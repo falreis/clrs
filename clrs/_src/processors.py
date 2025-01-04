@@ -356,6 +356,34 @@ class GATv2Full(GATv2):
     return super().__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
 
 
+def get_edge_msgs(z, graph_fts, nb_triplet_fts):
+  """Triplet messages, as done by Dudzik and Velickovic (2022)."""
+  t_1 = hk.Linear(nb_triplet_fts)
+  t_2 = hk.Linear(nb_triplet_fts)
+  t_3 = hk.Linear(nb_triplet_fts)
+  #t_e_1 = hk.Linear(nb_triplet_fts)
+  #t_e_2 = hk.Linear(nb_triplet_fts)
+  #t_e_3 = hk.Linear(nb_triplet_fts)
+  t_g = hk.Linear(nb_triplet_fts)
+
+  tri_1 = t_1(z)
+  tri_2 = t_2(z)
+  tri_3 = t_3(z)
+  #tri_e_1 = t_e_1(edge_fts)
+  #tri_e_2 = t_e_2(edge_fts)
+  #tri_e_3 = t_e_3(edge_fts)
+  tri_g = t_g(graph_fts)
+
+  return (
+      jnp.expand_dims(tri_1, axis=(2, 3))    +  #   (B, N, 1, 1, H)
+      jnp.expand_dims(tri_2, axis=(1, 3))    +  # + (B, 1, N, 1, H)
+      jnp.expand_dims(tri_3, axis=(1, 2))    +  # + (B, 1, 1, N, H)
+      #jnp.expand_dims(tri_e_1, axis=3)       +  # + (B, N, N, 1, H)
+      #jnp.expand_dims(tri_e_2, axis=2)       +  # + (B, N, 1, N, H)
+      #jnp.expand_dims(tri_e_3, axis=1)       +  # + (B, 1, N, N, H)
+      jnp.expand_dims(tri_g, axis=(1, 2, 3))    # + (B, 1, 1, 1, H)
+  )          
+
 def get_triplet_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
   """Triplet messages, as done by Dudzik and Velickovic (2022)."""
   t_1 = hk.Linear(nb_triplet_fts)
@@ -399,6 +427,7 @@ class PGN(Processor):
       use_ln: bool = False,
       use_triplets: bool = False,
       nb_triplet_fts: int = 8,
+      use_nodes: bool = False,
       gated: bool = False,
       name: str = 'mpnn_aggr',
   ):
@@ -414,6 +443,7 @@ class PGN(Processor):
     self._msgs_mlp_sizes = msgs_mlp_sizes
     self.use_ln = use_ln
     self.use_triplets = use_triplets
+    self.use_nodes = use_nodes
     self.nb_triplet_fts = nb_triplet_fts
     self.gated = gated
 
@@ -449,7 +479,17 @@ class PGN(Processor):
 
     tri_msgs = None
 
-    if self.use_triplets:
+    if self.use_nodes:
+      # Just use node features, not edges
+      triplets = get_edge_msgs(z, graph_fts, self.nb_triplet_fts)
+
+      o3 = hk.Linear(self.out_size)
+      tri_msgs = o3(jnp.max(triplets, axis=1))  # (B, N, N, H)
+
+      if self.activation is not None:
+        tri_msgs = self.activation(tri_msgs)
+
+    elif self.use_triplets:
       # Triplet messages, as done by Dudzik and Velickovic (2022)
       triplets = get_triplet_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
 
@@ -886,6 +926,15 @@ def get_processor_factory(kind: str,
           gated=True,
       )
     elif kind == 'triplet_gmpnn':
+      processor = MPNN(
+          out_size=out_size,
+          msgs_mlp_sizes=[out_size, out_size],
+          use_ln=use_ln,
+          use_triplets=True,
+          nb_triplet_fts=nb_triplet_fts,
+          gated=True,
+      )
+    elif kind == 'falreis':
       processor = MPNN(
           out_size=out_size,
           msgs_mlp_sizes=[out_size, out_size],

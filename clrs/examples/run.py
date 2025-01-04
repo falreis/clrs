@@ -30,7 +30,7 @@ import requests
 import tensorflow as tf
 
 
-flags.DEFINE_list('algorithms', ['bfs'], 'Which algorithms to run.')
+flags.DEFINE_list('algorithms', ['insertion_sort'], 'Which algorithms to run.')
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
                   'Which training sizes to use. A size of -1 means '
                   'use the benchmark dataset.')
@@ -104,17 +104,18 @@ flags.DEFINE_integer('nb_triplet_fts', 8,
 flags.DEFINE_enum('encoder_init', 'xavier_on_scalars',
                   ['default', 'xavier_on_scalars'],
                   'Initialiser to use for the encoders.')
-flags.DEFINE_enum('processor_type', 'triplet_gmpnn',
+flags.DEFINE_enum('processor_type', 'falreis',
                   ['deepsets', 'mpnn', 'pgn', 'pgn_mask',
                    'triplet_mpnn', 'triplet_pgn', 'triplet_pgn_mask',
                    'gat', 'gatv2', 'gat_full', 'gatv2_full',
                    'gpgn', 'gpgn_mask', 'gmpnn',
-                   'triplet_gpgn', 'triplet_gpgn_mask', 'triplet_gmpnn'],
+                   'triplet_gpgn', 'triplet_gpgn_mask', 'triplet_gmpnn',
+                   'falreis'],
                   'Processor type to use as the network P.')
 
-flags.DEFINE_string('checkpoint_path', '/tmp/CLRS30',
+flags.DEFINE_string('checkpoint_path', 'CLRS30',
                     'Path in which checkpoints are saved.')
-flags.DEFINE_string('dataset_path', '/tmp/CLRS30',
+flags.DEFINE_string('dataset_path', 'CLRS30',
                     'Path in which dataset is stored.')
 flags.DEFINE_boolean('freeze_processor', False,
                      'Whether to freeze the processor of the model.')
@@ -516,9 +517,9 @@ def main(unused_argv):
       else:
         examples_in_chunk = len(feedback.features.lengths)
       current_train_items[algo_idx] += examples_in_chunk
-      logging.info('Algo %s step %i current loss %f, current_train_items %i.',
-                   FLAGS.algorithms[algo_idx], step,
-                   cur_loss, current_train_items[algo_idx])
+      #logging.info('Algo %s step %i current loss %f, current_train_items %i.',
+      #             FLAGS.algorithms[algo_idx], step,
+      #             cur_loss, current_train_items[algo_idx])
 
     # Periodically evaluate model
     if step >= next_eval:

@@ -427,7 +427,7 @@ class PGN(Processor):
       use_ln: bool = False,
       use_triplets: bool = False,
       nb_triplet_fts: int = 8,
-      use_nodes: bool = False,
+      use_falreis_nodes: bool = False,
       gated: bool = False,
       name: str = 'mpnn_aggr',
   ):
@@ -443,7 +443,7 @@ class PGN(Processor):
     self._msgs_mlp_sizes = msgs_mlp_sizes
     self.use_ln = use_ln
     self.use_triplets = use_triplets
-    self.use_nodes = use_nodes
+    self.use_falreis_nodes = use_falreis_nodes
     self.nb_triplet_fts = nb_triplet_fts
     self.gated = gated
 
@@ -479,7 +479,7 @@ class PGN(Processor):
 
     tri_msgs = None
 
-    if self.use_nodes:
+    if self.use_falreis_nodes:
       # Just use node features, not edges
       triplets = get_edge_msgs(z, graph_fts, self.nb_triplet_fts)
 
@@ -941,6 +941,7 @@ def get_processor_factory(kind: str,
           use_ln=use_ln,
           use_triplets=True,
           nb_triplet_fts=nb_triplet_fts,
+          use_falreis_nodes = True,
           gated=True,
       )
     else:

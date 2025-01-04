@@ -481,10 +481,11 @@ class PGN(Processor):
 
     if self.use_falreis_nodes:
       # Just use node features, not edges
-      triplets = get_node_msgs(z, graph_fts, self.nb_triplet_fts)
+      #triplets = get_node_msgs(z, graph_fts, self.nb_triplet_fts)
+      triplets = get_triplet_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
 
       o3 = hk.Linear(self.out_size)
-      tri_msgs = o3(jnp.min(triplets, axis=1))  # (B, N, N, H)
+      tri_msgs = o3(jnp.mean(triplets, axis=1))  # (B, N, N, H)
 
       if self.activation is not None:
         tri_msgs = self.activation(tri_msgs)

@@ -357,7 +357,7 @@ class GATv2Full(GATv2):
 
 
 def get_node_msgs(z, graph_fts, nb_triplet_fts):
-  """Triplet messages, as done by Dudzik and Velickovic (2022)."""
+  """Only get node information. Ignore edges (falreis)"""
   t_1 = hk.Linear(nb_triplet_fts)
   t_2 = hk.Linear(nb_triplet_fts)
   t_3 = hk.Linear(nb_triplet_fts)
@@ -427,7 +427,7 @@ class PGN(Processor):
       use_ln: bool = False,
       use_triplets: bool = False,
       nb_triplet_fts: int = 8,
-      use_falreis_nodes: bool = False,
+      use_mean_triplet: bool = False,
       gated: bool = False,
       name: str = 'mpnn_aggr',
   ):
@@ -443,7 +443,7 @@ class PGN(Processor):
     self._msgs_mlp_sizes = msgs_mlp_sizes
     self.use_ln = use_ln
     self.use_triplets = use_triplets
-    self.use_falreis_nodes = use_falreis_nodes
+    self.use_mean_triplet = use_mean_triplet
     self.nb_triplet_fts = nb_triplet_fts
     self.gated = gated
 
@@ -479,7 +479,7 @@ class PGN(Processor):
 
     tri_msgs = None
 
-    if self.use_falreis_nodes:
+    if self.use_mean_triplet:
       # Just use node features, not edges
       #triplets = get_node_msgs(z, graph_fts, self.nb_triplet_fts)
       triplets = get_triplet_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
@@ -942,7 +942,7 @@ def get_processor_factory(kind: str,
           use_ln=use_ln,
           use_triplets=True,
           nb_triplet_fts=nb_triplet_fts,
-          use_falreis_nodes = True,
+          #use_mean_triplet = True,
           gated=True,
       )
     else:

@@ -122,7 +122,6 @@ flags.DEFINE_boolean('freeze_processor', False,
 
 FLAGS = flags.FLAGS
 
-
 PRED_AS_INPUT_ALGOS = [
     'binary_search',
     'minimum',
@@ -157,7 +156,6 @@ def _maybe_download_dataset(dataset_path):
     logging.info('Dataset found at %s. Skipping download.', dataset_folder)
     return dataset_folder
   logging.info('Dataset not found in %s. Downloading...', dataset_folder)
-  logging.info('Model: %', FLAGS.processor_type)
 
   clrs_url = clrs.get_dataset_gcp_url()
   request = requests.get(clrs_url, allow_redirects=True)
@@ -309,6 +307,8 @@ def create_samplers(
       spec_list: list of specs for each algorithm.
 
   """
+
+  logging.info('Model: %', FLAGS.processor_type)
 
   train_samplers = []
   val_samplers = []

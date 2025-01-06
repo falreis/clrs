@@ -486,12 +486,15 @@ class BaselineModel(model.Model):
   def restore_model(self, file_name: str, only_load_processor: bool = False):
     """Restore model from `file_name`."""
     path = os.path.join(self.checkpoint_path, file_name)
+
     with open(path, 'rb') as f:
       restored_state = pickle.load(f)
       if only_load_processor:
         restored_params = _filter_in_processor(restored_state['params'])
       else:
         restored_params = restored_state['params']
+
+      print('falreis_path: %s', path)
       self.params = hk.data_structures.merge(self.params, restored_params)
       self.opt_state = restored_state['opt_state']
 

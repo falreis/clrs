@@ -355,32 +355,31 @@ class GATv2Full(GATv2):
     adj_mat = jnp.ones_like(adj_mat)
     return super().__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
 
-
-def get_node_msgs(z, graph_fts, nb_triplet_fts):
+def get_falr_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
   """Only get node information. Ignore edges (falreis)"""
   t_1 = hk.Linear(nb_triplet_fts)
   t_2 = hk.Linear(nb_triplet_fts)
   t_3 = hk.Linear(nb_triplet_fts)
-  #t_e_1 = hk.Linear(nb_triplet_fts)
-  #t_e_2 = hk.Linear(nb_triplet_fts)
-  #t_e_3 = hk.Linear(nb_triplet_fts)
+  t_e_1 = hk.Linear(nb_triplet_fts)
+  t_e_2 = hk.Linear(nb_triplet_fts)
+  t_e_3 = hk.Linear(nb_triplet_fts)
   t_g = hk.Linear(nb_triplet_fts)
 
   tri_1 = t_1(z)
   tri_2 = t_2(z)
   tri_3 = t_3(z)
-  #tri_e_1 = t_e_1(edge_fts)
-  #tri_e_2 = t_e_2(edge_fts)
-  #tri_e_3 = t_e_3(edge_fts)
+  tri_e_1 = t_e_1(edge_fts)
+  tri_e_2 = t_e_2(edge_fts)
+  tri_e_3 = t_e_3(edge_fts)
   tri_g = t_g(graph_fts)
 
   return (
       jnp.expand_dims(tri_1, axis=(2, 3))    +  #   (B, N, 1, 1, H)
       jnp.expand_dims(tri_2, axis=(1, 3))    +  # + (B, 1, N, 1, H)
       jnp.expand_dims(tri_3, axis=(1, 2))    +  # + (B, 1, 1, N, H)
-      #jnp.expand_dims(tri_e_1, axis=3)       +  # + (B, N, N, 1, H)
-      #jnp.expand_dims(tri_e_2, axis=2)       +  # + (B, N, 1, N, H)
-      #jnp.expand_dims(tri_e_3, axis=1)       +  # + (B, 1, N, N, H)
+      jnp.expand_dims(tri_e_1, axis=3)       +  # + (B, N, N, 1, H)
+      jnp.expand_dims(tri_e_2, axis=2)       +  # + (B, N, 1, N, H)
+      jnp.expand_dims(tri_e_3, axis=1)       +  # + (B, 1, N, N, H)
       jnp.expand_dims(tri_g, axis=(1, 2, 3))    # + (B, 1, 1, 1, H)
   )          
 
@@ -481,11 +480,18 @@ class PGN(Processor):
 
     if self.use_mean_triplet:
       # Just use node features, not edges
-      #triplets = get_node_msgs(z, graph_fts, self.nb_triplet_fts)
-      triplets = get_triplet_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
+      print('falreis mean_triplets')
+      triplets = get_falr_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
+      #triplets = get_triplet_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
 
       o3 = hk.Linear(self.out_size)
-      tri_msgs = o3(jnp.mean(triplets, axis=1))  # (B, N, N, H)
+      #tri_msgs = 0.5 * o3(jnp.mean(triplets, axis=1)) + 0.5 * o3(jnp.max(triplets, axis=1))  # (B, N, N, H)
+      
+      #start with mean and after some epochs use max
+      if(triplets.shape[-2] < (graph_fts.shape[-1] / 10)):
+        tri_msgs = o3(jnp.mean(triplets, axis=1))  # (B, N, N, H)
+      else:
+        tri_msgs = o3(jnp.max(triplets, axis=1))  # (B, N, N, H)
 
       if self.activation is not None:
         tri_msgs = self.activation(tri_msgs)
@@ -493,12 +499,15 @@ class PGN(Processor):
     elif self.use_triplets:
       # Triplet messages, as done by Dudzik and Velickovic (2022)
       triplets = get_triplet_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
-
+      
       o3 = hk.Linear(self.out_size)
-      tri_msgs = o3(jnp.max(triplets, axis=1))  # (B, N, N, H)
+      tri_msgs = o3(jnp.mean(triplets, axis=1))  # (B, N, N, H)
 
       if self.activation is not None:
         tri_msgs = self.activation(tri_msgs)
+
+    #print(triplets.shape)
+    #print(triplets)
 
     msgs = (
         jnp.expand_dims(msg_1, axis=1) + jnp.expand_dims(msg_2, axis=2) +
@@ -942,7 +951,7 @@ def get_processor_factory(kind: str,
           use_ln=use_ln,
           use_triplets=True,
           nb_triplet_fts=nb_triplet_fts,
-          #use_mean_triplet = True,
+          use_mean_triplet = True,
           gated=True,
       )
     else:

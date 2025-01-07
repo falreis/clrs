@@ -34,7 +34,7 @@ import tensorflow as tf
 
 
 #flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs'], 'Which algorithms to run.')
-flags.DEFINE_list('algorithms', ['quickselect'], 
+flags.DEFINE_list('algorithms', ['insertion_sort'], 
                   'Which algorithms to run.')
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
                   'Which training sizes to use. A size of -1 means '

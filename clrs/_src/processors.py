@@ -365,6 +365,7 @@ def get_falr_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
   t_e_3 = hk.Linear(nb_triplet_fts)
   t_g = hk.Linear(nb_triplet_fts)
 
+  #tri_1 = t_1(z)
   tri_1 = t_1(z)
   tri_2 = t_2(z)
   tri_3 = t_3(z)
@@ -372,6 +373,15 @@ def get_falr_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
   tri_e_2 = t_e_2(edge_fts)
   tri_e_3 = t_e_3(edge_fts)
   tri_g = t_g(graph_fts)
+
+  #non linearities
+  tri_1 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_1))
+  tri_2 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_2))
+  tri_3 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_3))
+  tri_e_1 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_e_1))
+  tri_e_2 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_e_2))
+  tri_e_3 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_e_3))
+  tri_g = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_g))
 
   return (
       jnp.expand_dims(tri_1, axis=(2, 3))    +  #   (B, N, 1, 1, H)
@@ -480,18 +490,20 @@ class PGN(Processor):
 
     if self.use_mean_triplet:
       # Just use node features, not edges
-      print('falreis mean_triplets')
+      #print('falreis mean_triplets')
       triplets = get_falr_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
       #triplets = get_triplet_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
 
       o3 = hk.Linear(self.out_size)
-      #tri_msgs = 0.5 * o3(jnp.mean(triplets, axis=1)) + 0.5 * o3(jnp.max(triplets, axis=1))  # (B, N, N, H)
       
       #start with mean and after some epochs use max
-      if(triplets.shape[-2] < (graph_fts.shape[-1] / 10)):
-        tri_msgs = o3(jnp.mean(triplets, axis=1))  # (B, N, N, H)
-      else:
-        tri_msgs = o3(jnp.max(triplets, axis=1))  # (B, N, N, H)
+      tri_msgs = o3(jnp.mean(triplets, axis=1))  # (B, N, N, H)
+
+      #print('self._msgs_mlp_sizes', self._msgs_mlp_sizes)
+      msg_1 = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.relu(msg_1))
+      msg_2 = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.relu(msg_2))
+      msg_e = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.relu(msg_e))
+      msg_g = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.relu(msg_g))
 
       if self.activation is not None:
         tri_msgs = self.activation(tri_msgs)
@@ -501,13 +513,10 @@ class PGN(Processor):
       triplets = get_triplet_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
       
       o3 = hk.Linear(self.out_size)
-      tri_msgs = o3(jnp.mean(triplets, axis=1))  # (B, N, N, H)
+      tri_msgs = o3(jnp.max(triplets, axis=1))  # (B, N, N, H)
 
       if self.activation is not None:
         tri_msgs = self.activation(tri_msgs)
-
-    #print(triplets.shape)
-    #print(triplets)
 
     msgs = (
         jnp.expand_dims(msg_1, axis=1) + jnp.expand_dims(msg_2, axis=2) +
@@ -522,6 +531,7 @@ class PGN(Processor):
     if self.reduction == jnp.mean:
       msgs = jnp.sum(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
       msgs = msgs / jnp.sum(adj_mat, axis=-1, keepdims=True)
+
     elif self.reduction == jnp.max:
       maxarg = jnp.where(jnp.expand_dims(adj_mat, -1),
                          msgs,
@@ -952,6 +962,7 @@ def get_processor_factory(kind: str,
           use_triplets=True,
           nb_triplet_fts=nb_triplet_fts,
           use_mean_triplet = True,
+          #reduction = jnp.mean,
           gated=True,
       )
     else:

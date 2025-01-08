@@ -33,9 +33,9 @@ import requests
 import tensorflow as tf
 
 
-#flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs'], 'Which algorithms to run.')
-flags.DEFINE_list('algorithms', ['insertion_sort'], 
-                  'Which algorithms to run.')
+flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs'], 'Which algorithms to run.')
+#flags.DEFINE_list('algorithms', ['insertion_sort'], 
+#                  'Which algorithms to run.')
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
                   'Which training sizes to use. A size of -1 means '
                   'use the benchmark dataset.')
@@ -60,7 +60,7 @@ flags.DEFINE_boolean('chunked_training', False,
 flags.DEFINE_integer('chunk_length', 16,
                      'Time chunk length used for training (if '
                      '`chunked_training` is True.')
-flags.DEFINE_integer('train_steps', 3000, 'Number of training iterations.')
+flags.DEFINE_integer('train_steps', 5000, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 
@@ -482,7 +482,7 @@ def main(unused_argv):
   best_score = -1.0
   current_train_items = [0] * len(FLAGS.algorithms)
   step = 0
-  best_step = 0
+  #best_step = 0
   next_eval = 0
   # Make sure scores improve on first step, but not overcome best score
   # until all algos have had at least one evaluation.
@@ -561,9 +561,9 @@ def main(unused_argv):
       msg += ', '.join(
           ['%s: %.3f' % (x, y) for (x, y) in zip(FLAGS.algorithms, val_scores)])
       
-      if (sum(val_scores) > best_score) or step == 0 or ((step - best_step) > FLAGS.train_steps / 10):
+      if (sum(val_scores) > best_score) or step == 0: # or ((step - best_step) > FLAGS.train_steps / 10):
         best_score = sum(val_scores)
-        best_step = step
+        #best_step = step
         logging.info('Checkpointing best model, %s', msg)
         train_model.save_model('best.pkl')
       else:

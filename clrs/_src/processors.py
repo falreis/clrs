@@ -365,7 +365,6 @@ def get_falr_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
   t_e_3 = hk.Linear(nb_triplet_fts)
   t_g = hk.Linear(nb_triplet_fts)
 
-  #tri_1 = t_1(z)
   tri_1 = t_1(z)
   tri_2 = t_2(z)
   tri_3 = t_3(z)
@@ -375,13 +374,15 @@ def get_falr_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
   tri_g = t_g(graph_fts)
 
   #non linearities
-  tri_1 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.leaky_relu(tri_1))
-  tri_2 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.leaky_relu(tri_2))
-  tri_3 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.leaky_relu(tri_3))
-  tri_e_1 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.leaky_relu(tri_e_1))
-  tri_e_2 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.leaky_relu(tri_e_2))
-  tri_e_3 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.leaky_relu(tri_e_3))
-  tri_g = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.leaky_relu(tri_g))
+  '''
+  tri_1 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_1))
+  tri_2 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_2))
+  tri_3 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_3))
+  tri_e_1 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_e_1))
+  tri_e_2 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_e_2))
+  tri_e_3 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_e_3))
+  tri_g = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_g))
+  '''
 
   return (
       jnp.expand_dims(tri_1, axis=(2, 3))    +  #   (B, N, 1, 1, H)
@@ -391,38 +392,10 @@ def get_falr_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
       jnp.expand_dims(tri_e_2, axis=2)       +  # + (B, N, 1, N, H)
       jnp.expand_dims(tri_e_3, axis=1)       +  # + (B, 1, N, N, H)
       jnp.expand_dims(tri_g, axis=(1, 2, 3))    # + (B, 1, 1, 1, H)
-  )          
-
-def get_triplet_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
-  """Triplet messages, as done by Dudzik and Velickovic (2022)."""
-  t_1 = hk.Linear(nb_triplet_fts)
-  t_2 = hk.Linear(nb_triplet_fts)
-  t_3 = hk.Linear(nb_triplet_fts)
-  t_e_1 = hk.Linear(nb_triplet_fts)
-  t_e_2 = hk.Linear(nb_triplet_fts)
-  t_e_3 = hk.Linear(nb_triplet_fts)
-  t_g = hk.Linear(nb_triplet_fts)
-
-  tri_1 = t_1(z)
-  tri_2 = t_2(z)
-  tri_3 = t_3(z)
-  tri_e_1 = t_e_1(edge_fts)
-  tri_e_2 = t_e_2(edge_fts)
-  tri_e_3 = t_e_3(edge_fts)
-  tri_g = t_g(graph_fts)
-
-  return (
-      jnp.expand_dims(tri_1, axis=(2, 3))    +  #   (B, N, 1, 1, H)
-      jnp.expand_dims(tri_2, axis=(1, 3))    +  # + (B, 1, N, 1, H)
-      jnp.expand_dims(tri_3, axis=(1, 2))    +  # + (B, 1, 1, N, H)
-      jnp.expand_dims(tri_e_1, axis=3)       +  # + (B, N, N, 1, H)
-      jnp.expand_dims(tri_e_2, axis=2)       +  # + (B, N, 1, N, H)
-      jnp.expand_dims(tri_e_3, axis=1)       +  # + (B, 1, N, N, H)
-      jnp.expand_dims(tri_g, axis=(1, 2, 3))    # + (B, 1, 1, 1, H)
-  )                                             # = (B, N, N, N, H)
+  )                                                     # = (B, N, N, N, H)
 
 class FALR(Processor):
-  """Pointer Graph Networks (Veličković et al., NeurIPS 2020)."""
+  """FALREIS code"""
 
   def __init__(
       self,
@@ -436,7 +409,7 @@ class FALR(Processor):
       use_triplets: bool = False,
       nb_triplet_fts: int = 8,
       gated: bool = False,
-      name: str = 'mpnn_aggr',
+      name: str = 'falreis_avg',
   ):
     super().__init__(name=name)
     if mid_size is None:
@@ -484,24 +457,31 @@ class FALR(Processor):
     msg_g = m_g(graph_fts)
 
     #print('self._msgs_mlp_sizes', self._msgs_mlp_sizes)
-    msg_1 = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.leaky_relu(msg_1))
-    msg_2 = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.leaky_relu(msg_2))
-    msg_e = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.leaky_relu(msg_e))
-    msg_g = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.leaky_relu(msg_g))
+    '''
+    msg_1 = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.relu(msg_1))
+    msg_2 = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.relu(msg_2))
+    msg_e = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.relu(msg_e))
+    msg_g = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.relu(msg_g))
+    '''
+
+    # _, eig_adj = jnp.linalg.eigh(adj_mat)
+    # adj_mat = eig_adj
+    # print(adj_mat.shape, eig_adj.shape)
+
+    adj_trp = jnp.transpose(adj_mat, (0, 2, 1))
+    #eq = np.allclose(np.array(adj_mat), np.array(adj_trp), rtol=1e-05, atol=1e-05)
+    #print('is symmetric? ', eq)
+    adj_mat = jnp.maximum(adj_mat, adj_trp)
 
     tri_msgs = None
 
     if self.use_triplets:
-      #print('falreis mean_triplets')
-
       triplets = get_falr_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
       o3 = hk.Linear(self.out_size)
       
       #start with mean and after some epochs use max
       tri_msgs = o3(jnp.mean(triplets, axis=1))  # (B, N, N, H)
-      tri_msgs = hk.nets.MLP([self.nb_triplet_fts, self.nb_triplet_fts])(jax.nn.leaky_relu(tri_msgs))
-
-      #print('tri_msgs.shape', tri_msgs.shape)
+      #tri_msgs = hk.nets.MLP([self.nb_triplet_fts, self.nb_triplet_fts])(jax.nn.relu(tri_msgs))
 
       if self.activation is not None:
         tri_msgs = self.activation(tri_msgs)
@@ -549,6 +529,41 @@ class FALR(Processor):
 
     return ret, tri_msgs  # pytype: disable=bad-return-type  # numpy-scalars
 
+class F1(FALR):
+  """Message-Passing Neural Network (Gilmer et al., ICML 2017)."""
+
+  def __call__(self, node_fts: _Array, edge_fts: _Array, graph_fts: _Array,
+               adj_mat: _Array, hidden: _Array, **unused_kwargs) -> _Array:
+    adj_mat = jnp.ones_like(adj_mat)
+    return super().__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
+
+def get_triplet_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
+  """Triplet messages, as done by Dudzik and Velickovic (2022)."""
+  t_1 = hk.Linear(nb_triplet_fts)
+  t_2 = hk.Linear(nb_triplet_fts)
+  t_3 = hk.Linear(nb_triplet_fts)
+  t_e_1 = hk.Linear(nb_triplet_fts)
+  t_e_2 = hk.Linear(nb_triplet_fts)
+  t_e_3 = hk.Linear(nb_triplet_fts)
+  t_g = hk.Linear(nb_triplet_fts)
+
+  tri_1 = t_1(z)
+  tri_2 = t_2(z)
+  tri_3 = t_3(z)
+  tri_e_1 = t_e_1(edge_fts)
+  tri_e_2 = t_e_2(edge_fts)
+  tri_e_3 = t_e_3(edge_fts)
+  tri_g = t_g(graph_fts)
+
+  return (
+      jnp.expand_dims(tri_1, axis=(2, 3))    +  #   (B, N, 1, 1, H)
+      jnp.expand_dims(tri_2, axis=(1, 3))    +  # + (B, 1, N, 1, H)
+      jnp.expand_dims(tri_3, axis=(1, 2))    +  # + (B, 1, 1, N, H)
+      jnp.expand_dims(tri_e_1, axis=3)       +  # + (B, N, N, 1, H)
+      jnp.expand_dims(tri_e_2, axis=2)       +  # + (B, N, 1, N, H)
+      jnp.expand_dims(tri_e_3, axis=1)       +  # + (B, 1, N, N, H)
+      jnp.expand_dims(tri_g, axis=(1, 2, 3))    # + (B, 1, 1, 1, H)
+  )  
 
 class PGN(Processor):
   """Pointer Graph Networks (Veličković et al., NeurIPS 2020)."""
@@ -1063,7 +1078,7 @@ def get_processor_factory(kind: str,
           gated=True,
       )
     elif kind == 'falreis':
-      processor = FALR(
+      processor = F1(
           out_size=out_size,
           msgs_mlp_sizes=[out_size, out_size],
           use_ln=use_ln,

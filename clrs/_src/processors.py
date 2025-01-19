@@ -373,17 +373,6 @@ def get_falr_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
   tri_e_3 = t_e_3(edge_fts)
   tri_g = t_g(graph_fts)
 
-  #non linearities
-  '''
-  tri_1 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_1))
-  tri_2 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_2))
-  tri_3 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_3))
-  tri_e_1 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_e_1))
-  tri_e_2 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_e_2))
-  tri_e_3 = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_e_3))
-  tri_g = hk.nets.MLP([nb_triplet_fts, nb_triplet_fts])(jax.nn.relu(tri_g))
-  '''
-
   return (
       jnp.expand_dims(tri_1, axis=(2, 3))    +  #   (B, N, 1, 1, H)
       jnp.expand_dims(tri_2, axis=(1, 3))    +  # + (B, 1, N, 1, H)
@@ -440,7 +429,7 @@ class FALR(Processor):
     b, n, _ = node_fts.shape
     assert edge_fts.shape[:-1] == (b, n, n)
     assert graph_fts.shape[:-1] == (b,)
-    assert adj_mat.shape == (b, n, n)
+    assert adj_mat.shape == (b, n, n) #hints
 
     z = jnp.concatenate([node_fts, hidden], axis=-1)
     m_1 = hk.Linear(self.mid_size)
@@ -456,22 +445,17 @@ class FALR(Processor):
     msg_e = m_e(edge_fts)
     msg_g = m_g(graph_fts)
 
-    #print('self._msgs_mlp_sizes', self._msgs_mlp_sizes)
-    '''
-    msg_1 = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.relu(msg_1))
-    msg_2 = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.relu(msg_2))
-    msg_e = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.relu(msg_e))
-    msg_g = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.relu(msg_g))
-    '''
-
     # _, eig_adj = jnp.linalg.eigh(adj_mat)
     # adj_mat = eig_adj
     # print(adj_mat.shape, eig_adj.shape)
 
+    #evaluate symmetric matrix
+    '''
     adj_trp = jnp.transpose(adj_mat, (0, 2, 1))
-    #eq = np.allclose(np.array(adj_mat), np.array(adj_trp), rtol=1e-05, atol=1e-05)
-    #print('is symmetric? ', eq)
+    eq = jnp.allclose(adj_mat, adj_trp, rtol=1e-05, atol=1e-05)
+    jax.debug.print("jnp is symmetric? {bar}", bar=jnp.all(eq))
     adj_mat = jnp.maximum(adj_mat, adj_trp)
+    '''
 
     tri_msgs = None
 
@@ -479,9 +463,9 @@ class FALR(Processor):
       triplets = get_falr_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
       o3 = hk.Linear(self.out_size)
       
-      #start with mean and after some epochs use max
       tri_msgs = o3(jnp.mean(triplets, axis=1))  # (B, N, N, H)
       #tri_msgs = hk.nets.MLP([self.nb_triplet_fts, self.nb_triplet_fts])(jax.nn.relu(tri_msgs))
+      tri_msgs = jax.nn.elu(jnp.mean(triplets, axis=1))
 
       if self.activation is not None:
         tri_msgs = self.activation(tri_msgs)
@@ -1084,7 +1068,7 @@ def get_processor_factory(kind: str,
           use_ln=use_ln,
           use_triplets=True,
           nb_triplet_fts=nb_triplet_fts,
-          #reduction = jnp.mean,
+          #reduction = jnp.max,
           gated=True,
       )
     else:

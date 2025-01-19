@@ -33,9 +33,8 @@ import requests
 import tensorflow as tf
 
 
-flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs'], 'Which algorithms to run.')
-#flags.DEFINE_list('algorithms', ['insertion_sort'], 
-#                  'Which algorithms to run.')
+#flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs'], 'Which algorithms to run.')
+flags.DEFINE_list('algorithms', ['dfs'], 'Which algorithms to run.')
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
                   'Which training sizes to use. A size of -1 means '
                   'use the benchmark dataset.')
@@ -60,7 +59,7 @@ flags.DEFINE_boolean('chunked_training', False,
 flags.DEFINE_integer('chunk_length', 16,
                      'Time chunk length used for training (if '
                      '`chunked_training` is True.')
-flags.DEFINE_integer('train_steps', 5000, 'Number of training iterations.')
+flags.DEFINE_integer('train_steps', 3000, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 

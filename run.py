@@ -20,21 +20,26 @@
 import functools
 import os
 import shutil
+import time
+import pickle
 from typing import Any, Dict, List, Optional
-
 from absl import app
 from absl import flags
 from absl import logging
-#import clrs
+
 import clrs
+from clrs._src import specs
+
 import jax
 import numpy as np
+import jax.numpy as jnp
+
 import requests
 import tensorflow as tf
 
 
 #flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs'], 'Which algorithms to run.')
-flags.DEFINE_list('algorithms', ['dfs'], 'Which algorithms to run.')
+flags.DEFINE_list('algorithms', ['quickselect'], 'Which algorithms to run.')
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
                   'Which training sizes to use. A size of -1 means '
                   'use the benchmark dataset.')
@@ -59,13 +64,14 @@ flags.DEFINE_boolean('chunked_training', False,
 flags.DEFINE_integer('chunk_length', 16,
                      'Time chunk length used for training (if '
                      '`chunked_training` is True.')
-flags.DEFINE_integer('train_steps', 3000, 'Number of training iterations.')
+flags.DEFINE_integer('train_steps', 1000, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 
 flags.DEFINE_integer('hidden_size', 128,
                      'Number of hidden units of the model.')
-flags.DEFINE_integer('nb_heads', 1, 'Number of heads for GAT processors')
+flags.DEFINE_integer('nb_heads', 12, 'Number of heads for GAT processors') #including RT model
+
 flags.DEFINE_integer('nb_msg_passing_steps', 1,
                      'Number of message passing steps to run per hint.')
 flags.DEFINE_float('learning_rate', 0.001, 'Learning rate to use.')
@@ -115,7 +121,7 @@ flags.DEFINE_enum('processor_type', 'falreis',
                    'gat', 'gatv2', 'gat_full', 'gatv2_full',
                    'gpgn', 'gpgn_mask', 'gmpnn',
                    'triplet_gpgn', 'triplet_gpgn_mask', 'triplet_gmpnn',
-                   'falreis'],
+                   'rt', 'falreis'],
                   'Processor type to use as the network P.')
 
 flags.DEFINE_string('checkpoint_path', 'CLRS30',
@@ -124,6 +130,16 @@ flags.DEFINE_string('dataset_path', 'CLRS30',
                     'Path in which dataset is stored.')
 flags.DEFINE_boolean('freeze_processor', False,
                      'Whether to freeze the processor of the model.')
+
+#for RT model (Diao et al. (2023))
+flags.DEFINE_integer('nb_layers', 3, 'Number of processor layers.') 
+flags.DEFINE_integer('head_size', 16, 'Size of each attention head (overrides hidden_size for GAT/RT processors.')
+flags.DEFINE_integer('node_hid_size', 32, 'Hidden size of node processors (d_nh) in the paper).')
+flags.DEFINE_integer('edge_hid_size_1', 16, 'First hidden size of edge processors (d_eh1) in the paper).')
+flags.DEFINE_integer('edge_hid_size_2', 8, 'Second hidden size of edge processors (d_eh2) in the paper).')
+flags.DEFINE_enum('graph_vec', 'cat',
+                  ['att', 'core', 'cat'], 'How to process the graph representations.')
+flags.DEFINE_string('disable_edge_updates', 'False', 'Whether to disable edge updates')
 
 FLAGS = flags.FLAGS
 
@@ -440,11 +456,21 @@ def main(unused_argv):
       train_batch_size=FLAGS.batch_size,
   )
 
+  FLAGS.disable_edge_updates = eval(FLAGS.disable_edge_updates)
+
   processor_factory = clrs.get_processor_factory(
       FLAGS.processor_type,
       use_ln=FLAGS.use_ln,
       nb_triplet_fts=FLAGS.nb_triplet_fts,
       nb_heads=FLAGS.nb_heads,
+      
+      #RT model
+      nb_layers=FLAGS.nb_layers, 
+      node_hid_size=FLAGS.node_hid_size, 
+      edge_hid_size_1=FLAGS.edge_hid_size_1, 
+      edge_hid_size_2=FLAGS.edge_hid_size_2,
+      graph_vec=FLAGS.graph_vec,
+      disable_edge_updates=FLAGS.disable_edge_updates
   )
   model_params = dict(
       processor_factory=processor_factory,

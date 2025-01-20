@@ -73,6 +73,102 @@ class Processor(hk.Module):
   def inf_bias_edge(self):
     return False
 
+class RT(Processor):
+  """
+  Relational Transformers (Diao et al., 2023). 
+  https://github.com/CameronDiao/relational-transformer/blob/master/clrs/_src/processors.py
+  """
+
+  def __init__(
+          self,
+          nb_layers: int,
+          nb_heads: int,
+          vec_size: int,
+          node_hid_size: int,
+          edge_hid_size_1: int,
+          edge_hid_size_2: int,
+          graph_vec: str,
+          disable_edge_updates: bool,
+          name: str = 'rt',
+  ):
+      super().__init__(name=name)
+      assert graph_vec in ['att', 'core', 'cat']
+      self.nb_layers = nb_layers
+      self.nb_heads = nb_heads
+      self.graph_vec = graph_vec
+      self.disable_edge_updates = disable_edge_updates
+
+      self.node_vec_size = vec_size
+      self.node_hid_size = node_hid_size
+      self.edge_vec_size = vec_size
+      self.edge_hid_size_1 = edge_hid_size_1
+      self.edge_hid_size_2 = edge_hid_size_2
+      self.global_vec_size = vec_size
+
+      self.tfm_dropout_rate = 0.0
+
+  def __call__(
+          self,
+          node_fts: _Array,
+          edge_fts: _Array,
+          graph_fts: _Array,
+          adj_mat: _Array,
+          hidden: _Array,
+          **unused_kwargs,
+  ) -> _Array:
+      N = node_fts.shape[-2]
+      node_tensors = jnp.concatenate([node_fts, hidden], axis=-1)
+      edge_tensors = jnp.concatenate([edge_fts, unused_kwargs.get('e_hidden')], axis=-1)
+      if self.graph_vec == 'core':
+          graph_tensors = jnp.concatenate([graph_fts, unused_kwargs.get('g_hidden')], axis=-1)
+      else:
+          graph_tensors = graph_fts
+
+      if self.graph_vec == 'cat':
+          expanded_graph_tensors = jnp.tile(jnp.expand_dims(graph_tensors, -2), (1, N, 1))
+          node_tensors = jnp.concatenate([node_tensors, expanded_graph_tensors], axis=-1)
+          expanded_graph_tensors = jnp.tile(jnp.expand_dims(graph_tensors, (-2, -3)), (1, N, N, 1))
+          edge_tensors = jnp.concatenate([edge_tensors, expanded_graph_tensors], axis=-1)
+
+      node_enc = hk.Linear(self.node_vec_size)
+      edge_enc = hk.Linear(self.edge_vec_size)
+      if self.graph_vec == 'core':
+          global_enc = hk.Linear(self.global_vec_size)
+
+      node_tensors = node_enc(node_tensors)
+      edge_tensors = edge_enc(edge_tensors)
+      if self.graph_vec == 'core':
+          graph_tensors = global_enc(graph_tensors)
+          expanded_graph_tensors = jnp.expand_dims(graph_tensors, 1)
+          node_tensors = jnp.concatenate([expanded_graph_tensors, node_tensors], axis=-2)
+          edge_tensors = jnp.pad(edge_tensors, [(0, 0), (1, 0), (1, 0), (0, 0)], mode='constant', constant_values=0.)
+
+      layers = []
+      for l in range(self.nb_layers):
+          layers.append(Basic_RT(self.nb_heads,
+                                  self.graph_vec,
+                                  self.disable_edge_updates,
+                                  self.node_vec_size,
+                                  self.node_hid_size,
+                                  self.edge_vec_size,
+                                  self.edge_hid_size_1,
+                                  self.edge_hid_size_2,
+                                  self.tfm_dropout_rate,
+                                  name='{}_layer{}'.format(self.name, l)))
+      for layer in layers:
+          node_tensors, edge_tensors = layer(node_tensors, edge_tensors, graph_tensors, adj_mat, hidden)
+
+      if self.graph_vec == 'core':
+          out_nodes = node_tensors[:, 1:, :]
+          out_edges = edge_tensors[:, 1:, 1:, :]
+          out_graph = node_tensors[:, 0, :]
+      else:
+          out_nodes = node_tensors
+          out_edges = edge_tensors
+          out_graph = graph_tensors
+
+      return out_nodes, out_edges, out_graph if self.graph_vec == 'core' else None
+
 
 class GAT(Processor):
   """Graph Attention Network (Velickovic et al., ICLR 2018)."""
@@ -902,7 +998,8 @@ ProcessorFactory = Callable[[int], Processor]
 def get_processor_factory(kind: str,
                           use_ln: bool,
                           nb_triplet_fts: int,
-                          nb_heads: Optional[int] = None) -> ProcessorFactory:
+                          nb_heads: Optional[int] = None,
+                          **kwargs) -> ProcessorFactory:
   """Returns a processor factory.
 
   Args:
@@ -1060,6 +1157,18 @@ def get_processor_factory(kind: str,
           use_triplets=True,
           nb_triplet_fts=nb_triplet_fts,
           gated=True,
+      )
+    elif 'rt' in kind:
+      processor = RT(
+          nb_layers=kwargs['nb_layers'],
+          nb_heads=nb_heads,
+          vec_size=out_size,
+          node_hid_size=kwargs['node_hid_size'],
+          edge_hid_size_1=kwargs['edge_hid_size_1'],
+          edge_hid_size_2=kwargs['edge_hid_size_2'],
+          graph_vec=kwargs['graph_vec'],
+          disable_edge_updates=kwargs['disable_edge_updates'],
+          name=kind
       )
     elif kind == 'falreis':
       processor = F1(

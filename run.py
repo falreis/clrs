@@ -38,8 +38,8 @@ import requests
 import tensorflow as tf
 
 
-#flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs'], 'Which algorithms to run.')
-flags.DEFINE_list('algorithms', ['quickselect'], 'Which algorithms to run.')
+flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
+#flags.DEFINE_list('algorithms', ['quickselect'], 'Which algorithms to run.')
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
                   'Which training sizes to use. A size of -1 means '
                   'use the benchmark dataset.')
@@ -59,12 +59,12 @@ flags.DEFINE_boolean('enforce_permutations', True,
 flags.DEFINE_boolean('enforce_pred_as_input', True,
                      'Whether to change pred_h hints into pred inputs.')
 flags.DEFINE_integer('batch_size', 8, 'Batch size used for training.')
-flags.DEFINE_boolean('chunked_training', False,
+flags.DEFINE_boolean('chunked_training', True,
                      'Whether to use chunking for training.')
 flags.DEFINE_integer('chunk_length', 16,
                      'Time chunk length used for training (if '
                      '`chunked_training` is True.')
-flags.DEFINE_integer('train_steps', 1000, 'Number of training iterations.')
+flags.DEFINE_integer('train_steps', 3000, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 
@@ -106,7 +106,7 @@ flags.DEFINE_enum('hint_repred_mode', 'soft', ['soft', 'hard', 'hard_on_eval'],
                   'used for training and hard mode is used for evaluation.')
 flags.DEFINE_boolean('use_ln', True,
                      'Whether to use layer normalisation in the processor.')
-flags.DEFINE_boolean('use_lstm', False,
+flags.DEFINE_boolean('use_lstm', True,
                      'Whether to insert an LSTM after message passing.')
 flags.DEFINE_integer('nb_triplet_fts', 8,
                      'How many triplet features to compute?')

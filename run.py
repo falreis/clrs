@@ -121,7 +121,7 @@ flags.DEFINE_enum('processor_type', 'falreis',
                    'gat', 'gatv2', 'gat_full', 'gatv2_full',
                    'gpgn', 'gpgn_mask', 'gmpnn',
                    'triplet_gpgn', 'triplet_gpgn_mask', 'triplet_gmpnn',
-                   'rt', 'falreis'],
+                   'rt', 'falreis', 'f_mpnn'],
                   'Processor type to use as the network P.')
 
 flags.DEFINE_string('checkpoint_path', 'CLRS30',
@@ -130,6 +130,15 @@ flags.DEFINE_string('dataset_path', 'CLRS30',
                     'Path in which dataset is stored.')
 flags.DEFINE_boolean('freeze_processor', False,
                      'Whether to freeze the processor of the model.')
+
+#for falreis model
+flags.DEFINE_enum('reduction', 'max', 
+                    ['max', 'mean', 'average', 'sum', 'min'],
+                    'Reduction operation.') 
+
+flags.DEFINE_enum('activation', 'relu', 
+                    ['relu', 'elu', 'sigmoid'],
+                    'Activation function.') 
 
 #for RT model (Diao et al. (2023))
 flags.DEFINE_integer('nb_layers', 3, 'Number of processor layers.') 
@@ -463,6 +472,10 @@ def main(unused_argv):
       use_ln=FLAGS.use_ln,
       nb_triplet_fts=FLAGS.nb_triplet_fts,
       nb_heads=FLAGS.nb_heads,
+
+      #falreis model
+      reduction=FLAGS.reduction,
+      activation=FLAGS.activation,
       
       #RT model
       nb_layers=FLAGS.nb_layers, 

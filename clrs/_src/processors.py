@@ -497,7 +497,7 @@ class FALR(Processor):
       use_triplets: bool = False,
       nb_triplet_fts: int = 8,
       gated: bool = False,
-      name: str = 'falreis_avg',
+      name: str = 'falreis',
   ):
     super().__init__(name=name)
     if mid_size is None:
@@ -563,10 +563,7 @@ class FALR(Processor):
     if self.mid_act is not None:
       msgs = self.mid_act(msgs)
 
-    if self.reduction == jnp.average:
-      msgs = jnp.average(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
-
-    elif self.reduction == jnp.mean:
+    if self.reduction == jnp.mean:
       msgs = jnp.sum(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
       msgs = msgs / jnp.sum(adj_mat, axis=-1, keepdims=True)
 
@@ -606,6 +603,80 @@ class F1(FALR):
                adj_mat: _Array, hidden: _Array, **unused_kwargs) -> _Array:
     adj_mat = jnp.ones_like(adj_mat)
     return super().__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
+
+class F2(FALR):
+  """Message-Passing Neural Network (Gilmer et al., ICML 2017)."""
+
+  def __call__(self, node_fts: _Array, edge_fts: _Array, graph_fts: _Array,
+               adj_mat: _Array, hidden: _Array, **unused_kwargs) -> _Array:
+    adj_mat = jnp.ones_like(adj_mat)
+    return super().__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
+  
+class fMPNN():
+  @property
+  def inf_bias(self):
+    return True
+
+  @property
+  def inf_bias_edge(self):
+    return True
+
+  def __init__(
+      self,
+      out_size: int,
+      mid_size: Optional[int] = None,
+      mid_act: Optional[_Fn] = None,
+      activation: Optional[_Fn] = jax.nn.relu,
+      reduction: _Fn = jnp.max,
+      msgs_mlp_sizes: Optional[List[int]] = None,
+      use_ln: bool = False,
+      use_triplets: bool = False,
+      nb_triplet_fts: int = 8,
+      gated: bool = False,
+      name: str = 'f_mpnn',
+  ):
+    self._f1 = F1(
+      out_size,
+      mid_size,
+      mid_act,
+      activation,
+      jnp.max,
+      msgs_mlp_sizes,
+      use_ln,
+      use_triplets,
+      nb_triplet_fts,
+      gated,
+      'F1'
+    )
+
+    self._f2 = F1(
+      out_size,
+      mid_size,
+      mid_act,
+      activation,
+      jnp.average,
+      msgs_mlp_sizes,
+      use_ln,
+      use_triplets,
+      nb_triplet_fts,
+      gated,
+      'F2'
+    )
+
+  def __call__(self, 
+               node_fts: _Array, 
+               edge_fts: _Array, 
+               graph_fts: _Array,
+               adj_mat: _Array, 
+               hidden: _Array, **unused_kwargs
+  ) -> _Array:
+    adj_mat = jnp.ones_like(adj_mat)
+
+    f1_ret, f1_tri_msgs = self._f1.__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
+    f2_ret, f2_tri_msgs = self._f2.__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
+
+    return jax.nn.sigmoid(f1_ret + f2_ret), jax.nn.sigmoid(f1_tri_msgs + f2_tri_msgs)
+
 
 def get_triplet_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
   """Triplet messages, as done by Dudzik and Velickovic (2022)."""
@@ -1005,6 +1076,27 @@ def get_processor_factory(kind: str,
     A callable that takes an `out_size` parameter (equal to the hidden
     dimension of the network) and returns a processor instance.
   """
+  #reduction
+  reduction = jnp.max #default
+  
+  if(kwargs['reduction'] == 'average'):
+    reduction = jnp.average
+  elif(kwargs['reduction'] == 'mean'):
+    reduction = jnp.mean
+  elif(kwargs['reduction'] == 'min'):
+    reduction = jnp.min
+  elif(kwargs['reduction'] == 'sum'):
+    reduction = jnp.sum
+
+  #activation
+  activation = jax.nn.relu #default
+  
+  if(kwargs['activation'] == 'elu'):
+    reduction = jax.nn.relu
+  elif(kwargs['activation'] == 'sigmoid'):
+    reduction = jax.nn.sigmoid
+
+
   def _factory(out_size: int):
     if kind == 'deepsets':
       processor = DeepSets(
@@ -1171,8 +1263,19 @@ def get_processor_factory(kind: str,
           use_ln=use_ln,
           use_triplets=True,
           nb_triplet_fts=nb_triplet_fts,
-          activation = jax.nn.relu,
-          reduction = jnp.average,
+          activation = activation,
+          reduction = reduction,
+          gated=True,
+      )
+    elif kind == 'f_mpnn':
+      processor = fMPNN(
+          out_size=out_size,
+          msgs_mlp_sizes=[out_size, out_size],
+          use_ln=use_ln,
+          use_triplets=True,
+          nb_triplet_fts=nb_triplet_fts,
+          activation = activation,
+          reduction = reduction,
           gated=True,
       )
     else:

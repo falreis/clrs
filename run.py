@@ -137,7 +137,7 @@ flags.DEFINE_enum('reduction', 'min',
                     'Reduction operation.') 
 
 flags.DEFINE_enum('activation', 'elu', 
-                    ['relu', 'elu', 'sigmoid'],
+                    ['relu', 'elu', 'leaky_relu', 'glu' 'sigmoid'],
                     'Activation function.') 
 
 #for RT model (Diao et al. (2023))

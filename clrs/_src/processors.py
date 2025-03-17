@@ -558,7 +558,7 @@ class FALR(Processor):
         msg_e + jnp.expand_dims(msg_g, axis=(1, 2)))
 
     if self._msgs_mlp_sizes is not None:
-      msgs = hk.nets.MLP(self._msgs_mlp_sizes)(jax.nn.relu(msgs))
+      msgs = hk.nets.MLP(self._msgs_mlp_sizes)(self.activation(msgs))
 
     if self.mid_act is not None:
       msgs = self.mid_act(msgs)
@@ -1093,10 +1093,14 @@ def get_processor_factory(kind: str,
   
   if(kwargs['activation'] == 'elu'):
     activation = jax.nn.elu
+  elif(kwargs['activation'] == 'leaky_relu'):
+    activation = jax.nn.leaky_relu
+  elif(kwargs['activation'] == 'glu'):
+    activation = jax.nn.glu
   elif(kwargs['activation'] == 'sigmoid'):
     activation = jax.nn.sigmoid
 
-
+  #factory with methods
   def _factory(out_size: int):
     if kind == 'deepsets':
       processor = DeepSets(

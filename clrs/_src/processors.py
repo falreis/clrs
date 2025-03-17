@@ -1092,9 +1092,9 @@ def get_processor_factory(kind: str,
   activation = jax.nn.relu #default
   
   if(kwargs['activation'] == 'elu'):
-    reduction = jax.nn.relu
+    activation = jax.nn.elu
   elif(kwargs['activation'] == 'sigmoid'):
-    reduction = jax.nn.sigmoid
+    activation = jax.nn.sigmoid
 
 
   def _factory(out_size: int):

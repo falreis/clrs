@@ -132,11 +132,11 @@ flags.DEFINE_boolean('freeze_processor', False,
                      'Whether to freeze the processor of the model.')
 
 #for falreis model
-flags.DEFINE_enum('reduction', 'max', 
+flags.DEFINE_enum('reduction', 'min', 
                     ['max', 'mean', 'average', 'sum', 'min'],
                     'Reduction operation.') 
 
-flags.DEFINE_enum('activation', 'relu', 
+flags.DEFINE_enum('activation', 'elu', 
                     ['relu', 'elu', 'sigmoid'],
                     'Activation function.') 
 

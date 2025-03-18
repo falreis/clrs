@@ -38,8 +38,16 @@ import requests
 import tensorflow as tf
 
 
-flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
+#flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
 #flags.DEFINE_list('algorithms', ['quickselect'], 'Which algorithms to run.')
+#flags.DEFINE_list('algorithms', ['articulation_points', 'activity_selector', 'bellman_ford', 'bfs', 'binary_search'], 'Which algorithms to run.')
+#flags.DEFINE_list('algorithms', ['bridges', 'bubble_sort', 'dag_shortest_paths', 'dfs', 'dijkstra'], 'Which algorithms to run.')
+#flags.DEFINE_list('algorithms', ['find_maximum_subarray_kadane', 'floyd_warshall', 'graham_scan', 'heapsort', 'insertion_sort'], 'Which algorithms to run.')
+#flags.DEFINE_list('algorithms', [#'jarvis_march', 'kmp_matcher', 'lcs_length', 'matrix_chain_order', 'minimum',], 'Which algorithms to run.')
+#flags.DEFINE_list('algorithms', [#'mst_kruskal', 'mst_prim', 'naive_string_matcher', 'optimal_bst', 'quickselect',], 'Which algorithms to run.')
+#flags.DEFINE_list('algorithms', [#'quicksort', 'segments_intersect', 'strongly_connected_components', 'task_scheduling', 'topological_sort',], 'Which algorithms to run.')
+flags.DEFINE_list('algorithms', ['dfs', 'heapsort', 'kmp_matcher', 'quickselect', 'strongly_connected_components'], 'Hard algorithms.')
+
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
                   'Which training sizes to use. A size of -1 means '
                   'use the benchmark dataset.')
@@ -58,7 +66,7 @@ flags.DEFINE_boolean('enforce_permutations', True,
                      'Whether to enforce permutation-type node pointers.')
 flags.DEFINE_boolean('enforce_pred_as_input', True,
                      'Whether to change pred_h hints into pred inputs.')
-flags.DEFINE_integer('batch_size', 8, 'Batch size used for training.')
+flags.DEFINE_integer('batch_size', 32, 'Batch size used for training.')
 flags.DEFINE_boolean('chunked_training', True,
                      'Whether to use chunking for training.')
 flags.DEFINE_integer('chunk_length', 16,
@@ -137,7 +145,7 @@ flags.DEFINE_enum('reduction', 'min',
                     'Reduction operation.') 
 
 flags.DEFINE_enum('activation', 'elu', 
-                    ['relu', 'elu', 'leaky_relu', 'glu' 'sigmoid'],
+                    ['relu', 'elu', 'leaky_relu', 'glu', 'sigmoid'],
                     'Activation function.') 
 
 #for RT model (Diao et al. (2023))

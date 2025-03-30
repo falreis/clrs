@@ -23,6 +23,7 @@ import haiku as hk
 import jax
 import jax.numpy as jnp
 import numpy as np
+from absl import logging
 
 
 _Array = chex.Array
@@ -635,6 +636,8 @@ class fMPNN():
       gated: bool = False,
       name: str = 'f_mpnn',
   ):
+    self.state = 1
+
     self._f1 = F1(
       out_size,
       mid_size,

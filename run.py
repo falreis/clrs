@@ -23,9 +23,16 @@ import shutil
 import time
 import pickle
 from typing import Any, Dict, List, Optional
+import absl
 from absl import app
 from absl import flags
 from absl import logging
+
+if not os.path.exists('./absl-log/'): 
+     os.makedirs('./absl-log/') 
+logging.get_absl_handler().use_absl_log_file('absl_logging', './absl-log/') 
+absl.flags.FLAGS.mark_as_parsed() 
+logging.set_verbosity(logging.INFO)
 
 import clrs
 from clrs._src import specs
@@ -40,18 +47,21 @@ import tensorflow as tf
 
 #flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
 #flags.DEFINE_list('algorithms', ['quickselect'], 'Which algorithms to run.')
-#flags.DEFINE_list('algorithms', ['articulation_points', 'activity_selector', 'bellman_ford', 'bfs', 'binary_search'], 'Which algorithms to run.')
-#flags.DEFINE_list('algorithms', ['bridges', 'bubble_sort', 'dag_shortest_paths', 'dfs', 'dijkstra'], 'Which algorithms to run.')
-#flags.DEFINE_list('algorithms', ['find_maximum_subarray_kadane', 'floyd_warshall', 'graham_scan', 'heapsort', 'insertion_sort'], 'Which algorithms to run.')
-#flags.DEFINE_list('algorithms', [#'jarvis_march', 'kmp_matcher', 'lcs_length', 'matrix_chain_order', 'minimum',], 'Which algorithms to run.')
-#flags.DEFINE_list('algorithms', [#'mst_kruskal', 'mst_prim', 'naive_string_matcher', 'optimal_bst', 'quickselect',], 'Which algorithms to run.')
-#flags.DEFINE_list('algorithms', [#'quicksort', 'segments_intersect', 'strongly_connected_components', 'task_scheduling', 'topological_sort',], 'Which algorithms to run.')
-flags.DEFINE_list('algorithms', ['dfs', 'heapsort', 'kmp_matcher', 'quickselect', 'strongly_connected_components'], 'Hard algorithms.')
-
+#flags.DEFINE_list('algorithms', ['dfs', 'heapsort', 'kmp_matcher', 'quickselect', 'strongly_connected_components'], 'Hard algorithms.')
+# flags.DEFINE_list('algorithms', ['dfs', 'heapsort'], '')
+flags.DEFINE_list('algorithms', 
+                 ['articulation_points', 'activity_selector', 'bellman_ford', 'bfs', 'binary_search',
+                 'bridges', 'bubble_sort', 'dag_shortest_paths', 'dfs', 'dijkstra',
+                 'find_maximum_subarray_kadane', 'floyd_warshall', 'graham_scan', 'heapsort', 'insertion_sort', #], 'Which algorithms to run.')
+                 'jarvis_march', 'kmp_matcher', 'lcs_length', 'matrix_chain_order', 'minimum',
+                 'mst_kruskal', 'mst_prim', 'naive_string_matcher', 'optimal_bst', 'quickselect',
+                 'quicksort', 'segments_intersect', 'strongly_connected_components', 
+                 'task_scheduling', 'topological_sort'], 
+                 'Which algorithms to run.')
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
                   'Which training sizes to use. A size of -1 means '
                   'use the benchmark dataset.')
-flags.DEFINE_integer('length_needle', -8,
+flags.DEFINE_integer('length_needle', 0,
                      'Length of needle for training and validation '
                      '(not testing) in string matching algorithms. '
                      'A negative value randomizes the length for each sample '
@@ -66,13 +76,13 @@ flags.DEFINE_boolean('enforce_permutations', True,
                      'Whether to enforce permutation-type node pointers.')
 flags.DEFINE_boolean('enforce_pred_as_input', True,
                      'Whether to change pred_h hints into pred inputs.')
-flags.DEFINE_integer('batch_size', 32, 'Batch size used for training.')
+flags.DEFINE_integer('batch_size', 4, 'Batch size used for training.')
 flags.DEFINE_boolean('chunked_training', True,
                      'Whether to use chunking for training.')
 flags.DEFINE_integer('chunk_length', 16,
                      'Time chunk length used for training (if '
                      '`chunked_training` is True.')
-flags.DEFINE_integer('train_steps', 3000, 'Number of training iterations.')
+flags.DEFINE_integer('train_steps', 5000, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 
@@ -129,6 +139,7 @@ flags.DEFINE_enum('processor_type', 'falreis',
                    'gat', 'gatv2', 'gat_full', 'gatv2_full',
                    'gpgn', 'gpgn_mask', 'gmpnn',
                    'triplet_gpgn', 'triplet_gpgn_mask', 'triplet_gmpnn',
+                   'memnet_full', 'memnet_masked',
                    'rt', 'falreis', 'f_mpnn'],
                   'Processor type to use as the network P.')
 
@@ -147,6 +158,9 @@ flags.DEFINE_enum('reduction', 'min',
 flags.DEFINE_enum('activation', 'elu', 
                     ['relu', 'elu', 'leaky_relu', 'glu', 'sigmoid'],
                     'Activation function.') 
+
+flags.DEFINE_list('algorithm_models', ['F1', 'F2'], 
+                  'List of models for f_mpnn')
 
 #for RT model (Diao et al. (2023))
 flags.DEFINE_integer('nb_layers', 3, 'Number of processor layers.') 
@@ -471,6 +485,8 @@ def main(unused_argv):
       val_lengths=[np.amax(train_lengths)],
       test_lengths=[-1],
       train_batch_size=FLAGS.batch_size,
+      val_batch_size = (FLAGS.batch_size // 2) if (FLAGS.batch_size >= 4) else 1,
+      test_batch_size = (FLAGS.batch_size // 4) if (FLAGS.batch_size >= 4) else 1
   )
 
   FLAGS.disable_edge_updates = eval(FLAGS.disable_edge_updates)

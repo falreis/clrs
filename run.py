@@ -27,6 +27,9 @@ import absl
 from absl import app
 from absl import flags
 from absl import logging
+import datetime
+
+exec_timestamp = datetime.datetime.now()
 
 if not os.path.exists('./absl-log/'): 
      os.makedirs('./absl-log/') 
@@ -45,7 +48,7 @@ import requests
 import tensorflow as tf
 
 
-#flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
+# flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
 #flags.DEFINE_list('algorithms', ['quickselect'], 'Which algorithms to run.')
 #flags.DEFINE_list('algorithms', ['dfs', 'heapsort', 'kmp_matcher', 'quickselect', 'strongly_connected_components'], 'Hard algorithms.')
 # flags.DEFINE_list('algorithms', ['dfs', 'heapsort'], '')
@@ -76,15 +79,15 @@ flags.DEFINE_boolean('enforce_permutations', True,
                      'Whether to enforce permutation-type node pointers.')
 flags.DEFINE_boolean('enforce_pred_as_input', True,
                      'Whether to change pred_h hints into pred inputs.')
-flags.DEFINE_integer('batch_size', 4, 'Batch size used for training.')
+flags.DEFINE_integer('batch_size', 8, 'Batch size used for training.')
 flags.DEFINE_boolean('chunked_training', True,
                      'Whether to use chunking for training.')
 flags.DEFINE_integer('chunk_length', 16,
                      'Time chunk length used for training (if '
                      '`chunked_training` is True.')
-flags.DEFINE_integer('train_steps', 5000, 'Number of training iterations.')
+flags.DEFINE_integer('train_steps', 10000, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
-flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
+flags.DEFINE_integer('test_every', 500 'Evaluation frequency (in steps).')
 
 flags.DEFINE_integer('hidden_size', 128,
                      'Number of hidden units of the model.')
@@ -92,7 +95,7 @@ flags.DEFINE_integer('nb_heads', 12, 'Number of heads for GAT processors') #incl
 
 flags.DEFINE_integer('nb_msg_passing_steps', 1,
                      'Number of message passing steps to run per hint.')
-flags.DEFINE_float('learning_rate', 0.001, 'Learning rate to use.')
+flags.DEFINE_float('learning_rate', 0.0005, 'Learning rate to use.')
 flags.DEFINE_float('grad_clip_max_norm', 1.0,
                    'Gradient clipping by norm. 0.0 disables grad clipping')
 flags.DEFINE_float('dropout_prob', 0.0, 'Dropout rate to use.')
@@ -161,6 +164,9 @@ flags.DEFINE_enum('activation', 'elu',
 
 flags.DEFINE_list('algorithm_models', ['F1', 'F2'], 
                   'List of models for f_mpnn')
+
+flags.DEFINE_string('restore_model', '',
+                    'Path in which dataset is stored.')
 
 #for RT model (Diao et al. (2023))
 flags.DEFINE_integer('nb_layers', 3, 'Number of processor layers.') 
@@ -550,6 +556,7 @@ def main(unused_argv):
   # until all algos have had at least one evaluation.
   val_scores = [-99999.9] * len(FLAGS.algorithms)
   length_idx = 0
+  restored = False
 
   while step < FLAGS.train_steps:
     feedback_list = [next(t) for t in train_samplers]
@@ -588,9 +595,26 @@ def main(unused_argv):
       else:
         examples_in_chunk = len(feedback.features.lengths)
       current_train_items[algo_idx] += examples_in_chunk
-      #logging.info('Algo %s step %i current loss %f, current_train_items %i.',
-      #             FLAGS.algorithms[algo_idx], step,
-      #             cur_loss, current_train_items[algo_idx])
+
+      if step >= next_eval:
+        logging.info('Algo %s step %i current loss %f, current_train_items %i.',
+                    FLAGS.algorithms[algo_idx], step,
+                    cur_loss, current_train_items[algo_idx])
+        
+      ####################################
+      if step == 1:
+        if(FLAGS.restore_model != '' and restored == False):
+          print('-------------------------------------------')
+          print('---------------RESTORE MODEL---------------')
+          print('-------------------------------------------')
+          print(FLAGS.restore_model)
+          train_model.restore_model(FLAGS.restore_model, only_load_processor=False)
+          print('-------------------------------------------')
+          print('---------------MODEL RESTORED--------------')
+          print('-------------------------------------------')
+          restored = True
+
+      ####################################
 
     # Periodically evaluate model
     if step >= next_eval:
@@ -627,7 +651,7 @@ def main(unused_argv):
         best_score = sum(val_scores)
         #best_step = step
         logging.info('Checkpointing best model, %s', msg)
-        train_model.save_model('best.pkl')
+        train_model.save_model('best_{}.pkl'.format(exec_timestamp))
       else:
         logging.info('Not saving new best model, %s', msg)
 
@@ -636,7 +660,7 @@ def main(unused_argv):
 
 
   logging.info('Restoring best model from checkpoint...')
-  eval_model.restore_model('best.pkl', only_load_processor=True)
+  eval_model.restore_model('best_{}.pkl'.format(exec_timestamp), only_load_processor=True)
 
   for algo_idx in range(len(train_samplers)):
     common_extras = {'examples_seen': current_train_items[algo_idx],

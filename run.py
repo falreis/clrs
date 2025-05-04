@@ -51,7 +51,8 @@ import tensorflow as tf
 # flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
 #flags.DEFINE_list('algorithms', ['quickselect'], 'Which algorithms to run.')
 #flags.DEFINE_list('algorithms', ['dfs', 'heapsort', 'kmp_matcher', 'quickselect', 'strongly_connected_components'], 'Hard algorithms.')
-# flags.DEFINE_list('algorithms', ['dfs', 'heapsort'], '')
+flags.DEFINE_list('algorithms', ['dfs', 'heapsort'], '')
+'''
 flags.DEFINE_list('algorithms', 
                  ['articulation_points', 'activity_selector', 'bellman_ford', 'bfs', 'binary_search',
                  'bridges', 'bubble_sort', 'dag_shortest_paths', 'dfs', 'dijkstra',
@@ -61,6 +62,7 @@ flags.DEFINE_list('algorithms',
                  'quicksort', 'segments_intersect', 'strongly_connected_components', 
                  'task_scheduling', 'topological_sort'], 
                  'Which algorithms to run.')
+'''
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
                   'Which training sizes to use. A size of -1 means '
                   'use the benchmark dataset.')
@@ -85,9 +87,9 @@ flags.DEFINE_boolean('chunked_training', True,
 flags.DEFINE_integer('chunk_length', 16,
                      'Time chunk length used for training (if '
                      '`chunked_training` is True.')
-flags.DEFINE_integer('train_steps', 10000, 'Number of training iterations.')
+flags.DEFINE_integer('train_steps', 1000, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
-flags.DEFINE_integer('test_every', 500 'Evaluation frequency (in steps).')
+flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 
 flags.DEFINE_integer('hidden_size', 128,
                      'Number of hidden units of the model.')

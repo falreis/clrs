@@ -498,6 +498,7 @@ class FALR(Processor):
       use_triplets: bool = False,
       nb_triplet_fts: int = 8,
       gated: bool = False,
+      gated_activation: Optional[_Fn] = jax.nn.sigmoid,
       name: str = 'falreis',
   ):
     super().__init__(name=name)
@@ -514,6 +515,7 @@ class FALR(Processor):
     self.use_triplets = use_triplets
     self.nb_triplet_fts = nb_triplet_fts
     self.gated = gated
+    self.gated_activation = gated_activation
 
   def __call__(  # pytype: disable=signature-mismatch  # numpy-scalars
       self,
@@ -549,7 +551,8 @@ class FALR(Processor):
 
     if self.use_triplets:
       triplets = get_falr_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
-      tri_msgs = jnp.average(triplets, axis=1)
+      tri_msgs = jnp.average(triplets, axis=1)  # (B, N, N, H)
+      #tri_msgs = self.reduction(triplets, axis=1)  # (B, N, N, H)
 
       if self.activation is not None:
         tri_msgs = self.activation(tri_msgs)
@@ -573,6 +576,7 @@ class FALR(Processor):
                          msgs,
                          -BIG_NUMBER)
       msgs = jnp.max(maxarg, axis=1)
+
     else:
       msgs = self.reduction(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
 
@@ -592,7 +596,11 @@ class FALR(Processor):
       gate1 = hk.Linear(self.out_size)
       gate2 = hk.Linear(self.out_size)
       gate3 = hk.Linear(self.out_size, b_init=hk.initializers.Constant(-3))
-      gate = jax.nn.sigmoid(gate3(jax.nn.relu(gate1(z) + gate2(msgs))))
+
+      gate = self.gated_activation(jax.nn.elu(gate1(z) + gate2(msgs)))
+      #gate = self.gated_activation(gate3(jax.nn.relu(gate1(z) + gate2(msgs))))
+      # gate = jax.nn.sigmoid(gate3(jax.nn.relu(gate1(z) + gate2(msgs))))
+
       ret = ret * gate + hidden * (1-gate)
 
     return ret, tri_msgs  # pytype: disable=bad-return-type  # numpy-scalars
@@ -1102,6 +1110,31 @@ def get_processor_factory(kind: str,
     activation = jax.nn.glu
   elif(kwargs['activation'] == 'sigmoid'):
     activation = jax.nn.sigmoid
+  elif(kwargs['activation'] == 'log_sigmoid'):
+    activation = jax.nn.log_sigmoid
+  elif(kwargs['activation'] == 'hard_sigmoid'):
+    activation = jax.nn.hard_sigmoid
+  elif(kwargs['activation'] == 'sparse_sigmoid'):
+    activation = jax.nn.sparse_sigmoid
+  elif(kwargs['activation'] == 'hard_tanh'):  
+    activation = jax.nn.hard_tanh
+
+  #gated activation
+  gated = kwargs['gated']
+  gated_activation = jax.nn.sigmoid #default
+
+  if(kwargs['gated_activation'] == 'hard_sigmoid'):
+    gated_activation = jax.nn.hard_sigmoid
+  elif(kwargs['gated_activation'] == 'log_sigmoid'):
+    gated_activation = jax.nn.log_sigmoid
+  elif(kwargs['gated_activation'] == 'sparse_sigmoid'):
+    gated_activation = jax.nn.sparse_sigmoid
+  elif(kwargs['gated_activation'] == 'hard_tanh'):  
+    gated_activation = jax.nn.hard_tanh
+  elif(kwargs['gated_activation'] == 'relu'):
+    gated_activation = jax.nn.relu
+  elif(kwargs['gated_activation'] == 'elu'):
+    gated_activation = jax.nn.elu
 
   #factory with methods
   def _factory(out_size: int):
@@ -1272,7 +1305,8 @@ def get_processor_factory(kind: str,
           nb_triplet_fts=nb_triplet_fts,
           activation = activation,
           reduction = reduction,
-          gated=True,
+          gated = gated,
+          gated_activation = gated_activation
       )
     elif kind == 'f_mpnn':
       processor = fMPNN(
@@ -1283,7 +1317,8 @@ def get_processor_factory(kind: str,
           nb_triplet_fts=nb_triplet_fts,
           activation = activation,
           reduction = reduction,
-          gated=True,
+          gated = gated,
+          gated_activation = gated_activation
       )
     else:
       raise ValueError('Unexpected processor kind ' + kind)

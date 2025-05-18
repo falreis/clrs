@@ -47,22 +47,27 @@ import jax.numpy as jnp
 import requests
 import tensorflow as tf
 
+# flags.DEFINE_list('algorithms', ['dfs', 'find_maximum_subarray_kadane', 'floyd_warshall', 
+#                                 'kmp_matcher', 'naive_string_matcher', 'quickselect'], 'Which algorithms to run.')
 
-# flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
-#flags.DEFINE_list('algorithms', ['quickselect'], 'Which algorithms to run.')
+#flags.DEFINE_list('algorithms', ['kmp_matcher', 'naive_string_matcher', 'quickselect'], 'Which algorithms to run.')
+
+flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
 #flags.DEFINE_list('algorithms', ['dfs', 'heapsort', 'kmp_matcher', 'quickselect', 'strongly_connected_components'], 'Hard algorithms.')
-flags.DEFINE_list('algorithms', ['dfs', 'heapsort'], '')
+# flags.DEFINE_list('algorithms', ['dfs', 'heapsort'], '')
+
 '''
 flags.DEFINE_list('algorithms', 
                  ['articulation_points', 'activity_selector', 'bellman_ford', 'bfs', 'binary_search',
                  'bridges', 'bubble_sort', 'dag_shortest_paths', 'dfs', 'dijkstra',
-                 'find_maximum_subarray_kadane', 'floyd_warshall', 'graham_scan', 'heapsort', 'insertion_sort', #], 'Which algorithms to run.')
+                 'find_maximum_subarray_kadane', 'floyd_warshall', 'graham_scan', 'heapsort', 'insertion_sort',
                  'jarvis_march', 'kmp_matcher', 'lcs_length', 'matrix_chain_order', 'minimum',
                  'mst_kruskal', 'mst_prim', 'naive_string_matcher', 'optimal_bst', 'quickselect',
                  'quicksort', 'segments_intersect', 'strongly_connected_components', 
                  'task_scheduling', 'topological_sort'], 
                  'Which algorithms to run.')
 '''
+                 
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
                   'Which training sizes to use. A size of -1 means '
                   'use the benchmark dataset.')
@@ -81,13 +86,13 @@ flags.DEFINE_boolean('enforce_permutations', True,
                      'Whether to enforce permutation-type node pointers.')
 flags.DEFINE_boolean('enforce_pred_as_input', True,
                      'Whether to change pred_h hints into pred inputs.')
-flags.DEFINE_integer('batch_size', 8, 'Batch size used for training.')
+flags.DEFINE_integer('batch_size', 16, 'Batch size used for training.')
 flags.DEFINE_boolean('chunked_training', True,
                      'Whether to use chunking for training.')
 flags.DEFINE_integer('chunk_length', 16,
                      'Time chunk length used for training (if '
                      '`chunked_training` is True.')
-flags.DEFINE_integer('train_steps', 1000, 'Number of training iterations.')
+flags.DEFINE_integer('train_steps', 3000, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 
@@ -97,7 +102,7 @@ flags.DEFINE_integer('nb_heads', 12, 'Number of heads for GAT processors') #incl
 
 flags.DEFINE_integer('nb_msg_passing_steps', 1,
                      'Number of message passing steps to run per hint.')
-flags.DEFINE_float('learning_rate', 0.0005, 'Learning rate to use.')
+flags.DEFINE_float('learning_rate', 0.001, 'Learning rate to use.')
 flags.DEFINE_float('grad_clip_max_norm', 1.0,
                    'Gradient clipping by norm. 0.0 disables grad clipping')
 flags.DEFINE_float('dropout_prob', 0.0, 'Dropout rate to use.')
@@ -127,7 +132,7 @@ flags.DEFINE_enum('hint_repred_mode', 'soft', ['soft', 'hard', 'hard_on_eval'],
                   'thresholding of masks. '
                   'In hard_on_eval mode, soft mode is '
                   'used for training and hard mode is used for evaluation.')
-flags.DEFINE_boolean('use_ln', True,
+flags.DEFINE_boolean('use_ln', False,
                      'Whether to use layer normalisation in the processor.')
 flags.DEFINE_boolean('use_lstm', True,
                      'Whether to insert an LSTM after message passing.')
@@ -161,7 +166,9 @@ flags.DEFINE_enum('reduction', 'min',
                     'Reduction operation.') 
 
 flags.DEFINE_enum('activation', 'elu', 
-                    ['relu', 'elu', 'leaky_relu', 'glu', 'sigmoid'],
+                    ['relu', 'elu', 'leaky_relu', 'glu', 'sigmoid',
+                     'hard_sigmoid', 'log_sigmoid', 'sparse_sigmoid', 
+                     'hard_tanh'],
                     'Activation function.') 
 
 flags.DEFINE_list('algorithm_models', ['F1', 'F2'], 
@@ -169,6 +176,14 @@ flags.DEFINE_list('algorithm_models', ['F1', 'F2'],
 
 flags.DEFINE_string('restore_model', '',
                     'Path in which dataset is stored.')
+
+flags.DEFINE_boolean('gated', False, 
+                    'Use gated activation.') 
+
+flags.DEFINE_enum('gated_activation', 'hard_tanh', 
+                    ['sigmoid', 'hard_sigmoid', 'log_sigmoid', 'sparse_sigmoid', 
+                     'hard_tanh', 'relu', 'elu'],
+                    'Gated activation function.') 
 
 #for RT model (Diao et al. (2023))
 flags.DEFINE_integer('nb_layers', 3, 'Number of processor layers.') 
@@ -369,7 +384,36 @@ def create_samplers(
 
   """
 
-  logging.info('Model: %', FLAGS.processor_type, FLAGS.algorithms)
+  logging.info('Model: %s %s', FLAGS.processor_type, FLAGS.algorithms)
+
+  logging.info('algorithms %s', FLAGS.algorithms)
+  logging.info('train_lengths %s', FLAGS.train_lengths)
+  logging.info('batch %s', FLAGS.batch_size)
+  logging.info('chunked_training %s', FLAGS.chunked_training)
+  logging.info('chunk_length %s', FLAGS.chunk_length)
+  logging.info('train_steps %s', FLAGS.train_steps)
+  logging.info('eval_every %s', FLAGS.eval_every)
+  logging.info('test_every %s', FLAGS.test_every)
+  logging.info('learning_rate %s', FLAGS.learning_rate)
+  logging.info('grad_clip_max_norm %s', FLAGS.grad_clip_max_norm) 
+  logging.info('dropout_prob %s', FLAGS.dropout_prob)
+  logging.info('hint_teacher_forcing %s', FLAGS.hint_teacher_forcing)
+  logging.info('hint_mode %s', FLAGS.hint_mode)
+  logging.info('hint_repred_mode %s', FLAGS.hint_repred_mode)
+  logging.info('use_ln %s', FLAGS.use_ln)
+  logging.info('use_lstm %s', FLAGS.use_lstm)
+  logging.info('nb_triplet_fts %s', FLAGS.nb_triplet_fts)
+  logging.info('encoder_init %s', FLAGS.encoder_init)
+  logging.info('processor_type %s', FLAGS.processor_type)
+  logging.info('checkpoint_path %s', FLAGS.checkpoint_path)
+  logging.info('dataset_path %s', FLAGS.dataset_path)
+  logging.info('freeze_processor %s', FLAGS.freeze_processor)
+  logging.info('reduction %s', FLAGS.reduction)
+  logging.info('activation %s', FLAGS.activation)
+  logging.info('algorithm_models %s', FLAGS.algorithm_models)
+  logging.info('restore_model %s', FLAGS.restore_model)
+  logging.info('gated %s', FLAGS.gated)
+  logging.info('gated_activation %s', FLAGS.gated_activation)
 
   train_samplers = []
   val_samplers = []
@@ -506,8 +550,10 @@ def main(unused_argv):
       nb_heads=FLAGS.nb_heads,
 
       #falreis model
-      reduction=FLAGS.reduction,
-      activation=FLAGS.activation,
+      reduction = FLAGS.reduction,
+      activation = FLAGS.activation,
+      gated = FLAGS.gated,
+      gated_activation = FLAGS.gated_activation,
       
       #RT model
       nb_layers=FLAGS.nb_layers, 

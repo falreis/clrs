@@ -156,6 +156,7 @@ def _preprocess(data_point, algorithm=None):
   outputs = []
   hints = []
   lengths = None
+  hint_increase = None
 
   for name, data in data_point.items():
     if name == 'lengths':
@@ -175,7 +176,7 @@ def _preprocess(data_point, algorithm=None):
     else:
       hints.append(dp)
   return samplers.Feedback(
-      samplers.Features(tuple(inputs), tuple(hints), lengths), tuple(outputs))
+      samplers.Features(tuple(inputs), tuple(hints), lengths), tuple(outputs), hint_increase)
 
 
 def create_dataset(folder, algorithm, split, batch_size):
@@ -243,9 +244,9 @@ def chunkify(dataset: Iterator[samplers.Feedback], chunk_length: int):
   def _get_batch():
     d = next(dataset)
     return (d.features.inputs, d.features.hints, d.outputs,
-            d.features.lengths.astype(int))
+            d.features.lengths.astype(int), d.hint_increase)
 
-  inputs, hints, outputs, lengths = _get_batch()
+  inputs, hints, outputs, lengths, hint_increases = _get_batch()
   for inp in inputs:
     if inp.location in [specs.Location.NODE, specs.Location.EDGE]:
       batch_size = inp.data.shape[0]
@@ -271,15 +272,19 @@ def chunkify(dataset: Iterator[samplers.Feedback], chunk_length: int):
     chunk_outputs = jax.tree_util.tree_map(np.zeros_like, chunk_outputs)
     start_mark = np.zeros((chunk_length, batch_size), dtype=int)
     end_mark = np.zeros((chunk_length, batch_size), dtype=int)
+    hint_increase = False
 
     # Get enough data batches to fill the new chunk
     while np.any(np.sum(left, axis=0) < chunk_length):
-      inp, hh, out, ll = _get_batch()
+      inp, hh, out, ll, hi = _get_batch()
       inputs.append(inp)
       hints.append(hh)
       outputs.append(out)
       left.append(ll.copy())
       lengths.append(ll.copy())
+
+      if(hi == True):
+        hint_increase = True
 
     # Fill the chunk, one batch element at a time
     for i in range(batch_size):
@@ -317,7 +322,7 @@ def chunkify(dataset: Iterator[samplers.Feedback], chunk_length: int):
     yield samplers.Feedback(
         samplers.FeaturesChunked(chunk_inputs, chunk_hints,
                                  start_mark, end_mark),
-        chunk_outputs)
+        chunk_outputs, hint_increase)
 
 
 def create_chunked_dataset(folder, algorithm, split, batch_size, chunk_length):

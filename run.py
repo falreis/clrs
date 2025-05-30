@@ -52,7 +52,10 @@ import tensorflow as tf
 
 #flags.DEFINE_list('algorithms', ['kmp_matcher', 'naive_string_matcher', 'quickselect'], 'Which algorithms to run.')
 
-flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
+flags.DEFINE_list('algorithms', ['insertion_sort', 'kmp_matcher'], 'Which algorithms to run.')
+
+#flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort',
+#                                 'kmp_matcher', 'naive_string_matcher', 'quickselect'], 'Which algorithms to run.')
 #flags.DEFINE_list('algorithms', ['dfs', 'heapsort', 'kmp_matcher', 'quickselect', 'strongly_connected_components'], 'Hard algorithms.')
 # flags.DEFINE_list('algorithms', ['dfs', 'heapsort'], '')
 
@@ -71,7 +74,7 @@ flags.DEFINE_list('algorithms',
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
                   'Which training sizes to use. A size of -1 means '
                   'use the benchmark dataset.')
-flags.DEFINE_integer('length_needle', 0,
+flags.DEFINE_integer('length_needle', -1,
                      'Length of needle for training and validation '
                      '(not testing) in string matching algorithms. '
                      'A negative value randomizes the length for each sample '
@@ -86,13 +89,13 @@ flags.DEFINE_boolean('enforce_permutations', True,
                      'Whether to enforce permutation-type node pointers.')
 flags.DEFINE_boolean('enforce_pred_as_input', True,
                      'Whether to change pred_h hints into pred inputs.')
-flags.DEFINE_integer('batch_size', 16, 'Batch size used for training.')
+flags.DEFINE_integer('batch_size', 8, 'Batch size used for training.')
 flags.DEFINE_boolean('chunked_training', True,
                      'Whether to use chunking for training.')
 flags.DEFINE_integer('chunk_length', 16,
                      'Time chunk length used for training (if '
                      '`chunked_training` is True.')
-flags.DEFINE_integer('train_steps', 3000, 'Number of training iterations.')
+flags.DEFINE_integer('train_steps', 1000, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 
@@ -105,7 +108,7 @@ flags.DEFINE_integer('nb_msg_passing_steps', 1,
 flags.DEFINE_float('learning_rate', 0.001, 'Learning rate to use.')
 flags.DEFINE_float('grad_clip_max_norm', 1.0,
                    'Gradient clipping by norm. 0.0 disables grad clipping')
-flags.DEFINE_float('dropout_prob', 0.0, 'Dropout rate to use.')
+flags.DEFINE_float('dropout_prob', 0.1, 'Dropout rate to use.')
 flags.DEFINE_float('hint_teacher_forcing', 0.0,
                    'Probability that ground-truth teacher hints are encoded '
                    'during training instead of predicted hints. Only '
@@ -132,7 +135,7 @@ flags.DEFINE_enum('hint_repred_mode', 'soft', ['soft', 'hard', 'hard_on_eval'],
                   'thresholding of masks. '
                   'In hard_on_eval mode, soft mode is '
                   'used for training and hard mode is used for evaluation.')
-flags.DEFINE_boolean('use_ln', False,
+flags.DEFINE_boolean('use_ln', True,
                      'Whether to use layer normalisation in the processor.')
 flags.DEFINE_boolean('use_lstm', True,
                      'Whether to insert an LSTM after message passing.')
@@ -174,13 +177,13 @@ flags.DEFINE_enum('activation', 'elu',
 flags.DEFINE_list('algorithm_models', ['F1', 'F2'], 
                   'List of models for f_mpnn')
 
-flags.DEFINE_string('restore_model', '',
+flags.DEFINE_string('restore_model', 'best_2025-05-28 19:48:53.545306.pkl',
                     'Path in which dataset is stored.')
 
-flags.DEFINE_boolean('gated', False, 
+flags.DEFINE_boolean('gated', True, 
                     'Use gated activation.') 
 
-flags.DEFINE_enum('gated_activation', 'hard_tanh', 
+flags.DEFINE_enum('gated_activation', 'log_sigmoid', 
                     ['sigmoid', 'hard_sigmoid', 'log_sigmoid', 'sparse_sigmoid', 
                      'hard_tanh', 'relu', 'elu'],
                     'Gated activation function.') 
@@ -626,6 +629,12 @@ def main(unused_argv):
     # Training step.
     for algo_idx in range(len(train_samplers)):
       feedback = feedback_list[algo_idx]
+
+      if best_score > 0:
+        if feedback.hint_increase == True:
+          print('Hint increase')
+          best_score = -1.0
+
       rng_key, new_rng_key = jax.random.split(rng_key)
       if FLAGS.chunked_training:
         # In chunked training, we must indicate which training length we are
@@ -686,17 +695,20 @@ def main(unused_argv):
 
       next_eval += FLAGS.eval_every
 
+      current_score = sum(val_scores) 
+      avg_score = current_score / len(FLAGS.algorithms)
+
       # If best total score, update best checkpoint.
       # Also save a best checkpoint on the first step.
       msg = (f'best avg val score was '
-             f'{best_score/len(FLAGS.algorithms):.3f}, '
+             f'{avg_score:.3f}, '
              f'current avg val score is {np.mean(val_scores):.3f}, '
              f'val scores are: ')
       msg += ', '.join(
           ['%s: %.3f' % (x, y) for (x, y) in zip(FLAGS.algorithms, val_scores)])
       
-      if (sum(val_scores) > best_score) or step == 0: # or ((step - best_step) > FLAGS.train_steps / 10):
-        best_score = sum(val_scores)
+      if (current_score > best_score) or step == 0:
+        best_score = current_score
         #best_step = step
         logging.info('Checkpointing best model, %s', msg)
         train_model.save_model('best_{}.pkl'.format(exec_timestamp))
@@ -708,7 +720,7 @@ def main(unused_argv):
 
 
   logging.info('Restoring best model from checkpoint...')
-  eval_model.restore_model('best_{}.pkl'.format(exec_timestamp), only_load_processor=True)
+  eval_model.restore_model('best_{}.pkl'.format(exec_timestamp), only_load_processor=False)
 
   for algo_idx in range(len(train_samplers)):
     common_extras = {'examples_seen': current_train_items[algo_idx],

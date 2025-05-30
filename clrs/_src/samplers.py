@@ -40,7 +40,7 @@ Algorithm = Callable[..., Any]
 Features = collections.namedtuple('Features', ['inputs', 'hints', 'lengths'])
 FeaturesChunked = collections.namedtuple(
     'Features', ['inputs', 'hints', 'is_first', 'is_last'])
-Feedback = collections.namedtuple('Feedback', ['features', 'outputs'])
+Feedback = collections.namedtuple('Feedback', ['features', 'outputs', 'hint_increase'])
 
 # CLRS-30 baseline spec.
 CLRS30 = types.MappingProxyType({
@@ -158,6 +158,8 @@ class Sampler(abc.ABC):
     Returns:
       Subsampled trajectories.
     """
+    hint_increase = False
+
     if batch_size:
       if self._num_samples < 0:  # generate on the fly
         min_length = self.max_steps if self._track_max_steps else 0
@@ -172,6 +174,7 @@ class Sampler(abc.ABC):
         if self._track_max_steps and hints[0].data.shape[0] > self.max_steps:
           logging.warning('Increasing hint lengh from %i to %i',
                           self.max_steps, hints[0].data.shape[0])
+          hint_increase = True
           self.max_steps = hints[0].data.shape[0]
       else:
         if batch_size > self._num_samples:
@@ -194,7 +197,7 @@ class Sampler(abc.ABC):
       lengths = self._lengths
       outputs = self._outputs
 
-    return Feedback(Features(inputs, hints, lengths), outputs)
+    return Feedback(Features(inputs, hints, lengths), outputs, hint_increase)
 
   @abc.abstractmethod
   def _sample_data(self, length: int, *args, **kwargs) -> List[_Array]:

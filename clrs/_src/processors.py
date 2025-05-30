@@ -478,7 +478,8 @@ def get_falr_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
       jnp.expand_dims(tri_e_2, axis=2)       +  # + (B, N, 1, N, H)
       jnp.expand_dims(tri_e_3, axis=1)       +  # + (B, 1, N, N, H)
       jnp.expand_dims(tri_g, axis=(1, 2, 3))    # + (B, 1, 1, 1, H)
-  )                                                     # = (B, N, N, N, H)
+  )
+
 
 ##############################################################
 ##############################################################
@@ -551,7 +552,7 @@ class FALR(Processor):
 
     if self.use_triplets:
       triplets = get_falr_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
-      tri_msgs = jnp.average(triplets, axis=1)  # (B, N, N, H)
+      tri_msgs = jnp.max(triplets, axis=1) + jnp.max(triplets, axis=2) + jnp.max(triplets, axis=3)  # (B, N, N, H)
       #tri_msgs = self.reduction(triplets, axis=1)  # (B, N, N, H)
 
       if self.activation is not None:
@@ -597,9 +598,9 @@ class FALR(Processor):
       gate2 = hk.Linear(self.out_size)
       gate3 = hk.Linear(self.out_size, b_init=hk.initializers.Constant(-3))
 
-      gate = self.gated_activation(jax.nn.elu(gate1(z) + gate2(msgs)))
+      #gate = self.gated_activation(jax.nn.elu(gate1(z) + gate2(msgs)))
       #gate = self.gated_activation(gate3(jax.nn.relu(gate1(z) + gate2(msgs))))
-      # gate = jax.nn.sigmoid(gate3(jax.nn.relu(gate1(z) + gate2(msgs))))
+      gate = self.gated_activation(gate3(jax.nn.relu(gate1(z) + gate2(msgs))))
 
       ret = ret * gate + hidden * (1-gate)
 
@@ -642,9 +643,11 @@ class fMPNN():
       use_triplets: bool = False,
       nb_triplet_fts: int = 8,
       gated: bool = False,
+      gated_activation: Optional[_Fn] = jax.nn.sigmoid,
       name: str = 'f_mpnn',
   ):
     self.state = 1
+    self.gated_activation = gated_activation
 
     self._f1 = F1(
       out_size,
@@ -657,6 +660,7 @@ class fMPNN():
       use_triplets,
       nb_triplet_fts,
       gated,
+      gated_activation,
       'F1'
     )
 
@@ -665,12 +669,13 @@ class fMPNN():
       mid_size,
       mid_act,
       activation,
-      jnp.average,
+      jnp.min,
       msgs_mlp_sizes,
       use_ln,
       use_triplets,
       nb_triplet_fts,
       gated,
+      gated_activation,
       'F2'
     )
 
@@ -683,10 +688,10 @@ class fMPNN():
   ) -> _Array:
     adj_mat = jnp.ones_like(adj_mat)
 
-    f1_ret, f1_tri_msgs = self._f1.__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
-    f2_ret, f2_tri_msgs = self._f2.__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
+    f1_ret, f1_tri_msgs = self._f1.__call__(node_fts, edge_fts, graph_fts, jnp.ones_like(adj_mat), hidden)
+    f2_ret, f2_tri_msgs = self._f2.__call__(node_fts, edge_fts, graph_fts, jnp.ones_like(adj_mat), hidden)
 
-    return jax.nn.sigmoid(f1_ret + f2_ret), jax.nn.sigmoid(f1_tri_msgs + f2_tri_msgs)
+    return (f1_ret + f2_ret), (f1_tri_msgs + f2_tri_msgs)
 
 
 def get_triplet_msgs(z, edge_fts, graph_fts, nb_triplet_fts):

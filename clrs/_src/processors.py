@@ -552,8 +552,8 @@ class FALR(Processor):
 
     if self.use_triplets:
       triplets = get_falr_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
-      tri_msgs = jnp.max(triplets, axis=1) + jnp.max(triplets, axis=2) + jnp.max(triplets, axis=3)  # (B, N, N, H)
-      #tri_msgs = self.reduction(triplets, axis=1)  # (B, N, N, H)
+      #tri_msgs = jnp.max(triplets, axis=1) + jnp.max(triplets, axis=2) + jnp.max(triplets, axis=3)  # (B, N, N, H)
+      tri_msgs = jnp.average(triplets, axis=1)  # (B, N, N, H)
 
       if self.activation is not None:
         tri_msgs = self.activation(tri_msgs)
@@ -598,9 +598,8 @@ class FALR(Processor):
       gate2 = hk.Linear(self.out_size)
       gate3 = hk.Linear(self.out_size, b_init=hk.initializers.Constant(-3))
 
-      #gate = self.gated_activation(jax.nn.elu(gate1(z) + gate2(msgs)))
-      #gate = self.gated_activation(gate3(jax.nn.relu(gate1(z) + gate2(msgs))))
       gate = self.gated_activation(gate3(jax.nn.relu(gate1(z) + gate2(msgs))))
+      #gate = self.gated_activation(gate3(jax.nn.relu(gate1(z) + gate2(msgs))))
 
       ret = ret * gate + hidden * (1-gate)
 

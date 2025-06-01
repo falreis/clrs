@@ -813,9 +813,9 @@ def process_permutations(spec, sample_iterator, enforce_permutations):
       hints = _preprocess_permutations(features.hints, enforce_permutations)
       outputs = _preprocess_permutations(feedback.outputs, enforce_permutations)
       features = features._replace(inputs=tuple(inputs),
-                                   hints=tuple(hints))
+                                  hints=tuple(hints))
       feedback = feedback._replace(features=features,
-                                   outputs=outputs)
+                                  outputs=outputs)
       yield feedback
 
   new_spec = {}

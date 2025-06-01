@@ -52,7 +52,7 @@ import tensorflow as tf
 
 #flags.DEFINE_list('algorithms', ['kmp_matcher', 'naive_string_matcher', 'quickselect'], 'Which algorithms to run.')
 
-flags.DEFINE_list('algorithms', ['insertion_sort', 'kmp_matcher'], 'Which algorithms to run.')
+flags.DEFINE_list('algorithms', ['bfs', 'insertion_sort', 'kmp_matcher', 'naive_string_matcher', 'quicksort'], 'Which algorithms to run.')
 
 #flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort',
 #                                 'kmp_matcher', 'naive_string_matcher', 'quickselect'], 'Which algorithms to run.')
@@ -74,14 +74,19 @@ flags.DEFINE_list('algorithms',
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
                   'Which training sizes to use. A size of -1 means '
                   'use the benchmark dataset.')
-flags.DEFINE_integer('length_needle', -1,
+
+# ----------------------------------------------------
+# Não mudar length_needle para negativo!!!
+flags.DEFINE_integer('length_needle', 0,
                      'Length of needle for training and validation '
                      '(not testing) in string matching algorithms. '
                      'A negative value randomizes the length for each sample '
                      'between 1 and the opposite of the value. '
                      'A value of 0 means use always 1/4 of the length of '
-                     'the haystack (the default sampler behavior).')
-flags.DEFINE_integer('seed', 42, 'Random seed to set')
+                     'the haystack (the default sampler behavior).') 
+# ----------------------------------------------------
+
+flags.DEFINE_integer('seed', 41, 'Random seed to set')
 
 flags.DEFINE_boolean('random_pos', True,
                      'Randomize the pos input common to all algos.')
@@ -89,13 +94,17 @@ flags.DEFINE_boolean('enforce_permutations', True,
                      'Whether to enforce permutation-type node pointers.')
 flags.DEFINE_boolean('enforce_pred_as_input', True,
                      'Whether to change pred_h hints into pred inputs.')
-flags.DEFINE_integer('batch_size', 8, 'Batch size used for training.')
+
+flags.DEFINE_integer('batch_size', 16, 'Batch size used for training.')
+flags.DEFINE_integer('val_batch_size', 16, 'Batch size used for training.')
+flags.DEFINE_integer('test_batch_size', 8, 'Batch size used for training.')
+
 flags.DEFINE_boolean('chunked_training', True,
                      'Whether to use chunking for training.')
-flags.DEFINE_integer('chunk_length', 16,
+flags.DEFINE_integer('chunk_length', 8,
                      'Time chunk length used for training (if '
                      '`chunked_training` is True.')
-flags.DEFINE_integer('train_steps', 1000, 'Number of training iterations.')
+flags.DEFINE_integer('train_steps', 3000, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 
@@ -103,12 +112,12 @@ flags.DEFINE_integer('hidden_size', 128,
                      'Number of hidden units of the model.')
 flags.DEFINE_integer('nb_heads', 12, 'Number of heads for GAT processors') #including RT model
 
-flags.DEFINE_integer('nb_msg_passing_steps', 1,
+flags.DEFINE_integer('nb_msg_passing_steps', 8,
                      'Number of message passing steps to run per hint.')
 flags.DEFINE_float('learning_rate', 0.001, 'Learning rate to use.')
-flags.DEFINE_float('grad_clip_max_norm', 1.0,
+flags.DEFINE_float('grad_clip_max_norm', 0.0,
                    'Gradient clipping by norm. 0.0 disables grad clipping')
-flags.DEFINE_float('dropout_prob', 0.1, 'Dropout rate to use.')
+flags.DEFINE_float('dropout_prob', 0.0, 'Dropout rate to use.')
 flags.DEFINE_float('hint_teacher_forcing', 0.0,
                    'Probability that ground-truth teacher hints are encoded '
                    'during training instead of predicted hints. Only '
@@ -163,7 +172,9 @@ flags.DEFINE_string('dataset_path', 'CLRS30',
 flags.DEFINE_boolean('freeze_processor', False,
                      'Whether to freeze the processor of the model.')
 
-#for falreis model
+# ----------------------------------------------
+# for falreis model
+
 flags.DEFINE_enum('reduction', 'min', 
                     ['max', 'mean', 'average', 'sum', 'min'],
                     'Reduction operation.') 
@@ -177,13 +188,13 @@ flags.DEFINE_enum('activation', 'elu',
 flags.DEFINE_list('algorithm_models', ['F1', 'F2'], 
                   'List of models for f_mpnn')
 
-flags.DEFINE_string('restore_model', 'best_2025-05-28 19:48:53.545306.pkl',
+flags.DEFINE_string('restore_model', '',
                     'Path in which dataset is stored.')
 
 flags.DEFINE_boolean('gated', True, 
                     'Use gated activation.') 
 
-flags.DEFINE_enum('gated_activation', 'log_sigmoid', 
+flags.DEFINE_enum('gated_activation', 'sigmoid', 
                     ['sigmoid', 'hard_sigmoid', 'log_sigmoid', 'sparse_sigmoid', 
                      'hard_tanh', 'relu', 'elu'],
                     'Gated activation function.') 
@@ -391,7 +402,9 @@ def create_samplers(
 
   logging.info('algorithms %s', FLAGS.algorithms)
   logging.info('train_lengths %s', FLAGS.train_lengths)
-  logging.info('batch %s', FLAGS.batch_size)
+  logging.info('train_batch_size %s', FLAGS.batch_size)
+  logging.info('val_batch_size %s', FLAGS.val_batch_size)
+  logging.info('test_batch_size %s', FLAGS.test_batch_size)
   logging.info('chunked_training %s', FLAGS.chunked_training)
   logging.info('chunk_length %s', FLAGS.chunk_length)
   logging.info('train_steps %s', FLAGS.train_steps)
@@ -540,8 +553,8 @@ def main(unused_argv):
       val_lengths=[np.amax(train_lengths)],
       test_lengths=[-1],
       train_batch_size=FLAGS.batch_size,
-      val_batch_size = (FLAGS.batch_size // 2) if (FLAGS.batch_size >= 4) else 1,
-      test_batch_size = (FLAGS.batch_size // 4) if (FLAGS.batch_size >= 4) else 1
+      val_batch_size = FLAGS.val_batch_size,
+      test_batch_size = FLAGS.test_batch_size,
   )
 
   FLAGS.disable_edge_updates = eval(FLAGS.disable_edge_updates)
@@ -630,9 +643,12 @@ def main(unused_argv):
     for algo_idx in range(len(train_samplers)):
       feedback = feedback_list[algo_idx]
 
+      # Restart best_score if hint increases
       if best_score > 0:
         if feedback.hint_increase == True:
-          print('Hint increase')
+          print('------------------------------')
+          print('Hint increase!! Restarting best_score. Epoch %d'.format(step))
+          print('------------------------------')
           best_score = -1.0
 
       rng_key, new_rng_key = jax.random.split(rng_key)
@@ -696,7 +712,7 @@ def main(unused_argv):
       next_eval += FLAGS.eval_every
 
       current_score = sum(val_scores) 
-      avg_score = current_score / len(FLAGS.algorithms)
+      avg_score = best_score / len(FLAGS.algorithms)
 
       # If best total score, update best checkpoint.
       # Also save a best checkpoint on the first step.

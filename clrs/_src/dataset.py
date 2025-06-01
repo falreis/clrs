@@ -156,7 +156,6 @@ def _preprocess(data_point, algorithm=None):
   outputs = []
   hints = []
   lengths = None
-  hint_increase = None
 
   for name, data in data_point.items():
     if name == 'lengths':
@@ -176,7 +175,7 @@ def _preprocess(data_point, algorithm=None):
     else:
       hints.append(dp)
   return samplers.Feedback(
-      samplers.Features(tuple(inputs), tuple(hints), lengths), tuple(outputs), hint_increase)
+      samplers.Features(tuple(inputs), tuple(hints), lengths), tuple(outputs), False)
 
 
 def create_dataset(folder, algorithm, split, batch_size):

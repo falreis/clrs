@@ -47,15 +47,10 @@ import jax.numpy as jnp
 import requests
 import tensorflow as tf
 
-# flags.DEFINE_list('algorithms', ['dfs', 'find_maximum_subarray_kadane', 'floyd_warshall', 
-#                                 'kmp_matcher', 'naive_string_matcher', 'quickselect'], 'Which algorithms to run.')
 
-#flags.DEFINE_list('algorithms', ['kmp_matcher', 'naive_string_matcher', 'quickselect'], 'Which algorithms to run.')
+flags.DEFINE_list('algorithms', ['bfs', 'kmp_matcher'], 'Which algorithms to run.')
 
-flags.DEFINE_list('algorithms', ['bfs', 'insertion_sort', 'kmp_matcher', 'naive_string_matcher', 'quicksort'], 'Which algorithms to run.')
-
-#flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort',
-#                                 'kmp_matcher', 'naive_string_matcher', 'quickselect'], 'Which algorithms to run.')
+#flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
 #flags.DEFINE_list('algorithms', ['dfs', 'heapsort', 'kmp_matcher', 'quickselect', 'strongly_connected_components'], 'Hard algorithms.')
 # flags.DEFINE_list('algorithms', ['dfs', 'heapsort'], '')
 
@@ -71,9 +66,15 @@ flags.DEFINE_list('algorithms',
                  'Which algorithms to run.')
 '''
                  
+# flags.DEFINE_list('train_lengths', [-1], '')
+flags.DEFINE_list('train_lengths', ['2', '3', '5', '7', '11', '13', '17', '19', 
+                                    '23', '29', '31', '37', '39', '41'], '')
+
+'''
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
                   'Which training sizes to use. A size of -1 means '
                   'use the benchmark dataset.')
+'''
 
 # ----------------------------------------------------
 # Não mudar length_needle para negativo!!!
@@ -86,7 +87,7 @@ flags.DEFINE_integer('length_needle', 0,
                      'the haystack (the default sampler behavior).') 
 # ----------------------------------------------------
 
-flags.DEFINE_integer('seed', 41, 'Random seed to set')
+flags.DEFINE_integer('seed', 42, 'Random seed to set')
 
 flags.DEFINE_boolean('random_pos', True,
                      'Randomize the pos input common to all algos.')
@@ -95,29 +96,29 @@ flags.DEFINE_boolean('enforce_permutations', True,
 flags.DEFINE_boolean('enforce_pred_as_input', True,
                      'Whether to change pred_h hints into pred inputs.')
 
-flags.DEFINE_integer('batch_size', 16, 'Batch size used for training.')
+flags.DEFINE_integer('batch_size', 32, 'Batch size used for training.')
 flags.DEFINE_integer('val_batch_size', 16, 'Batch size used for training.')
-flags.DEFINE_integer('test_batch_size', 8, 'Batch size used for training.')
+flags.DEFINE_integer('test_batch_size', 16, 'Batch size used for training.')
 
 flags.DEFINE_boolean('chunked_training', True,
                      'Whether to use chunking for training.')
-flags.DEFINE_integer('chunk_length', 8,
+flags.DEFINE_integer('chunk_length', 16,
                      'Time chunk length used for training (if '
                      '`chunked_training` is True.')
-flags.DEFINE_integer('train_steps', 3000, 'Number of training iterations.')
+flags.DEFINE_integer('train_steps', 10000, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 
 flags.DEFINE_integer('hidden_size', 128,
                      'Number of hidden units of the model.')
-flags.DEFINE_integer('nb_heads', 12, 'Number of heads for GAT processors') #including RT model
+flags.DEFINE_integer('nb_heads', 16, 'Number of heads for GAT processors') #including RT model
 
-flags.DEFINE_integer('nb_msg_passing_steps', 8,
+flags.DEFINE_integer('nb_msg_passing_steps', 1,
                      'Number of message passing steps to run per hint.')
 flags.DEFINE_float('learning_rate', 0.001, 'Learning rate to use.')
-flags.DEFINE_float('grad_clip_max_norm', 0.0,
+flags.DEFINE_float('grad_clip_max_norm', 1.0,
                    'Gradient clipping by norm. 0.0 disables grad clipping')
-flags.DEFINE_float('dropout_prob', 0.0, 'Dropout rate to use.')
+flags.DEFINE_float('dropout_prob', 0.1, 'Dropout rate to use.')
 flags.DEFINE_float('hint_teacher_forcing', 0.0,
                    'Probability that ground-truth teacher hints are encoded '
                    'during training instead of predicted hints. Only '
@@ -136,7 +137,7 @@ flags.DEFINE_enum('hint_mode', 'encoded_decoded',
                   'counterbalance the various hint losses. Hence, for certain '
                   'tasks, the best performance will now be achievable with no '
                   'hint usage at all (`none`).')
-flags.DEFINE_enum('hint_repred_mode', 'soft', ['soft', 'hard', 'hard_on_eval'],
+flags.DEFINE_enum('hint_repred_mode', 'hard_on_eval', ['soft', 'hard', 'hard_on_eval'],
                   'How to process predicted hints when fed back as inputs.'
                   'In soft mode, we use softmaxes for categoricals, pointers '
                   'and mask_one, and sigmoids for masks. '
@@ -144,7 +145,7 @@ flags.DEFINE_enum('hint_repred_mode', 'soft', ['soft', 'hard', 'hard_on_eval'],
                   'thresholding of masks. '
                   'In hard_on_eval mode, soft mode is '
                   'used for training and hard mode is used for evaluation.')
-flags.DEFINE_boolean('use_ln', True,
+flags.DEFINE_boolean('use_ln', False,
                      'Whether to use layer normalisation in the processor.')
 flags.DEFINE_boolean('use_lstm', True,
                      'Whether to insert an LSTM after message passing.')
@@ -647,7 +648,7 @@ def main(unused_argv):
       if best_score > 0:
         if feedback.hint_increase == True:
           print('------------------------------')
-          print('Hint increase!! Restarting best_score. Epoch %d'.format(step))
+          print('Hint increase!! Restarting best_score. Epoch {}'.format(step))
           print('------------------------------')
           best_score = -1.0
 

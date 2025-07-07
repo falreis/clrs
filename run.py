@@ -47,8 +47,19 @@ import jax.numpy as jnp
 import requests
 import tensorflow as tf
 
+assert tf.test.is_gpu_available()
+assert tf.test.is_built_with_cuda()
 
-flags.DEFINE_list('algorithms', ['bfs', 'kmp_matcher'], 'Which algorithms to run.')
+
+#source env/bin/activate env
+
+
+
+#os.environ["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"
+os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".9"
+
+
+flags.DEFINE_list('algorithms', ['task_scheduling'], 'Which algorithms to run.')
 
 #flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
 #flags.DEFINE_list('algorithms', ['dfs', 'heapsort', 'kmp_matcher', 'quickselect', 'strongly_connected_components'], 'Hard algorithms.')
@@ -61,8 +72,7 @@ flags.DEFINE_list('algorithms',
                  'find_maximum_subarray_kadane', 'floyd_warshall', 'graham_scan', 'heapsort', 'insertion_sort',
                  'jarvis_march', 'kmp_matcher', 'lcs_length', 'matrix_chain_order', 'minimum',
                  'mst_kruskal', 'mst_prim', 'naive_string_matcher', 'optimal_bst', 'quickselect',
-                 'quicksort', 'segments_intersect', 'strongly_connected_components', 
-                 'task_scheduling', 'topological_sort'], 
+                 'quicksort', 'segments_intersect', 'strongly_connected_components', 'task_scheduling', 'topological_sort'], 
                  'Which algorithms to run.')
 '''
                  
@@ -71,6 +81,7 @@ flags.DEFINE_list('train_lengths', ['2', '3', '5', '7', '11', '13', '17', '19',
                                     '23', '29', '31', '37', '39', '41'], '')
 
 '''
+#flags.DEFINE_list('train_lengths', ['2', '3', '5', '7', '11', '13'], '')
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
                   'Which training sizes to use. A size of -1 means '
                   'use the benchmark dataset.')
@@ -96,9 +107,9 @@ flags.DEFINE_boolean('enforce_permutations', True,
 flags.DEFINE_boolean('enforce_pred_as_input', True,
                      'Whether to change pred_h hints into pred inputs.')
 
-flags.DEFINE_integer('batch_size', 32, 'Batch size used for training.')
-flags.DEFINE_integer('val_batch_size', 16, 'Batch size used for training.')
-flags.DEFINE_integer('test_batch_size', 16, 'Batch size used for training.')
+flags.DEFINE_integer('batch_size', 16, 'Batch size used for training.')
+flags.DEFINE_integer('val_batch_size', 8, 'Batch size used for training.')
+flags.DEFINE_integer('test_batch_size', 8, 'Batch size used for training.')
 
 flags.DEFINE_boolean('chunked_training', True,
                      'Whether to use chunking for training.')

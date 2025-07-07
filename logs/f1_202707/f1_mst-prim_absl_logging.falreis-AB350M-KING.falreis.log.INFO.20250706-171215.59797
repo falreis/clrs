@@ -1,0 +1,648 @@
+I0706 17:12:17.569959 137182519096832 xla_bridge.py:889] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0706 17:12:17.570612 137182519096832 xla_bridge.py:889] Unable to initialize backend 'tpu': INTERNAL: Failed to open libtpu.so: libtpu.so: cannot open shared object file: No such file or directory
+I0706 17:12:17.809206 137182519096832 run.py:413] Model: falreis ['mst_prim']
+I0706 17:12:17.809326 137182519096832 run.py:415] algorithms ['mst_prim']
+I0706 17:12:17.809538 137182519096832 run.py:416] train_lengths ['2', '3', '5', '7', '11', '13', '17', '19', '23', '29', '31', '37', '39', '41']
+I0706 17:12:17.809579 137182519096832 run.py:417] train_batch_size 16
+I0706 17:12:17.809697 137182519096832 run.py:418] val_batch_size 8
+I0706 17:12:17.809731 137182519096832 run.py:419] test_batch_size 8
+I0706 17:12:17.809762 137182519096832 run.py:420] chunked_training True
+I0706 17:12:17.809924 137182519096832 run.py:421] chunk_length 16
+I0706 17:12:17.809962 137182519096832 run.py:422] train_steps 10000
+I0706 17:12:17.809994 137182519096832 run.py:423] eval_every 50
+I0706 17:12:17.810025 137182519096832 run.py:424] test_every 500
+I0706 17:12:17.810056 137182519096832 run.py:425] learning_rate 0.001
+I0706 17:12:17.810160 137182519096832 run.py:426] grad_clip_max_norm 1.0
+I0706 17:12:17.810192 137182519096832 run.py:427] dropout_prob 0.1
+I0706 17:12:17.810223 137182519096832 run.py:428] hint_teacher_forcing 0.0
+I0706 17:12:17.810254 137182519096832 run.py:429] hint_mode encoded_decoded
+I0706 17:12:17.810370 137182519096832 run.py:430] hint_repred_mode hard_on_eval
+I0706 17:12:17.810400 137182519096832 run.py:431] use_ln False
+I0706 17:12:17.810430 137182519096832 run.py:432] use_lstm True
+I0706 17:12:17.810460 137182519096832 run.py:433] nb_triplet_fts 8
+I0706 17:12:17.810489 137182519096832 run.py:434] encoder_init xavier_on_scalars
+I0706 17:12:17.810526 137182519096832 run.py:435] processor_type falreis
+I0706 17:12:17.810559 137182519096832 run.py:436] checkpoint_path CLRS30
+I0706 17:12:17.810589 137182519096832 run.py:437] dataset_path CLRS30
+I0706 17:12:17.810619 137182519096832 run.py:438] freeze_processor False
+I0706 17:12:17.810650 137182519096832 run.py:439] reduction min
+I0706 17:12:17.810680 137182519096832 run.py:440] activation elu
+I0706 17:12:17.810710 137182519096832 run.py:441] algorithm_models ['F1', 'F2']
+I0706 17:12:17.810748 137182519096832 run.py:442] restore_model 
+I0706 17:12:17.810781 137182519096832 run.py:443] gated True
+I0706 17:12:17.810812 137182519096832 run.py:444] gated_activation sigmoid
+I0706 17:12:17.813944 137182519096832 run.py:470] Creating samplers for algo mst_prim
+W0706 17:12:17.814456 137182519096832 samplers.py:109] Sampling dataset on-the-fly, unlimited samples.
+I0706 17:12:27.321626 137182519096832 samplers.py:124] Creating a dataset with 64 samples.
+I0706 17:12:27.412490 137182519096832 run.py:257] Dataset found at CLRS30/CLRS30_v1.0.0. Skipping download.
+I0706 17:12:27.413263 137182519096832 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/mst_prim_test/1.0.0
+I0706 17:12:27.417939 137182519096832 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/mst_prim_test/1.0.0
+I0706 17:12:27.421207 137182519096832 reader.py:262] Creating a tf.data.Dataset reading 1 files located in folders: CLRS30/CLRS30_v1.0.0/clrs_dataset/mst_prim_test/1.0.0.
+I0706 17:12:27.473789 137182519096832 logging_logger.py:49] Constructing tf.data.Dataset clrs_dataset for split test, from CLRS30/CLRS30_v1.0.0/clrs_dataset/mst_prim_test/1.0.0
+W0706 17:12:27.494977 137182519096832 ag_logging.py:142] AutoGraph could not transform <function _preprocess at 0x7cc3c63bac00> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: `haiku.experimental.flax` features require `flax` to be installed.
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+I0706 17:13:26.328839 137182519096832 run.py:685] Algo mst_prim step 0 current loss 5.300893, current_train_items 84.
+I0706 17:13:33.371546 137182519096832 run.py:720] (val) algo mst_prim step 0: {'pi': 0.23132621951219512, 'score': 0.23132621951219512, 'examples_seen': 84, 'step': 0, 'algorithm': 'mst_prim'}
+I0706 17:13:33.371796 137182519096832 run.py:741] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.231, val scores are: mst_prim: 0.231
+I0706 17:17:24.435773 137182519096832 run.py:685] Algo mst_prim step 50 current loss 7.298599, current_train_items 1745.
+I0706 17:17:24.840522 137182519096832 run.py:720] (val) algo mst_prim step 50: {'pi': 0.4809451219512195, 'score': 0.4809451219512195, 'examples_seen': 1745, 'step': 50, 'algorithm': 'mst_prim'}
+I0706 17:17:24.840757 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.231, current avg val score is 0.481, val scores are: mst_prim: 0.481
+I0706 17:17:28.238457 137182519096832 run.py:685] Algo mst_prim step 100 current loss 3.552567, current_train_items 3522.
+I0706 17:17:28.553081 137182519096832 run.py:720] (val) algo mst_prim step 100: {'pi': 0.618140243902439, 'score': 0.618140243902439, 'examples_seen': 3522, 'step': 100, 'algorithm': 'mst_prim'}
+I0706 17:17:28.553301 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.481, current avg val score is 0.618, val scores are: mst_prim: 0.618
+I0706 17:17:31.555822 137182519096832 run.py:685] Algo mst_prim step 150 current loss 7.085513, current_train_items 5070.
+I0706 17:17:32.198786 137182519096832 run.py:720] (val) algo mst_prim step 150: {'pi': 0.6150914634146342, 'score': 0.6150914634146342, 'examples_seen': 5070, 'step': 150, 'algorithm': 'mst_prim'}
+I0706 17:17:32.199030 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.618, current avg val score is 0.615, val scores are: mst_prim: 0.615
+I0706 17:17:35.373875 137182519096832 run.py:685] Algo mst_prim step 200 current loss 4.563413, current_train_items 6852.
+I0706 17:17:35.679418 137182519096832 run.py:720] (val) algo mst_prim step 200: {'pi': 0.6196646341463414, 'score': 0.6196646341463414, 'examples_seen': 6852, 'step': 200, 'algorithm': 'mst_prim'}
+I0706 17:17:35.679644 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.618, current avg val score is 0.620, val scores are: mst_prim: 0.620
+I0706 17:17:38.703262 137182519096832 run.py:685] Algo mst_prim step 250 current loss 6.866086, current_train_items 8368.
+I0706 17:17:39.577696 137182519096832 run.py:720] (val) algo mst_prim step 250: {'pi': 0.5278201219512195, 'score': 0.5278201219512195, 'examples_seen': 8368, 'step': 250, 'algorithm': 'mst_prim'}
+I0706 17:17:39.577856 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.620, current avg val score is 0.528, val scores are: mst_prim: 0.528
+I0706 17:17:42.572338 137182519096832 run.py:685] Algo mst_prim step 300 current loss 5.331528, current_train_items 10165.
+I0706 17:17:42.896001 137182519096832 run.py:720] (val) algo mst_prim step 300: {'pi': 0.4809451219512195, 'score': 0.4809451219512195, 'examples_seen': 10165, 'step': 300, 'algorithm': 'mst_prim'}
+I0706 17:17:42.896216 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.620, current avg val score is 0.481, val scores are: mst_prim: 0.481
+I0706 17:17:46.101309 137182519096832 run.py:685] Algo mst_prim step 350 current loss 1.238568, current_train_items 11846.
+I0706 17:17:46.778178 137182519096832 run.py:720] (val) algo mst_prim step 350: {'pi': 0.515625, 'score': 0.515625, 'examples_seen': 11846, 'step': 350, 'algorithm': 'mst_prim'}
+I0706 17:17:46.778391 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.620, current avg val score is 0.516, val scores are: mst_prim: 0.516
+I0706 17:17:49.846281 137182519096832 run.py:685] Algo mst_prim step 400 current loss 5.395321, current_train_items 13496.
+I0706 17:17:50.240877 137182519096832 run.py:720] (val) algo mst_prim step 400: {'pi': 0.5080030487804879, 'score': 0.5080030487804879, 'examples_seen': 13496, 'step': 400, 'algorithm': 'mst_prim'}
+I0706 17:17:50.241115 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.620, current avg val score is 0.508, val scores are: mst_prim: 0.508
+I0706 17:17:53.606971 137182519096832 run.py:685] Algo mst_prim step 450 current loss 2.425575, current_train_items 15236.
+I0706 17:17:53.920646 137182519096832 run.py:720] (val) algo mst_prim step 450: {'pi': 0.6036585365853658, 'score': 0.6036585365853658, 'examples_seen': 15236, 'step': 450, 'algorithm': 'mst_prim'}
+I0706 17:17:53.920879 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.620, current avg val score is 0.604, val scores are: mst_prim: 0.604
+I0706 17:17:56.858824 137182519096832 run.py:685] Algo mst_prim step 500 current loss 6.373215, current_train_items 16787.
+I0706 17:17:57.501011 137182519096832 run.py:720] (val) algo mst_prim step 500: {'pi': 0.5838414634146342, 'score': 0.5838414634146342, 'examples_seen': 16787, 'step': 500, 'algorithm': 'mst_prim'}
+I0706 17:17:57.501246 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.620, current avg val score is 0.584, val scores are: mst_prim: 0.584
+I0706 17:18:00.762336 137182519096832 run.py:685] Algo mst_prim step 550 current loss 3.646142, current_train_items 18606.
+I0706 17:18:01.059999 137182519096832 run.py:720] (val) algo mst_prim step 550: {'pi': 0.6425304878048781, 'score': 0.6425304878048781, 'examples_seen': 18606, 'step': 550, 'algorithm': 'mst_prim'}
+I0706 17:18:01.060216 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.620, current avg val score is 0.643, val scores are: mst_prim: 0.643
+I0706 17:18:04.069615 137182519096832 run.py:685] Algo mst_prim step 600 current loss 6.203582, current_train_items 20106.
+I0706 17:18:04.945985 137182519096832 run.py:720] (val) algo mst_prim step 600: {'pi': 0.6528201219512195, 'score': 0.6528201219512195, 'examples_seen': 20106, 'step': 600, 'algorithm': 'mst_prim'}
+I0706 17:18:04.946212 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.643, current avg val score is 0.653, val scores are: mst_prim: 0.653
+I0706 17:18:07.978050 137182519096832 run.py:685] Algo mst_prim step 650 current loss 4.737974, current_train_items 21957.
+I0706 17:18:08.315990 137182519096832 run.py:720] (val) algo mst_prim step 650: {'pi': 0.6859756097560976, 'score': 0.6859756097560976, 'examples_seen': 21957, 'step': 650, 'algorithm': 'mst_prim'}
+I0706 17:18:08.316221 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.653, current avg val score is 0.686, val scores are: mst_prim: 0.686
+I0706 17:18:11.539552 137182519096832 run.py:685] Algo mst_prim step 700 current loss 0.951202, current_train_items 23609.
+I0706 17:18:12.189643 137182519096832 run.py:720] (val) algo mst_prim step 700: {'pi': 0.6421493902439024, 'score': 0.6421493902439024, 'examples_seen': 23609, 'step': 700, 'algorithm': 'mst_prim'}
+I0706 17:18:12.189886 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.686, current avg val score is 0.642, val scores are: mst_prim: 0.642
+I0706 17:18:15.158922 137182519096832 run.py:685] Algo mst_prim step 750 current loss 5.082285, current_train_items 25254.
+I0706 17:18:15.575919 137182519096832 run.py:720] (val) algo mst_prim step 750: {'pi': 0.7076981707317073, 'score': 0.7076981707317073, 'examples_seen': 25254, 'step': 750, 'algorithm': 'mst_prim'}
+I0706 17:18:15.576142 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.686, current avg val score is 0.708, val scores are: mst_prim: 0.708
+I0706 17:18:18.933160 137182519096832 run.py:685] Algo mst_prim step 800 current loss 2.227248, current_train_items 26987.
+I0706 17:18:19.246449 137182519096832 run.py:720] (val) algo mst_prim step 800: {'pi': 0.6516768292682927, 'score': 0.6516768292682927, 'examples_seen': 26987, 'step': 800, 'algorithm': 'mst_prim'}
+I0706 17:18:19.246679 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.708, current avg val score is 0.652, val scores are: mst_prim: 0.652
+I0706 17:18:22.205011 137182519096832 run.py:685] Algo mst_prim step 850 current loss 6.126047, current_train_items 28513.
+I0706 17:18:22.827879 137182519096832 run.py:720] (val) algo mst_prim step 850: {'pi': 0.756859756097561, 'score': 0.756859756097561, 'examples_seen': 28513, 'step': 850, 'algorithm': 'mst_prim'}
+I0706 17:18:22.828091 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.708, current avg val score is 0.757, val scores are: mst_prim: 0.757
+I0706 17:18:26.058559 137182519096832 run.py:685] Algo mst_prim step 900 current loss 3.717054, current_train_items 30365.
+I0706 17:18:26.358434 137182519096832 run.py:720] (val) algo mst_prim step 900: {'pi': 0.7358993902439024, 'score': 0.7358993902439024, 'examples_seen': 30365, 'step': 900, 'algorithm': 'mst_prim'}
+I0706 17:18:26.358643 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.757, current avg val score is 0.736, val scores are: mst_prim: 0.736
+I0706 17:18:29.355813 137182519096832 run.py:685] Algo mst_prim step 950 current loss 5.900054, current_train_items 31846.
+I0706 17:18:30.232352 137182519096832 run.py:720] (val) algo mst_prim step 950: {'pi': 0.666920731707317, 'score': 0.666920731707317, 'examples_seen': 31846, 'step': 950, 'algorithm': 'mst_prim'}
+I0706 17:18:30.232569 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.757, current avg val score is 0.667, val scores are: mst_prim: 0.667
+I0706 17:18:33.252104 137182519096832 run.py:685] Algo mst_prim step 1000 current loss 4.592440, current_train_items 33654.
+I0706 17:18:33.586708 137182519096832 run.py:720] (val) algo mst_prim step 1000: {'pi': 0.6875, 'score': 0.6875, 'examples_seen': 33654, 'step': 1000, 'algorithm': 'mst_prim'}
+I0706 17:18:33.586954 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.757, current avg val score is 0.688, val scores are: mst_prim: 0.688
+I0706 17:18:36.736817 137182519096832 run.py:685] Algo mst_prim step 1050 current loss 0.927030, current_train_items 35307.
+I0706 17:18:37.389132 137182519096832 run.py:720] (val) algo mst_prim step 1050: {'pi': 0.6875, 'score': 0.6875, 'examples_seen': 35307, 'step': 1050, 'algorithm': 'mst_prim'}
+I0706 17:18:37.389365 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.757, current avg val score is 0.688, val scores are: mst_prim: 0.688
+I0706 17:18:40.404939 137182519096832 run.py:685] Algo mst_prim step 1100 current loss 4.936590, current_train_items 36932.
+I0706 17:18:40.843160 137182519096832 run.py:720] (val) algo mst_prim step 1100: {'pi': 0.7942073170731707, 'score': 0.7942073170731707, 'examples_seen': 36932, 'step': 1100, 'algorithm': 'mst_prim'}
+I0706 17:18:40.843379 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.757, current avg val score is 0.794, val scores are: mst_prim: 0.794
+I0706 17:18:44.246048 137182519096832 run.py:685] Algo mst_prim step 1150 current loss 2.252054, current_train_items 38686.
+I0706 17:18:44.559615 137182519096832 run.py:720] (val) algo mst_prim step 1150: {'pi': 0.7751524390243902, 'score': 0.7751524390243902, 'examples_seen': 38686, 'step': 1150, 'algorithm': 'mst_prim'}
+I0706 17:18:44.559856 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.794, current avg val score is 0.775, val scores are: mst_prim: 0.775
+I0706 17:18:47.517731 137182519096832 run.py:685] Algo mst_prim step 1200 current loss 5.342167, current_train_items 40241.
+I0706 17:18:48.154620 137182519096832 run.py:720] (val) algo mst_prim step 1200: {'pi': 0.770579268292683, 'score': 0.770579268292683, 'examples_seen': 40241, 'step': 1200, 'algorithm': 'mst_prim'}
+I0706 17:18:48.154855 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.794, current avg val score is 0.771, val scores are: mst_prim: 0.771
+I0706 17:18:51.362957 137182519096832 run.py:685] Algo mst_prim step 1250 current loss 3.365221, current_train_items 42033.
+I0706 17:18:51.667325 137182519096832 run.py:720] (val) algo mst_prim step 1250: {'pi': 0.7088414634146342, 'score': 0.7088414634146342, 'examples_seen': 42033, 'step': 1250, 'algorithm': 'mst_prim'}
+I0706 17:18:51.667570 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.794, current avg val score is 0.709, val scores are: mst_prim: 0.709
+I0706 17:18:54.664633 137182519096832 run.py:685] Algo mst_prim step 1300 current loss 5.892294, current_train_items 43532.
+I0706 17:18:55.526775 137182519096832 run.py:720] (val) algo mst_prim step 1300: {'pi': 0.7355182926829268, 'score': 0.7355182926829268, 'examples_seen': 43532, 'step': 1300, 'algorithm': 'mst_prim'}
+I0706 17:18:55.527006 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.794, current avg val score is 0.736, val scores are: mst_prim: 0.736
+I0706 17:18:58.555010 137182519096832 run.py:685] Algo mst_prim step 1350 current loss 3.980084, current_train_items 45328.
+I0706 17:18:58.885182 137182519096832 run.py:720] (val) algo mst_prim step 1350: {'pi': 0.817454268292683, 'score': 0.817454268292683, 'examples_seen': 45328, 'step': 1350, 'algorithm': 'mst_prim'}
+I0706 17:18:58.885409 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.794, current avg val score is 0.817, val scores are: mst_prim: 0.817
+I0706 17:19:02.039629 137182519096832 run.py:685] Algo mst_prim step 1400 current loss 0.934313, current_train_items 46981.
+I0706 17:19:02.694140 137182519096832 run.py:720] (val) algo mst_prim step 1400: {'pi': 0.8128810975609756, 'score': 0.8128810975609756, 'examples_seen': 46981, 'step': 1400, 'algorithm': 'mst_prim'}
+I0706 17:19:02.694365 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.817, current avg val score is 0.813, val scores are: mst_prim: 0.813
+I0706 17:19:05.685503 137182519096832 run.py:685] Algo mst_prim step 1450 current loss 5.686633, current_train_items 48624.
+I0706 17:19:06.107428 137182519096832 run.py:720] (val) algo mst_prim step 1450: {'pi': 0.7522865853658537, 'score': 0.7522865853658537, 'examples_seen': 48624, 'step': 1450, 'algorithm': 'mst_prim'}
+I0706 17:19:06.107650 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.817, current avg val score is 0.752, val scores are: mst_prim: 0.752
+I0706 17:19:09.442520 137182519096832 run.py:685] Algo mst_prim step 1500 current loss 2.147531, current_train_items 50361.
+I0706 17:19:09.751383 137182519096832 run.py:720] (val) algo mst_prim step 1500: {'pi': 0.7660060975609756, 'score': 0.7660060975609756, 'examples_seen': 50361, 'step': 1500, 'algorithm': 'mst_prim'}
+I0706 17:19:09.751553 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.817, current avg val score is 0.766, val scores are: mst_prim: 0.766
+I0706 17:19:12.682050 137182519096832 run.py:685] Algo mst_prim step 1550 current loss 6.823799, current_train_items 51877.
+I0706 17:19:13.289463 137182519096832 run.py:720] (val) algo mst_prim step 1550: {'pi': 0.7271341463414634, 'score': 0.7271341463414634, 'examples_seen': 51877, 'step': 1550, 'algorithm': 'mst_prim'}
+I0706 17:19:13.289604 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.817, current avg val score is 0.727, val scores are: mst_prim: 0.727
+I0706 17:19:16.446233 137182519096832 run.py:685] Algo mst_prim step 1600 current loss 3.672632, current_train_items 53620.
+I0706 17:19:16.751763 137182519096832 run.py:720] (val) algo mst_prim step 1600: {'pi': 0.734375, 'score': 0.734375, 'examples_seen': 53620, 'step': 1600, 'algorithm': 'mst_prim'}
+I0706 17:19:16.751952 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.817, current avg val score is 0.734, val scores are: mst_prim: 0.734
+I0706 17:19:19.702002 137182519096832 run.py:685] Algo mst_prim step 1650 current loss 5.530310, current_train_items 55134.
+I0706 17:19:20.577672 137182519096832 run.py:720] (val) algo mst_prim step 1650: {'pi': 0.7637195121951219, 'score': 0.7637195121951219, 'examples_seen': 55134, 'step': 1650, 'algorithm': 'mst_prim'}
+I0706 17:19:20.577990 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.817, current avg val score is 0.764, val scores are: mst_prim: 0.764
+I0706 17:19:23.662295 137182519096832 run.py:685] Algo mst_prim step 1700 current loss 4.654360, current_train_items 56967.
+I0706 17:19:23.995895 137182519096832 run.py:720] (val) algo mst_prim step 1700: {'pi': 0.7195121951219512, 'score': 0.7195121951219512, 'examples_seen': 56967, 'step': 1700, 'algorithm': 'mst_prim'}
+I0706 17:19:23.996122 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.817, current avg val score is 0.720, val scores are: mst_prim: 0.720
+I0706 17:19:27.156856 137182519096832 run.py:685] Algo mst_prim step 1750 current loss 0.747327, current_train_items 58624.
+I0706 17:19:27.805126 137182519096832 run.py:720] (val) algo mst_prim step 1750: {'pi': 0.7488567073170732, 'score': 0.7488567073170732, 'examples_seen': 58624, 'step': 1750, 'algorithm': 'mst_prim'}
+I0706 17:19:27.805269 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.817, current avg val score is 0.749, val scores are: mst_prim: 0.749
+I0706 17:19:30.754339 137182519096832 run.py:685] Algo mst_prim step 1800 current loss 4.593199, current_train_items 60241.
+I0706 17:19:31.192448 137182519096832 run.py:720] (val) algo mst_prim step 1800: {'pi': 0.834984756097561, 'score': 0.834984756097561, 'examples_seen': 60241, 'step': 1800, 'algorithm': 'mst_prim'}
+I0706 17:19:31.192588 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.817, current avg val score is 0.835, val scores are: mst_prim: 0.835
+I0706 17:19:34.580564 137182519096832 run.py:685] Algo mst_prim step 1850 current loss 2.146002, current_train_items 61969.
+I0706 17:19:34.871290 137182519096832 run.py:720] (val) algo mst_prim step 1850: {'pi': 0.8170731707317073, 'score': 0.8170731707317073, 'examples_seen': 61969, 'step': 1850, 'algorithm': 'mst_prim'}
+I0706 17:19:34.871433 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.835, current avg val score is 0.817, val scores are: mst_prim: 0.817
+I0706 17:19:37.823816 137182519096832 run.py:685] Algo mst_prim step 1900 current loss 5.087191, current_train_items 63531.
+I0706 17:19:38.434252 137182519096832 run.py:720] (val) algo mst_prim step 1900: {'pi': 0.8483231707317073, 'score': 0.8483231707317073, 'examples_seen': 63531, 'step': 1900, 'algorithm': 'mst_prim'}
+I0706 17:19:38.434398 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.835, current avg val score is 0.848, val scores are: mst_prim: 0.848
+I0706 17:19:41.591154 137182519096832 run.py:685] Algo mst_prim step 1950 current loss 3.236482, current_train_items 65331.
+I0706 17:19:41.906442 137182519096832 run.py:720] (val) algo mst_prim step 1950: {'pi': 0.8185975609756098, 'score': 0.8185975609756098, 'examples_seen': 65331, 'step': 1950, 'algorithm': 'mst_prim'}
+I0706 17:19:41.906666 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.848, current avg val score is 0.819, val scores are: mst_prim: 0.819
+I0706 17:19:44.911804 137182519096832 run.py:685] Algo mst_prim step 2000 current loss 5.501126, current_train_items 66820.
+I0706 17:19:45.789254 137182519096832 run.py:720] (val) algo mst_prim step 2000: {'pi': 0.7846798780487805, 'score': 0.7846798780487805, 'examples_seen': 66820, 'step': 2000, 'algorithm': 'mst_prim'}
+I0706 17:19:45.789473 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.848, current avg val score is 0.785, val scores are: mst_prim: 0.785
+I0706 17:19:48.842323 137182519096832 run.py:685] Algo mst_prim step 2050 current loss 3.713419, current_train_items 68617.
+I0706 17:19:49.172817 137182519096832 run.py:720] (val) algo mst_prim step 2050: {'pi': 0.7983993902439024, 'score': 0.7983993902439024, 'examples_seen': 68617, 'step': 2050, 'algorithm': 'mst_prim'}
+I0706 17:19:49.173058 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.848, current avg val score is 0.798, val scores are: mst_prim: 0.798
+I0706 17:19:52.341085 137182519096832 run.py:685] Algo mst_prim step 2100 current loss 0.905302, current_train_items 70278.
+I0706 17:19:52.991268 137182519096832 run.py:720] (val) algo mst_prim step 2100: {'pi': 0.838795731707317, 'score': 0.838795731707317, 'examples_seen': 70278, 'step': 2100, 'algorithm': 'mst_prim'}
+I0706 17:19:52.991503 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.848, current avg val score is 0.839, val scores are: mst_prim: 0.839
+I0706 17:19:55.940010 137182519096832 run.py:685] Algo mst_prim step 2150 current loss 4.935162, current_train_items 71936.
+I0706 17:19:56.365584 137182519096832 run.py:720] (val) algo mst_prim step 2150: {'pi': 0.8540396341463414, 'score': 0.8540396341463414, 'examples_seen': 71936, 'step': 2150, 'algorithm': 'mst_prim'}
+I0706 17:19:56.365719 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.848, current avg val score is 0.854, val scores are: mst_prim: 0.854
+I0706 17:19:59.767467 137182519096832 run.py:685] Algo mst_prim step 2200 current loss 1.960951, current_train_items 73689.
+I0706 17:20:00.082798 137182519096832 run.py:720] (val) algo mst_prim step 2200: {'pi': 0.8239329268292683, 'score': 0.8239329268292683, 'examples_seen': 73689, 'step': 2200, 'algorithm': 'mst_prim'}
+I0706 17:20:00.083032 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.824, val scores are: mst_prim: 0.824
+I0706 17:20:03.052920 137182519096832 run.py:685] Algo mst_prim step 2250 current loss 5.913905, current_train_items 75247.
+I0706 17:20:03.642467 137182519096832 run.py:720] (val) algo mst_prim step 2250: {'pi': 0.7949695121951219, 'score': 0.7949695121951219, 'examples_seen': 75247, 'step': 2250, 'algorithm': 'mst_prim'}
+I0706 17:20:03.642690 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.795, val scores are: mst_prim: 0.795
+I0706 17:20:06.776947 137182519096832 run.py:685] Algo mst_prim step 2300 current loss 3.238029, current_train_items 77032.
+I0706 17:20:07.078387 137182519096832 run.py:720] (val) algo mst_prim step 2300: {'pi': 0.7942073170731707, 'score': 0.7942073170731707, 'examples_seen': 77032, 'step': 2300, 'algorithm': 'mst_prim'}
+I0706 17:20:07.078529 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.794, val scores are: mst_prim: 0.794
+I0706 17:20:10.168113 137182519096832 run.py:685] Algo mst_prim step 2350 current loss 5.522259, current_train_items 78531.
+I0706 17:20:10.953321 137182519096832 run.py:720] (val) algo mst_prim step 2350: {'pi': 0.7854420731707317, 'score': 0.7854420731707317, 'examples_seen': 78531, 'step': 2350, 'algorithm': 'mst_prim'}
+I0706 17:20:10.953537 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.785, val scores are: mst_prim: 0.785
+I0706 17:20:14.052997 137182519096832 run.py:685] Algo mst_prim step 2400 current loss 4.021894, current_train_items 80358.
+I0706 17:20:14.400226 137182519096832 run.py:720] (val) algo mst_prim step 2400: {'pi': 0.8460365853658537, 'score': 0.8460365853658537, 'examples_seen': 80358, 'step': 2400, 'algorithm': 'mst_prim'}
+I0706 17:20:14.400438 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.846, val scores are: mst_prim: 0.846
+I0706 17:20:17.622837 137182519096832 run.py:685] Algo mst_prim step 2450 current loss 0.945276, current_train_items 82023.
+I0706 17:20:18.271562 137182519096832 run.py:720] (val) algo mst_prim step 2450: {'pi': 0.8044969512195121, 'score': 0.8044969512195121, 'examples_seen': 82023, 'step': 2450, 'algorithm': 'mst_prim'}
+I0706 17:20:18.271790 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.804, val scores are: mst_prim: 0.804
+I0706 17:20:21.197295 137182519096832 run.py:685] Algo mst_prim step 2500 current loss 4.407292, current_train_items 83650.
+I0706 17:20:21.646524 137182519096832 run.py:720] (val) algo mst_prim step 2500: {'pi': 0.8483231707317073, 'score': 0.8483231707317073, 'examples_seen': 83650, 'step': 2500, 'algorithm': 'mst_prim'}
+I0706 17:20:21.646730 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.848, val scores are: mst_prim: 0.848
+I0706 17:20:25.057779 137182519096832 run.py:685] Algo mst_prim step 2550 current loss 1.677988, current_train_items 85410.
+I0706 17:20:25.370795 137182519096832 run.py:720] (val) algo mst_prim step 2550: {'pi': 0.7591463414634146, 'score': 0.7591463414634146, 'examples_seen': 85410, 'step': 2550, 'algorithm': 'mst_prim'}
+I0706 17:20:25.371035 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.759, val scores are: mst_prim: 0.759
+I0706 17:20:28.280294 137182519096832 run.py:685] Algo mst_prim step 2600 current loss 5.271276, current_train_items 86957.
+I0706 17:20:28.912374 137182519096832 run.py:720] (val) algo mst_prim step 2600: {'pi': 0.7930640243902439, 'score': 0.7930640243902439, 'examples_seen': 86957, 'step': 2600, 'algorithm': 'mst_prim'}
+I0706 17:20:28.912593 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.793, val scores are: mst_prim: 0.793
+I0706 17:20:32.138759 137182519096832 run.py:685] Algo mst_prim step 2650 current loss 3.030776, current_train_items 88779.
+I0706 17:20:32.441338 137182519096832 run.py:720] (val) algo mst_prim step 2650: {'pi': 0.8113567073170732, 'score': 0.8113567073170732, 'examples_seen': 88779, 'step': 2650, 'algorithm': 'mst_prim'}
+I0706 17:20:32.441563 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.811, val scores are: mst_prim: 0.811
+I0706 17:20:35.404855 137182519096832 run.py:685] Algo mst_prim step 2700 current loss 6.423814, current_train_items 90291.
+I0706 17:20:36.283439 137182519096832 run.py:720] (val) algo mst_prim step 2700: {'pi': 0.833079268292683, 'score': 0.833079268292683, 'examples_seen': 90291, 'step': 2700, 'algorithm': 'mst_prim'}
+I0706 17:20:36.283669 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.833, val scores are: mst_prim: 0.833
+I0706 17:20:39.272612 137182519096832 run.py:685] Algo mst_prim step 2750 current loss 3.993125, current_train_items 92153.
+I0706 17:20:39.616507 137182519096832 run.py:720] (val) algo mst_prim step 2750: {'pi': 0.8460365853658537, 'score': 0.8460365853658537, 'examples_seen': 92153, 'step': 2750, 'algorithm': 'mst_prim'}
+I0706 17:20:39.616728 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.846, val scores are: mst_prim: 0.846
+I0706 17:20:42.755768 137182519096832 run.py:685] Algo mst_prim step 2800 current loss 0.778236, current_train_items 93814.
+I0706 17:20:43.406489 137182519096832 run.py:720] (val) algo mst_prim step 2800: {'pi': 0.7915396341463414, 'score': 0.7915396341463414, 'examples_seen': 93814, 'step': 2800, 'algorithm': 'mst_prim'}
+I0706 17:20:43.406659 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.792, val scores are: mst_prim: 0.792
+I0706 17:20:46.364678 137182519096832 run.py:685] Algo mst_prim step 2850 current loss 4.876539, current_train_items 95447.
+I0706 17:20:46.793498 137182519096832 run.py:720] (val) algo mst_prim step 2850: {'pi': 0.7980182926829268, 'score': 0.7980182926829268, 'examples_seen': 95447, 'step': 2850, 'algorithm': 'mst_prim'}
+I0706 17:20:46.793729 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.798, val scores are: mst_prim: 0.798
+I0706 17:20:50.222062 137182519096832 run.py:685] Algo mst_prim step 2900 current loss 1.944219, current_train_items 97210.
+I0706 17:20:50.530675 137182519096832 run.py:720] (val) algo mst_prim step 2900: {'pi': 0.8540396341463414, 'score': 0.8540396341463414, 'examples_seen': 97210, 'step': 2900, 'algorithm': 'mst_prim'}
+I0706 17:20:50.530920 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.854, val scores are: mst_prim: 0.854
+I0706 17:20:53.426649 137182519096832 run.py:685] Algo mst_prim step 2950 current loss 5.975829, current_train_items 98747.
+I0706 17:20:54.044001 137182519096832 run.py:720] (val) algo mst_prim step 2950: {'pi': 0.7945884146341463, 'score': 0.7945884146341463, 'examples_seen': 98747, 'step': 2950, 'algorithm': 'mst_prim'}
+I0706 17:20:54.044210 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.795, val scores are: mst_prim: 0.795
+I0706 17:20:57.187174 137182519096832 run.py:685] Algo mst_prim step 3000 current loss 2.928678, current_train_items 100483.
+I0706 17:20:57.492290 137182519096832 run.py:720] (val) algo mst_prim step 3000: {'pi': 0.8346036585365854, 'score': 0.8346036585365854, 'examples_seen': 100483, 'step': 3000, 'algorithm': 'mst_prim'}
+I0706 17:20:57.492517 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.854, current avg val score is 0.835, val scores are: mst_prim: 0.835
+I0706 17:21:00.609125 137182519096832 run.py:685] Algo mst_prim step 3050 current loss 5.839015, current_train_items 102002.
+I0706 17:21:01.390134 137182519096832 run.py:720] (val) algo mst_prim step 3050: {'pi': 0.8548018292682927, 'score': 0.8548018292682927, 'examples_seen': 102002, 'step': 3050, 'algorithm': 'mst_prim'}
+I0706 17:21:01.390385 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.854, current avg val score is 0.855, val scores are: mst_prim: 0.855
+I0706 17:21:04.453328 137182519096832 run.py:685] Algo mst_prim step 3100 current loss 4.046159, current_train_items 103793.
+I0706 17:21:04.778289 137182519096832 run.py:720] (val) algo mst_prim step 3100: {'pi': 0.8601371951219512, 'score': 0.8601371951219512, 'examples_seen': 103793, 'step': 3100, 'algorithm': 'mst_prim'}
+I0706 17:21:04.778467 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.855, current avg val score is 0.860, val scores are: mst_prim: 0.860
+I0706 17:21:07.911109 137182519096832 run.py:685] Algo mst_prim step 3150 current loss 0.561918, current_train_items 105427.
+I0706 17:21:08.562811 137182519096832 run.py:720] (val) algo mst_prim step 3150: {'pi': 0.6985518292682927, 'score': 0.6985518292682927, 'examples_seen': 105427, 'step': 3150, 'algorithm': 'mst_prim'}
+I0706 17:21:08.563066 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.860, current avg val score is 0.699, val scores are: mst_prim: 0.699
+I0706 17:21:11.642661 137182519096832 run.py:685] Algo mst_prim step 3200 current loss 4.529067, current_train_items 107083.
+I0706 17:21:12.081819 137182519096832 run.py:720] (val) algo mst_prim step 3200: {'pi': 0.8254573170731707, 'score': 0.8254573170731707, 'examples_seen': 107083, 'step': 3200, 'algorithm': 'mst_prim'}
+I0706 17:21:12.082059 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.860, current avg val score is 0.825, val scores are: mst_prim: 0.825
+I0706 17:21:15.457385 137182519096832 run.py:685] Algo mst_prim step 3250 current loss 1.783558, current_train_items 108858.
+I0706 17:21:15.769162 137182519096832 run.py:720] (val) algo mst_prim step 3250: {'pi': 0.8414634146341463, 'score': 0.8414634146341463, 'examples_seen': 108858, 'step': 3250, 'algorithm': 'mst_prim'}
+I0706 17:21:15.769420 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.860, current avg val score is 0.841, val scores are: mst_prim: 0.841
+I0706 17:21:18.693490 137182519096832 run.py:685] Algo mst_prim step 3300 current loss 5.622376, current_train_items 110393.
+I0706 17:21:19.343432 137182519096832 run.py:720] (val) algo mst_prim step 3300: {'pi': 0.866234756097561, 'score': 0.866234756097561, 'examples_seen': 110393, 'step': 3300, 'algorithm': 'mst_prim'}
+I0706 17:21:19.343691 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.860, current avg val score is 0.866, val scores are: mst_prim: 0.866
+I0706 17:21:22.569466 137182519096832 run.py:685] Algo mst_prim step 3350 current loss 3.142741, current_train_items 112173.
+I0706 17:21:22.873911 137182519096832 run.py:720] (val) algo mst_prim step 3350: {'pi': 0.8791920731707317, 'score': 0.8791920731707317, 'examples_seen': 112173, 'step': 3350, 'algorithm': 'mst_prim'}
+I0706 17:21:22.874131 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.866, current avg val score is 0.879, val scores are: mst_prim: 0.879
+I0706 17:21:25.926033 137182519096832 run.py:685] Algo mst_prim step 3400 current loss 5.648267, current_train_items 113661.
+I0706 17:21:26.804564 137182519096832 run.py:720] (val) algo mst_prim step 3400: {'pi': 0.8357469512195121, 'score': 0.8357469512195121, 'examples_seen': 113661, 'step': 3400, 'algorithm': 'mst_prim'}
+I0706 17:21:26.804793 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.879, current avg val score is 0.836, val scores are: mst_prim: 0.836
+I0706 17:21:29.827248 137182519096832 run.py:685] Algo mst_prim step 3450 current loss 4.093950, current_train_items 115453.
+I0706 17:21:30.178535 137182519096832 run.py:720] (val) algo mst_prim step 3450: {'pi': 0.879954268292683, 'score': 0.879954268292683, 'examples_seen': 115453, 'step': 3450, 'algorithm': 'mst_prim'}
+I0706 17:21:30.178748 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.879, current avg val score is 0.880, val scores are: mst_prim: 0.880
+I0706 17:21:33.353052 137182519096832 run.py:685] Algo mst_prim step 3500 current loss 0.803406, current_train_items 117088.
+I0706 17:21:34.005397 137182519096832 run.py:720] (val) algo mst_prim step 3500: {'pi': 0.7519054878048781, 'score': 0.7519054878048781, 'examples_seen': 117088, 'step': 3500, 'algorithm': 'mst_prim'}
+I0706 17:21:34.005612 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.752, val scores are: mst_prim: 0.752
+I0706 17:21:36.982472 137182519096832 run.py:685] Algo mst_prim step 3550 current loss 5.395354, current_train_items 118757.
+I0706 17:21:37.419456 137182519096832 run.py:720] (val) algo mst_prim step 3550: {'pi': 0.8128810975609756, 'score': 0.8128810975609756, 'examples_seen': 118757, 'step': 3550, 'algorithm': 'mst_prim'}
+I0706 17:21:37.419673 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.813, val scores are: mst_prim: 0.813
+I0706 17:21:40.823154 137182519096832 run.py:685] Algo mst_prim step 3600 current loss 1.685496, current_train_items 120508.
+I0706 17:21:41.138982 137182519096832 run.py:720] (val) algo mst_prim step 3600: {'pi': 0.859375, 'score': 0.859375, 'examples_seen': 120508, 'step': 3600, 'algorithm': 'mst_prim'}
+I0706 17:21:41.139198 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.859, val scores are: mst_prim: 0.859
+I0706 17:21:44.186917 137182519096832 run.py:685] Algo mst_prim step 3650 current loss 5.174395, current_train_items 122063.
+I0706 17:21:44.762260 137182519096832 run.py:720] (val) algo mst_prim step 3650: {'pi': 0.8475609756097561, 'score': 0.8475609756097561, 'examples_seen': 122063, 'step': 3650, 'algorithm': 'mst_prim'}
+I0706 17:21:44.762506 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.848, val scores are: mst_prim: 0.848
+I0706 17:21:47.966700 137182519096832 run.py:685] Algo mst_prim step 3700 current loss 3.375730, current_train_items 123855.
+I0706 17:21:48.264556 137182519096832 run.py:720] (val) algo mst_prim step 3700: {'pi': 0.8631859756097561, 'score': 0.8631859756097561, 'examples_seen': 123855, 'step': 3700, 'algorithm': 'mst_prim'}
+I0706 17:21:48.264786 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.863, val scores are: mst_prim: 0.863
+I0706 17:21:51.292951 137182519096832 run.py:685] Algo mst_prim step 3750 current loss 5.844851, current_train_items 125390.
+I0706 17:21:52.139724 137182519096832 run.py:720] (val) algo mst_prim step 3750: {'pi': 0.8650914634146342, 'score': 0.8650914634146342, 'examples_seen': 125390, 'step': 3750, 'algorithm': 'mst_prim'}
+I0706 17:21:52.139966 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.865, val scores are: mst_prim: 0.865
+I0706 17:21:55.219531 137182519096832 run.py:685] Algo mst_prim step 3800 current loss 3.580691, current_train_items 127219.
+I0706 17:21:55.548142 137182519096832 run.py:720] (val) algo mst_prim step 3800: {'pi': 0.7816310975609756, 'score': 0.7816310975609756, 'examples_seen': 127219, 'step': 3800, 'algorithm': 'mst_prim'}
+I0706 17:21:55.548364 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.782, val scores are: mst_prim: 0.782
+I0706 17:21:58.717649 137182519096832 run.py:685] Algo mst_prim step 3850 current loss 0.654111, current_train_items 128897.
+I0706 17:21:59.368403 137182519096832 run.py:720] (val) algo mst_prim step 3850: {'pi': 0.8521341463414634, 'score': 0.8521341463414634, 'examples_seen': 128897, 'step': 3850, 'algorithm': 'mst_prim'}
+I0706 17:21:59.368633 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.852, val scores are: mst_prim: 0.852
+I0706 17:22:02.361075 137182519096832 run.py:685] Algo mst_prim step 3900 current loss 5.214612, current_train_items 130531.
+I0706 17:22:02.767390 137182519096832 run.py:720] (val) algo mst_prim step 3900: {'pi': 0.8471798780487805, 'score': 0.8471798780487805, 'examples_seen': 130531, 'step': 3900, 'algorithm': 'mst_prim'}
+I0706 17:22:02.767611 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.847, val scores are: mst_prim: 0.847
+I0706 17:22:06.126039 137182519096832 run.py:685] Algo mst_prim step 3950 current loss 1.603549, current_train_items 132275.
+I0706 17:22:06.442290 137182519096832 run.py:720] (val) algo mst_prim step 3950: {'pi': 0.8528963414634146, 'score': 0.8528963414634146, 'examples_seen': 132275, 'step': 3950, 'algorithm': 'mst_prim'}
+I0706 17:22:06.442513 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.853, val scores are: mst_prim: 0.853
+I0706 17:22:09.414731 137182519096832 run.py:685] Algo mst_prim step 4000 current loss 5.395331, current_train_items 133831.
+I0706 17:22:09.991029 137182519096832 run.py:720] (val) algo mst_prim step 4000: {'pi': 0.8578506097560976, 'score': 0.8578506097560976, 'examples_seen': 133831, 'step': 4000, 'algorithm': 'mst_prim'}
+I0706 17:22:09.991248 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.858, val scores are: mst_prim: 0.858
+I0706 17:22:13.226937 137182519096832 run.py:685] Algo mst_prim step 4050 current loss 3.280903, current_train_items 135626.
+I0706 17:22:13.525270 137182519096832 run.py:720] (val) algo mst_prim step 4050: {'pi': 0.8418445121951219, 'score': 0.8418445121951219, 'examples_seen': 135626, 'step': 4050, 'algorithm': 'mst_prim'}
+I0706 17:22:13.525496 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.842, val scores are: mst_prim: 0.842
+I0706 17:22:16.514198 137182519096832 run.py:685] Algo mst_prim step 4100 current loss 5.695178, current_train_items 137095.
+I0706 17:22:17.385850 137182519096832 run.py:720] (val) algo mst_prim step 4100: {'pi': 0.8304115853658537, 'score': 0.8304115853658537, 'examples_seen': 137095, 'step': 4100, 'algorithm': 'mst_prim'}
+I0706 17:22:17.386067 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.830, val scores are: mst_prim: 0.830
+I0706 17:22:20.441097 137182519096832 run.py:685] Algo mst_prim step 4150 current loss 4.116200, current_train_items 138884.
+I0706 17:22:20.777406 137182519096832 run.py:720] (val) algo mst_prim step 4150: {'pi': 0.8342225609756098, 'score': 0.8342225609756098, 'examples_seen': 138884, 'step': 4150, 'algorithm': 'mst_prim'}
+I0706 17:22:20.777645 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.834, val scores are: mst_prim: 0.834
+I0706 17:22:23.935908 137182519096832 run.py:685] Algo mst_prim step 4200 current loss 0.835495, current_train_items 140554.
+I0706 17:22:24.590035 137182519096832 run.py:720] (val) algo mst_prim step 4200: {'pi': 0.8376524390243902, 'score': 0.8376524390243902, 'examples_seen': 140554, 'step': 4200, 'algorithm': 'mst_prim'}
+I0706 17:22:24.590252 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.838, val scores are: mst_prim: 0.838
+I0706 17:22:27.618475 137182519096832 run.py:685] Algo mst_prim step 4250 current loss 4.528935, current_train_items 142173.
+I0706 17:22:28.044272 137182519096832 run.py:720] (val) algo mst_prim step 4250: {'pi': 0.8140243902439024, 'score': 0.8140243902439024, 'examples_seen': 142173, 'step': 4250, 'algorithm': 'mst_prim'}
+I0706 17:22:28.044518 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.814, val scores are: mst_prim: 0.814
+I0706 17:22:31.402415 137182519096832 run.py:685] Algo mst_prim step 4300 current loss 1.874068, current_train_items 143922.
+I0706 17:22:31.716611 137182519096832 run.py:720] (val) algo mst_prim step 4300: {'pi': 0.7751524390243902, 'score': 0.7751524390243902, 'examples_seen': 143922, 'step': 4300, 'algorithm': 'mst_prim'}
+I0706 17:22:31.716858 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.775, val scores are: mst_prim: 0.775
+I0706 17:22:34.627973 137182519096832 run.py:685] Algo mst_prim step 4350 current loss 4.922116, current_train_items 145458.
+I0706 17:22:35.281874 137182519096832 run.py:720] (val) algo mst_prim step 4350: {'pi': 0.8780487804878049, 'score': 0.8780487804878049, 'examples_seen': 145458, 'step': 4350, 'algorithm': 'mst_prim'}
+I0706 17:22:35.282093 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.878, val scores are: mst_prim: 0.878
+I0706 17:22:38.521273 137182519096832 run.py:685] Algo mst_prim step 4400 current loss 2.968417, current_train_items 147268.
+I0706 17:22:38.819953 137182519096832 run.py:720] (val) algo mst_prim step 4400: {'pi': 0.866234756097561, 'score': 0.866234756097561, 'examples_seen': 147268, 'step': 4400, 'algorithm': 'mst_prim'}
+I0706 17:22:38.820178 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.880, current avg val score is 0.866, val scores are: mst_prim: 0.866
+I0706 17:22:41.824405 137182519096832 run.py:685] Algo mst_prim step 4450 current loss 5.086838, current_train_items 148782.
+I0706 17:22:42.662329 137182519096832 run.py:720] (val) algo mst_prim step 4450: {'pi': 0.8814786585365854, 'score': 0.8814786585365854, 'examples_seen': 148782, 'step': 4450, 'algorithm': 'mst_prim'}
+I0706 17:22:42.662579 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.880, current avg val score is 0.881, val scores are: mst_prim: 0.881
+I0706 17:22:45.759679 137182519096832 run.py:685] Algo mst_prim step 4500 current loss 3.428147, current_train_items 150603.
+I0706 17:22:46.083287 137182519096832 run.py:720] (val) algo mst_prim step 4500: {'pi': 0.8422256097560976, 'score': 0.8422256097560976, 'examples_seen': 150603, 'step': 4500, 'algorithm': 'mst_prim'}
+I0706 17:22:46.083530 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.881, current avg val score is 0.842, val scores are: mst_prim: 0.842
+I0706 17:22:49.243922 137182519096832 run.py:685] Algo mst_prim step 4550 current loss 0.694591, current_train_items 152270.
+I0706 17:22:49.891662 137182519096832 run.py:720] (val) algo mst_prim step 4550: {'pi': 0.8647103658536586, 'score': 0.8647103658536586, 'examples_seen': 152270, 'step': 4550, 'algorithm': 'mst_prim'}
+I0706 17:22:49.891914 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.881, current avg val score is 0.865, val scores are: mst_prim: 0.865
+I0706 17:22:52.878424 137182519096832 run.py:685] Algo mst_prim step 4600 current loss 4.450573, current_train_items 153869.
+I0706 17:22:53.287507 137182519096832 run.py:720] (val) algo mst_prim step 4600: {'pi': 0.8936737804878049, 'score': 0.8936737804878049, 'examples_seen': 153869, 'step': 4600, 'algorithm': 'mst_prim'}
+I0706 17:22:53.287727 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.881, current avg val score is 0.894, val scores are: mst_prim: 0.894
+I0706 17:22:56.680592 137182519096832 run.py:685] Algo mst_prim step 4650 current loss 1.310575, current_train_items 155644.
+I0706 17:22:56.996489 137182519096832 run.py:720] (val) algo mst_prim step 4650: {'pi': 0.8391768292682927, 'score': 0.8391768292682927, 'examples_seen': 155644, 'step': 4650, 'algorithm': 'mst_prim'}
+I0706 17:22:56.996708 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.894, current avg val score is 0.839, val scores are: mst_prim: 0.839
+I0706 17:22:59.936401 137182519096832 run.py:685] Algo mst_prim step 4700 current loss 6.435435, current_train_items 157203.
+I0706 17:23:00.568164 137182519096832 run.py:720] (val) algo mst_prim step 4700: {'pi': 0.8803353658536586, 'score': 0.8803353658536586, 'examples_seen': 157203, 'step': 4700, 'algorithm': 'mst_prim'}
+I0706 17:23:00.568377 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.894, current avg val score is 0.880, val scores are: mst_prim: 0.880
+I0706 17:23:03.725981 137182519096832 run.py:685] Algo mst_prim step 4750 current loss 3.600255, current_train_items 159000.
+I0706 17:23:04.491957 137182519096832 run.py:720] (val) algo mst_prim step 4750: {'pi': 0.7694359756097561, 'score': 0.7694359756097561, 'examples_seen': 159000, 'step': 4750, 'algorithm': 'mst_prim'}
+I0706 17:23:04.492200 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.894, current avg val score is 0.769, val scores are: mst_prim: 0.769
+I0706 17:23:07.482038 137182519096832 run.py:685] Algo mst_prim step 4800 current loss 6.035648, current_train_items 160468.
+I0706 17:23:08.358579 137182519096832 run.py:720] (val) algo mst_prim step 4800: {'pi': 0.8395579268292683, 'score': 0.8395579268292683, 'examples_seen': 160468, 'step': 4800, 'algorithm': 'mst_prim'}
+I0706 17:23:08.358804 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.894, current avg val score is 0.840, val scores are: mst_prim: 0.840
+I0706 17:23:11.452574 137182519096832 run.py:685] Algo mst_prim step 4850 current loss 3.560115, current_train_items 162288.
+I0706 17:23:11.779856 137182519096832 run.py:720] (val) algo mst_prim step 4850: {'pi': 0.760670731707317, 'score': 0.760670731707317, 'examples_seen': 162288, 'step': 4850, 'algorithm': 'mst_prim'}
+I0706 17:23:11.780082 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.894, current avg val score is 0.761, val scores are: mst_prim: 0.761
+I0706 17:23:14.934611 137182519096832 run.py:685] Algo mst_prim step 4900 current loss 0.759814, current_train_items 163949.
+I0706 17:23:15.587847 137182519096832 run.py:720] (val) algo mst_prim step 4900: {'pi': 0.8300304878048781, 'score': 0.8300304878048781, 'examples_seen': 163949, 'step': 4900, 'algorithm': 'mst_prim'}
+I0706 17:23:15.588079 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.894, current avg val score is 0.830, val scores are: mst_prim: 0.830
+I0706 17:23:18.608552 137182519096832 run.py:685] Algo mst_prim step 4950 current loss 4.936632, current_train_items 165581.
+I0706 17:23:19.039109 137182519096832 run.py:720] (val) algo mst_prim step 4950: {'pi': 0.8201219512195121, 'score': 0.8201219512195121, 'examples_seen': 165581, 'step': 4950, 'algorithm': 'mst_prim'}
+I0706 17:23:19.039355 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.894, current avg val score is 0.820, val scores are: mst_prim: 0.820
+I0706 17:23:22.391894 137182519096832 run.py:685] Algo mst_prim step 5000 current loss 1.797096, current_train_items 167342.
+I0706 17:23:22.706000 137182519096832 run.py:720] (val) algo mst_prim step 5000: {'pi': 0.8769054878048781, 'score': 0.8769054878048781, 'examples_seen': 167342, 'step': 5000, 'algorithm': 'mst_prim'}
+I0706 17:23:22.706223 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.894, current avg val score is 0.877, val scores are: mst_prim: 0.877
+I0706 17:23:25.668984 137182519096832 run.py:685] Algo mst_prim step 5050 current loss 5.399807, current_train_items 168901.
+I0706 17:23:26.266863 137182519096832 run.py:720] (val) algo mst_prim step 5050: {'pi': 0.8685213414634146, 'score': 0.8685213414634146, 'examples_seen': 168901, 'step': 5050, 'algorithm': 'mst_prim'}
+I0706 17:23:26.267080 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.894, current avg val score is 0.869, val scores are: mst_prim: 0.869
+I0706 17:23:29.405795 137182519096832 run.py:685] Algo mst_prim step 5100 current loss 2.601131, current_train_items 170694.
+I0706 17:23:29.712563 137182519096832 run.py:720] (val) algo mst_prim step 5100: {'pi': 0.8887195121951219, 'score': 0.8887195121951219, 'examples_seen': 170694, 'step': 5100, 'algorithm': 'mst_prim'}
+I0706 17:23:29.712789 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.894, current avg val score is 0.889, val scores are: mst_prim: 0.889
+I0706 17:23:32.804708 137182519096832 run.py:685] Algo mst_prim step 5150 current loss 5.109056, current_train_items 172193.
+I0706 17:23:33.592005 137182519096832 run.py:720] (val) algo mst_prim step 5150: {'pi': 0.8830030487804879, 'score': 0.8830030487804879, 'examples_seen': 172193, 'step': 5150, 'algorithm': 'mst_prim'}
+I0706 17:23:33.592218 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.894, current avg val score is 0.883, val scores are: mst_prim: 0.883
+I0706 17:23:36.615656 137182519096832 run.py:685] Algo mst_prim step 5200 current loss 3.682889, current_train_items 174024.
+I0706 17:23:36.929983 137182519096832 run.py:720] (val) algo mst_prim step 5200: {'pi': 0.8685213414634146, 'score': 0.8685213414634146, 'examples_seen': 174024, 'step': 5200, 'algorithm': 'mst_prim'}
+I0706 17:23:36.930223 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.894, current avg val score is 0.869, val scores are: mst_prim: 0.869
+I0706 17:23:40.056994 137182519096832 run.py:685] Algo mst_prim step 5250 current loss 0.608181, current_train_items 175693.
+I0706 17:23:40.708390 137182519096832 run.py:720] (val) algo mst_prim step 5250: {'pi': 0.8551829268292683, 'score': 0.8551829268292683, 'examples_seen': 175693, 'step': 5250, 'algorithm': 'mst_prim'}
+I0706 17:23:40.708606 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.894, current avg val score is 0.855, val scores are: mst_prim: 0.855
+I0706 17:23:43.740936 137182519096832 run.py:685] Algo mst_prim step 5300 current loss 5.493274, current_train_items 177339.
+I0706 17:23:44.161623 137182519096832 run.py:720] (val) algo mst_prim step 5300: {'pi': 0.9134908536585366, 'score': 0.9134908536585366, 'examples_seen': 177339, 'step': 5300, 'algorithm': 'mst_prim'}
+I0706 17:23:44.161867 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.894, current avg val score is 0.913, val scores are: mst_prim: 0.913
+I0706 17:23:47.573713 137182519096832 run.py:685] Algo mst_prim step 5350 current loss 1.673700, current_train_items 179102.
+I0706 17:23:47.887383 137182519096832 run.py:720] (val) algo mst_prim step 5350: {'pi': 0.8868140243902439, 'score': 0.8868140243902439, 'examples_seen': 179102, 'step': 5350, 'algorithm': 'mst_prim'}
+I0706 17:23:47.887604 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.887, val scores are: mst_prim: 0.887
+I0706 17:23:50.875395 137182519096832 run.py:685] Algo mst_prim step 5400 current loss 5.245354, current_train_items 180668.
+I0706 17:23:51.469342 137182519096832 run.py:720] (val) algo mst_prim step 5400: {'pi': 0.9092987804878049, 'score': 0.9092987804878049, 'examples_seen': 180668, 'step': 5400, 'algorithm': 'mst_prim'}
+I0706 17:23:51.469558 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.909, val scores are: mst_prim: 0.909
+I0706 17:23:54.615592 137182519096832 run.py:685] Algo mst_prim step 5450 current loss 2.884551, current_train_items 182483.
+I0706 17:23:54.921871 137182519096832 run.py:720] (val) algo mst_prim step 5450: {'pi': 0.866234756097561, 'score': 0.866234756097561, 'examples_seen': 182483, 'step': 5450, 'algorithm': 'mst_prim'}
+I0706 17:23:54.922091 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.866, val scores are: mst_prim: 0.866
+I0706 17:23:57.903309 137182519096832 run.py:685] Algo mst_prim step 5500 current loss 5.397954, current_train_items 183976.
+I0706 17:23:58.781156 137182519096832 run.py:720] (val) algo mst_prim step 5500: {'pi': 0.8788109756097561, 'score': 0.8788109756097561, 'examples_seen': 183976, 'step': 5500, 'algorithm': 'mst_prim'}
+I0706 17:23:58.781390 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.879, val scores are: mst_prim: 0.879
+I0706 17:24:01.754319 137182519096832 run.py:685] Algo mst_prim step 5550 current loss 3.940841, current_train_items 185811.
+I0706 17:24:02.107711 137182519096832 run.py:720] (val) algo mst_prim step 5550: {'pi': 0.8727134146341463, 'score': 0.8727134146341463, 'examples_seen': 185811, 'step': 5550, 'algorithm': 'mst_prim'}
+I0706 17:24:02.107965 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.873, val scores are: mst_prim: 0.873
+I0706 17:24:05.330770 137182519096832 run.py:685] Algo mst_prim step 5600 current loss 0.786666, current_train_items 187481.
+I0706 17:24:05.982168 137182519096832 run.py:720] (val) algo mst_prim step 5600: {'pi': 0.8631859756097561, 'score': 0.8631859756097561, 'examples_seen': 187481, 'step': 5600, 'algorithm': 'mst_prim'}
+I0706 17:24:05.982396 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.863, val scores are: mst_prim: 0.863
+I0706 17:24:08.960287 137182519096832 run.py:685] Algo mst_prim step 5650 current loss 4.970912, current_train_items 189098.
+I0706 17:24:09.376732 137182519096832 run.py:720] (val) algo mst_prim step 5650: {'pi': 0.9051067073170732, 'score': 0.9051067073170732, 'examples_seen': 189098, 'step': 5650, 'algorithm': 'mst_prim'}
+I0706 17:24:09.376987 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.905, val scores are: mst_prim: 0.905
+I0706 17:24:12.737464 137182519096832 run.py:685] Algo mst_prim step 5700 current loss 1.729415, current_train_items 190860.
+I0706 17:24:13.052220 137182519096832 run.py:720] (val) algo mst_prim step 5700: {'pi': 0.8746189024390244, 'score': 0.8746189024390244, 'examples_seen': 190860, 'step': 5700, 'algorithm': 'mst_prim'}
+I0706 17:24:13.052444 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.875, val scores are: mst_prim: 0.875
+I0706 17:24:15.937986 137182519096832 run.py:685] Algo mst_prim step 5750 current loss 5.330170, current_train_items 192406.
+I0706 17:24:16.590819 137182519096832 run.py:720] (val) algo mst_prim step 5750: {'pi': 0.8536585365853658, 'score': 0.8536585365853658, 'examples_seen': 192406, 'step': 5750, 'algorithm': 'mst_prim'}
+I0706 17:24:16.591061 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.854, val scores are: mst_prim: 0.854
+I0706 17:24:19.766096 137182519096832 run.py:685] Algo mst_prim step 5800 current loss 2.692467, current_train_items 194229.
+I0706 17:24:20.061588 137182519096832 run.py:720] (val) algo mst_prim step 5800: {'pi': 0.8666158536585366, 'score': 0.8666158536585366, 'examples_seen': 194229, 'step': 5800, 'algorithm': 'mst_prim'}
+I0706 17:24:20.061807 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.867, val scores are: mst_prim: 0.867
+I0706 17:24:23.047325 137182519096832 run.py:685] Algo mst_prim step 5850 current loss 5.677137, current_train_items 195720.
+I0706 17:24:23.920184 137182519096832 run.py:720] (val) algo mst_prim step 5850: {'pi': 0.8944359756097561, 'score': 0.8944359756097561, 'examples_seen': 195720, 'step': 5850, 'algorithm': 'mst_prim'}
+I0706 17:24:23.920403 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.894, val scores are: mst_prim: 0.894
+I0706 17:24:26.930967 137182519096832 run.py:685] Algo mst_prim step 5900 current loss 3.550982, current_train_items 197557.
+I0706 17:24:27.279011 137182519096832 run.py:720] (val) algo mst_prim step 5900: {'pi': 0.8243140243902439, 'score': 0.8243140243902439, 'examples_seen': 197557, 'step': 5900, 'algorithm': 'mst_prim'}
+I0706 17:24:27.279240 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.824, val scores are: mst_prim: 0.824
+I0706 17:24:30.431241 137182519096832 run.py:685] Algo mst_prim step 5950 current loss 0.649266, current_train_items 199242.
+I0706 17:24:31.079218 137182519096832 run.py:720] (val) algo mst_prim step 5950: {'pi': 0.8929115853658537, 'score': 0.8929115853658537, 'examples_seen': 199242, 'step': 5950, 'algorithm': 'mst_prim'}
+I0706 17:24:31.079441 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.893, val scores are: mst_prim: 0.893
+I0706 17:24:34.057903 137182519096832 run.py:685] Algo mst_prim step 6000 current loss 5.000003, current_train_items 200877.
+I0706 17:24:34.465238 137182519096832 run.py:720] (val) algo mst_prim step 6000: {'pi': 0.8780487804878049, 'score': 0.8780487804878049, 'examples_seen': 200877, 'step': 6000, 'algorithm': 'mst_prim'}
+I0706 17:24:34.465467 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.878, val scores are: mst_prim: 0.878
+I0706 17:24:37.702934 137182519096832 run.py:685] Algo mst_prim step 6050 current loss 1.492894, current_train_items 202652.
+I0706 17:24:38.185447 137182519096832 run.py:720] (val) algo mst_prim step 6050: {'pi': 0.9123475609756098, 'score': 0.9123475609756098, 'examples_seen': 202652, 'step': 6050, 'algorithm': 'mst_prim'}
+I0706 17:24:38.185673 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.912, val scores are: mst_prim: 0.912
+I0706 17:24:41.090441 137182519096832 run.py:685] Algo mst_prim step 6100 current loss 5.606296, current_train_items 204177.
+I0706 17:24:41.738626 137182519096832 run.py:720] (val) algo mst_prim step 6100: {'pi': 0.9024390243902439, 'score': 0.9024390243902439, 'examples_seen': 204177, 'step': 6100, 'algorithm': 'mst_prim'}
+I0706 17:24:41.738871 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.902, val scores are: mst_prim: 0.902
+I0706 17:24:44.946731 137182519096832 run.py:685] Algo mst_prim step 6150 current loss 2.637720, current_train_items 205964.
+I0706 17:24:45.242926 137182519096832 run.py:720] (val) algo mst_prim step 6150: {'pi': 0.890625, 'score': 0.890625, 'examples_seen': 205964, 'step': 6150, 'algorithm': 'mst_prim'}
+I0706 17:24:45.243151 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.891, val scores are: mst_prim: 0.891
+I0706 17:24:48.242185 137182519096832 run.py:685] Algo mst_prim step 6200 current loss 5.531272, current_train_items 207442.
+I0706 17:24:49.120187 137182519096832 run.py:720] (val) algo mst_prim step 6200: {'pi': 0.8879573170731707, 'score': 0.8879573170731707, 'examples_seen': 207442, 'step': 6200, 'algorithm': 'mst_prim'}
+I0706 17:24:49.120418 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.888, val scores are: mst_prim: 0.888
+I0706 17:24:52.201600 137182519096832 run.py:685] Algo mst_prim step 6250 current loss 4.069770, current_train_items 209259.
+I0706 17:24:52.513188 137182519096832 run.py:720] (val) algo mst_prim step 6250: {'pi': 0.8841463414634146, 'score': 0.8841463414634146, 'examples_seen': 209259, 'step': 6250, 'algorithm': 'mst_prim'}
+I0706 17:24:52.513412 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.884, val scores are: mst_prim: 0.884
+I0706 17:24:55.731943 137182519096832 run.py:685] Algo mst_prim step 6300 current loss 0.838624, current_train_items 210914.
+I0706 17:24:56.386384 137182519096832 run.py:720] (val) algo mst_prim step 6300: {'pi': 0.8723323170731707, 'score': 0.8723323170731707, 'examples_seen': 210914, 'step': 6300, 'algorithm': 'mst_prim'}
+I0706 17:24:56.386599 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.872, val scores are: mst_prim: 0.872
+I0706 17:24:59.351100 137182519096832 run.py:685] Algo mst_prim step 6350 current loss 4.815999, current_train_items 212530.
+I0706 17:24:59.779871 137182519096832 run.py:720] (val) algo mst_prim step 6350: {'pi': 0.8898628048780488, 'score': 0.8898628048780488, 'examples_seen': 212530, 'step': 6350, 'algorithm': 'mst_prim'}
+I0706 17:24:59.780092 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.890, val scores are: mst_prim: 0.890
+I0706 17:25:03.194176 137182519096832 run.py:685] Algo mst_prim step 6400 current loss 1.321201, current_train_items 214303.
+I0706 17:25:03.511574 137182519096832 run.py:720] (val) algo mst_prim step 6400: {'pi': 0.8639481707317073, 'score': 0.8639481707317073, 'examples_seen': 214303, 'step': 6400, 'algorithm': 'mst_prim'}
+I0706 17:25:03.511792 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.864, val scores are: mst_prim: 0.864
+I0706 17:25:06.475527 137182519096832 run.py:685] Algo mst_prim step 6450 current loss 4.879073, current_train_items 215850.
+I0706 17:25:07.088271 137182519096832 run.py:720] (val) algo mst_prim step 6450: {'pi': 0.9024390243902439, 'score': 0.9024390243902439, 'examples_seen': 215850, 'step': 6450, 'algorithm': 'mst_prim'}
+I0706 17:25:07.088488 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.913, current avg val score is 0.902, val scores are: mst_prim: 0.902
+I0706 17:25:10.278689 137182519096832 run.py:685] Algo mst_prim step 6500 current loss 2.576247, current_train_items 217655.
+I0706 17:25:10.581060 137182519096832 run.py:720] (val) algo mst_prim step 6500: {'pi': 0.9153963414634146, 'score': 0.9153963414634146, 'examples_seen': 217655, 'step': 6500, 'algorithm': 'mst_prim'}
+I0706 17:25:10.581277 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.913, current avg val score is 0.915, val scores are: mst_prim: 0.915
+I0706 17:25:13.644096 137182519096832 run.py:685] Algo mst_prim step 6550 current loss 5.840010, current_train_items 219157.
+I0706 17:25:14.522350 137182519096832 run.py:720] (val) algo mst_prim step 6550: {'pi': 0.8628048780487805, 'score': 0.8628048780487805, 'examples_seen': 219157, 'step': 6550, 'algorithm': 'mst_prim'}
+I0706 17:25:14.522561 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.915, current avg val score is 0.863, val scores are: mst_prim: 0.863
+I0706 17:25:17.551739 137182519096832 run.py:685] Algo mst_prim step 6600 current loss 3.917569, current_train_items 220977.
+I0706 17:25:17.899708 137182519096832 run.py:720] (val) algo mst_prim step 6600: {'pi': 0.8841463414634146, 'score': 0.8841463414634146, 'examples_seen': 220977, 'step': 6600, 'algorithm': 'mst_prim'}
+I0706 17:25:17.899976 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.915, current avg val score is 0.884, val scores are: mst_prim: 0.884
+I0706 17:25:21.081626 137182519096832 run.py:685] Algo mst_prim step 6650 current loss 0.626512, current_train_items 222666.
+I0706 17:25:21.731876 137182519096832 run.py:720] (val) algo mst_prim step 6650: {'pi': 0.9043445121951219, 'score': 0.9043445121951219, 'examples_seen': 222666, 'step': 6650, 'algorithm': 'mst_prim'}
+I0706 17:25:21.732086 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.915, current avg val score is 0.904, val scores are: mst_prim: 0.904
+I0706 17:25:24.727047 137182519096832 run.py:685] Algo mst_prim step 6700 current loss 4.516027, current_train_items 224318.
+I0706 17:25:25.156401 137182519096832 run.py:720] (val) algo mst_prim step 6700: {'pi': 0.8917682926829268, 'score': 0.8917682926829268, 'examples_seen': 224318, 'step': 6700, 'algorithm': 'mst_prim'}
+I0706 17:25:25.156616 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.915, current avg val score is 0.892, val scores are: mst_prim: 0.892
+I0706 17:25:28.527639 137182519096832 run.py:685] Algo mst_prim step 6750 current loss 1.565216, current_train_items 226074.
+I0706 17:25:28.842576 137182519096832 run.py:720] (val) algo mst_prim step 6750: {'pi': 0.8990091463414634, 'score': 0.8990091463414634, 'examples_seen': 226074, 'step': 6750, 'algorithm': 'mst_prim'}
+I0706 17:25:28.842803 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.915, current avg val score is 0.899, val scores are: mst_prim: 0.899
+I0706 17:25:31.795229 137182519096832 run.py:685] Algo mst_prim step 6800 current loss 4.848650, current_train_items 227601.
+I0706 17:25:32.396188 137182519096832 run.py:720] (val) algo mst_prim step 6800: {'pi': 0.9085365853658537, 'score': 0.9085365853658537, 'examples_seen': 227601, 'step': 6800, 'algorithm': 'mst_prim'}
+I0706 17:25:32.396419 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.915, current avg val score is 0.909, val scores are: mst_prim: 0.909
+I0706 17:25:35.634473 137182519096832 run.py:685] Algo mst_prim step 6850 current loss 2.611573, current_train_items 229422.
+I0706 17:25:35.938133 137182519096832 run.py:720] (val) algo mst_prim step 6850: {'pi': 0.8940548780487805, 'score': 0.8940548780487805, 'examples_seen': 229422, 'step': 6850, 'algorithm': 'mst_prim'}
+I0706 17:25:35.938352 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.915, current avg val score is 0.894, val scores are: mst_prim: 0.894
+I0706 17:25:38.932813 137182519096832 run.py:685] Algo mst_prim step 6900 current loss 5.563518, current_train_items 230919.
+I0706 17:25:39.806462 137182519096832 run.py:720] (val) algo mst_prim step 6900: {'pi': 0.9089176829268293, 'score': 0.9089176829268293, 'examples_seen': 230919, 'step': 6900, 'algorithm': 'mst_prim'}
+I0706 17:25:39.806668 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.915, current avg val score is 0.909, val scores are: mst_prim: 0.909
+I0706 17:25:42.838597 137182519096832 run.py:685] Algo mst_prim step 6950 current loss 3.653100, current_train_items 232772.
+I0706 17:25:43.178639 137182519096832 run.py:720] (val) algo mst_prim step 6950: {'pi': 0.9245426829268293, 'score': 0.9245426829268293, 'examples_seen': 232772, 'step': 6950, 'algorithm': 'mst_prim'}
+I0706 17:25:43.178925 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.915, current avg val score is 0.925, val scores are: mst_prim: 0.925
+I0706 17:25:46.250522 137182519096832 run.py:685] Algo mst_prim step 7000 current loss 0.657139, current_train_items 234457.
+I0706 17:25:46.999072 137182519096832 run.py:720] (val) algo mst_prim step 7000: {'pi': 0.868140243902439, 'score': 0.868140243902439, 'examples_seen': 234457, 'step': 7000, 'algorithm': 'mst_prim'}
+I0706 17:25:46.999291 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.925, current avg val score is 0.868, val scores are: mst_prim: 0.868
+I0706 17:25:49.954136 137182519096832 run.py:685] Algo mst_prim step 7050 current loss 4.913752, current_train_items 236085.
+I0706 17:25:50.397612 137182519096832 run.py:720] (val) algo mst_prim step 7050: {'pi': 0.8795731707317073, 'score': 0.8795731707317073, 'examples_seen': 236085, 'step': 7050, 'algorithm': 'mst_prim'}
+I0706 17:25:50.397845 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.925, current avg val score is 0.880, val scores are: mst_prim: 0.880
+I0706 17:25:53.764938 137182519096832 run.py:685] Algo mst_prim step 7100 current loss 1.754352, current_train_items 237802.
+I0706 17:25:54.080468 137182519096832 run.py:720] (val) algo mst_prim step 7100: {'pi': 0.895579268292683, 'score': 0.895579268292683, 'examples_seen': 237802, 'step': 7100, 'algorithm': 'mst_prim'}
+I0706 17:25:54.080689 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.925, current avg val score is 0.896, val scores are: mst_prim: 0.896
+I0706 17:25:57.057038 137182519096832 run.py:685] Algo mst_prim step 7150 current loss 5.065173, current_train_items 239380.
+I0706 17:25:57.682220 137182519096832 run.py:720] (val) algo mst_prim step 7150: {'pi': 0.9340701219512195, 'score': 0.9340701219512195, 'examples_seen': 239380, 'step': 7150, 'algorithm': 'mst_prim'}
+I0706 17:25:57.682444 137182519096832 run.py:741] Checkpointing best model, best avg val score was 0.925, current avg val score is 0.934, val scores are: mst_prim: 0.934
+I0706 17:26:00.852802 137182519096832 run.py:685] Algo mst_prim step 7200 current loss 3.209402, current_train_items 241193.
+I0706 17:26:01.162066 137182519096832 run.py:720] (val) algo mst_prim step 7200: {'pi': 0.8574695121951219, 'score': 0.8574695121951219, 'examples_seen': 241193, 'step': 7200, 'algorithm': 'mst_prim'}
+I0706 17:26:01.162237 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.857, val scores are: mst_prim: 0.857
+I0706 17:26:04.168658 137182519096832 run.py:685] Algo mst_prim step 7250 current loss 5.572454, current_train_items 242698.
+I0706 17:26:05.019274 137182519096832 run.py:720] (val) algo mst_prim step 7250: {'pi': 0.890625, 'score': 0.890625, 'examples_seen': 242698, 'step': 7250, 'algorithm': 'mst_prim'}
+I0706 17:26:05.019490 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.891, val scores are: mst_prim: 0.891
+I0706 17:26:08.048199 137182519096832 run.py:685] Algo mst_prim step 7300 current loss 4.436233, current_train_items 244509.
+I0706 17:26:08.380580 137182519096832 run.py:720] (val) algo mst_prim step 7300: {'pi': 0.890625, 'score': 0.890625, 'examples_seen': 244509, 'step': 7300, 'algorithm': 'mst_prim'}
+I0706 17:26:08.380802 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.891, val scores are: mst_prim: 0.891
+I0706 17:26:11.544031 137182519096832 run.py:685] Algo mst_prim step 7350 current loss 0.644574, current_train_items 246170.
+I0706 17:26:12.192431 137182519096832 run.py:720] (val) algo mst_prim step 7350: {'pi': 0.8898628048780488, 'score': 0.8898628048780488, 'examples_seen': 246170, 'step': 7350, 'algorithm': 'mst_prim'}
+I0706 17:26:12.192642 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.890, val scores are: mst_prim: 0.890
+I0706 17:26:15.156363 137182519096832 run.py:685] Algo mst_prim step 7400 current loss 5.021404, current_train_items 247831.
+I0706 17:26:15.559118 137182519096832 run.py:720] (val) algo mst_prim step 7400: {'pi': 0.9092987804878049, 'score': 0.9092987804878049, 'examples_seen': 247831, 'step': 7400, 'algorithm': 'mst_prim'}
+I0706 17:26:15.559340 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.909, val scores are: mst_prim: 0.909
+I0706 17:26:18.924243 137182519096832 run.py:685] Algo mst_prim step 7450 current loss 1.337584, current_train_items 249574.
+I0706 17:26:19.239641 137182519096832 run.py:720] (val) algo mst_prim step 7450: {'pi': 0.885670731707317, 'score': 0.885670731707317, 'examples_seen': 249574, 'step': 7450, 'algorithm': 'mst_prim'}
+I0706 17:26:19.239889 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.886, val scores are: mst_prim: 0.886
+I0706 17:26:22.199170 137182519096832 run.py:685] Algo mst_prim step 7500 current loss 5.639655, current_train_items 251114.
+I0706 17:26:22.815377 137182519096832 run.py:720] (val) algo mst_prim step 7500: {'pi': 0.9123475609756098, 'score': 0.9123475609756098, 'examples_seen': 251114, 'step': 7500, 'algorithm': 'mst_prim'}
+I0706 17:26:22.815587 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.912, val scores are: mst_prim: 0.912
+I0706 17:26:25.955948 137182519096832 run.py:685] Algo mst_prim step 7550 current loss 2.901357, current_train_items 252900.
+I0706 17:26:26.266687 137182519096832 run.py:720] (val) algo mst_prim step 7550: {'pi': 0.883765243902439, 'score': 0.883765243902439, 'examples_seen': 252900, 'step': 7550, 'algorithm': 'mst_prim'}
+I0706 17:26:26.266921 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.884, val scores are: mst_prim: 0.884
+I0706 17:26:29.408142 137182519096832 run.py:685] Algo mst_prim step 7600 current loss 5.681908, current_train_items 254400.
+I0706 17:26:30.188130 137182519096832 run.py:720] (val) algo mst_prim step 7600: {'pi': 0.9024390243902439, 'score': 0.9024390243902439, 'examples_seen': 254400, 'step': 7600, 'algorithm': 'mst_prim'}
+I0706 17:26:30.188349 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.902, val scores are: mst_prim: 0.902
+I0706 17:26:33.232096 137182519096832 run.py:685] Algo mst_prim step 7650 current loss 3.082490, current_train_items 256244.
+I0706 17:26:33.551264 137182519096832 run.py:720] (val) algo mst_prim step 7650: {'pi': 0.8852896341463414, 'score': 0.8852896341463414, 'examples_seen': 256244, 'step': 7650, 'algorithm': 'mst_prim'}
+I0706 17:26:33.551485 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.885, val scores are: mst_prim: 0.885
+I0706 17:26:36.666269 137182519096832 run.py:685] Algo mst_prim step 7700 current loss 0.651565, current_train_items 257922.
+I0706 17:26:37.320307 137182519096832 run.py:720] (val) algo mst_prim step 7700: {'pi': 0.9035823170731707, 'score': 0.9035823170731707, 'examples_seen': 257922, 'step': 7700, 'algorithm': 'mst_prim'}
+I0706 17:26:37.320522 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.904, val scores are: mst_prim: 0.904
+I0706 17:26:40.242687 137182519096832 run.py:685] Algo mst_prim step 7750 current loss 5.069091, current_train_items 259548.
+I0706 17:26:40.687270 137182519096832 run.py:720] (val) algo mst_prim step 7750: {'pi': 0.9119664634146342, 'score': 0.9119664634146342, 'examples_seen': 259548, 'step': 7750, 'algorithm': 'mst_prim'}
+I0706 17:26:40.687488 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.912, val scores are: mst_prim: 0.912
+I0706 17:26:43.938774 137182519096832 run.py:685] Algo mst_prim step 7800 current loss 1.278493, current_train_items 261298.
+I0706 17:26:44.410310 137182519096832 run.py:720] (val) algo mst_prim step 7800: {'pi': 0.8791920731707317, 'score': 0.8791920731707317, 'examples_seen': 261298, 'step': 7800, 'algorithm': 'mst_prim'}
+I0706 17:26:44.410526 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.879, val scores are: mst_prim: 0.879
+I0706 17:26:47.326739 137182519096832 run.py:685] Algo mst_prim step 7850 current loss 6.191098, current_train_items 262858.
+I0706 17:26:47.975569 137182519096832 run.py:720] (val) algo mst_prim step 7850: {'pi': 0.8894817073170732, 'score': 0.8894817073170732, 'examples_seen': 262858, 'step': 7850, 'algorithm': 'mst_prim'}
+I0706 17:26:47.975800 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.889, val scores are: mst_prim: 0.889
+I0706 17:26:51.157308 137182519096832 run.py:685] Algo mst_prim step 7900 current loss 2.743297, current_train_items 264637.
+I0706 17:26:51.458977 137182519096832 run.py:720] (val) algo mst_prim step 7900: {'pi': 0.8753810975609756, 'score': 0.8753810975609756, 'examples_seen': 264637, 'step': 7900, 'algorithm': 'mst_prim'}
+I0706 17:26:51.459237 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.875, val scores are: mst_prim: 0.875
+I0706 17:26:54.432091 137182519096832 run.py:685] Algo mst_prim step 7950 current loss 5.064577, current_train_items 266113.
+I0706 17:26:55.313447 137182519096832 run.py:720] (val) algo mst_prim step 7950: {'pi': 0.8689024390243902, 'score': 0.8689024390243902, 'examples_seen': 266113, 'step': 7950, 'algorithm': 'mst_prim'}
+I0706 17:26:55.313674 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.869, val scores are: mst_prim: 0.869
+I0706 17:26:58.356853 137182519096832 run.py:685] Algo mst_prim step 8000 current loss 3.830771, current_train_items 267978.
+I0706 17:26:58.694824 137182519096832 run.py:720] (val) algo mst_prim step 8000: {'pi': 0.9176829268292683, 'score': 0.9176829268292683, 'examples_seen': 267978, 'step': 8000, 'algorithm': 'mst_prim'}
+I0706 17:26:58.695060 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.918, val scores are: mst_prim: 0.918
+I0706 17:27:01.894010 137182519096832 run.py:685] Algo mst_prim step 8050 current loss 0.741991, current_train_items 269646.
+I0706 17:27:02.549722 137182519096832 run.py:720] (val) algo mst_prim step 8050: {'pi': 0.8997713414634146, 'score': 0.8997713414634146, 'examples_seen': 269646, 'step': 8050, 'algorithm': 'mst_prim'}
+I0706 17:27:02.549953 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.900, val scores are: mst_prim: 0.900
+I0706 17:27:05.553888 137182519096832 run.py:685] Algo mst_prim step 8100 current loss 4.553150, current_train_items 271277.
+I0706 17:27:05.977078 137182519096832 run.py:720] (val) algo mst_prim step 8100: {'pi': 0.8963414634146342, 'score': 0.8963414634146342, 'examples_seen': 271277, 'step': 8100, 'algorithm': 'mst_prim'}
+I0706 17:27:05.977288 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.896, val scores are: mst_prim: 0.896
+I0706 17:27:09.340598 137182519096832 run.py:685] Algo mst_prim step 8150 current loss 1.617323, current_train_items 273032.
+I0706 17:27:09.656996 137182519096832 run.py:720] (val) algo mst_prim step 8150: {'pi': 0.8338414634146342, 'score': 0.8338414634146342, 'examples_seen': 273032, 'step': 8150, 'algorithm': 'mst_prim'}
+I0706 17:27:09.657219 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.834, val scores are: mst_prim: 0.834
+I0706 17:27:12.621181 137182519096832 run.py:685] Algo mst_prim step 8200 current loss 6.200027, current_train_items 274595.
+I0706 17:27:13.262499 137182519096832 run.py:720] (val) algo mst_prim step 8200: {'pi': 0.9104420731707317, 'score': 0.9104420731707317, 'examples_seen': 274595, 'step': 8200, 'algorithm': 'mst_prim'}
+I0706 17:27:13.262722 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.910, val scores are: mst_prim: 0.910
+I0706 17:27:16.475210 137182519096832 run.py:685] Algo mst_prim step 8250 current loss 2.516019, current_train_items 276391.
+I0706 17:27:16.775746 137182519096832 run.py:720] (val) algo mst_prim step 8250: {'pi': 0.8769054878048781, 'score': 0.8769054878048781, 'examples_seen': 276391, 'step': 8250, 'algorithm': 'mst_prim'}
+I0706 17:27:16.775995 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.877, val scores are: mst_prim: 0.877
+I0706 17:27:19.750512 137182519096832 run.py:685] Algo mst_prim step 8300 current loss 5.663214, current_train_items 277909.
+I0706 17:27:20.623639 137182519096832 run.py:720] (val) algo mst_prim step 8300: {'pi': 0.852515243902439, 'score': 0.852515243902439, 'examples_seen': 277909, 'step': 8300, 'algorithm': 'mst_prim'}
+I0706 17:27:20.623879 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.853, val scores are: mst_prim: 0.853
+I0706 17:27:23.708121 137182519096832 run.py:685] Algo mst_prim step 8350 current loss 3.770057, current_train_items 279717.
+I0706 17:27:24.043508 137182519096832 run.py:720] (val) algo mst_prim step 8350: {'pi': 0.8948170731707317, 'score': 0.8948170731707317, 'examples_seen': 279717, 'step': 8350, 'algorithm': 'mst_prim'}
+I0706 17:27:24.043734 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.895, val scores are: mst_prim: 0.895
+I0706 17:27:27.170874 137182519096832 run.py:685] Algo mst_prim step 8400 current loss 0.585958, current_train_items 281365.
+I0706 17:27:27.820972 137182519096832 run.py:720] (val) algo mst_prim step 8400: {'pi': 0.9207317073170732, 'score': 0.9207317073170732, 'examples_seen': 281365, 'step': 8400, 'algorithm': 'mst_prim'}
+I0706 17:27:27.821197 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.921, val scores are: mst_prim: 0.921
+I0706 17:27:30.831426 137182519096832 run.py:685] Algo mst_prim step 8450 current loss 4.810114, current_train_items 282998.
+I0706 17:27:31.272185 137182519096832 run.py:720] (val) algo mst_prim step 8450: {'pi': 0.8784298780487805, 'score': 0.8784298780487805, 'examples_seen': 282998, 'step': 8450, 'algorithm': 'mst_prim'}
+I0706 17:27:31.272423 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.878, val scores are: mst_prim: 0.878
+I0706 17:27:34.624192 137182519096832 run.py:685] Algo mst_prim step 8500 current loss 1.305136, current_train_items 284769.
+I0706 17:27:34.936543 137182519096832 run.py:720] (val) algo mst_prim step 8500: {'pi': 0.9032012195121951, 'score': 0.9032012195121951, 'examples_seen': 284769, 'step': 8500, 'algorithm': 'mst_prim'}
+I0706 17:27:34.936768 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.903, val scores are: mst_prim: 0.903
+I0706 17:27:37.883494 137182519096832 run.py:685] Algo mst_prim step 8550 current loss 5.391982, current_train_items 286311.
+I0706 17:27:38.467695 137182519096832 run.py:720] (val) algo mst_prim step 8550: {'pi': 0.9233993902439024, 'score': 0.9233993902439024, 'examples_seen': 286311, 'step': 8550, 'algorithm': 'mst_prim'}
+I0706 17:27:38.467888 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.923, val scores are: mst_prim: 0.923
+I0706 17:27:41.650048 137182519096832 run.py:685] Algo mst_prim step 8600 current loss 2.585237, current_train_items 288113.
+I0706 17:27:41.948937 137182519096832 run.py:720] (val) algo mst_prim step 8600: {'pi': 0.9146341463414634, 'score': 0.9146341463414634, 'examples_seen': 288113, 'step': 8600, 'algorithm': 'mst_prim'}
+I0706 17:27:41.949168 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.915, val scores are: mst_prim: 0.915
+I0706 17:27:44.940564 137182519096832 run.py:685] Algo mst_prim step 8650 current loss 5.306491, current_train_items 289593.
+I0706 17:27:45.821272 137182519096832 run.py:720] (val) algo mst_prim step 8650: {'pi': 0.9119664634146342, 'score': 0.9119664634146342, 'examples_seen': 289593, 'step': 8650, 'algorithm': 'mst_prim'}
+I0706 17:27:45.821490 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.912, val scores are: mst_prim: 0.912
+I0706 17:27:48.857308 137182519096832 run.py:685] Algo mst_prim step 8700 current loss 3.961096, current_train_items 291383.
+I0706 17:27:49.184971 137182519096832 run.py:720] (val) algo mst_prim step 8700: {'pi': 0.8875762195121951, 'score': 0.8875762195121951, 'examples_seen': 291383, 'step': 8700, 'algorithm': 'mst_prim'}
+I0706 17:27:49.185189 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.888, val scores are: mst_prim: 0.888
+I0706 17:27:52.473066 137182519096832 run.py:685] Algo mst_prim step 8750 current loss 0.490912, current_train_items 293036.
+I0706 17:27:52.953653 137182519096832 run.py:720] (val) algo mst_prim step 8750: {'pi': 0.9024390243902439, 'score': 0.9024390243902439, 'examples_seen': 293036, 'step': 8750, 'algorithm': 'mst_prim'}
+I0706 17:27:52.953877 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.902, val scores are: mst_prim: 0.902
+I0706 17:27:55.983738 137182519096832 run.py:685] Algo mst_prim step 8800 current loss 5.030391, current_train_items 294640.
+I0706 17:27:56.376597 137182519096832 run.py:720] (val) algo mst_prim step 8800: {'pi': 0.911204268292683, 'score': 0.911204268292683, 'examples_seen': 294640, 'step': 8800, 'algorithm': 'mst_prim'}
+I0706 17:27:56.376818 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.911, val scores are: mst_prim: 0.911
+I0706 17:27:59.794782 137182519096832 run.py:685] Algo mst_prim step 8850 current loss 1.638049, current_train_items 296403.
+I0706 17:28:00.110296 137182519096832 run.py:720] (val) algo mst_prim step 8850: {'pi': 0.881859756097561, 'score': 0.881859756097561, 'examples_seen': 296403, 'step': 8850, 'algorithm': 'mst_prim'}
+I0706 17:28:00.110522 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.882, val scores are: mst_prim: 0.882
+I0706 17:28:03.035204 137182519096832 run.py:685] Algo mst_prim step 8900 current loss 5.752486, current_train_items 297906.
+I0706 17:28:03.674195 137182519096832 run.py:720] (val) algo mst_prim step 8900: {'pi': 0.8959603658536586, 'score': 0.8959603658536586, 'examples_seen': 297906, 'step': 8900, 'algorithm': 'mst_prim'}
+I0706 17:28:03.674429 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.896, val scores are: mst_prim: 0.896
+I0706 17:28:06.926513 137182519096832 run.py:685] Algo mst_prim step 8950 current loss 2.708555, current_train_items 299704.
+I0706 17:28:07.227272 137182519096832 run.py:720] (val) algo mst_prim step 8950: {'pi': 0.9119664634146342, 'score': 0.9119664634146342, 'examples_seen': 299704, 'step': 8950, 'algorithm': 'mst_prim'}
+I0706 17:28:07.227494 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.912, val scores are: mst_prim: 0.912
+I0706 17:28:10.199205 137182519096832 run.py:685] Algo mst_prim step 9000 current loss 5.446042, current_train_items 301218.
+I0706 17:28:11.070494 137182519096832 run.py:720] (val) algo mst_prim step 9000: {'pi': 0.8757621951219512, 'score': 0.8757621951219512, 'examples_seen': 301218, 'step': 9000, 'algorithm': 'mst_prim'}
+I0706 17:28:11.070666 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.876, val scores are: mst_prim: 0.876
+I0706 17:28:14.089591 137182519096832 run.py:685] Algo mst_prim step 9050 current loss 3.215687, current_train_items 303038.
+I0706 17:28:14.419564 137182519096832 run.py:720] (val) algo mst_prim step 9050: {'pi': 0.9138719512195121, 'score': 0.9138719512195121, 'examples_seen': 303038, 'step': 9050, 'algorithm': 'mst_prim'}
+I0706 17:28:14.419780 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.914, val scores are: mst_prim: 0.914
+I0706 17:28:17.579455 137182519096832 run.py:685] Algo mst_prim step 9100 current loss 0.658210, current_train_items 304708.
+I0706 17:28:18.225693 137182519096832 run.py:720] (val) algo mst_prim step 9100: {'pi': 0.9146341463414634, 'score': 0.9146341463414634, 'examples_seen': 304708, 'step': 9100, 'algorithm': 'mst_prim'}
+I0706 17:28:18.225874 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.915, val scores are: mst_prim: 0.915
+I0706 17:28:21.165997 137182519096832 run.py:685] Algo mst_prim step 9150 current loss 4.177101, current_train_items 306359.
+I0706 17:28:21.594950 137182519096832 run.py:720] (val) algo mst_prim step 9150: {'pi': 0.9032012195121951, 'score': 0.9032012195121951, 'examples_seen': 306359, 'step': 9150, 'algorithm': 'mst_prim'}
+I0706 17:28:21.595121 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.903, val scores are: mst_prim: 0.903
+I0706 17:28:24.952683 137182519096832 run.py:685] Algo mst_prim step 9200 current loss 1.640679, current_train_items 308092.
+I0706 17:28:25.267772 137182519096832 run.py:720] (val) algo mst_prim step 9200: {'pi': 0.8708079268292683, 'score': 0.8708079268292683, 'examples_seen': 308092, 'step': 9200, 'algorithm': 'mst_prim'}
+I0706 17:28:25.268008 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.871, val scores are: mst_prim: 0.871
+I0706 17:28:28.220243 137182519096832 run.py:685] Algo mst_prim step 9250 current loss 4.785648, current_train_items 309637.
+I0706 17:28:28.811922 137182519096832 run.py:720] (val) algo mst_prim step 9250: {'pi': 0.899390243902439, 'score': 0.899390243902439, 'examples_seen': 309637, 'step': 9250, 'algorithm': 'mst_prim'}
+I0706 17:28:28.812110 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.899, val scores are: mst_prim: 0.899
+I0706 17:28:32.037243 137182519096832 run.py:685] Algo mst_prim step 9300 current loss 2.692859, current_train_items 311430.
+I0706 17:28:32.340194 137182519096832 run.py:720] (val) algo mst_prim step 9300: {'pi': 0.9070121951219512, 'score': 0.9070121951219512, 'examples_seen': 311430, 'step': 9300, 'algorithm': 'mst_prim'}
+I0706 17:28:32.340429 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.907, val scores are: mst_prim: 0.907
+I0706 17:28:35.379507 137182519096832 run.py:685] Algo mst_prim step 9350 current loss 5.911353, current_train_items 312953.
+I0706 17:28:36.257103 137182519096832 run.py:720] (val) algo mst_prim step 9350: {'pi': 0.901295731707317, 'score': 0.901295731707317, 'examples_seen': 312953, 'step': 9350, 'algorithm': 'mst_prim'}
+I0706 17:28:36.257322 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.901, val scores are: mst_prim: 0.901
+I0706 17:28:39.326801 137182519096832 run.py:685] Algo mst_prim step 9400 current loss 3.435845, current_train_items 314753.
+I0706 17:28:39.669196 137182519096832 run.py:720] (val) algo mst_prim step 9400: {'pi': 0.8860518292682927, 'score': 0.8860518292682927, 'examples_seen': 314753, 'step': 9400, 'algorithm': 'mst_prim'}
+I0706 17:28:39.669414 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.886, val scores are: mst_prim: 0.886
+I0706 17:28:42.815632 137182519096832 run.py:685] Algo mst_prim step 9450 current loss 0.763948, current_train_items 316399.
+I0706 17:28:43.468305 137182519096832 run.py:720] (val) algo mst_prim step 9450: {'pi': 0.9104420731707317, 'score': 0.9104420731707317, 'examples_seen': 316399, 'step': 9450, 'algorithm': 'mst_prim'}
+I0706 17:28:43.468522 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.910, val scores are: mst_prim: 0.910
+I0706 17:28:46.437889 137182519096832 run.py:685] Algo mst_prim step 9500 current loss 4.510636, current_train_items 318024.
+I0706 17:28:46.871182 137182519096832 run.py:720] (val) algo mst_prim step 9500: {'pi': 0.9043445121951219, 'score': 0.9043445121951219, 'examples_seen': 318024, 'step': 9500, 'algorithm': 'mst_prim'}
+I0706 17:28:46.871449 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.904, val scores are: mst_prim: 0.904
+I0706 17:28:50.244184 137182519096832 run.py:685] Algo mst_prim step 9550 current loss 1.929161, current_train_items 319762.
+I0706 17:28:50.557246 137182519096832 run.py:720] (val) algo mst_prim step 9550: {'pi': 0.8978658536585366, 'score': 0.8978658536585366, 'examples_seen': 319762, 'step': 9550, 'algorithm': 'mst_prim'}
+I0706 17:28:50.557472 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.898, val scores are: mst_prim: 0.898
+I0706 17:28:53.500143 137182519096832 run.py:685] Algo mst_prim step 9600 current loss 5.565606, current_train_items 321309.
+I0706 17:28:54.096061 137182519096832 run.py:720] (val) algo mst_prim step 9600: {'pi': 0.9020579268292683, 'score': 0.9020579268292683, 'examples_seen': 321309, 'step': 9600, 'algorithm': 'mst_prim'}
+I0706 17:28:54.096283 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.902, val scores are: mst_prim: 0.902
+I0706 17:28:57.343863 137182519096832 run.py:685] Algo mst_prim step 9650 current loss 2.981159, current_train_items 323098.
+I0706 17:28:57.645755 137182519096832 run.py:720] (val) algo mst_prim step 9650: {'pi': 0.9222560975609756, 'score': 0.9222560975609756, 'examples_seen': 323098, 'step': 9650, 'algorithm': 'mst_prim'}
+I0706 17:28:57.646003 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.922, val scores are: mst_prim: 0.922
+I0706 17:29:00.653671 137182519096832 run.py:685] Algo mst_prim step 9700 current loss 5.578252, current_train_items 324576.
+I0706 17:29:01.531985 137182519096832 run.py:720] (val) algo mst_prim step 9700: {'pi': 0.890625, 'score': 0.890625, 'examples_seen': 324576, 'step': 9700, 'algorithm': 'mst_prim'}
+I0706 17:29:01.532216 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.891, val scores are: mst_prim: 0.891
+I0706 17:29:04.577391 137182519096832 run.py:685] Algo mst_prim step 9750 current loss 4.349669, current_train_items 326423.
+I0706 17:29:04.941482 137182519096832 run.py:720] (val) algo mst_prim step 9750: {'pi': 0.9146341463414634, 'score': 0.9146341463414634, 'examples_seen': 326423, 'step': 9750, 'algorithm': 'mst_prim'}
+I0706 17:29:04.941733 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.915, val scores are: mst_prim: 0.915
+I0706 17:29:08.091391 137182519096832 run.py:685] Algo mst_prim step 9800 current loss 0.748954, current_train_items 328105.
+I0706 17:29:08.739548 137182519096832 run.py:720] (val) algo mst_prim step 9800: {'pi': 0.9222560975609756, 'score': 0.9222560975609756, 'examples_seen': 328105, 'step': 9800, 'algorithm': 'mst_prim'}
+I0706 17:29:08.739763 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.922, val scores are: mst_prim: 0.922
+I0706 17:29:11.686939 137182519096832 run.py:685] Algo mst_prim step 9850 current loss 4.256040, current_train_items 329745.
+I0706 17:29:12.130222 137182519096832 run.py:720] (val) algo mst_prim step 9850: {'pi': 0.9016768292682927, 'score': 0.9016768292682927, 'examples_seen': 329745, 'step': 9850, 'algorithm': 'mst_prim'}
+I0706 17:29:12.130458 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.902, val scores are: mst_prim: 0.902
+I0706 17:29:15.540930 137182519096832 run.py:685] Algo mst_prim step 9900 current loss 1.328657, current_train_items 331493.
+I0706 17:29:15.853298 137182519096832 run.py:720] (val) algo mst_prim step 9900: {'pi': 0.9237804878048781, 'score': 0.9237804878048781, 'examples_seen': 331493, 'step': 9900, 'algorithm': 'mst_prim'}
+I0706 17:29:15.853542 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.924, val scores are: mst_prim: 0.924
+I0706 17:29:18.795020 137182519096832 run.py:685] Algo mst_prim step 9950 current loss 5.183934, current_train_items 333046.
+I0706 17:29:19.411496 137182519096832 run.py:720] (val) algo mst_prim step 9950: {'pi': 0.8628048780487805, 'score': 0.8628048780487805, 'examples_seen': 333046, 'step': 9950, 'algorithm': 'mst_prim'}
+I0706 17:29:19.411721 137182519096832 run.py:744] Not saving new best model, best avg val score was 0.934, current avg val score is 0.863, val scores are: mst_prim: 0.863
+I0706 17:29:22.586560 137182519096832 run.py:750] Restoring best model from checkpoint...
+I0706 17:29:28.733403 137182519096832 run.py:765] (test) algo mst_prim : {'pi': 0.9072265625, 'score': 0.9072265625, 'examples_seen': 334817, 'step': 10000, 'algorithm': 'mst_prim'}
+I0706 17:29:28.733541 137182519096832 run.py:767] Done!

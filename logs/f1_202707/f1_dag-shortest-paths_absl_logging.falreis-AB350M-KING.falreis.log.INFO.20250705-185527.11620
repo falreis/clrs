@@ -1,0 +1,648 @@
+I0705 18:55:29.580770 133913852769792 xla_bridge.py:889] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0705 18:55:29.581419 133913852769792 xla_bridge.py:889] Unable to initialize backend 'tpu': INTERNAL: Failed to open libtpu.so: libtpu.so: cannot open shared object file: No such file or directory
+I0705 18:55:29.809787 133913852769792 run.py:413] Model: falreis ['dag_shortest_paths']
+I0705 18:55:29.809883 133913852769792 run.py:415] algorithms ['dag_shortest_paths']
+I0705 18:55:29.810053 133913852769792 run.py:416] train_lengths ['2', '3', '5', '7', '11', '13', '17', '19', '23', '29', '31', '37', '39', '41']
+I0705 18:55:29.810089 133913852769792 run.py:417] train_batch_size 16
+I0705 18:55:29.810176 133913852769792 run.py:418] val_batch_size 8
+I0705 18:55:29.810206 133913852769792 run.py:419] test_batch_size 8
+I0705 18:55:29.810235 133913852769792 run.py:420] chunked_training True
+I0705 18:55:29.810348 133913852769792 run.py:421] chunk_length 16
+I0705 18:55:29.810377 133913852769792 run.py:422] train_steps 10000
+I0705 18:55:29.810405 133913852769792 run.py:423] eval_every 50
+I0705 18:55:29.810433 133913852769792 run.py:424] test_every 500
+I0705 18:55:29.810461 133913852769792 run.py:425] learning_rate 0.001
+I0705 18:55:29.810546 133913852769792 run.py:426] grad_clip_max_norm 1.0
+I0705 18:55:29.810575 133913852769792 run.py:427] dropout_prob 0.1
+I0705 18:55:29.810604 133913852769792 run.py:428] hint_teacher_forcing 0.0
+I0705 18:55:29.810632 133913852769792 run.py:429] hint_mode encoded_decoded
+I0705 18:55:29.810765 133913852769792 run.py:430] hint_repred_mode hard_on_eval
+I0705 18:55:29.810798 133913852769792 run.py:431] use_ln False
+I0705 18:55:29.810827 133913852769792 run.py:432] use_lstm True
+I0705 18:55:29.810854 133913852769792 run.py:433] nb_triplet_fts 8
+I0705 18:55:29.810882 133913852769792 run.py:434] encoder_init xavier_on_scalars
+I0705 18:55:29.810909 133913852769792 run.py:435] processor_type falreis
+I0705 18:55:29.810936 133913852769792 run.py:436] checkpoint_path CLRS30
+I0705 18:55:29.810963 133913852769792 run.py:437] dataset_path CLRS30
+I0705 18:55:29.810991 133913852769792 run.py:438] freeze_processor False
+I0705 18:55:29.811019 133913852769792 run.py:439] reduction min
+I0705 18:55:29.811047 133913852769792 run.py:440] activation elu
+I0705 18:55:29.811074 133913852769792 run.py:441] algorithm_models ['F1', 'F2']
+I0705 18:55:29.811104 133913852769792 run.py:442] restore_model 
+I0705 18:55:29.811131 133913852769792 run.py:443] gated True
+I0705 18:55:29.811158 133913852769792 run.py:444] gated_activation sigmoid
+I0705 18:55:29.813605 133913852769792 run.py:470] Creating samplers for algo dag_shortest_paths
+W0705 18:55:29.813994 133913852769792 samplers.py:109] Sampling dataset on-the-fly, unlimited samples.
+I0705 18:55:46.689947 133913852769792 samplers.py:124] Creating a dataset with 64 samples.
+I0705 18:55:46.842533 133913852769792 run.py:257] Dataset found at CLRS30/CLRS30_v1.0.0. Skipping download.
+I0705 18:55:46.843342 133913852769792 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/dag_shortest_paths_test/1.0.0
+I0705 18:55:46.846995 133913852769792 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/dag_shortest_paths_test/1.0.0
+I0705 18:55:46.850545 133913852769792 reader.py:262] Creating a tf.data.Dataset reading 1 files located in folders: CLRS30/CLRS30_v1.0.0/clrs_dataset/dag_shortest_paths_test/1.0.0.
+I0705 18:55:46.910992 133913852769792 logging_logger.py:49] Constructing tf.data.Dataset clrs_dataset for split test, from CLRS30/CLRS30_v1.0.0/clrs_dataset/dag_shortest_paths_test/1.0.0
+W0705 18:55:46.933049 133913852769792 ag_logging.py:142] AutoGraph could not transform <function _preprocess at 0x79cabaabec00> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: `haiku.experimental.flax` features require `flax` to be installed.
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+I0705 18:56:51.339426 133913852769792 run.py:685] Algo dag_shortest_paths step 0 current loss 11.668859, current_train_items 41.
+I0705 18:56:58.755329 133913852769792 run.py:720] (val) algo dag_shortest_paths step 0: {'pi': 0.7492378048780488, 'score': 0.7492378048780488, 'examples_seen': 41, 'step': 0, 'algorithm': 'dag_shortest_paths'}
+I0705 18:56:58.755531 133913852769792 run.py:741] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.749, val scores are: dag_shortest_paths: 0.749
+I0705 19:01:20.595406 133913852769792 run.py:685] Algo dag_shortest_paths step 50 current loss 15.378637, current_train_items 922.
+I0705 19:01:21.936410 133913852769792 run.py:720] (val) algo dag_shortest_paths step 50: {'pi': 0.8833841463414634, 'score': 0.8833841463414634, 'examples_seen': 922, 'step': 50, 'algorithm': 'dag_shortest_paths'}
+I0705 19:01:21.936597 133913852769792 run.py:741] Checkpointing best model, best avg val score was 0.749, current avg val score is 0.883, val scores are: dag_shortest_paths: 0.883
+I0705 19:01:27.041294 133913852769792 run.py:685] Algo dag_shortest_paths step 100 current loss 7.360403, current_train_items 1852.
+I0705 19:01:28.189623 133913852769792 run.py:720] (val) algo dag_shortest_paths step 100: {'pi': 0.868140243902439, 'score': 0.868140243902439, 'examples_seen': 1852, 'step': 100, 'algorithm': 'dag_shortest_paths'}
+I0705 19:01:28.189835 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.883, current avg val score is 0.868, val scores are: dag_shortest_paths: 0.868
+I0705 19:01:32.596866 133913852769792 run.py:685] Algo dag_shortest_paths step 150 current loss 15.390990, current_train_items 2689.
+I0705 19:01:34.207915 133913852769792 run.py:720] (val) algo dag_shortest_paths step 150: {'pi': 0.8658536585365854, 'score': 0.8658536585365854, 'examples_seen': 2689, 'step': 150, 'algorithm': 'dag_shortest_paths'}
+I0705 19:01:34.208096 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.883, current avg val score is 0.866, val scores are: dag_shortest_paths: 0.866
+I0705 19:01:39.048965 133913852769792 run.py:685] Algo dag_shortest_paths step 200 current loss 9.982027, current_train_items 3628.
+I0705 19:01:40.205732 133913852769792 run.py:720] (val) algo dag_shortest_paths step 200: {'pi': 0.9024390243902439, 'score': 0.9024390243902439, 'examples_seen': 3628, 'step': 200, 'algorithm': 'dag_shortest_paths'}
+I0705 19:01:40.205917 133913852769792 run.py:741] Checkpointing best model, best avg val score was 0.883, current avg val score is 0.902, val scores are: dag_shortest_paths: 0.902
+I0705 19:01:44.810480 133913852769792 run.py:685] Algo dag_shortest_paths step 250 current loss 14.965352, current_train_items 4427.
+I0705 19:01:46.683104 133913852769792 run.py:720] (val) algo dag_shortest_paths step 250: {'pi': 0.9039634146341463, 'score': 0.9039634146341463, 'examples_seen': 4427, 'step': 250, 'algorithm': 'dag_shortest_paths'}
+I0705 19:01:46.683282 133913852769792 run.py:741] Checkpointing best model, best avg val score was 0.902, current avg val score is 0.904, val scores are: dag_shortest_paths: 0.904
+I0705 19:01:51.134840 133913852769792 run.py:685] Algo dag_shortest_paths step 300 current loss 11.141232, current_train_items 5408.
+I0705 19:01:52.318523 133913852769792 run.py:720] (val) algo dag_shortest_paths step 300: {'pi': 0.901295731707317, 'score': 0.901295731707317, 'examples_seen': 5408, 'step': 300, 'algorithm': 'dag_shortest_paths'}
+I0705 19:01:52.318726 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.904, current avg val score is 0.901, val scores are: dag_shortest_paths: 0.901
+I0705 19:01:57.288275 133913852769792 run.py:685] Algo dag_shortest_paths step 350 current loss 4.063843, current_train_items 6322.
+I0705 19:01:58.671996 133913852769792 run.py:720] (val) algo dag_shortest_paths step 350: {'pi': 0.9409298780487805, 'score': 0.9409298780487805, 'examples_seen': 6322, 'step': 350, 'algorithm': 'dag_shortest_paths'}
+I0705 19:01:58.672233 133913852769792 run.py:741] Checkpointing best model, best avg val score was 0.904, current avg val score is 0.941, val scores are: dag_shortest_paths: 0.941
+I0705 19:02:03.062535 133913852769792 run.py:685] Algo dag_shortest_paths step 400 current loss 11.707745, current_train_items 7202.
+I0705 19:02:04.391913 133913852769792 run.py:720] (val) algo dag_shortest_paths step 400: {'pi': 0.9066310975609756, 'score': 0.9066310975609756, 'examples_seen': 7202, 'step': 400, 'algorithm': 'dag_shortest_paths'}
+I0705 19:02:04.392062 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.941, current avg val score is 0.907, val scores are: dag_shortest_paths: 0.907
+I0705 19:02:09.368320 133913852769792 run.py:685] Algo dag_shortest_paths step 450 current loss 5.985027, current_train_items 8166.
+I0705 19:02:10.514895 133913852769792 run.py:720] (val) algo dag_shortest_paths step 450: {'pi': 0.7961128048780488, 'score': 0.7961128048780488, 'examples_seen': 8166, 'step': 450, 'algorithm': 'dag_shortest_paths'}
+I0705 19:02:10.515041 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.941, current avg val score is 0.796, val scores are: dag_shortest_paths: 0.796
+I0705 19:02:14.890298 133913852769792 run.py:685] Algo dag_shortest_paths step 500 current loss 13.128377, current_train_items 9001.
+I0705 19:02:16.492018 133913852769792 run.py:720] (val) algo dag_shortest_paths step 500: {'pi': 0.8769054878048781, 'score': 0.8769054878048781, 'examples_seen': 9001, 'step': 500, 'algorithm': 'dag_shortest_paths'}
+I0705 19:02:16.492183 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.941, current avg val score is 0.877, val scores are: dag_shortest_paths: 0.877
+I0705 19:02:21.186382 133913852769792 run.py:685] Algo dag_shortest_paths step 550 current loss 8.588193, current_train_items 10004.
+I0705 19:02:22.357647 133913852769792 run.py:720] (val) algo dag_shortest_paths step 550: {'pi': 0.9485518292682927, 'score': 0.9485518292682927, 'examples_seen': 10004, 'step': 550, 'algorithm': 'dag_shortest_paths'}
+I0705 19:02:22.357806 133913852769792 run.py:741] Checkpointing best model, best avg val score was 0.941, current avg val score is 0.949, val scores are: dag_shortest_paths: 0.949
+I0705 19:02:26.923355 133913852769792 run.py:685] Algo dag_shortest_paths step 600 current loss 13.469667, current_train_items 10835.
+I0705 19:02:28.792259 133913852769792 run.py:720] (val) algo dag_shortest_paths step 600: {'pi': 0.921875, 'score': 0.921875, 'examples_seen': 10835, 'step': 600, 'algorithm': 'dag_shortest_paths'}
+I0705 19:02:28.792441 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.922, val scores are: dag_shortest_paths: 0.922
+I0705 19:02:33.193978 133913852769792 run.py:685] Algo dag_shortest_paths step 650 current loss 9.332748, current_train_items 11801.
+I0705 19:02:34.407683 133913852769792 run.py:720] (val) algo dag_shortest_paths step 650: {'pi': 0.8757621951219512, 'score': 0.8757621951219512, 'examples_seen': 11801, 'step': 650, 'algorithm': 'dag_shortest_paths'}
+I0705 19:02:34.407878 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.876, val scores are: dag_shortest_paths: 0.876
+I0705 19:02:39.292779 133913852769792 run.py:685] Algo dag_shortest_paths step 700 current loss 1.842924, current_train_items 12752.
+I0705 19:02:40.721407 133913852769792 run.py:720] (val) algo dag_shortest_paths step 700: {'pi': 0.9378810975609756, 'score': 0.9378810975609756, 'examples_seen': 12752, 'step': 700, 'algorithm': 'dag_shortest_paths'}
+I0705 19:02:40.721592 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.938, val scores are: dag_shortest_paths: 0.938
+I0705 19:02:45.030647 133913852769792 run.py:685] Algo dag_shortest_paths step 750 current loss 11.292126, current_train_items 13622.
+I0705 19:02:46.410017 133913852769792 run.py:720] (val) algo dag_shortest_paths step 750: {'pi': 0.9336890243902439, 'score': 0.9336890243902439, 'examples_seen': 13622, 'step': 750, 'algorithm': 'dag_shortest_paths'}
+I0705 19:02:46.410224 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.934, val scores are: dag_shortest_paths: 0.934
+I0705 19:02:51.465074 133913852769792 run.py:685] Algo dag_shortest_paths step 800 current loss 5.038154, current_train_items 14589.
+I0705 19:02:52.605746 133913852769792 run.py:720] (val) algo dag_shortest_paths step 800: {'pi': 0.8986280487804879, 'score': 0.8986280487804879, 'examples_seen': 14589, 'step': 800, 'algorithm': 'dag_shortest_paths'}
+I0705 19:02:52.605931 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.899, val scores are: dag_shortest_paths: 0.899
+I0705 19:02:56.964191 133913852769792 run.py:685] Algo dag_shortest_paths step 850 current loss 12.217865, current_train_items 15425.
+I0705 19:02:58.569257 133913852769792 run.py:720] (val) algo dag_shortest_paths step 850: {'pi': 0.9188262195121951, 'score': 0.9188262195121951, 'examples_seen': 15425, 'step': 850, 'algorithm': 'dag_shortest_paths'}
+I0705 19:02:58.569417 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.919, val scores are: dag_shortest_paths: 0.919
+I0705 19:03:03.363330 133913852769792 run.py:685] Algo dag_shortest_paths step 900 current loss 6.946717, current_train_items 16396.
+I0705 19:03:04.527670 133913852769792 run.py:720] (val) algo dag_shortest_paths step 900: {'pi': 0.8830030487804879, 'score': 0.8830030487804879, 'examples_seen': 16396, 'step': 900, 'algorithm': 'dag_shortest_paths'}
+I0705 19:03:04.527882 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.883, val scores are: dag_shortest_paths: 0.883
+I0705 19:03:09.251512 133913852769792 run.py:685] Algo dag_shortest_paths step 950 current loss 13.586879, current_train_items 17228.
+I0705 19:03:10.903245 133913852769792 run.py:720] (val) algo dag_shortest_paths step 950: {'pi': 0.930640243902439, 'score': 0.930640243902439, 'examples_seen': 17228, 'step': 950, 'algorithm': 'dag_shortest_paths'}
+I0705 19:03:10.903425 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.931, val scores are: dag_shortest_paths: 0.931
+I0705 19:03:15.340826 133913852769792 run.py:685] Algo dag_shortest_paths step 1000 current loss 9.410122, current_train_items 18188.
+I0705 19:03:16.545238 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1000: {'pi': 0.9310213414634146, 'score': 0.9310213414634146, 'examples_seen': 18188, 'step': 1000, 'algorithm': 'dag_shortest_paths'}
+I0705 19:03:16.545384 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.931, val scores are: dag_shortest_paths: 0.931
+I0705 19:03:21.461403 133913852769792 run.py:685] Algo dag_shortest_paths step 1050 current loss 2.438863, current_train_items 19077.
+I0705 19:03:22.885898 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1050: {'pi': 0.932545731707317, 'score': 0.932545731707317, 'examples_seen': 19077, 'step': 1050, 'algorithm': 'dag_shortest_paths'}
+I0705 19:03:22.886079 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.933, val scores are: dag_shortest_paths: 0.933
+I0705 19:03:27.255643 133913852769792 run.py:685] Algo dag_shortest_paths step 1100 current loss 12.659674, current_train_items 19962.
+I0705 19:03:28.612215 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1100: {'pi': 0.9256859756097561, 'score': 0.9256859756097561, 'examples_seen': 19962, 'step': 1100, 'algorithm': 'dag_shortest_paths'}
+I0705 19:03:28.612404 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.926, val scores are: dag_shortest_paths: 0.926
+I0705 19:03:33.730895 133913852769792 run.py:685] Algo dag_shortest_paths step 1150 current loss 4.820603, current_train_items 20902.
+I0705 19:03:34.871201 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1150: {'pi': 0.9009146341463414, 'score': 0.9009146341463414, 'examples_seen': 20902, 'step': 1150, 'algorithm': 'dag_shortest_paths'}
+I0705 19:03:34.871378 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.901, val scores are: dag_shortest_paths: 0.901
+I0705 19:03:39.298861 133913852769792 run.py:685] Algo dag_shortest_paths step 1200 current loss 10.946860, current_train_items 21785.
+I0705 19:03:40.903924 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1200: {'pi': 0.913109756097561, 'score': 0.913109756097561, 'examples_seen': 21785, 'step': 1200, 'algorithm': 'dag_shortest_paths'}
+I0705 19:03:40.904105 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.913, val scores are: dag_shortest_paths: 0.913
+I0705 19:03:45.709317 133913852769792 run.py:685] Algo dag_shortest_paths step 1250 current loss 6.315346, current_train_items 22733.
+I0705 19:03:46.882014 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1250: {'pi': 0.9375, 'score': 0.9375, 'examples_seen': 22733, 'step': 1250, 'algorithm': 'dag_shortest_paths'}
+I0705 19:03:46.882183 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.938, val scores are: dag_shortest_paths: 0.938
+I0705 19:03:51.656516 133913852769792 run.py:685] Algo dag_shortest_paths step 1300 current loss 13.118100, current_train_items 23568.
+I0705 19:03:53.304858 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1300: {'pi': 0.9314024390243902, 'score': 0.9314024390243902, 'examples_seen': 23568, 'step': 1300, 'algorithm': 'dag_shortest_paths'}
+I0705 19:03:53.305010 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.931, val scores are: dag_shortest_paths: 0.931
+I0705 19:03:57.631120 133913852769792 run.py:685] Algo dag_shortest_paths step 1350 current loss 9.538860, current_train_items 24533.
+I0705 19:03:58.847952 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1350: {'pi': 0.916920731707317, 'score': 0.916920731707317, 'examples_seen': 24533, 'step': 1350, 'algorithm': 'dag_shortest_paths'}
+I0705 19:03:58.848158 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.917, val scores are: dag_shortest_paths: 0.917
+I0705 19:04:03.858889 133913852769792 run.py:685] Algo dag_shortest_paths step 1400 current loss 1.880121, current_train_items 25460.
+I0705 19:04:05.227130 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1400: {'pi': 0.8677591463414634, 'score': 0.8677591463414634, 'examples_seen': 25460, 'step': 1400, 'algorithm': 'dag_shortest_paths'}
+I0705 19:04:05.227278 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.868, val scores are: dag_shortest_paths: 0.868
+I0705 19:04:09.546091 133913852769792 run.py:685] Algo dag_shortest_paths step 1450 current loss 10.399665, current_train_items 26339.
+I0705 19:04:10.844670 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1450: {'pi': 0.9363567073170732, 'score': 0.9363567073170732, 'examples_seen': 26339, 'step': 1450, 'algorithm': 'dag_shortest_paths'}
+I0705 19:04:10.844907 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.936, val scores are: dag_shortest_paths: 0.936
+I0705 19:04:15.974099 133913852769792 run.py:685] Algo dag_shortest_paths step 1500 current loss 4.096333, current_train_items 27312.
+I0705 19:04:17.127860 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1500: {'pi': 0.9180640243902439, 'score': 0.9180640243902439, 'examples_seen': 27312, 'step': 1500, 'algorithm': 'dag_shortest_paths'}
+I0705 19:04:17.128081 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.918, val scores are: dag_shortest_paths: 0.918
+I0705 19:04:21.611323 133913852769792 run.py:685] Algo dag_shortest_paths step 1550 current loss 10.404670, current_train_items 28145.
+I0705 19:04:23.093902 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1550: {'pi': 0.9310213414634146, 'score': 0.9310213414634146, 'examples_seen': 28145, 'step': 1550, 'algorithm': 'dag_shortest_paths'}
+I0705 19:04:23.094052 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.949, current avg val score is 0.931, val scores are: dag_shortest_paths: 0.931
+I0705 19:04:27.857154 133913852769792 run.py:685] Algo dag_shortest_paths step 1600 current loss 9.039462, current_train_items 29057.
+I0705 19:04:29.017517 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1600: {'pi': 0.9626524390243902, 'score': 0.9626524390243902, 'examples_seen': 29057, 'step': 1600, 'algorithm': 'dag_shortest_paths'}
+I0705 19:04:29.017723 133913852769792 run.py:741] Checkpointing best model, best avg val score was 0.949, current avg val score is 0.963, val scores are: dag_shortest_paths: 0.963
+I0705 19:04:33.816530 133913852769792 run.py:685] Algo dag_shortest_paths step 1650 current loss 12.792872, current_train_items 29874.
+I0705 19:04:35.472431 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1650: {'pi': 0.9321646341463414, 'score': 0.9321646341463414, 'examples_seen': 29874, 'step': 1650, 'algorithm': 'dag_shortest_paths'}
+I0705 19:04:35.472606 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.932, val scores are: dag_shortest_paths: 0.932
+I0705 19:04:39.793365 133913852769792 run.py:685] Algo dag_shortest_paths step 1700 current loss 9.114619, current_train_items 30877.
+I0705 19:04:41.007944 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1700: {'pi': 0.930640243902439, 'score': 0.930640243902439, 'examples_seen': 30877, 'step': 1700, 'algorithm': 'dag_shortest_paths'}
+I0705 19:04:41.008120 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.931, val scores are: dag_shortest_paths: 0.931
+I0705 19:04:46.190225 133913852769792 run.py:685] Algo dag_shortest_paths step 1750 current loss 2.006914, current_train_items 31756.
+I0705 19:04:47.340498 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1750: {'pi': 0.7362804878048781, 'score': 0.7362804878048781, 'examples_seen': 31756, 'step': 1750, 'algorithm': 'dag_shortest_paths'}
+I0705 19:04:47.340678 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.736, val scores are: dag_shortest_paths: 0.736
+I0705 19:04:51.783778 133913852769792 run.py:685] Algo dag_shortest_paths step 1800 current loss 8.172221, current_train_items 32666.
+I0705 19:04:53.096412 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1800: {'pi': 0.9550304878048781, 'score': 0.9550304878048781, 'examples_seen': 32666, 'step': 1800, 'algorithm': 'dag_shortest_paths'}
+I0705 19:04:53.096590 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.955, val scores are: dag_shortest_paths: 0.955
+I0705 19:04:58.160460 133913852769792 run.py:685] Algo dag_shortest_paths step 1850 current loss 4.619296, current_train_items 33637.
+I0705 19:04:59.310134 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1850: {'pi': 0.9134908536585366, 'score': 0.9134908536585366, 'examples_seen': 33637, 'step': 1850, 'algorithm': 'dag_shortest_paths'}
+I0705 19:04:59.310319 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.913, val scores are: dag_shortest_paths: 0.913
+I0705 19:05:03.713611 133913852769792 run.py:685] Algo dag_shortest_paths step 1900 current loss 12.708214, current_train_items 34479.
+I0705 19:05:05.320827 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1900: {'pi': 0.9317835365853658, 'score': 0.9317835365853658, 'examples_seen': 34479, 'step': 1900, 'algorithm': 'dag_shortest_paths'}
+I0705 19:05:05.321027 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.932, val scores are: dag_shortest_paths: 0.932
+I0705 19:05:10.022174 133913852769792 run.py:685] Algo dag_shortest_paths step 1950 current loss 6.634847, current_train_items 35436.
+I0705 19:05:11.213246 133913852769792 run.py:720] (val) algo dag_shortest_paths step 1950: {'pi': 0.8864329268292683, 'score': 0.8864329268292683, 'examples_seen': 35436, 'step': 1950, 'algorithm': 'dag_shortest_paths'}
+I0705 19:05:11.213420 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.886, val scores are: dag_shortest_paths: 0.886
+I0705 19:05:15.808808 133913852769792 run.py:685] Algo dag_shortest_paths step 2000 current loss 13.701548, current_train_items 36267.
+I0705 19:05:17.676448 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2000: {'pi': 0.9329268292682927, 'score': 0.9329268292682927, 'examples_seen': 36267, 'step': 2000, 'algorithm': 'dag_shortest_paths'}
+I0705 19:05:17.676672 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.933, val scores are: dag_shortest_paths: 0.933
+I0705 19:05:22.064467 133913852769792 run.py:685] Algo dag_shortest_paths step 2050 current loss 8.069143, current_train_items 37263.
+I0705 19:05:23.281094 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2050: {'pi': 0.9592225609756098, 'score': 0.9592225609756098, 'examples_seen': 37263, 'step': 2050, 'algorithm': 'dag_shortest_paths'}
+I0705 19:05:23.281270 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.959, val scores are: dag_shortest_paths: 0.959
+I0705 19:05:28.241780 133913852769792 run.py:685] Algo dag_shortest_paths step 2100 current loss 1.700551, current_train_items 38134.
+I0705 19:05:29.601116 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2100: {'pi': 0.8982469512195121, 'score': 0.8982469512195121, 'examples_seen': 38134, 'step': 2100, 'algorithm': 'dag_shortest_paths'}
+I0705 19:05:29.601303 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.898, val scores are: dag_shortest_paths: 0.898
+I0705 19:05:33.952043 133913852769792 run.py:685] Algo dag_shortest_paths step 2150 current loss 11.572624, current_train_items 39045.
+I0705 19:05:35.299750 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2150: {'pi': 0.9519817073170732, 'score': 0.9519817073170732, 'examples_seen': 39045, 'step': 2150, 'algorithm': 'dag_shortest_paths'}
+I0705 19:05:35.299974 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.952, val scores are: dag_shortest_paths: 0.952
+I0705 19:05:40.401682 133913852769792 run.py:685] Algo dag_shortest_paths step 2200 current loss 3.153126, current_train_items 39997.
+I0705 19:05:41.541929 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2200: {'pi': 0.9123475609756098, 'score': 0.9123475609756098, 'examples_seen': 39997, 'step': 2200, 'algorithm': 'dag_shortest_paths'}
+I0705 19:05:41.542155 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.912, val scores are: dag_shortest_paths: 0.912
+I0705 19:05:45.974259 133913852769792 run.py:685] Algo dag_shortest_paths step 2250 current loss 12.010006, current_train_items 40860.
+I0705 19:05:47.581739 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2250: {'pi': 0.9283536585365854, 'score': 0.9283536585365854, 'examples_seen': 40860, 'step': 2250, 'algorithm': 'dag_shortest_paths'}
+I0705 19:05:47.581961 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.928, val scores are: dag_shortest_paths: 0.928
+I0705 19:05:52.268272 133913852769792 run.py:685] Algo dag_shortest_paths step 2300 current loss 7.909673, current_train_items 41798.
+I0705 19:05:53.457199 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2300: {'pi': 0.9493140243902439, 'score': 0.9493140243902439, 'examples_seen': 41798, 'step': 2300, 'algorithm': 'dag_shortest_paths'}
+I0705 19:05:53.457376 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.949, val scores are: dag_shortest_paths: 0.949
+I0705 19:05:58.285753 133913852769792 run.py:685] Algo dag_shortest_paths step 2350 current loss 12.799577, current_train_items 42599.
+I0705 19:05:59.936181 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2350: {'pi': 0.9378810975609756, 'score': 0.9378810975609756, 'examples_seen': 42599, 'step': 2350, 'algorithm': 'dag_shortest_paths'}
+I0705 19:05:59.936350 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.938, val scores are: dag_shortest_paths: 0.938
+I0705 19:06:04.271730 133913852769792 run.py:685] Algo dag_shortest_paths step 2400 current loss 8.669236, current_train_items 43586.
+I0705 19:06:05.493004 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2400: {'pi': 0.9432164634146342, 'score': 0.9432164634146342, 'examples_seen': 43586, 'step': 2400, 'algorithm': 'dag_shortest_paths'}
+I0705 19:06:05.493188 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.943, val scores are: dag_shortest_paths: 0.943
+I0705 19:06:10.414151 133913852769792 run.py:685] Algo dag_shortest_paths step 2450 current loss 1.856276, current_train_items 44470.
+I0705 19:06:11.849622 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2450: {'pi': 0.9043445121951219, 'score': 0.9043445121951219, 'examples_seen': 44470, 'step': 2450, 'algorithm': 'dag_shortest_paths'}
+I0705 19:06:11.849838 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.904, val scores are: dag_shortest_paths: 0.904
+I0705 19:06:16.148992 133913852769792 run.py:685] Algo dag_shortest_paths step 2500 current loss 11.033129, current_train_items 45384.
+I0705 19:06:17.511583 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2500: {'pi': 0.9435975609756098, 'score': 0.9435975609756098, 'examples_seen': 45384, 'step': 2500, 'algorithm': 'dag_shortest_paths'}
+I0705 19:06:17.511844 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.944, val scores are: dag_shortest_paths: 0.944
+I0705 19:06:22.582744 133913852769792 run.py:685] Algo dag_shortest_paths step 2550 current loss 2.930369, current_train_items 46325.
+I0705 19:06:23.723090 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2550: {'pi': 0.9378810975609756, 'score': 0.9378810975609756, 'examples_seen': 46325, 'step': 2550, 'algorithm': 'dag_shortest_paths'}
+I0705 19:06:23.723264 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.938, val scores are: dag_shortest_paths: 0.938
+I0705 19:06:28.113846 133913852769792 run.py:685] Algo dag_shortest_paths step 2600 current loss 11.080849, current_train_items 47157.
+I0705 19:06:29.720266 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2600: {'pi': 0.9237804878048781, 'score': 0.9237804878048781, 'examples_seen': 47157, 'step': 2600, 'algorithm': 'dag_shortest_paths'}
+I0705 19:06:29.720492 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.924, val scores are: dag_shortest_paths: 0.924
+I0705 19:06:34.473443 133913852769792 run.py:685] Algo dag_shortest_paths step 2650 current loss 5.811491, current_train_items 48150.
+I0705 19:06:35.632179 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2650: {'pi': 0.9508384146341463, 'score': 0.9508384146341463, 'examples_seen': 48150, 'step': 2650, 'algorithm': 'dag_shortest_paths'}
+I0705 19:06:35.632324 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.951, val scores are: dag_shortest_paths: 0.951
+I0705 19:06:40.415630 133913852769792 run.py:685] Algo dag_shortest_paths step 2700 current loss 12.343918, current_train_items 48975.
+I0705 19:06:42.068604 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2700: {'pi': 0.9466463414634146, 'score': 0.9466463414634146, 'examples_seen': 48975, 'step': 2700, 'algorithm': 'dag_shortest_paths'}
+I0705 19:06:42.068768 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.947, val scores are: dag_shortest_paths: 0.947
+I0705 19:06:46.402946 133913852769792 run.py:685] Algo dag_shortest_paths step 2750 current loss 10.590631, current_train_items 49975.
+I0705 19:06:47.626345 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2750: {'pi': 0.9390243902439024, 'score': 0.9390243902439024, 'examples_seen': 49975, 'step': 2750, 'algorithm': 'dag_shortest_paths'}
+I0705 19:06:47.626491 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.939, val scores are: dag_shortest_paths: 0.939
+I0705 19:06:52.509076 133913852769792 run.py:685] Algo dag_shortest_paths step 2800 current loss 1.368810, current_train_items 50818.
+I0705 19:06:53.938359 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2800: {'pi': 0.9607469512195121, 'score': 0.9607469512195121, 'examples_seen': 50818, 'step': 2800, 'algorithm': 'dag_shortest_paths'}
+I0705 19:06:53.938500 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.961, val scores are: dag_shortest_paths: 0.961
+I0705 19:06:58.214293 133913852769792 run.py:685] Algo dag_shortest_paths step 2850 current loss 9.356434, current_train_items 51735.
+I0705 19:06:59.596539 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2850: {'pi': 0.946265243902439, 'score': 0.946265243902439, 'examples_seen': 51735, 'step': 2850, 'algorithm': 'dag_shortest_paths'}
+I0705 19:06:59.596736 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.946, val scores are: dag_shortest_paths: 0.946
+I0705 19:07:04.595129 133913852769792 run.py:685] Algo dag_shortest_paths step 2900 current loss 4.194032, current_train_items 52686.
+I0705 19:07:05.743123 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2900: {'pi': 0.9542682926829268, 'score': 0.9542682926829268, 'examples_seen': 52686, 'step': 2900, 'algorithm': 'dag_shortest_paths'}
+I0705 19:07:05.743363 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.954, val scores are: dag_shortest_paths: 0.954
+I0705 19:07:10.184278 133913852769792 run.py:685] Algo dag_shortest_paths step 2950 current loss 10.528058, current_train_items 53548.
+I0705 19:07:11.738423 133913852769792 run.py:720] (val) algo dag_shortest_paths step 2950: {'pi': 0.9626524390243902, 'score': 0.9626524390243902, 'examples_seen': 53548, 'step': 2950, 'algorithm': 'dag_shortest_paths'}
+I0705 19:07:11.738626 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.963, val scores are: dag_shortest_paths: 0.963
+I0705 19:07:16.430088 133913852769792 run.py:685] Algo dag_shortest_paths step 3000 current loss 5.290596, current_train_items 54508.
+I0705 19:07:17.587449 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3000: {'pi': 0.9512195121951219, 'score': 0.9512195121951219, 'examples_seen': 54508, 'step': 3000, 'algorithm': 'dag_shortest_paths'}
+I0705 19:07:17.587628 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.951, val scores are: dag_shortest_paths: 0.951
+I0705 19:07:22.325182 133913852769792 run.py:685] Algo dag_shortest_paths step 3050 current loss 12.277130, current_train_items 55330.
+I0705 19:07:23.980508 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3050: {'pi': 0.9355945121951219, 'score': 0.9355945121951219, 'examples_seen': 55330, 'step': 3050, 'algorithm': 'dag_shortest_paths'}
+I0705 19:07:23.980792 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.936, val scores are: dag_shortest_paths: 0.936
+I0705 19:07:28.423254 133913852769792 run.py:685] Algo dag_shortest_paths step 3100 current loss 7.959525, current_train_items 56312.
+I0705 19:07:29.620746 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3100: {'pi': 0.9565548780487805, 'score': 0.9565548780487805, 'examples_seen': 56312, 'step': 3100, 'algorithm': 'dag_shortest_paths'}
+I0705 19:07:29.620894 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.957, val scores are: dag_shortest_paths: 0.957
+I0705 19:07:34.600916 133913852769792 run.py:685] Algo dag_shortest_paths step 3150 current loss 1.599366, current_train_items 57195.
+I0705 19:07:35.975394 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3150: {'pi': 0.9089176829268293, 'score': 0.9089176829268293, 'examples_seen': 57195, 'step': 3150, 'algorithm': 'dag_shortest_paths'}
+I0705 19:07:35.975533 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.963, current avg val score is 0.909, val scores are: dag_shortest_paths: 0.909
+I0705 19:07:40.297736 133913852769792 run.py:685] Algo dag_shortest_paths step 3200 current loss 10.544026, current_train_items 58079.
+I0705 19:07:41.677033 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3200: {'pi': 0.975609756097561, 'score': 0.975609756097561, 'examples_seen': 58079, 'step': 3200, 'algorithm': 'dag_shortest_paths'}
+I0705 19:07:41.677214 133913852769792 run.py:741] Checkpointing best model, best avg val score was 0.963, current avg val score is 0.976, val scores are: dag_shortest_paths: 0.976
+I0705 19:07:46.849280 133913852769792 run.py:685] Algo dag_shortest_paths step 3250 current loss 3.746906, current_train_items 59036.
+I0705 19:07:48.008308 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3250: {'pi': 0.946265243902439, 'score': 0.946265243902439, 'examples_seen': 59036, 'step': 3250, 'algorithm': 'dag_shortest_paths'}
+I0705 19:07:48.008529 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.946, val scores are: dag_shortest_paths: 0.946
+I0705 19:07:52.395394 133913852769792 run.py:685] Algo dag_shortest_paths step 3300 current loss 12.805083, current_train_items 59886.
+I0705 19:07:54.007888 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3300: {'pi': 0.9489329268292683, 'score': 0.9489329268292683, 'examples_seen': 59886, 'step': 3300, 'algorithm': 'dag_shortest_paths'}
+I0705 19:07:54.008066 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.949, val scores are: dag_shortest_paths: 0.949
+I0705 19:07:58.677247 133913852769792 run.py:685] Algo dag_shortest_paths step 3350 current loss 9.146194, current_train_items 60828.
+I0705 19:07:59.857481 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3350: {'pi': 0.897484756097561, 'score': 0.897484756097561, 'examples_seen': 60828, 'step': 3350, 'algorithm': 'dag_shortest_paths'}
+I0705 19:07:59.857634 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.897, val scores are: dag_shortest_paths: 0.897
+I0705 19:08:04.655104 133913852769792 run.py:685] Algo dag_shortest_paths step 3400 current loss 12.940345, current_train_items 61641.
+I0705 19:08:06.308156 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3400: {'pi': 0.9550304878048781, 'score': 0.9550304878048781, 'examples_seen': 61641, 'step': 3400, 'algorithm': 'dag_shortest_paths'}
+I0705 19:08:06.308392 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.955, val scores are: dag_shortest_paths: 0.955
+I0705 19:08:10.634917 133913852769792 run.py:685] Algo dag_shortest_paths step 3450 current loss 8.815621, current_train_items 62611.
+I0705 19:08:11.885633 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3450: {'pi': 0.9538871951219512, 'score': 0.9538871951219512, 'examples_seen': 62611, 'step': 3450, 'algorithm': 'dag_shortest_paths'}
+I0705 19:08:11.885933 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.954, val scores are: dag_shortest_paths: 0.954
+I0705 19:08:16.835121 133913852769792 run.py:685] Algo dag_shortest_paths step 3500 current loss 1.907738, current_train_items 63502.
+I0705 19:08:18.266468 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3500: {'pi': 0.953125, 'score': 0.953125, 'examples_seen': 63502, 'step': 3500, 'algorithm': 'dag_shortest_paths'}
+I0705 19:08:18.266659 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.953, val scores are: dag_shortest_paths: 0.953
+I0705 19:08:22.620873 133913852769792 run.py:685] Algo dag_shortest_paths step 3550 current loss 9.885422, current_train_items 64384.
+I0705 19:08:23.988461 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3550: {'pi': 0.9333079268292683, 'score': 0.9333079268292683, 'examples_seen': 64384, 'step': 3550, 'algorithm': 'dag_shortest_paths'}
+I0705 19:08:23.988690 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.933, val scores are: dag_shortest_paths: 0.933
+I0705 19:08:29.152322 133913852769792 run.py:685] Algo dag_shortest_paths step 3600 current loss 5.528532, current_train_items 65317.
+I0705 19:08:30.291791 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3600: {'pi': 0.9439786585365854, 'score': 0.9439786585365854, 'examples_seen': 65317, 'step': 3600, 'algorithm': 'dag_shortest_paths'}
+I0705 19:08:30.291997 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.944, val scores are: dag_shortest_paths: 0.944
+I0705 19:08:34.604535 133913852769792 run.py:685] Algo dag_shortest_paths step 3650 current loss 15.139809, current_train_items 66161.
+I0705 19:08:36.211995 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3650: {'pi': 0.9439786585365854, 'score': 0.9439786585365854, 'examples_seen': 66161, 'step': 3650, 'algorithm': 'dag_shortest_paths'}
+I0705 19:08:36.212219 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.944, val scores are: dag_shortest_paths: 0.944
+I0705 19:08:41.091188 133913852769792 run.py:685] Algo dag_shortest_paths step 3700 current loss 7.729458, current_train_items 67108.
+I0705 19:08:42.249008 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3700: {'pi': 0.9173018292682927, 'score': 0.9173018292682927, 'examples_seen': 67108, 'step': 3700, 'algorithm': 'dag_shortest_paths'}
+I0705 19:08:42.249181 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.917, val scores are: dag_shortest_paths: 0.917
+I0705 19:08:46.793469 133913852769792 run.py:685] Algo dag_shortest_paths step 3750 current loss 13.282609, current_train_items 67927.
+I0705 19:08:48.663548 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3750: {'pi': 0.9485518292682927, 'score': 0.9485518292682927, 'examples_seen': 67927, 'step': 3750, 'algorithm': 'dag_shortest_paths'}
+I0705 19:08:48.663741 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.949, val scores are: dag_shortest_paths: 0.949
+I0705 19:08:53.034577 133913852769792 run.py:685] Algo dag_shortest_paths step 3800 current loss 9.019678, current_train_items 68940.
+I0705 19:08:54.236097 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3800: {'pi': 0.9653201219512195, 'score': 0.9653201219512195, 'examples_seen': 68940, 'step': 3800, 'algorithm': 'dag_shortest_paths'}
+I0705 19:08:54.236316 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.965, val scores are: dag_shortest_paths: 0.965
+I0705 19:08:59.448318 133913852769792 run.py:685] Algo dag_shortest_paths step 3850 current loss 1.405310, current_train_items 69828.
+I0705 19:09:00.600152 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3850: {'pi': 0.9512195121951219, 'score': 0.9512195121951219, 'examples_seen': 69828, 'step': 3850, 'algorithm': 'dag_shortest_paths'}
+I0705 19:09:00.600323 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.951, val scores are: dag_shortest_paths: 0.951
+I0705 19:09:04.882469 133913852769792 run.py:685] Algo dag_shortest_paths step 3900 current loss 10.627883, current_train_items 70732.
+I0705 19:09:06.253955 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3900: {'pi': 0.9523628048780488, 'score': 0.9523628048780488, 'examples_seen': 70732, 'step': 3900, 'algorithm': 'dag_shortest_paths'}
+I0705 19:09:06.254135 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.952, val scores are: dag_shortest_paths: 0.952
+I0705 19:09:11.314250 133913852769792 run.py:685] Algo dag_shortest_paths step 3950 current loss 2.957469, current_train_items 71696.
+I0705 19:09:12.473560 133913852769792 run.py:720] (val) algo dag_shortest_paths step 3950: {'pi': 0.9634146341463414, 'score': 0.9634146341463414, 'examples_seen': 71696, 'step': 3950, 'algorithm': 'dag_shortest_paths'}
+I0705 19:09:12.473759 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.963, val scores are: dag_shortest_paths: 0.963
+I0705 19:09:16.945754 133913852769792 run.py:685] Algo dag_shortest_paths step 4000 current loss 11.954950, current_train_items 72546.
+I0705 19:09:18.430045 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4000: {'pi': 0.9519817073170732, 'score': 0.9519817073170732, 'examples_seen': 72546, 'step': 4000, 'algorithm': 'dag_shortest_paths'}
+I0705 19:09:18.430266 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.952, val scores are: dag_shortest_paths: 0.952
+I0705 19:09:23.188382 133913852769792 run.py:685] Algo dag_shortest_paths step 4050 current loss 6.867801, current_train_items 73485.
+I0705 19:09:24.346191 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4050: {'pi': 0.9603658536585366, 'score': 0.9603658536585366, 'examples_seen': 73485, 'step': 4050, 'algorithm': 'dag_shortest_paths'}
+I0705 19:09:24.346378 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.960, val scores are: dag_shortest_paths: 0.960
+I0705 19:09:29.129257 133913852769792 run.py:685] Algo dag_shortest_paths step 4100 current loss 12.760334, current_train_items 74307.
+I0705 19:09:30.786400 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4100: {'pi': 0.9516006097560976, 'score': 0.9516006097560976, 'examples_seen': 74307, 'step': 4100, 'algorithm': 'dag_shortest_paths'}
+I0705 19:09:30.786578 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.952, val scores are: dag_shortest_paths: 0.952
+I0705 19:09:35.123828 133913852769792 run.py:685] Algo dag_shortest_paths step 4150 current loss 9.067510, current_train_items 75311.
+I0705 19:09:36.360330 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4150: {'pi': 0.9432164634146342, 'score': 0.9432164634146342, 'examples_seen': 75311, 'step': 4150, 'algorithm': 'dag_shortest_paths'}
+I0705 19:09:36.360507 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.943, val scores are: dag_shortest_paths: 0.943
+I0705 19:09:41.322944 133913852769792 run.py:685] Algo dag_shortest_paths step 4200 current loss 1.882568, current_train_items 76228.
+I0705 19:09:42.752497 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4200: {'pi': 0.9496951219512195, 'score': 0.9496951219512195, 'examples_seen': 76228, 'step': 4200, 'algorithm': 'dag_shortest_paths'}
+I0705 19:09:42.752651 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.950, val scores are: dag_shortest_paths: 0.950
+I0705 19:09:47.046937 133913852769792 run.py:685] Algo dag_shortest_paths step 4250 current loss 11.900428, current_train_items 77125.
+I0705 19:09:48.407488 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4250: {'pi': 0.9375, 'score': 0.9375, 'examples_seen': 77125, 'step': 4250, 'algorithm': 'dag_shortest_paths'}
+I0705 19:09:48.407735 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.938, val scores are: dag_shortest_paths: 0.938
+I0705 19:09:53.500044 133913852769792 run.py:685] Algo dag_shortest_paths step 4300 current loss 3.417560, current_train_items 78048.
+I0705 19:09:54.640470 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4300: {'pi': 0.9569359756097561, 'score': 0.9569359756097561, 'examples_seen': 78048, 'step': 4300, 'algorithm': 'dag_shortest_paths'}
+I0705 19:09:54.640648 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.957, val scores are: dag_shortest_paths: 0.957
+I0705 19:09:58.988835 133913852769792 run.py:685] Algo dag_shortest_paths step 4350 current loss 11.989968, current_train_items 78893.
+I0705 19:10:00.586751 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4350: {'pi': 0.9321646341463414, 'score': 0.9321646341463414, 'examples_seen': 78893, 'step': 4350, 'algorithm': 'dag_shortest_paths'}
+I0705 19:10:00.586989 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.932, val scores are: dag_shortest_paths: 0.932
+I0705 19:10:05.407157 133913852769792 run.py:685] Algo dag_shortest_paths step 4400 current loss 6.760591, current_train_items 79887.
+I0705 19:10:06.567544 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4400: {'pi': 0.9550304878048781, 'score': 0.9550304878048781, 'examples_seen': 79887, 'step': 4400, 'algorithm': 'dag_shortest_paths'}
+I0705 19:10:06.567745 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.955, val scores are: dag_shortest_paths: 0.955
+I0705 19:10:11.344097 133913852769792 run.py:685] Algo dag_shortest_paths step 4450 current loss 11.823369, current_train_items 80729.
+I0705 19:10:12.996920 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4450: {'pi': 0.953125, 'score': 0.953125, 'examples_seen': 80729, 'step': 4450, 'algorithm': 'dag_shortest_paths'}
+I0705 19:10:12.997066 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.953, val scores are: dag_shortest_paths: 0.953
+I0705 19:10:17.373605 133913852769792 run.py:685] Algo dag_shortest_paths step 4500 current loss 8.144144, current_train_items 81680.
+I0705 19:10:18.578597 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4500: {'pi': 0.9470274390243902, 'score': 0.9470274390243902, 'examples_seen': 81680, 'step': 4500, 'algorithm': 'dag_shortest_paths'}
+I0705 19:10:18.578856 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.947, val scores are: dag_shortest_paths: 0.947
+I0705 19:10:23.549213 133913852769792 run.py:685] Algo dag_shortest_paths step 4550 current loss 1.702234, current_train_items 82597.
+I0705 19:10:24.978597 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4550: {'pi': 0.9420731707317073, 'score': 0.9420731707317073, 'examples_seen': 82597, 'step': 4550, 'algorithm': 'dag_shortest_paths'}
+I0705 19:10:24.978762 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.942, val scores are: dag_shortest_paths: 0.942
+I0705 19:10:29.264037 133913852769792 run.py:685] Algo dag_shortest_paths step 4600 current loss 11.225183, current_train_items 83471.
+I0705 19:10:30.630637 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4600: {'pi': 0.9519817073170732, 'score': 0.9519817073170732, 'examples_seen': 83471, 'step': 4600, 'algorithm': 'dag_shortest_paths'}
+I0705 19:10:30.630795 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.952, val scores are: dag_shortest_paths: 0.952
+I0705 19:10:35.736450 133913852769792 run.py:685] Algo dag_shortest_paths step 4650 current loss 3.051195, current_train_items 84451.
+I0705 19:10:36.876874 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4650: {'pi': 0.9192073170731707, 'score': 0.9192073170731707, 'examples_seen': 84451, 'step': 4650, 'algorithm': 'dag_shortest_paths'}
+I0705 19:10:36.877068 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.919, val scores are: dag_shortest_paths: 0.919
+I0705 19:10:41.280322 133913852769792 run.py:685] Algo dag_shortest_paths step 4700 current loss 12.331379, current_train_items 85271.
+I0705 19:10:42.884860 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4700: {'pi': 0.9489329268292683, 'score': 0.9489329268292683, 'examples_seen': 85271, 'step': 4700, 'algorithm': 'dag_shortest_paths'}
+I0705 19:10:42.885007 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.949, val scores are: dag_shortest_paths: 0.949
+I0705 19:10:47.674072 133913852769792 run.py:685] Algo dag_shortest_paths step 4750 current loss 6.944507, current_train_items 86237.
+I0705 19:10:48.835232 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4750: {'pi': 0.9474085365853658, 'score': 0.9474085365853658, 'examples_seen': 86237, 'step': 4750, 'algorithm': 'dag_shortest_paths'}
+I0705 19:10:48.835411 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.947, val scores are: dag_shortest_paths: 0.947
+I0705 19:10:53.634752 133913852769792 run.py:685] Algo dag_shortest_paths step 4800 current loss 11.219265, current_train_items 87071.
+I0705 19:10:55.284458 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4800: {'pi': 0.9615091463414634, 'score': 0.9615091463414634, 'examples_seen': 87071, 'step': 4800, 'algorithm': 'dag_shortest_paths'}
+I0705 19:10:55.284600 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.962, val scores are: dag_shortest_paths: 0.962
+I0705 19:10:59.733015 133913852769792 run.py:685] Algo dag_shortest_paths step 4850 current loss 8.687648, current_train_items 88046.
+I0705 19:11:00.948904 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4850: {'pi': 0.948170731707317, 'score': 0.948170731707317, 'examples_seen': 88046, 'step': 4850, 'algorithm': 'dag_shortest_paths'}
+I0705 19:11:00.949057 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.948, val scores are: dag_shortest_paths: 0.948
+I0705 19:11:06.008574 133913852769792 run.py:685] Algo dag_shortest_paths step 4900 current loss 1.572374, current_train_items 88935.
+I0705 19:11:07.388754 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4900: {'pi': 0.961890243902439, 'score': 0.961890243902439, 'examples_seen': 88935, 'step': 4900, 'algorithm': 'dag_shortest_paths'}
+I0705 19:11:07.388897 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.962, val scores are: dag_shortest_paths: 0.962
+I0705 19:11:11.705554 133913852769792 run.py:685] Algo dag_shortest_paths step 4950 current loss 6.710149, current_train_items 89818.
+I0705 19:11:13.065359 133913852769792 run.py:720] (val) algo dag_shortest_paths step 4950: {'pi': 0.9641768292682927, 'score': 0.9641768292682927, 'examples_seen': 89818, 'step': 4950, 'algorithm': 'dag_shortest_paths'}
+I0705 19:11:13.065501 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.964, val scores are: dag_shortest_paths: 0.964
+I0705 19:11:18.034387 133913852769792 run.py:685] Algo dag_shortest_paths step 5000 current loss 3.568026, current_train_items 90740.
+I0705 19:11:19.187769 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5000: {'pi': 0.9584603658536586, 'score': 0.9584603658536586, 'examples_seen': 90740, 'step': 5000, 'algorithm': 'dag_shortest_paths'}
+I0705 19:11:19.187988 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.958, val scores are: dag_shortest_paths: 0.958
+I0705 19:11:23.616679 133913852769792 run.py:685] Algo dag_shortest_paths step 5050 current loss 11.404011, current_train_items 91612.
+I0705 19:11:25.218493 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5050: {'pi': 0.9382621951219512, 'score': 0.9382621951219512, 'examples_seen': 91612, 'step': 5050, 'algorithm': 'dag_shortest_paths'}
+I0705 19:11:25.218636 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.938, val scores are: dag_shortest_paths: 0.938
+I0705 19:11:29.941874 133913852769792 run.py:685] Algo dag_shortest_paths step 5100 current loss 5.412840, current_train_items 92596.
+I0705 19:11:31.101337 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5100: {'pi': 0.9416920731707317, 'score': 0.9416920731707317, 'examples_seen': 92596, 'step': 5100, 'algorithm': 'dag_shortest_paths'}
+I0705 19:11:31.101560 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.942, val scores are: dag_shortest_paths: 0.942
+I0705 19:11:35.620410 133913852769792 run.py:685] Algo dag_shortest_paths step 5150 current loss 12.566054, current_train_items 93396.
+I0705 19:11:37.491019 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5150: {'pi': 0.9519817073170732, 'score': 0.9519817073170732, 'examples_seen': 93396, 'step': 5150, 'algorithm': 'dag_shortest_paths'}
+I0705 19:11:37.491189 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.952, val scores are: dag_shortest_paths: 0.952
+I0705 19:11:41.929697 133913852769792 run.py:685] Algo dag_shortest_paths step 5200 current loss 7.565372, current_train_items 94389.
+I0705 19:11:43.123328 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5200: {'pi': 0.9576981707317073, 'score': 0.9576981707317073, 'examples_seen': 94389, 'step': 5200, 'algorithm': 'dag_shortest_paths'}
+I0705 19:11:43.123510 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.958, val scores are: dag_shortest_paths: 0.958
+I0705 19:11:48.060004 133913852769792 run.py:685] Algo dag_shortest_paths step 5250 current loss 1.668749, current_train_items 95313.
+I0705 19:11:49.445097 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5250: {'pi': 0.9611280487804879, 'score': 0.9611280487804879, 'examples_seen': 95313, 'step': 5250, 'algorithm': 'dag_shortest_paths'}
+I0705 19:11:49.445321 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.961, val scores are: dag_shortest_paths: 0.961
+I0705 19:11:53.774169 133913852769792 run.py:685] Algo dag_shortest_paths step 5300 current loss 11.052717, current_train_items 96216.
+I0705 19:11:55.138369 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5300: {'pi': 0.9523628048780488, 'score': 0.9523628048780488, 'examples_seen': 96216, 'step': 5300, 'algorithm': 'dag_shortest_paths'}
+I0705 19:11:55.138546 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.952, val scores are: dag_shortest_paths: 0.952
+I0705 19:12:00.155344 133913852769792 run.py:685] Algo dag_shortest_paths step 5350 current loss 4.801011, current_train_items 97141.
+I0705 19:12:01.319486 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5350: {'pi': 0.9527439024390244, 'score': 0.9527439024390244, 'examples_seen': 97141, 'step': 5350, 'algorithm': 'dag_shortest_paths'}
+I0705 19:12:01.319675 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.953, val scores are: dag_shortest_paths: 0.953
+I0705 19:12:05.677963 133913852769792 run.py:685] Algo dag_shortest_paths step 5400 current loss 13.435515, current_train_items 97998.
+I0705 19:12:07.287369 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5400: {'pi': 0.9622713414634146, 'score': 0.9622713414634146, 'examples_seen': 97998, 'step': 5400, 'algorithm': 'dag_shortest_paths'}
+I0705 19:12:07.287560 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.962, val scores are: dag_shortest_paths: 0.962
+I0705 19:12:12.060422 133913852769792 run.py:685] Algo dag_shortest_paths step 5450 current loss 5.886054, current_train_items 98954.
+I0705 19:12:13.220768 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5450: {'pi': 0.9679878048780488, 'score': 0.9679878048780488, 'examples_seen': 98954, 'step': 5450, 'algorithm': 'dag_shortest_paths'}
+I0705 19:12:13.220986 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.968, val scores are: dag_shortest_paths: 0.968
+I0705 19:12:18.045838 133913852769792 run.py:685] Algo dag_shortest_paths step 5500 current loss 11.884012, current_train_items 99791.
+I0705 19:12:19.698474 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5500: {'pi': 0.9390243902439024, 'score': 0.9390243902439024, 'examples_seen': 99791, 'step': 5500, 'algorithm': 'dag_shortest_paths'}
+I0705 19:12:19.698646 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.939, val scores are: dag_shortest_paths: 0.939
+I0705 19:12:24.030396 133913852769792 run.py:685] Algo dag_shortest_paths step 5550 current loss 7.668594, current_train_items 100818.
+I0705 19:12:25.254371 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5550: {'pi': 0.9336890243902439, 'score': 0.9336890243902439, 'examples_seen': 100818, 'step': 5550, 'algorithm': 'dag_shortest_paths'}
+I0705 19:12:25.254555 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.934, val scores are: dag_shortest_paths: 0.934
+I0705 19:12:30.197957 133913852769792 run.py:685] Algo dag_shortest_paths step 5600 current loss 1.559779, current_train_items 101752.
+I0705 19:12:31.632250 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5600: {'pi': 0.9496951219512195, 'score': 0.9496951219512195, 'examples_seen': 101752, 'step': 5600, 'algorithm': 'dag_shortest_paths'}
+I0705 19:12:31.632432 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.950, val scores are: dag_shortest_paths: 0.950
+I0705 19:12:35.982991 133913852769792 run.py:685] Algo dag_shortest_paths step 5650 current loss 9.454878, current_train_items 102689.
+I0705 19:12:37.305917 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5650: {'pi': 0.9603658536585366, 'score': 0.9603658536585366, 'examples_seen': 102689, 'step': 5650, 'algorithm': 'dag_shortest_paths'}
+I0705 19:12:37.306138 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.960, val scores are: dag_shortest_paths: 0.960
+I0705 19:12:42.368996 133913852769792 run.py:685] Algo dag_shortest_paths step 5700 current loss 2.705837, current_train_items 103633.
+I0705 19:12:43.509181 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5700: {'pi': 0.9500762195121951, 'score': 0.9500762195121951, 'examples_seen': 103633, 'step': 5700, 'algorithm': 'dag_shortest_paths'}
+I0705 19:12:43.509363 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.950, val scores are: dag_shortest_paths: 0.950
+I0705 19:12:47.933481 133913852769792 run.py:685] Algo dag_shortest_paths step 5750 current loss 13.376925, current_train_items 104509.
+I0705 19:12:49.540175 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5750: {'pi': 0.9519817073170732, 'score': 0.9519817073170732, 'examples_seen': 104509, 'step': 5750, 'algorithm': 'dag_shortest_paths'}
+I0705 19:12:49.540378 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.952, val scores are: dag_shortest_paths: 0.952
+I0705 19:12:54.388129 133913852769792 run.py:685] Algo dag_shortest_paths step 5800 current loss 7.110599, current_train_items 105483.
+I0705 19:12:55.565326 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5800: {'pi': 0.9428353658536586, 'score': 0.9428353658536586, 'examples_seen': 105483, 'step': 5800, 'algorithm': 'dag_shortest_paths'}
+I0705 19:12:55.565476 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.943, val scores are: dag_shortest_paths: 0.943
+I0705 19:13:00.373698 133913852769792 run.py:685] Algo dag_shortest_paths step 5850 current loss 12.378860, current_train_items 106292.
+I0705 19:13:02.021699 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5850: {'pi': 0.944359756097561, 'score': 0.944359756097561, 'examples_seen': 106292, 'step': 5850, 'algorithm': 'dag_shortest_paths'}
+I0705 19:13:02.021857 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.944, val scores are: dag_shortest_paths: 0.944
+I0705 19:13:06.361572 133913852769792 run.py:685] Algo dag_shortest_paths step 5900 current loss 8.598872, current_train_items 107274.
+I0705 19:13:07.536801 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5900: {'pi': 0.9477896341463414, 'score': 0.9477896341463414, 'examples_seen': 107274, 'step': 5900, 'algorithm': 'dag_shortest_paths'}
+I0705 19:13:07.536954 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.948, val scores are: dag_shortest_paths: 0.948
+I0705 19:13:12.435903 133913852769792 run.py:685] Algo dag_shortest_paths step 5950 current loss 1.626147, current_train_items 108164.
+I0705 19:13:13.864851 133913852769792 run.py:720] (val) algo dag_shortest_paths step 5950: {'pi': 0.9512195121951219, 'score': 0.9512195121951219, 'examples_seen': 108164, 'step': 5950, 'algorithm': 'dag_shortest_paths'}
+I0705 19:13:13.865036 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.951, val scores are: dag_shortest_paths: 0.951
+I0705 19:13:18.202893 133913852769792 run.py:685] Algo dag_shortest_paths step 6000 current loss 10.047056, current_train_items 109034.
+I0705 19:13:19.529770 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6000: {'pi': 0.9538871951219512, 'score': 0.9538871951219512, 'examples_seen': 109034, 'step': 6000, 'algorithm': 'dag_shortest_paths'}
+I0705 19:13:19.529918 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.954, val scores are: dag_shortest_paths: 0.954
+I0705 19:13:24.560964 133913852769792 run.py:685] Algo dag_shortest_paths step 6050 current loss 3.756235, current_train_items 109979.
+I0705 19:13:25.704070 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6050: {'pi': 0.9466463414634146, 'score': 0.9466463414634146, 'examples_seen': 109979, 'step': 6050, 'algorithm': 'dag_shortest_paths'}
+I0705 19:13:25.704242 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.947, val scores are: dag_shortest_paths: 0.947
+I0705 19:13:30.067541 133913852769792 run.py:685] Algo dag_shortest_paths step 6100 current loss 12.479286, current_train_items 110848.
+I0705 19:13:31.674875 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6100: {'pi': 0.9371189024390244, 'score': 0.9371189024390244, 'examples_seen': 110848, 'step': 6100, 'algorithm': 'dag_shortest_paths'}
+I0705 19:13:31.675049 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.937, val scores are: dag_shortest_paths: 0.937
+I0705 19:13:36.415189 133913852769792 run.py:685] Algo dag_shortest_paths step 6150 current loss 5.495391, current_train_items 111838.
+I0705 19:13:37.572437 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6150: {'pi': 0.959984756097561, 'score': 0.959984756097561, 'examples_seen': 111838, 'step': 6150, 'algorithm': 'dag_shortest_paths'}
+I0705 19:13:37.572615 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.960, val scores are: dag_shortest_paths: 0.960
+I0705 19:13:42.360391 133913852769792 run.py:685] Algo dag_shortest_paths step 6200 current loss 11.652322, current_train_items 112658.
+I0705 19:13:44.010075 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6200: {'pi': 0.9664634146341463, 'score': 0.9664634146341463, 'examples_seen': 112658, 'step': 6200, 'algorithm': 'dag_shortest_paths'}
+I0705 19:13:44.010249 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.966, val scores are: dag_shortest_paths: 0.966
+I0705 19:13:48.366900 133913852769792 run.py:685] Algo dag_shortest_paths step 6250 current loss 6.246073, current_train_items 113648.
+I0705 19:13:49.564543 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6250: {'pi': 0.9584603658536586, 'score': 0.9584603658536586, 'examples_seen': 113648, 'step': 6250, 'algorithm': 'dag_shortest_paths'}
+I0705 19:13:49.564777 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.958, val scores are: dag_shortest_paths: 0.958
+I0705 19:13:54.492257 133913852769792 run.py:685] Algo dag_shortest_paths step 6300 current loss 1.468560, current_train_items 114562.
+I0705 19:13:55.923699 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6300: {'pi': 0.9294969512195121, 'score': 0.9294969512195121, 'examples_seen': 114562, 'step': 6300, 'algorithm': 'dag_shortest_paths'}
+I0705 19:13:55.923903 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.929, val scores are: dag_shortest_paths: 0.929
+I0705 19:14:00.222985 133913852769792 run.py:685] Algo dag_shortest_paths step 6350 current loss 11.980388, current_train_items 115464.
+I0705 19:14:01.606400 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6350: {'pi': 0.9348323170731707, 'score': 0.9348323170731707, 'examples_seen': 115464, 'step': 6350, 'algorithm': 'dag_shortest_paths'}
+I0705 19:14:01.606572 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.935, val scores are: dag_shortest_paths: 0.935
+I0705 19:14:06.701468 133913852769792 run.py:685] Algo dag_shortest_paths step 6400 current loss 2.816470, current_train_items 116404.
+I0705 19:14:07.840850 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6400: {'pi': 0.9508384146341463, 'score': 0.9508384146341463, 'examples_seen': 116404, 'step': 6400, 'algorithm': 'dag_shortest_paths'}
+I0705 19:14:07.841061 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.951, val scores are: dag_shortest_paths: 0.951
+I0705 19:14:12.393455 133913852769792 run.py:685] Algo dag_shortest_paths step 6450 current loss 11.052313, current_train_items 117243.
+I0705 19:14:13.877103 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6450: {'pi': 0.9516006097560976, 'score': 0.9516006097560976, 'examples_seen': 117243, 'step': 6450, 'algorithm': 'dag_shortest_paths'}
+I0705 19:14:13.877277 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.952, val scores are: dag_shortest_paths: 0.952
+I0705 19:14:18.590817 133913852769792 run.py:685] Algo dag_shortest_paths step 6500 current loss 6.216199, current_train_items 118183.
+I0705 19:14:19.755620 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6500: {'pi': 0.9489329268292683, 'score': 0.9489329268292683, 'examples_seen': 118183, 'step': 6500, 'algorithm': 'dag_shortest_paths'}
+I0705 19:14:19.755786 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.949, val scores are: dag_shortest_paths: 0.949
+I0705 19:14:24.512345 133913852769792 run.py:685] Algo dag_shortest_paths step 6550 current loss 11.302523, current_train_items 118997.
+I0705 19:14:26.166777 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6550: {'pi': 0.9508384146341463, 'score': 0.9508384146341463, 'examples_seen': 118997, 'step': 6550, 'algorithm': 'dag_shortest_paths'}
+I0705 19:14:26.167019 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.951, val scores are: dag_shortest_paths: 0.951
+I0705 19:14:30.486820 133913852769792 run.py:685] Algo dag_shortest_paths step 6600 current loss 8.161650, current_train_items 119981.
+I0705 19:14:31.719443 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6600: {'pi': 0.946265243902439, 'score': 0.946265243902439, 'examples_seen': 119981, 'step': 6600, 'algorithm': 'dag_shortest_paths'}
+I0705 19:14:31.719624 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.946, val scores are: dag_shortest_paths: 0.946
+I0705 19:14:36.705617 133913852769792 run.py:685] Algo dag_shortest_paths step 6650 current loss 1.558289, current_train_items 120899.
+I0705 19:14:38.138229 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6650: {'pi': 0.9607469512195121, 'score': 0.9607469512195121, 'examples_seen': 120899, 'step': 6650, 'algorithm': 'dag_shortest_paths'}
+I0705 19:14:38.138401 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.961, val scores are: dag_shortest_paths: 0.961
+I0705 19:14:42.453504 133913852769792 run.py:685] Algo dag_shortest_paths step 6700 current loss 10.655743, current_train_items 121767.
+I0705 19:14:43.813995 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6700: {'pi': 0.9584603658536586, 'score': 0.9584603658536586, 'examples_seen': 121767, 'step': 6700, 'algorithm': 'dag_shortest_paths'}
+I0705 19:14:43.814136 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.958, val scores are: dag_shortest_paths: 0.958
+I0705 19:14:48.790829 133913852769792 run.py:685] Algo dag_shortest_paths step 6750 current loss 3.169893, current_train_items 122718.
+I0705 19:14:49.931470 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6750: {'pi': 0.930640243902439, 'score': 0.930640243902439, 'examples_seen': 122718, 'step': 6750, 'algorithm': 'dag_shortest_paths'}
+I0705 19:14:49.931691 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.931, val scores are: dag_shortest_paths: 0.931
+I0705 19:14:54.390521 133913852769792 run.py:685] Algo dag_shortest_paths step 6800 current loss 12.059388, current_train_items 123563.
+I0705 19:14:55.997577 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6800: {'pi': 0.9474085365853658, 'score': 0.9474085365853658, 'examples_seen': 123563, 'step': 6800, 'algorithm': 'dag_shortest_paths'}
+I0705 19:14:55.997777 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.947, val scores are: dag_shortest_paths: 0.947
+I0705 19:15:00.726941 133913852769792 run.py:685] Algo dag_shortest_paths step 6850 current loss 6.305635, current_train_items 124526.
+I0705 19:15:01.883779 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6850: {'pi': 0.946265243902439, 'score': 0.946265243902439, 'examples_seen': 124526, 'step': 6850, 'algorithm': 'dag_shortest_paths'}
+I0705 19:15:01.883967 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.946, val scores are: dag_shortest_paths: 0.946
+I0705 19:15:06.493643 133913852769792 run.py:685] Algo dag_shortest_paths step 6900 current loss 12.318176, current_train_items 125367.
+I0705 19:15:08.351885 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6900: {'pi': 0.9523628048780488, 'score': 0.9523628048780488, 'examples_seen': 125367, 'step': 6900, 'algorithm': 'dag_shortest_paths'}
+I0705 19:15:08.352055 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.952, val scores are: dag_shortest_paths: 0.952
+I0705 19:15:12.722470 133913852769792 run.py:685] Algo dag_shortest_paths step 6950 current loss 8.871423, current_train_items 126360.
+I0705 19:15:13.916544 133913852769792 run.py:720] (val) algo dag_shortest_paths step 6950: {'pi': 0.9584603658536586, 'score': 0.9584603658536586, 'examples_seen': 126360, 'step': 6950, 'algorithm': 'dag_shortest_paths'}
+I0705 19:15:13.916730 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.958, val scores are: dag_shortest_paths: 0.958
+I0705 19:15:18.879595 133913852769792 run.py:685] Algo dag_shortest_paths step 7000 current loss 1.158194, current_train_items 127263.
+I0705 19:15:20.307361 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7000: {'pi': 0.9386432926829268, 'score': 0.9386432926829268, 'examples_seen': 127263, 'step': 7000, 'algorithm': 'dag_shortest_paths'}
+I0705 19:15:20.307589 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.939, val scores are: dag_shortest_paths: 0.939
+I0705 19:15:24.630663 133913852769792 run.py:685] Algo dag_shortest_paths step 7050 current loss 9.935848, current_train_items 128159.
+I0705 19:15:26.014550 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7050: {'pi': 0.9516006097560976, 'score': 0.9516006097560976, 'examples_seen': 128159, 'step': 7050, 'algorithm': 'dag_shortest_paths'}
+I0705 19:15:26.014806 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.952, val scores are: dag_shortest_paths: 0.952
+I0705 19:15:31.127477 133913852769792 run.py:685] Algo dag_shortest_paths step 7100 current loss 3.745933, current_train_items 129110.
+I0705 19:15:32.267664 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7100: {'pi': 0.9641768292682927, 'score': 0.9641768292682927, 'examples_seen': 129110, 'step': 7100, 'algorithm': 'dag_shortest_paths'}
+I0705 19:15:32.267866 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.964, val scores are: dag_shortest_paths: 0.964
+I0705 19:15:36.628610 133913852769792 run.py:685] Algo dag_shortest_paths step 7150 current loss 12.640279, current_train_items 129947.
+I0705 19:15:38.234568 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7150: {'pi': 0.9485518292682927, 'score': 0.9485518292682927, 'examples_seen': 129947, 'step': 7150, 'algorithm': 'dag_shortest_paths'}
+I0705 19:15:38.234764 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.949, val scores are: dag_shortest_paths: 0.949
+I0705 19:15:43.038327 133913852769792 run.py:685] Algo dag_shortest_paths step 7200 current loss 5.429629, current_train_items 130940.
+I0705 19:15:44.212983 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7200: {'pi': 0.9432164634146342, 'score': 0.9432164634146342, 'examples_seen': 130940, 'step': 7200, 'algorithm': 'dag_shortest_paths'}
+I0705 19:15:44.213160 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.943, val scores are: dag_shortest_paths: 0.943
+I0705 19:15:48.770560 133913852769792 run.py:685] Algo dag_shortest_paths step 7250 current loss 10.626945, current_train_items 131774.
+I0705 19:15:50.640634 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7250: {'pi': 0.9352134146341463, 'score': 0.9352134146341463, 'examples_seen': 131774, 'step': 7250, 'algorithm': 'dag_shortest_paths'}
+I0705 19:15:50.640847 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.935, val scores are: dag_shortest_paths: 0.935
+I0705 19:15:54.956101 133913852769792 run.py:685] Algo dag_shortest_paths step 7300 current loss 7.205770, current_train_items 132759.
+I0705 19:15:56.157879 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7300: {'pi': 0.9416920731707317, 'score': 0.9416920731707317, 'examples_seen': 132759, 'step': 7300, 'algorithm': 'dag_shortest_paths'}
+I0705 19:15:56.158084 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.942, val scores are: dag_shortest_paths: 0.942
+I0705 19:16:01.073917 133913852769792 run.py:685] Algo dag_shortest_paths step 7350 current loss 1.873629, current_train_items 133664.
+I0705 19:16:02.502148 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7350: {'pi': 0.9535060975609756, 'score': 0.9535060975609756, 'examples_seen': 133664, 'step': 7350, 'algorithm': 'dag_shortest_paths'}
+I0705 19:16:02.502317 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.954, val scores are: dag_shortest_paths: 0.954
+I0705 19:16:06.888965 133913852769792 run.py:685] Algo dag_shortest_paths step 7400 current loss 10.429715, current_train_items 134553.
+I0705 19:16:08.217501 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7400: {'pi': 0.9466463414634146, 'score': 0.9466463414634146, 'examples_seen': 134553, 'step': 7400, 'algorithm': 'dag_shortest_paths'}
+I0705 19:16:08.217754 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.947, val scores are: dag_shortest_paths: 0.947
+I0705 19:16:13.307195 133913852769792 run.py:685] Algo dag_shortest_paths step 7450 current loss 3.403054, current_train_items 135493.
+I0705 19:16:14.450172 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7450: {'pi': 0.9405487804878049, 'score': 0.9405487804878049, 'examples_seen': 135493, 'step': 7450, 'algorithm': 'dag_shortest_paths'}
+I0705 19:16:14.450337 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.941, val scores are: dag_shortest_paths: 0.941
+I0705 19:16:18.945867 133913852769792 run.py:685] Algo dag_shortest_paths step 7500 current loss 11.685515, current_train_items 136346.
+I0705 19:16:20.427776 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7500: {'pi': 0.9550304878048781, 'score': 0.9550304878048781, 'examples_seen': 136346, 'step': 7500, 'algorithm': 'dag_shortest_paths'}
+I0705 19:16:20.427948 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.955, val scores are: dag_shortest_paths: 0.955
+I0705 19:16:25.194070 133913852769792 run.py:685] Algo dag_shortest_paths step 7550 current loss 7.728603, current_train_items 137319.
+I0705 19:16:26.366383 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7550: {'pi': 0.9576981707317073, 'score': 0.9576981707317073, 'examples_seen': 137319, 'step': 7550, 'algorithm': 'dag_shortest_paths'}
+I0705 19:16:26.366593 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.958, val scores are: dag_shortest_paths: 0.958
+I0705 19:16:30.960967 133913852769792 run.py:685] Algo dag_shortest_paths step 7600 current loss 10.141995, current_train_items 138144.
+I0705 19:16:32.830005 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7600: {'pi': 0.948170731707317, 'score': 0.948170731707317, 'examples_seen': 138144, 'step': 7600, 'algorithm': 'dag_shortest_paths'}
+I0705 19:16:32.830192 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.948, val scores are: dag_shortest_paths: 0.948
+I0705 19:16:37.183923 133913852769792 run.py:685] Algo dag_shortest_paths step 7650 current loss 8.766393, current_train_items 139093.
+I0705 19:16:38.401451 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7650: {'pi': 0.9607469512195121, 'score': 0.9607469512195121, 'examples_seen': 139093, 'step': 7650, 'algorithm': 'dag_shortest_paths'}
+I0705 19:16:38.401630 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.961, val scores are: dag_shortest_paths: 0.961
+I0705 19:16:43.312960 133913852769792 run.py:685] Algo dag_shortest_paths step 7700 current loss 1.557664, current_train_items 139998.
+I0705 19:16:44.744371 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7700: {'pi': 0.9298780487804879, 'score': 0.9298780487804879, 'examples_seen': 139998, 'step': 7700, 'algorithm': 'dag_shortest_paths'}
+I0705 19:16:44.744515 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.930, val scores are: dag_shortest_paths: 0.930
+I0705 19:16:49.096567 133913852769792 run.py:685] Algo dag_shortest_paths step 7750 current loss 11.806128, current_train_items 140898.
+I0705 19:16:50.433910 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7750: {'pi': 0.8978658536585366, 'score': 0.8978658536585366, 'examples_seen': 140898, 'step': 7750, 'algorithm': 'dag_shortest_paths'}
+I0705 19:16:50.434077 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.898, val scores are: dag_shortest_paths: 0.898
+I0705 19:16:55.569260 133913852769792 run.py:685] Algo dag_shortest_paths step 7800 current loss 2.113961, current_train_items 141828.
+I0705 19:16:56.710767 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7800: {'pi': 0.9386432926829268, 'score': 0.9386432926829268, 'examples_seen': 141828, 'step': 7800, 'algorithm': 'dag_shortest_paths'}
+I0705 19:16:56.710932 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.939, val scores are: dag_shortest_paths: 0.939
+I0705 19:17:01.107406 133913852769792 run.py:685] Algo dag_shortest_paths step 7850 current loss 11.810766, current_train_items 142697.
+I0705 19:17:02.696046 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7850: {'pi': 0.9405487804878049, 'score': 0.9405487804878049, 'examples_seen': 142697, 'step': 7850, 'algorithm': 'dag_shortest_paths'}
+I0705 19:17:02.696218 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.941, val scores are: dag_shortest_paths: 0.941
+I0705 19:17:07.428902 133913852769792 run.py:685] Algo dag_shortest_paths step 7900 current loss 4.958446, current_train_items 143672.
+I0705 19:17:08.586674 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7900: {'pi': 0.9592225609756098, 'score': 0.9592225609756098, 'examples_seen': 143672, 'step': 7900, 'algorithm': 'dag_shortest_paths'}
+I0705 19:17:08.586839 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.959, val scores are: dag_shortest_paths: 0.959
+I0705 19:17:13.341660 133913852769792 run.py:685] Algo dag_shortest_paths step 7950 current loss 13.409818, current_train_items 144490.
+I0705 19:17:14.991532 133913852769792 run.py:720] (val) algo dag_shortest_paths step 7950: {'pi': 0.9359756097560976, 'score': 0.9359756097560976, 'examples_seen': 144490, 'step': 7950, 'algorithm': 'dag_shortest_paths'}
+I0705 19:17:14.991688 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.936, val scores are: dag_shortest_paths: 0.936
+I0705 19:17:19.334458 133913852769792 run.py:685] Algo dag_shortest_paths step 8000 current loss 6.977391, current_train_items 145473.
+I0705 19:17:20.510899 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8000: {'pi': 0.953125, 'score': 0.953125, 'examples_seen': 145473, 'step': 8000, 'algorithm': 'dag_shortest_paths'}
+I0705 19:17:20.511114 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.953, val scores are: dag_shortest_paths: 0.953
+I0705 19:17:25.454553 133913852769792 run.py:685] Algo dag_shortest_paths step 8050 current loss 1.714953, current_train_items 146373.
+I0705 19:17:26.883433 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8050: {'pi': 0.9573170731707317, 'score': 0.9573170731707317, 'examples_seen': 146373, 'step': 8050, 'algorithm': 'dag_shortest_paths'}
+I0705 19:17:26.883609 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.957, val scores are: dag_shortest_paths: 0.957
+I0705 19:17:31.256349 133913852769792 run.py:685] Algo dag_shortest_paths step 8100 current loss 11.591516, current_train_items 147255.
+I0705 19:17:32.570338 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8100: {'pi': 0.9477896341463414, 'score': 0.9477896341463414, 'examples_seen': 147255, 'step': 8100, 'algorithm': 'dag_shortest_paths'}
+I0705 19:17:32.570564 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.948, val scores are: dag_shortest_paths: 0.948
+I0705 19:17:37.573350 133913852769792 run.py:685] Algo dag_shortest_paths step 8150 current loss 3.328239, current_train_items 148238.
+I0705 19:17:38.712637 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8150: {'pi': 0.9516006097560976, 'score': 0.9516006097560976, 'examples_seen': 148238, 'step': 8150, 'algorithm': 'dag_shortest_paths'}
+I0705 19:17:38.712794 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.952, val scores are: dag_shortest_paths: 0.952
+I0705 19:17:43.189190 133913852769792 run.py:685] Algo dag_shortest_paths step 8200 current loss 13.102517, current_train_items 149076.
+I0705 19:17:44.677968 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8200: {'pi': 0.9576981707317073, 'score': 0.9576981707317073, 'examples_seen': 149076, 'step': 8200, 'algorithm': 'dag_shortest_paths'}
+I0705 19:17:44.678114 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.958, val scores are: dag_shortest_paths: 0.958
+I0705 19:17:49.425063 133913852769792 run.py:685] Algo dag_shortest_paths step 8250 current loss 4.565594, current_train_items 150059.
+I0705 19:17:50.585087 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8250: {'pi': 0.9504573170731707, 'score': 0.9504573170731707, 'examples_seen': 150059, 'step': 8250, 'algorithm': 'dag_shortest_paths'}
+I0705 19:17:50.585233 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.950, val scores are: dag_shortest_paths: 0.950
+I0705 19:17:55.325529 133913852769792 run.py:685] Algo dag_shortest_paths step 8300 current loss 13.771091, current_train_items 150891.
+I0705 19:17:56.981461 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8300: {'pi': 0.9493140243902439, 'score': 0.9493140243902439, 'examples_seen': 150891, 'step': 8300, 'algorithm': 'dag_shortest_paths'}
+I0705 19:17:56.981647 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.949, val scores are: dag_shortest_paths: 0.949
+I0705 19:18:01.345258 133913852769792 run.py:685] Algo dag_shortest_paths step 8350 current loss 5.547308, current_train_items 151862.
+I0705 19:18:02.538335 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8350: {'pi': 0.930640243902439, 'score': 0.930640243902439, 'examples_seen': 151862, 'step': 8350, 'algorithm': 'dag_shortest_paths'}
+I0705 19:18:02.538512 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.931, val scores are: dag_shortest_paths: 0.931
+I0705 19:18:07.508470 133913852769792 run.py:685] Algo dag_shortest_paths step 8400 current loss 1.444234, current_train_items 152789.
+I0705 19:18:08.882375 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8400: {'pi': 0.9157774390243902, 'score': 0.9157774390243902, 'examples_seen': 152789, 'step': 8400, 'algorithm': 'dag_shortest_paths'}
+I0705 19:18:08.882541 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.916, val scores are: dag_shortest_paths: 0.916
+I0705 19:18:13.314992 133913852769792 run.py:685] Algo dag_shortest_paths step 8450 current loss 10.468112, current_train_items 153678.
+I0705 19:18:14.635963 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8450: {'pi': 0.9279725609756098, 'score': 0.9279725609756098, 'examples_seen': 153678, 'step': 8450, 'algorithm': 'dag_shortest_paths'}
+I0705 19:18:14.636152 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.928, val scores are: dag_shortest_paths: 0.928
+I0705 19:18:19.644720 133913852769792 run.py:685] Algo dag_shortest_paths step 8500 current loss 4.570617, current_train_items 154649.
+I0705 19:18:20.793327 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8500: {'pi': 0.9378810975609756, 'score': 0.9378810975609756, 'examples_seen': 154649, 'step': 8500, 'algorithm': 'dag_shortest_paths'}
+I0705 19:18:20.793508 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.938, val scores are: dag_shortest_paths: 0.938
+I0705 19:18:25.145226 133913852769792 run.py:685] Algo dag_shortest_paths step 8550 current loss 12.161172, current_train_items 155521.
+I0705 19:18:26.750243 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8550: {'pi': 0.9321646341463414, 'score': 0.9321646341463414, 'examples_seen': 155521, 'step': 8550, 'algorithm': 'dag_shortest_paths'}
+I0705 19:18:26.750413 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.932, val scores are: dag_shortest_paths: 0.932
+I0705 19:18:31.438063 133913852769792 run.py:685] Algo dag_shortest_paths step 8600 current loss 6.567522, current_train_items 156487.
+I0705 19:18:32.595454 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8600: {'pi': 0.9474085365853658, 'score': 0.9474085365853658, 'examples_seen': 156487, 'step': 8600, 'algorithm': 'dag_shortest_paths'}
+I0705 19:18:32.595623 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.947, val scores are: dag_shortest_paths: 0.947
+I0705 19:18:37.154245 133913852769792 run.py:685] Algo dag_shortest_paths step 8650 current loss 11.957651, current_train_items 157319.
+I0705 19:18:39.024071 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8650: {'pi': 0.9439786585365854, 'score': 0.9439786585365854, 'examples_seen': 157319, 'step': 8650, 'algorithm': 'dag_shortest_paths'}
+I0705 19:18:39.024256 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.944, val scores are: dag_shortest_paths: 0.944
+I0705 19:18:43.321847 133913852769792 run.py:685] Algo dag_shortest_paths step 8700 current loss 9.015947, current_train_items 158298.
+I0705 19:18:44.554867 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8700: {'pi': 0.9264481707317073, 'score': 0.9264481707317073, 'examples_seen': 158298, 'step': 8700, 'algorithm': 'dag_shortest_paths'}
+I0705 19:18:44.555048 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.926, val scores are: dag_shortest_paths: 0.926
+I0705 19:18:49.508929 133913852769792 run.py:685] Algo dag_shortest_paths step 8750 current loss 1.272134, current_train_items 159212.
+I0705 19:18:50.883551 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8750: {'pi': 0.911204268292683, 'score': 0.911204268292683, 'examples_seen': 159212, 'step': 8750, 'algorithm': 'dag_shortest_paths'}
+I0705 19:18:50.883793 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.911, val scores are: dag_shortest_paths: 0.911
+I0705 19:18:55.279020 133913852769792 run.py:685] Algo dag_shortest_paths step 8800 current loss 10.337785, current_train_items 160101.
+I0705 19:18:56.611250 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8800: {'pi': 0.9535060975609756, 'score': 0.9535060975609756, 'examples_seen': 160101, 'step': 8800, 'algorithm': 'dag_shortest_paths'}
+I0705 19:18:56.611431 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.954, val scores are: dag_shortest_paths: 0.954
+I0705 19:19:01.680008 133913852769792 run.py:685] Algo dag_shortest_paths step 8850 current loss 3.456918, current_train_items 161053.
+I0705 19:19:02.820350 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8850: {'pi': 0.9363567073170732, 'score': 0.9363567073170732, 'examples_seen': 161053, 'step': 8850, 'algorithm': 'dag_shortest_paths'}
+I0705 19:19:02.820533 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.936, val scores are: dag_shortest_paths: 0.936
+I0705 19:19:07.221552 133913852769792 run.py:685] Algo dag_shortest_paths step 8900 current loss 12.340919, current_train_items 161910.
+I0705 19:19:08.830242 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8900: {'pi': 0.9565548780487805, 'score': 0.9565548780487805, 'examples_seen': 161910, 'step': 8900, 'algorithm': 'dag_shortest_paths'}
+I0705 19:19:08.830466 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.957, val scores are: dag_shortest_paths: 0.957
+I0705 19:19:13.648868 133913852769792 run.py:685] Algo dag_shortest_paths step 8950 current loss 7.565895, current_train_items 162878.
+I0705 19:19:14.806964 133913852769792 run.py:720] (val) algo dag_shortest_paths step 8950: {'pi': 0.9405487804878049, 'score': 0.9405487804878049, 'examples_seen': 162878, 'step': 8950, 'algorithm': 'dag_shortest_paths'}
+I0705 19:19:14.807134 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.941, val scores are: dag_shortest_paths: 0.941
+I0705 19:19:19.550522 133913852769792 run.py:685] Algo dag_shortest_paths step 9000 current loss 12.237272, current_train_items 163690.
+I0705 19:19:21.203088 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9000: {'pi': 0.958079268292683, 'score': 0.958079268292683, 'examples_seen': 163690, 'step': 9000, 'algorithm': 'dag_shortest_paths'}
+I0705 19:19:21.203313 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.958, val scores are: dag_shortest_paths: 0.958
+I0705 19:19:25.656997 133913852769792 run.py:685] Algo dag_shortest_paths step 9050 current loss 7.666252, current_train_items 164670.
+I0705 19:19:26.866427 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9050: {'pi': 0.9451219512195121, 'score': 0.9451219512195121, 'examples_seen': 164670, 'step': 9050, 'algorithm': 'dag_shortest_paths'}
+I0705 19:19:26.866586 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.945, val scores are: dag_shortest_paths: 0.945
+I0705 19:19:31.868018 133913852769792 run.py:685] Algo dag_shortest_paths step 9100 current loss 1.683476, current_train_items 165572.
+I0705 19:19:33.301981 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9100: {'pi': 0.9676067073170732, 'score': 0.9676067073170732, 'examples_seen': 165572, 'step': 9100, 'algorithm': 'dag_shortest_paths'}
+I0705 19:19:33.302220 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.968, val scores are: dag_shortest_paths: 0.968
+I0705 19:19:37.673290 133913852769792 run.py:685] Algo dag_shortest_paths step 9150 current loss 12.927010, current_train_items 166476.
+I0705 19:19:39.055346 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9150: {'pi': 0.9649390243902439, 'score': 0.9649390243902439, 'examples_seen': 166476, 'step': 9150, 'algorithm': 'dag_shortest_paths'}
+I0705 19:19:39.055491 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.965, val scores are: dag_shortest_paths: 0.965
+I0705 19:19:44.031429 133913852769792 run.py:685] Algo dag_shortest_paths step 9200 current loss 3.764261, current_train_items 167404.
+I0705 19:19:45.170926 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9200: {'pi': 0.9386432926829268, 'score': 0.9386432926829268, 'examples_seen': 167404, 'step': 9200, 'algorithm': 'dag_shortest_paths'}
+I0705 19:19:45.171069 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.939, val scores are: dag_shortest_paths: 0.939
+I0705 19:19:49.510803 133913852769792 run.py:685] Algo dag_shortest_paths step 9250 current loss 10.435428, current_train_items 168294.
+I0705 19:19:51.114141 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9250: {'pi': 0.926829268292683, 'score': 0.926829268292683, 'examples_seen': 168294, 'step': 9250, 'algorithm': 'dag_shortest_paths'}
+I0705 19:19:51.114315 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.927, val scores are: dag_shortest_paths: 0.927
+I0705 19:19:55.879156 133913852769792 run.py:685] Algo dag_shortest_paths step 9300 current loss 6.357395, current_train_items 169271.
+I0705 19:19:57.056793 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9300: {'pi': 0.9493140243902439, 'score': 0.9493140243902439, 'examples_seen': 169271, 'step': 9300, 'algorithm': 'dag_shortest_paths'}
+I0705 19:19:57.056943 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.949, val scores are: dag_shortest_paths: 0.949
+I0705 19:20:01.742196 133913852769792 run.py:685] Algo dag_shortest_paths step 9350 current loss 11.564009, current_train_items 170113.
+I0705 19:20:03.592029 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9350: {'pi': 0.963795731707317, 'score': 0.963795731707317, 'examples_seen': 170113, 'step': 9350, 'algorithm': 'dag_shortest_paths'}
+I0705 19:20:03.592202 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.964, val scores are: dag_shortest_paths: 0.964
+I0705 19:20:07.946520 133913852769792 run.py:685] Algo dag_shortest_paths step 9400 current loss 8.939643, current_train_items 171050.
+I0705 19:20:09.173916 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9400: {'pi': 0.9298780487804879, 'score': 0.9298780487804879, 'examples_seen': 171050, 'step': 9400, 'algorithm': 'dag_shortest_paths'}
+I0705 19:20:09.174103 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.930, val scores are: dag_shortest_paths: 0.930
+I0705 19:20:14.153026 133913852769792 run.py:685] Algo dag_shortest_paths step 9450 current loss 1.429013, current_train_items 171949.
+I0705 19:20:15.534884 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9450: {'pi': 0.9439786585365854, 'score': 0.9439786585365854, 'examples_seen': 171949, 'step': 9450, 'algorithm': 'dag_shortest_paths'}
+I0705 19:20:15.535070 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.944, val scores are: dag_shortest_paths: 0.944
+I0705 19:20:19.846770 133913852769792 run.py:685] Algo dag_shortest_paths step 9500 current loss 10.143532, current_train_items 172824.
+I0705 19:20:21.207455 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9500: {'pi': 0.9611280487804879, 'score': 0.9611280487804879, 'examples_seen': 172824, 'step': 9500, 'algorithm': 'dag_shortest_paths'}
+I0705 19:20:21.207633 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.961, val scores are: dag_shortest_paths: 0.961
+I0705 19:20:26.228607 133913852769792 run.py:685] Algo dag_shortest_paths step 9550 current loss 3.040848, current_train_items 173794.
+I0705 19:20:27.369958 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9550: {'pi': 0.9432164634146342, 'score': 0.9432164634146342, 'examples_seen': 173794, 'step': 9550, 'algorithm': 'dag_shortest_paths'}
+I0705 19:20:27.370124 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.943, val scores are: dag_shortest_paths: 0.943
+I0705 19:20:31.816509 133913852769792 run.py:685] Algo dag_shortest_paths step 9600 current loss 11.041105, current_train_items 174622.
+I0705 19:20:33.425373 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9600: {'pi': 0.9409298780487805, 'score': 0.9409298780487805, 'examples_seen': 174622, 'step': 9600, 'algorithm': 'dag_shortest_paths'}
+I0705 19:20:33.425546 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.941, val scores are: dag_shortest_paths: 0.941
+I0705 19:20:38.165264 133913852769792 run.py:685] Algo dag_shortest_paths step 9650 current loss 5.899301, current_train_items 175575.
+I0705 19:20:39.323873 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9650: {'pi': 0.9340701219512195, 'score': 0.9340701219512195, 'examples_seen': 175575, 'step': 9650, 'algorithm': 'dag_shortest_paths'}
+I0705 19:20:39.324016 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.934, val scores are: dag_shortest_paths: 0.934
+I0705 19:20:44.114065 133913852769792 run.py:685] Algo dag_shortest_paths step 9700 current loss 10.673765, current_train_items 176396.
+I0705 19:20:45.762755 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9700: {'pi': 0.9500762195121951, 'score': 0.9500762195121951, 'examples_seen': 176396, 'step': 9700, 'algorithm': 'dag_shortest_paths'}
+I0705 19:20:45.762935 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.950, val scores are: dag_shortest_paths: 0.950
+I0705 19:20:50.061369 133913852769792 run.py:685] Algo dag_shortest_paths step 9750 current loss 7.249014, current_train_items 177385.
+I0705 19:20:51.278957 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9750: {'pi': 0.9340701219512195, 'score': 0.9340701219512195, 'examples_seen': 177385, 'step': 9750, 'algorithm': 'dag_shortest_paths'}
+I0705 19:20:51.279125 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.934, val scores are: dag_shortest_paths: 0.934
+I0705 19:20:56.274592 133913852769792 run.py:685] Algo dag_shortest_paths step 9800 current loss 1.232698, current_train_items 178253.
+I0705 19:20:57.704209 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9800: {'pi': 0.9222560975609756, 'score': 0.9222560975609756, 'examples_seen': 178253, 'step': 9800, 'algorithm': 'dag_shortest_paths'}
+I0705 19:20:57.704369 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.922, val scores are: dag_shortest_paths: 0.922
+I0705 19:21:02.052628 133913852769792 run.py:685] Algo dag_shortest_paths step 9850 current loss 10.335117, current_train_items 179165.
+I0705 19:21:03.396682 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9850: {'pi': 0.9241615853658537, 'score': 0.9241615853658537, 'examples_seen': 179165, 'step': 9850, 'algorithm': 'dag_shortest_paths'}
+I0705 19:21:03.396930 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.924, val scores are: dag_shortest_paths: 0.924
+I0705 19:21:08.401143 133913852769792 run.py:685] Algo dag_shortest_paths step 9900 current loss 3.233801, current_train_items 180107.
+I0705 19:21:09.561692 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9900: {'pi': 0.928734756097561, 'score': 0.928734756097561, 'examples_seen': 180107, 'step': 9900, 'algorithm': 'dag_shortest_paths'}
+I0705 19:21:09.561896 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.929, val scores are: dag_shortest_paths: 0.929
+I0705 19:21:13.905832 133913852769792 run.py:685] Algo dag_shortest_paths step 9950 current loss 12.111451, current_train_items 180950.
+I0705 19:21:15.508049 133913852769792 run.py:720] (val) algo dag_shortest_paths step 9950: {'pi': 0.9641768292682927, 'score': 0.9641768292682927, 'examples_seen': 180950, 'step': 9950, 'algorithm': 'dag_shortest_paths'}
+I0705 19:21:15.508197 133913852769792 run.py:744] Not saving new best model, best avg val score was 0.976, current avg val score is 0.964, val scores are: dag_shortest_paths: 0.964
+I0705 19:21:20.286597 133913852769792 run.py:750] Restoring best model from checkpoint...
+I0705 19:21:28.048523 133913852769792 run.py:765] (test) algo dag_shortest_paths : {'pi': 0.90087890625, 'score': 0.90087890625, 'examples_seen': 181913, 'step': 10000, 'algorithm': 'dag_shortest_paths'}
+I0705 19:21:28.048810 133913852769792 run.py:767] Done!

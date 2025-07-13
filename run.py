@@ -56,10 +56,9 @@ assert tf.test.is_built_with_cuda()
 
 
 #os.environ["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"
-os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".9"
+os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".85"
 
-
-flags.DEFINE_list('algorithms', ['task_scheduling'], 'Which algorithms to run.')
+flags.DEFINE_list('algorithms', ['quickselect'], 'Which algorithms to run.')
 
 #flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
 #flags.DEFINE_list('algorithms', ['dfs', 'heapsort', 'kmp_matcher', 'quickselect', 'strongly_connected_components'], 'Hard algorithms.')
@@ -67,7 +66,7 @@ flags.DEFINE_list('algorithms', ['task_scheduling'], 'Which algorithms to run.')
 
 '''
 flags.DEFINE_list('algorithms', 
-                 ['articulation_points', 'activity_selector', 'bellman_ford', 'bfs', 'binary_search',
+                 ['activity_selector', 'articulation_points', 'bellman_ford', 'bfs', 'binary_search',
                  'bridges', 'bubble_sort', 'dag_shortest_paths', 'dfs', 'dijkstra',
                  'find_maximum_subarray_kadane', 'floyd_warshall', 'graham_scan', 'heapsort', 'insertion_sort',
                  'jarvis_march', 'kmp_matcher', 'lcs_length', 'matrix_chain_order', 'minimum',
@@ -76,7 +75,7 @@ flags.DEFINE_list('algorithms',
                  'Which algorithms to run.')
 '''
                  
-# flags.DEFINE_list('train_lengths', [-1], '')
+#flags.DEFINE_list('train_lengths', [-1], '')
 flags.DEFINE_list('train_lengths', ['2', '3', '5', '7', '11', '13', '17', '19', 
                                     '23', '29', '31', '37', '39', '41'], '')
 

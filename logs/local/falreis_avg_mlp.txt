@@ -1,0 +1,518 @@
+(clrs) falreis@falreis-AB350M-DS3H-V2:~/Me/doutorado/clrs$ python run.py 
+2025-01-08 23:19:08.351521: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:477] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1736389148.370627   13175 cuda_dnn.cc:8310] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1736389148.376480   13175 cuda_blas.cc:1418] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+INFO:2025-01-08 23:19:10,464:jax._src.xla_bridge:927: Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0108 23:19:10.464258 123578613282624 xla_bridge.py:927] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+INFO:2025-01-08 23:19:10,465:jax._src.xla_bridge:927: Unable to initialize backend 'tpu': INTERNAL: Failed to open libtpu.so: libtpu.so: cannot open shared object file: No such file or directory
+I0108 23:19:10.465391 123578613282624 xla_bridge.py:927] Unable to initialize backend 'tpu': INTERNAL: Failed to open libtpu.so: libtpu.so: cannot open shared object file: No such file or directory
+--- Logging error ---
+Traceback (most recent call last):
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/logging/__init__.py", line 1160, in emit
+    msg = self.format(record)
+          ^^^^^^^^^^^^^^^^^^^
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/logging/__init__.py", line 999, in format
+    return fmt.format(record)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/site-packages/absl/logging/__init__.py", line 1052, in format
+    return prefix + super(PythonFormatter, self).format(record)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/logging/__init__.py", line 703, in format
+    record.message = record.getMessage()
+                     ^^^^^^^^^^^^^^^^^^^
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/logging/__init__.py", line 392, in getMessage
+    msg = msg % self.args
+          ~~~~^~~~~~~~~~~
+ValueError: incomplete format
+Call stack:
+  File "/home/falreis/Me/doutorado/clrs/run.py", line 597, in <module>
+    app.run(main)
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/site-packages/absl/app.py", line 308, in run
+    _run_main(main, args)
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/site-packages/absl/app.py", line 254, in _run_main
+    sys.exit(main(argv))
+  File "/home/falreis/Me/doutorado/clrs/run.py", line 435, in main
+    ) = create_samplers(
+  File "/home/falreis/Me/doutorado/clrs/run.py", line 318, in create_samplers
+    logging.info('Model: %', FLAGS.processor_type, FLAGS.algorithms)
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/site-packages/absl/logging/__init__.py", line 442, in info
+    log(INFO, msg, *args, **kwargs)
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/site-packages/absl/logging/__init__.py", line 589, in log
+    _absl_logger.log(standard_level, msg, *args, **kwargs)
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/site-packages/absl/logging/__init__.py", line 1158, in log
+    super(ABSLLogger, self).log(level, msg, *args, **kwargs)
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/logging/__init__.py", line 1609, in log
+    self._log(level, msg, args, **kwargs)
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/logging/__init__.py", line 1684, in _log
+    self.handle(record)
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/site-packages/absl/logging/__init__.py", line 1175, in handle
+    self.callHandlers(record)
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/logging/__init__.py", line 1762, in callHandlers
+    hdlr.handle(record)
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/site-packages/absl/logging/__init__.py", line 1015, in handle
+    return self._current_handler.handle(record)
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/logging/__init__.py", line 1028, in handle
+    self.emit(record)
+  File "/home/falreis/anaconda3/envs/clrs/lib/python3.12/site-packages/absl/logging/__init__.py", line 952, in emit
+    super(PythonHandler, self).emit(record)
+Message: 'Model: %'
+Arguments: ('falreis', ['insertion_sort', 'activity_selector', 'bfs'])
+I0000 00:00:1736389150.625023   13175 gpu_device.cc:2022] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 852 MB memory:  -> device: 0, name: NVIDIA GeForce GTX 1660, pci bus id: 0000:07:00.0, compute capability: 7.5
+I0108 23:19:10.626553 123578613282624 run.py:344] Creating samplers for algo insertion_sort
+W0108 23:19:10.626973 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle', 'p'} when building sampler class <class 'clrs._src.samplers.SortingSampler'>
+W0108 23:19:10.627262 123578613282624 samplers.py:109] Sampling dataset on-the-fly, unlimited samples.
+W0108 23:19:10.807418 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle', 'p'} when building sampler class <class 'clrs._src.samplers.SortingSampler'>
+W0108 23:19:11.029633 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle', 'p'} when building sampler class <class 'clrs._src.samplers.SortingSampler'>
+W0108 23:19:11.321911 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle', 'p'} when building sampler class <class 'clrs._src.samplers.SortingSampler'>
+W0108 23:19:11.656515 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle', 'p'} when building sampler class <class 'clrs._src.samplers.SortingSampler'>
+W0108 23:19:12.053745 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle', 'p'} when building sampler class <class 'clrs._src.samplers.SortingSampler'>
+I0108 23:19:12.054056 123578613282624 samplers.py:124] Creating a dataset with 64 samples.
+I0108 23:19:12.082497 123578613282624 run.py:162] Dataset found at CLRS30/CLRS30_v1.0.0. Skipping download.
+I0108 23:19:12.083234 123578613282624 dataset_info.py:707] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/insertion_sort_test/1.0.0
+I0108 23:19:12.085491 123578613282624 dataset_info.py:707] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/insertion_sort_test/1.0.0
+I0108 23:19:12.088289 123578613282624 reader.py:262] Creating a tf.data.Dataset reading 1 files located in folders: CLRS30/CLRS30_v1.0.0/clrs_dataset/insertion_sort_test/1.0.0.
+I0108 23:19:12.140181 123578613282624 logging_logger.py:49] Constructing tf.data.Dataset clrs_dataset for split test, from CLRS30/CLRS30_v1.0.0/clrs_dataset/insertion_sort_test/1.0.0
+WARNING:tensorflow:AutoGraph could not transform <function _preprocess at 0x7063fdd8ba60> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: `haiku.experimental.flax` features require `flax` to be installed.
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+W0108 23:19:12.165960 123578613282624 ag_logging.py:142] AutoGraph could not transform <function _preprocess at 0x7063fdd8ba60> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: `haiku.experimental.flax` features require `flax` to be installed.
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+I0108 23:19:12.232573 123578613282624 run.py:344] Creating samplers for algo activity_selector
+W0108 23:19:12.232804 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle', 'p'} when building sampler class <class 'clrs._src.samplers.ActivitySampler'>
+W0108 23:19:12.465693 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle', 'p'} when building sampler class <class 'clrs._src.samplers.ActivitySampler'>
+W0108 23:19:12.718728 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle', 'p'} when building sampler class <class 'clrs._src.samplers.ActivitySampler'>
+W0108 23:19:13.030928 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle', 'p'} when building sampler class <class 'clrs._src.samplers.ActivitySampler'>
+W0108 23:19:13.372558 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle', 'p'} when building sampler class <class 'clrs._src.samplers.ActivitySampler'>
+W0108 23:19:13.763976 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle', 'p'} when building sampler class <class 'clrs._src.samplers.ActivitySampler'>
+I0108 23:19:13.764268 123578613282624 samplers.py:124] Creating a dataset with 64 samples.
+I0108 23:19:13.791210 123578613282624 run.py:162] Dataset found at CLRS30/CLRS30_v1.0.0. Skipping download.
+I0108 23:19:13.791819 123578613282624 dataset_info.py:707] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/activity_selector_test/1.0.0
+I0108 23:19:13.794131 123578613282624 dataset_info.py:707] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/activity_selector_test/1.0.0
+I0108 23:19:13.796020 123578613282624 reader.py:262] Creating a tf.data.Dataset reading 1 files located in folders: CLRS30/CLRS30_v1.0.0/clrs_dataset/activity_selector_test/1.0.0.
+I0108 23:19:13.832315 123578613282624 logging_logger.py:49] Constructing tf.data.Dataset clrs_dataset for split test, from CLRS30/CLRS30_v1.0.0/clrs_dataset/activity_selector_test/1.0.0
+I0108 23:19:13.912911 123578613282624 run.py:344] Creating samplers for algo bfs
+W0108 23:19:13.913138 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle'} when building sampler class <class 'clrs._src.samplers.BfsSampler'>
+W0108 23:19:14.141117 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle'} when building sampler class <class 'clrs._src.samplers.BfsSampler'>
+W0108 23:19:14.430828 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle'} when building sampler class <class 'clrs._src.samplers.BfsSampler'>
+W0108 23:19:14.761838 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle'} when building sampler class <class 'clrs._src.samplers.BfsSampler'>
+W0108 23:19:15.163104 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle'} when building sampler class <class 'clrs._src.samplers.BfsSampler'>
+W0108 23:19:15.672990 123578613282624 samplers.py:296] Ignoring kwargs {'length_needle'} when building sampler class <class 'clrs._src.samplers.BfsSampler'>
+I0108 23:19:15.673395 123578613282624 samplers.py:124] Creating a dataset with 64 samples.
+I0108 23:19:15.719965 123578613282624 run.py:162] Dataset found at CLRS30/CLRS30_v1.0.0. Skipping download.
+I0108 23:19:15.720905 123578613282624 dataset_info.py:707] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/bfs_test/1.0.0
+I0108 23:19:15.724562 123578613282624 dataset_info.py:707] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/bfs_test/1.0.0
+I0108 23:19:15.728248 123578613282624 reader.py:262] Creating a tf.data.Dataset reading 1 files located in folders: CLRS30/CLRS30_v1.0.0/clrs_dataset/bfs_test/1.0.0.
+I0108 23:19:15.778175 123578613282624 logging_logger.py:49] Constructing tf.data.Dataset clrs_dataset for split test, from CLRS30/CLRS30_v1.0.0/clrs_dataset/bfs_test/1.0.0
+I0108 23:20:06.336796 123578613282624 run.py:549] (val) algo insertion_sort step 0: {'pred': 0.0986328125, 'score': 0.0986328125, 'examples_seen': 8, 'step': 0, 'algorithm': 'insertion_sort'}
+I0108 23:20:07.363188 123578613282624 run.py:549] (val) algo activity_selector step 0: {'selected': 0.22702702702702704, 'score': 0.22702702702702704, 'examples_seen': 8, 'step': 0, 'algorithm': 'activity_selector'}
+I0108 23:20:08.808424 123578613282624 run.py:549] (val) algo bfs step 0: {'pi': 0.4677734375, 'score': 0.4677734375, 'examples_seen': 8, 'step': 0, 'algorithm': 'bfs'}
+I0108 23:20:08.808562 123578613282624 run.py:567] Checkpointing best model, best avg val score was -0.333, current avg val score is 0.264, val scores are: insertion_sort: 0.099, activity_selector: 0.227, bfs: 0.468
+I0108 23:22:37.980689 123578613282624 run.py:549] (val) algo insertion_sort step 50: {'pred': 0.82421875, 'score': 0.82421875, 'examples_seen': 408, 'step': 50, 'algorithm': 'insertion_sort'}
+I0108 23:22:38.002399 123578613282624 run.py:549] (val) algo activity_selector step 50: {'selected': 0.6108949416342412, 'score': 0.6108949416342412, 'examples_seen': 408, 'step': 50, 'algorithm': 'activity_selector'}
+I0108 23:22:38.023565 123578613282624 run.py:549] (val) algo bfs step 50: {'pi': 0.9951171875, 'score': 0.9951171875, 'examples_seen': 408, 'step': 50, 'algorithm': 'bfs'}
+I0108 23:22:38.023811 123578613282624 run.py:567] Checkpointing best model, best avg val score was 0.264, current avg val score is 0.810, val scores are: insertion_sort: 0.824, activity_selector: 0.611, bfs: 0.995
+I0108 23:22:40.060920 123578613282624 run.py:549] (val) algo insertion_sort step 100: {'pred': 0.658203125, 'score': 0.658203125, 'examples_seen': 808, 'step': 100, 'algorithm': 'insertion_sort'}
+I0108 23:22:40.081667 123578613282624 run.py:549] (val) algo activity_selector step 100: {'selected': 0.7287853577371048, 'score': 0.7287853577371048, 'examples_seen': 808, 'step': 100, 'algorithm': 'activity_selector'}
+I0108 23:22:40.101301 123578613282624 run.py:549] (val) algo bfs step 100: {'pi': 0.9921875, 'score': 0.9921875, 'examples_seen': 808, 'step': 100, 'algorithm': 'bfs'}
+I0108 23:22:40.101491 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.810, current avg val score is 0.793, val scores are: insertion_sort: 0.658, activity_selector: 0.729, bfs: 0.992
+I0108 23:22:42.065712 123578613282624 run.py:549] (val) algo insertion_sort step 150: {'pred': 0.73046875, 'score': 0.73046875, 'examples_seen': 1208, 'step': 150, 'algorithm': 'insertion_sort'}
+I0108 23:22:42.086766 123578613282624 run.py:549] (val) algo activity_selector step 150: {'selected': 0.7033333333333333, 'score': 0.7033333333333333, 'examples_seen': 1208, 'step': 150, 'algorithm': 'activity_selector'}
+I0108 23:22:42.105236 123578613282624 run.py:549] (val) algo bfs step 150: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 1208, 'step': 150, 'algorithm': 'bfs'}
+I0108 23:22:42.105444 123578613282624 run.py:567] Checkpointing best model, best avg val score was 0.810, current avg val score is 0.811, val scores are: insertion_sort: 0.730, activity_selector: 0.703, bfs: 0.999
+W0108 23:22:43.742579 123578613282624 samplers.py:173] Increasing hint lengh from 9 to 10
+I0108 23:22:56.506527 123578613282624 run.py:549] (val) algo insertion_sort step 200: {'pred': 0.8125, 'score': 0.8125, 'examples_seen': 1608, 'step': 200, 'algorithm': 'insertion_sort'}
+I0108 23:22:56.527849 123578613282624 run.py:549] (val) algo activity_selector step 200: {'selected': 0.6942148760330578, 'score': 0.6942148760330578, 'examples_seen': 1608, 'step': 200, 'algorithm': 'activity_selector'}
+I0108 23:22:56.547956 123578613282624 run.py:549] (val) algo bfs step 200: {'pi': 0.9970703125, 'score': 0.9970703125, 'examples_seen': 1608, 'step': 200, 'algorithm': 'bfs'}
+I0108 23:22:56.548168 123578613282624 run.py:567] Checkpointing best model, best avg val score was 0.811, current avg val score is 0.835, val scores are: insertion_sort: 0.812, activity_selector: 0.694, bfs: 0.997
+I0108 23:22:58.584436 123578613282624 run.py:549] (val) algo insertion_sort step 250: {'pred': 0.814453125, 'score': 0.814453125, 'examples_seen': 2008, 'step': 250, 'algorithm': 'insertion_sort'}
+I0108 23:22:58.606612 123578613282624 run.py:549] (val) algo activity_selector step 250: {'selected': 0.7377777777777778, 'score': 0.7377777777777778, 'examples_seen': 2008, 'step': 250, 'algorithm': 'activity_selector'}
+I0108 23:22:58.626515 123578613282624 run.py:549] (val) algo bfs step 250: {'pi': 1.0, 'score': 1.0, 'examples_seen': 2008, 'step': 250, 'algorithm': 'bfs'}
+I0108 23:22:58.626723 123578613282624 run.py:567] Checkpointing best model, best avg val score was 0.835, current avg val score is 0.851, val scores are: insertion_sort: 0.814, activity_selector: 0.738, bfs: 1.000
+I0108 23:23:00.661367 123578613282624 run.py:549] (val) algo insertion_sort step 300: {'pred': 0.892578125, 'score': 0.892578125, 'examples_seen': 2408, 'step': 300, 'algorithm': 'insertion_sort'}
+I0108 23:23:00.682789 123578613282624 run.py:549] (val) algo activity_selector step 300: {'selected': 0.8181818181818182, 'score': 0.8181818181818182, 'examples_seen': 2408, 'step': 300, 'algorithm': 'activity_selector'}
+I0108 23:23:00.701340 123578613282624 run.py:549] (val) algo bfs step 300: {'pi': 0.9951171875, 'score': 0.9951171875, 'examples_seen': 2408, 'step': 300, 'algorithm': 'bfs'}
+I0108 23:23:00.701554 123578613282624 run.py:567] Checkpointing best model, best avg val score was 0.851, current avg val score is 0.902, val scores are: insertion_sort: 0.893, activity_selector: 0.818, bfs: 0.995
+I0108 23:23:02.723919 123578613282624 run.py:549] (val) algo insertion_sort step 350: {'pred': 0.802734375, 'score': 0.802734375, 'examples_seen': 2808, 'step': 350, 'algorithm': 'insertion_sort'}
+I0108 23:23:02.744816 123578613282624 run.py:549] (val) algo activity_selector step 350: {'selected': 0.795774647887324, 'score': 0.795774647887324, 'examples_seen': 2808, 'step': 350, 'algorithm': 'activity_selector'}
+I0108 23:23:02.764484 123578613282624 run.py:549] (val) algo bfs step 350: {'pi': 0.9931640625, 'score': 0.9931640625, 'examples_seen': 2808, 'step': 350, 'algorithm': 'bfs'}
+I0108 23:23:02.764743 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.902, current avg val score is 0.864, val scores are: insertion_sort: 0.803, activity_selector: 0.796, bfs: 0.993
+I0108 23:23:04.759667 123578613282624 run.py:549] (val) algo insertion_sort step 400: {'pred': 0.90625, 'score': 0.90625, 'examples_seen': 3208, 'step': 400, 'algorithm': 'insertion_sort'}
+I0108 23:23:04.780980 123578613282624 run.py:549] (val) algo activity_selector step 400: {'selected': 0.6752136752136753, 'score': 0.6752136752136753, 'examples_seen': 3208, 'step': 400, 'algorithm': 'activity_selector'}
+I0108 23:23:04.800781 123578613282624 run.py:549] (val) algo bfs step 400: {'pi': 0.998046875, 'score': 0.998046875, 'examples_seen': 3208, 'step': 400, 'algorithm': 'bfs'}
+I0108 23:23:04.801027 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.902, current avg val score is 0.860, val scores are: insertion_sort: 0.906, activity_selector: 0.675, bfs: 0.998
+I0108 23:23:06.801656 123578613282624 run.py:549] (val) algo insertion_sort step 450: {'pred': 0.8154296875, 'score': 0.8154296875, 'examples_seen': 3608, 'step': 450, 'algorithm': 'insertion_sort'}
+I0108 23:23:06.822629 123578613282624 run.py:549] (val) algo activity_selector step 450: {'selected': 0.8347826086956521, 'score': 0.8347826086956521, 'examples_seen': 3608, 'step': 450, 'algorithm': 'activity_selector'}
+I0108 23:23:06.841436 123578613282624 run.py:549] (val) algo bfs step 450: {'pi': 0.998046875, 'score': 0.998046875, 'examples_seen': 3608, 'step': 450, 'algorithm': 'bfs'}
+I0108 23:23:06.841644 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.902, current avg val score is 0.883, val scores are: insertion_sort: 0.815, activity_selector: 0.835, bfs: 0.998
+I0108 23:23:08.844357 123578613282624 run.py:549] (val) algo insertion_sort step 500: {'pred': 0.908203125, 'score': 0.908203125, 'examples_seen': 4008, 'step': 500, 'algorithm': 'insertion_sort'}
+I0108 23:23:08.865677 123578613282624 run.py:549] (val) algo activity_selector step 500: {'selected': 0.8199233716475095, 'score': 0.8199233716475095, 'examples_seen': 4008, 'step': 500, 'algorithm': 'activity_selector'}
+I0108 23:23:08.884927 123578613282624 run.py:549] (val) algo bfs step 500: {'pi': 0.998046875, 'score': 0.998046875, 'examples_seen': 4008, 'step': 500, 'algorithm': 'bfs'}
+I0108 23:23:08.885134 123578613282624 run.py:567] Checkpointing best model, best avg val score was 0.902, current avg val score is 0.909, val scores are: insertion_sort: 0.908, activity_selector: 0.820, bfs: 0.998
+I0108 23:23:10.924264 123578613282624 run.py:549] (val) algo insertion_sort step 550: {'pred': 0.8544921875, 'score': 0.8544921875, 'examples_seen': 4408, 'step': 550, 'algorithm': 'insertion_sort'}
+I0108 23:23:10.944530 123578613282624 run.py:549] (val) algo activity_selector step 550: {'selected': 0.7836990595611286, 'score': 0.7836990595611286, 'examples_seen': 4408, 'step': 550, 'algorithm': 'activity_selector'}
+I0108 23:23:10.964027 123578613282624 run.py:549] (val) algo bfs step 550: {'pi': 0.998046875, 'score': 0.998046875, 'examples_seen': 4408, 'step': 550, 'algorithm': 'bfs'}
+I0108 23:23:10.964334 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.909, current avg val score is 0.879, val scores are: insertion_sort: 0.854, activity_selector: 0.784, bfs: 0.998
+I0108 23:23:12.977722 123578613282624 run.py:549] (val) algo insertion_sort step 600: {'pred': 0.83984375, 'score': 0.83984375, 'examples_seen': 4808, 'step': 600, 'algorithm': 'insertion_sort'}
+I0108 23:23:12.998526 123578613282624 run.py:549] (val) algo activity_selector step 600: {'selected': 0.8230912476722533, 'score': 0.8230912476722533, 'examples_seen': 4808, 'step': 600, 'algorithm': 'activity_selector'}
+I0108 23:23:13.018764 123578613282624 run.py:549] (val) algo bfs step 600: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 4808, 'step': 600, 'algorithm': 'bfs'}
+I0108 23:23:13.019021 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.909, current avg val score is 0.887, val scores are: insertion_sort: 0.840, activity_selector: 0.823, bfs: 0.999
+I0108 23:23:15.015209 123578613282624 run.py:549] (val) algo insertion_sort step 650: {'pred': 0.8037109375, 'score': 0.8037109375, 'examples_seen': 5208, 'step': 650, 'algorithm': 'insertion_sort'}
+I0108 23:23:15.035101 123578613282624 run.py:549] (val) algo activity_selector step 650: {'selected': 0.8363047001620746, 'score': 0.8363047001620746, 'examples_seen': 5208, 'step': 650, 'algorithm': 'activity_selector'}
+I0108 23:23:15.052531 123578613282624 run.py:549] (val) algo bfs step 650: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 5208, 'step': 650, 'algorithm': 'bfs'}
+I0108 23:23:15.052773 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.909, current avg val score is 0.880, val scores are: insertion_sort: 0.804, activity_selector: 0.836, bfs: 0.999
+I0108 23:23:17.042744 123578613282624 run.py:549] (val) algo insertion_sort step 700: {'pred': 0.9560546875, 'score': 0.9560546875, 'examples_seen': 5608, 'step': 700, 'algorithm': 'insertion_sort'}
+I0108 23:23:17.063292 123578613282624 run.py:549] (val) algo activity_selector step 700: {'selected': 0.875, 'score': 0.875, 'examples_seen': 5608, 'step': 700, 'algorithm': 'activity_selector'}
+I0108 23:23:17.083094 123578613282624 run.py:549] (val) algo bfs step 700: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 5608, 'step': 700, 'algorithm': 'bfs'}
+I0108 23:23:17.083328 123578613282624 run.py:567] Checkpointing best model, best avg val score was 0.909, current avg val score is 0.943, val scores are: insertion_sort: 0.956, activity_selector: 0.875, bfs: 0.999
+I0108 23:23:19.118384 123578613282624 run.py:549] (val) algo insertion_sort step 750: {'pred': 0.9521484375, 'score': 0.9521484375, 'examples_seen': 6008, 'step': 750, 'algorithm': 'insertion_sort'}
+I0108 23:23:19.140015 123578613282624 run.py:549] (val) algo activity_selector step 750: {'selected': 0.8464163822525598, 'score': 0.8464163822525598, 'examples_seen': 6008, 'step': 750, 'algorithm': 'activity_selector'}
+I0108 23:23:19.159452 123578613282624 run.py:549] (val) algo bfs step 750: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 6008, 'step': 750, 'algorithm': 'bfs'}
+I0108 23:23:19.159596 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.943, current avg val score is 0.933, val scores are: insertion_sort: 0.952, activity_selector: 0.846, bfs: 0.999
+I0108 23:23:21.169996 123578613282624 run.py:549] (val) algo insertion_sort step 800: {'pred': 0.89453125, 'score': 0.89453125, 'examples_seen': 6408, 'step': 800, 'algorithm': 'insertion_sort'}
+I0108 23:23:21.191790 123578613282624 run.py:549] (val) algo activity_selector step 800: {'selected': 0.8316498316498316, 'score': 0.8316498316498316, 'examples_seen': 6408, 'step': 800, 'algorithm': 'activity_selector'}
+I0108 23:23:21.211454 123578613282624 run.py:549] (val) algo bfs step 800: {'pi': 0.9951171875, 'score': 0.9951171875, 'examples_seen': 6408, 'step': 800, 'algorithm': 'bfs'}
+I0108 23:23:21.211660 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.943, current avg val score is 0.907, val scores are: insertion_sort: 0.895, activity_selector: 0.832, bfs: 0.995
+I0108 23:23:23.258593 123578613282624 run.py:549] (val) algo insertion_sort step 850: {'pred': 0.9541015625, 'score': 0.9541015625, 'examples_seen': 6808, 'step': 850, 'algorithm': 'insertion_sort'}
+I0108 23:23:23.279661 123578613282624 run.py:549] (val) algo activity_selector step 850: {'selected': 0.8936170212765957, 'score': 0.8936170212765957, 'examples_seen': 6808, 'step': 850, 'algorithm': 'activity_selector'}
+I0108 23:23:23.299558 123578613282624 run.py:549] (val) algo bfs step 850: {'pi': 1.0, 'score': 1.0, 'examples_seen': 6808, 'step': 850, 'algorithm': 'bfs'}
+I0108 23:23:23.299734 123578613282624 run.py:567] Checkpointing best model, best avg val score was 0.943, current avg val score is 0.949, val scores are: insertion_sort: 0.954, activity_selector: 0.894, bfs: 1.000
+I0108 23:23:25.331044 123578613282624 run.py:549] (val) algo insertion_sort step 900: {'pred': 0.86328125, 'score': 0.86328125, 'examples_seen': 7208, 'step': 900, 'algorithm': 'insertion_sort'}
+I0108 23:23:25.352227 123578613282624 run.py:549] (val) algo activity_selector step 900: {'selected': 0.8509874326750448, 'score': 0.8509874326750448, 'examples_seen': 7208, 'step': 900, 'algorithm': 'activity_selector'}
+I0108 23:23:25.370374 123578613282624 run.py:549] (val) algo bfs step 900: {'pi': 0.998046875, 'score': 0.998046875, 'examples_seen': 7208, 'step': 900, 'algorithm': 'bfs'}
+I0108 23:23:25.370589 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.949, current avg val score is 0.904, val scores are: insertion_sort: 0.863, activity_selector: 0.851, bfs: 0.998
+I0108 23:23:27.375425 123578613282624 run.py:549] (val) algo insertion_sort step 950: {'pred': 0.8037109375, 'score': 0.8037109375, 'examples_seen': 7608, 'step': 950, 'algorithm': 'insertion_sort'}
+I0108 23:23:27.396177 123578613282624 run.py:549] (val) algo activity_selector step 950: {'selected': 0.8416, 'score': 0.8416, 'examples_seen': 7608, 'step': 950, 'algorithm': 'activity_selector'}
+I0108 23:23:27.415004 123578613282624 run.py:549] (val) algo bfs step 950: {'pi': 1.0, 'score': 1.0, 'examples_seen': 7608, 'step': 950, 'algorithm': 'bfs'}
+I0108 23:23:27.415228 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.949, current avg val score is 0.882, val scores are: insertion_sort: 0.804, activity_selector: 0.842, bfs: 1.000
+I0108 23:23:29.436479 123578613282624 run.py:549] (val) algo insertion_sort step 1000: {'pred': 0.9248046875, 'score': 0.9248046875, 'examples_seen': 8008, 'step': 1000, 'algorithm': 'insertion_sort'}
+I0108 23:23:29.456848 123578613282624 run.py:549] (val) algo activity_selector step 1000: {'selected': 0.8901303538175047, 'score': 0.8901303538175047, 'examples_seen': 8008, 'step': 1000, 'algorithm': 'activity_selector'}
+I0108 23:23:29.475419 123578613282624 run.py:549] (val) algo bfs step 1000: {'pi': 0.998046875, 'score': 0.998046875, 'examples_seen': 8008, 'step': 1000, 'algorithm': 'bfs'}
+I0108 23:23:29.475625 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.949, current avg val score is 0.938, val scores are: insertion_sort: 0.925, activity_selector: 0.890, bfs: 0.998
+I0108 23:23:31.443860 123578613282624 run.py:549] (val) algo insertion_sort step 1050: {'pred': 0.927734375, 'score': 0.927734375, 'examples_seen': 8408, 'step': 1050, 'algorithm': 'insertion_sort'}
+I0108 23:23:31.464604 123578613282624 run.py:549] (val) algo activity_selector step 1050: {'selected': 0.9371633752244165, 'score': 0.9371633752244165, 'examples_seen': 8408, 'step': 1050, 'algorithm': 'activity_selector'}
+I0108 23:23:31.484037 123578613282624 run.py:549] (val) algo bfs step 1050: {'pi': 0.9970703125, 'score': 0.9970703125, 'examples_seen': 8408, 'step': 1050, 'algorithm': 'bfs'}
+I0108 23:23:31.484295 123578613282624 run.py:567] Checkpointing best model, best avg val score was 0.949, current avg val score is 0.954, val scores are: insertion_sort: 0.928, activity_selector: 0.937, bfs: 0.997
+I0108 23:23:33.454429 123578613282624 run.py:549] (val) algo insertion_sort step 1100: {'pred': 0.9521484375, 'score': 0.9521484375, 'examples_seen': 8808, 'step': 1100, 'algorithm': 'insertion_sort'}
+I0108 23:23:33.474423 123578613282624 run.py:549] (val) algo activity_selector step 1100: {'selected': 0.8924949290060852, 'score': 0.8924949290060852, 'examples_seen': 8808, 'step': 1100, 'algorithm': 'activity_selector'}
+I0108 23:23:33.492518 123578613282624 run.py:549] (val) algo bfs step 1100: {'pi': 0.9970703125, 'score': 0.9970703125, 'examples_seen': 8808, 'step': 1100, 'algorithm': 'bfs'}
+I0108 23:23:33.492677 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.954, current avg val score is 0.947, val scores are: insertion_sort: 0.952, activity_selector: 0.892, bfs: 0.997
+I0108 23:23:35.491864 123578613282624 run.py:549] (val) algo insertion_sort step 1150: {'pred': 0.9267578125, 'score': 0.9267578125, 'examples_seen': 9208, 'step': 1150, 'algorithm': 'insertion_sort'}
+I0108 23:23:35.512518 123578613282624 run.py:549] (val) algo activity_selector step 1150: {'selected': 0.8888888888888888, 'score': 0.8888888888888888, 'examples_seen': 9208, 'step': 1150, 'algorithm': 'activity_selector'}
+I0108 23:23:35.532629 123578613282624 run.py:549] (val) algo bfs step 1150: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 9208, 'step': 1150, 'algorithm': 'bfs'}
+I0108 23:23:35.532841 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.954, current avg val score is 0.938, val scores are: insertion_sort: 0.927, activity_selector: 0.889, bfs: 0.999
+I0108 23:23:37.560092 123578613282624 run.py:549] (val) algo insertion_sort step 1200: {'pred': 0.9091796875, 'score': 0.9091796875, 'examples_seen': 9608, 'step': 1200, 'algorithm': 'insertion_sort'}
+I0108 23:23:37.582072 123578613282624 run.py:549] (val) algo activity_selector step 1200: {'selected': 0.8976377952755905, 'score': 0.8976377952755905, 'examples_seen': 9608, 'step': 1200, 'algorithm': 'activity_selector'}
+I0108 23:23:37.601750 123578613282624 run.py:549] (val) algo bfs step 1200: {'pi': 0.9970703125, 'score': 0.9970703125, 'examples_seen': 9608, 'step': 1200, 'algorithm': 'bfs'}
+I0108 23:23:37.601983 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.954, current avg val score is 0.935, val scores are: insertion_sort: 0.909, activity_selector: 0.898, bfs: 0.997
+I0108 23:23:39.588620 123578613282624 run.py:549] (val) algo insertion_sort step 1250: {'pred': 0.873046875, 'score': 0.873046875, 'examples_seen': 10008, 'step': 1250, 'algorithm': 'insertion_sort'}
+I0108 23:23:39.609954 123578613282624 run.py:549] (val) algo activity_selector step 1250: {'selected': 0.8274582560296846, 'score': 0.8274582560296846, 'examples_seen': 10008, 'step': 1250, 'algorithm': 'activity_selector'}
+I0108 23:23:39.628347 123578613282624 run.py:549] (val) algo bfs step 1250: {'pi': 0.998046875, 'score': 0.998046875, 'examples_seen': 10008, 'step': 1250, 'algorithm': 'bfs'}
+I0108 23:23:39.628562 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.954, current avg val score is 0.900, val scores are: insertion_sort: 0.873, activity_selector: 0.827, bfs: 0.998
+I0108 23:23:41.613200 123578613282624 run.py:549] (val) algo insertion_sort step 1300: {'pred': 0.923828125, 'score': 0.923828125, 'examples_seen': 10408, 'step': 1300, 'algorithm': 'insertion_sort'}
+I0108 23:23:41.634333 123578613282624 run.py:549] (val) algo activity_selector step 1300: {'selected': 0.8767605633802816, 'score': 0.8767605633802816, 'examples_seen': 10408, 'step': 1300, 'algorithm': 'activity_selector'}
+I0108 23:23:41.652940 123578613282624 run.py:549] (val) algo bfs step 1300: {'pi': 0.96484375, 'score': 0.96484375, 'examples_seen': 10408, 'step': 1300, 'algorithm': 'bfs'}
+I0108 23:23:41.653171 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.954, current avg val score is 0.922, val scores are: insertion_sort: 0.924, activity_selector: 0.877, bfs: 0.965
+I0108 23:23:43.635005 123578613282624 run.py:549] (val) algo insertion_sort step 1350: {'pred': 0.9306640625, 'score': 0.9306640625, 'examples_seen': 10808, 'step': 1350, 'algorithm': 'insertion_sort'}
+I0108 23:23:43.655363 123578613282624 run.py:549] (val) algo activity_selector step 1350: {'selected': 0.9245901639344262, 'score': 0.9245901639344262, 'examples_seen': 10808, 'step': 1350, 'algorithm': 'activity_selector'}
+I0108 23:23:43.675228 123578613282624 run.py:549] (val) algo bfs step 1350: {'pi': 0.9951171875, 'score': 0.9951171875, 'examples_seen': 10808, 'step': 1350, 'algorithm': 'bfs'}
+I0108 23:23:43.675435 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.954, current avg val score is 0.950, val scores are: insertion_sort: 0.931, activity_selector: 0.925, bfs: 0.995
+I0108 23:23:45.656960 123578613282624 run.py:549] (val) algo insertion_sort step 1400: {'pred': 0.87109375, 'score': 0.87109375, 'examples_seen': 11208, 'step': 1400, 'algorithm': 'insertion_sort'}
+I0108 23:23:45.678043 123578613282624 run.py:549] (val) algo activity_selector step 1400: {'selected': 0.9233511586452763, 'score': 0.9233511586452763, 'examples_seen': 11208, 'step': 1400, 'algorithm': 'activity_selector'}
+I0108 23:23:45.696254 123578613282624 run.py:549] (val) algo bfs step 1400: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 11208, 'step': 1400, 'algorithm': 'bfs'}
+I0108 23:23:45.696472 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.954, current avg val score is 0.931, val scores are: insertion_sort: 0.871, activity_selector: 0.923, bfs: 0.999
+I0108 23:23:47.680419 123578613282624 run.py:549] (val) algo insertion_sort step 1450: {'pred': 0.9580078125, 'score': 0.9580078125, 'examples_seen': 11608, 'step': 1450, 'algorithm': 'insertion_sort'}
+I0108 23:23:47.700906 123578613282624 run.py:549] (val) algo activity_selector step 1450: {'selected': 0.9310344827586207, 'score': 0.9310344827586207, 'examples_seen': 11608, 'step': 1450, 'algorithm': 'activity_selector'}
+I0108 23:23:47.718922 123578613282624 run.py:549] (val) algo bfs step 1450: {'pi': 0.9970703125, 'score': 0.9970703125, 'examples_seen': 11608, 'step': 1450, 'algorithm': 'bfs'}
+I0108 23:23:47.719082 123578613282624 run.py:567] Checkpointing best model, best avg val score was 0.954, current avg val score is 0.962, val scores are: insertion_sort: 0.958, activity_selector: 0.931, bfs: 0.997
+I0108 23:23:49.751606 123578613282624 run.py:549] (val) algo insertion_sort step 1500: {'pred': 0.9443359375, 'score': 0.9443359375, 'examples_seen': 12008, 'step': 1500, 'algorithm': 'insertion_sort'}
+I0108 23:23:49.772279 123578613282624 run.py:549] (val) algo activity_selector step 1500: {'selected': 0.9034749034749036, 'score': 0.9034749034749036, 'examples_seen': 12008, 'step': 1500, 'algorithm': 'activity_selector'}
+I0108 23:23:49.791260 123578613282624 run.py:549] (val) algo bfs step 1500: {'pi': 0.9970703125, 'score': 0.9970703125, 'examples_seen': 12008, 'step': 1500, 'algorithm': 'bfs'}
+I0108 23:23:49.791469 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.962, current avg val score is 0.948, val scores are: insertion_sort: 0.944, activity_selector: 0.903, bfs: 0.997
+I0108 23:23:51.781435 123578613282624 run.py:549] (val) algo insertion_sort step 1550: {'pred': 0.892578125, 'score': 0.892578125, 'examples_seen': 12408, 'step': 1550, 'algorithm': 'insertion_sort'}
+I0108 23:23:51.801755 123578613282624 run.py:549] (val) algo activity_selector step 1550: {'selected': 0.9224952741020795, 'score': 0.9224952741020795, 'examples_seen': 12408, 'step': 1550, 'algorithm': 'activity_selector'}
+I0108 23:23:51.819231 123578613282624 run.py:549] (val) algo bfs step 1550: {'pi': 0.99609375, 'score': 0.99609375, 'examples_seen': 12408, 'step': 1550, 'algorithm': 'bfs'}
+I0108 23:23:51.819396 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.962, current avg val score is 0.937, val scores are: insertion_sort: 0.893, activity_selector: 0.922, bfs: 0.996
+I0108 23:23:53.802794 123578613282624 run.py:549] (val) algo insertion_sort step 1600: {'pred': 0.9052734375, 'score': 0.9052734375, 'examples_seen': 12808, 'step': 1600, 'algorithm': 'insertion_sort'}
+I0108 23:23:53.822772 123578613282624 run.py:549] (val) algo activity_selector step 1600: {'selected': 0.8754863813229572, 'score': 0.8754863813229572, 'examples_seen': 12808, 'step': 1600, 'algorithm': 'activity_selector'}
+I0108 23:23:53.841878 123578613282624 run.py:549] (val) algo bfs step 1600: {'pi': 1.0, 'score': 1.0, 'examples_seen': 12808, 'step': 1600, 'algorithm': 'bfs'}
+I0108 23:23:53.842060 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.962, current avg val score is 0.927, val scores are: insertion_sort: 0.905, activity_selector: 0.875, bfs: 1.000
+W0108 23:23:54.499589 123578613282624 samplers.py:173] Increasing hint lengh from 9 to 10
+I0108 23:24:08.176966 123578613282624 run.py:549] (val) algo insertion_sort step 1650: {'pred': 0.943359375, 'score': 0.943359375, 'examples_seen': 13208, 'step': 1650, 'algorithm': 'insertion_sort'}
+I0108 23:24:08.199358 123578613282624 run.py:549] (val) algo activity_selector step 1650: {'selected': 0.9283018867924528, 'score': 0.9283018867924528, 'examples_seen': 13208, 'step': 1650, 'algorithm': 'activity_selector'}
+I0108 23:24:08.220093 123578613282624 run.py:549] (val) algo bfs step 1650: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 13208, 'step': 1650, 'algorithm': 'bfs'}
+I0108 23:24:08.220317 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.962, current avg val score is 0.957, val scores are: insertion_sort: 0.943, activity_selector: 0.928, bfs: 0.999
+I0108 23:24:10.237649 123578613282624 run.py:549] (val) algo insertion_sort step 1700: {'pred': 0.9130859375, 'score': 0.9130859375, 'examples_seen': 13608, 'step': 1700, 'algorithm': 'insertion_sort'}
+I0108 23:24:10.258879 123578613282624 run.py:549] (val) algo activity_selector step 1700: {'selected': 0.9222222222222223, 'score': 0.9222222222222223, 'examples_seen': 13608, 'step': 1700, 'algorithm': 'activity_selector'}
+I0108 23:24:10.279429 123578613282624 run.py:549] (val) algo bfs step 1700: {'pi': 1.0, 'score': 1.0, 'examples_seen': 13608, 'step': 1700, 'algorithm': 'bfs'}
+I0108 23:24:10.279669 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.962, current avg val score is 0.945, val scores are: insertion_sort: 0.913, activity_selector: 0.922, bfs: 1.000
+I0108 23:24:12.528328 123578613282624 run.py:549] (val) algo insertion_sort step 1750: {'pred': 0.916015625, 'score': 0.916015625, 'examples_seen': 14008, 'step': 1750, 'algorithm': 'insertion_sort'}
+I0108 23:24:12.550055 123578613282624 run.py:549] (val) algo activity_selector step 1750: {'selected': 0.9405204460966543, 'score': 0.9405204460966543, 'examples_seen': 14008, 'step': 1750, 'algorithm': 'activity_selector'}
+I0108 23:24:12.569180 123578613282624 run.py:549] (val) algo bfs step 1750: {'pi': 0.998046875, 'score': 0.998046875, 'examples_seen': 14008, 'step': 1750, 'algorithm': 'bfs'}
+I0108 23:24:12.569412 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.962, current avg val score is 0.952, val scores are: insertion_sort: 0.916, activity_selector: 0.941, bfs: 0.998
+I0108 23:24:14.634634 123578613282624 run.py:549] (val) algo insertion_sort step 1800: {'pred': 0.9306640625, 'score': 0.9306640625, 'examples_seen': 14408, 'step': 1800, 'algorithm': 'insertion_sort'}
+I0108 23:24:14.654284 123578613282624 run.py:549] (val) algo activity_selector step 1800: {'selected': 0.9194991055456172, 'score': 0.9194991055456172, 'examples_seen': 14408, 'step': 1800, 'algorithm': 'activity_selector'}
+I0108 23:24:14.671307 123578613282624 run.py:549] (val) algo bfs step 1800: {'pi': 0.99609375, 'score': 0.99609375, 'examples_seen': 14408, 'step': 1800, 'algorithm': 'bfs'}
+I0108 23:24:14.671489 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.962, current avg val score is 0.949, val scores are: insertion_sort: 0.931, activity_selector: 0.919, bfs: 0.996
+I0108 23:24:16.694563 123578613282624 run.py:549] (val) algo insertion_sort step 1850: {'pred': 0.95703125, 'score': 0.95703125, 'examples_seen': 14808, 'step': 1850, 'algorithm': 'insertion_sort'}
+I0108 23:24:16.715344 123578613282624 run.py:549] (val) algo activity_selector step 1850: {'selected': 0.8383233532934132, 'score': 0.8383233532934132, 'examples_seen': 14808, 'step': 1850, 'algorithm': 'activity_selector'}
+I0108 23:24:16.734676 123578613282624 run.py:549] (val) algo bfs step 1850: {'pi': 0.9970703125, 'score': 0.9970703125, 'examples_seen': 14808, 'step': 1850, 'algorithm': 'bfs'}
+I0108 23:24:16.734885 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.962, current avg val score is 0.931, val scores are: insertion_sort: 0.957, activity_selector: 0.838, bfs: 0.997
+I0108 23:24:18.730480 123578613282624 run.py:549] (val) algo insertion_sort step 1900: {'pred': 0.935546875, 'score': 0.935546875, 'examples_seen': 15208, 'step': 1900, 'algorithm': 'insertion_sort'}
+I0108 23:24:18.749759 123578613282624 run.py:549] (val) algo activity_selector step 1900: {'selected': 0.9341085271317829, 'score': 0.9341085271317829, 'examples_seen': 15208, 'step': 1900, 'algorithm': 'activity_selector'}
+I0108 23:24:18.768518 123578613282624 run.py:549] (val) algo bfs step 1900: {'pi': 0.994140625, 'score': 0.994140625, 'examples_seen': 15208, 'step': 1900, 'algorithm': 'bfs'}
+I0108 23:24:18.768742 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.962, current avg val score is 0.955, val scores are: insertion_sort: 0.936, activity_selector: 0.934, bfs: 0.994
+I0108 23:24:20.680178 123578613282624 run.py:549] (val) algo insertion_sort step 1950: {'pred': 0.865234375, 'score': 0.865234375, 'examples_seen': 15608, 'step': 1950, 'algorithm': 'insertion_sort'}
+I0108 23:24:20.700304 123578613282624 run.py:549] (val) algo activity_selector step 1950: {'selected': 0.9080459770114944, 'score': 0.9080459770114944, 'examples_seen': 15608, 'step': 1950, 'algorithm': 'activity_selector'}
+I0108 23:24:20.719265 123578613282624 run.py:549] (val) algo bfs step 1950: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 15608, 'step': 1950, 'algorithm': 'bfs'}
+I0108 23:24:20.719489 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.962, current avg val score is 0.924, val scores are: insertion_sort: 0.865, activity_selector: 0.908, bfs: 0.999
+I0108 23:24:22.663076 123578613282624 run.py:549] (val) algo insertion_sort step 2000: {'pred': 0.8779296875, 'score': 0.8779296875, 'examples_seen': 16008, 'step': 2000, 'algorithm': 'insertion_sort'}
+I0108 23:24:22.684399 123578613282624 run.py:549] (val) algo activity_selector step 2000: {'selected': 0.9165120593692022, 'score': 0.9165120593692022, 'examples_seen': 16008, 'step': 2000, 'algorithm': 'activity_selector'}
+I0108 23:24:22.703801 123578613282624 run.py:549] (val) algo bfs step 2000: {'pi': 0.998046875, 'score': 0.998046875, 'examples_seen': 16008, 'step': 2000, 'algorithm': 'bfs'}
+I0108 23:24:22.704045 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.962, current avg val score is 0.931, val scores are: insertion_sort: 0.878, activity_selector: 0.917, bfs: 0.998
+I0108 23:24:24.717721 123578613282624 run.py:549] (val) algo insertion_sort step 2050: {'pred': 0.912109375, 'score': 0.912109375, 'examples_seen': 16408, 'step': 2050, 'algorithm': 'insertion_sort'}
+I0108 23:24:24.739023 123578613282624 run.py:549] (val) algo activity_selector step 2050: {'selected': 0.9168207024029575, 'score': 0.9168207024029575, 'examples_seen': 16408, 'step': 2050, 'algorithm': 'activity_selector'}
+I0108 23:24:24.758694 123578613282624 run.py:549] (val) algo bfs step 2050: {'pi': 0.9970703125, 'score': 0.9970703125, 'examples_seen': 16408, 'step': 2050, 'algorithm': 'bfs'}
+I0108 23:24:24.758876 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.962, current avg val score is 0.942, val scores are: insertion_sort: 0.912, activity_selector: 0.917, bfs: 0.997
+I0108 23:24:26.864906 123578613282624 run.py:549] (val) algo insertion_sort step 2100: {'pred': 0.93359375, 'score': 0.93359375, 'examples_seen': 16808, 'step': 2100, 'algorithm': 'insertion_sort'}
+I0108 23:24:26.885374 123578613282624 run.py:549] (val) algo activity_selector step 2100: {'selected': 0.9459962756052142, 'score': 0.9459962756052142, 'examples_seen': 16808, 'step': 2100, 'algorithm': 'activity_selector'}
+I0108 23:24:26.904241 123578613282624 run.py:549] (val) algo bfs step 2100: {'pi': 1.0, 'score': 1.0, 'examples_seen': 16808, 'step': 2100, 'algorithm': 'bfs'}
+I0108 23:24:26.904403 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.962, current avg val score is 0.960, val scores are: insertion_sort: 0.934, activity_selector: 0.946, bfs: 1.000
+I0108 23:24:29.035124 123578613282624 run.py:549] (val) algo insertion_sort step 2150: {'pred': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 17208, 'step': 2150, 'algorithm': 'insertion_sort'}
+I0108 23:24:29.055831 123578613282624 run.py:549] (val) algo activity_selector step 2150: {'selected': 0.9015748031496063, 'score': 0.9015748031496063, 'examples_seen': 17208, 'step': 2150, 'algorithm': 'activity_selector'}
+I0108 23:24:29.074283 123578613282624 run.py:549] (val) algo bfs step 2150: {'pi': 0.9951171875, 'score': 0.9951171875, 'examples_seen': 17208, 'step': 2150, 'algorithm': 'bfs'}
+I0108 23:24:29.074525 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.962, current avg val score is 0.960, val scores are: insertion_sort: 0.983, activity_selector: 0.902, bfs: 0.995
+I0108 23:24:31.119143 123578613282624 run.py:549] (val) algo insertion_sort step 2200: {'pred': 0.8857421875, 'score': 0.8857421875, 'examples_seen': 17608, 'step': 2200, 'algorithm': 'insertion_sort'}
+I0108 23:24:31.139690 123578613282624 run.py:549] (val) algo activity_selector step 2200: {'selected': 0.9306569343065694, 'score': 0.9306569343065694, 'examples_seen': 17608, 'step': 2200, 'algorithm': 'activity_selector'}
+I0108 23:24:31.158712 123578613282624 run.py:549] (val) algo bfs step 2200: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 17608, 'step': 2200, 'algorithm': 'bfs'}
+I0108 23:24:31.158940 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.962, current avg val score is 0.938, val scores are: insertion_sort: 0.886, activity_selector: 0.931, bfs: 0.999
+I0108 23:24:33.240486 123578613282624 run.py:549] (val) algo insertion_sort step 2250: {'pred': 0.966796875, 'score': 0.966796875, 'examples_seen': 18008, 'step': 2250, 'algorithm': 'insertion_sort'}
+I0108 23:24:33.262387 123578613282624 run.py:549] (val) algo activity_selector step 2250: {'selected': 0.940952380952381, 'score': 0.940952380952381, 'examples_seen': 18008, 'step': 2250, 'algorithm': 'activity_selector'}
+I0108 23:24:33.281207 123578613282624 run.py:549] (val) algo bfs step 2250: {'pi': 0.998046875, 'score': 0.998046875, 'examples_seen': 18008, 'step': 2250, 'algorithm': 'bfs'}
+I0108 23:24:33.281384 123578613282624 run.py:567] Checkpointing best model, best avg val score was 0.962, current avg val score is 0.969, val scores are: insertion_sort: 0.967, activity_selector: 0.941, bfs: 0.998
+I0108 23:24:35.397644 123578613282624 run.py:549] (val) algo insertion_sort step 2300: {'pred': 0.935546875, 'score': 0.935546875, 'examples_seen': 18408, 'step': 2300, 'algorithm': 'insertion_sort'}
+I0108 23:24:35.417423 123578613282624 run.py:549] (val) algo activity_selector step 2300: {'selected': 0.9154929577464789, 'score': 0.9154929577464789, 'examples_seen': 18408, 'step': 2300, 'algorithm': 'activity_selector'}
+I0108 23:24:35.435983 123578613282624 run.py:549] (val) algo bfs step 2300: {'pi': 0.998046875, 'score': 0.998046875, 'examples_seen': 18408, 'step': 2300, 'algorithm': 'bfs'}
+I0108 23:24:35.436212 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.950, val scores are: insertion_sort: 0.936, activity_selector: 0.915, bfs: 0.998
+I0108 23:24:37.504584 123578613282624 run.py:549] (val) algo insertion_sort step 2350: {'pred': 0.958984375, 'score': 0.958984375, 'examples_seen': 18808, 'step': 2350, 'algorithm': 'insertion_sort'}
+I0108 23:24:37.524768 123578613282624 run.py:549] (val) algo activity_selector step 2350: {'selected': 0.9005628517823641, 'score': 0.9005628517823641, 'examples_seen': 18808, 'step': 2350, 'algorithm': 'activity_selector'}
+I0108 23:24:37.543765 123578613282624 run.py:549] (val) algo bfs step 2350: {'pi': 1.0, 'score': 1.0, 'examples_seen': 18808, 'step': 2350, 'algorithm': 'bfs'}
+I0108 23:24:37.543944 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.953, val scores are: insertion_sort: 0.959, activity_selector: 0.901, bfs: 1.000
+I0108 23:24:39.561713 123578613282624 run.py:549] (val) algo insertion_sort step 2400: {'pred': 0.9599609375, 'score': 0.9599609375, 'examples_seen': 19208, 'step': 2400, 'algorithm': 'insertion_sort'}
+I0108 23:24:39.583359 123578613282624 run.py:549] (val) algo activity_selector step 2400: {'selected': 0.9220103986135182, 'score': 0.9220103986135182, 'examples_seen': 19208, 'step': 2400, 'algorithm': 'activity_selector'}
+I0108 23:24:39.602275 123578613282624 run.py:549] (val) algo bfs step 2400: {'pi': 1.0, 'score': 1.0, 'examples_seen': 19208, 'step': 2400, 'algorithm': 'bfs'}
+I0108 23:24:39.602498 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.961, val scores are: insertion_sort: 0.960, activity_selector: 0.922, bfs: 1.000
+I0108 23:24:41.660407 123578613282624 run.py:549] (val) algo insertion_sort step 2450: {'pred': 0.955078125, 'score': 0.955078125, 'examples_seen': 19608, 'step': 2450, 'algorithm': 'insertion_sort'}
+I0108 23:24:41.680910 123578613282624 run.py:549] (val) algo activity_selector step 2450: {'selected': 0.9200779727095517, 'score': 0.9200779727095517, 'examples_seen': 19608, 'step': 2450, 'algorithm': 'activity_selector'}
+I0108 23:24:41.699011 123578613282624 run.py:549] (val) algo bfs step 2450: {'pi': 1.0, 'score': 1.0, 'examples_seen': 19608, 'step': 2450, 'algorithm': 'bfs'}
+I0108 23:24:41.699179 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.958, val scores are: insertion_sort: 0.955, activity_selector: 0.920, bfs: 1.000
+I0108 23:24:43.703790 123578613282624 run.py:549] (val) algo insertion_sort step 2500: {'pred': 0.9248046875, 'score': 0.9248046875, 'examples_seen': 20008, 'step': 2500, 'algorithm': 'insertion_sort'}
+I0108 23:24:43.723602 123578613282624 run.py:549] (val) algo activity_selector step 2500: {'selected': 0.9444444444444444, 'score': 0.9444444444444444, 'examples_seen': 20008, 'step': 2500, 'algorithm': 'activity_selector'}
+I0108 23:24:43.740850 123578613282624 run.py:549] (val) algo bfs step 2500: {'pi': 0.998046875, 'score': 0.998046875, 'examples_seen': 20008, 'step': 2500, 'algorithm': 'bfs'}
+I0108 23:24:43.741043 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.956, val scores are: insertion_sort: 0.925, activity_selector: 0.944, bfs: 0.998
+I0108 23:24:45.752845 123578613282624 run.py:549] (val) algo insertion_sort step 2550: {'pred': 0.9189453125, 'score': 0.9189453125, 'examples_seen': 20408, 'step': 2550, 'algorithm': 'insertion_sort'}
+I0108 23:24:45.772383 123578613282624 run.py:549] (val) algo activity_selector step 2550: {'selected': 0.9216417910447763, 'score': 0.9216417910447763, 'examples_seen': 20408, 'step': 2550, 'algorithm': 'activity_selector'}
+I0108 23:24:45.790455 123578613282624 run.py:549] (val) algo bfs step 2550: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 20408, 'step': 2550, 'algorithm': 'bfs'}
+I0108 23:24:45.790667 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.947, val scores are: insertion_sort: 0.919, activity_selector: 0.922, bfs: 0.999
+I0108 23:24:47.769520 123578613282624 run.py:549] (val) algo insertion_sort step 2600: {'pred': 0.9677734375, 'score': 0.9677734375, 'examples_seen': 20808, 'step': 2600, 'algorithm': 'insertion_sort'}
+I0108 23:24:47.789705 123578613282624 run.py:549] (val) algo activity_selector step 2600: {'selected': 0.9140893470790377, 'score': 0.9140893470790377, 'examples_seen': 20808, 'step': 2600, 'algorithm': 'activity_selector'}
+I0108 23:24:47.807456 123578613282624 run.py:549] (val) algo bfs step 2600: {'pi': 1.0, 'score': 1.0, 'examples_seen': 20808, 'step': 2600, 'algorithm': 'bfs'}
+I0108 23:24:47.807590 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.961, val scores are: insertion_sort: 0.968, activity_selector: 0.914, bfs: 1.000
+I0108 23:24:49.911943 123578613282624 run.py:549] (val) algo insertion_sort step 2650: {'pred': 0.9541015625, 'score': 0.9541015625, 'examples_seen': 21208, 'step': 2650, 'algorithm': 'insertion_sort'}
+I0108 23:24:49.933923 123578613282624 run.py:549] (val) algo activity_selector step 2650: {'selected': 0.9281961471103328, 'score': 0.9281961471103328, 'examples_seen': 21208, 'step': 2650, 'algorithm': 'activity_selector'}
+I0108 23:24:49.953109 123578613282624 run.py:549] (val) algo bfs step 2650: {'pi': 0.998046875, 'score': 0.998046875, 'examples_seen': 21208, 'step': 2650, 'algorithm': 'bfs'}
+I0108 23:24:49.953314 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.960, val scores are: insertion_sort: 0.954, activity_selector: 0.928, bfs: 0.998
+W0108 23:24:50.446565 123578613282624 samplers.py:173] Increasing hint lengh from 10 to 11
+I0108 23:25:03.927397 123578613282624 run.py:549] (val) algo insertion_sort step 2700: {'pred': 0.96484375, 'score': 0.96484375, 'examples_seen': 21608, 'step': 2700, 'algorithm': 'insertion_sort'}
+I0108 23:25:03.948874 123578613282624 run.py:549] (val) algo activity_selector step 2700: {'selected': 0.9335727109515262, 'score': 0.9335727109515262, 'examples_seen': 21608, 'step': 2700, 'algorithm': 'activity_selector'}
+I0108 23:25:03.968516 123578613282624 run.py:549] (val) algo bfs step 2700: {'pi': 1.0, 'score': 1.0, 'examples_seen': 21608, 'step': 2700, 'algorithm': 'bfs'}
+I0108 23:25:03.968686 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.966, val scores are: insertion_sort: 0.965, activity_selector: 0.934, bfs: 1.000
+I0108 23:25:06.110428 123578613282624 run.py:549] (val) algo insertion_sort step 2750: {'pred': 0.955078125, 'score': 0.955078125, 'examples_seen': 22008, 'step': 2750, 'algorithm': 'insertion_sort'}
+I0108 23:25:06.133800 123578613282624 run.py:549] (val) algo activity_selector step 2750: {'selected': 0.9210084033613445, 'score': 0.9210084033613445, 'examples_seen': 22008, 'step': 2750, 'algorithm': 'activity_selector'}
+I0108 23:25:06.152633 123578613282624 run.py:549] (val) algo bfs step 2750: {'pi': 1.0, 'score': 1.0, 'examples_seen': 22008, 'step': 2750, 'algorithm': 'bfs'}
+I0108 23:25:06.152816 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.959, val scores are: insertion_sort: 0.955, activity_selector: 0.921, bfs: 1.000
+I0108 23:25:08.363557 123578613282624 run.py:549] (val) algo insertion_sort step 2800: {'pred': 0.921875, 'score': 0.921875, 'examples_seen': 22408, 'step': 2800, 'algorithm': 'insertion_sort'}
+I0108 23:25:08.384777 123578613282624 run.py:549] (val) algo activity_selector step 2800: {'selected': 0.9672447013487475, 'score': 0.9672447013487475, 'examples_seen': 22408, 'step': 2800, 'algorithm': 'activity_selector'}
+I0108 23:25:08.403616 123578613282624 run.py:549] (val) algo bfs step 2800: {'pi': 1.0, 'score': 1.0, 'examples_seen': 22408, 'step': 2800, 'algorithm': 'bfs'}
+I0108 23:25:08.403754 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.963, val scores are: insertion_sort: 0.922, activity_selector: 0.967, bfs: 1.000
+I0108 23:25:10.548882 123578613282624 run.py:549] (val) algo insertion_sort step 2850: {'pred': 0.9443359375, 'score': 0.9443359375, 'examples_seen': 22808, 'step': 2850, 'algorithm': 'insertion_sort'}
+I0108 23:25:10.570932 123578613282624 run.py:549] (val) algo activity_selector step 2850: {'selected': 0.9392857142857144, 'score': 0.9392857142857144, 'examples_seen': 22808, 'step': 2850, 'algorithm': 'activity_selector'}
+I0108 23:25:10.589142 123578613282624 run.py:549] (val) algo bfs step 2850: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 22808, 'step': 2850, 'algorithm': 'bfs'}
+I0108 23:25:10.589320 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.961, val scores are: insertion_sort: 0.944, activity_selector: 0.939, bfs: 0.999
+I0108 23:25:12.724163 123578613282624 run.py:549] (val) algo insertion_sort step 2900: {'pred': 0.9501953125, 'score': 0.9501953125, 'examples_seen': 23208, 'step': 2900, 'algorithm': 'insertion_sort'}
+I0108 23:25:12.746378 123578613282624 run.py:549] (val) algo activity_selector step 2900: {'selected': 0.9257142857142857, 'score': 0.9257142857142857, 'examples_seen': 23208, 'step': 2900, 'algorithm': 'activity_selector'}
+I0108 23:25:12.765267 123578613282624 run.py:549] (val) algo bfs step 2900: {'pi': 1.0, 'score': 1.0, 'examples_seen': 23208, 'step': 2900, 'algorithm': 'bfs'}
+I0108 23:25:12.765449 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.959, val scores are: insertion_sort: 0.950, activity_selector: 0.926, bfs: 1.000
+I0108 23:25:14.851126 123578613282624 run.py:549] (val) algo insertion_sort step 2950: {'pred': 0.95703125, 'score': 0.95703125, 'examples_seen': 23608, 'step': 2950, 'algorithm': 'insertion_sort'}
+I0108 23:25:14.871939 123578613282624 run.py:549] (val) algo activity_selector step 2950: {'selected': 0.9551166965888689, 'score': 0.9551166965888689, 'examples_seen': 23608, 'step': 2950, 'algorithm': 'activity_selector'}
+I0108 23:25:14.890713 123578613282624 run.py:549] (val) algo bfs step 2950: {'pi': 0.994140625, 'score': 0.994140625, 'examples_seen': 23608, 'step': 2950, 'algorithm': 'bfs'}
+I0108 23:25:14.890851 123578613282624 run.py:567] Checkpointing best model, best avg val score was 0.969, current avg val score is 0.969, val scores are: insertion_sort: 0.957, activity_selector: 0.955, bfs: 0.994
+I0108 23:25:17.133549 123578613282624 run.py:549] (val) algo insertion_sort step 3000: {'pred': 0.94140625, 'score': 0.94140625, 'examples_seen': 24008, 'step': 3000, 'algorithm': 'insertion_sort'}
+I0108 23:25:17.154623 123578613282624 run.py:549] (val) algo activity_selector step 3000: {'selected': 0.925531914893617, 'score': 0.925531914893617, 'examples_seen': 24008, 'step': 3000, 'algorithm': 'activity_selector'}
+I0108 23:25:17.174105 123578613282624 run.py:549] (val) algo bfs step 3000: {'pi': 1.0, 'score': 1.0, 'examples_seen': 24008, 'step': 3000, 'algorithm': 'bfs'}
+I0108 23:25:17.174308 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.956, val scores are: insertion_sort: 0.941, activity_selector: 0.926, bfs: 1.000
+I0108 23:25:19.292672 123578613282624 run.py:549] (val) algo insertion_sort step 3050: {'pred': 0.9345703125, 'score': 0.9345703125, 'examples_seen': 24408, 'step': 3050, 'algorithm': 'insertion_sort'}
+I0108 23:25:19.314599 123578613282624 run.py:549] (val) algo activity_selector step 3050: {'selected': 0.9541984732824428, 'score': 0.9541984732824428, 'examples_seen': 24408, 'step': 3050, 'algorithm': 'activity_selector'}
+I0108 23:25:19.333692 123578613282624 run.py:549] (val) algo bfs step 3050: {'pi': 1.0, 'score': 1.0, 'examples_seen': 24408, 'step': 3050, 'algorithm': 'bfs'}
+I0108 23:25:19.333994 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.963, val scores are: insertion_sort: 0.935, activity_selector: 0.954, bfs: 1.000
+I0108 23:25:21.435864 123578613282624 run.py:549] (val) algo insertion_sort step 3100: {'pred': 0.919921875, 'score': 0.919921875, 'examples_seen': 24808, 'step': 3100, 'algorithm': 'insertion_sort'}
+I0108 23:25:21.456673 123578613282624 run.py:549] (val) algo activity_selector step 3100: {'selected': 0.8945454545454546, 'score': 0.8945454545454546, 'examples_seen': 24808, 'step': 3100, 'algorithm': 'activity_selector'}
+I0108 23:25:21.477173 123578613282624 run.py:549] (val) algo bfs step 3100: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 24808, 'step': 3100, 'algorithm': 'bfs'}
+I0108 23:25:21.477387 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.938, val scores are: insertion_sort: 0.920, activity_selector: 0.895, bfs: 0.999
+I0108 23:25:23.669305 123578613282624 run.py:549] (val) algo insertion_sort step 3150: {'pred': 0.9423828125, 'score': 0.9423828125, 'examples_seen': 25208, 'step': 3150, 'algorithm': 'insertion_sort'}
+I0108 23:25:23.691989 123578613282624 run.py:549] (val) algo activity_selector step 3150: {'selected': 0.9148514851485149, 'score': 0.9148514851485149, 'examples_seen': 25208, 'step': 3150, 'algorithm': 'activity_selector'}
+I0108 23:25:23.711829 123578613282624 run.py:549] (val) algo bfs step 3150: {'pi': 0.994140625, 'score': 0.994140625, 'examples_seen': 25208, 'step': 3150, 'algorithm': 'bfs'}
+I0108 23:25:23.712077 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.969, current avg val score is 0.950, val scores are: insertion_sort: 0.942, activity_selector: 0.915, bfs: 0.994
+I0108 23:25:25.803082 123578613282624 run.py:549] (val) algo insertion_sort step 3200: {'pred': 0.958984375, 'score': 0.958984375, 'examples_seen': 25608, 'step': 3200, 'algorithm': 'insertion_sort'}
+I0108 23:25:25.823786 123578613282624 run.py:549] (val) algo activity_selector step 3200: {'selected': 0.9678571428571429, 'score': 0.9678571428571429, 'examples_seen': 25608, 'step': 3200, 'algorithm': 'activity_selector'}
+I0108 23:25:25.842135 123578613282624 run.py:549] (val) algo bfs step 3200: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 25608, 'step': 3200, 'algorithm': 'bfs'}
+I0108 23:25:25.842368 123578613282624 run.py:567] Checkpointing best model, best avg val score was 0.969, current avg val score is 0.975, val scores are: insertion_sort: 0.959, activity_selector: 0.968, bfs: 0.999
+I0108 23:25:27.962141 123578613282624 run.py:549] (val) algo insertion_sort step 3250: {'pred': 0.96875, 'score': 0.96875, 'examples_seen': 26008, 'step': 3250, 'algorithm': 'insertion_sort'}
+I0108 23:25:27.984553 123578613282624 run.py:549] (val) algo activity_selector step 3250: {'selected': 0.907103825136612, 'score': 0.907103825136612, 'examples_seen': 26008, 'step': 3250, 'algorithm': 'activity_selector'}
+I0108 23:25:28.005528 123578613282624 run.py:549] (val) algo bfs step 3250: {'pi': 1.0, 'score': 1.0, 'examples_seen': 26008, 'step': 3250, 'algorithm': 'bfs'}
+I0108 23:25:28.005768 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.959, val scores are: insertion_sort: 0.969, activity_selector: 0.907, bfs: 1.000
+I0108 23:25:30.065719 123578613282624 run.py:549] (val) algo insertion_sort step 3300: {'pred': 0.970703125, 'score': 0.970703125, 'examples_seen': 26408, 'step': 3300, 'algorithm': 'insertion_sort'}
+I0108 23:25:30.087720 123578613282624 run.py:549] (val) algo activity_selector step 3300: {'selected': 0.9143897996357012, 'score': 0.9143897996357012, 'examples_seen': 26408, 'step': 3300, 'algorithm': 'activity_selector'}
+I0108 23:25:30.107778 123578613282624 run.py:549] (val) algo bfs step 3300: {'pi': 1.0, 'score': 1.0, 'examples_seen': 26408, 'step': 3300, 'algorithm': 'bfs'}
+I0108 23:25:30.107966 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.962, val scores are: insertion_sort: 0.971, activity_selector: 0.914, bfs: 1.000
+I0108 23:25:32.172013 123578613282624 run.py:549] (val) algo insertion_sort step 3350: {'pred': 0.90234375, 'score': 0.90234375, 'examples_seen': 26808, 'step': 3350, 'algorithm': 'insertion_sort'}
+I0108 23:25:32.192905 123578613282624 run.py:549] (val) algo activity_selector step 3350: {'selected': 0.8944543828264759, 'score': 0.8944543828264759, 'examples_seen': 26808, 'step': 3350, 'algorithm': 'activity_selector'}
+I0108 23:25:32.212692 123578613282624 run.py:549] (val) algo bfs step 3350: {'pi': 1.0, 'score': 1.0, 'examples_seen': 26808, 'step': 3350, 'algorithm': 'bfs'}
+I0108 23:25:32.212847 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.932, val scores are: insertion_sort: 0.902, activity_selector: 0.894, bfs: 1.000
+I0108 23:25:34.251698 123578613282624 run.py:549] (val) algo insertion_sort step 3400: {'pred': 0.9453125, 'score': 0.9453125, 'examples_seen': 27208, 'step': 3400, 'algorithm': 'insertion_sort'}
+I0108 23:25:34.271771 123578613282624 run.py:549] (val) algo activity_selector step 3400: {'selected': 0.9434697855750487, 'score': 0.9434697855750487, 'examples_seen': 27208, 'step': 3400, 'algorithm': 'activity_selector'}
+I0108 23:25:34.290870 123578613282624 run.py:549] (val) algo bfs step 3400: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 27208, 'step': 3400, 'algorithm': 'bfs'}
+I0108 23:25:34.291073 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.963, val scores are: insertion_sort: 0.945, activity_selector: 0.943, bfs: 0.999
+I0108 23:25:36.321610 123578613282624 run.py:549] (val) algo insertion_sort step 3450: {'pred': 0.9716796875, 'score': 0.9716796875, 'examples_seen': 27608, 'step': 3450, 'algorithm': 'insertion_sort'}
+I0108 23:25:36.343177 123578613282624 run.py:549] (val) algo activity_selector step 3450: {'selected': 0.8847583643122677, 'score': 0.8847583643122677, 'examples_seen': 27608, 'step': 3450, 'algorithm': 'activity_selector'}
+I0108 23:25:36.362353 123578613282624 run.py:549] (val) algo bfs step 3450: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 27608, 'step': 3450, 'algorithm': 'bfs'}
+I0108 23:25:36.362594 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.952, val scores are: insertion_sort: 0.972, activity_selector: 0.885, bfs: 0.999
+I0108 23:25:38.413946 123578613282624 run.py:549] (val) algo insertion_sort step 3500: {'pred': 0.9697265625, 'score': 0.9697265625, 'examples_seen': 28008, 'step': 3500, 'algorithm': 'insertion_sort'}
+I0108 23:25:38.434467 123578613282624 run.py:549] (val) algo activity_selector step 3500: {'selected': 0.9168278529980658, 'score': 0.9168278529980658, 'examples_seen': 28008, 'step': 3500, 'algorithm': 'activity_selector'}
+I0108 23:25:38.454261 123578613282624 run.py:549] (val) algo bfs step 3500: {'pi': 1.0, 'score': 1.0, 'examples_seen': 28008, 'step': 3500, 'algorithm': 'bfs'}
+I0108 23:25:38.454463 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.962, val scores are: insertion_sort: 0.970, activity_selector: 0.917, bfs: 1.000
+I0108 23:25:40.500309 123578613282624 run.py:549] (val) algo insertion_sort step 3550: {'pred': 0.98046875, 'score': 0.98046875, 'examples_seen': 28408, 'step': 3550, 'algorithm': 'insertion_sort'}
+I0108 23:25:40.520262 123578613282624 run.py:549] (val) algo activity_selector step 3550: {'selected': 0.9380863039399625, 'score': 0.9380863039399625, 'examples_seen': 28408, 'step': 3550, 'algorithm': 'activity_selector'}
+I0108 23:25:40.539172 123578613282624 run.py:549] (val) algo bfs step 3550: {'pi': 0.9970703125, 'score': 0.9970703125, 'examples_seen': 28408, 'step': 3550, 'algorithm': 'bfs'}
+I0108 23:25:40.539378 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.972, val scores are: insertion_sort: 0.980, activity_selector: 0.938, bfs: 0.997
+I0108 23:25:42.630194 123578613282624 run.py:549] (val) algo insertion_sort step 3600: {'pred': 0.98046875, 'score': 0.98046875, 'examples_seen': 28808, 'step': 3600, 'algorithm': 'insertion_sort'}
+I0108 23:25:42.650653 123578613282624 run.py:549] (val) algo activity_selector step 3600: {'selected': 0.9310986964618249, 'score': 0.9310986964618249, 'examples_seen': 28808, 'step': 3600, 'algorithm': 'activity_selector'}
+I0108 23:25:42.669790 123578613282624 run.py:549] (val) algo bfs step 3600: {'pi': 0.9970703125, 'score': 0.9970703125, 'examples_seen': 28808, 'step': 3600, 'algorithm': 'bfs'}
+I0108 23:25:42.670007 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.970, val scores are: insertion_sort: 0.980, activity_selector: 0.931, bfs: 0.997
+I0108 23:25:44.774440 123578613282624 run.py:549] (val) algo insertion_sort step 3650: {'pred': 0.9697265625, 'score': 0.9697265625, 'examples_seen': 29208, 'step': 3650, 'algorithm': 'insertion_sort'}
+I0108 23:25:44.795786 123578613282624 run.py:549] (val) algo activity_selector step 3650: {'selected': 0.914179104477612, 'score': 0.914179104477612, 'examples_seen': 29208, 'step': 3650, 'algorithm': 'activity_selector'}
+I0108 23:25:44.814759 123578613282624 run.py:549] (val) algo bfs step 3650: {'pi': 1.0, 'score': 1.0, 'examples_seen': 29208, 'step': 3650, 'algorithm': 'bfs'}
+I0108 23:25:44.814933 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.961, val scores are: insertion_sort: 0.970, activity_selector: 0.914, bfs: 1.000
+I0108 23:25:46.824170 123578613282624 run.py:549] (val) algo insertion_sort step 3700: {'pred': 0.9716796875, 'score': 0.9716796875, 'examples_seen': 29608, 'step': 3700, 'algorithm': 'insertion_sort'}
+I0108 23:25:46.844944 123578613282624 run.py:549] (val) algo activity_selector step 3700: {'selected': 0.9392265193370166, 'score': 0.9392265193370166, 'examples_seen': 29608, 'step': 3700, 'algorithm': 'activity_selector'}
+I0108 23:25:46.864658 123578613282624 run.py:549] (val) algo bfs step 3700: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 29608, 'step': 3700, 'algorithm': 'bfs'}
+I0108 23:25:46.864833 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.970, val scores are: insertion_sort: 0.972, activity_selector: 0.939, bfs: 0.999
+I0108 23:25:48.905020 123578613282624 run.py:549] (val) algo insertion_sort step 3750: {'pred': 0.9541015625, 'score': 0.9541015625, 'examples_seen': 30008, 'step': 3750, 'algorithm': 'insertion_sort'}
+I0108 23:25:48.926266 123578613282624 run.py:549] (val) algo activity_selector step 3750: {'selected': 0.930909090909091, 'score': 0.930909090909091, 'examples_seen': 30008, 'step': 3750, 'algorithm': 'activity_selector'}
+I0108 23:25:48.945700 123578613282624 run.py:549] (val) algo bfs step 3750: {'pi': 1.0, 'score': 1.0, 'examples_seen': 30008, 'step': 3750, 'algorithm': 'bfs'}
+I0108 23:25:48.945939 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.962, val scores are: insertion_sort: 0.954, activity_selector: 0.931, bfs: 1.000
+I0108 23:25:51.049472 123578613282624 run.py:549] (val) algo insertion_sort step 3800: {'pred': 0.955078125, 'score': 0.955078125, 'examples_seen': 30408, 'step': 3800, 'algorithm': 'insertion_sort'}
+I0108 23:25:51.070784 123578613282624 run.py:549] (val) algo activity_selector step 3800: {'selected': 0.9090909090909091, 'score': 0.9090909090909091, 'examples_seen': 30408, 'step': 3800, 'algorithm': 'activity_selector'}
+I0108 23:25:51.088883 123578613282624 run.py:549] (val) algo bfs step 3800: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 30408, 'step': 3800, 'algorithm': 'bfs'}
+I0108 23:25:51.089029 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.954, val scores are: insertion_sort: 0.955, activity_selector: 0.909, bfs: 0.999
+I0108 23:25:53.256564 123578613282624 run.py:549] (val) algo insertion_sort step 3850: {'pred': 0.9443359375, 'score': 0.9443359375, 'examples_seen': 30808, 'step': 3850, 'algorithm': 'insertion_sort'}
+I0108 23:25:53.277947 123578613282624 run.py:549] (val) algo activity_selector step 3850: {'selected': 0.9529190207156308, 'score': 0.9529190207156308, 'examples_seen': 30808, 'step': 3850, 'algorithm': 'activity_selector'}
+I0108 23:25:53.296972 123578613282624 run.py:549] (val) algo bfs step 3850: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 30808, 'step': 3850, 'algorithm': 'bfs'}
+I0108 23:25:53.297188 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.965, val scores are: insertion_sort: 0.944, activity_selector: 0.953, bfs: 0.999
+I0108 23:25:55.337052 123578613282624 run.py:549] (val) algo insertion_sort step 3900: {'pred': 0.9609375, 'score': 0.9609375, 'examples_seen': 31208, 'step': 3900, 'algorithm': 'insertion_sort'}
+I0108 23:25:55.358519 123578613282624 run.py:549] (val) algo activity_selector step 3900: {'selected': 0.9338374291115312, 'score': 0.9338374291115312, 'examples_seen': 31208, 'step': 3900, 'algorithm': 'activity_selector'}
+I0108 23:25:55.379710 123578613282624 run.py:549] (val) algo bfs step 3900: {'pi': 1.0, 'score': 1.0, 'examples_seen': 31208, 'step': 3900, 'algorithm': 'bfs'}
+I0108 23:25:55.379929 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.965, val scores are: insertion_sort: 0.961, activity_selector: 0.934, bfs: 1.000
+I0108 23:25:57.554440 123578613282624 run.py:549] (val) algo insertion_sort step 3950: {'pred': 0.982421875, 'score': 0.982421875, 'examples_seen': 31608, 'step': 3950, 'algorithm': 'insertion_sort'}
+I0108 23:25:57.576616 123578613282624 run.py:549] (val) algo activity_selector step 3950: {'selected': 0.9359430604982207, 'score': 0.9359430604982207, 'examples_seen': 31608, 'step': 3950, 'algorithm': 'activity_selector'}
+I0108 23:25:57.596481 123578613282624 run.py:549] (val) algo bfs step 3950: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 31608, 'step': 3950, 'algorithm': 'bfs'}
+I0108 23:25:57.596743 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.972, val scores are: insertion_sort: 0.982, activity_selector: 0.936, bfs: 0.999
+I0108 23:25:59.581913 123578613282624 run.py:549] (val) algo insertion_sort step 4000: {'pred': 0.9423828125, 'score': 0.9423828125, 'examples_seen': 32008, 'step': 4000, 'algorithm': 'insertion_sort'}
+I0108 23:25:59.601384 123578613282624 run.py:549] (val) algo activity_selector step 4000: {'selected': 0.9104761904761905, 'score': 0.9104761904761905, 'examples_seen': 32008, 'step': 4000, 'algorithm': 'activity_selector'}
+I0108 23:25:59.619181 123578613282624 run.py:549] (val) algo bfs step 4000: {'pi': 0.9951171875, 'score': 0.9951171875, 'examples_seen': 32008, 'step': 4000, 'algorithm': 'bfs'}
+I0108 23:25:59.619381 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.949, val scores are: insertion_sort: 0.942, activity_selector: 0.910, bfs: 0.995
+I0108 23:26:01.666090 123578613282624 run.py:549] (val) algo insertion_sort step 4050: {'pred': 0.9072265625, 'score': 0.9072265625, 'examples_seen': 32408, 'step': 4050, 'algorithm': 'insertion_sort'}
+I0108 23:26:01.687573 123578613282624 run.py:549] (val) algo activity_selector step 4050: {'selected': 0.9330922242314649, 'score': 0.9330922242314649, 'examples_seen': 32408, 'step': 4050, 'algorithm': 'activity_selector'}
+I0108 23:26:01.708394 123578613282624 run.py:549] (val) algo bfs step 4050: {'pi': 1.0, 'score': 1.0, 'examples_seen': 32408, 'step': 4050, 'algorithm': 'bfs'}
+I0108 23:26:01.708614 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.947, val scores are: insertion_sort: 0.907, activity_selector: 0.933, bfs: 1.000
+I0108 23:26:03.757810 123578613282624 run.py:549] (val) algo insertion_sort step 4100: {'pred': 0.9462890625, 'score': 0.9462890625, 'examples_seen': 32808, 'step': 4100, 'algorithm': 'insertion_sort'}
+I0108 23:26:03.777472 123578613282624 run.py:549] (val) algo activity_selector step 4100: {'selected': 0.9589552238805971, 'score': 0.9589552238805971, 'examples_seen': 32808, 'step': 4100, 'algorithm': 'activity_selector'}
+I0108 23:26:03.795612 123578613282624 run.py:549] (val) algo bfs step 4100: {'pi': 0.9970703125, 'score': 0.9970703125, 'examples_seen': 32808, 'step': 4100, 'algorithm': 'bfs'}
+I0108 23:26:03.795772 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.967, val scores are: insertion_sort: 0.946, activity_selector: 0.959, bfs: 0.997
+I0108 23:26:05.802064 123578613282624 run.py:549] (val) algo insertion_sort step 4150: {'pred': 0.9501953125, 'score': 0.9501953125, 'examples_seen': 33208, 'step': 4150, 'algorithm': 'insertion_sort'}
+I0108 23:26:05.823232 123578613282624 run.py:549] (val) algo activity_selector step 4150: {'selected': 0.9087893864013267, 'score': 0.9087893864013267, 'examples_seen': 33208, 'step': 4150, 'algorithm': 'activity_selector'}
+I0108 23:26:05.842609 123578613282624 run.py:549] (val) algo bfs step 4150: {'pi': 0.998046875, 'score': 0.998046875, 'examples_seen': 33208, 'step': 4150, 'algorithm': 'bfs'}
+I0108 23:26:05.842907 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.952, val scores are: insertion_sort: 0.950, activity_selector: 0.909, bfs: 0.998
+I0108 23:26:08.031562 123578613282624 run.py:549] (val) algo insertion_sort step 4200: {'pred': 0.9375, 'score': 0.9375, 'examples_seen': 33608, 'step': 4200, 'algorithm': 'insertion_sort'}
+I0108 23:26:08.053344 123578613282624 run.py:549] (val) algo activity_selector step 4200: {'selected': 0.9194139194139194, 'score': 0.9194139194139194, 'examples_seen': 33608, 'step': 4200, 'algorithm': 'activity_selector'}
+I0108 23:26:08.072059 123578613282624 run.py:549] (val) algo bfs step 4200: {'pi': 1.0, 'score': 1.0, 'examples_seen': 33608, 'step': 4200, 'algorithm': 'bfs'}
+I0108 23:26:08.072233 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.952, val scores are: insertion_sort: 0.938, activity_selector: 0.919, bfs: 1.000
+I0108 23:26:10.271126 123578613282624 run.py:549] (val) algo insertion_sort step 4250: {'pred': 0.947265625, 'score': 0.947265625, 'examples_seen': 34008, 'step': 4250, 'algorithm': 'insertion_sort'}
+I0108 23:26:10.291944 123578613282624 run.py:549] (val) algo activity_selector step 4250: {'selected': 0.9508771929824562, 'score': 0.9508771929824562, 'examples_seen': 34008, 'step': 4250, 'algorithm': 'activity_selector'}
+I0108 23:26:10.312204 123578613282624 run.py:549] (val) algo bfs step 4250: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 34008, 'step': 4250, 'algorithm': 'bfs'}
+I0108 23:26:10.312426 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.966, val scores are: insertion_sort: 0.947, activity_selector: 0.951, bfs: 0.999
+I0108 23:26:12.289253 123578613282624 run.py:549] (val) algo insertion_sort step 4300: {'pred': 0.9501953125, 'score': 0.9501953125, 'examples_seen': 34408, 'step': 4300, 'algorithm': 'insertion_sort'}
+I0108 23:26:12.308262 123578613282624 run.py:549] (val) algo activity_selector step 4300: {'selected': 0.9090909090909092, 'score': 0.9090909090909092, 'examples_seen': 34408, 'step': 4300, 'algorithm': 'activity_selector'}
+I0108 23:26:12.326433 123578613282624 run.py:549] (val) algo bfs step 4300: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 34408, 'step': 4300, 'algorithm': 'bfs'}
+I0108 23:26:12.326590 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.953, val scores are: insertion_sort: 0.950, activity_selector: 0.909, bfs: 0.999
+I0108 23:26:14.296918 123578613282624 run.py:549] (val) algo insertion_sort step 4350: {'pred': 0.94921875, 'score': 0.94921875, 'examples_seen': 34808, 'step': 4350, 'algorithm': 'insertion_sort'}
+I0108 23:26:14.317189 123578613282624 run.py:549] (val) algo activity_selector step 4350: {'selected': 0.8978224455611391, 'score': 0.8978224455611391, 'examples_seen': 34808, 'step': 4350, 'algorithm': 'activity_selector'}
+I0108 23:26:14.336045 123578613282624 run.py:549] (val) algo bfs step 4350: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 34808, 'step': 4350, 'algorithm': 'bfs'}
+I0108 23:26:14.336257 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.949, val scores are: insertion_sort: 0.949, activity_selector: 0.898, bfs: 0.999
+I0108 23:26:16.388224 123578613282624 run.py:549] (val) algo insertion_sort step 4400: {'pred': 0.9501953125, 'score': 0.9501953125, 'examples_seen': 35208, 'step': 4400, 'algorithm': 'insertion_sort'}
+I0108 23:26:16.409417 123578613282624 run.py:549] (val) algo activity_selector step 4400: {'selected': 0.8798521256931608, 'score': 0.8798521256931608, 'examples_seen': 35208, 'step': 4400, 'algorithm': 'activity_selector'}
+I0108 23:26:16.429254 123578613282624 run.py:549] (val) algo bfs step 4400: {'pi': 0.9951171875, 'score': 0.9951171875, 'examples_seen': 35208, 'step': 4400, 'algorithm': 'bfs'}
+I0108 23:26:16.429486 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.942, val scores are: insertion_sort: 0.950, activity_selector: 0.880, bfs: 0.995
+I0108 23:26:18.485867 123578613282624 run.py:549] (val) algo insertion_sort step 4450: {'pred': 0.96484375, 'score': 0.96484375, 'examples_seen': 35608, 'step': 4450, 'algorithm': 'insertion_sort'}
+I0108 23:26:18.505036 123578613282624 run.py:549] (val) algo activity_selector step 4450: {'selected': 0.874274661508704, 'score': 0.874274661508704, 'examples_seen': 35608, 'step': 4450, 'algorithm': 'activity_selector'}
+I0108 23:26:18.522729 123578613282624 run.py:549] (val) algo bfs step 4450: {'pi': 0.9970703125, 'score': 0.9970703125, 'examples_seen': 35608, 'step': 4450, 'algorithm': 'bfs'}
+I0108 23:26:18.522964 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.945, val scores are: insertion_sort: 0.965, activity_selector: 0.874, bfs: 0.997
+I0108 23:26:20.440202 123578613282624 run.py:549] (val) algo insertion_sort step 4500: {'pred': 0.94921875, 'score': 0.94921875, 'examples_seen': 36008, 'step': 4500, 'algorithm': 'insertion_sort'}
+I0108 23:26:20.460226 123578613282624 run.py:549] (val) algo activity_selector step 4500: {'selected': 0.9277566539923955, 'score': 0.9277566539923955, 'examples_seen': 36008, 'step': 4500, 'algorithm': 'activity_selector'}
+I0108 23:26:20.478513 123578613282624 run.py:549] (val) algo bfs step 4500: {'pi': 0.99609375, 'score': 0.99609375, 'examples_seen': 36008, 'step': 4500, 'algorithm': 'bfs'}
+I0108 23:26:20.478683 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.958, val scores are: insertion_sort: 0.949, activity_selector: 0.928, bfs: 0.996
+I0108 23:26:22.402562 123578613282624 run.py:549] (val) algo insertion_sort step 4550: {'pred': 0.9755859375, 'score': 0.9755859375, 'examples_seen': 36408, 'step': 4550, 'algorithm': 'insertion_sort'}
+I0108 23:26:22.422249 123578613282624 run.py:549] (val) algo activity_selector step 4550: {'selected': 0.9087523277467412, 'score': 0.9087523277467412, 'examples_seen': 36408, 'step': 4550, 'algorithm': 'activity_selector'}
+I0108 23:26:22.439779 123578613282624 run.py:549] (val) algo bfs step 4550: {'pi': 1.0, 'score': 1.0, 'examples_seen': 36408, 'step': 4550, 'algorithm': 'bfs'}
+I0108 23:26:22.439946 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.961, val scores are: insertion_sort: 0.976, activity_selector: 0.909, bfs: 1.000
+I0108 23:26:24.356128 123578613282624 run.py:549] (val) algo insertion_sort step 4600: {'pred': 0.9658203125, 'score': 0.9658203125, 'examples_seen': 36808, 'step': 4600, 'algorithm': 'insertion_sort'}
+I0108 23:26:24.376703 123578613282624 run.py:549] (val) algo activity_selector step 4600: {'selected': 0.8970873786407767, 'score': 0.8970873786407767, 'examples_seen': 36808, 'step': 4600, 'algorithm': 'activity_selector'}
+I0108 23:26:24.394562 123578613282624 run.py:549] (val) algo bfs step 4600: {'pi': 1.0, 'score': 1.0, 'examples_seen': 36808, 'step': 4600, 'algorithm': 'bfs'}
+I0108 23:26:24.394731 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.954, val scores are: insertion_sort: 0.966, activity_selector: 0.897, bfs: 1.000
+I0108 23:26:26.315657 123578613282624 run.py:549] (val) algo insertion_sort step 4650: {'pred': 0.966796875, 'score': 0.966796875, 'examples_seen': 37208, 'step': 4650, 'algorithm': 'insertion_sort'}
+I0108 23:26:26.335778 123578613282624 run.py:549] (val) algo activity_selector step 4650: {'selected': 0.957169459962756, 'score': 0.957169459962756, 'examples_seen': 37208, 'step': 4650, 'algorithm': 'activity_selector'}
+I0108 23:26:26.353951 123578613282624 run.py:549] (val) algo bfs step 4650: {'pi': 0.9951171875, 'score': 0.9951171875, 'examples_seen': 37208, 'step': 4650, 'algorithm': 'bfs'}
+I0108 23:26:26.354109 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.973, val scores are: insertion_sort: 0.967, activity_selector: 0.957, bfs: 0.995
+I0108 23:26:28.270330 123578613282624 run.py:549] (val) algo insertion_sort step 4700: {'pred': 0.9765625, 'score': 0.9765625, 'examples_seen': 37608, 'step': 4700, 'algorithm': 'insertion_sort'}
+I0108 23:26:28.289868 123578613282624 run.py:549] (val) algo activity_selector step 4700: {'selected': 0.9128014842300557, 'score': 0.9128014842300557, 'examples_seen': 37608, 'step': 4700, 'algorithm': 'activity_selector'}
+I0108 23:26:28.306998 123578613282624 run.py:549] (val) algo bfs step 4700: {'pi': 0.998046875, 'score': 0.998046875, 'examples_seen': 37608, 'step': 4700, 'algorithm': 'bfs'}
+I0108 23:26:28.307156 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.975, current avg val score is 0.962, val scores are: insertion_sort: 0.977, activity_selector: 0.913, bfs: 0.998
+I0108 23:26:30.222499 123578613282624 run.py:549] (val) algo insertion_sort step 4750: {'pred': 0.986328125, 'score': 0.986328125, 'examples_seen': 38008, 'step': 4750, 'algorithm': 'insertion_sort'}
+I0108 23:26:30.242251 123578613282624 run.py:549] (val) algo activity_selector step 4750: {'selected': 0.9424860853432282, 'score': 0.9424860853432282, 'examples_seen': 38008, 'step': 4750, 'algorithm': 'activity_selector'}
+I0108 23:26:30.259790 123578613282624 run.py:549] (val) algo bfs step 4750: {'pi': 1.0, 'score': 1.0, 'examples_seen': 38008, 'step': 4750, 'algorithm': 'bfs'}
+I0108 23:26:30.260024 123578613282624 run.py:567] Checkpointing best model, best avg val score was 0.975, current avg val score is 0.976, val scores are: insertion_sort: 0.986, activity_selector: 0.942, bfs: 1.000
+I0108 23:26:32.211363 123578613282624 run.py:549] (val) algo insertion_sort step 4800: {'pred': 0.966796875, 'score': 0.966796875, 'examples_seen': 38408, 'step': 4800, 'algorithm': 'insertion_sort'}
+I0108 23:26:32.231025 123578613282624 run.py:549] (val) algo activity_selector step 4800: {'selected': 0.9409660107334527, 'score': 0.9409660107334527, 'examples_seen': 38408, 'step': 4800, 'algorithm': 'activity_selector'}
+I0108 23:26:32.249810 123578613282624 run.py:549] (val) algo bfs step 4800: {'pi': 0.9990234375, 'score': 0.9990234375, 'examples_seen': 38408, 'step': 4800, 'algorithm': 'bfs'}
+I0108 23:26:32.250032 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.976, current avg val score is 0.969, val scores are: insertion_sort: 0.967, activity_selector: 0.941, bfs: 0.999
+I0108 23:26:34.167560 123578613282624 run.py:549] (val) algo insertion_sort step 4850: {'pred': 0.9765625, 'score': 0.9765625, 'examples_seen': 38808, 'step': 4850, 'algorithm': 'insertion_sort'}
+I0108 23:26:34.187434 123578613282624 run.py:549] (val) algo activity_selector step 4850: {'selected': 0.9403747870528109, 'score': 0.9403747870528109, 'examples_seen': 38808, 'step': 4850, 'algorithm': 'activity_selector'}
+I0108 23:26:34.206519 123578613282624 run.py:549] (val) algo bfs step 4850: {'pi': 1.0, 'score': 1.0, 'examples_seen': 38808, 'step': 4850, 'algorithm': 'bfs'}
+I0108 23:26:34.206776 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.976, current avg val score is 0.972, val scores are: insertion_sort: 0.977, activity_selector: 0.940, bfs: 1.000
+I0108 23:26:36.125731 123578613282624 run.py:549] (val) algo insertion_sort step 4900: {'pred': 0.9482421875, 'score': 0.9482421875, 'examples_seen': 39208, 'step': 4900, 'algorithm': 'insertion_sort'}
+I0108 23:26:36.145305 123578613282624 run.py:549] (val) algo activity_selector step 4900: {'selected': 0.9576427255985267, 'score': 0.9576427255985267, 'examples_seen': 39208, 'step': 4900, 'algorithm': 'activity_selector'}
+I0108 23:26:36.163986 123578613282624 run.py:549] (val) algo bfs step 4900: {'pi': 1.0, 'score': 1.0, 'examples_seen': 39208, 'step': 4900, 'algorithm': 'bfs'}
+I0108 23:26:36.164200 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.976, current avg val score is 0.969, val scores are: insertion_sort: 0.948, activity_selector: 0.958, bfs: 1.000
+I0108 23:26:38.084939 123578613282624 run.py:549] (val) algo insertion_sort step 4950: {'pred': 0.9404296875, 'score': 0.9404296875, 'examples_seen': 39608, 'step': 4950, 'algorithm': 'insertion_sort'}
+I0108 23:26:38.104813 123578613282624 run.py:549] (val) algo activity_selector step 4950: {'selected': 0.9333333333333333, 'score': 0.9333333333333333, 'examples_seen': 39608, 'step': 4950, 'algorithm': 'activity_selector'}
+I0108 23:26:38.123381 123578613282624 run.py:549] (val) algo bfs step 4950: {'pi': 1.0, 'score': 1.0, 'examples_seen': 39608, 'step': 4950, 'algorithm': 'bfs'}
+I0108 23:26:38.123594 123578613282624 run.py:570] Not saving new best model, best avg val score was 0.976, current avg val score is 0.958, val scores are: insertion_sort: 0.940, activity_selector: 0.933, bfs: 1.000
+I0108 23:26:39.944007 123578613282624 run.py:576] Restoring best model from checkpoint...
+falreis_path: %s CLRS30/best.pkl
+I0108 23:26:45.659496 123578613282624 run.py:591] (test) algo insertion_sort : {'pred': 0.923828125, 'score': 0.923828125, 'examples_seen': 40000, 'step': 5000, 'algorithm': 'insertion_sort'}
+I0108 23:26:47.071862 123578613282624 run.py:591] (test) algo activity_selector : {'selected': 0.9053356282271945, 'score': 0.9053356282271945, 'examples_seen': 40000, 'step': 5000, 'algorithm': 'activity_selector'}
+I0108 23:26:48.401072 123578613282624 run.py:591] (test) algo bfs : {'pi': 1.0, 'score': 1.0, 'examples_seen': 40000, 'step': 5000, 'algorithm': 'bfs'}
+I0108 23:26:48.401175 123578613282624 run.py:593] Done!

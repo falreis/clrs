@@ -17,6 +17,7 @@
 
 #python -m clrs.examples.run
 
+import sys
 import functools
 import os
 import shutil
@@ -52,13 +53,15 @@ assert tf.test.is_built_with_cuda()
 
 
 #source env/bin/activate env
-
-
-
 #os.environ["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"
 os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".85"
 
-flags.DEFINE_list('algorithms', ['quickselect'], 'Which algorithms to run.')
+#define algorithms to run
+if len(sys.argv) < 2:
+    flags.DEFINE_list('algorithms', ['activity_selector'], 'Which algorithms to run.')
+else:
+    flags.DEFINE_list('algorithms', [sys.argv[1]], 'Which algorithms to run.')
+
 
 #flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
 #flags.DEFINE_list('algorithms', ['dfs', 'heapsort', 'kmp_matcher', 'quickselect', 'strongly_connected_components'], 'Hard algorithms.')
@@ -76,8 +79,8 @@ flags.DEFINE_list('algorithms',
 '''
                  
 #flags.DEFINE_list('train_lengths', [-1], '')
-flags.DEFINE_list('train_lengths', ['2', '3', '5', '7', '11', '13', '17', '19', 
-                                    '23', '29', '31', '37', '39', '41'], '')
+#flags.DEFINE_list('train_lengths', ['2', '3', '5', '7', '11', '13', '17', '19', '23', '29', '31', '37', '39', '41'], '')
+flags.DEFINE_list('train_lengths', ['2', '3', '5', '7', '11', '13', '16'], '')
 
 '''
 #flags.DEFINE_list('train_lengths', ['2', '3', '5', '7', '11', '13'], '')

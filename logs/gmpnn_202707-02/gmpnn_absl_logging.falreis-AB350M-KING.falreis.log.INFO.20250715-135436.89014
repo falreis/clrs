@@ -1,0 +1,661 @@
+I0715 13:54:39.399789 137161025132032 xla_bridge.py:889] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0715 13:54:39.400448 137161025132032 xla_bridge.py:889] Unable to initialize backend 'tpu': INTERNAL: Failed to open libtpu.so: libtpu.so: cannot open shared object file: No such file or directory
+I0715 13:54:39.638176 137161025132032 run.py:416] Model: triplet_gmpnn ['bridges']
+I0715 13:54:39.638281 137161025132032 run.py:418] algorithms ['bridges']
+I0715 13:54:39.638459 137161025132032 run.py:419] train_lengths ['2', '3', '5', '7', '11', '13', '16']
+I0715 13:54:39.638512 137161025132032 run.py:420] train_batch_size 16
+I0715 13:54:39.638605 137161025132032 run.py:421] val_batch_size 8
+I0715 13:54:39.638639 137161025132032 run.py:422] test_batch_size 8
+I0715 13:54:39.638671 137161025132032 run.py:423] chunked_training True
+I0715 13:54:39.638788 137161025132032 run.py:424] chunk_length 16
+I0715 13:54:39.638821 137161025132032 run.py:425] train_steps 10000
+I0715 13:54:39.638853 137161025132032 run.py:426] eval_every 50
+I0715 13:54:39.638884 137161025132032 run.py:427] test_every 500
+I0715 13:54:39.638915 137161025132032 run.py:428] learning_rate 0.001
+I0715 13:54:39.639006 137161025132032 run.py:429] grad_clip_max_norm 1.0
+I0715 13:54:39.639038 137161025132032 run.py:430] dropout_prob 0.1
+I0715 13:54:39.639069 137161025132032 run.py:431] hint_teacher_forcing 0.0
+I0715 13:54:39.639100 137161025132032 run.py:432] hint_mode encoded_decoded
+I0715 13:54:39.639205 137161025132032 run.py:433] hint_repred_mode hard_on_eval
+I0715 13:54:39.639237 137161025132032 run.py:434] use_ln False
+I0715 13:54:39.639267 137161025132032 run.py:435] use_lstm True
+I0715 13:54:39.639297 137161025132032 run.py:436] nb_triplet_fts 8
+I0715 13:54:39.639327 137161025132032 run.py:437] encoder_init xavier_on_scalars
+I0715 13:54:39.639356 137161025132032 run.py:438] processor_type triplet_gmpnn
+I0715 13:54:39.639386 137161025132032 run.py:439] checkpoint_path CLRS30
+I0715 13:54:39.639415 137161025132032 run.py:440] dataset_path CLRS30
+I0715 13:54:39.639446 137161025132032 run.py:441] freeze_processor False
+I0715 13:54:39.639477 137161025132032 run.py:442] reduction min
+I0715 13:54:39.639522 137161025132032 run.py:443] activation elu
+I0715 13:54:39.639554 137161025132032 run.py:444] algorithm_models ['F1', 'F2']
+I0715 13:54:39.639586 137161025132032 run.py:445] restore_model 
+I0715 13:54:39.639616 137161025132032 run.py:446] gated True
+I0715 13:54:39.639647 137161025132032 run.py:447] gated_activation sigmoid
+I0715 13:54:39.642359 137161025132032 run.py:473] Creating samplers for algo bridges
+W0715 13:54:39.642779 137161025132032 samplers.py:109] Sampling dataset on-the-fly, unlimited samples.
+I0715 13:54:47.200206 137161025132032 samplers.py:124] Creating a dataset with 64 samples.
+I0715 13:54:47.351852 137161025132032 run.py:260] Dataset found at CLRS30/CLRS30_v1.0.0. Skipping download.
+I0715 13:54:47.352641 137161025132032 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/bridges_test/1.0.0
+I0715 13:54:47.356566 137161025132032 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/bridges_test/1.0.0
+I0715 13:54:47.360317 137161025132032 reader.py:262] Creating a tf.data.Dataset reading 2 files located in folders: CLRS30/CLRS30_v1.0.0/clrs_dataset/bridges_test/1.0.0.
+I0715 13:54:47.421644 137161025132032 logging_logger.py:49] Constructing tf.data.Dataset clrs_dataset for split test, from CLRS30/CLRS30_v1.0.0/clrs_dataset/bridges_test/1.0.0
+W0715 13:54:47.443817 137161025132032 ag_logging.py:142] AutoGraph could not transform <function _preprocess at 0x7cbec51cab60> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: `haiku.experimental.flax` features require `flax` to be installed.
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+I0715 13:55:33.281476 137161025132032 run.py:688] Algo bridges step 0 current loss 10.425303, current_train_items 16.
+I0715 13:55:40.077221 137161025132032 run.py:723] (val) algo bridges step 0: {'is_bridge': 0.5953788285867814, 'score': 0.5953788285867814, 'examples_seen': 16, 'step': 0, 'algorithm': 'bridges'}
+I0715 13:55:40.077522 137161025132032 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.595, val scores are: bridges: 0.595
+W0715 13:57:31.821342 137161025132032 samplers.py:175] Increasing hint lengh from 13 to 14
+I0715 13:57:33.112396 137161025132032 run.py:688] Algo bridges step 50 current loss 7.208496, current_train_items 799.
+I0715 13:57:33.326922 137161025132032 run.py:723] (val) algo bridges step 50: {'is_bridge': 0.6822589845978322, 'score': 0.6822589845978322, 'examples_seen': 799, 'step': 50, 'algorithm': 'bridges'}
+I0715 13:57:33.327089 137161025132032 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.682, val scores are: bridges: 0.682
+W0715 13:57:34.339042 137161025132032 samplers.py:175] Increasing hint lengh from 25 to 26
+I0715 13:57:34.725105 137161025132032 run.py:688] Algo bridges step 100 current loss 8.882344, current_train_items 1592.
+I0715 13:57:34.944274 137161025132032 run.py:723] (val) algo bridges step 100: {'is_bridge': 0.5175879396984924, 'score': 0.5175879396984924, 'examples_seen': 1592, 'step': 100, 'algorithm': 'bridges'}
+I0715 13:57:34.944527 137161025132032 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.518, val scores are: bridges: 0.518
+I0715 13:57:36.377438 137161025132032 run.py:688] Algo bridges step 150 current loss 10.549067, current_train_items 2372.
+I0715 13:57:36.607577 137161025132032 run.py:723] (val) algo bridges step 150: {'is_bridge': 0.6072961373390559, 'score': 0.6072961373390559, 'examples_seen': 2372, 'step': 150, 'algorithm': 'bridges'}
+I0715 13:57:36.607809 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.518, current avg val score is 0.607, val scores are: bridges: 0.607
+I0715 13:57:37.954437 137161025132032 run.py:688] Algo bridges step 200 current loss 11.438770, current_train_items 3158.
+I0715 13:57:38.207980 137161025132032 run.py:723] (val) algo bridges step 200: {'is_bridge': 0.6733238231098431, 'score': 0.6733238231098431, 'examples_seen': 3158, 'step': 200, 'algorithm': 'bridges'}
+I0715 13:57:38.208219 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.607, current avg val score is 0.673, val scores are: bridges: 0.673
+W0715 13:57:39.108849 137161025132032 samplers.py:175] Increasing hint lengh from 26 to 32
+I0715 13:57:39.638312 137161025132032 run.py:688] Algo bridges step 250 current loss 11.605215, current_train_items 3938.
+I0715 13:57:39.919656 137161025132032 run.py:723] (val) algo bridges step 250: {'is_bridge': 0.8214285714285715, 'score': 0.8214285714285715, 'examples_seen': 3938, 'step': 250, 'algorithm': 'bridges'}
+I0715 13:57:39.919898 137161025132032 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.821, val scores are: bridges: 0.821
+W0715 13:57:40.680174 137161025132032 samplers.py:175] Increasing hint lengh from 101 to 102
+I0715 13:57:41.344093 137161025132032 run.py:688] Algo bridges step 300 current loss 0.984319, current_train_items 4758.
+I0715 13:57:41.579654 137161025132032 run.py:723] (val) algo bridges step 300: {'is_bridge': 0.7727891156462585, 'score': 0.7727891156462585, 'examples_seen': 4758, 'step': 300, 'algorithm': 'bridges'}
+I0715 13:57:41.579810 137161025132032 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.773, val scores are: bridges: 0.773
+W0715 13:57:42.667537 137161025132032 samplers.py:175] Increasing hint lengh from 76 to 82
+I0715 13:57:42.982669 137161025132032 run.py:688] Algo bridges step 350 current loss 3.083048, current_train_items 5564.
+I0715 13:57:43.194123 137161025132032 run.py:723] (val) algo bridges step 350: {'is_bridge': 0.7282780410742496, 'score': 0.7282780410742496, 'examples_seen': 5564, 'step': 350, 'algorithm': 'bridges'}
+I0715 13:57:43.194300 137161025132032 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.728, val scores are: bridges: 0.728
+W0715 13:57:44.533645 137161025132032 samplers.py:175] Increasing hint lengh from 14 to 16
+I0715 13:57:44.575863 137161025132032 run.py:688] Algo bridges step 400 current loss 5.610483, current_train_items 6361.
+I0715 13:57:44.795252 137161025132032 run.py:723] (val) algo bridges step 400: {'is_bridge': 0.7360335195530725, 'score': 0.7360335195530725, 'examples_seen': 6361, 'step': 400, 'algorithm': 'bridges'}
+I0715 13:57:44.795413 137161025132032 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.736, val scores are: bridges: 0.736
+I0715 13:57:46.173772 137161025132032 run.py:688] Algo bridges step 450 current loss 7.634862, current_train_items 7144.
+I0715 13:57:46.394305 137161025132032 run.py:723] (val) algo bridges step 450: {'is_bridge': 0.8220064724919095, 'score': 0.8220064724919095, 'examples_seen': 7144, 'step': 450, 'algorithm': 'bridges'}
+I0715 13:57:46.394560 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.736, current avg val score is 0.822, val scores are: bridges: 0.822
+I0715 13:57:47.797300 137161025132032 run.py:688] Algo bridges step 500 current loss 9.322942, current_train_items 7922.
+I0715 13:57:48.022869 137161025132032 run.py:723] (val) algo bridges step 500: {'is_bridge': 0.8516129032258064, 'score': 0.8516129032258064, 'examples_seen': 7922, 'step': 500, 'algorithm': 'bridges'}
+I0715 13:57:48.023102 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.822, current avg val score is 0.852, val scores are: bridges: 0.852
+I0715 13:57:49.412824 137161025132032 run.py:688] Algo bridges step 550 current loss 10.589188, current_train_items 8709.
+I0715 13:57:49.659134 137161025132032 run.py:723] (val) algo bridges step 550: {'is_bridge': 0.8571428571428572, 'score': 0.8571428571428572, 'examples_seen': 8709, 'step': 550, 'algorithm': 'bridges'}
+I0715 13:57:49.659374 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.852, current avg val score is 0.857, val scores are: bridges: 0.857
+I0715 13:57:51.084330 137161025132032 run.py:688] Algo bridges step 600 current loss 11.580487, current_train_items 9489.
+I0715 13:57:51.345940 137161025132032 run.py:723] (val) algo bridges step 600: {'is_bridge': 0.7850911974623314, 'score': 0.7850911974623314, 'examples_seen': 9489, 'step': 600, 'algorithm': 'bridges'}
+I0715 13:57:51.346172 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.857, current avg val score is 0.785, val scores are: bridges: 0.785
+I0715 13:57:52.699511 137161025132032 run.py:688] Algo bridges step 650 current loss 0.650545, current_train_items 10303.
+I0715 13:57:52.925148 137161025132032 run.py:723] (val) algo bridges step 650: {'is_bridge': 0.7990654205607477, 'score': 0.7990654205607477, 'examples_seen': 10303, 'step': 650, 'algorithm': 'bridges'}
+I0715 13:57:52.925382 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.857, current avg val score is 0.799, val scores are: bridges: 0.799
+W0715 13:57:53.063657 137161025132032 samplers.py:175] Increasing hint lengh from 82 to 85
+I0715 13:57:54.345933 137161025132032 run.py:688] Algo bridges step 700 current loss 2.609421, current_train_items 11121.
+I0715 13:57:54.565685 137161025132032 run.py:723] (val) algo bridges step 700: {'is_bridge': 0.814708002883922, 'score': 0.814708002883922, 'examples_seen': 11121, 'step': 700, 'algorithm': 'bridges'}
+I0715 13:57:54.565923 137161025132032 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.815, val scores are: bridges: 0.815
+I0715 13:57:55.930624 137161025132032 run.py:688] Algo bridges step 750 current loss 4.994934, current_train_items 11916.
+I0715 13:57:56.143414 137161025132032 run.py:723] (val) algo bridges step 750: {'is_bridge': 0.7867203219315896, 'score': 0.7867203219315896, 'examples_seen': 11916, 'step': 750, 'algorithm': 'bridges'}
+I0715 13:57:56.143676 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.815, current avg val score is 0.787, val scores are: bridges: 0.787
+I0715 13:57:57.498533 137161025132032 run.py:688] Algo bridges step 800 current loss 6.549932, current_train_items 12693.
+I0715 13:57:57.715140 137161025132032 run.py:723] (val) algo bridges step 800: {'is_bridge': 0.7317073170731706, 'score': 0.7317073170731706, 'examples_seen': 12693, 'step': 800, 'algorithm': 'bridges'}
+I0715 13:57:57.715372 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.815, current avg val score is 0.732, val scores are: bridges: 0.732
+I0715 13:57:59.053120 137161025132032 run.py:688] Algo bridges step 850 current loss 9.420263, current_train_items 13478.
+I0715 13:57:59.284782 137161025132032 run.py:723] (val) algo bridges step 850: {'is_bridge': 0.787037037037037, 'score': 0.787037037037037, 'examples_seen': 13478, 'step': 850, 'algorithm': 'bridges'}
+I0715 13:57:59.284936 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.815, current avg val score is 0.787, val scores are: bridges: 0.787
+I0715 13:58:00.660107 137161025132032 run.py:688] Algo bridges step 900 current loss 9.847097, current_train_items 14261.
+I0715 13:58:00.911654 137161025132032 run.py:723] (val) algo bridges step 900: {'is_bridge': 0.7592440427280197, 'score': 0.7592440427280197, 'examples_seen': 14261, 'step': 900, 'algorithm': 'bridges'}
+I0715 13:58:00.911809 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.815, current avg val score is 0.759, val scores are: bridges: 0.759
+I0715 13:58:02.228241 137161025132032 run.py:688] Algo bridges step 950 current loss 10.939096, current_train_items 15044.
+I0715 13:58:02.501927 137161025132032 run.py:723] (val) algo bridges step 950: {'is_bridge': 0.7448494453248812, 'score': 0.7448494453248812, 'examples_seen': 15044, 'step': 950, 'algorithm': 'bridges'}
+I0715 13:58:02.502163 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.815, current avg val score is 0.745, val scores are: bridges: 0.745
+W0715 13:58:03.059615 137161025132032 samplers.py:175] Increasing hint lengh from 85 to 86
+I0715 13:58:03.961875 137161025132032 run.py:688] Algo bridges step 1000 current loss 0.747346, current_train_items 15862.
+I0715 13:58:04.179230 137161025132032 run.py:723] (val) algo bridges step 1000: {'is_bridge': 0.7825464949928468, 'score': 0.7825464949928468, 'examples_seen': 15862, 'step': 1000, 'algorithm': 'bridges'}
+I0715 13:58:04.179465 137161025132032 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.783, val scores are: bridges: 0.783
+I0715 13:58:05.625047 137161025132032 run.py:688] Algo bridges step 1050 current loss 2.313742, current_train_items 16666.
+I0715 13:58:05.837800 137161025132032 run.py:723] (val) algo bridges step 1050: {'is_bridge': 0.7116279069767443, 'score': 0.7116279069767443, 'examples_seen': 16666, 'step': 1050, 'algorithm': 'bridges'}
+I0715 13:58:05.838037 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.783, current avg val score is 0.712, val scores are: bridges: 0.712
+I0715 13:58:07.230348 137161025132032 run.py:688] Algo bridges step 1100 current loss 4.093205, current_train_items 17456.
+I0715 13:58:07.444679 137161025132032 run.py:723] (val) algo bridges step 1100: {'is_bridge': 0.7564356435643563, 'score': 0.7564356435643563, 'examples_seen': 17456, 'step': 1100, 'algorithm': 'bridges'}
+I0715 13:58:07.444914 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.783, current avg val score is 0.756, val scores are: bridges: 0.756
+I0715 13:58:08.807669 137161025132032 run.py:688] Algo bridges step 1150 current loss 6.683444, current_train_items 18236.
+I0715 13:58:09.029077 137161025132032 run.py:723] (val) algo bridges step 1150: {'is_bridge': 0.7399411187438665, 'score': 0.7399411187438665, 'examples_seen': 18236, 'step': 1150, 'algorithm': 'bridges'}
+I0715 13:58:09.029351 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.783, current avg val score is 0.740, val scores are: bridges: 0.740
+I0715 13:58:10.404622 137161025132032 run.py:688] Algo bridges step 1200 current loss 9.342218, current_train_items 19020.
+I0715 13:58:10.630844 137161025132032 run.py:723] (val) algo bridges step 1200: {'is_bridge': 0.7721639656816016, 'score': 0.7721639656816016, 'examples_seen': 19020, 'step': 1200, 'algorithm': 'bridges'}
+I0715 13:58:10.631081 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.783, current avg val score is 0.772, val scores are: bridges: 0.772
+I0715 13:58:11.989588 137161025132032 run.py:688] Algo bridges step 1250 current loss 9.372701, current_train_items 19803.
+I0715 13:58:12.239532 137161025132032 run.py:723] (val) algo bridges step 1250: {'is_bridge': 0.8289054197662061, 'score': 0.8289054197662061, 'examples_seen': 19803, 'step': 1250, 'algorithm': 'bridges'}
+I0715 13:58:12.239753 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.783, current avg val score is 0.829, val scores are: bridges: 0.829
+I0715 13:58:13.606933 137161025132032 run.py:688] Algo bridges step 1300 current loss 10.786528, current_train_items 20574.
+I0715 13:58:13.867771 137161025132032 run.py:723] (val) algo bridges step 1300: {'is_bridge': 0.7732656514382402, 'score': 0.7732656514382402, 'examples_seen': 20574, 'step': 1300, 'algorithm': 'bridges'}
+I0715 13:58:13.868004 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.829, current avg val score is 0.773, val scores are: bridges: 0.773
+I0715 13:58:15.254063 137161025132032 run.py:688] Algo bridges step 1350 current loss 0.459970, current_train_items 21402.
+I0715 13:58:15.464924 137161025132032 run.py:723] (val) algo bridges step 1350: {'is_bridge': 0.723205964585275, 'score': 0.723205964585275, 'examples_seen': 21402, 'step': 1350, 'algorithm': 'bridges'}
+I0715 13:58:15.465172 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.829, current avg val score is 0.723, val scores are: bridges: 0.723
+I0715 13:58:16.844512 137161025132032 run.py:688] Algo bridges step 1400 current loss 2.202945, current_train_items 22205.
+I0715 13:58:17.059905 137161025132032 run.py:723] (val) algo bridges step 1400: {'is_bridge': 0.8849693251533742, 'score': 0.8849693251533742, 'examples_seen': 22205, 'step': 1400, 'algorithm': 'bridges'}
+I0715 13:58:17.060064 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.829, current avg val score is 0.885, val scores are: bridges: 0.885
+I0715 13:58:18.404817 137161025132032 run.py:688] Algo bridges step 1450 current loss 4.082572, current_train_items 22992.
+I0715 13:58:18.622367 137161025132032 run.py:723] (val) algo bridges step 1450: {'is_bridge': 0.8007483629560337, 'score': 0.8007483629560337, 'examples_seen': 22992, 'step': 1450, 'algorithm': 'bridges'}
+I0715 13:58:18.622534 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.801, val scores are: bridges: 0.801
+I0715 13:58:20.047929 137161025132032 run.py:688] Algo bridges step 1500 current loss 6.193478, current_train_items 23790.
+I0715 13:58:20.265289 137161025132032 run.py:723] (val) algo bridges step 1500: {'is_bridge': 0.7718484145398298, 'score': 0.7718484145398298, 'examples_seen': 23790, 'step': 1500, 'algorithm': 'bridges'}
+I0715 13:58:20.265537 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.772, val scores are: bridges: 0.772
+I0715 13:58:21.659624 137161025132032 run.py:688] Algo bridges step 1550 current loss 9.538342, current_train_items 24579.
+I0715 13:58:21.886163 137161025132032 run.py:723] (val) algo bridges step 1550: {'is_bridge': 0.8030176026823135, 'score': 0.8030176026823135, 'examples_seen': 24579, 'step': 1550, 'algorithm': 'bridges'}
+I0715 13:58:21.886365 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.803, val scores are: bridges: 0.803
+I0715 13:58:23.225384 137161025132032 run.py:688] Algo bridges step 1600 current loss 9.978296, current_train_items 25373.
+I0715 13:58:23.471780 137161025132032 run.py:723] (val) algo bridges step 1600: {'is_bridge': 0.8281374900079936, 'score': 0.8281374900079936, 'examples_seen': 25373, 'step': 1600, 'algorithm': 'bridges'}
+I0715 13:58:23.472014 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.828, val scores are: bridges: 0.828
+I0715 13:58:24.822889 137161025132032 run.py:688] Algo bridges step 1650 current loss 11.082306, current_train_items 26148.
+I0715 13:58:25.096050 137161025132032 run.py:723] (val) algo bridges step 1650: {'is_bridge': 0.8433359314107559, 'score': 0.8433359314107559, 'examples_seen': 26148, 'step': 1650, 'algorithm': 'bridges'}
+I0715 13:58:25.096238 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.843, val scores are: bridges: 0.843
+I0715 13:58:26.444375 137161025132032 run.py:688] Algo bridges step 1700 current loss 0.567488, current_train_items 26979.
+I0715 13:58:26.671993 137161025132032 run.py:723] (val) algo bridges step 1700: {'is_bridge': 0.8075348075348076, 'score': 0.8075348075348076, 'examples_seen': 26979, 'step': 1700, 'algorithm': 'bridges'}
+I0715 13:58:26.672232 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.808, val scores are: bridges: 0.808
+I0715 13:58:28.050104 137161025132032 run.py:688] Algo bridges step 1750 current loss 2.234937, current_train_items 27790.
+I0715 13:58:28.283154 137161025132032 run.py:723] (val) algo bridges step 1750: {'is_bridge': 0.846503178928247, 'score': 0.846503178928247, 'examples_seen': 27790, 'step': 1750, 'algorithm': 'bridges'}
+I0715 13:58:28.283391 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.847, val scores are: bridges: 0.847
+I0715 13:58:29.685274 137161025132032 run.py:688] Algo bridges step 1800 current loss 4.074407, current_train_items 28578.
+I0715 13:58:29.903989 137161025132032 run.py:723] (val) algo bridges step 1800: {'is_bridge': 0.7536800785083415, 'score': 0.7536800785083415, 'examples_seen': 28578, 'step': 1800, 'algorithm': 'bridges'}
+I0715 13:58:29.904225 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.754, val scores are: bridges: 0.754
+I0715 13:58:31.238358 137161025132032 run.py:688] Algo bridges step 1850 current loss 5.871357, current_train_items 29362.
+I0715 13:58:31.456610 137161025132032 run.py:723] (val) algo bridges step 1850: {'is_bridge': 0.8238636363636364, 'score': 0.8238636363636364, 'examples_seen': 29362, 'step': 1850, 'algorithm': 'bridges'}
+I0715 13:58:31.456848 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.824, val scores are: bridges: 0.824
+I0715 13:58:32.860457 137161025132032 run.py:688] Algo bridges step 1900 current loss 8.392864, current_train_items 30144.
+I0715 13:58:33.086264 137161025132032 run.py:723] (val) algo bridges step 1900: {'is_bridge': 0.8574257425742574, 'score': 0.8574257425742574, 'examples_seen': 30144, 'step': 1900, 'algorithm': 'bridges'}
+I0715 13:58:33.086518 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.857, val scores are: bridges: 0.857
+W0715 13:58:33.342015 137161025132032 samplers.py:175] Increasing hint lengh from 141 to 144
+I0715 13:58:34.482475 137161025132032 run.py:688] Algo bridges step 1950 current loss 8.579336, current_train_items 30937.
+I0715 13:58:34.720883 137161025132032 run.py:723] (val) algo bridges step 1950: {'is_bridge': 0.7948207171314742, 'score': 0.7948207171314742, 'examples_seen': 30937, 'step': 1950, 'algorithm': 'bridges'}
+I0715 13:58:34.721565 137161025132032 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.795, val scores are: bridges: 0.795
+I0715 13:58:36.068801 137161025132032 run.py:688] Algo bridges step 2000 current loss 10.929995, current_train_items 31704.
+I0715 13:58:36.328261 137161025132032 run.py:723] (val) algo bridges step 2000: {'is_bridge': 0.799593082400814, 'score': 0.799593082400814, 'examples_seen': 31704, 'step': 2000, 'algorithm': 'bridges'}
+I0715 13:58:36.328515 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.795, current avg val score is 0.800, val scores are: bridges: 0.800
+I0715 13:58:37.729694 137161025132032 run.py:688] Algo bridges step 2050 current loss 0.435027, current_train_items 32518.
+I0715 13:58:37.963285 137161025132032 run.py:723] (val) algo bridges step 2050: {'is_bridge': 0.713733075435203, 'score': 0.713733075435203, 'examples_seen': 32518, 'step': 2050, 'algorithm': 'bridges'}
+I0715 13:58:37.963537 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.800, current avg val score is 0.714, val scores are: bridges: 0.714
+I0715 13:58:39.374461 137161025132032 run.py:688] Algo bridges step 2100 current loss 1.861201, current_train_items 33326.
+I0715 13:58:39.586521 137161025132032 run.py:723] (val) algo bridges step 2100: {'is_bridge': 0.7772511848341233, 'score': 0.7772511848341233, 'examples_seen': 33326, 'step': 2100, 'algorithm': 'bridges'}
+I0715 13:58:39.586754 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.800, current avg val score is 0.777, val scores are: bridges: 0.777
+I0715 13:58:40.992596 137161025132032 run.py:688] Algo bridges step 2150 current loss 3.825091, current_train_items 34120.
+I0715 13:58:41.206605 137161025132032 run.py:723] (val) algo bridges step 2150: {'is_bridge': 0.8180112570356473, 'score': 0.8180112570356473, 'examples_seen': 34120, 'step': 2150, 'algorithm': 'bridges'}
+I0715 13:58:41.206840 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.800, current avg val score is 0.818, val scores are: bridges: 0.818
+I0715 13:58:42.626471 137161025132032 run.py:688] Algo bridges step 2200 current loss 6.161324, current_train_items 34907.
+I0715 13:58:42.845156 137161025132032 run.py:723] (val) algo bridges step 2200: {'is_bridge': 0.8076285240464345, 'score': 0.8076285240464345, 'examples_seen': 34907, 'step': 2200, 'algorithm': 'bridges'}
+I0715 13:58:42.845409 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.818, current avg val score is 0.808, val scores are: bridges: 0.808
+I0715 13:58:44.160395 137161025132032 run.py:688] Algo bridges step 2250 current loss 9.660473, current_train_items 35693.
+I0715 13:58:44.387312 137161025132032 run.py:723] (val) algo bridges step 2250: {'is_bridge': 0.7523709167544784, 'score': 0.7523709167544784, 'examples_seen': 35693, 'step': 2250, 'algorithm': 'bridges'}
+I0715 13:58:44.387572 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.818, current avg val score is 0.752, val scores are: bridges: 0.752
+I0715 13:58:45.746309 137161025132032 run.py:688] Algo bridges step 2300 current loss 8.790892, current_train_items 36463.
+I0715 13:58:45.993287 137161025132032 run.py:723] (val) algo bridges step 2300: {'is_bridge': 0.7911683532658693, 'score': 0.7911683532658693, 'examples_seen': 36463, 'step': 2300, 'algorithm': 'bridges'}
+I0715 13:58:45.993540 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.818, current avg val score is 0.791, val scores are: bridges: 0.791
+I0715 13:58:47.357759 137161025132032 run.py:688] Algo bridges step 2350 current loss 10.497698, current_train_items 37253.
+I0715 13:58:47.616503 137161025132032 run.py:723] (val) algo bridges step 2350: {'is_bridge': 0.8317046688382194, 'score': 0.8317046688382194, 'examples_seen': 37253, 'step': 2350, 'algorithm': 'bridges'}
+I0715 13:58:47.616754 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.818, current avg val score is 0.832, val scores are: bridges: 0.832
+I0715 13:58:48.996365 137161025132032 run.py:688] Algo bridges step 2400 current loss 0.490354, current_train_items 38065.
+I0715 13:58:49.224334 137161025132032 run.py:723] (val) algo bridges step 2400: {'is_bridge': 0.7799295774647886, 'score': 0.7799295774647886, 'examples_seen': 38065, 'step': 2400, 'algorithm': 'bridges'}
+I0715 13:58:49.224607 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.832, current avg val score is 0.780, val scores are: bridges: 0.780
+I0715 13:58:50.627572 137161025132032 run.py:688] Algo bridges step 2450 current loss 2.011081, current_train_items 38870.
+I0715 13:58:50.839432 137161025132032 run.py:723] (val) algo bridges step 2450: {'is_bridge': 0.7619848612279226, 'score': 0.7619848612279226, 'examples_seen': 38870, 'step': 2450, 'algorithm': 'bridges'}
+I0715 13:58:50.839682 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.832, current avg val score is 0.762, val scores are: bridges: 0.762
+I0715 13:58:52.188971 137161025132032 run.py:688] Algo bridges step 2500 current loss 3.794163, current_train_items 39671.
+I0715 13:58:52.403327 137161025132032 run.py:723] (val) algo bridges step 2500: {'is_bridge': 0.8379204892966362, 'score': 0.8379204892966362, 'examples_seen': 39671, 'step': 2500, 'algorithm': 'bridges'}
+I0715 13:58:52.403579 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.832, current avg val score is 0.838, val scores are: bridges: 0.838
+I0715 13:58:53.755166 137161025132032 run.py:688] Algo bridges step 2550 current loss 5.162657, current_train_items 40461.
+I0715 13:58:53.973956 137161025132032 run.py:723] (val) algo bridges step 2550: {'is_bridge': 0.7760758570386579, 'score': 0.7760758570386579, 'examples_seen': 40461, 'step': 2550, 'algorithm': 'bridges'}
+I0715 13:58:53.974203 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.838, current avg val score is 0.776, val scores are: bridges: 0.776
+I0715 13:58:55.320807 137161025132032 run.py:688] Algo bridges step 2600 current loss 7.599492, current_train_items 41238.
+I0715 13:58:55.550493 137161025132032 run.py:723] (val) algo bridges step 2600: {'is_bridge': 0.7752380952380952, 'score': 0.7752380952380952, 'examples_seen': 41238, 'step': 2600, 'algorithm': 'bridges'}
+I0715 13:58:55.550731 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.838, current avg val score is 0.775, val scores are: bridges: 0.775
+W0715 13:58:56.341662 137161025132032 samplers.py:175] Increasing hint lengh from 44 to 45
+I0715 13:58:56.955926 137161025132032 run.py:688] Algo bridges step 2650 current loss 8.915817, current_train_items 42028.
+I0715 13:58:57.215732 137161025132032 run.py:723] (val) algo bridges step 2650: {'is_bridge': 0.7893738140417457, 'score': 0.7893738140417457, 'examples_seen': 42028, 'step': 2650, 'algorithm': 'bridges'}
+I0715 13:58:57.215965 137161025132032 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.789, val scores are: bridges: 0.789
+I0715 13:58:58.584980 137161025132032 run.py:688] Algo bridges step 2700 current loss 10.937241, current_train_items 42801.
+I0715 13:58:58.863080 137161025132032 run.py:723] (val) algo bridges step 2700: {'is_bridge': 0.7962003454231434, 'score': 0.7962003454231434, 'examples_seen': 42801, 'step': 2700, 'algorithm': 'bridges'}
+I0715 13:58:58.863234 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.789, current avg val score is 0.796, val scores are: bridges: 0.796
+I0715 13:59:00.277018 137161025132032 run.py:688] Algo bridges step 2750 current loss 0.434332, current_train_items 43618.
+I0715 13:59:00.491080 137161025132032 run.py:723] (val) algo bridges step 2750: {'is_bridge': 0.7070110701107012, 'score': 0.7070110701107012, 'examples_seen': 43618, 'step': 2750, 'algorithm': 'bridges'}
+I0715 13:59:00.491234 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.796, current avg val score is 0.707, val scores are: bridges: 0.707
+I0715 13:59:01.791738 137161025132032 run.py:688] Algo bridges step 2800 current loss 2.216613, current_train_items 44419.
+I0715 13:59:02.016065 137161025132032 run.py:723] (val) algo bridges step 2800: {'is_bridge': 0.8206751054852321, 'score': 0.8206751054852321, 'examples_seen': 44419, 'step': 2800, 'algorithm': 'bridges'}
+I0715 13:59:02.016295 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.796, current avg val score is 0.821, val scores are: bridges: 0.821
+I0715 13:59:03.471152 137161025132032 run.py:688] Algo bridges step 2850 current loss 3.757650, current_train_items 45215.
+I0715 13:59:03.684153 137161025132032 run.py:723] (val) algo bridges step 2850: {'is_bridge': 0.804953560371517, 'score': 0.804953560371517, 'examples_seen': 45215, 'step': 2850, 'algorithm': 'bridges'}
+I0715 13:59:03.684393 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.821, current avg val score is 0.805, val scores are: bridges: 0.805
+I0715 13:59:04.990700 137161025132032 run.py:688] Algo bridges step 2900 current loss 4.970297, current_train_items 46006.
+I0715 13:59:05.207129 137161025132032 run.py:723] (val) algo bridges step 2900: {'is_bridge': 0.810248198558847, 'score': 0.810248198558847, 'examples_seen': 46006, 'step': 2900, 'algorithm': 'bridges'}
+I0715 13:59:05.207375 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.821, current avg val score is 0.810, val scores are: bridges: 0.810
+I0715 13:59:06.619687 137161025132032 run.py:688] Algo bridges step 2950 current loss 7.871490, current_train_items 46798.
+I0715 13:59:06.848768 137161025132032 run.py:723] (val) algo bridges step 2950: {'is_bridge': 0.7982532751091702, 'score': 0.7982532751091702, 'examples_seen': 46798, 'step': 2950, 'algorithm': 'bridges'}
+I0715 13:59:06.849003 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.821, current avg val score is 0.798, val scores are: bridges: 0.798
+I0715 13:59:08.196586 137161025132032 run.py:688] Algo bridges step 3000 current loss 9.415324, current_train_items 47573.
+I0715 13:59:08.445962 137161025132032 run.py:723] (val) algo bridges step 3000: {'is_bridge': 0.872037914691943, 'score': 0.872037914691943, 'examples_seen': 47573, 'step': 3000, 'algorithm': 'bridges'}
+I0715 13:59:08.446118 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.821, current avg val score is 0.872, val scores are: bridges: 0.872
+I0715 13:59:09.771277 137161025132032 run.py:688] Algo bridges step 3050 current loss 10.510763, current_train_items 48348.
+I0715 13:59:10.042600 137161025132032 run.py:723] (val) algo bridges step 3050: {'is_bridge': 0.8006617038875105, 'score': 0.8006617038875105, 'examples_seen': 48348, 'step': 3050, 'algorithm': 'bridges'}
+I0715 13:59:10.042762 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.801, val scores are: bridges: 0.801
+I0715 13:59:11.380645 137161025132032 run.py:688] Algo bridges step 3100 current loss 0.408592, current_train_items 49166.
+I0715 13:59:11.590002 137161025132032 run.py:723] (val) algo bridges step 3100: {'is_bridge': 0.8331907613344739, 'score': 0.8331907613344739, 'examples_seen': 49166, 'step': 3100, 'algorithm': 'bridges'}
+I0715 13:59:11.590241 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.833, val scores are: bridges: 0.833
+I0715 13:59:12.955712 137161025132032 run.py:688] Algo bridges step 3150 current loss 1.951290, current_train_items 49966.
+I0715 13:59:13.180002 137161025132032 run.py:723] (val) algo bridges step 3150: {'is_bridge': 0.6858924395947, 'score': 0.6858924395947, 'examples_seen': 49966, 'step': 3150, 'algorithm': 'bridges'}
+I0715 13:59:13.180236 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.686, val scores are: bridges: 0.686
+I0715 13:59:14.559739 137161025132032 run.py:688] Algo bridges step 3200 current loss 3.670674, current_train_items 50766.
+I0715 13:59:14.777422 137161025132032 run.py:723] (val) algo bridges step 3200: {'is_bridge': 0.835920177383592, 'score': 0.835920177383592, 'examples_seen': 50766, 'step': 3200, 'algorithm': 'bridges'}
+I0715 13:59:14.777697 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.836, val scores are: bridges: 0.836
+I0715 13:59:16.150498 137161025132032 run.py:688] Algo bridges step 3250 current loss 7.213202, current_train_items 51550.
+I0715 13:59:16.367824 137161025132032 run.py:723] (val) algo bridges step 3250: {'is_bridge': 0.8120171673819742, 'score': 0.8120171673819742, 'examples_seen': 51550, 'step': 3250, 'algorithm': 'bridges'}
+I0715 13:59:16.368061 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.812, val scores are: bridges: 0.812
+I0715 13:59:17.735185 137161025132032 run.py:688] Algo bridges step 3300 current loss 8.768746, current_train_items 52341.
+I0715 13:59:17.960807 137161025132032 run.py:723] (val) algo bridges step 3300: {'is_bridge': 0.7751937984496124, 'score': 0.7751937984496124, 'examples_seen': 52341, 'step': 3300, 'algorithm': 'bridges'}
+I0715 13:59:17.961061 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.775, val scores are: bridges: 0.775
+I0715 13:59:19.366152 137161025132032 run.py:688] Algo bridges step 3350 current loss 10.302011, current_train_items 53125.
+I0715 13:59:19.600946 137161025132032 run.py:723] (val) algo bridges step 3350: {'is_bridge': 0.7735191637630662, 'score': 0.7735191637630662, 'examples_seen': 53125, 'step': 3350, 'algorithm': 'bridges'}
+I0715 13:59:19.601182 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.774, val scores are: bridges: 0.774
+I0715 13:59:20.966921 137161025132032 run.py:688] Algo bridges step 3400 current loss 9.802675, current_train_items 53899.
+I0715 13:59:21.205023 137161025132032 run.py:723] (val) algo bridges step 3400: {'is_bridge': 0.8397435897435898, 'score': 0.8397435897435898, 'examples_seen': 53899, 'step': 3400, 'algorithm': 'bridges'}
+I0715 13:59:21.205263 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.840, val scores are: bridges: 0.840
+I0715 13:59:22.615996 137161025132032 run.py:688] Algo bridges step 3450 current loss 0.398145, current_train_items 54732.
+I0715 13:59:22.860537 137161025132032 run.py:723] (val) algo bridges step 3450: {'is_bridge': 0.815811606391926, 'score': 0.815811606391926, 'examples_seen': 54732, 'step': 3450, 'algorithm': 'bridges'}
+I0715 13:59:22.860696 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.816, val scores are: bridges: 0.816
+I0715 13:59:24.198347 137161025132032 run.py:688] Algo bridges step 3500 current loss 1.522256, current_train_items 55530.
+I0715 13:59:24.421757 137161025132032 run.py:723] (val) algo bridges step 3500: {'is_bridge': 0.8146341463414634, 'score': 0.8146341463414634, 'examples_seen': 55530, 'step': 3500, 'algorithm': 'bridges'}
+I0715 13:59:24.421992 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.815, val scores are: bridges: 0.815
+I0715 13:59:25.760332 137161025132032 run.py:688] Algo bridges step 3550 current loss 4.142478, current_train_items 56331.
+I0715 13:59:25.973062 137161025132032 run.py:723] (val) algo bridges step 3550: {'is_bridge': 0.8389982110912343, 'score': 0.8389982110912343, 'examples_seen': 56331, 'step': 3550, 'algorithm': 'bridges'}
+I0715 13:59:25.973223 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.839, val scores are: bridges: 0.839
+I0715 13:59:27.306809 137161025132032 run.py:688] Algo bridges step 3600 current loss 5.817663, current_train_items 57113.
+I0715 13:59:27.522019 137161025132032 run.py:723] (val) algo bridges step 3600: {'is_bridge': 0.821852731591449, 'score': 0.821852731591449, 'examples_seen': 57113, 'step': 3600, 'algorithm': 'bridges'}
+I0715 13:59:27.522268 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.822, val scores are: bridges: 0.822
+I0715 13:59:28.919632 137161025132032 run.py:688] Algo bridges step 3650 current loss 8.247298, current_train_items 57901.
+I0715 13:59:29.149573 137161025132032 run.py:723] (val) algo bridges step 3650: {'is_bridge': 0.7325769854132902, 'score': 0.7325769854132902, 'examples_seen': 57901, 'step': 3650, 'algorithm': 'bridges'}
+I0715 13:59:29.149807 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.733, val scores are: bridges: 0.733
+I0715 13:59:30.486629 137161025132032 run.py:688] Algo bridges step 3700 current loss 8.765412, current_train_items 58688.
+I0715 13:59:30.734397 137161025132032 run.py:723] (val) algo bridges step 3700: {'is_bridge': 0.7728085867620751, 'score': 0.7728085867620751, 'examples_seen': 58688, 'step': 3700, 'algorithm': 'bridges'}
+I0715 13:59:30.734653 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.773, val scores are: bridges: 0.773
+I0715 13:59:32.152464 137161025132032 run.py:688] Algo bridges step 3750 current loss 10.650082, current_train_items 59466.
+I0715 13:59:32.433717 137161025132032 run.py:723] (val) algo bridges step 3750: {'is_bridge': 0.8156424581005588, 'score': 0.8156424581005588, 'examples_seen': 59466, 'step': 3750, 'algorithm': 'bridges'}
+I0715 13:59:32.433953 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.816, val scores are: bridges: 0.816
+I0715 13:59:33.839044 137161025132032 run.py:688] Algo bridges step 3800 current loss 0.431666, current_train_items 60287.
+I0715 13:59:34.048861 137161025132032 run.py:723] (val) algo bridges step 3800: {'is_bridge': 0.7846975088967971, 'score': 0.7846975088967971, 'examples_seen': 60287, 'step': 3800, 'algorithm': 'bridges'}
+I0715 13:59:34.049126 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.785, val scores are: bridges: 0.785
+I0715 13:59:35.431138 137161025132032 run.py:688] Algo bridges step 3850 current loss 1.394471, current_train_items 61091.
+I0715 13:59:35.652127 137161025132032 run.py:723] (val) algo bridges step 3850: {'is_bridge': 0.7573182247403211, 'score': 0.7573182247403211, 'examples_seen': 61091, 'step': 3850, 'algorithm': 'bridges'}
+I0715 13:59:35.652370 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.757, val scores are: bridges: 0.757
+I0715 13:59:37.039148 137161025132032 run.py:688] Algo bridges step 3900 current loss 3.274189, current_train_items 61882.
+I0715 13:59:37.252021 137161025132032 run.py:723] (val) algo bridges step 3900: {'is_bridge': 0.7968596663395486, 'score': 0.7968596663395486, 'examples_seen': 61882, 'step': 3900, 'algorithm': 'bridges'}
+I0715 13:59:37.252265 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.797, val scores are: bridges: 0.797
+I0715 13:59:38.567688 137161025132032 run.py:688] Algo bridges step 3950 current loss 4.977582, current_train_items 62670.
+I0715 13:59:38.785057 137161025132032 run.py:723] (val) algo bridges step 3950: {'is_bridge': 0.758679085520745, 'score': 0.758679085520745, 'examples_seen': 62670, 'step': 3950, 'algorithm': 'bridges'}
+I0715 13:59:38.785294 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.759, val scores are: bridges: 0.759
+I0715 13:59:40.167402 137161025132032 run.py:688] Algo bridges step 4000 current loss 7.723593, current_train_items 63455.
+I0715 13:59:40.391813 137161025132032 run.py:723] (val) algo bridges step 4000: {'is_bridge': 0.8348909657320872, 'score': 0.8348909657320872, 'examples_seen': 63455, 'step': 4000, 'algorithm': 'bridges'}
+I0715 13:59:40.392062 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.835, val scores are: bridges: 0.835
+I0715 13:59:41.722815 137161025132032 run.py:688] Algo bridges step 4050 current loss 9.111868, current_train_items 64233.
+I0715 13:59:41.966640 137161025132032 run.py:723] (val) algo bridges step 4050: {'is_bridge': 0.7560975609756098, 'score': 0.7560975609756098, 'examples_seen': 64233, 'step': 4050, 'algorithm': 'bridges'}
+I0715 13:59:41.966877 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.756, val scores are: bridges: 0.756
+I0715 13:59:43.385952 137161025132032 run.py:688] Algo bridges step 4100 current loss 9.142635, current_train_items 65016.
+I0715 13:59:43.646953 137161025132032 run.py:723] (val) algo bridges step 4100: {'is_bridge': 0.7782357790601815, 'score': 0.7782357790601815, 'examples_seen': 65016, 'step': 4100, 'algorithm': 'bridges'}
+I0715 13:59:43.647195 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.778, val scores are: bridges: 0.778
+I0715 13:59:45.010236 137161025132032 run.py:688] Algo bridges step 4150 current loss 0.440345, current_train_items 65832.
+I0715 13:59:45.249941 137161025132032 run.py:723] (val) algo bridges step 4150: {'is_bridge': 0.7522441651705565, 'score': 0.7522441651705565, 'examples_seen': 65832, 'step': 4150, 'algorithm': 'bridges'}
+I0715 13:59:45.250184 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.752, val scores are: bridges: 0.752
+I0715 13:59:46.573497 137161025132032 run.py:688] Algo bridges step 4200 current loss 1.625329, current_train_items 66636.
+I0715 13:59:46.783580 137161025132032 run.py:723] (val) algo bridges step 4200: {'is_bridge': 0.8028279654359781, 'score': 0.8028279654359781, 'examples_seen': 66636, 'step': 4200, 'algorithm': 'bridges'}
+I0715 13:59:46.783820 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.803, val scores are: bridges: 0.803
+I0715 13:59:48.174460 137161025132032 run.py:688] Algo bridges step 4250 current loss 2.841549, current_train_items 67428.
+I0715 13:59:48.391373 137161025132032 run.py:723] (val) algo bridges step 4250: {'is_bridge': 0.823529411764706, 'score': 0.823529411764706, 'examples_seen': 67428, 'step': 4250, 'algorithm': 'bridges'}
+I0715 13:59:48.391623 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.824, val scores are: bridges: 0.824
+I0715 13:59:49.715535 137161025132032 run.py:688] Algo bridges step 4300 current loss 6.196503, current_train_items 68211.
+I0715 13:59:49.932394 137161025132032 run.py:723] (val) algo bridges step 4300: {'is_bridge': 0.8422391857506362, 'score': 0.8422391857506362, 'examples_seen': 68211, 'step': 4300, 'algorithm': 'bridges'}
+I0715 13:59:49.932671 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.842, val scores are: bridges: 0.842
+I0715 13:59:51.313825 137161025132032 run.py:688] Algo bridges step 4350 current loss 7.464918, current_train_items 68994.
+I0715 13:59:51.538080 137161025132032 run.py:723] (val) algo bridges step 4350: {'is_bridge': 0.8372549019607843, 'score': 0.8372549019607843, 'examples_seen': 68994, 'step': 4350, 'algorithm': 'bridges'}
+I0715 13:59:51.538321 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.837, val scores are: bridges: 0.837
+I0715 13:59:52.925663 137161025132032 run.py:688] Algo bridges step 4400 current loss 9.233129, current_train_items 69775.
+I0715 13:59:53.172138 137161025132032 run.py:723] (val) algo bridges step 4400: {'is_bridge': 0.8013816925734024, 'score': 0.8013816925734024, 'examples_seen': 69775, 'step': 4400, 'algorithm': 'bridges'}
+I0715 13:59:53.172367 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.801, val scores are: bridges: 0.801
+I0715 13:59:54.529195 137161025132032 run.py:688] Algo bridges step 4450 current loss 10.661960, current_train_items 70558.
+I0715 13:59:54.771399 137161025132032 run.py:723] (val) algo bridges step 4450: {'is_bridge': 0.8520599250936329, 'score': 0.8520599250936329, 'examples_seen': 70558, 'step': 4450, 'algorithm': 'bridges'}
+I0715 13:59:54.771660 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.852, val scores are: bridges: 0.852
+I0715 13:59:56.127462 137161025132032 run.py:688] Algo bridges step 4500 current loss 0.464400, current_train_items 71376.
+I0715 13:59:56.374379 137161025132032 run.py:723] (val) algo bridges step 4500: {'is_bridge': 0.8376068376068376, 'score': 0.8376068376068376, 'examples_seen': 71376, 'step': 4500, 'algorithm': 'bridges'}
+I0715 13:59:56.374637 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.872, current avg val score is 0.838, val scores are: bridges: 0.838
+W0715 13:59:56.529849 137161025132032 samplers.py:175] Increasing hint lengh from 102 to 109
+I0715 13:59:57.807140 137161025132032 run.py:688] Algo bridges step 4550 current loss 1.639739, current_train_items 72190.
+I0715 13:59:58.018174 137161025132032 run.py:723] (val) algo bridges step 4550: {'is_bridge': 0.7844374342797056, 'score': 0.7844374342797056, 'examples_seen': 72190, 'step': 4550, 'algorithm': 'bridges'}
+I0715 13:59:58.018414 137161025132032 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.784, val scores are: bridges: 0.784
+I0715 13:59:59.424315 137161025132032 run.py:688] Algo bridges step 4600 current loss 3.934453, current_train_items 72975.
+I0715 13:59:59.637668 137161025132032 run.py:723] (val) algo bridges step 4600: {'is_bridge': 0.8530901722391084, 'score': 0.8530901722391084, 'examples_seen': 72975, 'step': 4600, 'algorithm': 'bridges'}
+I0715 13:59:59.637899 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.784, current avg val score is 0.853, val scores are: bridges: 0.853
+I0715 14:00:01.020345 137161025132032 run.py:688] Algo bridges step 4650 current loss 6.204834, current_train_items 73768.
+I0715 14:00:01.238367 137161025132032 run.py:723] (val) algo bridges step 4650: {'is_bridge': 0.783710407239819, 'score': 0.783710407239819, 'examples_seen': 73768, 'step': 4650, 'algorithm': 'bridges'}
+I0715 14:00:01.238632 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.853, current avg val score is 0.784, val scores are: bridges: 0.784
+I0715 14:00:02.576347 137161025132032 run.py:688] Algo bridges step 4700 current loss 8.025000, current_train_items 74547.
+I0715 14:00:02.800654 137161025132032 run.py:723] (val) algo bridges step 4700: {'is_bridge': 0.8122362869198312, 'score': 0.8122362869198312, 'examples_seen': 74547, 'step': 4700, 'algorithm': 'bridges'}
+I0715 14:00:02.800890 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.853, current avg val score is 0.812, val scores are: bridges: 0.812
+I0715 14:00:04.161936 137161025132032 run.py:688] Algo bridges step 4750 current loss 8.468235, current_train_items 75326.
+I0715 14:00:04.392194 137161025132032 run.py:723] (val) algo bridges step 4750: {'is_bridge': 0.7978339350180507, 'score': 0.7978339350180507, 'examples_seen': 75326, 'step': 4750, 'algorithm': 'bridges'}
+I0715 14:00:04.392434 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.853, current avg val score is 0.798, val scores are: bridges: 0.798
+I0715 14:00:05.733234 137161025132032 run.py:688] Algo bridges step 4800 current loss 9.190006, current_train_items 76108.
+I0715 14:00:06.005429 137161025132032 run.py:723] (val) algo bridges step 4800: {'is_bridge': 0.8288119738072964, 'score': 0.8288119738072964, 'examples_seen': 76108, 'step': 4800, 'algorithm': 'bridges'}
+I0715 14:00:06.005695 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.853, current avg val score is 0.829, val scores are: bridges: 0.829
+I0715 14:00:07.360656 137161025132032 run.py:688] Algo bridges step 4850 current loss 0.541219, current_train_items 76931.
+I0715 14:00:07.600362 137161025132032 run.py:723] (val) algo bridges step 4850: {'is_bridge': 0.794921875, 'score': 0.794921875, 'examples_seen': 76931, 'step': 4850, 'algorithm': 'bridges'}
+I0715 14:00:07.600630 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.853, current avg val score is 0.795, val scores are: bridges: 0.795
+I0715 14:00:08.990624 137161025132032 run.py:688] Algo bridges step 4900 current loss 1.376869, current_train_items 77727.
+I0715 14:00:09.211467 137161025132032 run.py:723] (val) algo bridges step 4900: {'is_bridge': 0.8701754385964912, 'score': 0.8701754385964912, 'examples_seen': 77727, 'step': 4900, 'algorithm': 'bridges'}
+I0715 14:00:09.211725 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.853, current avg val score is 0.870, val scores are: bridges: 0.870
+I0715 14:00:10.556022 137161025132032 run.py:688] Algo bridges step 4950 current loss 3.141863, current_train_items 78527.
+I0715 14:00:10.770413 137161025132032 run.py:723] (val) algo bridges step 4950: {'is_bridge': 0.8549087749782797, 'score': 0.8549087749782797, 'examples_seen': 78527, 'step': 4950, 'algorithm': 'bridges'}
+I0715 14:00:10.770678 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.870, current avg val score is 0.855, val scores are: bridges: 0.855
+I0715 14:00:12.120401 137161025132032 run.py:688] Algo bridges step 5000 current loss 5.467910, current_train_items 79314.
+I0715 14:00:12.337125 137161025132032 run.py:723] (val) algo bridges step 5000: {'is_bridge': 0.799618320610687, 'score': 0.799618320610687, 'examples_seen': 79314, 'step': 5000, 'algorithm': 'bridges'}
+I0715 14:00:12.337364 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.870, current avg val score is 0.800, val scores are: bridges: 0.800
+I0715 14:00:13.733294 137161025132032 run.py:688] Algo bridges step 5050 current loss 7.716858, current_train_items 80101.
+I0715 14:00:13.967553 137161025132032 run.py:723] (val) algo bridges step 5050: {'is_bridge': 0.818086225026288, 'score': 0.818086225026288, 'examples_seen': 80101, 'step': 5050, 'algorithm': 'bridges'}
+I0715 14:00:13.967782 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.870, current avg val score is 0.818, val scores are: bridges: 0.818
+I0715 14:00:15.338768 137161025132032 run.py:688] Algo bridges step 5100 current loss 9.479415, current_train_items 80879.
+I0715 14:00:15.591525 137161025132032 run.py:723] (val) algo bridges step 5100: {'is_bridge': 0.824847250509165, 'score': 0.824847250509165, 'examples_seen': 80879, 'step': 5100, 'algorithm': 'bridges'}
+I0715 14:00:15.591760 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.870, current avg val score is 0.825, val scores are: bridges: 0.825
+I0715 14:00:17.025638 137161025132032 run.py:688] Algo bridges step 5150 current loss 10.788527, current_train_items 81662.
+I0715 14:00:17.264107 137161025132032 run.py:723] (val) algo bridges step 5150: {'is_bridge': 0.7857142857142858, 'score': 0.7857142857142858, 'examples_seen': 81662, 'step': 5150, 'algorithm': 'bridges'}
+I0715 14:00:17.264265 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.870, current avg val score is 0.786, val scores are: bridges: 0.786
+I0715 14:00:18.539917 137161025132032 run.py:688] Algo bridges step 5200 current loss 0.387840, current_train_items 82480.
+I0715 14:00:18.793431 137161025132032 run.py:723] (val) algo bridges step 5200: {'is_bridge': 0.8269961977186313, 'score': 0.8269961977186313, 'examples_seen': 82480, 'step': 5200, 'algorithm': 'bridges'}
+I0715 14:00:18.793683 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.870, current avg val score is 0.827, val scores are: bridges: 0.827
+I0715 14:00:20.204608 137161025132032 run.py:688] Algo bridges step 5250 current loss 1.283395, current_train_items 83294.
+I0715 14:00:20.414706 137161025132032 run.py:723] (val) algo bridges step 5250: {'is_bridge': 0.811078140454995, 'score': 0.811078140454995, 'examples_seen': 83294, 'step': 5250, 'algorithm': 'bridges'}
+I0715 14:00:20.414966 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.870, current avg val score is 0.811, val scores are: bridges: 0.811
+I0715 14:00:21.759840 137161025132032 run.py:688] Algo bridges step 5300 current loss 3.663806, current_train_items 84080.
+I0715 14:00:21.974208 137161025132032 run.py:723] (val) algo bridges step 5300: {'is_bridge': 0.822695035460993, 'score': 0.822695035460993, 'examples_seen': 84080, 'step': 5300, 'algorithm': 'bridges'}
+I0715 14:00:21.974395 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.870, current avg val score is 0.823, val scores are: bridges: 0.823
+I0715 14:00:23.344556 137161025132032 run.py:688] Algo bridges step 5350 current loss 4.644040, current_train_items 84873.
+I0715 14:00:23.562981 137161025132032 run.py:723] (val) algo bridges step 5350: {'is_bridge': 0.851231527093596, 'score': 0.851231527093596, 'examples_seen': 84873, 'step': 5350, 'algorithm': 'bridges'}
+I0715 14:00:23.563217 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.870, current avg val score is 0.851, val scores are: bridges: 0.851
+I0715 14:00:24.886834 137161025132032 run.py:688] Algo bridges step 5400 current loss 7.157908, current_train_items 85657.
+I0715 14:00:25.115063 137161025132032 run.py:723] (val) algo bridges step 5400: {'is_bridge': 0.7770069375619425, 'score': 0.7770069375619425, 'examples_seen': 85657, 'step': 5400, 'algorithm': 'bridges'}
+I0715 14:00:25.115297 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.870, current avg val score is 0.777, val scores are: bridges: 0.777
+I0715 14:00:26.467342 137161025132032 run.py:688] Algo bridges step 5450 current loss 8.793619, current_train_items 86431.
+I0715 14:00:26.697279 137161025132032 run.py:723] (val) algo bridges step 5450: {'is_bridge': 0.826923076923077, 'score': 0.826923076923077, 'examples_seen': 86431, 'step': 5450, 'algorithm': 'bridges'}
+I0715 14:00:26.697532 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.870, current avg val score is 0.827, val scores are: bridges: 0.827
+I0715 14:00:28.048768 137161025132032 run.py:688] Algo bridges step 5500 current loss 9.514660, current_train_items 87219.
+I0715 14:00:28.325056 137161025132032 run.py:723] (val) algo bridges step 5500: {'is_bridge': 0.8436213991769547, 'score': 0.8436213991769547, 'examples_seen': 87219, 'step': 5500, 'algorithm': 'bridges'}
+I0715 14:00:28.325300 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.870, current avg val score is 0.844, val scores are: bridges: 0.844
+I0715 14:00:29.725651 137161025132032 run.py:688] Algo bridges step 5550 current loss 0.440143, current_train_items 88046.
+I0715 14:00:29.969325 137161025132032 run.py:723] (val) algo bridges step 5550: {'is_bridge': 0.8194070080862534, 'score': 0.8194070080862534, 'examples_seen': 88046, 'step': 5550, 'algorithm': 'bridges'}
+I0715 14:00:29.969582 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.870, current avg val score is 0.819, val scores are: bridges: 0.819
+I0715 14:00:31.417439 137161025132032 run.py:688] Algo bridges step 5600 current loss 1.947281, current_train_items 88846.
+I0715 14:00:31.628344 137161025132032 run.py:723] (val) algo bridges step 5600: {'is_bridge': 0.8208695652173912, 'score': 0.8208695652173912, 'examples_seen': 88846, 'step': 5600, 'algorithm': 'bridges'}
+I0715 14:00:31.628547 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.870, current avg val score is 0.821, val scores are: bridges: 0.821
+I0715 14:00:32.996064 137161025132032 run.py:688] Algo bridges step 5650 current loss 4.105537, current_train_items 89638.
+I0715 14:00:33.209404 137161025132032 run.py:723] (val) algo bridges step 5650: {'is_bridge': 0.8177215189873417, 'score': 0.8177215189873417, 'examples_seen': 89638, 'step': 5650, 'algorithm': 'bridges'}
+I0715 14:00:33.209582 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.870, current avg val score is 0.818, val scores are: bridges: 0.818
+I0715 14:00:34.543678 137161025132032 run.py:688] Algo bridges step 5700 current loss 4.483968, current_train_items 90427.
+I0715 14:00:34.760849 137161025132032 run.py:723] (val) algo bridges step 5700: {'is_bridge': 0.9012096774193548, 'score': 0.9012096774193548, 'examples_seen': 90427, 'step': 5700, 'algorithm': 'bridges'}
+I0715 14:00:34.761003 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.870, current avg val score is 0.901, val scores are: bridges: 0.901
+W0715 14:00:36.107472 137161025132032 samplers.py:175] Increasing hint lengh from 45 to 46
+I0715 14:00:36.160243 137161025132032 run.py:688] Algo bridges step 5750 current loss 7.368338, current_train_items 91206.
+I0715 14:00:36.386996 137161025132032 run.py:723] (val) algo bridges step 5750: {'is_bridge': 0.87374749498998, 'score': 0.87374749498998, 'examples_seen': 91206, 'step': 5750, 'algorithm': 'bridges'}
+I0715 14:00:36.387232 137161025132032 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.874, val scores are: bridges: 0.874
+I0715 14:00:37.837927 137161025132032 run.py:688] Algo bridges step 5800 current loss 9.721550, current_train_items 91993.
+I0715 14:00:38.086207 137161025132032 run.py:723] (val) algo bridges step 5800: {'is_bridge': 0.8299319727891157, 'score': 0.8299319727891157, 'examples_seen': 91993, 'step': 5800, 'algorithm': 'bridges'}
+I0715 14:00:38.086365 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.874, current avg val score is 0.830, val scores are: bridges: 0.830
+I0715 14:00:39.384502 137161025132032 run.py:688] Algo bridges step 5850 current loss 9.875188, current_train_items 92776.
+I0715 14:00:39.662545 137161025132032 run.py:723] (val) algo bridges step 5850: {'is_bridge': 0.8172043010752688, 'score': 0.8172043010752688, 'examples_seen': 92776, 'step': 5850, 'algorithm': 'bridges'}
+I0715 14:00:39.662781 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.874, current avg val score is 0.817, val scores are: bridges: 0.817
+I0715 14:00:41.058703 137161025132032 run.py:688] Algo bridges step 5900 current loss 0.451895, current_train_items 93595.
+I0715 14:00:41.302343 137161025132032 run.py:723] (val) algo bridges step 5900: {'is_bridge': 0.8317853457172343, 'score': 0.8317853457172343, 'examples_seen': 93595, 'step': 5900, 'algorithm': 'bridges'}
+I0715 14:00:41.302593 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.874, current avg val score is 0.832, val scores are: bridges: 0.832
+W0715 14:00:41.788324 137161025132032 samplers.py:175] Increasing hint lengh from 46 to 53
+I0715 14:00:42.718265 137161025132032 run.py:688] Algo bridges step 5950 current loss 1.493854, current_train_items 94394.
+I0715 14:00:42.945683 137161025132032 run.py:723] (val) algo bridges step 5950: {'is_bridge': 0.7864164432529044, 'score': 0.7864164432529044, 'examples_seen': 94394, 'step': 5950, 'algorithm': 'bridges'}
+I0715 14:00:42.945840 137161025132032 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.786, val scores are: bridges: 0.786
+I0715 14:00:44.319517 137161025132032 run.py:688] Algo bridges step 6000 current loss 3.778519, current_train_items 95185.
+I0715 14:00:44.532279 137161025132032 run.py:723] (val) algo bridges step 6000: {'is_bridge': 0.8769657724329325, 'score': 0.8769657724329325, 'examples_seen': 95185, 'step': 6000, 'algorithm': 'bridges'}
+I0715 14:00:44.532543 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.786, current avg val score is 0.877, val scores are: bridges: 0.877
+I0715 14:00:45.856933 137161025132032 run.py:688] Algo bridges step 6050 current loss 5.010741, current_train_items 95970.
+I0715 14:00:46.076019 137161025132032 run.py:723] (val) algo bridges step 6050: {'is_bridge': 0.8102564102564103, 'score': 0.8102564102564103, 'examples_seen': 95970, 'step': 6050, 'algorithm': 'bridges'}
+I0715 14:00:46.076297 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.877, current avg val score is 0.810, val scores are: bridges: 0.810
+I0715 14:00:47.416397 137161025132032 run.py:688] Algo bridges step 6100 current loss 7.908528, current_train_items 96745.
+I0715 14:00:47.645787 137161025132032 run.py:723] (val) algo bridges step 6100: {'is_bridge': 0.8674698795180724, 'score': 0.8674698795180724, 'examples_seen': 96745, 'step': 6100, 'algorithm': 'bridges'}
+I0715 14:00:47.646040 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.877, current avg val score is 0.867, val scores are: bridges: 0.867
+I0715 14:00:49.009388 137161025132032 run.py:688] Algo bridges step 6150 current loss 8.648719, current_train_items 97528.
+I0715 14:00:49.239076 137161025132032 run.py:723] (val) algo bridges step 6150: {'is_bridge': 0.8517786561264823, 'score': 0.8517786561264823, 'examples_seen': 97528, 'step': 6150, 'algorithm': 'bridges'}
+I0715 14:00:49.239332 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.877, current avg val score is 0.852, val scores are: bridges: 0.852
+I0715 14:00:50.619753 137161025132032 run.py:688] Algo bridges step 6200 current loss 9.874615, current_train_items 98310.
+I0715 14:00:50.862255 137161025132032 run.py:723] (val) algo bridges step 6200: {'is_bridge': 0.8441330998248686, 'score': 0.8441330998248686, 'examples_seen': 98310, 'step': 6200, 'algorithm': 'bridges'}
+I0715 14:00:50.862515 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.877, current avg val score is 0.844, val scores are: bridges: 0.844
+I0715 14:00:52.223562 137161025132032 run.py:688] Algo bridges step 6250 current loss 0.265456, current_train_items 99125.
+I0715 14:00:52.476927 137161025132032 run.py:723] (val) algo bridges step 6250: {'is_bridge': 0.8050089445438282, 'score': 0.8050089445438282, 'examples_seen': 99125, 'step': 6250, 'algorithm': 'bridges'}
+I0715 14:00:52.477169 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.877, current avg val score is 0.805, val scores are: bridges: 0.805
+I0715 14:00:53.856678 137161025132032 run.py:688] Algo bridges step 6300 current loss 1.537979, current_train_items 99930.
+I0715 14:00:54.067141 137161025132032 run.py:723] (val) algo bridges step 6300: {'is_bridge': 0.8849740932642486, 'score': 0.8849740932642486, 'examples_seen': 99930, 'step': 6300, 'algorithm': 'bridges'}
+I0715 14:00:54.067379 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.877, current avg val score is 0.885, val scores are: bridges: 0.885
+I0715 14:00:55.508810 137161025132032 run.py:688] Algo bridges step 6350 current loss 3.987717, current_train_items 100714.
+I0715 14:00:55.722738 137161025132032 run.py:723] (val) algo bridges step 6350: {'is_bridge': 0.8131212723658051, 'score': 0.8131212723658051, 'examples_seen': 100714, 'step': 6350, 'algorithm': 'bridges'}
+I0715 14:00:55.722978 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.813, val scores are: bridges: 0.813
+I0715 14:00:57.074954 137161025132032 run.py:688] Algo bridges step 6400 current loss 5.572848, current_train_items 101505.
+I0715 14:00:57.290942 137161025132032 run.py:723] (val) algo bridges step 6400: {'is_bridge': 0.8409893992932862, 'score': 0.8409893992932862, 'examples_seen': 101505, 'step': 6400, 'algorithm': 'bridges'}
+I0715 14:00:57.291179 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.841, val scores are: bridges: 0.841
+I0715 14:00:58.621098 137161025132032 run.py:688] Algo bridges step 6450 current loss 8.937920, current_train_items 102293.
+I0715 14:00:58.850575 137161025132032 run.py:723] (val) algo bridges step 6450: {'is_bridge': 0.7816593886462881, 'score': 0.7816593886462881, 'examples_seen': 102293, 'step': 6450, 'algorithm': 'bridges'}
+I0715 14:00:58.850829 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.782, val scores are: bridges: 0.782
+I0715 14:01:00.237395 137161025132032 run.py:688] Algo bridges step 6500 current loss 8.931748, current_train_items 103075.
+I0715 14:01:00.468364 137161025132032 run.py:723] (val) algo bridges step 6500: {'is_bridge': 0.7635658914728681, 'score': 0.7635658914728681, 'examples_seen': 103075, 'step': 6500, 'algorithm': 'bridges'}
+I0715 14:01:00.468636 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.764, val scores are: bridges: 0.764
+I0715 14:01:01.833340 137161025132032 run.py:688] Algo bridges step 6550 current loss 9.317761, current_train_items 103854.
+I0715 14:01:02.110697 137161025132032 run.py:723] (val) algo bridges step 6550: {'is_bridge': 0.8137044967880085, 'score': 0.8137044967880085, 'examples_seen': 103854, 'step': 6550, 'algorithm': 'bridges'}
+I0715 14:01:02.110953 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.814, val scores are: bridges: 0.814
+I0715 14:01:03.530386 137161025132032 run.py:688] Algo bridges step 6600 current loss 0.411189, current_train_items 104682.
+I0715 14:01:03.745150 137161025132032 run.py:723] (val) algo bridges step 6600: {'is_bridge': 0.847750865051903, 'score': 0.847750865051903, 'examples_seen': 104682, 'step': 6600, 'algorithm': 'bridges'}
+I0715 14:01:03.745401 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.848, val scores are: bridges: 0.848
+I0715 14:01:05.106868 137161025132032 run.py:688] Algo bridges step 6650 current loss 1.817076, current_train_items 105484.
+I0715 14:01:05.339065 137161025132032 run.py:723] (val) algo bridges step 6650: {'is_bridge': 0.8150572831423895, 'score': 0.8150572831423895, 'examples_seen': 105484, 'step': 6650, 'algorithm': 'bridges'}
+I0715 14:01:05.339308 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.815, val scores are: bridges: 0.815
+I0715 14:01:06.641180 137161025132032 run.py:688] Algo bridges step 6700 current loss 3.048825, current_train_items 106273.
+I0715 14:01:06.853553 137161025132032 run.py:723] (val) algo bridges step 6700: {'is_bridge': 0.840981856990395, 'score': 0.840981856990395, 'examples_seen': 106273, 'step': 6700, 'algorithm': 'bridges'}
+I0715 14:01:06.853809 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.841, val scores are: bridges: 0.841
+I0715 14:01:08.241194 137161025132032 run.py:688] Algo bridges step 6750 current loss 4.916495, current_train_items 107058.
+I0715 14:01:08.457533 137161025132032 run.py:723] (val) algo bridges step 6750: {'is_bridge': 0.8215767634854771, 'score': 0.8215767634854771, 'examples_seen': 107058, 'step': 6750, 'algorithm': 'bridges'}
+I0715 14:01:08.457774 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.822, val scores are: bridges: 0.822
+I0715 14:01:09.824737 137161025132032 run.py:688] Algo bridges step 6800 current loss 7.214846, current_train_items 107837.
+I0715 14:01:10.053766 137161025132032 run.py:723] (val) algo bridges step 6800: {'is_bridge': 0.7634936211972522, 'score': 0.7634936211972522, 'examples_seen': 107837, 'step': 6800, 'algorithm': 'bridges'}
+I0715 14:01:10.054008 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.763, val scores are: bridges: 0.763
+I0715 14:01:11.420508 137161025132032 run.py:688] Algo bridges step 6850 current loss 8.701155, current_train_items 108619.
+I0715 14:01:11.672552 137161025132032 run.py:723] (val) algo bridges step 6850: {'is_bridge': 0.8, 'score': 0.8, 'examples_seen': 108619, 'step': 6850, 'algorithm': 'bridges'}
+I0715 14:01:11.672791 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.800, val scores are: bridges: 0.800
+I0715 14:01:13.028349 137161025132032 run.py:688] Algo bridges step 6900 current loss 9.855144, current_train_items 109394.
+I0715 14:01:13.298521 137161025132032 run.py:723] (val) algo bridges step 6900: {'is_bridge': 0.8278221208665907, 'score': 0.8278221208665907, 'examples_seen': 109394, 'step': 6900, 'algorithm': 'bridges'}
+I0715 14:01:13.298758 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.828, val scores are: bridges: 0.828
+I0715 14:01:14.724565 137161025132032 run.py:688] Algo bridges step 6950 current loss 0.483411, current_train_items 110221.
+I0715 14:01:14.939715 137161025132032 run.py:723] (val) algo bridges step 6950: {'is_bridge': 0.8640973630831643, 'score': 0.8640973630831643, 'examples_seen': 110221, 'step': 6950, 'algorithm': 'bridges'}
+I0715 14:01:14.939947 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.864, val scores are: bridges: 0.864
+I0715 14:01:16.304614 137161025132032 run.py:688] Algo bridges step 7000 current loss 1.428344, current_train_items 111023.
+I0715 14:01:16.515760 137161025132032 run.py:723] (val) algo bridges step 7000: {'is_bridge': 0.8463035019455253, 'score': 0.8463035019455253, 'examples_seen': 111023, 'step': 7000, 'algorithm': 'bridges'}
+I0715 14:01:16.515998 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.885, current avg val score is 0.846, val scores are: bridges: 0.846
+I0715 14:01:17.870677 137161025132032 run.py:688] Algo bridges step 7050 current loss 2.995754, current_train_items 111818.
+I0715 14:01:18.084741 137161025132032 run.py:723] (val) algo bridges step 7050: {'is_bridge': 0.905511811023622, 'score': 0.905511811023622, 'examples_seen': 111818, 'step': 7050, 'algorithm': 'bridges'}
+I0715 14:01:18.084973 137161025132032 run.py:744] Checkpointing best model, best avg val score was 0.885, current avg val score is 0.906, val scores are: bridges: 0.906
+I0715 14:01:19.418029 137161025132032 run.py:688] Algo bridges step 7100 current loss 5.827330, current_train_items 112603.
+I0715 14:01:19.642260 137161025132032 run.py:723] (val) algo bridges step 7100: {'is_bridge': 0.8204121687929342, 'score': 0.8204121687929342, 'examples_seen': 112603, 'step': 7100, 'algorithm': 'bridges'}
+I0715 14:01:19.642505 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.820, val scores are: bridges: 0.820
+I0715 14:01:21.084190 137161025132032 run.py:688] Algo bridges step 7150 current loss 8.002152, current_train_items 113385.
+I0715 14:01:21.313934 137161025132032 run.py:723] (val) algo bridges step 7150: {'is_bridge': 0.8359281437125747, 'score': 0.8359281437125747, 'examples_seen': 113385, 'step': 7150, 'algorithm': 'bridges'}
+I0715 14:01:21.314171 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.836, val scores are: bridges: 0.836
+I0715 14:01:22.710533 137161025132032 run.py:688] Algo bridges step 7200 current loss 8.657434, current_train_items 114163.
+I0715 14:01:22.941828 137161025132032 run.py:723] (val) algo bridges step 7200: {'is_bridge': 0.8134715025906735, 'score': 0.8134715025906735, 'examples_seen': 114163, 'step': 7200, 'algorithm': 'bridges'}
+I0715 14:01:22.942071 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.813, val scores are: bridges: 0.813
+I0715 14:01:24.346688 137161025132032 run.py:688] Algo bridges step 7250 current loss 10.276133, current_train_items 114957.
+I0715 14:01:24.607068 137161025132032 run.py:723] (val) algo bridges step 7250: {'is_bridge': 0.8161044613710555, 'score': 0.8161044613710555, 'examples_seen': 114957, 'step': 7250, 'algorithm': 'bridges'}
+I0715 14:01:24.607313 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.816, val scores are: bridges: 0.816
+I0715 14:01:26.005984 137161025132032 run.py:688] Algo bridges step 7300 current loss 0.429370, current_train_items 115775.
+I0715 14:01:26.216650 137161025132032 run.py:723] (val) algo bridges step 7300: {'is_bridge': 0.831973898858075, 'score': 0.831973898858075, 'examples_seen': 115775, 'step': 7300, 'algorithm': 'bridges'}
+I0715 14:01:26.216886 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.832, val scores are: bridges: 0.832
+I0715 14:01:27.601087 137161025132032 run.py:688] Algo bridges step 7350 current loss 1.663372, current_train_items 116585.
+I0715 14:01:27.819439 137161025132032 run.py:723] (val) algo bridges step 7350: {'is_bridge': 0.7967032967032966, 'score': 0.7967032967032966, 'examples_seen': 116585, 'step': 7350, 'algorithm': 'bridges'}
+I0715 14:01:27.819686 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.797, val scores are: bridges: 0.797
+I0715 14:01:29.182107 137161025132032 run.py:688] Algo bridges step 7400 current loss 2.926273, current_train_items 117369.
+I0715 14:01:29.408106 137161025132032 run.py:723] (val) algo bridges step 7400: {'is_bridge': 0.8220502901353965, 'score': 0.8220502901353965, 'examples_seen': 117369, 'step': 7400, 'algorithm': 'bridges'}
+I0715 14:01:29.408345 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.822, val scores are: bridges: 0.822
+I0715 14:01:30.791350 137161025132032 run.py:688] Algo bridges step 7450 current loss 5.257909, current_train_items 118150.
+I0715 14:01:31.007847 137161025132032 run.py:723] (val) algo bridges step 7450: {'is_bridge': 0.7915611814345992, 'score': 0.7915611814345992, 'examples_seen': 118150, 'step': 7450, 'algorithm': 'bridges'}
+I0715 14:01:31.008089 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.792, val scores are: bridges: 0.792
+I0715 14:01:32.393198 137161025132032 run.py:688] Algo bridges step 7500 current loss 7.425361, current_train_items 118931.
+I0715 14:01:32.617408 137161025132032 run.py:723] (val) algo bridges step 7500: {'is_bridge': 0.800865800865801, 'score': 0.800865800865801, 'examples_seen': 118931, 'step': 7500, 'algorithm': 'bridges'}
+I0715 14:01:32.617663 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.801, val scores are: bridges: 0.801
+I0715 14:01:33.991008 137161025132032 run.py:688] Algo bridges step 7550 current loss 8.715014, current_train_items 119715.
+I0715 14:01:34.221141 137161025132032 run.py:723] (val) algo bridges step 7550: {'is_bridge': 0.7234042553191488, 'score': 0.7234042553191488, 'examples_seen': 119715, 'step': 7550, 'algorithm': 'bridges'}
+I0715 14:01:34.221386 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.723, val scores are: bridges: 0.723
+I0715 14:01:35.562004 137161025132032 run.py:688] Algo bridges step 7600 current loss 10.053243, current_train_items 120499.
+I0715 14:01:35.834403 137161025132032 run.py:723] (val) algo bridges step 7600: {'is_bridge': 0.7914230019493178, 'score': 0.7914230019493178, 'examples_seen': 120499, 'step': 7600, 'algorithm': 'bridges'}
+I0715 14:01:35.834682 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.791, val scores are: bridges: 0.791
+I0715 14:01:37.223842 137161025132032 run.py:688] Algo bridges step 7650 current loss 0.531540, current_train_items 121320.
+I0715 14:01:37.432965 137161025132032 run.py:723] (val) algo bridges step 7650: {'is_bridge': 0.8518518518518517, 'score': 0.8518518518518517, 'examples_seen': 121320, 'step': 7650, 'algorithm': 'bridges'}
+I0715 14:01:37.433207 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.852, val scores are: bridges: 0.852
+I0715 14:01:38.758020 137161025132032 run.py:688] Algo bridges step 7700 current loss 1.438683, current_train_items 122120.
+I0715 14:01:38.987766 137161025132032 run.py:723] (val) algo bridges step 7700: {'is_bridge': 0.888152444076222, 'score': 0.888152444076222, 'examples_seen': 122120, 'step': 7700, 'algorithm': 'bridges'}
+I0715 14:01:38.988018 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.888, val scores are: bridges: 0.888
+I0715 14:01:40.342755 137161025132032 run.py:688] Algo bridges step 7750 current loss 2.518820, current_train_items 122916.
+I0715 14:01:40.564566 137161025132032 run.py:723] (val) algo bridges step 7750: {'is_bridge': 0.8297271872060207, 'score': 0.8297271872060207, 'examples_seen': 122916, 'step': 7750, 'algorithm': 'bridges'}
+I0715 14:01:40.564803 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.830, val scores are: bridges: 0.830
+I0715 14:01:41.929828 137161025132032 run.py:688] Algo bridges step 7800 current loss 4.662346, current_train_items 123694.
+I0715 14:01:42.155765 137161025132032 run.py:723] (val) algo bridges step 7800: {'is_bridge': 0.8074807480748075, 'score': 0.8074807480748075, 'examples_seen': 123694, 'step': 7800, 'algorithm': 'bridges'}
+I0715 14:01:42.156008 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.807, val scores are: bridges: 0.807
+I0715 14:01:43.506252 137161025132032 run.py:688] Algo bridges step 7850 current loss 9.076221, current_train_items 124473.
+I0715 14:01:43.736874 137161025132032 run.py:723] (val) algo bridges step 7850: {'is_bridge': 0.8504854368932039, 'score': 0.8504854368932039, 'examples_seen': 124473, 'step': 7850, 'algorithm': 'bridges'}
+I0715 14:01:43.737109 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.850, val scores are: bridges: 0.850
+I0715 14:01:45.123805 137161025132032 run.py:688] Algo bridges step 7900 current loss 9.558471, current_train_items 125257.
+I0715 14:01:45.354607 137161025132032 run.py:723] (val) algo bridges step 7900: {'is_bridge': 0.8305647840531561, 'score': 0.8305647840531561, 'examples_seen': 125257, 'step': 7900, 'algorithm': 'bridges'}
+I0715 14:01:45.354846 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.831, val scores are: bridges: 0.831
+I0715 14:01:46.698657 137161025132032 run.py:688] Algo bridges step 7950 current loss 8.931085, current_train_items 126040.
+I0715 14:01:46.956028 137161025132032 run.py:723] (val) algo bridges step 7950: {'is_bridge': 0.8573991031390136, 'score': 0.8573991031390136, 'examples_seen': 126040, 'step': 7950, 'algorithm': 'bridges'}
+I0715 14:01:46.956273 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.857, val scores are: bridges: 0.857
+I0715 14:01:48.384662 137161025132032 run.py:688] Algo bridges step 8000 current loss 0.396987, current_train_items 126860.
+I0715 14:01:48.617688 137161025132032 run.py:723] (val) algo bridges step 8000: {'is_bridge': 0.7702573879885606, 'score': 0.7702573879885606, 'examples_seen': 126860, 'step': 8000, 'algorithm': 'bridges'}
+I0715 14:01:48.617928 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.770, val scores are: bridges: 0.770
+I0715 14:01:49.936312 137161025132032 run.py:688] Algo bridges step 8050 current loss 1.502139, current_train_items 127654.
+I0715 14:01:50.160742 137161025132032 run.py:723] (val) algo bridges step 8050: {'is_bridge': 0.8512467755803955, 'score': 0.8512467755803955, 'examples_seen': 127654, 'step': 8050, 'algorithm': 'bridges'}
+I0715 14:01:50.160980 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.851, val scores are: bridges: 0.851
+I0715 14:01:51.584421 137161025132032 run.py:688] Algo bridges step 8100 current loss 3.437513, current_train_items 128447.
+I0715 14:01:51.796309 137161025132032 run.py:723] (val) algo bridges step 8100: {'is_bridge': 0.8635547576301615, 'score': 0.8635547576301615, 'examples_seen': 128447, 'step': 8100, 'algorithm': 'bridges'}
+I0715 14:01:51.796608 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.864, val scores are: bridges: 0.864
+I0715 14:01:53.175836 137161025132032 run.py:688] Algo bridges step 8150 current loss 4.555620, current_train_items 129242.
+I0715 14:01:53.392788 137161025132032 run.py:723] (val) algo bridges step 8150: {'is_bridge': 0.8064516129032259, 'score': 0.8064516129032259, 'examples_seen': 129242, 'step': 8150, 'algorithm': 'bridges'}
+I0715 14:01:53.393026 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.806, val scores are: bridges: 0.806
+I0715 14:01:54.757708 137161025132032 run.py:688] Algo bridges step 8200 current loss 8.251524, current_train_items 130027.
+I0715 14:01:54.982249 137161025132032 run.py:723] (val) algo bridges step 8200: {'is_bridge': 0.8337468982630273, 'score': 0.8337468982630273, 'examples_seen': 130027, 'step': 8200, 'algorithm': 'bridges'}
+I0715 14:01:54.982512 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.834, val scores are: bridges: 0.834
+I0715 14:01:56.367519 137161025132032 run.py:688] Algo bridges step 8250 current loss 9.283912, current_train_items 130806.
+I0715 14:01:56.611980 137161025132032 run.py:723] (val) algo bridges step 8250: {'is_bridge': 0.7776838546069316, 'score': 0.7776838546069316, 'examples_seen': 130806, 'step': 8250, 'algorithm': 'bridges'}
+I0715 14:01:56.612215 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.778, val scores are: bridges: 0.778
+I0715 14:01:57.963505 137161025132032 run.py:688] Algo bridges step 8300 current loss 10.212043, current_train_items 131584.
+I0715 14:01:58.235013 137161025132032 run.py:723] (val) algo bridges step 8300: {'is_bridge': 0.7980392156862746, 'score': 0.7980392156862746, 'examples_seen': 131584, 'step': 8300, 'algorithm': 'bridges'}
+I0715 14:01:58.235253 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.798, val scores are: bridges: 0.798
+I0715 14:01:59.643126 137161025132032 run.py:688] Algo bridges step 8350 current loss 0.440037, current_train_items 132407.
+I0715 14:01:59.850969 137161025132032 run.py:723] (val) algo bridges step 8350: {'is_bridge': 0.8232235701906413, 'score': 0.8232235701906413, 'examples_seen': 132407, 'step': 8350, 'algorithm': 'bridges'}
+I0715 14:01:59.851212 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.823, val scores are: bridges: 0.823
+I0715 14:02:01.159308 137161025132032 run.py:688] Algo bridges step 8400 current loss 1.284766, current_train_items 133208.
+I0715 14:02:01.372500 137161025132032 run.py:723] (val) algo bridges step 8400: {'is_bridge': 0.8047571853320119, 'score': 0.8047571853320119, 'examples_seen': 133208, 'step': 8400, 'algorithm': 'bridges'}
+I0715 14:02:01.372746 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.805, val scores are: bridges: 0.805
+I0715 14:02:02.756981 137161025132032 run.py:688] Algo bridges step 8450 current loss 2.862772, current_train_items 133997.
+I0715 14:02:02.970011 137161025132032 run.py:723] (val) algo bridges step 8450: {'is_bridge': 0.839924670433145, 'score': 0.839924670433145, 'examples_seen': 133997, 'step': 8450, 'algorithm': 'bridges'}
+I0715 14:02:02.970254 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.840, val scores are: bridges: 0.840
+I0715 14:02:04.268935 137161025132032 run.py:688] Algo bridges step 8500 current loss 4.948411, current_train_items 134780.
+I0715 14:02:04.485183 137161025132032 run.py:723] (val) algo bridges step 8500: {'is_bridge': 0.802127659574468, 'score': 0.802127659574468, 'examples_seen': 134780, 'step': 8500, 'algorithm': 'bridges'}
+I0715 14:02:04.485426 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.802, val scores are: bridges: 0.802
+I0715 14:02:05.833611 137161025132032 run.py:688] Algo bridges step 8550 current loss 7.117697, current_train_items 135570.
+I0715 14:02:06.063730 137161025132032 run.py:723] (val) algo bridges step 8550: {'is_bridge': 0.8162926018287615, 'score': 0.8162926018287615, 'examples_seen': 135570, 'step': 8550, 'algorithm': 'bridges'}
+I0715 14:02:06.063968 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.816, val scores are: bridges: 0.816
+I0715 14:02:07.417779 137161025132032 run.py:688] Algo bridges step 8600 current loss 8.390363, current_train_items 136362.
+I0715 14:02:07.662020 137161025132032 run.py:723] (val) algo bridges step 8600: {'is_bridge': 0.8160136286201023, 'score': 0.8160136286201023, 'examples_seen': 136362, 'step': 8600, 'algorithm': 'bridges'}
+I0715 14:02:07.662280 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.816, val scores are: bridges: 0.816
+I0715 14:02:08.988549 137161025132032 run.py:688] Algo bridges step 8650 current loss 9.475046, current_train_items 137135.
+I0715 14:02:09.270241 137161025132032 run.py:723] (val) algo bridges step 8650: {'is_bridge': 0.7702265372168285, 'score': 0.7702265372168285, 'examples_seen': 137135, 'step': 8650, 'algorithm': 'bridges'}
+I0715 14:02:09.270494 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.770, val scores are: bridges: 0.770
+I0715 14:02:10.620005 137161025132032 run.py:688] Algo bridges step 8700 current loss 0.326380, current_train_items 137954.
+I0715 14:02:10.835962 137161025132032 run.py:723] (val) algo bridges step 8700: {'is_bridge': 0.8017021276595744, 'score': 0.8017021276595744, 'examples_seen': 137954, 'step': 8700, 'algorithm': 'bridges'}
+I0715 14:02:10.836199 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.802, val scores are: bridges: 0.802
+I0715 14:02:12.218748 137161025132032 run.py:688] Algo bridges step 8750 current loss 1.801705, current_train_items 138756.
+I0715 14:02:12.430374 137161025132032 run.py:723] (val) algo bridges step 8750: {'is_bridge': 0.8024582967515365, 'score': 0.8024582967515365, 'examples_seen': 138756, 'step': 8750, 'algorithm': 'bridges'}
+I0715 14:02:12.430649 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.802, val scores are: bridges: 0.802
+I0715 14:02:13.757739 137161025132032 run.py:688] Algo bridges step 8800 current loss 3.027747, current_train_items 139540.
+I0715 14:02:13.979120 137161025132032 run.py:723] (val) algo bridges step 8800: {'is_bridge': 0.8460144927536232, 'score': 0.8460144927536232, 'examples_seen': 139540, 'step': 8800, 'algorithm': 'bridges'}
+I0715 14:02:13.979361 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.846, val scores are: bridges: 0.846
+I0715 14:02:15.348156 137161025132032 run.py:688] Algo bridges step 8850 current loss 4.369298, current_train_items 140330.
+I0715 14:02:15.564950 137161025132032 run.py:723] (val) algo bridges step 8850: {'is_bridge': 0.8486394557823129, 'score': 0.8486394557823129, 'examples_seen': 140330, 'step': 8850, 'algorithm': 'bridges'}
+I0715 14:02:15.565184 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.849, val scores are: bridges: 0.849
+I0715 14:02:16.890035 137161025132032 run.py:688] Algo bridges step 8900 current loss 7.019219, current_train_items 141109.
+I0715 14:02:17.113986 137161025132032 run.py:723] (val) algo bridges step 8900: {'is_bridge': 0.8527724665391969, 'score': 0.8527724665391969, 'examples_seen': 141109, 'step': 8900, 'algorithm': 'bridges'}
+I0715 14:02:17.114164 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.853, val scores are: bridges: 0.853
+I0715 14:02:18.422713 137161025132032 run.py:688] Algo bridges step 8950 current loss 6.840398, current_train_items 141899.
+I0715 14:02:18.652606 137161025132032 run.py:723] (val) algo bridges step 8950: {'is_bridge': 0.8271068635968722, 'score': 0.8271068635968722, 'examples_seen': 141899, 'step': 8950, 'algorithm': 'bridges'}
+I0715 14:02:18.652840 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.827, val scores are: bridges: 0.827
+I0715 14:02:19.977729 137161025132032 run.py:688] Algo bridges step 9000 current loss 11.082253, current_train_items 142677.
+I0715 14:02:20.254472 137161025132032 run.py:723] (val) algo bridges step 9000: {'is_bridge': 0.860215053763441, 'score': 0.860215053763441, 'examples_seen': 142677, 'step': 9000, 'algorithm': 'bridges'}
+I0715 14:02:20.254661 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.860, val scores are: bridges: 0.860
+I0715 14:02:21.642543 137161025132032 run.py:688] Algo bridges step 9050 current loss 0.410987, current_train_items 143489.
+I0715 14:02:21.887326 137161025132032 run.py:723] (val) algo bridges step 9050: {'is_bridge': 0.8155953635405689, 'score': 0.8155953635405689, 'examples_seen': 143489, 'step': 9050, 'algorithm': 'bridges'}
+I0715 14:02:21.887517 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.816, val scores are: bridges: 0.816
+I0715 14:02:23.303727 137161025132032 run.py:688] Algo bridges step 9100 current loss 1.479623, current_train_items 144301.
+I0715 14:02:23.526431 137161025132032 run.py:723] (val) algo bridges step 9100: {'is_bridge': 0.826086956521739, 'score': 0.826086956521739, 'examples_seen': 144301, 'step': 9100, 'algorithm': 'bridges'}
+I0715 14:02:23.526691 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.826, val scores are: bridges: 0.826
+I0715 14:02:24.919544 137161025132032 run.py:688] Algo bridges step 9150 current loss 2.743268, current_train_items 145094.
+I0715 14:02:25.132100 137161025132032 run.py:723] (val) algo bridges step 9150: {'is_bridge': 0.8177966101694915, 'score': 0.8177966101694915, 'examples_seen': 145094, 'step': 9150, 'algorithm': 'bridges'}
+I0715 14:02:25.132333 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.818, val scores are: bridges: 0.818
+I0715 14:02:26.507433 137161025132032 run.py:688] Algo bridges step 9200 current loss 5.107754, current_train_items 145880.
+I0715 14:02:26.723983 137161025132032 run.py:723] (val) algo bridges step 9200: {'is_bridge': 0.8582600195503421, 'score': 0.8582600195503421, 'examples_seen': 145880, 'step': 9200, 'algorithm': 'bridges'}
+I0715 14:02:26.724224 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.858, val scores are: bridges: 0.858
+I0715 14:02:28.070373 137161025132032 run.py:688] Algo bridges step 9250 current loss 7.252204, current_train_items 146666.
+I0715 14:02:28.295079 137161025132032 run.py:723] (val) algo bridges step 9250: {'is_bridge': 0.8750994431185362, 'score': 0.8750994431185362, 'examples_seen': 146666, 'step': 9250, 'algorithm': 'bridges'}
+I0715 14:02:28.295312 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.875, val scores are: bridges: 0.875
+I0715 14:02:29.659019 137161025132032 run.py:688] Algo bridges step 9300 current loss 7.879366, current_train_items 147448.
+I0715 14:02:29.909472 137161025132032 run.py:723] (val) algo bridges step 9300: {'is_bridge': 0.8301574150787076, 'score': 0.8301574150787076, 'examples_seen': 147448, 'step': 9300, 'algorithm': 'bridges'}
+I0715 14:02:29.909724 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.830, val scores are: bridges: 0.830
+I0715 14:02:31.275380 137161025132032 run.py:688] Algo bridges step 9350 current loss 10.354093, current_train_items 148230.
+I0715 14:02:31.515983 137161025132032 run.py:723] (val) algo bridges step 9350: {'is_bridge': 0.8238747553816047, 'score': 0.8238747553816047, 'examples_seen': 148230, 'step': 9350, 'algorithm': 'bridges'}
+I0715 14:02:31.516217 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.824, val scores are: bridges: 0.824
+I0715 14:02:32.901882 137161025132032 run.py:688] Algo bridges step 9400 current loss 0.400405, current_train_items 149047.
+I0715 14:02:33.110977 137161025132032 run.py:723] (val) algo bridges step 9400: {'is_bridge': 0.8648221343873519, 'score': 0.8648221343873519, 'examples_seen': 149047, 'step': 9400, 'algorithm': 'bridges'}
+I0715 14:02:33.111212 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.865, val scores are: bridges: 0.865
+I0715 14:02:34.525790 137161025132032 run.py:688] Algo bridges step 9450 current loss 1.208776, current_train_items 149855.
+I0715 14:02:34.740884 137161025132032 run.py:723] (val) algo bridges step 9450: {'is_bridge': 0.8125, 'score': 0.8125, 'examples_seen': 149855, 'step': 9450, 'algorithm': 'bridges'}
+I0715 14:02:34.741056 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.812, val scores are: bridges: 0.812
+I0715 14:02:36.102740 137161025132032 run.py:688] Algo bridges step 9500 current loss 2.479557, current_train_items 150644.
+I0715 14:02:36.319598 137161025132032 run.py:723] (val) algo bridges step 9500: {'is_bridge': 0.8593903638151426, 'score': 0.8593903638151426, 'examples_seen': 150644, 'step': 9500, 'algorithm': 'bridges'}
+I0715 14:02:36.319846 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.859, val scores are: bridges: 0.859
+I0715 14:02:37.708904 137161025132032 run.py:688] Algo bridges step 9550 current loss 5.572793, current_train_items 151437.
+I0715 14:02:37.929169 137161025132032 run.py:723] (val) algo bridges step 9550: {'is_bridge': 0.8488687782805429, 'score': 0.8488687782805429, 'examples_seen': 151437, 'step': 9550, 'algorithm': 'bridges'}
+I0715 14:02:37.929414 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.849, val scores are: bridges: 0.849
+I0715 14:02:39.265681 137161025132032 run.py:688] Algo bridges step 9600 current loss 8.361556, current_train_items 152222.
+I0715 14:02:39.500597 137161025132032 run.py:723] (val) algo bridges step 9600: {'is_bridge': 0.8328716528162511, 'score': 0.8328716528162511, 'examples_seen': 152222, 'step': 9600, 'algorithm': 'bridges'}
+I0715 14:02:39.500770 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.833, val scores are: bridges: 0.833
+I0715 14:02:40.901625 137161025132032 run.py:688] Algo bridges step 9650 current loss 7.677320, current_train_items 153008.
+I0715 14:02:41.152884 137161025132032 run.py:723] (val) algo bridges step 9650: {'is_bridge': 0.8582449373191899, 'score': 0.8582449373191899, 'examples_seen': 153008, 'step': 9650, 'algorithm': 'bridges'}
+I0715 14:02:41.153058 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.858, val scores are: bridges: 0.858
+I0715 14:02:42.550236 137161025132032 run.py:688] Algo bridges step 9700 current loss 10.136356, current_train_items 153803.
+I0715 14:02:42.808685 137161025132032 run.py:723] (val) algo bridges step 9700: {'is_bridge': 0.8241308793456033, 'score': 0.8241308793456033, 'examples_seen': 153803, 'step': 9700, 'algorithm': 'bridges'}
+I0715 14:02:42.808919 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.824, val scores are: bridges: 0.824
+I0715 14:02:44.246320 137161025132032 run.py:688] Algo bridges step 9750 current loss 0.488851, current_train_items 154616.
+I0715 14:02:44.460270 137161025132032 run.py:723] (val) algo bridges step 9750: {'is_bridge': 0.8357664233576643, 'score': 0.8357664233576643, 'examples_seen': 154616, 'step': 9750, 'algorithm': 'bridges'}
+I0715 14:02:44.460560 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.836, val scores are: bridges: 0.836
+I0715 14:02:45.789673 137161025132032 run.py:688] Algo bridges step 9800 current loss 1.211249, current_train_items 155420.
+I0715 14:02:45.999971 137161025132032 run.py:723] (val) algo bridges step 9800: {'is_bridge': 0.7828418230563003, 'score': 0.7828418230563003, 'examples_seen': 155420, 'step': 9800, 'algorithm': 'bridges'}
+I0715 14:02:46.000204 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.783, val scores are: bridges: 0.783
+I0715 14:02:47.392431 137161025132032 run.py:688] Algo bridges step 9850 current loss 2.485453, current_train_items 156214.
+I0715 14:02:47.606091 137161025132032 run.py:723] (val) algo bridges step 9850: {'is_bridge': 0.8453976764968721, 'score': 0.8453976764968721, 'examples_seen': 156214, 'step': 9850, 'algorithm': 'bridges'}
+I0715 14:02:47.606324 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.845, val scores are: bridges: 0.845
+I0715 14:02:48.931141 137161025132032 run.py:688] Algo bridges step 9900 current loss 5.474514, current_train_items 157002.
+I0715 14:02:49.148219 137161025132032 run.py:723] (val) algo bridges step 9900: {'is_bridge': 0.7952329360780065, 'score': 0.7952329360780065, 'examples_seen': 157002, 'step': 9900, 'algorithm': 'bridges'}
+I0715 14:02:49.148454 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.795, val scores are: bridges: 0.795
+I0715 14:02:50.509387 137161025132032 run.py:688] Algo bridges step 9950 current loss 7.410901, current_train_items 157775.
+I0715 14:02:50.741647 137161025132032 run.py:723] (val) algo bridges step 9950: {'is_bridge': 0.7575757575757577, 'score': 0.7575757575757577, 'examples_seen': 157775, 'step': 9950, 'algorithm': 'bridges'}
+I0715 14:02:50.741882 137161025132032 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.758, val scores are: bridges: 0.758
+I0715 14:02:52.088132 137161025132032 run.py:753] Restoring best model from checkpoint...
+I0715 14:03:04.199437 137161025132032 run.py:768] (test) algo bridges : {'is_bridge': 0.7477849970466628, 'score': 0.7477849970466628, 'examples_seen': 158554, 'step': 10000, 'algorithm': 'bridges'}
+I0715 14:03:04.199604 137161025132032 run.py:770] Done!

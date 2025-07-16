@@ -1,0 +1,648 @@
+I0716 14:14:24.907898 126711536682496 xla_bridge.py:889] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0716 14:14:24.908802 126711536682496 xla_bridge.py:889] Unable to initialize backend 'tpu': INTERNAL: Failed to open libtpu.so: libtpu.so: cannot open shared object file: No such file or directory
+I0716 14:14:25.151343 126711536682496 run.py:415] Model: falreis ['floyd_warshall']
+I0716 14:14:25.151444 126711536682496 run.py:417] algorithms ['floyd_warshall']
+I0716 14:14:25.151633 126711536682496 run.py:418] train_lengths ['2', '3', '5', '7', '11', '13', '16']
+I0716 14:14:25.151671 126711536682496 run.py:419] train_batch_size 16
+I0716 14:14:25.151764 126711536682496 run.py:420] val_batch_size 8
+I0716 14:14:25.151795 126711536682496 run.py:421] test_batch_size 8
+I0716 14:14:25.151826 126711536682496 run.py:422] chunked_training True
+I0716 14:14:25.151942 126711536682496 run.py:423] chunk_length 16
+I0716 14:14:25.151972 126711536682496 run.py:424] train_steps 10000
+I0716 14:14:25.152002 126711536682496 run.py:425] eval_every 50
+I0716 14:14:25.152031 126711536682496 run.py:426] test_every 500
+I0716 14:14:25.152060 126711536682496 run.py:427] learning_rate 0.001
+I0716 14:14:25.152153 126711536682496 run.py:428] grad_clip_max_norm 1.0
+I0716 14:14:25.152184 126711536682496 run.py:429] dropout_prob 0.1
+I0716 14:14:25.152213 126711536682496 run.py:430] hint_teacher_forcing 0.0
+I0716 14:14:25.152242 126711536682496 run.py:431] hint_mode encoded_decoded
+I0716 14:14:25.152344 126711536682496 run.py:432] hint_repred_mode hard_on_eval
+I0716 14:14:25.152374 126711536682496 run.py:433] use_ln False
+I0716 14:14:25.152402 126711536682496 run.py:434] use_lstm True
+I0716 14:14:25.152430 126711536682496 run.py:435] nb_triplet_fts 8
+I0716 14:14:25.152458 126711536682496 run.py:436] encoder_init xavier_on_scalars
+I0716 14:14:25.152486 126711536682496 run.py:437] processor_type falreis
+I0716 14:14:25.152515 126711536682496 run.py:438] checkpoint_path CLRS30
+I0716 14:14:25.152554 126711536682496 run.py:439] dataset_path CLRS30
+I0716 14:14:25.152585 126711536682496 run.py:440] freeze_processor False
+I0716 14:14:25.152614 126711536682496 run.py:441] reduction min
+I0716 14:14:25.152643 126711536682496 run.py:442] activation elu
+I0716 14:14:25.152671 126711536682496 run.py:443] algorithm_models ['F1', 'F2']
+I0716 14:14:25.152701 126711536682496 run.py:444] restore_model 
+I0716 14:14:25.152729 126711536682496 run.py:445] gated True
+I0716 14:14:25.152757 126711536682496 run.py:446] gated_activation sigmoid
+I0716 14:14:25.155347 126711536682496 run.py:472] Creating samplers for algo floyd_warshall
+W0716 14:14:25.155769 126711536682496 samplers.py:109] Sampling dataset on-the-fly, unlimited samples.
+I0716 14:14:32.330764 126711536682496 samplers.py:124] Creating a dataset with 64 samples.
+I0716 14:14:32.543062 126711536682496 run.py:259] Dataset found at CLRS30/CLRS30_v1.0.0. Skipping download.
+I0716 14:14:32.543853 126711536682496 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/floyd_warshall_test/1.0.0
+I0716 14:14:32.546706 126711536682496 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/floyd_warshall_test/1.0.0
+I0716 14:14:32.549844 126711536682496 reader.py:262] Creating a tf.data.Dataset reading 1 files located in folders: CLRS30/CLRS30_v1.0.0/clrs_dataset/floyd_warshall_test/1.0.0.
+I0716 14:14:32.598667 126711536682496 logging_logger.py:49] Constructing tf.data.Dataset clrs_dataset for split test, from CLRS30/CLRS30_v1.0.0/clrs_dataset/floyd_warshall_test/1.0.0
+W0716 14:14:32.619060 126711536682496 ag_logging.py:142] AutoGraph could not transform <function _preprocess at 0x733dcf982c00> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: `haiku.experimental.flax` features require `flax` to be installed.
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+I0716 14:15:14.801366 126711536682496 run.py:687] Algo floyd_warshall step 0 current loss 4.761251, current_train_items 80.
+I0716 14:15:19.849946 126711536682496 run.py:722] (val) algo floyd_warshall step 0: {'Pi': 0.0775146484375, 'score': 0.0775146484375, 'examples_seen': 80, 'step': 0, 'algorithm': 'floyd_warshall'}
+I0716 14:15:19.850111 126711536682496 run.py:743] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.078, val scores are: floyd_warshall: 0.078
+I0716 14:16:55.023914 126711536682496 run.py:687] Algo floyd_warshall step 50 current loss 3.687774, current_train_items 2640.
+I0716 14:16:55.172474 126711536682496 run.py:722] (val) algo floyd_warshall step 50: {'Pi': 0.23577880859375, 'score': 0.23577880859375, 'examples_seen': 2640, 'step': 50, 'algorithm': 'floyd_warshall'}
+I0716 14:16:55.172740 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.078, current avg val score is 0.236, val scores are: floyd_warshall: 0.236
+I0716 14:16:57.357944 126711536682496 run.py:687] Algo floyd_warshall step 100 current loss 3.747635, current_train_items 5200.
+I0716 14:16:57.470409 126711536682496 run.py:722] (val) algo floyd_warshall step 100: {'Pi': 0.2705078125, 'score': 0.2705078125, 'examples_seen': 5200, 'step': 100, 'algorithm': 'floyd_warshall'}
+I0716 14:16:57.470604 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.236, current avg val score is 0.271, val scores are: floyd_warshall: 0.271
+I0716 14:16:59.677272 126711536682496 run.py:687] Algo floyd_warshall step 150 current loss 4.260391, current_train_items 7744.
+I0716 14:16:59.790015 126711536682496 run.py:722] (val) algo floyd_warshall step 150: {'Pi': 0.3934326171875, 'score': 0.3934326171875, 'examples_seen': 7744, 'step': 150, 'algorithm': 'floyd_warshall'}
+I0716 14:16:59.790241 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.271, current avg val score is 0.393, val scores are: floyd_warshall: 0.393
+I0716 14:17:01.909842 126711536682496 run.py:687] Algo floyd_warshall step 200 current loss 5.921601, current_train_items 10288.
+I0716 14:17:02.090581 126711536682496 run.py:722] (val) algo floyd_warshall step 200: {'Pi': 0.5301513671875, 'score': 0.5301513671875, 'examples_seen': 10288, 'step': 200, 'algorithm': 'floyd_warshall'}
+I0716 14:17:02.090807 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.393, current avg val score is 0.530, val scores are: floyd_warshall: 0.530
+I0716 14:17:04.301914 126711536682496 run.py:687] Algo floyd_warshall step 250 current loss 4.796702, current_train_items 12816.
+I0716 14:17:04.528196 126711536682496 run.py:722] (val) algo floyd_warshall step 250: {'Pi': 0.47601318359375, 'score': 0.47601318359375, 'examples_seen': 12816, 'step': 250, 'algorithm': 'floyd_warshall'}
+I0716 14:17:04.528418 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.530, current avg val score is 0.476, val scores are: floyd_warshall: 0.476
+I0716 14:17:06.740772 126711536682496 run.py:687] Algo floyd_warshall step 300 current loss 0.092483, current_train_items 15472.
+I0716 14:17:06.893774 126711536682496 run.py:722] (val) algo floyd_warshall step 300: {'Pi': 0.48553466796875, 'score': 0.48553466796875, 'examples_seen': 15472, 'step': 300, 'algorithm': 'floyd_warshall'}
+I0716 14:17:06.894000 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.530, current avg val score is 0.486, val scores are: floyd_warshall: 0.486
+I0716 14:17:09.077651 126711536682496 run.py:687] Algo floyd_warshall step 350 current loss 0.328474, current_train_items 18080.
+I0716 14:17:09.203037 126711536682496 run.py:722] (val) algo floyd_warshall step 350: {'Pi': 0.50909423828125, 'score': 0.50909423828125, 'examples_seen': 18080, 'step': 350, 'algorithm': 'floyd_warshall'}
+I0716 14:17:09.203262 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.530, current avg val score is 0.509, val scores are: floyd_warshall: 0.509
+I0716 14:17:11.333083 126711536682496 run.py:687] Algo floyd_warshall step 400 current loss 1.769205, current_train_items 20640.
+I0716 14:17:11.461782 126711536682496 run.py:722] (val) algo floyd_warshall step 400: {'Pi': 0.54034423828125, 'score': 0.54034423828125, 'examples_seen': 20640, 'step': 400, 'algorithm': 'floyd_warshall'}
+I0716 14:17:11.462003 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.530, current avg val score is 0.540, val scores are: floyd_warshall: 0.540
+I0716 14:17:13.584513 126711536682496 run.py:687] Algo floyd_warshall step 450 current loss 2.183598, current_train_items 23216.
+I0716 14:17:13.722028 126711536682496 run.py:722] (val) algo floyd_warshall step 450: {'Pi': 0.589111328125, 'score': 0.589111328125, 'examples_seen': 23216, 'step': 450, 'algorithm': 'floyd_warshall'}
+I0716 14:17:13.722255 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.540, current avg val score is 0.589, val scores are: floyd_warshall: 0.589
+I0716 14:17:15.927267 126711536682496 run.py:687] Algo floyd_warshall step 500 current loss 3.444229, current_train_items 25744.
+I0716 14:17:16.070404 126711536682496 run.py:722] (val) algo floyd_warshall step 500: {'Pi': 0.5369873046875, 'score': 0.5369873046875, 'examples_seen': 25744, 'step': 500, 'algorithm': 'floyd_warshall'}
+I0716 14:17:16.070645 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.589, current avg val score is 0.537, val scores are: floyd_warshall: 0.537
+I0716 14:17:18.248422 126711536682496 run.py:687] Algo floyd_warshall step 550 current loss 4.631751, current_train_items 28288.
+I0716 14:17:18.402043 126711536682496 run.py:722] (val) algo floyd_warshall step 550: {'Pi': 0.598876953125, 'score': 0.598876953125, 'examples_seen': 28288, 'step': 550, 'algorithm': 'floyd_warshall'}
+I0716 14:17:18.402266 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.589, current avg val score is 0.599, val scores are: floyd_warshall: 0.599
+I0716 14:17:20.603432 126711536682496 run.py:687] Algo floyd_warshall step 600 current loss 3.738806, current_train_items 30832.
+I0716 14:17:20.810818 126711536682496 run.py:722] (val) algo floyd_warshall step 600: {'Pi': 0.5618896484375, 'score': 0.5618896484375, 'examples_seen': 30832, 'step': 600, 'algorithm': 'floyd_warshall'}
+I0716 14:17:20.811040 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.599, current avg val score is 0.562, val scores are: floyd_warshall: 0.562
+I0716 14:17:22.951894 126711536682496 run.py:687] Algo floyd_warshall step 650 current loss 0.094427, current_train_items 33456.
+I0716 14:17:23.129762 126711536682496 run.py:722] (val) algo floyd_warshall step 650: {'Pi': 0.508544921875, 'score': 0.508544921875, 'examples_seen': 33456, 'step': 650, 'algorithm': 'floyd_warshall'}
+I0716 14:17:23.129983 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.599, current avg val score is 0.509, val scores are: floyd_warshall: 0.509
+I0716 14:17:25.358616 126711536682496 run.py:687] Algo floyd_warshall step 700 current loss 0.561548, current_train_items 36080.
+I0716 14:17:25.482106 126711536682496 run.py:722] (val) algo floyd_warshall step 700: {'Pi': 0.59259033203125, 'score': 0.59259033203125, 'examples_seen': 36080, 'step': 700, 'algorithm': 'floyd_warshall'}
+I0716 14:17:25.482328 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.599, current avg val score is 0.593, val scores are: floyd_warshall: 0.593
+I0716 14:17:27.630611 126711536682496 run.py:687] Algo floyd_warshall step 750 current loss 1.272696, current_train_items 38640.
+I0716 14:17:27.752310 126711536682496 run.py:722] (val) algo floyd_warshall step 750: {'Pi': 0.5765380859375, 'score': 0.5765380859375, 'examples_seen': 38640, 'step': 750, 'algorithm': 'floyd_warshall'}
+I0716 14:17:27.752546 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.599, current avg val score is 0.577, val scores are: floyd_warshall: 0.577
+I0716 14:17:29.918622 126711536682496 run.py:687] Algo floyd_warshall step 800 current loss 1.974638, current_train_items 41216.
+I0716 14:17:30.029424 126711536682496 run.py:722] (val) algo floyd_warshall step 800: {'Pi': 0.57745361328125, 'score': 0.57745361328125, 'examples_seen': 41216, 'step': 800, 'algorithm': 'floyd_warshall'}
+I0716 14:17:30.029647 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.599, current avg val score is 0.577, val scores are: floyd_warshall: 0.577
+I0716 14:17:32.164947 126711536682496 run.py:687] Algo floyd_warshall step 850 current loss 3.392890, current_train_items 43760.
+I0716 14:17:32.289316 126711536682496 run.py:722] (val) algo floyd_warshall step 850: {'Pi': 0.53997802734375, 'score': 0.53997802734375, 'examples_seen': 43760, 'step': 850, 'algorithm': 'floyd_warshall'}
+I0716 14:17:32.289554 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.599, current avg val score is 0.540, val scores are: floyd_warshall: 0.540
+I0716 14:17:34.461271 126711536682496 run.py:687] Algo floyd_warshall step 900 current loss 3.575005, current_train_items 46320.
+I0716 14:17:34.612141 126711536682496 run.py:722] (val) algo floyd_warshall step 900: {'Pi': 0.56829833984375, 'score': 0.56829833984375, 'examples_seen': 46320, 'step': 900, 'algorithm': 'floyd_warshall'}
+I0716 14:17:34.612360 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.599, current avg val score is 0.568, val scores are: floyd_warshall: 0.568
+I0716 14:17:36.816257 126711536682496 run.py:687] Algo floyd_warshall step 950 current loss 2.746619, current_train_items 48832.
+I0716 14:17:37.022733 126711536682496 run.py:722] (val) algo floyd_warshall step 950: {'Pi': 0.58441162109375, 'score': 0.58441162109375, 'examples_seen': 48832, 'step': 950, 'algorithm': 'floyd_warshall'}
+I0716 14:17:37.022953 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.599, current avg val score is 0.584, val scores are: floyd_warshall: 0.584
+I0716 14:17:39.196203 126711536682496 run.py:687] Algo floyd_warshall step 1000 current loss 0.086059, current_train_items 51488.
+I0716 14:17:39.344855 126711536682496 run.py:722] (val) algo floyd_warshall step 1000: {'Pi': 0.574462890625, 'score': 0.574462890625, 'examples_seen': 51488, 'step': 1000, 'algorithm': 'floyd_warshall'}
+I0716 14:17:39.345076 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.599, current avg val score is 0.574, val scores are: floyd_warshall: 0.574
+I0716 14:17:41.466166 126711536682496 run.py:687] Algo floyd_warshall step 1050 current loss 0.334274, current_train_items 54080.
+I0716 14:17:41.633637 126711536682496 run.py:722] (val) algo floyd_warshall step 1050: {'Pi': 0.587890625, 'score': 0.587890625, 'examples_seen': 54080, 'step': 1050, 'algorithm': 'floyd_warshall'}
+I0716 14:17:41.633859 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.599, current avg val score is 0.588, val scores are: floyd_warshall: 0.588
+I0716 14:17:43.811339 126711536682496 run.py:687] Algo floyd_warshall step 1100 current loss 1.254786, current_train_items 56656.
+I0716 14:17:43.922950 126711536682496 run.py:722] (val) algo floyd_warshall step 1100: {'Pi': 0.6033935546875, 'score': 0.6033935546875, 'examples_seen': 56656, 'step': 1100, 'algorithm': 'floyd_warshall'}
+I0716 14:17:43.923171 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.599, current avg val score is 0.603, val scores are: floyd_warshall: 0.603
+I0716 14:17:46.099479 126711536682496 run.py:687] Algo floyd_warshall step 1150 current loss 1.358764, current_train_items 59232.
+I0716 14:17:46.214720 126711536682496 run.py:722] (val) algo floyd_warshall step 1150: {'Pi': 0.57781982421875, 'score': 0.57781982421875, 'examples_seen': 59232, 'step': 1150, 'algorithm': 'floyd_warshall'}
+I0716 14:17:46.214943 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.603, current avg val score is 0.578, val scores are: floyd_warshall: 0.578
+I0716 14:17:48.359784 126711536682496 run.py:687] Algo floyd_warshall step 1200 current loss 3.249968, current_train_items 61744.
+I0716 14:17:48.498281 126711536682496 run.py:722] (val) algo floyd_warshall step 1200: {'Pi': 0.62408447265625, 'score': 0.62408447265625, 'examples_seen': 61744, 'step': 1200, 'algorithm': 'floyd_warshall'}
+I0716 14:17:48.498503 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.603, current avg val score is 0.624, val scores are: floyd_warshall: 0.624
+I0716 14:17:50.675117 126711536682496 run.py:687] Algo floyd_warshall step 1250 current loss 3.622042, current_train_items 64304.
+I0716 14:17:50.844023 126711536682496 run.py:722] (val) algo floyd_warshall step 1250: {'Pi': 0.615966796875, 'score': 0.615966796875, 'examples_seen': 64304, 'step': 1250, 'algorithm': 'floyd_warshall'}
+I0716 14:17:50.844238 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.624, current avg val score is 0.616, val scores are: floyd_warshall: 0.616
+I0716 14:17:53.062546 126711536682496 run.py:687] Algo floyd_warshall step 1300 current loss 2.587903, current_train_items 66848.
+I0716 14:17:53.250411 126711536682496 run.py:722] (val) algo floyd_warshall step 1300: {'Pi': 0.65966796875, 'score': 0.65966796875, 'examples_seen': 66848, 'step': 1300, 'algorithm': 'floyd_warshall'}
+I0716 14:17:53.250643 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.624, current avg val score is 0.660, val scores are: floyd_warshall: 0.660
+I0716 14:17:55.448120 126711536682496 run.py:687] Algo floyd_warshall step 1350 current loss 0.065787, current_train_items 69472.
+I0716 14:17:55.605896 126711536682496 run.py:722] (val) algo floyd_warshall step 1350: {'Pi': 0.6002197265625, 'score': 0.6002197265625, 'examples_seen': 69472, 'step': 1350, 'algorithm': 'floyd_warshall'}
+I0716 14:17:55.606145 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.660, current avg val score is 0.600, val scores are: floyd_warshall: 0.600
+I0716 14:17:57.759496 126711536682496 run.py:687] Algo floyd_warshall step 1400 current loss 0.186933, current_train_items 72096.
+I0716 14:17:57.901399 126711536682496 run.py:722] (val) algo floyd_warshall step 1400: {'Pi': 0.62420654296875, 'score': 0.62420654296875, 'examples_seen': 72096, 'step': 1400, 'algorithm': 'floyd_warshall'}
+I0716 14:17:57.901634 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.660, current avg val score is 0.624, val scores are: floyd_warshall: 0.624
+I0716 14:18:00.027560 126711536682496 run.py:687] Algo floyd_warshall step 1450 current loss 1.204161, current_train_items 74656.
+I0716 14:18:00.172496 126711536682496 run.py:722] (val) algo floyd_warshall step 1450: {'Pi': 0.6556396484375, 'score': 0.6556396484375, 'examples_seen': 74656, 'step': 1450, 'algorithm': 'floyd_warshall'}
+I0716 14:18:00.172728 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.660, current avg val score is 0.656, val scores are: floyd_warshall: 0.656
+I0716 14:18:02.354017 126711536682496 run.py:687] Algo floyd_warshall step 1500 current loss 1.554793, current_train_items 77216.
+I0716 14:18:02.467744 126711536682496 run.py:722] (val) algo floyd_warshall step 1500: {'Pi': 0.6192626953125, 'score': 0.6192626953125, 'examples_seen': 77216, 'step': 1500, 'algorithm': 'floyd_warshall'}
+I0716 14:18:02.467982 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.660, current avg val score is 0.619, val scores are: floyd_warshall: 0.619
+I0716 14:18:04.669936 126711536682496 run.py:687] Algo floyd_warshall step 1550 current loss 2.527272, current_train_items 79760.
+I0716 14:18:04.790104 126711536682496 run.py:722] (val) algo floyd_warshall step 1550: {'Pi': 0.621826171875, 'score': 0.621826171875, 'examples_seen': 79760, 'step': 1550, 'algorithm': 'floyd_warshall'}
+I0716 14:18:04.790322 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.660, current avg val score is 0.622, val scores are: floyd_warshall: 0.622
+I0716 14:18:06.954234 126711536682496 run.py:687] Algo floyd_warshall step 1600 current loss 2.654375, current_train_items 82304.
+I0716 14:18:07.094862 126711536682496 run.py:722] (val) algo floyd_warshall step 1600: {'Pi': 0.652587890625, 'score': 0.652587890625, 'examples_seen': 82304, 'step': 1600, 'algorithm': 'floyd_warshall'}
+I0716 14:18:07.095084 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.660, current avg val score is 0.653, val scores are: floyd_warshall: 0.653
+I0716 14:18:09.291462 126711536682496 run.py:687] Algo floyd_warshall step 1650 current loss 2.081984, current_train_items 84832.
+I0716 14:18:09.508045 126711536682496 run.py:722] (val) algo floyd_warshall step 1650: {'Pi': 0.63897705078125, 'score': 0.63897705078125, 'examples_seen': 84832, 'step': 1650, 'algorithm': 'floyd_warshall'}
+I0716 14:18:09.508267 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.660, current avg val score is 0.639, val scores are: floyd_warshall: 0.639
+I0716 14:18:11.703734 126711536682496 run.py:687] Algo floyd_warshall step 1700 current loss 0.074468, current_train_items 87472.
+I0716 14:18:11.875230 126711536682496 run.py:722] (val) algo floyd_warshall step 1700: {'Pi': 0.673095703125, 'score': 0.673095703125, 'examples_seen': 87472, 'step': 1700, 'algorithm': 'floyd_warshall'}
+I0716 14:18:11.875464 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.660, current avg val score is 0.673, val scores are: floyd_warshall: 0.673
+I0716 14:18:14.050840 126711536682496 run.py:687] Algo floyd_warshall step 1750 current loss 0.731923, current_train_items 90096.
+I0716 14:18:14.178842 126711536682496 run.py:722] (val) algo floyd_warshall step 1750: {'Pi': 0.6983642578125, 'score': 0.6983642578125, 'examples_seen': 90096, 'step': 1750, 'algorithm': 'floyd_warshall'}
+I0716 14:18:14.179062 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.673, current avg val score is 0.698, val scores are: floyd_warshall: 0.698
+I0716 14:18:16.361828 126711536682496 run.py:687] Algo floyd_warshall step 1800 current loss 1.025277, current_train_items 92656.
+I0716 14:18:16.470843 126711536682496 run.py:722] (val) algo floyd_warshall step 1800: {'Pi': 0.5894775390625, 'score': 0.5894775390625, 'examples_seen': 92656, 'step': 1800, 'algorithm': 'floyd_warshall'}
+I0716 14:18:16.471017 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.698, current avg val score is 0.589, val scores are: floyd_warshall: 0.589
+I0716 14:18:18.618088 126711536682496 run.py:687] Algo floyd_warshall step 1850 current loss 1.370182, current_train_items 95232.
+I0716 14:18:18.723831 126711536682496 run.py:722] (val) algo floyd_warshall step 1850: {'Pi': 0.6563720703125, 'score': 0.6563720703125, 'examples_seen': 95232, 'step': 1850, 'algorithm': 'floyd_warshall'}
+I0716 14:18:18.724008 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.698, current avg val score is 0.656, val scores are: floyd_warshall: 0.656
+I0716 14:18:20.870634 126711536682496 run.py:687] Algo floyd_warshall step 1900 current loss 2.492479, current_train_items 97776.
+I0716 14:18:20.991966 126711536682496 run.py:722] (val) algo floyd_warshall step 1900: {'Pi': 0.6611328125, 'score': 0.6611328125, 'examples_seen': 97776, 'step': 1900, 'algorithm': 'floyd_warshall'}
+I0716 14:18:20.992188 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.698, current avg val score is 0.661, val scores are: floyd_warshall: 0.661
+I0716 14:18:23.165632 126711536682496 run.py:687] Algo floyd_warshall step 1950 current loss 3.260508, current_train_items 100320.
+I0716 14:18:23.320859 126711536682496 run.py:722] (val) algo floyd_warshall step 1950: {'Pi': 0.65972900390625, 'score': 0.65972900390625, 'examples_seen': 100320, 'step': 1950, 'algorithm': 'floyd_warshall'}
+I0716 14:18:23.321083 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.698, current avg val score is 0.660, val scores are: floyd_warshall: 0.660
+I0716 14:18:25.513578 126711536682496 run.py:687] Algo floyd_warshall step 2000 current loss 2.179404, current_train_items 102848.
+I0716 14:18:25.697955 126711536682496 run.py:722] (val) algo floyd_warshall step 2000: {'Pi': 0.68255615234375, 'score': 0.68255615234375, 'examples_seen': 102848, 'step': 2000, 'algorithm': 'floyd_warshall'}
+I0716 14:18:25.698178 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.698, current avg val score is 0.683, val scores are: floyd_warshall: 0.683
+I0716 14:18:27.862799 126711536682496 run.py:687] Algo floyd_warshall step 2050 current loss 0.073074, current_train_items 105488.
+I0716 14:18:28.040602 126711536682496 run.py:722] (val) algo floyd_warshall step 2050: {'Pi': 0.7119140625, 'score': 0.7119140625, 'examples_seen': 105488, 'step': 2050, 'algorithm': 'floyd_warshall'}
+I0716 14:18:28.040820 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.698, current avg val score is 0.712, val scores are: floyd_warshall: 0.712
+I0716 14:18:30.278723 126711536682496 run.py:687] Algo floyd_warshall step 2100 current loss 0.288292, current_train_items 108096.
+I0716 14:18:30.397550 126711536682496 run.py:722] (val) algo floyd_warshall step 2100: {'Pi': 0.71185302734375, 'score': 0.71185302734375, 'examples_seen': 108096, 'step': 2100, 'algorithm': 'floyd_warshall'}
+I0716 14:18:30.397772 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.712, current avg val score is 0.712, val scores are: floyd_warshall: 0.712
+I0716 14:18:32.554590 126711536682496 run.py:687] Algo floyd_warshall step 2150 current loss 0.817339, current_train_items 110688.
+I0716 14:18:32.659838 126711536682496 run.py:722] (val) algo floyd_warshall step 2150: {'Pi': 0.7030029296875, 'score': 0.7030029296875, 'examples_seen': 110688, 'step': 2150, 'algorithm': 'floyd_warshall'}
+I0716 14:18:32.660010 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.712, current avg val score is 0.703, val scores are: floyd_warshall: 0.703
+I0716 14:18:34.814542 126711536682496 run.py:687] Algo floyd_warshall step 2200 current loss 0.575261, current_train_items 113232.
+I0716 14:18:34.914479 126711536682496 run.py:722] (val) algo floyd_warshall step 2200: {'Pi': 0.685302734375, 'score': 0.685302734375, 'examples_seen': 113232, 'step': 2200, 'algorithm': 'floyd_warshall'}
+I0716 14:18:34.914663 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.712, current avg val score is 0.685, val scores are: floyd_warshall: 0.685
+I0716 14:18:37.091946 126711536682496 run.py:687] Algo floyd_warshall step 2250 current loss 2.492666, current_train_items 115760.
+I0716 14:18:37.216984 126711536682496 run.py:722] (val) algo floyd_warshall step 2250: {'Pi': 0.69720458984375, 'score': 0.69720458984375, 'examples_seen': 115760, 'step': 2250, 'algorithm': 'floyd_warshall'}
+I0716 14:18:37.217222 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.712, current avg val score is 0.697, val scores are: floyd_warshall: 0.697
+I0716 14:18:39.395334 126711536682496 run.py:687] Algo floyd_warshall step 2300 current loss 2.516128, current_train_items 118336.
+I0716 14:18:39.541767 126711536682496 run.py:722] (val) algo floyd_warshall step 2300: {'Pi': 0.6988525390625, 'score': 0.6988525390625, 'examples_seen': 118336, 'step': 2300, 'algorithm': 'floyd_warshall'}
+I0716 14:18:39.541987 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.712, current avg val score is 0.699, val scores are: floyd_warshall: 0.699
+I0716 14:18:41.747866 126711536682496 run.py:687] Algo floyd_warshall step 2350 current loss 1.518146, current_train_items 120848.
+I0716 14:18:41.950588 126711536682496 run.py:722] (val) algo floyd_warshall step 2350: {'Pi': 0.68939208984375, 'score': 0.68939208984375, 'examples_seen': 120848, 'step': 2350, 'algorithm': 'floyd_warshall'}
+I0716 14:18:41.950828 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.712, current avg val score is 0.689, val scores are: floyd_warshall: 0.689
+I0716 14:18:44.110539 126711536682496 run.py:687] Algo floyd_warshall step 2400 current loss 0.038742, current_train_items 123488.
+I0716 14:18:44.277868 126711536682496 run.py:722] (val) algo floyd_warshall step 2400: {'Pi': 0.71307373046875, 'score': 0.71307373046875, 'examples_seen': 123488, 'step': 2400, 'algorithm': 'floyd_warshall'}
+I0716 14:18:44.278087 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.712, current avg val score is 0.713, val scores are: floyd_warshall: 0.713
+I0716 14:18:46.507074 126711536682496 run.py:687] Algo floyd_warshall step 2450 current loss 0.115394, current_train_items 126112.
+I0716 14:18:46.625914 126711536682496 run.py:722] (val) algo floyd_warshall step 2450: {'Pi': 0.68572998046875, 'score': 0.68572998046875, 'examples_seen': 126112, 'step': 2450, 'algorithm': 'floyd_warshall'}
+I0716 14:18:46.626147 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.713, current avg val score is 0.686, val scores are: floyd_warshall: 0.686
+I0716 14:18:48.760947 126711536682496 run.py:687] Algo floyd_warshall step 2500 current loss 0.934854, current_train_items 128656.
+I0716 14:18:48.898768 126711536682496 run.py:722] (val) algo floyd_warshall step 2500: {'Pi': 0.7523193359375, 'score': 0.7523193359375, 'examples_seen': 128656, 'step': 2500, 'algorithm': 'floyd_warshall'}
+I0716 14:18:48.898986 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.713, current avg val score is 0.752, val scores are: floyd_warshall: 0.752
+I0716 14:18:51.118418 126711536682496 run.py:687] Algo floyd_warshall step 2550 current loss 1.272847, current_train_items 131232.
+I0716 14:18:51.213619 126711536682496 run.py:722] (val) algo floyd_warshall step 2550: {'Pi': 0.704833984375, 'score': 0.704833984375, 'examples_seen': 131232, 'step': 2550, 'algorithm': 'floyd_warshall'}
+I0716 14:18:51.213801 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.752, current avg val score is 0.705, val scores are: floyd_warshall: 0.705
+I0716 14:18:53.349070 126711536682496 run.py:687] Algo floyd_warshall step 2600 current loss 3.030314, current_train_items 133760.
+I0716 14:18:53.489363 126711536682496 run.py:722] (val) algo floyd_warshall step 2600: {'Pi': 0.6982421875, 'score': 0.6982421875, 'examples_seen': 133760, 'step': 2600, 'algorithm': 'floyd_warshall'}
+I0716 14:18:53.489598 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.752, current avg val score is 0.698, val scores are: floyd_warshall: 0.698
+I0716 14:18:55.646576 126711536682496 run.py:687] Algo floyd_warshall step 2650 current loss 2.864123, current_train_items 136304.
+I0716 14:18:55.813311 126711536682496 run.py:722] (val) algo floyd_warshall step 2650: {'Pi': 0.750732421875, 'score': 0.750732421875, 'examples_seen': 136304, 'step': 2650, 'algorithm': 'floyd_warshall'}
+I0716 14:18:55.813564 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.752, current avg val score is 0.751, val scores are: floyd_warshall: 0.751
+I0716 14:18:58.031646 126711536682496 run.py:687] Algo floyd_warshall step 2700 current loss 1.635191, current_train_items 138848.
+I0716 14:18:58.249470 126711536682496 run.py:722] (val) algo floyd_warshall step 2700: {'Pi': 0.75390625, 'score': 0.75390625, 'examples_seen': 138848, 'step': 2700, 'algorithm': 'floyd_warshall'}
+I0716 14:18:58.249727 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.752, current avg val score is 0.754, val scores are: floyd_warshall: 0.754
+I0716 14:19:00.463989 126711536682496 run.py:687] Algo floyd_warshall step 2750 current loss 0.041666, current_train_items 141488.
+I0716 14:19:00.621223 126711536682496 run.py:722] (val) algo floyd_warshall step 2750: {'Pi': 0.73870849609375, 'score': 0.73870849609375, 'examples_seen': 141488, 'step': 2750, 'algorithm': 'floyd_warshall'}
+I0716 14:19:00.621448 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.754, current avg val score is 0.739, val scores are: floyd_warshall: 0.739
+I0716 14:19:02.828185 126711536682496 run.py:687] Algo floyd_warshall step 2800 current loss 0.583858, current_train_items 144112.
+I0716 14:19:02.962495 126711536682496 run.py:722] (val) algo floyd_warshall step 2800: {'Pi': 0.6920166015625, 'score': 0.6920166015625, 'examples_seen': 144112, 'step': 2800, 'algorithm': 'floyd_warshall'}
+I0716 14:19:02.962648 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.754, current avg val score is 0.692, val scores are: floyd_warshall: 0.692
+I0716 14:19:05.099129 126711536682496 run.py:687] Algo floyd_warshall step 2850 current loss 0.846112, current_train_items 146672.
+I0716 14:19:05.208981 126711536682496 run.py:722] (val) algo floyd_warshall step 2850: {'Pi': 0.695068359375, 'score': 0.695068359375, 'examples_seen': 146672, 'step': 2850, 'algorithm': 'floyd_warshall'}
+I0716 14:19:05.209124 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.754, current avg val score is 0.695, val scores are: floyd_warshall: 0.695
+I0716 14:19:07.355681 126711536682496 run.py:687] Algo floyd_warshall step 2900 current loss 1.319470, current_train_items 149216.
+I0716 14:19:07.470759 126711536682496 run.py:722] (val) algo floyd_warshall step 2900: {'Pi': 0.7220458984375, 'score': 0.7220458984375, 'examples_seen': 149216, 'step': 2900, 'algorithm': 'floyd_warshall'}
+I0716 14:19:07.470993 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.754, current avg val score is 0.722, val scores are: floyd_warshall: 0.722
+I0716 14:19:09.650385 126711536682496 run.py:687] Algo floyd_warshall step 2950 current loss 1.932877, current_train_items 151776.
+I0716 14:19:09.764978 126711536682496 run.py:722] (val) algo floyd_warshall step 2950: {'Pi': 0.74090576171875, 'score': 0.74090576171875, 'examples_seen': 151776, 'step': 2950, 'algorithm': 'floyd_warshall'}
+I0716 14:19:09.765146 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.754, current avg val score is 0.741, val scores are: floyd_warshall: 0.741
+I0716 14:19:11.941267 126711536682496 run.py:687] Algo floyd_warshall step 3000 current loss 1.376774, current_train_items 154320.
+I0716 14:19:12.081299 126711536682496 run.py:722] (val) algo floyd_warshall step 3000: {'Pi': 0.72625732421875, 'score': 0.72625732421875, 'examples_seen': 154320, 'step': 3000, 'algorithm': 'floyd_warshall'}
+I0716 14:19:12.081548 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.754, current avg val score is 0.726, val scores are: floyd_warshall: 0.726
+I0716 14:19:14.239384 126711536682496 run.py:687] Algo floyd_warshall step 3050 current loss 1.209053, current_train_items 156832.
+I0716 14:19:14.474532 126711536682496 run.py:722] (val) algo floyd_warshall step 3050: {'Pi': 0.730224609375, 'score': 0.730224609375, 'examples_seen': 156832, 'step': 3050, 'algorithm': 'floyd_warshall'}
+I0716 14:19:14.474765 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.754, current avg val score is 0.730, val scores are: floyd_warshall: 0.730
+I0716 14:19:16.652811 126711536682496 run.py:687] Algo floyd_warshall step 3100 current loss 0.070927, current_train_items 159488.
+I0716 14:19:16.830889 126711536682496 run.py:722] (val) algo floyd_warshall step 3100: {'Pi': 0.7860107421875, 'score': 0.7860107421875, 'examples_seen': 159488, 'step': 3100, 'algorithm': 'floyd_warshall'}
+I0716 14:19:16.831105 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.754, current avg val score is 0.786, val scores are: floyd_warshall: 0.786
+I0716 14:19:19.040278 126711536682496 run.py:687] Algo floyd_warshall step 3150 current loss 0.227372, current_train_items 162112.
+I0716 14:19:19.162803 126711536682496 run.py:722] (val) algo floyd_warshall step 3150: {'Pi': 0.70538330078125, 'score': 0.70538330078125, 'examples_seen': 162112, 'step': 3150, 'algorithm': 'floyd_warshall'}
+I0716 14:19:19.163020 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.786, current avg val score is 0.705, val scores are: floyd_warshall: 0.705
+I0716 14:19:21.332874 126711536682496 run.py:687] Algo floyd_warshall step 3200 current loss 0.851435, current_train_items 164672.
+I0716 14:19:21.451769 126711536682496 run.py:722] (val) algo floyd_warshall step 3200: {'Pi': 0.756103515625, 'score': 0.756103515625, 'examples_seen': 164672, 'step': 3200, 'algorithm': 'floyd_warshall'}
+I0716 14:19:21.452000 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.786, current avg val score is 0.756, val scores are: floyd_warshall: 0.756
+I0716 14:19:23.626745 126711536682496 run.py:687] Algo floyd_warshall step 3250 current loss 1.302652, current_train_items 167248.
+I0716 14:19:23.711116 126711536682496 run.py:722] (val) algo floyd_warshall step 3250: {'Pi': 0.7451171875, 'score': 0.7451171875, 'examples_seen': 167248, 'step': 3250, 'algorithm': 'floyd_warshall'}
+I0716 14:19:23.711262 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.786, current avg val score is 0.745, val scores are: floyd_warshall: 0.745
+I0716 14:19:25.844759 126711536682496 run.py:687] Algo floyd_warshall step 3300 current loss 2.007431, current_train_items 169776.
+I0716 14:19:25.983480 126711536682496 run.py:722] (val) algo floyd_warshall step 3300: {'Pi': 0.7371826171875, 'score': 0.7371826171875, 'examples_seen': 169776, 'step': 3300, 'algorithm': 'floyd_warshall'}
+I0716 14:19:25.983728 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.786, current avg val score is 0.737, val scores are: floyd_warshall: 0.737
+I0716 14:19:28.194463 126711536682496 run.py:687] Algo floyd_warshall step 3350 current loss 2.749698, current_train_items 172336.
+I0716 14:19:28.349660 126711536682496 run.py:722] (val) algo floyd_warshall step 3350: {'Pi': 0.7696533203125, 'score': 0.7696533203125, 'examples_seen': 172336, 'step': 3350, 'algorithm': 'floyd_warshall'}
+I0716 14:19:28.349894 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.786, current avg val score is 0.770, val scores are: floyd_warshall: 0.770
+I0716 14:19:30.571349 126711536682496 run.py:687] Algo floyd_warshall step 3400 current loss 1.509169, current_train_items 174864.
+I0716 14:19:30.763622 126711536682496 run.py:722] (val) algo floyd_warshall step 3400: {'Pi': 0.78851318359375, 'score': 0.78851318359375, 'examples_seen': 174864, 'step': 3400, 'algorithm': 'floyd_warshall'}
+I0716 14:19:30.763849 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.786, current avg val score is 0.789, val scores are: floyd_warshall: 0.789
+I0716 14:19:32.913363 126711536682496 run.py:687] Algo floyd_warshall step 3450 current loss 0.041203, current_train_items 177504.
+I0716 14:19:33.100846 126711536682496 run.py:722] (val) algo floyd_warshall step 3450: {'Pi': 0.76446533203125, 'score': 0.76446533203125, 'examples_seen': 177504, 'step': 3450, 'algorithm': 'floyd_warshall'}
+I0716 14:19:33.101073 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.789, current avg val score is 0.764, val scores are: floyd_warshall: 0.764
+I0716 14:19:35.238397 126711536682496 run.py:687] Algo floyd_warshall step 3500 current loss 0.116443, current_train_items 180112.
+I0716 14:19:35.392485 126711536682496 run.py:722] (val) algo floyd_warshall step 3500: {'Pi': 0.737548828125, 'score': 0.737548828125, 'examples_seen': 180112, 'step': 3500, 'algorithm': 'floyd_warshall'}
+I0716 14:19:35.392644 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.789, current avg val score is 0.738, val scores are: floyd_warshall: 0.738
+I0716 14:19:37.567368 126711536682496 run.py:687] Algo floyd_warshall step 3550 current loss 0.839060, current_train_items 182672.
+I0716 14:19:37.671124 126711536682496 run.py:722] (val) algo floyd_warshall step 3550: {'Pi': 0.7091064453125, 'score': 0.7091064453125, 'examples_seen': 182672, 'step': 3550, 'algorithm': 'floyd_warshall'}
+I0716 14:19:37.671325 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.789, current avg val score is 0.709, val scores are: floyd_warshall: 0.709
+I0716 14:19:39.848238 126711536682496 run.py:687] Algo floyd_warshall step 3600 current loss 1.231590, current_train_items 185248.
+I0716 14:19:39.943134 126711536682496 run.py:722] (val) algo floyd_warshall step 3600: {'Pi': 0.7730712890625, 'score': 0.7730712890625, 'examples_seen': 185248, 'step': 3600, 'algorithm': 'floyd_warshall'}
+I0716 14:19:39.943303 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.789, current avg val score is 0.773, val scores are: floyd_warshall: 0.773
+I0716 14:19:42.121145 126711536682496 run.py:687] Algo floyd_warshall step 3650 current loss 2.280548, current_train_items 187776.
+I0716 14:19:42.245239 126711536682496 run.py:722] (val) algo floyd_warshall step 3650: {'Pi': 0.74920654296875, 'score': 0.74920654296875, 'examples_seen': 187776, 'step': 3650, 'algorithm': 'floyd_warshall'}
+I0716 14:19:42.245457 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.789, current avg val score is 0.749, val scores are: floyd_warshall: 0.749
+I0716 14:19:44.449223 126711536682496 run.py:687] Algo floyd_warshall step 3700 current loss 3.001470, current_train_items 190320.
+I0716 14:19:44.606838 126711536682496 run.py:722] (val) algo floyd_warshall step 3700: {'Pi': 0.76104736328125, 'score': 0.76104736328125, 'examples_seen': 190320, 'step': 3700, 'algorithm': 'floyd_warshall'}
+I0716 14:19:44.607059 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.789, current avg val score is 0.761, val scores are: floyd_warshall: 0.761
+I0716 14:19:46.805486 126711536682496 run.py:687] Algo floyd_warshall step 3750 current loss 1.652083, current_train_items 192864.
+I0716 14:19:47.005766 126711536682496 run.py:722] (val) algo floyd_warshall step 3750: {'Pi': 0.7691650390625, 'score': 0.7691650390625, 'examples_seen': 192864, 'step': 3750, 'algorithm': 'floyd_warshall'}
+I0716 14:19:47.005985 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.789, current avg val score is 0.769, val scores are: floyd_warshall: 0.769
+I0716 14:19:49.194120 126711536682496 run.py:687] Algo floyd_warshall step 3800 current loss 0.057913, current_train_items 195504.
+I0716 14:19:49.355988 126711536682496 run.py:722] (val) algo floyd_warshall step 3800: {'Pi': 0.78887939453125, 'score': 0.78887939453125, 'examples_seen': 195504, 'step': 3800, 'algorithm': 'floyd_warshall'}
+I0716 14:19:49.356218 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.789, current avg val score is 0.789, val scores are: floyd_warshall: 0.789
+I0716 14:19:51.550892 126711536682496 run.py:687] Algo floyd_warshall step 3850 current loss 0.510638, current_train_items 198128.
+I0716 14:19:51.674850 126711536682496 run.py:722] (val) algo floyd_warshall step 3850: {'Pi': 0.71478271484375, 'score': 0.71478271484375, 'examples_seen': 198128, 'step': 3850, 'algorithm': 'floyd_warshall'}
+I0716 14:19:51.675070 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.789, current avg val score is 0.715, val scores are: floyd_warshall: 0.715
+I0716 14:19:53.797133 126711536682496 run.py:687] Algo floyd_warshall step 3900 current loss 0.820227, current_train_items 200672.
+I0716 14:19:53.932190 126711536682496 run.py:722] (val) algo floyd_warshall step 3900: {'Pi': 0.760498046875, 'score': 0.760498046875, 'examples_seen': 200672, 'step': 3900, 'algorithm': 'floyd_warshall'}
+I0716 14:19:53.932412 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.789, current avg val score is 0.760, val scores are: floyd_warshall: 0.760
+I0716 14:19:56.088732 126711536682496 run.py:687] Algo floyd_warshall step 3950 current loss 1.064771, current_train_items 203232.
+I0716 14:19:56.207022 126711536682496 run.py:722] (val) algo floyd_warshall step 3950: {'Pi': 0.76251220703125, 'score': 0.76251220703125, 'examples_seen': 203232, 'step': 3950, 'algorithm': 'floyd_warshall'}
+I0716 14:19:56.207242 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.789, current avg val score is 0.763, val scores are: floyd_warshall: 0.763
+I0716 14:19:58.372431 126711536682496 run.py:687] Algo floyd_warshall step 4000 current loss 0.749783, current_train_items 205792.
+I0716 14:19:58.494677 126711536682496 run.py:722] (val) algo floyd_warshall step 4000: {'Pi': 0.81048583984375, 'score': 0.81048583984375, 'examples_seen': 205792, 'step': 4000, 'algorithm': 'floyd_warshall'}
+I0716 14:19:58.494899 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.789, current avg val score is 0.810, val scores are: floyd_warshall: 0.810
+I0716 14:20:00.676013 126711536682496 run.py:687] Algo floyd_warshall step 4050 current loss 1.970864, current_train_items 208320.
+I0716 14:20:00.853013 126711536682496 run.py:722] (val) algo floyd_warshall step 4050: {'Pi': 0.77044677734375, 'score': 0.77044677734375, 'examples_seen': 208320, 'step': 4050, 'algorithm': 'floyd_warshall'}
+I0716 14:20:00.853232 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.770, val scores are: floyd_warshall: 0.770
+I0716 14:20:03.059858 126711536682496 run.py:687] Algo floyd_warshall step 4100 current loss 1.306519, current_train_items 210848.
+I0716 14:20:03.278613 126711536682496 run.py:722] (val) algo floyd_warshall step 4100: {'Pi': 0.75982666015625, 'score': 0.75982666015625, 'examples_seen': 210848, 'step': 4100, 'algorithm': 'floyd_warshall'}
+I0716 14:20:03.278844 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.760, val scores are: floyd_warshall: 0.760
+I0716 14:20:05.459690 126711536682496 run.py:687] Algo floyd_warshall step 4150 current loss 0.063902, current_train_items 213520.
+I0716 14:20:05.618218 126711536682496 run.py:722] (val) algo floyd_warshall step 4150: {'Pi': 0.781982421875, 'score': 0.781982421875, 'examples_seen': 213520, 'step': 4150, 'algorithm': 'floyd_warshall'}
+I0716 14:20:05.618455 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.782, val scores are: floyd_warshall: 0.782
+I0716 14:20:07.774702 126711536682496 run.py:687] Algo floyd_warshall step 4200 current loss 0.237009, current_train_items 216112.
+I0716 14:20:07.902439 126711536682496 run.py:722] (val) algo floyd_warshall step 4200: {'Pi': 0.74810791015625, 'score': 0.74810791015625, 'examples_seen': 216112, 'step': 4200, 'algorithm': 'floyd_warshall'}
+I0716 14:20:07.902676 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.748, val scores are: floyd_warshall: 0.748
+I0716 14:20:10.050974 126711536682496 run.py:687] Algo floyd_warshall step 4250 current loss 0.849024, current_train_items 218688.
+I0716 14:20:10.172834 126711536682496 run.py:722] (val) algo floyd_warshall step 4250: {'Pi': 0.78570556640625, 'score': 0.78570556640625, 'examples_seen': 218688, 'step': 4250, 'algorithm': 'floyd_warshall'}
+I0716 14:20:10.173056 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.786, val scores are: floyd_warshall: 0.786
+I0716 14:20:12.319155 126711536682496 run.py:687] Algo floyd_warshall step 4300 current loss 0.990450, current_train_items 221248.
+I0716 14:20:12.442640 126711536682496 run.py:722] (val) algo floyd_warshall step 4300: {'Pi': 0.80450439453125, 'score': 0.80450439453125, 'examples_seen': 221248, 'step': 4300, 'algorithm': 'floyd_warshall'}
+I0716 14:20:12.442785 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.805, val scores are: floyd_warshall: 0.805
+I0716 14:20:14.647669 126711536682496 run.py:687] Algo floyd_warshall step 4350 current loss 1.689392, current_train_items 223792.
+I0716 14:20:14.760219 126711536682496 run.py:722] (val) algo floyd_warshall step 4350: {'Pi': 0.7440185546875, 'score': 0.7440185546875, 'examples_seen': 223792, 'step': 4350, 'algorithm': 'floyd_warshall'}
+I0716 14:20:14.760440 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.744, val scores are: floyd_warshall: 0.744
+I0716 14:20:16.923935 126711536682496 run.py:687] Algo floyd_warshall step 4400 current loss 3.088131, current_train_items 226352.
+I0716 14:20:17.080217 126711536682496 run.py:722] (val) algo floyd_warshall step 4400: {'Pi': 0.801513671875, 'score': 0.801513671875, 'examples_seen': 226352, 'step': 4400, 'algorithm': 'floyd_warshall'}
+I0716 14:20:17.080457 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.802, val scores are: floyd_warshall: 0.802
+I0716 14:20:19.261694 126711536682496 run.py:687] Algo floyd_warshall step 4450 current loss 1.174160, current_train_items 228880.
+I0716 14:20:19.486989 126711536682496 run.py:722] (val) algo floyd_warshall step 4450: {'Pi': 0.780029296875, 'score': 0.780029296875, 'examples_seen': 228880, 'step': 4450, 'algorithm': 'floyd_warshall'}
+I0716 14:20:19.487234 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.780, val scores are: floyd_warshall: 0.780
+I0716 14:20:21.652605 126711536682496 run.py:687] Algo floyd_warshall step 4500 current loss 0.021124, current_train_items 231504.
+I0716 14:20:21.848271 126711536682496 run.py:722] (val) algo floyd_warshall step 4500: {'Pi': 0.7611083984375, 'score': 0.7611083984375, 'examples_seen': 231504, 'step': 4500, 'algorithm': 'floyd_warshall'}
+I0716 14:20:21.848502 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.761, val scores are: floyd_warshall: 0.761
+I0716 14:20:24.007390 126711536682496 run.py:687] Algo floyd_warshall step 4550 current loss 0.153005, current_train_items 234128.
+I0716 14:20:24.169848 126711536682496 run.py:722] (val) algo floyd_warshall step 4550: {'Pi': 0.7901611328125, 'score': 0.7901611328125, 'examples_seen': 234128, 'step': 4550, 'algorithm': 'floyd_warshall'}
+I0716 14:20:24.170077 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.790, val scores are: floyd_warshall: 0.790
+I0716 14:20:26.368912 126711536682496 run.py:687] Algo floyd_warshall step 4600 current loss 0.748966, current_train_items 236688.
+I0716 14:20:26.488319 126711536682496 run.py:722] (val) algo floyd_warshall step 4600: {'Pi': 0.7998046875, 'score': 0.7998046875, 'examples_seen': 236688, 'step': 4600, 'algorithm': 'floyd_warshall'}
+I0716 14:20:26.488464 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.800, val scores are: floyd_warshall: 0.800
+I0716 14:20:28.627267 126711536682496 run.py:687] Algo floyd_warshall step 4650 current loss 0.425150, current_train_items 239264.
+I0716 14:20:28.723297 126711536682496 run.py:722] (val) algo floyd_warshall step 4650: {'Pi': 0.7930908203125, 'score': 0.7930908203125, 'examples_seen': 239264, 'step': 4650, 'algorithm': 'floyd_warshall'}
+I0716 14:20:28.723475 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.793, val scores are: floyd_warshall: 0.793
+I0716 14:20:30.866470 126711536682496 run.py:687] Algo floyd_warshall step 4700 current loss 1.867115, current_train_items 241792.
+I0716 14:20:31.000834 126711536682496 run.py:722] (val) algo floyd_warshall step 4700: {'Pi': 0.75543212890625, 'score': 0.75543212890625, 'examples_seen': 241792, 'step': 4700, 'algorithm': 'floyd_warshall'}
+I0716 14:20:31.001070 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.755, val scores are: floyd_warshall: 0.755
+I0716 14:20:33.174432 126711536682496 run.py:687] Algo floyd_warshall step 4750 current loss 2.068522, current_train_items 244336.
+I0716 14:20:33.324144 126711536682496 run.py:722] (val) algo floyd_warshall step 4750: {'Pi': 0.7587890625, 'score': 0.7587890625, 'examples_seen': 244336, 'step': 4750, 'algorithm': 'floyd_warshall'}
+I0716 14:20:33.324376 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.759, val scores are: floyd_warshall: 0.759
+I0716 14:20:35.523442 126711536682496 run.py:687] Algo floyd_warshall step 4800 current loss 1.421031, current_train_items 246880.
+I0716 14:20:35.717603 126711536682496 run.py:722] (val) algo floyd_warshall step 4800: {'Pi': 0.788330078125, 'score': 0.788330078125, 'examples_seen': 246880, 'step': 4800, 'algorithm': 'floyd_warshall'}
+I0716 14:20:35.717826 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.788, val scores are: floyd_warshall: 0.788
+I0716 14:20:37.867878 126711536682496 run.py:687] Algo floyd_warshall step 4850 current loss 0.047157, current_train_items 249520.
+I0716 14:20:38.022376 126711536682496 run.py:722] (val) algo floyd_warshall step 4850: {'Pi': 0.80950927734375, 'score': 0.80950927734375, 'examples_seen': 249520, 'step': 4850, 'algorithm': 'floyd_warshall'}
+I0716 14:20:38.022635 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.810, val scores are: floyd_warshall: 0.810
+I0716 14:20:40.165767 126711536682496 run.py:687] Algo floyd_warshall step 4900 current loss 0.428795, current_train_items 252128.
+I0716 14:20:40.302037 126711536682496 run.py:722] (val) algo floyd_warshall step 4900: {'Pi': 0.78680419921875, 'score': 0.78680419921875, 'examples_seen': 252128, 'step': 4900, 'algorithm': 'floyd_warshall'}
+I0716 14:20:40.302257 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.810, current avg val score is 0.787, val scores are: floyd_warshall: 0.787
+I0716 14:20:42.479277 126711536682496 run.py:687] Algo floyd_warshall step 4950 current loss 0.720529, current_train_items 254688.
+I0716 14:20:42.594476 126711536682496 run.py:722] (val) algo floyd_warshall step 4950: {'Pi': 0.811279296875, 'score': 0.811279296875, 'examples_seen': 254688, 'step': 4950, 'algorithm': 'floyd_warshall'}
+I0716 14:20:42.594725 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.810, current avg val score is 0.811, val scores are: floyd_warshall: 0.811
+I0716 14:20:44.748839 126711536682496 run.py:687] Algo floyd_warshall step 5000 current loss 1.132464, current_train_items 257264.
+I0716 14:20:44.864490 126711536682496 run.py:722] (val) algo floyd_warshall step 5000: {'Pi': 0.77349853515625, 'score': 0.77349853515625, 'examples_seen': 257264, 'step': 5000, 'algorithm': 'floyd_warshall'}
+I0716 14:20:44.864722 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.811, current avg val score is 0.773, val scores are: floyd_warshall: 0.773
+I0716 14:20:47.028187 126711536682496 run.py:687] Algo floyd_warshall step 5050 current loss 2.544860, current_train_items 259792.
+I0716 14:20:47.153624 126711536682496 run.py:722] (val) algo floyd_warshall step 5050: {'Pi': 0.79351806640625, 'score': 0.79351806640625, 'examples_seen': 259792, 'step': 5050, 'algorithm': 'floyd_warshall'}
+I0716 14:20:47.153842 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.811, current avg val score is 0.794, val scores are: floyd_warshall: 0.794
+I0716 14:20:49.318141 126711536682496 run.py:687] Algo floyd_warshall step 5100 current loss 2.790765, current_train_items 262336.
+I0716 14:20:49.473662 126711536682496 run.py:722] (val) algo floyd_warshall step 5100: {'Pi': 0.7978515625, 'score': 0.7978515625, 'examples_seen': 262336, 'step': 5100, 'algorithm': 'floyd_warshall'}
+I0716 14:20:49.473888 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.811, current avg val score is 0.798, val scores are: floyd_warshall: 0.798
+I0716 14:20:51.687757 126711536682496 run.py:687] Algo floyd_warshall step 5150 current loss 1.119935, current_train_items 264880.
+I0716 14:20:51.884356 126711536682496 run.py:722] (val) algo floyd_warshall step 5150: {'Pi': 0.7791748046875, 'score': 0.7791748046875, 'examples_seen': 264880, 'step': 5150, 'algorithm': 'floyd_warshall'}
+I0716 14:20:51.884588 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.811, current avg val score is 0.779, val scores are: floyd_warshall: 0.779
+I0716 14:20:54.077540 126711536682496 run.py:687] Algo floyd_warshall step 5200 current loss 0.047320, current_train_items 267520.
+I0716 14:20:54.236027 126711536682496 run.py:722] (val) algo floyd_warshall step 5200: {'Pi': 0.7974853515625, 'score': 0.7974853515625, 'examples_seen': 267520, 'step': 5200, 'algorithm': 'floyd_warshall'}
+I0716 14:20:54.236264 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.811, current avg val score is 0.797, val scores are: floyd_warshall: 0.797
+I0716 14:20:56.444560 126711536682496 run.py:687] Algo floyd_warshall step 5250 current loss 0.223779, current_train_items 270128.
+I0716 14:20:56.582084 126711536682496 run.py:722] (val) algo floyd_warshall step 5250: {'Pi': 0.823486328125, 'score': 0.823486328125, 'examples_seen': 270128, 'step': 5250, 'algorithm': 'floyd_warshall'}
+I0716 14:20:56.582307 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.811, current avg val score is 0.823, val scores are: floyd_warshall: 0.823
+I0716 14:20:58.756937 126711536682496 run.py:687] Algo floyd_warshall step 5300 current loss 0.830129, current_train_items 272688.
+I0716 14:20:58.887135 126711536682496 run.py:722] (val) algo floyd_warshall step 5300: {'Pi': 0.79632568359375, 'score': 0.79632568359375, 'examples_seen': 272688, 'step': 5300, 'algorithm': 'floyd_warshall'}
+I0716 14:20:58.887357 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.823, current avg val score is 0.796, val scores are: floyd_warshall: 0.796
+I0716 14:21:01.055405 126711536682496 run.py:687] Algo floyd_warshall step 5350 current loss 1.078673, current_train_items 275248.
+I0716 14:21:01.171792 126711536682496 run.py:722] (val) algo floyd_warshall step 5350: {'Pi': 0.7935791015625, 'score': 0.7935791015625, 'examples_seen': 275248, 'step': 5350, 'algorithm': 'floyd_warshall'}
+I0716 14:21:01.172013 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.823, current avg val score is 0.794, val scores are: floyd_warshall: 0.794
+I0716 14:21:03.337854 126711536682496 run.py:687] Algo floyd_warshall step 5400 current loss 1.948765, current_train_items 277792.
+I0716 14:21:03.458404 126711536682496 run.py:722] (val) algo floyd_warshall step 5400: {'Pi': 0.80694580078125, 'score': 0.80694580078125, 'examples_seen': 277792, 'step': 5400, 'algorithm': 'floyd_warshall'}
+I0716 14:21:03.458641 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.823, current avg val score is 0.807, val scores are: floyd_warshall: 0.807
+I0716 14:21:05.562460 126711536682496 run.py:687] Algo floyd_warshall step 5450 current loss 1.964077, current_train_items 280352.
+I0716 14:21:05.751241 126711536682496 run.py:722] (val) algo floyd_warshall step 5450: {'Pi': 0.79669189453125, 'score': 0.79669189453125, 'examples_seen': 280352, 'step': 5450, 'algorithm': 'floyd_warshall'}
+I0716 14:21:05.751465 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.823, current avg val score is 0.797, val scores are: floyd_warshall: 0.797
+I0716 14:21:07.923261 126711536682496 run.py:687] Algo floyd_warshall step 5500 current loss 1.268043, current_train_items 282864.
+I0716 14:21:08.151490 126711536682496 run.py:722] (val) algo floyd_warshall step 5500: {'Pi': 0.7855224609375, 'score': 0.7855224609375, 'examples_seen': 282864, 'step': 5500, 'algorithm': 'floyd_warshall'}
+I0716 14:21:08.151732 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.823, current avg val score is 0.786, val scores are: floyd_warshall: 0.786
+I0716 14:21:10.322367 126711536682496 run.py:687] Algo floyd_warshall step 5550 current loss 0.052331, current_train_items 285504.
+I0716 14:21:10.502844 126711536682496 run.py:722] (val) algo floyd_warshall step 5550: {'Pi': 0.84039306640625, 'score': 0.84039306640625, 'examples_seen': 285504, 'step': 5550, 'algorithm': 'floyd_warshall'}
+I0716 14:21:10.503064 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.823, current avg val score is 0.840, val scores are: floyd_warshall: 0.840
+I0716 14:21:12.703402 126711536682496 run.py:687] Algo floyd_warshall step 5600 current loss 0.094896, current_train_items 288128.
+I0716 14:21:12.843922 126711536682496 run.py:722] (val) algo floyd_warshall step 5600: {'Pi': 0.7999267578125, 'score': 0.7999267578125, 'examples_seen': 288128, 'step': 5600, 'algorithm': 'floyd_warshall'}
+I0716 14:21:12.844141 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.840, current avg val score is 0.800, val scores are: floyd_warshall: 0.800
+I0716 14:21:15.010928 126711536682496 run.py:687] Algo floyd_warshall step 5650 current loss 0.619543, current_train_items 290688.
+I0716 14:21:15.126171 126711536682496 run.py:722] (val) algo floyd_warshall step 5650: {'Pi': 0.83026123046875, 'score': 0.83026123046875, 'examples_seen': 290688, 'step': 5650, 'algorithm': 'floyd_warshall'}
+I0716 14:21:15.126394 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.840, current avg val score is 0.830, val scores are: floyd_warshall: 0.830
+I0716 14:21:17.271865 126711536682496 run.py:687] Algo floyd_warshall step 5700 current loss 0.907701, current_train_items 293280.
+I0716 14:21:17.397678 126711536682496 run.py:722] (val) algo floyd_warshall step 5700: {'Pi': 0.792724609375, 'score': 0.792724609375, 'examples_seen': 293280, 'step': 5700, 'algorithm': 'floyd_warshall'}
+I0716 14:21:17.397898 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.840, current avg val score is 0.793, val scores are: floyd_warshall: 0.793
+I0716 14:21:19.554510 126711536682496 run.py:687] Algo floyd_warshall step 5750 current loss 1.835752, current_train_items 295808.
+I0716 14:21:19.672380 126711536682496 run.py:722] (val) algo floyd_warshall step 5750: {'Pi': 0.810791015625, 'score': 0.810791015625, 'examples_seen': 295808, 'step': 5750, 'algorithm': 'floyd_warshall'}
+I0716 14:21:19.672616 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.840, current avg val score is 0.811, val scores are: floyd_warshall: 0.811
+I0716 14:21:21.829966 126711536682496 run.py:687] Algo floyd_warshall step 5800 current loss 2.388052, current_train_items 298352.
+I0716 14:21:21.987845 126711536682496 run.py:722] (val) algo floyd_warshall step 5800: {'Pi': 0.7960205078125, 'score': 0.7960205078125, 'examples_seen': 298352, 'step': 5800, 'algorithm': 'floyd_warshall'}
+I0716 14:21:21.988066 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.840, current avg val score is 0.796, val scores are: floyd_warshall: 0.796
+I0716 14:21:24.163934 126711536682496 run.py:687] Algo floyd_warshall step 5850 current loss 1.116613, current_train_items 300896.
+I0716 14:21:24.358319 126711536682496 run.py:722] (val) algo floyd_warshall step 5850: {'Pi': 0.83355712890625, 'score': 0.83355712890625, 'examples_seen': 300896, 'step': 5850, 'algorithm': 'floyd_warshall'}
+I0716 14:21:24.358555 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.840, current avg val score is 0.834, val scores are: floyd_warshall: 0.834
+I0716 14:21:26.494441 126711536682496 run.py:687] Algo floyd_warshall step 5900 current loss 0.031790, current_train_items 303520.
+I0716 14:21:26.685066 126711536682496 run.py:722] (val) algo floyd_warshall step 5900: {'Pi': 0.7991943359375, 'score': 0.7991943359375, 'examples_seen': 303520, 'step': 5900, 'algorithm': 'floyd_warshall'}
+I0716 14:21:26.685286 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.840, current avg val score is 0.799, val scores are: floyd_warshall: 0.799
+I0716 14:21:28.859211 126711536682496 run.py:687] Algo floyd_warshall step 5950 current loss 0.484677, current_train_items 306144.
+I0716 14:21:28.997087 126711536682496 run.py:722] (val) algo floyd_warshall step 5950: {'Pi': 0.79791259765625, 'score': 0.79791259765625, 'examples_seen': 306144, 'step': 5950, 'algorithm': 'floyd_warshall'}
+I0716 14:21:28.997308 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.840, current avg val score is 0.798, val scores are: floyd_warshall: 0.798
+I0716 14:21:31.135253 126711536682496 run.py:687] Algo floyd_warshall step 6000 current loss 0.664691, current_train_items 308720.
+I0716 14:21:31.269646 126711536682496 run.py:722] (val) algo floyd_warshall step 6000: {'Pi': 0.7994384765625, 'score': 0.7994384765625, 'examples_seen': 308720, 'step': 6000, 'algorithm': 'floyd_warshall'}
+I0716 14:21:31.269867 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.840, current avg val score is 0.799, val scores are: floyd_warshall: 0.799
+I0716 14:21:33.438708 126711536682496 run.py:687] Algo floyd_warshall step 6050 current loss 0.933024, current_train_items 311264.
+I0716 14:21:33.544570 126711536682496 run.py:722] (val) algo floyd_warshall step 6050: {'Pi': 0.76153564453125, 'score': 0.76153564453125, 'examples_seen': 311264, 'step': 6050, 'algorithm': 'floyd_warshall'}
+I0716 14:21:33.544747 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.840, current avg val score is 0.762, val scores are: floyd_warshall: 0.762
+I0716 14:21:35.687100 126711536682496 run.py:687] Algo floyd_warshall step 6100 current loss 1.756763, current_train_items 313808.
+I0716 14:21:35.813579 126711536682496 run.py:722] (val) algo floyd_warshall step 6100: {'Pi': 0.8228759765625, 'score': 0.8228759765625, 'examples_seen': 313808, 'step': 6100, 'algorithm': 'floyd_warshall'}
+I0716 14:21:35.813804 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.840, current avg val score is 0.823, val scores are: floyd_warshall: 0.823
+I0716 14:21:37.974076 126711536682496 run.py:687] Algo floyd_warshall step 6150 current loss 2.009042, current_train_items 316368.
+I0716 14:21:38.139897 126711536682496 run.py:722] (val) algo floyd_warshall step 6150: {'Pi': 0.80572509765625, 'score': 0.80572509765625, 'examples_seen': 316368, 'step': 6150, 'algorithm': 'floyd_warshall'}
+I0716 14:21:38.140123 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.840, current avg val score is 0.806, val scores are: floyd_warshall: 0.806
+I0716 14:21:40.353811 126711536682496 run.py:687] Algo floyd_warshall step 6200 current loss 1.324034, current_train_items 318880.
+I0716 14:21:40.555190 126711536682496 run.py:722] (val) algo floyd_warshall step 6200: {'Pi': 0.795166015625, 'score': 0.795166015625, 'examples_seen': 318880, 'step': 6200, 'algorithm': 'floyd_warshall'}
+I0716 14:21:40.555415 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.840, current avg val score is 0.795, val scores are: floyd_warshall: 0.795
+I0716 14:21:42.725378 126711536682496 run.py:687] Algo floyd_warshall step 6250 current loss 0.030609, current_train_items 321536.
+I0716 14:21:42.888061 126711536682496 run.py:722] (val) algo floyd_warshall step 6250: {'Pi': 0.8458251953125, 'score': 0.8458251953125, 'examples_seen': 321536, 'step': 6250, 'algorithm': 'floyd_warshall'}
+I0716 14:21:42.888284 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.840, current avg val score is 0.846, val scores are: floyd_warshall: 0.846
+I0716 14:21:45.022478 126711536682496 run.py:687] Algo floyd_warshall step 6300 current loss 0.239631, current_train_items 324128.
+I0716 14:21:45.179270 126711536682496 run.py:722] (val) algo floyd_warshall step 6300: {'Pi': 0.81207275390625, 'score': 0.81207275390625, 'examples_seen': 324128, 'step': 6300, 'algorithm': 'floyd_warshall'}
+I0716 14:21:45.179493 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.812, val scores are: floyd_warshall: 0.812
+I0716 14:21:47.316890 126711536682496 run.py:687] Algo floyd_warshall step 6350 current loss 0.709003, current_train_items 326704.
+I0716 14:21:47.461957 126711536682496 run.py:722] (val) algo floyd_warshall step 6350: {'Pi': 0.7586669921875, 'score': 0.7586669921875, 'examples_seen': 326704, 'step': 6350, 'algorithm': 'floyd_warshall'}
+I0716 14:21:47.462199 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.759, val scores are: floyd_warshall: 0.759
+I0716 14:21:49.629414 126711536682496 run.py:687] Algo floyd_warshall step 6400 current loss 0.967955, current_train_items 329264.
+I0716 14:21:49.719944 126711536682496 run.py:722] (val) algo floyd_warshall step 6400: {'Pi': 0.81768798828125, 'score': 0.81768798828125, 'examples_seen': 329264, 'step': 6400, 'algorithm': 'floyd_warshall'}
+I0716 14:21:49.720117 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.818, val scores are: floyd_warshall: 0.818
+I0716 14:21:51.846873 126711536682496 run.py:687] Algo floyd_warshall step 6450 current loss 2.438052, current_train_items 331792.
+I0716 14:21:51.985178 126711536682496 run.py:722] (val) algo floyd_warshall step 6450: {'Pi': 0.78814697265625, 'score': 0.78814697265625, 'examples_seen': 331792, 'step': 6450, 'algorithm': 'floyd_warshall'}
+I0716 14:21:51.985400 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.788, val scores are: floyd_warshall: 0.788
+I0716 14:21:54.163183 126711536682496 run.py:687] Algo floyd_warshall step 6500 current loss 2.300098, current_train_items 334352.
+I0716 14:21:54.335952 126711536682496 run.py:722] (val) algo floyd_warshall step 6500: {'Pi': 0.7803955078125, 'score': 0.7803955078125, 'examples_seen': 334352, 'step': 6500, 'algorithm': 'floyd_warshall'}
+I0716 14:21:54.336169 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.780, val scores are: floyd_warshall: 0.780
+I0716 14:21:56.543336 126711536682496 run.py:687] Algo floyd_warshall step 6550 current loss 1.030833, current_train_items 336880.
+I0716 14:21:56.765437 126711536682496 run.py:722] (val) algo floyd_warshall step 6550: {'Pi': 0.81549072265625, 'score': 0.81549072265625, 'examples_seen': 336880, 'step': 6550, 'algorithm': 'floyd_warshall'}
+I0716 14:21:56.765672 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.815, val scores are: floyd_warshall: 0.815
+I0716 14:21:58.965511 126711536682496 run.py:687] Algo floyd_warshall step 6600 current loss 0.033932, current_train_items 339520.
+I0716 14:21:59.118676 126711536682496 run.py:722] (val) algo floyd_warshall step 6600: {'Pi': 0.8099365234375, 'score': 0.8099365234375, 'examples_seen': 339520, 'step': 6600, 'algorithm': 'floyd_warshall'}
+I0716 14:21:59.118895 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.810, val scores are: floyd_warshall: 0.810
+I0716 14:22:01.285117 126711536682496 run.py:687] Algo floyd_warshall step 6650 current loss 0.086012, current_train_items 342144.
+I0716 14:22:01.411025 126711536682496 run.py:722] (val) algo floyd_warshall step 6650: {'Pi': 0.82781982421875, 'score': 0.82781982421875, 'examples_seen': 342144, 'step': 6650, 'algorithm': 'floyd_warshall'}
+I0716 14:22:01.411243 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.828, val scores are: floyd_warshall: 0.828
+I0716 14:22:03.589053 126711536682496 run.py:687] Algo floyd_warshall step 6700 current loss 0.630839, current_train_items 344704.
+I0716 14:22:03.707879 126711536682496 run.py:722] (val) algo floyd_warshall step 6700: {'Pi': 0.82421875, 'score': 0.82421875, 'examples_seen': 344704, 'step': 6700, 'algorithm': 'floyd_warshall'}
+I0716 14:22:03.708095 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.824, val scores are: floyd_warshall: 0.824
+I0716 14:22:05.840831 126711536682496 run.py:687] Algo floyd_warshall step 6750 current loss 0.965617, current_train_items 347280.
+I0716 14:22:05.972011 126711536682496 run.py:722] (val) algo floyd_warshall step 6750: {'Pi': 0.8121337890625, 'score': 0.8121337890625, 'examples_seen': 347280, 'step': 6750, 'algorithm': 'floyd_warshall'}
+I0716 14:22:05.972247 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.812, val scores are: floyd_warshall: 0.812
+I0716 14:22:08.146994 126711536682496 run.py:687] Algo floyd_warshall step 6800 current loss 1.748470, current_train_items 349824.
+I0716 14:22:08.266101 126711536682496 run.py:722] (val) algo floyd_warshall step 6800: {'Pi': 0.825927734375, 'score': 0.825927734375, 'examples_seen': 349824, 'step': 6800, 'algorithm': 'floyd_warshall'}
+I0716 14:22:08.266320 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.826, val scores are: floyd_warshall: 0.826
+I0716 14:22:10.476213 126711536682496 run.py:687] Algo floyd_warshall step 6850 current loss 2.224734, current_train_items 352368.
+I0716 14:22:10.616122 126711536682496 run.py:722] (val) algo floyd_warshall step 6850: {'Pi': 0.808349609375, 'score': 0.808349609375, 'examples_seen': 352368, 'step': 6850, 'algorithm': 'floyd_warshall'}
+I0716 14:22:10.616339 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.808, val scores are: floyd_warshall: 0.808
+I0716 14:22:12.794493 126711536682496 run.py:687] Algo floyd_warshall step 6900 current loss 1.427769, current_train_items 354896.
+I0716 14:22:13.022228 126711536682496 run.py:722] (val) algo floyd_warshall step 6900: {'Pi': 0.80975341796875, 'score': 0.80975341796875, 'examples_seen': 354896, 'step': 6900, 'algorithm': 'floyd_warshall'}
+I0716 14:22:13.022450 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.810, val scores are: floyd_warshall: 0.810
+I0716 14:22:15.198800 126711536682496 run.py:687] Algo floyd_warshall step 6950 current loss 0.024413, current_train_items 357536.
+I0716 14:22:15.380992 126711536682496 run.py:722] (val) algo floyd_warshall step 6950: {'Pi': 0.81829833984375, 'score': 0.81829833984375, 'examples_seen': 357536, 'step': 6950, 'algorithm': 'floyd_warshall'}
+I0716 14:22:15.381214 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.818, val scores are: floyd_warshall: 0.818
+I0716 14:22:17.517464 126711536682496 run.py:687] Algo floyd_warshall step 7000 current loss 0.411231, current_train_items 360176.
+I0716 14:22:17.689318 126711536682496 run.py:722] (val) algo floyd_warshall step 7000: {'Pi': 0.81756591796875, 'score': 0.81756591796875, 'examples_seen': 360176, 'step': 7000, 'algorithm': 'floyd_warshall'}
+I0716 14:22:17.689555 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.818, val scores are: floyd_warshall: 0.818
+I0716 14:22:19.875887 126711536682496 run.py:687] Algo floyd_warshall step 7050 current loss 0.627634, current_train_items 362720.
+I0716 14:22:19.985838 126711536682496 run.py:722] (val) algo floyd_warshall step 7050: {'Pi': 0.83050537109375, 'score': 0.83050537109375, 'examples_seen': 362720, 'step': 7050, 'algorithm': 'floyd_warshall'}
+I0716 14:22:19.986010 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.831, val scores are: floyd_warshall: 0.831
+I0716 14:22:22.132656 126711536682496 run.py:687] Algo floyd_warshall step 7100 current loss 0.292466, current_train_items 365280.
+I0716 14:22:22.235367 126711536682496 run.py:722] (val) algo floyd_warshall step 7100: {'Pi': 0.81536865234375, 'score': 0.81536865234375, 'examples_seen': 365280, 'step': 7100, 'algorithm': 'floyd_warshall'}
+I0716 14:22:22.235562 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.815, val scores are: floyd_warshall: 0.815
+I0716 14:22:24.395846 126711536682496 run.py:687] Algo floyd_warshall step 7150 current loss 1.813663, current_train_items 367824.
+I0716 14:22:24.536785 126711536682496 run.py:722] (val) algo floyd_warshall step 7150: {'Pi': 0.81292724609375, 'score': 0.81292724609375, 'examples_seen': 367824, 'step': 7150, 'algorithm': 'floyd_warshall'}
+I0716 14:22:24.537025 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.813, val scores are: floyd_warshall: 0.813
+I0716 14:22:26.744374 126711536682496 run.py:687] Algo floyd_warshall step 7200 current loss 2.195919, current_train_items 370368.
+I0716 14:22:26.893485 126711536682496 run.py:722] (val) algo floyd_warshall step 7200: {'Pi': 0.81573486328125, 'score': 0.81573486328125, 'examples_seen': 370368, 'step': 7200, 'algorithm': 'floyd_warshall'}
+I0716 14:22:26.893742 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.816, val scores are: floyd_warshall: 0.816
+I0716 14:22:29.123919 126711536682496 run.py:687] Algo floyd_warshall step 7250 current loss 1.104762, current_train_items 372896.
+I0716 14:22:29.327275 126711536682496 run.py:722] (val) algo floyd_warshall step 7250: {'Pi': 0.81988525390625, 'score': 0.81988525390625, 'examples_seen': 372896, 'step': 7250, 'algorithm': 'floyd_warshall'}
+I0716 14:22:29.327497 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.820, val scores are: floyd_warshall: 0.820
+I0716 14:22:31.474323 126711536682496 run.py:687] Algo floyd_warshall step 7300 current loss 0.021415, current_train_items 375536.
+I0716 14:22:31.653422 126711536682496 run.py:722] (val) algo floyd_warshall step 7300: {'Pi': 0.83203125, 'score': 0.83203125, 'examples_seen': 375536, 'step': 7300, 'algorithm': 'floyd_warshall'}
+I0716 14:22:31.653681 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.832, val scores are: floyd_warshall: 0.832
+I0716 14:22:33.841271 126711536682496 run.py:687] Algo floyd_warshall step 7350 current loss 0.253409, current_train_items 378144.
+I0716 14:22:33.974886 126711536682496 run.py:722] (val) algo floyd_warshall step 7350: {'Pi': 0.81964111328125, 'score': 0.81964111328125, 'examples_seen': 378144, 'step': 7350, 'algorithm': 'floyd_warshall'}
+I0716 14:22:33.975126 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.820, val scores are: floyd_warshall: 0.820
+I0716 14:22:36.140859 126711536682496 run.py:687] Algo floyd_warshall step 7400 current loss 0.601972, current_train_items 380720.
+I0716 14:22:36.249294 126711536682496 run.py:722] (val) algo floyd_warshall step 7400: {'Pi': 0.82159423828125, 'score': 0.82159423828125, 'examples_seen': 380720, 'step': 7400, 'algorithm': 'floyd_warshall'}
+I0716 14:22:36.249484 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.822, val scores are: floyd_warshall: 0.822
+I0716 14:22:38.459022 126711536682496 run.py:687] Algo floyd_warshall step 7450 current loss 1.057307, current_train_items 383280.
+I0716 14:22:38.551833 126711536682496 run.py:722] (val) algo floyd_warshall step 7450: {'Pi': 0.82916259765625, 'score': 0.82916259765625, 'examples_seen': 383280, 'step': 7450, 'algorithm': 'floyd_warshall'}
+I0716 14:22:38.552037 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.829, val scores are: floyd_warshall: 0.829
+I0716 14:22:40.686891 126711536682496 run.py:687] Algo floyd_warshall step 7500 current loss 1.875403, current_train_items 385808.
+I0716 14:22:40.827793 126711536682496 run.py:722] (val) algo floyd_warshall step 7500: {'Pi': 0.8155517578125, 'score': 0.8155517578125, 'examples_seen': 385808, 'step': 7500, 'algorithm': 'floyd_warshall'}
+I0716 14:22:40.828032 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.816, val scores are: floyd_warshall: 0.816
+I0716 14:22:43.021191 126711536682496 run.py:687] Algo floyd_warshall step 7550 current loss 0.925818, current_train_items 388368.
+I0716 14:22:43.191664 126711536682496 run.py:722] (val) algo floyd_warshall step 7550: {'Pi': 0.80126953125, 'score': 0.80126953125, 'examples_seen': 388368, 'step': 7550, 'algorithm': 'floyd_warshall'}
+I0716 14:22:43.191922 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.801, val scores are: floyd_warshall: 0.801
+I0716 14:22:45.363687 126711536682496 run.py:687] Algo floyd_warshall step 7600 current loss 1.138989, current_train_items 390896.
+I0716 14:22:45.574914 126711536682496 run.py:722] (val) algo floyd_warshall step 7600: {'Pi': 0.80743408203125, 'score': 0.80743408203125, 'examples_seen': 390896, 'step': 7600, 'algorithm': 'floyd_warshall'}
+I0716 14:22:45.575158 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.807, val scores are: floyd_warshall: 0.807
+I0716 14:22:47.758948 126711536682496 run.py:687] Algo floyd_warshall step 7650 current loss 0.043913, current_train_items 393536.
+I0716 14:22:47.913126 126711536682496 run.py:722] (val) algo floyd_warshall step 7650: {'Pi': 0.8082275390625, 'score': 0.8082275390625, 'examples_seen': 393536, 'step': 7650, 'algorithm': 'floyd_warshall'}
+I0716 14:22:47.913362 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.808, val scores are: floyd_warshall: 0.808
+I0716 14:22:50.063322 126711536682496 run.py:687] Algo floyd_warshall step 7700 current loss 0.093707, current_train_items 396160.
+I0716 14:22:50.192788 126711536682496 run.py:722] (val) algo floyd_warshall step 7700: {'Pi': 0.83587646484375, 'score': 0.83587646484375, 'examples_seen': 396160, 'step': 7700, 'algorithm': 'floyd_warshall'}
+I0716 14:22:50.193029 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.836, val scores are: floyd_warshall: 0.836
+I0716 14:22:52.301135 126711536682496 run.py:687] Algo floyd_warshall step 7750 current loss 0.604022, current_train_items 398704.
+I0716 14:22:52.438377 126711536682496 run.py:722] (val) algo floyd_warshall step 7750: {'Pi': 0.8271484375, 'score': 0.8271484375, 'examples_seen': 398704, 'step': 7750, 'algorithm': 'floyd_warshall'}
+I0716 14:22:52.438618 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.827, val scores are: floyd_warshall: 0.827
+I0716 14:22:54.636864 126711536682496 run.py:687] Algo floyd_warshall step 7800 current loss 0.996652, current_train_items 401280.
+I0716 14:22:54.745583 126711536682496 run.py:722] (val) algo floyd_warshall step 7800: {'Pi': 0.83770751953125, 'score': 0.83770751953125, 'examples_seen': 401280, 'step': 7800, 'algorithm': 'floyd_warshall'}
+I0716 14:22:54.745744 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.838, val scores are: floyd_warshall: 0.838
+I0716 14:22:56.927315 126711536682496 run.py:687] Algo floyd_warshall step 7850 current loss 0.497287, current_train_items 403808.
+I0716 14:22:57.047713 126711536682496 run.py:722] (val) algo floyd_warshall step 7850: {'Pi': 0.83953857421875, 'score': 0.83953857421875, 'examples_seen': 403808, 'step': 7850, 'algorithm': 'floyd_warshall'}
+I0716 14:22:57.047933 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.840, val scores are: floyd_warshall: 0.840
+I0716 14:22:59.201008 126711536682496 run.py:687] Algo floyd_warshall step 7900 current loss 1.931873, current_train_items 406352.
+I0716 14:22:59.386743 126711536682496 run.py:722] (val) algo floyd_warshall step 7900: {'Pi': 0.838623046875, 'score': 0.838623046875, 'examples_seen': 406352, 'step': 7900, 'algorithm': 'floyd_warshall'}
+I0716 14:22:59.386968 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.839, val scores are: floyd_warshall: 0.839
+I0716 14:23:01.571727 126711536682496 run.py:687] Algo floyd_warshall step 7950 current loss 0.766923, current_train_items 408896.
+I0716 14:23:01.794317 126711536682496 run.py:722] (val) algo floyd_warshall step 7950: {'Pi': 0.812255859375, 'score': 0.812255859375, 'examples_seen': 408896, 'step': 7950, 'algorithm': 'floyd_warshall'}
+I0716 14:23:01.794578 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.812, val scores are: floyd_warshall: 0.812
+I0716 14:23:03.935247 126711536682496 run.py:687] Algo floyd_warshall step 8000 current loss 0.029338, current_train_items 411552.
+I0716 14:23:04.129750 126711536682496 run.py:722] (val) algo floyd_warshall step 8000: {'Pi': 0.839599609375, 'score': 0.839599609375, 'examples_seen': 411552, 'step': 8000, 'algorithm': 'floyd_warshall'}
+I0716 14:23:04.129971 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.840, val scores are: floyd_warshall: 0.840
+I0716 14:23:06.316875 126711536682496 run.py:687] Algo floyd_warshall step 8050 current loss 0.371716, current_train_items 414160.
+I0716 14:23:06.445660 126711536682496 run.py:722] (val) algo floyd_warshall step 8050: {'Pi': 0.83251953125, 'score': 0.83251953125, 'examples_seen': 414160, 'step': 8050, 'algorithm': 'floyd_warshall'}
+I0716 14:23:06.445880 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.833, val scores are: floyd_warshall: 0.833
+I0716 14:23:08.584655 126711536682496 run.py:687] Algo floyd_warshall step 8100 current loss 0.629759, current_train_items 416720.
+I0716 14:23:08.705798 126711536682496 run.py:722] (val) algo floyd_warshall step 8100: {'Pi': 0.8206787109375, 'score': 0.8206787109375, 'examples_seen': 416720, 'step': 8100, 'algorithm': 'floyd_warshall'}
+I0716 14:23:08.706019 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.821, val scores are: floyd_warshall: 0.821
+I0716 14:23:10.823423 126711536682496 run.py:687] Algo floyd_warshall step 8150 current loss 1.041565, current_train_items 419280.
+I0716 14:23:10.952111 126711536682496 run.py:722] (val) algo floyd_warshall step 8150: {'Pi': 0.8408203125, 'score': 0.8408203125, 'examples_seen': 419280, 'step': 8150, 'algorithm': 'floyd_warshall'}
+I0716 14:23:10.952331 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.841, val scores are: floyd_warshall: 0.841
+I0716 14:23:13.136946 126711536682496 run.py:687] Algo floyd_warshall step 8200 current loss 1.659972, current_train_items 421840.
+I0716 14:23:13.255405 126711536682496 run.py:722] (val) algo floyd_warshall step 8200: {'Pi': 0.84503173828125, 'score': 0.84503173828125, 'examples_seen': 421840, 'step': 8200, 'algorithm': 'floyd_warshall'}
+I0716 14:23:13.255643 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.846, current avg val score is 0.845, val scores are: floyd_warshall: 0.845
+I0716 14:23:15.430204 126711536682496 run.py:687] Algo floyd_warshall step 8250 current loss 3.311502, current_train_items 424384.
+I0716 14:23:15.577648 126711536682496 run.py:722] (val) algo floyd_warshall step 8250: {'Pi': 0.8524169921875, 'score': 0.8524169921875, 'examples_seen': 424384, 'step': 8250, 'algorithm': 'floyd_warshall'}
+I0716 14:23:15.577867 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.846, current avg val score is 0.852, val scores are: floyd_warshall: 0.852
+I0716 14:23:17.730312 126711536682496 run.py:687] Algo floyd_warshall step 8300 current loss 1.402335, current_train_items 426896.
+I0716 14:23:17.953925 126711536682496 run.py:722] (val) algo floyd_warshall step 8300: {'Pi': 0.8336181640625, 'score': 0.8336181640625, 'examples_seen': 426896, 'step': 8300, 'algorithm': 'floyd_warshall'}
+I0716 14:23:17.954149 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.852, current avg val score is 0.834, val scores are: floyd_warshall: 0.834
+I0716 14:23:20.126068 126711536682496 run.py:687] Algo floyd_warshall step 8350 current loss 0.020587, current_train_items 429552.
+I0716 14:23:20.296498 126711536682496 run.py:722] (val) algo floyd_warshall step 8350: {'Pi': 0.79876708984375, 'score': 0.79876708984375, 'examples_seen': 429552, 'step': 8350, 'algorithm': 'floyd_warshall'}
+I0716 14:23:20.296760 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.852, current avg val score is 0.799, val scores are: floyd_warshall: 0.799
+I0716 14:23:22.512032 126711536682496 run.py:687] Algo floyd_warshall step 8400 current loss 0.167480, current_train_items 432160.
+I0716 14:23:22.633381 126711536682496 run.py:722] (val) algo floyd_warshall step 8400: {'Pi': 0.82952880859375, 'score': 0.82952880859375, 'examples_seen': 432160, 'step': 8400, 'algorithm': 'floyd_warshall'}
+I0716 14:23:22.633611 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.852, current avg val score is 0.830, val scores are: floyd_warshall: 0.830
+I0716 14:23:24.761712 126711536682496 run.py:687] Algo floyd_warshall step 8450 current loss 0.679865, current_train_items 434736.
+I0716 14:23:24.900941 126711536682496 run.py:722] (val) algo floyd_warshall step 8450: {'Pi': 0.8466796875, 'score': 0.8466796875, 'examples_seen': 434736, 'step': 8450, 'algorithm': 'floyd_warshall'}
+I0716 14:23:24.901163 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.852, current avg val score is 0.847, val scores are: floyd_warshall: 0.847
+I0716 14:23:27.066640 126711536682496 run.py:687] Algo floyd_warshall step 8500 current loss 1.023668, current_train_items 437296.
+I0716 14:23:27.170898 126711536682496 run.py:722] (val) algo floyd_warshall step 8500: {'Pi': 0.8245849609375, 'score': 0.8245849609375, 'examples_seen': 437296, 'step': 8500, 'algorithm': 'floyd_warshall'}
+I0716 14:23:27.171068 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.852, current avg val score is 0.825, val scores are: floyd_warshall: 0.825
+I0716 14:23:29.330666 126711536682496 run.py:687] Algo floyd_warshall step 8550 current loss 1.592378, current_train_items 439824.
+I0716 14:23:29.461516 126711536682496 run.py:722] (val) algo floyd_warshall step 8550: {'Pi': 0.82763671875, 'score': 0.82763671875, 'examples_seen': 439824, 'step': 8550, 'algorithm': 'floyd_warshall'}
+I0716 14:23:29.461750 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.852, current avg val score is 0.828, val scores are: floyd_warshall: 0.828
+I0716 14:23:31.654095 126711536682496 run.py:687] Algo floyd_warshall step 8600 current loss 1.912107, current_train_items 442384.
+I0716 14:23:31.821811 126711536682496 run.py:722] (val) algo floyd_warshall step 8600: {'Pi': 0.8118896484375, 'score': 0.8118896484375, 'examples_seen': 442384, 'step': 8600, 'algorithm': 'floyd_warshall'}
+I0716 14:23:31.822028 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.852, current avg val score is 0.812, val scores are: floyd_warshall: 0.812
+I0716 14:23:34.025964 126711536682496 run.py:687] Algo floyd_warshall step 8650 current loss 0.959197, current_train_items 444912.
+I0716 14:23:34.235101 126711536682496 run.py:722] (val) algo floyd_warshall step 8650: {'Pi': 0.85565185546875, 'score': 0.85565185546875, 'examples_seen': 444912, 'step': 8650, 'algorithm': 'floyd_warshall'}
+I0716 14:23:34.235319 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.852, current avg val score is 0.856, val scores are: floyd_warshall: 0.856
+I0716 14:23:36.470191 126711536682496 run.py:687] Algo floyd_warshall step 8700 current loss 0.020581, current_train_items 447552.
+I0716 14:23:36.631909 126711536682496 run.py:722] (val) algo floyd_warshall step 8700: {'Pi': 0.8719482421875, 'score': 0.8719482421875, 'examples_seen': 447552, 'step': 8700, 'algorithm': 'floyd_warshall'}
+I0716 14:23:36.632128 126711536682496 run.py:743] Checkpointing best model, best avg val score was 0.856, current avg val score is 0.872, val scores are: floyd_warshall: 0.872
+I0716 14:23:38.761054 126711536682496 run.py:687] Algo floyd_warshall step 8750 current loss 0.060979, current_train_items 450160.
+I0716 14:23:38.911241 126711536682496 run.py:722] (val) algo floyd_warshall step 8750: {'Pi': 0.84808349609375, 'score': 0.84808349609375, 'examples_seen': 450160, 'step': 8750, 'algorithm': 'floyd_warshall'}
+I0716 14:23:38.911478 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.848, val scores are: floyd_warshall: 0.848
+I0716 14:23:41.075641 126711536682496 run.py:687] Algo floyd_warshall step 8800 current loss 0.608687, current_train_items 452720.
+I0716 14:23:41.193548 126711536682496 run.py:722] (val) algo floyd_warshall step 8800: {'Pi': 0.83111572265625, 'score': 0.83111572265625, 'examples_seen': 452720, 'step': 8800, 'algorithm': 'floyd_warshall'}
+I0716 14:23:41.193771 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.831, val scores are: floyd_warshall: 0.831
+I0716 14:23:43.324168 126711536682496 run.py:687] Algo floyd_warshall step 8850 current loss 0.956942, current_train_items 455296.
+I0716 14:23:43.440545 126711536682496 run.py:722] (val) algo floyd_warshall step 8850: {'Pi': 0.8206787109375, 'score': 0.8206787109375, 'examples_seen': 455296, 'step': 8850, 'algorithm': 'floyd_warshall'}
+I0716 14:23:43.440764 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.821, val scores are: floyd_warshall: 0.821
+I0716 14:23:45.564908 126711536682496 run.py:687] Algo floyd_warshall step 8900 current loss 2.029218, current_train_items 457824.
+I0716 14:23:45.722298 126711536682496 run.py:722] (val) algo floyd_warshall step 8900: {'Pi': 0.81298828125, 'score': 0.81298828125, 'examples_seen': 457824, 'step': 8900, 'algorithm': 'floyd_warshall'}
+I0716 14:23:45.722517 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.813, val scores are: floyd_warshall: 0.813
+I0716 14:23:47.859817 126711536682496 run.py:687] Algo floyd_warshall step 8950 current loss 2.484210, current_train_items 460368.
+I0716 14:23:48.029221 126711536682496 run.py:722] (val) algo floyd_warshall step 8950: {'Pi': 0.84197998046875, 'score': 0.84197998046875, 'examples_seen': 460368, 'step': 8950, 'algorithm': 'floyd_warshall'}
+I0716 14:23:48.029457 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.842, val scores are: floyd_warshall: 0.842
+I0716 14:23:50.215107 126711536682496 run.py:687] Algo floyd_warshall step 9000 current loss 1.149067, current_train_items 462928.
+I0716 14:23:50.439048 126711536682496 run.py:722] (val) algo floyd_warshall step 9000: {'Pi': 0.84033203125, 'score': 0.84033203125, 'examples_seen': 462928, 'step': 9000, 'algorithm': 'floyd_warshall'}
+I0716 14:23:50.439273 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.840, val scores are: floyd_warshall: 0.840
+I0716 14:23:52.641647 126711536682496 run.py:687] Algo floyd_warshall step 9050 current loss 0.028234, current_train_items 465552.
+I0716 14:23:52.807184 126711536682496 run.py:722] (val) algo floyd_warshall step 9050: {'Pi': 0.81781005859375, 'score': 0.81781005859375, 'examples_seen': 465552, 'step': 9050, 'algorithm': 'floyd_warshall'}
+I0716 14:23:52.807408 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.818, val scores are: floyd_warshall: 0.818
+I0716 14:23:54.973651 126711536682496 run.py:687] Algo floyd_warshall step 9100 current loss 0.408217, current_train_items 468176.
+I0716 14:23:55.099255 126711536682496 run.py:722] (val) algo floyd_warshall step 9100: {'Pi': 0.83428955078125, 'score': 0.83428955078125, 'examples_seen': 468176, 'step': 9100, 'algorithm': 'floyd_warshall'}
+I0716 14:23:55.099478 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.834, val scores are: floyd_warshall: 0.834
+I0716 14:23:57.223269 126711536682496 run.py:687] Algo floyd_warshall step 9150 current loss 0.585493, current_train_items 470720.
+I0716 14:23:57.362548 126711536682496 run.py:722] (val) algo floyd_warshall step 9150: {'Pi': 0.811767578125, 'score': 0.811767578125, 'examples_seen': 470720, 'step': 9150, 'algorithm': 'floyd_warshall'}
+I0716 14:23:57.362797 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.812, val scores are: floyd_warshall: 0.812
+I0716 14:23:59.525504 126711536682496 run.py:687] Algo floyd_warshall step 9200 current loss 0.883765, current_train_items 473296.
+I0716 14:23:59.641715 126711536682496 run.py:722] (val) algo floyd_warshall step 9200: {'Pi': 0.8218994140625, 'score': 0.8218994140625, 'examples_seen': 473296, 'step': 9200, 'algorithm': 'floyd_warshall'}
+I0716 14:23:59.641934 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.822, val scores are: floyd_warshall: 0.822
+I0716 14:24:01.808792 126711536682496 run.py:687] Algo floyd_warshall step 9250 current loss 2.047749, current_train_items 475856.
+I0716 14:24:01.919874 126711536682496 run.py:722] (val) algo floyd_warshall step 9250: {'Pi': 0.83343505859375, 'score': 0.83343505859375, 'examples_seen': 475856, 'step': 9250, 'algorithm': 'floyd_warshall'}
+I0716 14:24:01.920044 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.833, val scores are: floyd_warshall: 0.833
+I0716 14:24:04.050399 126711536682496 run.py:687] Algo floyd_warshall step 9300 current loss 1.817253, current_train_items 478384.
+I0716 14:24:04.228880 126711536682496 run.py:722] (val) algo floyd_warshall step 9300: {'Pi': 0.83563232421875, 'score': 0.83563232421875, 'examples_seen': 478384, 'step': 9300, 'algorithm': 'floyd_warshall'}
+I0716 14:24:04.229119 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.836, val scores are: floyd_warshall: 0.836
+I0716 14:24:06.436061 126711536682496 run.py:687] Algo floyd_warshall step 9350 current loss 1.089106, current_train_items 480912.
+I0716 14:24:06.661899 126711536682496 run.py:722] (val) algo floyd_warshall step 9350: {'Pi': 0.84588623046875, 'score': 0.84588623046875, 'examples_seen': 480912, 'step': 9350, 'algorithm': 'floyd_warshall'}
+I0716 14:24:06.662117 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.846, val scores are: floyd_warshall: 0.846
+I0716 14:24:08.867054 126711536682496 run.py:687] Algo floyd_warshall step 9400 current loss 0.018402, current_train_items 483568.
+I0716 14:24:09.009424 126711536682496 run.py:722] (val) algo floyd_warshall step 9400: {'Pi': 0.84039306640625, 'score': 0.84039306640625, 'examples_seen': 483568, 'step': 9400, 'algorithm': 'floyd_warshall'}
+I0716 14:24:09.009661 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.840, val scores are: floyd_warshall: 0.840
+I0716 14:24:11.186374 126711536682496 run.py:687] Algo floyd_warshall step 9450 current loss 0.271973, current_train_items 486176.
+I0716 14:24:11.313357 126711536682496 run.py:722] (val) algo floyd_warshall step 9450: {'Pi': 0.83685302734375, 'score': 0.83685302734375, 'examples_seen': 486176, 'step': 9450, 'algorithm': 'floyd_warshall'}
+I0716 14:24:11.313600 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.837, val scores are: floyd_warshall: 0.837
+I0716 14:24:13.457781 126711536682496 run.py:687] Algo floyd_warshall step 9500 current loss 0.647953, current_train_items 488752.
+I0716 14:24:13.565628 126711536682496 run.py:722] (val) algo floyd_warshall step 9500: {'Pi': 0.8447265625, 'score': 0.8447265625, 'examples_seen': 488752, 'step': 9500, 'algorithm': 'floyd_warshall'}
+I0716 14:24:13.565801 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.845, val scores are: floyd_warshall: 0.845
+I0716 14:24:15.724704 126711536682496 run.py:687] Algo floyd_warshall step 9550 current loss 0.285550, current_train_items 491312.
+I0716 14:24:15.838858 126711536682496 run.py:722] (val) algo floyd_warshall step 9550: {'Pi': 0.85614013671875, 'score': 0.85614013671875, 'examples_seen': 491312, 'step': 9550, 'algorithm': 'floyd_warshall'}
+I0716 14:24:15.839116 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.856, val scores are: floyd_warshall: 0.856
+I0716 14:24:18.037260 126711536682496 run.py:687] Algo floyd_warshall step 9600 current loss 1.612939, current_train_items 493840.
+I0716 14:24:18.148995 126711536682496 run.py:722] (val) algo floyd_warshall step 9600: {'Pi': 0.8565673828125, 'score': 0.8565673828125, 'examples_seen': 493840, 'step': 9600, 'algorithm': 'floyd_warshall'}
+I0716 14:24:18.149147 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.857, val scores are: floyd_warshall: 0.857
+I0716 14:24:20.292194 126711536682496 run.py:687] Algo floyd_warshall step 9650 current loss 2.279480, current_train_items 496400.
+I0716 14:24:20.445368 126711536682496 run.py:722] (val) algo floyd_warshall step 9650: {'Pi': 0.8505859375, 'score': 0.8505859375, 'examples_seen': 496400, 'step': 9650, 'algorithm': 'floyd_warshall'}
+I0716 14:24:20.445605 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.851, val scores are: floyd_warshall: 0.851
+I0716 14:24:22.660958 126711536682496 run.py:687] Algo floyd_warshall step 9700 current loss 0.941093, current_train_items 498928.
+I0716 14:24:22.853408 126711536682496 run.py:722] (val) algo floyd_warshall step 9700: {'Pi': 0.865478515625, 'score': 0.865478515625, 'examples_seen': 498928, 'step': 9700, 'algorithm': 'floyd_warshall'}
+I0716 14:24:22.853638 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.865, val scores are: floyd_warshall: 0.865
+I0716 14:24:25.011200 126711536682496 run.py:687] Algo floyd_warshall step 9750 current loss 0.030462, current_train_items 501552.
+I0716 14:24:25.188659 126711536682496 run.py:722] (val) algo floyd_warshall step 9750: {'Pi': 0.82342529296875, 'score': 0.82342529296875, 'examples_seen': 501552, 'step': 9750, 'algorithm': 'floyd_warshall'}
+I0716 14:24:25.188804 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.823, val scores are: floyd_warshall: 0.823
+I0716 14:24:27.359598 126711536682496 run.py:687] Algo floyd_warshall step 9800 current loss 0.084626, current_train_items 504176.
+I0716 14:24:27.487237 126711536682496 run.py:722] (val) algo floyd_warshall step 9800: {'Pi': 0.8516845703125, 'score': 0.8516845703125, 'examples_seen': 504176, 'step': 9800, 'algorithm': 'floyd_warshall'}
+I0716 14:24:27.487456 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.852, val scores are: floyd_warshall: 0.852
+I0716 14:24:29.642232 126711536682496 run.py:687] Algo floyd_warshall step 9850 current loss 0.594650, current_train_items 506736.
+I0716 14:24:29.770230 126711536682496 run.py:722] (val) algo floyd_warshall step 9850: {'Pi': 0.83746337890625, 'score': 0.83746337890625, 'examples_seen': 506736, 'step': 9850, 'algorithm': 'floyd_warshall'}
+I0716 14:24:29.770452 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.837, val scores are: floyd_warshall: 0.837
+I0716 14:24:31.928936 126711536682496 run.py:687] Algo floyd_warshall step 9900 current loss 0.954291, current_train_items 509312.
+I0716 14:24:32.037138 126711536682496 run.py:722] (val) algo floyd_warshall step 9900: {'Pi': 0.8460693359375, 'score': 0.8460693359375, 'examples_seen': 509312, 'step': 9900, 'algorithm': 'floyd_warshall'}
+I0716 14:24:32.037358 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.846, val scores are: floyd_warshall: 0.846
+I0716 14:24:34.168581 126711536682496 run.py:687] Algo floyd_warshall step 9950 current loss 1.593947, current_train_items 511840.
+I0716 14:24:34.303325 126711536682496 run.py:722] (val) algo floyd_warshall step 9950: {'Pi': 0.840087890625, 'score': 0.840087890625, 'examples_seen': 511840, 'step': 9950, 'algorithm': 'floyd_warshall'}
+I0716 14:24:34.303555 126711536682496 run.py:746] Not saving new best model, best avg val score was 0.872, current avg val score is 0.840, val scores are: floyd_warshall: 0.840
+I0716 14:24:36.400693 126711536682496 run.py:752] Restoring best model from checkpoint...
+I0716 14:24:47.639428 126711536682496 run.py:767] (test) algo floyd_warshall : {'Pi': 0.2963409423828125, 'score': 0.2963409423828125, 'examples_seen': 514368, 'step': 10000, 'algorithm': 'floyd_warshall'}
+I0716 14:24:47.639620 126711536682496 run.py:769] Done!

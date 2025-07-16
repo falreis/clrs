@@ -1,0 +1,648 @@
+I0716 08:04:30.470486 140312253715968 xla_bridge.py:889] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0716 08:04:30.471177 140312253715968 xla_bridge.py:889] Unable to initialize backend 'tpu': INTERNAL: Failed to open libtpu.so: libtpu.so: cannot open shared object file: No such file or directory
+I0716 08:04:30.700481 140312253715968 run.py:415] Model: triplet_gmpnn ['dijkstra']
+I0716 08:04:30.700586 140312253715968 run.py:417] algorithms ['dijkstra']
+I0716 08:04:30.700757 140312253715968 run.py:418] train_lengths ['2', '3', '5', '7', '11', '13', '16']
+I0716 08:04:30.700793 140312253715968 run.py:419] train_batch_size 16
+I0716 08:04:30.700881 140312253715968 run.py:420] val_batch_size 8
+I0716 08:04:30.700912 140312253715968 run.py:421] test_batch_size 8
+I0716 08:04:30.700941 140312253715968 run.py:422] chunked_training True
+I0716 08:04:30.701055 140312253715968 run.py:423] chunk_length 16
+I0716 08:04:30.701084 140312253715968 run.py:424] train_steps 10000
+I0716 08:04:30.701113 140312253715968 run.py:425] eval_every 50
+I0716 08:04:30.701141 140312253715968 run.py:426] test_every 500
+I0716 08:04:30.701169 140312253715968 run.py:427] learning_rate 0.001
+I0716 08:04:30.701255 140312253715968 run.py:428] grad_clip_max_norm 1.0
+I0716 08:04:30.701283 140312253715968 run.py:429] dropout_prob 0.1
+I0716 08:04:30.701311 140312253715968 run.py:430] hint_teacher_forcing 0.0
+I0716 08:04:30.701338 140312253715968 run.py:431] hint_mode encoded_decoded
+I0716 08:04:30.701439 140312253715968 run.py:432] hint_repred_mode hard_on_eval
+I0716 08:04:30.701466 140312253715968 run.py:433] use_ln False
+I0716 08:04:30.701494 140312253715968 run.py:434] use_lstm True
+I0716 08:04:30.701528 140312253715968 run.py:435] nb_triplet_fts 8
+I0716 08:04:30.701560 140312253715968 run.py:436] encoder_init xavier_on_scalars
+I0716 08:04:30.701588 140312253715968 run.py:437] processor_type triplet_gmpnn
+I0716 08:04:30.701615 140312253715968 run.py:438] checkpoint_path CLRS30
+I0716 08:04:30.701641 140312253715968 run.py:439] dataset_path CLRS30
+I0716 08:04:30.701669 140312253715968 run.py:440] freeze_processor False
+I0716 08:04:30.701696 140312253715968 run.py:441] reduction min
+I0716 08:04:30.701724 140312253715968 run.py:442] activation elu
+I0716 08:04:30.701751 140312253715968 run.py:443] algorithm_models ['F1', 'F2']
+I0716 08:04:30.701779 140312253715968 run.py:444] restore_model 
+I0716 08:04:30.701805 140312253715968 run.py:445] gated True
+I0716 08:04:30.701833 140312253715968 run.py:446] gated_activation sigmoid
+I0716 08:04:30.704379 140312253715968 run.py:472] Creating samplers for algo dijkstra
+W0716 08:04:30.704774 140312253715968 samplers.py:109] Sampling dataset on-the-fly, unlimited samples.
+I0716 08:04:33.217482 140312253715968 samplers.py:124] Creating a dataset with 64 samples.
+I0716 08:04:33.252248 140312253715968 run.py:259] Dataset found at CLRS30/CLRS30_v1.0.0. Skipping download.
+I0716 08:04:33.252970 140312253715968 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/dijkstra_test/1.0.0
+I0716 08:04:33.256480 140312253715968 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/dijkstra_test/1.0.0
+I0716 08:04:33.259757 140312253715968 reader.py:262] Creating a tf.data.Dataset reading 1 files located in folders: CLRS30/CLRS30_v1.0.0/clrs_dataset/dijkstra_test/1.0.0.
+I0716 08:04:33.313105 140312253715968 logging_logger.py:49] Constructing tf.data.Dataset clrs_dataset for split test, from CLRS30/CLRS30_v1.0.0/clrs_dataset/dijkstra_test/1.0.0
+W0716 08:04:33.334039 140312253715968 ag_logging.py:142] AutoGraph could not transform <function _preprocess at 0x7f9c797c6b60> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: `haiku.experimental.flax` features require `flax` to be installed.
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+I0716 08:05:13.221474 140312253715968 run.py:687] Algo dijkstra step 0 current loss 4.884531, current_train_items 84.
+I0716 08:05:20.132418 140312253715968 run.py:722] (val) algo dijkstra step 0: {'pi': 0.4375, 'score': 0.4375, 'examples_seen': 84, 'step': 0, 'algorithm': 'dijkstra'}
+I0716 08:05:20.132581 140312253715968 run.py:743] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.438, val scores are: dijkstra: 0.438
+I0716 08:06:59.942548 140312253715968 run.py:687] Algo dijkstra step 50 current loss 2.668051, current_train_items 2939.
+I0716 08:06:59.987517 140312253715968 run.py:722] (val) algo dijkstra step 50: {'pi': 0.716796875, 'score': 0.716796875, 'examples_seen': 2939, 'step': 50, 'algorithm': 'dijkstra'}
+I0716 08:06:59.987671 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.438, current avg val score is 0.717, val scores are: dijkstra: 0.717
+I0716 08:07:01.905075 140312253715968 run.py:687] Algo dijkstra step 100 current loss 2.775572, current_train_items 5767.
+I0716 08:07:01.951472 140312253715968 run.py:722] (val) algo dijkstra step 100: {'pi': 0.8310546875, 'score': 0.8310546875, 'examples_seen': 5767, 'step': 100, 'algorithm': 'dijkstra'}
+I0716 08:07:01.951622 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.717, current avg val score is 0.831, val scores are: dijkstra: 0.831
+I0716 08:07:03.761912 140312253715968 run.py:687] Algo dijkstra step 150 current loss 3.800067, current_train_items 8549.
+I0716 08:07:03.816103 140312253715968 run.py:722] (val) algo dijkstra step 150: {'pi': 0.869140625, 'score': 0.869140625, 'examples_seen': 8549, 'step': 150, 'algorithm': 'dijkstra'}
+I0716 08:07:03.816254 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.831, current avg val score is 0.869, val scores are: dijkstra: 0.869
+I0716 08:07:05.748250 140312253715968 run.py:687] Algo dijkstra step 200 current loss 4.302054, current_train_items 11356.
+I0716 08:07:05.811572 140312253715968 run.py:722] (val) algo dijkstra step 200: {'pi': 0.8857421875, 'score': 0.8857421875, 'examples_seen': 11356, 'step': 200, 'algorithm': 'dijkstra'}
+I0716 08:07:05.811719 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.869, current avg val score is 0.886, val scores are: dijkstra: 0.886
+I0716 08:07:07.676414 140312253715968 run.py:687] Algo dijkstra step 250 current loss 4.399936, current_train_items 14127.
+I0716 08:07:07.760068 140312253715968 run.py:722] (val) algo dijkstra step 250: {'pi': 0.87890625, 'score': 0.87890625, 'examples_seen': 14127, 'step': 250, 'algorithm': 'dijkstra'}
+I0716 08:07:07.760249 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.886, current avg val score is 0.879, val scores are: dijkstra: 0.879
+I0716 08:07:09.642407 140312253715968 run.py:687] Algo dijkstra step 300 current loss 0.422758, current_train_items 17028.
+I0716 08:07:09.682471 140312253715968 run.py:722] (val) algo dijkstra step 300: {'pi': 0.91015625, 'score': 0.91015625, 'examples_seen': 17028, 'step': 300, 'algorithm': 'dijkstra'}
+I0716 08:07:09.682620 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.886, current avg val score is 0.910, val scores are: dijkstra: 0.910
+I0716 08:07:11.579380 140312253715968 run.py:687] Algo dijkstra step 350 current loss 0.917250, current_train_items 19885.
+I0716 08:07:11.620210 140312253715968 run.py:722] (val) algo dijkstra step 350: {'pi': 0.849609375, 'score': 0.849609375, 'examples_seen': 19885, 'step': 350, 'algorithm': 'dijkstra'}
+I0716 08:07:11.620352 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.910, current avg val score is 0.850, val scores are: dijkstra: 0.850
+I0716 08:07:13.445927 140312253715968 run.py:687] Algo dijkstra step 400 current loss 1.482032, current_train_items 22716.
+I0716 08:07:13.489528 140312253715968 run.py:722] (val) algo dijkstra step 400: {'pi': 0.8701171875, 'score': 0.8701171875, 'examples_seen': 22716, 'step': 400, 'algorithm': 'dijkstra'}
+I0716 08:07:13.489669 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.910, current avg val score is 0.870, val scores are: dijkstra: 0.870
+I0716 08:07:15.322014 140312253715968 run.py:687] Algo dijkstra step 450 current loss 2.511512, current_train_items 25567.
+I0716 08:07:15.368747 140312253715968 run.py:722] (val) algo dijkstra step 450: {'pi': 0.9296875, 'score': 0.9296875, 'examples_seen': 25567, 'step': 450, 'algorithm': 'dijkstra'}
+I0716 08:07:15.368886 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.910, current avg val score is 0.930, val scores are: dijkstra: 0.930
+I0716 08:07:17.187699 140312253715968 run.py:687] Algo dijkstra step 500 current loss 3.264840, current_train_items 28356.
+I0716 08:07:17.242143 140312253715968 run.py:722] (val) algo dijkstra step 500: {'pi': 0.9365234375, 'score': 0.9365234375, 'examples_seen': 28356, 'step': 500, 'algorithm': 'dijkstra'}
+I0716 08:07:17.242284 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.930, current avg val score is 0.937, val scores are: dijkstra: 0.937
+I0716 08:07:19.065659 140312253715968 run.py:687] Algo dijkstra step 550 current loss 2.916850, current_train_items 31141.
+I0716 08:07:19.125392 140312253715968 run.py:722] (val) algo dijkstra step 550: {'pi': 0.9326171875, 'score': 0.9326171875, 'examples_seen': 31141, 'step': 550, 'algorithm': 'dijkstra'}
+I0716 08:07:19.125544 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.937, current avg val score is 0.933, val scores are: dijkstra: 0.933
+I0716 08:07:20.956714 140312253715968 run.py:687] Algo dijkstra step 600 current loss 3.370743, current_train_items 33957.
+I0716 08:07:21.030148 140312253715968 run.py:722] (val) algo dijkstra step 600: {'pi': 0.92578125, 'score': 0.92578125, 'examples_seen': 33957, 'step': 600, 'algorithm': 'dijkstra'}
+I0716 08:07:21.030313 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.937, current avg val score is 0.926, val scores are: dijkstra: 0.926
+I0716 08:07:22.827141 140312253715968 run.py:687] Algo dijkstra step 650 current loss 0.384578, current_train_items 36817.
+I0716 08:07:22.866160 140312253715968 run.py:722] (val) algo dijkstra step 650: {'pi': 0.9423828125, 'score': 0.9423828125, 'examples_seen': 36817, 'step': 650, 'algorithm': 'dijkstra'}
+I0716 08:07:22.866301 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.937, current avg val score is 0.942, val scores are: dijkstra: 0.942
+I0716 08:07:24.698676 140312253715968 run.py:687] Algo dijkstra step 700 current loss 0.806992, current_train_items 39664.
+I0716 08:07:24.739986 140312253715968 run.py:722] (val) algo dijkstra step 700: {'pi': 0.939453125, 'score': 0.939453125, 'examples_seen': 39664, 'step': 700, 'algorithm': 'dijkstra'}
+I0716 08:07:24.740125 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.942, current avg val score is 0.939, val scores are: dijkstra: 0.939
+I0716 08:07:26.579708 140312253715968 run.py:687] Algo dijkstra step 750 current loss 1.281965, current_train_items 42478.
+I0716 08:07:26.623190 140312253715968 run.py:722] (val) algo dijkstra step 750: {'pi': 0.931640625, 'score': 0.931640625, 'examples_seen': 42478, 'step': 750, 'algorithm': 'dijkstra'}
+I0716 08:07:26.623337 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.942, current avg val score is 0.932, val scores are: dijkstra: 0.932
+I0716 08:07:28.477144 140312253715968 run.py:687] Algo dijkstra step 800 current loss 2.038604, current_train_items 45235.
+I0716 08:07:28.523689 140312253715968 run.py:722] (val) algo dijkstra step 800: {'pi': 0.939453125, 'score': 0.939453125, 'examples_seen': 45235, 'step': 800, 'algorithm': 'dijkstra'}
+I0716 08:07:28.523834 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.942, current avg val score is 0.939, val scores are: dijkstra: 0.939
+I0716 08:07:30.324921 140312253715968 run.py:687] Algo dijkstra step 850 current loss 2.075381, current_train_items 48042.
+I0716 08:07:30.378772 140312253715968 run.py:722] (val) algo dijkstra step 850: {'pi': 0.9228515625, 'score': 0.9228515625, 'examples_seen': 48042, 'step': 850, 'algorithm': 'dijkstra'}
+I0716 08:07:30.378924 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.942, current avg val score is 0.923, val scores are: dijkstra: 0.923
+I0716 08:07:32.215390 140312253715968 run.py:687] Algo dijkstra step 900 current loss 2.982698, current_train_items 50811.
+I0716 08:07:32.274355 140312253715968 run.py:722] (val) algo dijkstra step 900: {'pi': 0.9580078125, 'score': 0.9580078125, 'examples_seen': 50811, 'step': 900, 'algorithm': 'dijkstra'}
+I0716 08:07:32.274494 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.942, current avg val score is 0.958, val scores are: dijkstra: 0.958
+I0716 08:07:34.113964 140312253715968 run.py:687] Algo dijkstra step 950 current loss 3.529463, current_train_items 53579.
+I0716 08:07:34.187847 140312253715968 run.py:722] (val) algo dijkstra step 950: {'pi': 0.95703125, 'score': 0.95703125, 'examples_seen': 53579, 'step': 950, 'algorithm': 'dijkstra'}
+I0716 08:07:34.188015 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.958, current avg val score is 0.957, val scores are: dijkstra: 0.957
+I0716 08:07:35.989534 140312253715968 run.py:687] Algo dijkstra step 1000 current loss 0.264904, current_train_items 56461.
+I0716 08:07:36.029569 140312253715968 run.py:722] (val) algo dijkstra step 1000: {'pi': 0.9560546875, 'score': 0.9560546875, 'examples_seen': 56461, 'step': 1000, 'algorithm': 'dijkstra'}
+I0716 08:07:36.029710 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.958, current avg val score is 0.956, val scores are: dijkstra: 0.956
+I0716 08:07:37.865276 140312253715968 run.py:687] Algo dijkstra step 1050 current loss 0.802560, current_train_items 59277.
+I0716 08:07:37.906155 140312253715968 run.py:722] (val) algo dijkstra step 1050: {'pi': 0.96875, 'score': 0.96875, 'examples_seen': 59277, 'step': 1050, 'algorithm': 'dijkstra'}
+I0716 08:07:37.906297 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.958, current avg val score is 0.969, val scores are: dijkstra: 0.969
+I0716 08:07:39.746632 140312253715968 run.py:687] Algo dijkstra step 1100 current loss 1.232904, current_train_items 62110.
+I0716 08:07:39.790341 140312253715968 run.py:722] (val) algo dijkstra step 1100: {'pi': 0.955078125, 'score': 0.955078125, 'examples_seen': 62110, 'step': 1100, 'algorithm': 'dijkstra'}
+I0716 08:07:39.790486 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.969, current avg val score is 0.955, val scores are: dijkstra: 0.955
+I0716 08:07:41.576756 140312253715968 run.py:687] Algo dijkstra step 1150 current loss 1.745370, current_train_items 64932.
+I0716 08:07:41.622710 140312253715968 run.py:722] (val) algo dijkstra step 1150: {'pi': 0.966796875, 'score': 0.966796875, 'examples_seen': 64932, 'step': 1150, 'algorithm': 'dijkstra'}
+I0716 08:07:41.622882 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.969, current avg val score is 0.967, val scores are: dijkstra: 0.967
+I0716 08:07:43.434291 140312253715968 run.py:687] Algo dijkstra step 1200 current loss 2.404274, current_train_items 67725.
+I0716 08:07:43.488921 140312253715968 run.py:722] (val) algo dijkstra step 1200: {'pi': 0.939453125, 'score': 0.939453125, 'examples_seen': 67725, 'step': 1200, 'algorithm': 'dijkstra'}
+I0716 08:07:43.489064 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.969, current avg val score is 0.939, val scores are: dijkstra: 0.939
+I0716 08:07:45.322297 140312253715968 run.py:687] Algo dijkstra step 1250 current loss 3.028476, current_train_items 70522.
+I0716 08:07:45.381375 140312253715968 run.py:722] (val) algo dijkstra step 1250: {'pi': 0.9736328125, 'score': 0.9736328125, 'examples_seen': 70522, 'step': 1250, 'algorithm': 'dijkstra'}
+I0716 08:07:45.381516 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.969, current avg val score is 0.974, val scores are: dijkstra: 0.974
+I0716 08:07:47.255809 140312253715968 run.py:687] Algo dijkstra step 1300 current loss 3.425146, current_train_items 73301.
+I0716 08:07:47.321167 140312253715968 run.py:722] (val) algo dijkstra step 1300: {'pi': 0.9619140625, 'score': 0.9619140625, 'examples_seen': 73301, 'step': 1300, 'algorithm': 'dijkstra'}
+I0716 08:07:47.321311 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.974, current avg val score is 0.962, val scores are: dijkstra: 0.962
+I0716 08:07:49.223768 140312253715968 run.py:687] Algo dijkstra step 1350 current loss 0.273329, current_train_items 76206.
+I0716 08:07:49.262592 140312253715968 run.py:722] (val) algo dijkstra step 1350: {'pi': 0.947265625, 'score': 0.947265625, 'examples_seen': 76206, 'step': 1350, 'algorithm': 'dijkstra'}
+I0716 08:07:49.262732 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.974, current avg val score is 0.947, val scores are: dijkstra: 0.947
+I0716 08:07:51.103793 140312253715968 run.py:687] Algo dijkstra step 1400 current loss 0.697366, current_train_items 79065.
+I0716 08:07:51.144504 140312253715968 run.py:722] (val) algo dijkstra step 1400: {'pi': 0.96875, 'score': 0.96875, 'examples_seen': 79065, 'step': 1400, 'algorithm': 'dijkstra'}
+I0716 08:07:51.144657 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.974, current avg val score is 0.969, val scores are: dijkstra: 0.969
+I0716 08:07:52.982748 140312253715968 run.py:687] Algo dijkstra step 1450 current loss 0.895661, current_train_items 81899.
+I0716 08:07:53.026398 140312253715968 run.py:722] (val) algo dijkstra step 1450: {'pi': 0.970703125, 'score': 0.970703125, 'examples_seen': 81899, 'step': 1450, 'algorithm': 'dijkstra'}
+I0716 08:07:53.026548 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.974, current avg val score is 0.971, val scores are: dijkstra: 0.971
+I0716 08:07:54.810786 140312253715968 run.py:687] Algo dijkstra step 1500 current loss 1.690965, current_train_items 84668.
+I0716 08:07:54.857182 140312253715968 run.py:722] (val) algo dijkstra step 1500: {'pi': 0.9736328125, 'score': 0.9736328125, 'examples_seen': 84668, 'step': 1500, 'algorithm': 'dijkstra'}
+I0716 08:07:54.857323 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.974, current avg val score is 0.974, val scores are: dijkstra: 0.974
+I0716 08:07:56.650960 140312253715968 run.py:687] Algo dijkstra step 1550 current loss 2.624265, current_train_items 87452.
+I0716 08:07:56.707792 140312253715968 run.py:722] (val) algo dijkstra step 1550: {'pi': 0.9580078125, 'score': 0.9580078125, 'examples_seen': 87452, 'step': 1550, 'algorithm': 'dijkstra'}
+I0716 08:07:56.707936 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.974, current avg val score is 0.958, val scores are: dijkstra: 0.958
+I0716 08:07:58.538969 140312253715968 run.py:687] Algo dijkstra step 1600 current loss 2.794835, current_train_items 90243.
+I0716 08:07:58.599532 140312253715968 run.py:722] (val) algo dijkstra step 1600: {'pi': 0.978515625, 'score': 0.978515625, 'examples_seen': 90243, 'step': 1600, 'algorithm': 'dijkstra'}
+I0716 08:07:58.599672 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.974, current avg val score is 0.979, val scores are: dijkstra: 0.979
+I0716 08:08:00.447034 140312253715968 run.py:687] Algo dijkstra step 1650 current loss 3.367266, current_train_items 93035.
+I0716 08:08:00.526786 140312253715968 run.py:722] (val) algo dijkstra step 1650: {'pi': 0.9384765625, 'score': 0.9384765625, 'examples_seen': 93035, 'step': 1650, 'algorithm': 'dijkstra'}
+I0716 08:08:00.527004 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.979, current avg val score is 0.938, val scores are: dijkstra: 0.938
+I0716 08:08:02.351451 140312253715968 run.py:687] Algo dijkstra step 1700 current loss 0.283859, current_train_items 95876.
+I0716 08:08:02.392132 140312253715968 run.py:722] (val) algo dijkstra step 1700: {'pi': 0.9658203125, 'score': 0.9658203125, 'examples_seen': 95876, 'step': 1700, 'algorithm': 'dijkstra'}
+I0716 08:08:02.392287 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.979, current avg val score is 0.966, val scores are: dijkstra: 0.966
+I0716 08:08:04.205087 140312253715968 run.py:687] Algo dijkstra step 1750 current loss 0.662309, current_train_items 98698.
+I0716 08:08:04.246294 140312253715968 run.py:722] (val) algo dijkstra step 1750: {'pi': 0.966796875, 'score': 0.966796875, 'examples_seen': 98698, 'step': 1750, 'algorithm': 'dijkstra'}
+I0716 08:08:04.246435 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.979, current avg val score is 0.967, val scores are: dijkstra: 0.967
+I0716 08:08:06.042085 140312253715968 run.py:687] Algo dijkstra step 1800 current loss 1.080923, current_train_items 101533.
+I0716 08:08:06.085638 140312253715968 run.py:722] (val) algo dijkstra step 1800: {'pi': 0.93359375, 'score': 0.93359375, 'examples_seen': 101533, 'step': 1800, 'algorithm': 'dijkstra'}
+I0716 08:08:06.085782 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.979, current avg val score is 0.934, val scores are: dijkstra: 0.934
+I0716 08:08:07.917130 140312253715968 run.py:687] Algo dijkstra step 1850 current loss 1.627852, current_train_items 104357.
+I0716 08:08:07.963607 140312253715968 run.py:722] (val) algo dijkstra step 1850: {'pi': 0.9677734375, 'score': 0.9677734375, 'examples_seen': 104357, 'step': 1850, 'algorithm': 'dijkstra'}
+I0716 08:08:07.963750 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.979, current avg val score is 0.968, val scores are: dijkstra: 0.968
+I0716 08:08:09.737655 140312253715968 run.py:687] Algo dijkstra step 1900 current loss 2.637539, current_train_items 107182.
+I0716 08:08:09.792923 140312253715968 run.py:722] (val) algo dijkstra step 1900: {'pi': 0.9560546875, 'score': 0.9560546875, 'examples_seen': 107182, 'step': 1900, 'algorithm': 'dijkstra'}
+I0716 08:08:09.793065 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.979, current avg val score is 0.956, val scores are: dijkstra: 0.956
+I0716 08:08:11.610606 140312253715968 run.py:687] Algo dijkstra step 1950 current loss 2.645750, current_train_items 109978.
+I0716 08:08:11.670026 140312253715968 run.py:722] (val) algo dijkstra step 1950: {'pi': 0.9697265625, 'score': 0.9697265625, 'examples_seen': 109978, 'step': 1950, 'algorithm': 'dijkstra'}
+I0716 08:08:11.670167 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.979, current avg val score is 0.970, val scores are: dijkstra: 0.970
+I0716 08:08:13.524955 140312253715968 run.py:687] Algo dijkstra step 2000 current loss 3.109041, current_train_items 112779.
+I0716 08:08:13.601299 140312253715968 run.py:722] (val) algo dijkstra step 2000: {'pi': 0.98046875, 'score': 0.98046875, 'examples_seen': 112779, 'step': 2000, 'algorithm': 'dijkstra'}
+I0716 08:08:13.601438 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.979, current avg val score is 0.980, val scores are: dijkstra: 0.980
+I0716 08:08:15.420342 140312253715968 run.py:687] Algo dijkstra step 2050 current loss 0.319916, current_train_items 115628.
+I0716 08:08:15.459784 140312253715968 run.py:722] (val) algo dijkstra step 2050: {'pi': 0.958984375, 'score': 0.958984375, 'examples_seen': 115628, 'step': 2050, 'algorithm': 'dijkstra'}
+I0716 08:08:15.459923 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.980, current avg val score is 0.959, val scores are: dijkstra: 0.959
+I0716 08:08:17.227643 140312253715968 run.py:687] Algo dijkstra step 2100 current loss 0.754295, current_train_items 118463.
+I0716 08:08:17.268696 140312253715968 run.py:722] (val) algo dijkstra step 2100: {'pi': 0.96875, 'score': 0.96875, 'examples_seen': 118463, 'step': 2100, 'algorithm': 'dijkstra'}
+I0716 08:08:17.268837 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.980, current avg val score is 0.969, val scores are: dijkstra: 0.969
+I0716 08:08:19.079336 140312253715968 run.py:687] Algo dijkstra step 2150 current loss 1.105953, current_train_items 121281.
+I0716 08:08:19.123859 140312253715968 run.py:722] (val) algo dijkstra step 2150: {'pi': 0.962890625, 'score': 0.962890625, 'examples_seen': 121281, 'step': 2150, 'algorithm': 'dijkstra'}
+I0716 08:08:19.124000 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.980, current avg val score is 0.963, val scores are: dijkstra: 0.963
+I0716 08:08:20.916771 140312253715968 run.py:687] Algo dijkstra step 2200 current loss 1.425125, current_train_items 124110.
+I0716 08:08:20.964507 140312253715968 run.py:722] (val) algo dijkstra step 2200: {'pi': 0.98828125, 'score': 0.98828125, 'examples_seen': 124110, 'step': 2200, 'algorithm': 'dijkstra'}
+I0716 08:08:20.964656 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.980, current avg val score is 0.988, val scores are: dijkstra: 0.988
+I0716 08:08:22.811448 140312253715968 run.py:687] Algo dijkstra step 2250 current loss 2.120954, current_train_items 126912.
+I0716 08:08:22.865962 140312253715968 run.py:722] (val) algo dijkstra step 2250: {'pi': 0.97265625, 'score': 0.97265625, 'examples_seen': 126912, 'step': 2250, 'algorithm': 'dijkstra'}
+I0716 08:08:22.866102 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.973, val scores are: dijkstra: 0.973
+I0716 08:08:24.661143 140312253715968 run.py:687] Algo dijkstra step 2300 current loss 2.589524, current_train_items 129663.
+I0716 08:08:24.721137 140312253715968 run.py:722] (val) algo dijkstra step 2300: {'pi': 0.9619140625, 'score': 0.9619140625, 'examples_seen': 129663, 'step': 2300, 'algorithm': 'dijkstra'}
+I0716 08:08:24.721280 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.962, val scores are: dijkstra: 0.962
+I0716 08:08:26.521399 140312253715968 run.py:687] Algo dijkstra step 2350 current loss 3.199550, current_train_items 132480.
+I0716 08:08:26.597066 140312253715968 run.py:722] (val) algo dijkstra step 2350: {'pi': 0.9599609375, 'score': 0.9599609375, 'examples_seen': 132480, 'step': 2350, 'algorithm': 'dijkstra'}
+I0716 08:08:26.597206 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.960, val scores are: dijkstra: 0.960
+I0716 08:08:28.427165 140312253715968 run.py:687] Algo dijkstra step 2400 current loss 0.330695, current_train_items 135339.
+I0716 08:08:28.466902 140312253715968 run.py:722] (val) algo dijkstra step 2400: {'pi': 0.970703125, 'score': 0.970703125, 'examples_seen': 135339, 'step': 2400, 'algorithm': 'dijkstra'}
+I0716 08:08:28.467042 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.971, val scores are: dijkstra: 0.971
+I0716 08:08:30.278775 140312253715968 run.py:687] Algo dijkstra step 2450 current loss 0.648671, current_train_items 138192.
+I0716 08:08:30.319750 140312253715968 run.py:722] (val) algo dijkstra step 2450: {'pi': 0.96875, 'score': 0.96875, 'examples_seen': 138192, 'step': 2450, 'algorithm': 'dijkstra'}
+I0716 08:08:30.319890 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.969, val scores are: dijkstra: 0.969
+I0716 08:08:32.229625 140312253715968 run.py:687] Algo dijkstra step 2500 current loss 1.226779, current_train_items 141013.
+I0716 08:08:32.273525 140312253715968 run.py:722] (val) algo dijkstra step 2500: {'pi': 0.9716796875, 'score': 0.9716796875, 'examples_seen': 141013, 'step': 2500, 'algorithm': 'dijkstra'}
+I0716 08:08:32.273667 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.972, val scores are: dijkstra: 0.972
+I0716 08:08:34.013630 140312253715968 run.py:687] Algo dijkstra step 2550 current loss 1.360476, current_train_items 143836.
+I0716 08:08:34.060281 140312253715968 run.py:722] (val) algo dijkstra step 2550: {'pi': 0.974609375, 'score': 0.974609375, 'examples_seen': 143836, 'step': 2550, 'algorithm': 'dijkstra'}
+I0716 08:08:34.060433 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.975, val scores are: dijkstra: 0.975
+I0716 08:08:35.844172 140312253715968 run.py:687] Algo dijkstra step 2600 current loss 2.052569, current_train_items 146621.
+I0716 08:08:35.898685 140312253715968 run.py:722] (val) algo dijkstra step 2600: {'pi': 0.88671875, 'score': 0.88671875, 'examples_seen': 146621, 'step': 2600, 'algorithm': 'dijkstra'}
+I0716 08:08:35.898827 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.887, val scores are: dijkstra: 0.887
+I0716 08:08:37.626963 140312253715968 run.py:687] Algo dijkstra step 2650 current loss 2.563062, current_train_items 149404.
+I0716 08:08:37.692692 140312253715968 run.py:722] (val) algo dijkstra step 2650: {'pi': 0.9775390625, 'score': 0.9775390625, 'examples_seen': 149404, 'step': 2650, 'algorithm': 'dijkstra'}
+I0716 08:08:37.692840 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.978, val scores are: dijkstra: 0.978
+I0716 08:08:39.505627 140312253715968 run.py:687] Algo dijkstra step 2700 current loss 3.054003, current_train_items 152220.
+I0716 08:08:39.578196 140312253715968 run.py:722] (val) algo dijkstra step 2700: {'pi': 0.9736328125, 'score': 0.9736328125, 'examples_seen': 152220, 'step': 2700, 'algorithm': 'dijkstra'}
+I0716 08:08:39.578374 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.974, val scores are: dijkstra: 0.974
+I0716 08:08:41.452950 140312253715968 run.py:687] Algo dijkstra step 2750 current loss 0.338518, current_train_items 155108.
+I0716 08:08:41.492359 140312253715968 run.py:722] (val) algo dijkstra step 2750: {'pi': 0.970703125, 'score': 0.970703125, 'examples_seen': 155108, 'step': 2750, 'algorithm': 'dijkstra'}
+I0716 08:08:41.492505 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.971, val scores are: dijkstra: 0.971
+I0716 08:08:43.310724 140312253715968 run.py:687] Algo dijkstra step 2800 current loss 0.704178, current_train_items 158001.
+I0716 08:08:43.351839 140312253715968 run.py:722] (val) algo dijkstra step 2800: {'pi': 0.9814453125, 'score': 0.9814453125, 'examples_seen': 158001, 'step': 2800, 'algorithm': 'dijkstra'}
+I0716 08:08:43.351980 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.981, val scores are: dijkstra: 0.981
+I0716 08:08:45.191952 140312253715968 run.py:687] Algo dijkstra step 2850 current loss 1.196472, current_train_items 160815.
+I0716 08:08:45.236272 140312253715968 run.py:722] (val) algo dijkstra step 2850: {'pi': 0.9814453125, 'score': 0.9814453125, 'examples_seen': 160815, 'step': 2850, 'algorithm': 'dijkstra'}
+I0716 08:08:45.236413 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.981, val scores are: dijkstra: 0.981
+I0716 08:08:47.042097 140312253715968 run.py:687] Algo dijkstra step 2900 current loss 1.377480, current_train_items 163649.
+I0716 08:08:47.088581 140312253715968 run.py:722] (val) algo dijkstra step 2900: {'pi': 0.9716796875, 'score': 0.9716796875, 'examples_seen': 163649, 'step': 2900, 'algorithm': 'dijkstra'}
+I0716 08:08:47.088723 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.972, val scores are: dijkstra: 0.972
+I0716 08:08:48.913053 140312253715968 run.py:687] Algo dijkstra step 2950 current loss 2.273462, current_train_items 166457.
+I0716 08:08:48.967460 140312253715968 run.py:722] (val) algo dijkstra step 2950: {'pi': 0.955078125, 'score': 0.955078125, 'examples_seen': 166457, 'step': 2950, 'algorithm': 'dijkstra'}
+I0716 08:08:48.967612 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.955, val scores are: dijkstra: 0.955
+I0716 08:08:50.795955 140312253715968 run.py:687] Algo dijkstra step 3000 current loss 2.210633, current_train_items 169243.
+I0716 08:08:50.858225 140312253715968 run.py:722] (val) algo dijkstra step 3000: {'pi': 0.9755859375, 'score': 0.9755859375, 'examples_seen': 169243, 'step': 3000, 'algorithm': 'dijkstra'}
+I0716 08:08:50.858375 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.976, val scores are: dijkstra: 0.976
+I0716 08:08:52.740361 140312253715968 run.py:687] Algo dijkstra step 3050 current loss 2.443521, current_train_items 172034.
+I0716 08:08:52.807329 140312253715968 run.py:722] (val) algo dijkstra step 3050: {'pi': 0.97265625, 'score': 0.97265625, 'examples_seen': 172034, 'step': 3050, 'algorithm': 'dijkstra'}
+I0716 08:08:52.807472 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.973, val scores are: dijkstra: 0.973
+I0716 08:08:54.692834 140312253715968 run.py:687] Algo dijkstra step 3100 current loss 0.372373, current_train_items 174905.
+I0716 08:08:54.732765 140312253715968 run.py:722] (val) algo dijkstra step 3100: {'pi': 0.974609375, 'score': 0.974609375, 'examples_seen': 174905, 'step': 3100, 'algorithm': 'dijkstra'}
+I0716 08:08:54.732914 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.975, val scores are: dijkstra: 0.975
+I0716 08:08:56.567739 140312253715968 run.py:687] Algo dijkstra step 3150 current loss 0.705509, current_train_items 177747.
+I0716 08:08:56.608614 140312253715968 run.py:722] (val) algo dijkstra step 3150: {'pi': 0.9775390625, 'score': 0.9775390625, 'examples_seen': 177747, 'step': 3150, 'algorithm': 'dijkstra'}
+I0716 08:08:56.608754 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.978, val scores are: dijkstra: 0.978
+I0716 08:08:58.430270 140312253715968 run.py:687] Algo dijkstra step 3200 current loss 0.945134, current_train_items 180581.
+I0716 08:08:58.473994 140312253715968 run.py:722] (val) algo dijkstra step 3200: {'pi': 0.974609375, 'score': 0.974609375, 'examples_seen': 180581, 'step': 3200, 'algorithm': 'dijkstra'}
+I0716 08:08:58.474136 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.975, val scores are: dijkstra: 0.975
+I0716 08:09:00.280966 140312253715968 run.py:687] Algo dijkstra step 3250 current loss 1.480239, current_train_items 183398.
+I0716 08:09:00.327189 140312253715968 run.py:722] (val) algo dijkstra step 3250: {'pi': 0.96875, 'score': 0.96875, 'examples_seen': 183398, 'step': 3250, 'algorithm': 'dijkstra'}
+I0716 08:09:00.327328 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.969, val scores are: dijkstra: 0.969
+I0716 08:09:02.162471 140312253715968 run.py:687] Algo dijkstra step 3300 current loss 2.151517, current_train_items 186193.
+I0716 08:09:02.216686 140312253715968 run.py:722] (val) algo dijkstra step 3300: {'pi': 0.98046875, 'score': 0.98046875, 'examples_seen': 186193, 'step': 3300, 'algorithm': 'dijkstra'}
+I0716 08:09:02.216827 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.980, val scores are: dijkstra: 0.980
+I0716 08:09:04.018245 140312253715968 run.py:687] Algo dijkstra step 3350 current loss 2.486792, current_train_items 189015.
+I0716 08:09:04.078753 140312253715968 run.py:722] (val) algo dijkstra step 3350: {'pi': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 189015, 'step': 3350, 'algorithm': 'dijkstra'}
+I0716 08:09:04.078893 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.983, val scores are: dijkstra: 0.983
+I0716 08:09:05.846704 140312253715968 run.py:687] Algo dijkstra step 3400 current loss 2.806485, current_train_items 191793.
+I0716 08:09:05.912517 140312253715968 run.py:722] (val) algo dijkstra step 3400: {'pi': 0.9814453125, 'score': 0.9814453125, 'examples_seen': 191793, 'step': 3400, 'algorithm': 'dijkstra'}
+I0716 08:09:05.912692 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.981, val scores are: dijkstra: 0.981
+I0716 08:09:07.809302 140312253715968 run.py:687] Algo dijkstra step 3450 current loss 0.482338, current_train_items 194694.
+I0716 08:09:07.849246 140312253715968 run.py:722] (val) algo dijkstra step 3450: {'pi': 0.9853515625, 'score': 0.9853515625, 'examples_seen': 194694, 'step': 3450, 'algorithm': 'dijkstra'}
+I0716 08:09:07.849385 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.985, val scores are: dijkstra: 0.985
+I0716 08:09:09.673247 140312253715968 run.py:687] Algo dijkstra step 3500 current loss 0.576971, current_train_items 197588.
+I0716 08:09:09.715242 140312253715968 run.py:722] (val) algo dijkstra step 3500: {'pi': 0.9794921875, 'score': 0.9794921875, 'examples_seen': 197588, 'step': 3500, 'algorithm': 'dijkstra'}
+I0716 08:09:09.715385 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.979, val scores are: dijkstra: 0.979
+I0716 08:09:11.518125 140312253715968 run.py:687] Algo dijkstra step 3550 current loss 1.324486, current_train_items 200382.
+I0716 08:09:11.560705 140312253715968 run.py:722] (val) algo dijkstra step 3550: {'pi': 0.9765625, 'score': 0.9765625, 'examples_seen': 200382, 'step': 3550, 'algorithm': 'dijkstra'}
+I0716 08:09:11.560847 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.977, val scores are: dijkstra: 0.977
+I0716 08:09:13.409176 140312253715968 run.py:687] Algo dijkstra step 3600 current loss 1.486587, current_train_items 203220.
+I0716 08:09:13.455572 140312253715968 run.py:722] (val) algo dijkstra step 3600: {'pi': 0.9697265625, 'score': 0.9697265625, 'examples_seen': 203220, 'step': 3600, 'algorithm': 'dijkstra'}
+I0716 08:09:13.455716 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.970, val scores are: dijkstra: 0.970
+I0716 08:09:15.277234 140312253715968 run.py:687] Algo dijkstra step 3650 current loss 2.176397, current_train_items 206048.
+I0716 08:09:15.331527 140312253715968 run.py:722] (val) algo dijkstra step 3650: {'pi': 0.9677734375, 'score': 0.9677734375, 'examples_seen': 206048, 'step': 3650, 'algorithm': 'dijkstra'}
+I0716 08:09:15.331674 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.968, val scores are: dijkstra: 0.968
+I0716 08:09:17.086832 140312253715968 run.py:687] Algo dijkstra step 3700 current loss 2.267629, current_train_items 208832.
+I0716 08:09:17.146839 140312253715968 run.py:722] (val) algo dijkstra step 3700: {'pi': 0.9853515625, 'score': 0.9853515625, 'examples_seen': 208832, 'step': 3700, 'algorithm': 'dijkstra'}
+I0716 08:09:17.146979 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.985, val scores are: dijkstra: 0.985
+I0716 08:09:18.920679 140312253715968 run.py:687] Algo dijkstra step 3750 current loss 3.004037, current_train_items 211606.
+I0716 08:09:18.999621 140312253715968 run.py:722] (val) algo dijkstra step 3750: {'pi': 0.9853515625, 'score': 0.9853515625, 'examples_seen': 211606, 'step': 3750, 'algorithm': 'dijkstra'}
+I0716 08:09:18.999795 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.985, val scores are: dijkstra: 0.985
+I0716 08:09:20.871361 140312253715968 run.py:687] Algo dijkstra step 3800 current loss 0.306282, current_train_items 214476.
+I0716 08:09:20.911341 140312253715968 run.py:722] (val) algo dijkstra step 3800: {'pi': 0.982421875, 'score': 0.982421875, 'examples_seen': 214476, 'step': 3800, 'algorithm': 'dijkstra'}
+I0716 08:09:20.911481 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.982, val scores are: dijkstra: 0.982
+I0716 08:09:22.752094 140312253715968 run.py:687] Algo dijkstra step 3850 current loss 0.640873, current_train_items 217374.
+I0716 08:09:22.793112 140312253715968 run.py:722] (val) algo dijkstra step 3850: {'pi': 0.9814453125, 'score': 0.9814453125, 'examples_seen': 217374, 'step': 3850, 'algorithm': 'dijkstra'}
+I0716 08:09:22.793252 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.981, val scores are: dijkstra: 0.981
+I0716 08:09:24.615380 140312253715968 run.py:687] Algo dijkstra step 3900 current loss 0.933183, current_train_items 220193.
+I0716 08:09:24.658738 140312253715968 run.py:722] (val) algo dijkstra step 3900: {'pi': 0.9677734375, 'score': 0.9677734375, 'examples_seen': 220193, 'step': 3900, 'algorithm': 'dijkstra'}
+I0716 08:09:24.658880 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.968, val scores are: dijkstra: 0.968
+I0716 08:09:26.445437 140312253715968 run.py:687] Algo dijkstra step 3950 current loss 1.456496, current_train_items 223011.
+I0716 08:09:26.492588 140312253715968 run.py:722] (val) algo dijkstra step 3950: {'pi': 0.98046875, 'score': 0.98046875, 'examples_seen': 223011, 'step': 3950, 'algorithm': 'dijkstra'}
+I0716 08:09:26.492730 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.980, val scores are: dijkstra: 0.980
+I0716 08:09:28.274418 140312253715968 run.py:687] Algo dijkstra step 4000 current loss 2.293526, current_train_items 225819.
+I0716 08:09:28.328989 140312253715968 run.py:722] (val) algo dijkstra step 4000: {'pi': 0.9794921875, 'score': 0.9794921875, 'examples_seen': 225819, 'step': 4000, 'algorithm': 'dijkstra'}
+I0716 08:09:28.329127 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.979, val scores are: dijkstra: 0.979
+I0716 08:09:30.065839 140312253715968 run.py:687] Algo dijkstra step 4050 current loss 2.423021, current_train_items 228595.
+I0716 08:09:30.127080 140312253715968 run.py:722] (val) algo dijkstra step 4050: {'pi': 0.984375, 'score': 0.984375, 'examples_seen': 228595, 'step': 4050, 'algorithm': 'dijkstra'}
+I0716 08:09:30.127218 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.984, val scores are: dijkstra: 0.984
+I0716 08:09:31.973373 140312253715968 run.py:687] Algo dijkstra step 4100 current loss 3.220720, current_train_items 231403.
+I0716 08:09:32.046948 140312253715968 run.py:722] (val) algo dijkstra step 4100: {'pi': 0.978515625, 'score': 0.978515625, 'examples_seen': 231403, 'step': 4100, 'algorithm': 'dijkstra'}
+I0716 08:09:32.047122 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.979, val scores are: dijkstra: 0.979
+I0716 08:09:33.939468 140312253715968 run.py:687] Algo dijkstra step 4150 current loss 0.245567, current_train_items 234285.
+I0716 08:09:33.979444 140312253715968 run.py:722] (val) algo dijkstra step 4150: {'pi': 0.9677734375, 'score': 0.9677734375, 'examples_seen': 234285, 'step': 4150, 'algorithm': 'dijkstra'}
+I0716 08:09:33.979596 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.968, val scores are: dijkstra: 0.968
+I0716 08:09:35.799678 140312253715968 run.py:687] Algo dijkstra step 4200 current loss 0.553287, current_train_items 237122.
+I0716 08:09:35.841324 140312253715968 run.py:722] (val) algo dijkstra step 4200: {'pi': 0.96484375, 'score': 0.96484375, 'examples_seen': 237122, 'step': 4200, 'algorithm': 'dijkstra'}
+I0716 08:09:35.841466 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.965, val scores are: dijkstra: 0.965
+I0716 08:09:37.691202 140312253715968 run.py:687] Algo dijkstra step 4250 current loss 1.040754, current_train_items 239968.
+I0716 08:09:37.738537 140312253715968 run.py:722] (val) algo dijkstra step 4250: {'pi': 0.986328125, 'score': 0.986328125, 'examples_seen': 239968, 'step': 4250, 'algorithm': 'dijkstra'}
+I0716 08:09:37.738681 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.986, val scores are: dijkstra: 0.986
+I0716 08:09:39.566429 140312253715968 run.py:687] Algo dijkstra step 4300 current loss 1.690622, current_train_items 242782.
+I0716 08:09:39.613920 140312253715968 run.py:722] (val) algo dijkstra step 4300: {'pi': 0.984375, 'score': 0.984375, 'examples_seen': 242782, 'step': 4300, 'algorithm': 'dijkstra'}
+I0716 08:09:39.614061 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.984, val scores are: dijkstra: 0.984
+I0716 08:09:41.413505 140312253715968 run.py:687] Algo dijkstra step 4350 current loss 2.165145, current_train_items 245570.
+I0716 08:09:41.468771 140312253715968 run.py:722] (val) algo dijkstra step 4350: {'pi': 0.986328125, 'score': 0.986328125, 'examples_seen': 245570, 'step': 4350, 'algorithm': 'dijkstra'}
+I0716 08:09:41.468912 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.986, val scores are: dijkstra: 0.986
+I0716 08:09:43.285823 140312253715968 run.py:687] Algo dijkstra step 4400 current loss 2.598179, current_train_items 248310.
+I0716 08:09:43.345957 140312253715968 run.py:722] (val) algo dijkstra step 4400: {'pi': 0.9814453125, 'score': 0.9814453125, 'examples_seen': 248310, 'step': 4400, 'algorithm': 'dijkstra'}
+I0716 08:09:43.346100 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.981, val scores are: dijkstra: 0.981
+I0716 08:09:45.143102 140312253715968 run.py:687] Algo dijkstra step 4450 current loss 2.875895, current_train_items 251100.
+I0716 08:09:45.219794 140312253715968 run.py:722] (val) algo dijkstra step 4450: {'pi': 0.9794921875, 'score': 0.9794921875, 'examples_seen': 251100, 'step': 4450, 'algorithm': 'dijkstra'}
+I0716 08:09:45.219960 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.979, val scores are: dijkstra: 0.979
+I0716 08:09:47.098231 140312253715968 run.py:687] Algo dijkstra step 4500 current loss 0.228972, current_train_items 253989.
+I0716 08:09:47.138335 140312253715968 run.py:722] (val) algo dijkstra step 4500: {'pi': 0.9697265625, 'score': 0.9697265625, 'examples_seen': 253989, 'step': 4500, 'algorithm': 'dijkstra'}
+I0716 08:09:47.138478 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.970, val scores are: dijkstra: 0.970
+I0716 08:09:48.959801 140312253715968 run.py:687] Algo dijkstra step 4550 current loss 0.556233, current_train_items 256862.
+I0716 08:09:49.002351 140312253715968 run.py:722] (val) algo dijkstra step 4550: {'pi': 0.984375, 'score': 0.984375, 'examples_seen': 256862, 'step': 4550, 'algorithm': 'dijkstra'}
+I0716 08:09:49.002493 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.984, val scores are: dijkstra: 0.984
+I0716 08:09:50.760133 140312253715968 run.py:687] Algo dijkstra step 4600 current loss 0.907994, current_train_items 259677.
+I0716 08:09:50.803352 140312253715968 run.py:722] (val) algo dijkstra step 4600: {'pi': 0.9658203125, 'score': 0.9658203125, 'examples_seen': 259677, 'step': 4600, 'algorithm': 'dijkstra'}
+I0716 08:09:50.803537 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.966, val scores are: dijkstra: 0.966
+I0716 08:09:52.638324 140312253715968 run.py:687] Algo dijkstra step 4650 current loss 1.263090, current_train_items 262486.
+I0716 08:09:52.684953 140312253715968 run.py:722] (val) algo dijkstra step 4650: {'pi': 0.9619140625, 'score': 0.9619140625, 'examples_seen': 262486, 'step': 4650, 'algorithm': 'dijkstra'}
+I0716 08:09:52.685126 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.962, val scores are: dijkstra: 0.962
+I0716 08:09:54.481082 140312253715968 run.py:687] Algo dijkstra step 4700 current loss 2.340809, current_train_items 265300.
+I0716 08:09:54.535339 140312253715968 run.py:722] (val) algo dijkstra step 4700: {'pi': 0.974609375, 'score': 0.974609375, 'examples_seen': 265300, 'step': 4700, 'algorithm': 'dijkstra'}
+I0716 08:09:54.535481 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.988, current avg val score is 0.975, val scores are: dijkstra: 0.975
+I0716 08:09:56.332425 140312253715968 run.py:687] Algo dijkstra step 4750 current loss 2.209479, current_train_items 268082.
+I0716 08:09:56.394499 140312253715968 run.py:722] (val) algo dijkstra step 4750: {'pi': 0.9892578125, 'score': 0.9892578125, 'examples_seen': 268082, 'step': 4750, 'algorithm': 'dijkstra'}
+I0716 08:09:56.394643 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.988, current avg val score is 0.989, val scores are: dijkstra: 0.989
+I0716 08:09:58.233998 140312253715968 run.py:687] Algo dijkstra step 4800 current loss 2.988128, current_train_items 270868.
+I0716 08:09:58.301670 140312253715968 run.py:722] (val) algo dijkstra step 4800: {'pi': 0.9873046875, 'score': 0.9873046875, 'examples_seen': 270868, 'step': 4800, 'algorithm': 'dijkstra'}
+I0716 08:09:58.301834 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.989, current avg val score is 0.987, val scores are: dijkstra: 0.987
+I0716 08:10:00.135493 140312253715968 run.py:687] Algo dijkstra step 4850 current loss 0.406701, current_train_items 273712.
+I0716 08:10:00.174831 140312253715968 run.py:722] (val) algo dijkstra step 4850: {'pi': 0.9775390625, 'score': 0.9775390625, 'examples_seen': 273712, 'step': 4850, 'algorithm': 'dijkstra'}
+I0716 08:10:00.174975 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.989, current avg val score is 0.978, val scores are: dijkstra: 0.978
+I0716 08:10:02.009262 140312253715968 run.py:687] Algo dijkstra step 4900 current loss 0.613360, current_train_items 276597.
+I0716 08:10:02.050512 140312253715968 run.py:722] (val) algo dijkstra step 4900: {'pi': 0.990234375, 'score': 0.990234375, 'examples_seen': 276597, 'step': 4900, 'algorithm': 'dijkstra'}
+I0716 08:10:02.050659 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.989, current avg val score is 0.990, val scores are: dijkstra: 0.990
+I0716 08:10:03.884015 140312253715968 run.py:687] Algo dijkstra step 4950 current loss 0.988610, current_train_items 279407.
+I0716 08:10:03.928262 140312253715968 run.py:722] (val) algo dijkstra step 4950: {'pi': 0.9658203125, 'score': 0.9658203125, 'examples_seen': 279407, 'step': 4950, 'algorithm': 'dijkstra'}
+I0716 08:10:03.928404 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.966, val scores are: dijkstra: 0.966
+I0716 08:10:05.732759 140312253715968 run.py:687] Algo dijkstra step 5000 current loss 1.597915, current_train_items 282193.
+I0716 08:10:05.779053 140312253715968 run.py:722] (val) algo dijkstra step 5000: {'pi': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 282193, 'step': 5000, 'algorithm': 'dijkstra'}
+I0716 08:10:05.779196 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.983, val scores are: dijkstra: 0.983
+I0716 08:10:07.548440 140312253715968 run.py:687] Algo dijkstra step 5050 current loss 2.176478, current_train_items 284988.
+I0716 08:10:07.603091 140312253715968 run.py:722] (val) algo dijkstra step 5050: {'pi': 0.984375, 'score': 0.984375, 'examples_seen': 284988, 'step': 5050, 'algorithm': 'dijkstra'}
+I0716 08:10:07.603232 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.984, val scores are: dijkstra: 0.984
+I0716 08:10:09.449723 140312253715968 run.py:687] Algo dijkstra step 5100 current loss 2.583546, current_train_items 287799.
+I0716 08:10:09.510744 140312253715968 run.py:722] (val) algo dijkstra step 5100: {'pi': 0.9853515625, 'score': 0.9853515625, 'examples_seen': 287799, 'step': 5100, 'algorithm': 'dijkstra'}
+I0716 08:10:09.510890 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.985, val scores are: dijkstra: 0.985
+I0716 08:10:11.366638 140312253715968 run.py:687] Algo dijkstra step 5150 current loss 3.179225, current_train_items 290587.
+I0716 08:10:11.433681 140312253715968 run.py:722] (val) algo dijkstra step 5150: {'pi': 0.9736328125, 'score': 0.9736328125, 'examples_seen': 290587, 'step': 5150, 'algorithm': 'dijkstra'}
+I0716 08:10:11.433824 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.974, val scores are: dijkstra: 0.974
+I0716 08:10:13.259071 140312253715968 run.py:687] Algo dijkstra step 5200 current loss 0.421261, current_train_items 293477.
+I0716 08:10:13.299574 140312253715968 run.py:722] (val) algo dijkstra step 5200: {'pi': 0.98828125, 'score': 0.98828125, 'examples_seen': 293477, 'step': 5200, 'algorithm': 'dijkstra'}
+I0716 08:10:13.299724 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.988, val scores are: dijkstra: 0.988
+I0716 08:10:15.172116 140312253715968 run.py:687] Algo dijkstra step 5250 current loss 0.451110, current_train_items 296379.
+I0716 08:10:15.216563 140312253715968 run.py:722] (val) algo dijkstra step 5250: {'pi': 0.9814453125, 'score': 0.9814453125, 'examples_seen': 296379, 'step': 5250, 'algorithm': 'dijkstra'}
+I0716 08:10:15.216704 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.981, val scores are: dijkstra: 0.981
+I0716 08:10:17.015176 140312253715968 run.py:687] Algo dijkstra step 5300 current loss 0.820753, current_train_items 299195.
+I0716 08:10:17.058700 140312253715968 run.py:722] (val) algo dijkstra step 5300: {'pi': 0.98046875, 'score': 0.98046875, 'examples_seen': 299195, 'step': 5300, 'algorithm': 'dijkstra'}
+I0716 08:10:17.058845 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.980, val scores are: dijkstra: 0.980
+I0716 08:10:18.874321 140312253715968 run.py:687] Algo dijkstra step 5350 current loss 1.494174, current_train_items 302045.
+I0716 08:10:18.920732 140312253715968 run.py:722] (val) algo dijkstra step 5350: {'pi': 0.974609375, 'score': 0.974609375, 'examples_seen': 302045, 'step': 5350, 'algorithm': 'dijkstra'}
+I0716 08:10:18.920873 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.975, val scores are: dijkstra: 0.975
+I0716 08:10:20.721165 140312253715968 run.py:687] Algo dijkstra step 5400 current loss 1.887400, current_train_items 304844.
+I0716 08:10:20.776215 140312253715968 run.py:722] (val) algo dijkstra step 5400: {'pi': 0.982421875, 'score': 0.982421875, 'examples_seen': 304844, 'step': 5400, 'algorithm': 'dijkstra'}
+I0716 08:10:20.776357 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.982, val scores are: dijkstra: 0.982
+I0716 08:10:22.604086 140312253715968 run.py:687] Algo dijkstra step 5450 current loss 1.949759, current_train_items 307674.
+I0716 08:10:22.663901 140312253715968 run.py:722] (val) algo dijkstra step 5450: {'pi': 0.96875, 'score': 0.96875, 'examples_seen': 307674, 'step': 5450, 'algorithm': 'dijkstra'}
+I0716 08:10:22.664043 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.969, val scores are: dijkstra: 0.969
+I0716 08:10:24.516868 140312253715968 run.py:687] Algo dijkstra step 5500 current loss 2.319140, current_train_items 310498.
+I0716 08:10:24.588946 140312253715968 run.py:722] (val) algo dijkstra step 5500: {'pi': 0.98828125, 'score': 0.98828125, 'examples_seen': 310498, 'step': 5500, 'algorithm': 'dijkstra'}
+I0716 08:10:24.589117 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.988, val scores are: dijkstra: 0.988
+I0716 08:10:26.409769 140312253715968 run.py:687] Algo dijkstra step 5550 current loss 0.255175, current_train_items 313348.
+I0716 08:10:26.449510 140312253715968 run.py:722] (val) algo dijkstra step 5550: {'pi': 0.9794921875, 'score': 0.9794921875, 'examples_seen': 313348, 'step': 5550, 'algorithm': 'dijkstra'}
+I0716 08:10:26.449656 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.979, val scores are: dijkstra: 0.979
+I0716 08:10:28.283098 140312253715968 run.py:687] Algo dijkstra step 5600 current loss 0.413843, current_train_items 316193.
+I0716 08:10:28.325062 140312253715968 run.py:722] (val) algo dijkstra step 5600: {'pi': 0.982421875, 'score': 0.982421875, 'examples_seen': 316193, 'step': 5600, 'algorithm': 'dijkstra'}
+I0716 08:10:28.325204 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.982, val scores are: dijkstra: 0.982
+I0716 08:10:30.152507 140312253715968 run.py:687] Algo dijkstra step 5650 current loss 0.937553, current_train_items 319034.
+I0716 08:10:30.195842 140312253715968 run.py:722] (val) algo dijkstra step 5650: {'pi': 0.97265625, 'score': 0.97265625, 'examples_seen': 319034, 'step': 5650, 'algorithm': 'dijkstra'}
+I0716 08:10:30.195979 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.973, val scores are: dijkstra: 0.973
+I0716 08:10:32.032057 140312253715968 run.py:687] Algo dijkstra step 5700 current loss 1.130653, current_train_items 321872.
+I0716 08:10:32.079659 140312253715968 run.py:722] (val) algo dijkstra step 5700: {'pi': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 321872, 'step': 5700, 'algorithm': 'dijkstra'}
+I0716 08:10:32.079799 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.983, val scores are: dijkstra: 0.983
+I0716 08:10:33.926284 140312253715968 run.py:687] Algo dijkstra step 5750 current loss 1.799181, current_train_items 324691.
+I0716 08:10:33.983616 140312253715968 run.py:722] (val) algo dijkstra step 5750: {'pi': 0.9873046875, 'score': 0.9873046875, 'examples_seen': 324691, 'step': 5750, 'algorithm': 'dijkstra'}
+I0716 08:10:33.983759 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.987, val scores are: dijkstra: 0.987
+I0716 08:10:35.828980 140312253715968 run.py:687] Algo dijkstra step 5800 current loss 2.339478, current_train_items 327482.
+I0716 08:10:35.888197 140312253715968 run.py:722] (val) algo dijkstra step 5800: {'pi': 0.982421875, 'score': 0.982421875, 'examples_seen': 327482, 'step': 5800, 'algorithm': 'dijkstra'}
+I0716 08:10:35.888337 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.982, val scores are: dijkstra: 0.982
+I0716 08:10:37.651420 140312253715968 run.py:687] Algo dijkstra step 5850 current loss 2.355246, current_train_items 330253.
+I0716 08:10:37.726879 140312253715968 run.py:722] (val) algo dijkstra step 5850: {'pi': 0.98046875, 'score': 0.98046875, 'examples_seen': 330253, 'step': 5850, 'algorithm': 'dijkstra'}
+I0716 08:10:37.727044 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.980, val scores are: dijkstra: 0.980
+I0716 08:10:39.630830 140312253715968 run.py:687] Algo dijkstra step 5900 current loss 0.426976, current_train_items 333147.
+I0716 08:10:39.671034 140312253715968 run.py:722] (val) algo dijkstra step 5900: {'pi': 0.978515625, 'score': 0.978515625, 'examples_seen': 333147, 'step': 5900, 'algorithm': 'dijkstra'}
+I0716 08:10:39.671255 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.979, val scores are: dijkstra: 0.979
+I0716 08:10:41.532441 140312253715968 run.py:687] Algo dijkstra step 5950 current loss 0.668432, current_train_items 336033.
+I0716 08:10:41.573136 140312253715968 run.py:722] (val) algo dijkstra step 5950: {'pi': 0.986328125, 'score': 0.986328125, 'examples_seen': 336033, 'step': 5950, 'algorithm': 'dijkstra'}
+I0716 08:10:41.573277 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.986, val scores are: dijkstra: 0.986
+I0716 08:10:43.404785 140312253715968 run.py:687] Algo dijkstra step 6000 current loss 0.860685, current_train_items 338875.
+I0716 08:10:43.449052 140312253715968 run.py:722] (val) algo dijkstra step 6000: {'pi': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 338875, 'step': 6000, 'algorithm': 'dijkstra'}
+I0716 08:10:43.449193 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.983, val scores are: dijkstra: 0.983
+I0716 08:10:45.263655 140312253715968 run.py:687] Algo dijkstra step 6050 current loss 1.571502, current_train_items 341736.
+I0716 08:10:45.310717 140312253715968 run.py:722] (val) algo dijkstra step 6050: {'pi': 0.984375, 'score': 0.984375, 'examples_seen': 341736, 'step': 6050, 'algorithm': 'dijkstra'}
+I0716 08:10:45.310858 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.990, current avg val score is 0.984, val scores are: dijkstra: 0.984
+I0716 08:10:47.119883 140312253715968 run.py:687] Algo dijkstra step 6100 current loss 1.846841, current_train_items 344519.
+I0716 08:10:47.174814 140312253715968 run.py:722] (val) algo dijkstra step 6100: {'pi': 0.9912109375, 'score': 0.9912109375, 'examples_seen': 344519, 'step': 6100, 'algorithm': 'dijkstra'}
+I0716 08:10:47.174957 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.990, current avg val score is 0.991, val scores are: dijkstra: 0.991
+I0716 08:10:49.080514 140312253715968 run.py:687] Algo dijkstra step 6150 current loss 2.407665, current_train_items 347320.
+I0716 08:10:49.144340 140312253715968 run.py:722] (val) algo dijkstra step 6150: {'pi': 0.962890625, 'score': 0.962890625, 'examples_seen': 347320, 'step': 6150, 'algorithm': 'dijkstra'}
+I0716 08:10:49.144484 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.991, current avg val score is 0.963, val scores are: dijkstra: 0.963
+I0716 08:10:50.965852 140312253715968 run.py:687] Algo dijkstra step 6200 current loss 2.875641, current_train_items 350082.
+I0716 08:10:51.033666 140312253715968 run.py:722] (val) algo dijkstra step 6200: {'pi': 0.9931640625, 'score': 0.9931640625, 'examples_seen': 350082, 'step': 6200, 'algorithm': 'dijkstra'}
+I0716 08:10:51.033808 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.991, current avg val score is 0.993, val scores are: dijkstra: 0.993
+I0716 08:10:52.933751 140312253715968 run.py:687] Algo dijkstra step 6250 current loss 0.202810, current_train_items 352931.
+I0716 08:10:52.973188 140312253715968 run.py:722] (val) algo dijkstra step 6250: {'pi': 0.9814453125, 'score': 0.9814453125, 'examples_seen': 352931, 'step': 6250, 'algorithm': 'dijkstra'}
+I0716 08:10:52.973329 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.981, val scores are: dijkstra: 0.981
+I0716 08:10:54.832576 140312253715968 run.py:687] Algo dijkstra step 6300 current loss 0.485996, current_train_items 355770.
+I0716 08:10:54.874666 140312253715968 run.py:722] (val) algo dijkstra step 6300: {'pi': 0.984375, 'score': 0.984375, 'examples_seen': 355770, 'step': 6300, 'algorithm': 'dijkstra'}
+I0716 08:10:54.874810 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.984, val scores are: dijkstra: 0.984
+I0716 08:10:56.656729 140312253715968 run.py:687] Algo dijkstra step 6350 current loss 0.893464, current_train_items 358610.
+I0716 08:10:56.700828 140312253715968 run.py:722] (val) algo dijkstra step 6350: {'pi': 0.966796875, 'score': 0.966796875, 'examples_seen': 358610, 'step': 6350, 'algorithm': 'dijkstra'}
+I0716 08:10:56.700968 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.967, val scores are: dijkstra: 0.967
+I0716 08:10:58.540904 140312253715968 run.py:687] Algo dijkstra step 6400 current loss 1.051332, current_train_items 361457.
+I0716 08:10:58.588129 140312253715968 run.py:722] (val) algo dijkstra step 6400: {'pi': 0.9892578125, 'score': 0.9892578125, 'examples_seen': 361457, 'step': 6400, 'algorithm': 'dijkstra'}
+I0716 08:10:58.588273 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.989, val scores are: dijkstra: 0.989
+I0716 08:11:00.427537 140312253715968 run.py:687] Algo dijkstra step 6450 current loss 2.101690, current_train_items 364254.
+I0716 08:11:00.481673 140312253715968 run.py:722] (val) algo dijkstra step 6450: {'pi': 0.9853515625, 'score': 0.9853515625, 'examples_seen': 364254, 'step': 6450, 'algorithm': 'dijkstra'}
+I0716 08:11:00.481813 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.985, val scores are: dijkstra: 0.985
+I0716 08:11:02.277586 140312253715968 run.py:687] Algo dijkstra step 6500 current loss 2.318631, current_train_items 367061.
+I0716 08:11:02.337621 140312253715968 run.py:722] (val) algo dijkstra step 6500: {'pi': 0.974609375, 'score': 0.974609375, 'examples_seen': 367061, 'step': 6500, 'algorithm': 'dijkstra'}
+I0716 08:11:02.337760 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.975, val scores are: dijkstra: 0.975
+I0716 08:11:04.147895 140312253715968 run.py:687] Algo dijkstra step 6550 current loss 2.136313, current_train_items 369825.
+I0716 08:11:04.215852 140312253715968 run.py:722] (val) algo dijkstra step 6550: {'pi': 0.986328125, 'score': 0.986328125, 'examples_seen': 369825, 'step': 6550, 'algorithm': 'dijkstra'}
+I0716 08:11:04.216000 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.986, val scores are: dijkstra: 0.986
+I0716 08:11:06.077207 140312253715968 run.py:687] Algo dijkstra step 6600 current loss 0.140087, current_train_items 372739.
+I0716 08:11:06.116395 140312253715968 run.py:722] (val) algo dijkstra step 6600: {'pi': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 372739, 'step': 6600, 'algorithm': 'dijkstra'}
+I0716 08:11:06.116548 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.983, val scores are: dijkstra: 0.983
+I0716 08:11:07.946971 140312253715968 run.py:687] Algo dijkstra step 6650 current loss 0.530076, current_train_items 375604.
+I0716 08:11:07.988729 140312253715968 run.py:722] (val) algo dijkstra step 6650: {'pi': 0.9755859375, 'score': 0.9755859375, 'examples_seen': 375604, 'step': 6650, 'algorithm': 'dijkstra'}
+I0716 08:11:07.988871 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.976, val scores are: dijkstra: 0.976
+I0716 08:11:09.766360 140312253715968 run.py:687] Algo dijkstra step 6700 current loss 0.965048, current_train_items 378391.
+I0716 08:11:09.809931 140312253715968 run.py:722] (val) algo dijkstra step 6700: {'pi': 0.9794921875, 'score': 0.9794921875, 'examples_seen': 378391, 'step': 6700, 'algorithm': 'dijkstra'}
+I0716 08:11:09.810072 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.979, val scores are: dijkstra: 0.979
+I0716 08:11:11.705643 140312253715968 run.py:687] Algo dijkstra step 6750 current loss 1.337987, current_train_items 381191.
+I0716 08:11:11.752565 140312253715968 run.py:722] (val) algo dijkstra step 6750: {'pi': 0.982421875, 'score': 0.982421875, 'examples_seen': 381191, 'step': 6750, 'algorithm': 'dijkstra'}
+I0716 08:11:11.752708 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.982, val scores are: dijkstra: 0.982
+I0716 08:11:13.647934 140312253715968 run.py:687] Algo dijkstra step 6800 current loss 2.000381, current_train_items 383982.
+I0716 08:11:13.702110 140312253715968 run.py:722] (val) algo dijkstra step 6800: {'pi': 0.9677734375, 'score': 0.9677734375, 'examples_seen': 383982, 'step': 6800, 'algorithm': 'dijkstra'}
+I0716 08:11:13.702252 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.968, val scores are: dijkstra: 0.968
+I0716 08:11:15.469529 140312253715968 run.py:687] Algo dijkstra step 6850 current loss 2.185609, current_train_items 386754.
+I0716 08:11:15.529851 140312253715968 run.py:722] (val) algo dijkstra step 6850: {'pi': 0.9765625, 'score': 0.9765625, 'examples_seen': 386754, 'step': 6850, 'algorithm': 'dijkstra'}
+I0716 08:11:15.529990 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.977, val scores are: dijkstra: 0.977
+I0716 08:11:17.349778 140312253715968 run.py:687] Algo dijkstra step 6900 current loss 2.678148, current_train_items 389507.
+I0716 08:11:17.428085 140312253715968 run.py:722] (val) algo dijkstra step 6900: {'pi': 0.9912109375, 'score': 0.9912109375, 'examples_seen': 389507, 'step': 6900, 'algorithm': 'dijkstra'}
+I0716 08:11:17.428253 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.991, val scores are: dijkstra: 0.991
+I0716 08:11:19.245852 140312253715968 run.py:687] Algo dijkstra step 6950 current loss 0.287415, current_train_items 392435.
+I0716 08:11:19.543701 140312253715968 run.py:722] (val) algo dijkstra step 6950: {'pi': 0.9765625, 'score': 0.9765625, 'examples_seen': 392435, 'step': 6950, 'algorithm': 'dijkstra'}
+I0716 08:11:19.543843 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.977, val scores are: dijkstra: 0.977
+I0716 08:11:21.393977 140312253715968 run.py:687] Algo dijkstra step 7000 current loss 0.488529, current_train_items 395323.
+I0716 08:11:21.435023 140312253715968 run.py:722] (val) algo dijkstra step 7000: {'pi': 0.986328125, 'score': 0.986328125, 'examples_seen': 395323, 'step': 7000, 'algorithm': 'dijkstra'}
+I0716 08:11:21.435168 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.986, val scores are: dijkstra: 0.986
+I0716 08:11:23.221829 140312253715968 run.py:687] Algo dijkstra step 7050 current loss 0.746902, current_train_items 398132.
+I0716 08:11:23.265176 140312253715968 run.py:722] (val) algo dijkstra step 7050: {'pi': 0.9873046875, 'score': 0.9873046875, 'examples_seen': 398132, 'step': 7050, 'algorithm': 'dijkstra'}
+I0716 08:11:23.265317 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.987, val scores are: dijkstra: 0.987
+I0716 08:11:25.118706 140312253715968 run.py:687] Algo dijkstra step 7100 current loss 1.447954, current_train_items 400911.
+I0716 08:11:25.167059 140312253715968 run.py:722] (val) algo dijkstra step 7100: {'pi': 0.9794921875, 'score': 0.9794921875, 'examples_seen': 400911, 'step': 7100, 'algorithm': 'dijkstra'}
+I0716 08:11:25.167200 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.979, val scores are: dijkstra: 0.979
+I0716 08:11:26.993444 140312253715968 run.py:687] Algo dijkstra step 7150 current loss 2.189632, current_train_items 403707.
+I0716 08:11:27.047868 140312253715968 run.py:722] (val) algo dijkstra step 7150: {'pi': 0.986328125, 'score': 0.986328125, 'examples_seen': 403707, 'step': 7150, 'algorithm': 'dijkstra'}
+I0716 08:11:27.048012 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.986, val scores are: dijkstra: 0.986
+I0716 08:11:28.823127 140312253715968 run.py:687] Algo dijkstra step 7200 current loss 2.392249, current_train_items 406508.
+I0716 08:11:28.885859 140312253715968 run.py:722] (val) algo dijkstra step 7200: {'pi': 0.97265625, 'score': 0.97265625, 'examples_seen': 406508, 'step': 7200, 'algorithm': 'dijkstra'}
+I0716 08:11:28.886011 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.973, val scores are: dijkstra: 0.973
+I0716 08:11:30.733981 140312253715968 run.py:687] Algo dijkstra step 7250 current loss 2.856470, current_train_items 409318.
+I0716 08:11:30.814763 140312253715968 run.py:722] (val) algo dijkstra step 7250: {'pi': 0.9931640625, 'score': 0.9931640625, 'examples_seen': 409318, 'step': 7250, 'algorithm': 'dijkstra'}
+I0716 08:11:30.814932 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.993, val scores are: dijkstra: 0.993
+I0716 08:11:32.699928 140312253715968 run.py:687] Algo dijkstra step 7300 current loss 0.240474, current_train_items 412205.
+I0716 08:11:32.740608 140312253715968 run.py:722] (val) algo dijkstra step 7300: {'pi': 0.98046875, 'score': 0.98046875, 'examples_seen': 412205, 'step': 7300, 'algorithm': 'dijkstra'}
+I0716 08:11:32.740754 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.980, val scores are: dijkstra: 0.980
+I0716 08:11:34.645820 140312253715968 run.py:687] Algo dijkstra step 7350 current loss 0.420733, current_train_items 415058.
+I0716 08:11:34.687285 140312253715968 run.py:722] (val) algo dijkstra step 7350: {'pi': 0.9931640625, 'score': 0.9931640625, 'examples_seen': 415058, 'step': 7350, 'algorithm': 'dijkstra'}
+I0716 08:11:34.687425 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.993, val scores are: dijkstra: 0.993
+I0716 08:11:36.524680 140312253715968 run.py:687] Algo dijkstra step 7400 current loss 0.663794, current_train_items 417912.
+I0716 08:11:36.568441 140312253715968 run.py:722] (val) algo dijkstra step 7400: {'pi': 0.96484375, 'score': 0.96484375, 'examples_seen': 417912, 'step': 7400, 'algorithm': 'dijkstra'}
+I0716 08:11:36.568592 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.965, val scores are: dijkstra: 0.965
+I0716 08:11:38.387122 140312253715968 run.py:687] Algo dijkstra step 7450 current loss 1.628903, current_train_items 420715.
+I0716 08:11:38.433656 140312253715968 run.py:722] (val) algo dijkstra step 7450: {'pi': 0.9755859375, 'score': 0.9755859375, 'examples_seen': 420715, 'step': 7450, 'algorithm': 'dijkstra'}
+I0716 08:11:38.433796 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.976, val scores are: dijkstra: 0.976
+I0716 08:11:40.301720 140312253715968 run.py:687] Algo dijkstra step 7500 current loss 1.813795, current_train_items 423528.
+I0716 08:11:40.356347 140312253715968 run.py:722] (val) algo dijkstra step 7500: {'pi': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 423528, 'step': 7500, 'algorithm': 'dijkstra'}
+I0716 08:11:40.356486 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.983, val scores are: dijkstra: 0.983
+I0716 08:11:42.219108 140312253715968 run.py:687] Algo dijkstra step 7550 current loss 2.265430, current_train_items 426306.
+I0716 08:11:42.278453 140312253715968 run.py:722] (val) algo dijkstra step 7550: {'pi': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 426306, 'step': 7550, 'algorithm': 'dijkstra'}
+I0716 08:11:42.278604 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.983, val scores are: dijkstra: 0.983
+I0716 08:11:44.060292 140312253715968 run.py:687] Algo dijkstra step 7600 current loss 2.470709, current_train_items 429096.
+I0716 08:11:44.134226 140312253715968 run.py:722] (val) algo dijkstra step 7600: {'pi': 0.9892578125, 'score': 0.9892578125, 'examples_seen': 429096, 'step': 7600, 'algorithm': 'dijkstra'}
+I0716 08:11:44.134399 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.989, val scores are: dijkstra: 0.989
+I0716 08:11:46.008885 140312253715968 run.py:687] Algo dijkstra step 7650 current loss 0.472424, current_train_items 431991.
+I0716 08:11:46.048991 140312253715968 run.py:722] (val) algo dijkstra step 7650: {'pi': 0.97265625, 'score': 0.97265625, 'examples_seen': 431991, 'step': 7650, 'algorithm': 'dijkstra'}
+I0716 08:11:46.049134 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.973, val scores are: dijkstra: 0.973
+I0716 08:11:47.944230 140312253715968 run.py:687] Algo dijkstra step 7700 current loss 0.584195, current_train_items 434881.
+I0716 08:11:47.984968 140312253715968 run.py:722] (val) algo dijkstra step 7700: {'pi': 0.9873046875, 'score': 0.9873046875, 'examples_seen': 434881, 'step': 7700, 'algorithm': 'dijkstra'}
+I0716 08:11:47.985111 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.987, val scores are: dijkstra: 0.987
+I0716 08:11:49.773750 140312253715968 run.py:687] Algo dijkstra step 7750 current loss 1.016860, current_train_items 437695.
+I0716 08:11:49.817662 140312253715968 run.py:722] (val) algo dijkstra step 7750: {'pi': 0.990234375, 'score': 0.990234375, 'examples_seen': 437695, 'step': 7750, 'algorithm': 'dijkstra'}
+I0716 08:11:49.817801 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.990, val scores are: dijkstra: 0.990
+I0716 08:11:51.621402 140312253715968 run.py:687] Algo dijkstra step 7800 current loss 1.271486, current_train_items 440510.
+I0716 08:11:51.667673 140312253715968 run.py:722] (val) algo dijkstra step 7800: {'pi': 0.98828125, 'score': 0.98828125, 'examples_seen': 440510, 'step': 7800, 'algorithm': 'dijkstra'}
+I0716 08:11:51.667813 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.988, val scores are: dijkstra: 0.988
+I0716 08:11:53.482338 140312253715968 run.py:687] Algo dijkstra step 7850 current loss 1.960088, current_train_items 443292.
+I0716 08:11:53.537286 140312253715968 run.py:722] (val) algo dijkstra step 7850: {'pi': 0.990234375, 'score': 0.990234375, 'examples_seen': 443292, 'step': 7850, 'algorithm': 'dijkstra'}
+I0716 08:11:53.537432 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.990, val scores are: dijkstra: 0.990
+I0716 08:11:55.339637 140312253715968 run.py:687] Algo dijkstra step 7900 current loss 2.456127, current_train_items 446072.
+I0716 08:11:55.400082 140312253715968 run.py:722] (val) algo dijkstra step 7900: {'pi': 0.9814453125, 'score': 0.9814453125, 'examples_seen': 446072, 'step': 7900, 'algorithm': 'dijkstra'}
+I0716 08:11:55.400222 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.981, val scores are: dijkstra: 0.981
+I0716 08:11:57.257866 140312253715968 run.py:687] Algo dijkstra step 7950 current loss 2.992506, current_train_items 448868.
+I0716 08:11:57.334294 140312253715968 run.py:722] (val) algo dijkstra step 7950: {'pi': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 448868, 'step': 7950, 'algorithm': 'dijkstra'}
+I0716 08:11:57.334460 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.983, val scores are: dijkstra: 0.983
+I0716 08:11:59.186561 140312253715968 run.py:687] Algo dijkstra step 8000 current loss 0.216422, current_train_items 451752.
+I0716 08:11:59.226749 140312253715968 run.py:722] (val) algo dijkstra step 8000: {'pi': 0.9794921875, 'score': 0.9794921875, 'examples_seen': 451752, 'step': 8000, 'algorithm': 'dijkstra'}
+I0716 08:11:59.226891 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.979, val scores are: dijkstra: 0.979
+I0716 08:12:01.103876 140312253715968 run.py:687] Algo dijkstra step 8050 current loss 0.414290, current_train_items 454601.
+I0716 08:12:01.144997 140312253715968 run.py:722] (val) algo dijkstra step 8050: {'pi': 0.98046875, 'score': 0.98046875, 'examples_seen': 454601, 'step': 8050, 'algorithm': 'dijkstra'}
+I0716 08:12:01.145150 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.980, val scores are: dijkstra: 0.980
+I0716 08:12:02.951777 140312253715968 run.py:687] Algo dijkstra step 8100 current loss 0.701690, current_train_items 457450.
+I0716 08:12:02.995668 140312253715968 run.py:722] (val) algo dijkstra step 8100: {'pi': 0.9775390625, 'score': 0.9775390625, 'examples_seen': 457450, 'step': 8100, 'algorithm': 'dijkstra'}
+I0716 08:12:02.995806 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.978, val scores are: dijkstra: 0.978
+I0716 08:12:04.832134 140312253715968 run.py:687] Algo dijkstra step 8150 current loss 1.012550, current_train_items 460254.
+I0716 08:12:04.879335 140312253715968 run.py:722] (val) algo dijkstra step 8150: {'pi': 0.978515625, 'score': 0.978515625, 'examples_seen': 460254, 'step': 8150, 'algorithm': 'dijkstra'}
+I0716 08:12:04.879479 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.979, val scores are: dijkstra: 0.979
+I0716 08:12:06.688807 140312253715968 run.py:687] Algo dijkstra step 8200 current loss 1.982485, current_train_items 463060.
+I0716 08:12:06.743853 140312253715968 run.py:722] (val) algo dijkstra step 8200: {'pi': 0.9775390625, 'score': 0.9775390625, 'examples_seen': 463060, 'step': 8200, 'algorithm': 'dijkstra'}
+I0716 08:12:06.743994 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.978, val scores are: dijkstra: 0.978
+I0716 08:12:08.572528 140312253715968 run.py:687] Algo dijkstra step 8250 current loss 2.070600, current_train_items 465871.
+I0716 08:12:08.633013 140312253715968 run.py:722] (val) algo dijkstra step 8250: {'pi': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 465871, 'step': 8250, 'algorithm': 'dijkstra'}
+I0716 08:12:08.633155 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.983, val scores are: dijkstra: 0.983
+I0716 08:12:10.523349 140312253715968 run.py:687] Algo dijkstra step 8300 current loss 2.507318, current_train_items 468672.
+I0716 08:12:10.590060 140312253715968 run.py:722] (val) algo dijkstra step 8300: {'pi': 0.9921875, 'score': 0.9921875, 'examples_seen': 468672, 'step': 8300, 'algorithm': 'dijkstra'}
+I0716 08:12:10.590207 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.992, val scores are: dijkstra: 0.992
+I0716 08:12:12.458320 140312253715968 run.py:687] Algo dijkstra step 8350 current loss 0.193907, current_train_items 471526.
+I0716 08:12:12.497859 140312253715968 run.py:722] (val) algo dijkstra step 8350: {'pi': 0.9853515625, 'score': 0.9853515625, 'examples_seen': 471526, 'step': 8350, 'algorithm': 'dijkstra'}
+I0716 08:12:12.498000 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.985, val scores are: dijkstra: 0.985
+I0716 08:12:14.427684 140312253715968 run.py:687] Algo dijkstra step 8400 current loss 0.450027, current_train_items 474409.
+I0716 08:12:14.468550 140312253715968 run.py:722] (val) algo dijkstra step 8400: {'pi': 0.982421875, 'score': 0.982421875, 'examples_seen': 474409, 'step': 8400, 'algorithm': 'dijkstra'}
+I0716 08:12:14.468688 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.982, val scores are: dijkstra: 0.982
+I0716 08:12:16.342774 140312253715968 run.py:687] Algo dijkstra step 8450 current loss 0.739806, current_train_items 477268.
+I0716 08:12:16.385908 140312253715968 run.py:722] (val) algo dijkstra step 8450: {'pi': 0.98046875, 'score': 0.98046875, 'examples_seen': 477268, 'step': 8450, 'algorithm': 'dijkstra'}
+I0716 08:12:16.386051 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.980, val scores are: dijkstra: 0.980
+I0716 08:12:18.256814 140312253715968 run.py:687] Algo dijkstra step 8500 current loss 1.184807, current_train_items 480081.
+I0716 08:12:18.304102 140312253715968 run.py:722] (val) algo dijkstra step 8500: {'pi': 0.990234375, 'score': 0.990234375, 'examples_seen': 480081, 'step': 8500, 'algorithm': 'dijkstra'}
+I0716 08:12:18.304241 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.990, val scores are: dijkstra: 0.990
+I0716 08:12:20.178305 140312253715968 run.py:687] Algo dijkstra step 8550 current loss 1.880029, current_train_items 482868.
+I0716 08:12:20.232751 140312253715968 run.py:722] (val) algo dijkstra step 8550: {'pi': 0.962890625, 'score': 0.962890625, 'examples_seen': 482868, 'step': 8550, 'algorithm': 'dijkstra'}
+I0716 08:12:20.232890 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.963, val scores are: dijkstra: 0.963
+I0716 08:12:22.032131 140312253715968 run.py:687] Algo dijkstra step 8600 current loss 2.235486, current_train_items 485664.
+I0716 08:12:22.092922 140312253715968 run.py:722] (val) algo dijkstra step 8600: {'pi': 0.9765625, 'score': 0.9765625, 'examples_seen': 485664, 'step': 8600, 'algorithm': 'dijkstra'}
+I0716 08:12:22.093061 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.977, val scores are: dijkstra: 0.977
+I0716 08:12:23.880593 140312253715968 run.py:687] Algo dijkstra step 8650 current loss 3.040284, current_train_items 488441.
+I0716 08:12:23.954701 140312253715968 run.py:722] (val) algo dijkstra step 8650: {'pi': 0.9853515625, 'score': 0.9853515625, 'examples_seen': 488441, 'step': 8650, 'algorithm': 'dijkstra'}
+I0716 08:12:23.954841 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.985, val scores are: dijkstra: 0.985
+I0716 08:12:25.794206 140312253715968 run.py:687] Algo dijkstra step 8700 current loss 0.190648, current_train_items 491333.
+I0716 08:12:25.835222 140312253715968 run.py:722] (val) algo dijkstra step 8700: {'pi': 0.982421875, 'score': 0.982421875, 'examples_seen': 491333, 'step': 8700, 'algorithm': 'dijkstra'}
+I0716 08:12:25.835363 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.982, val scores are: dijkstra: 0.982
+I0716 08:12:27.663249 140312253715968 run.py:687] Algo dijkstra step 8750 current loss 0.473541, current_train_items 494213.
+I0716 08:12:27.704759 140312253715968 run.py:722] (val) algo dijkstra step 8750: {'pi': 0.990234375, 'score': 0.990234375, 'examples_seen': 494213, 'step': 8750, 'algorithm': 'dijkstra'}
+I0716 08:12:27.704900 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.990, val scores are: dijkstra: 0.990
+I0716 08:12:29.524565 140312253715968 run.py:687] Algo dijkstra step 8800 current loss 0.720638, current_train_items 497025.
+I0716 08:12:29.567274 140312253715968 run.py:722] (val) algo dijkstra step 8800: {'pi': 0.978515625, 'score': 0.978515625, 'examples_seen': 497025, 'step': 8800, 'algorithm': 'dijkstra'}
+I0716 08:12:29.567414 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.979, val scores are: dijkstra: 0.979
+I0716 08:12:31.422141 140312253715968 run.py:687] Algo dijkstra step 8850 current loss 1.202148, current_train_items 499850.
+I0716 08:12:31.468940 140312253715968 run.py:722] (val) algo dijkstra step 8850: {'pi': 0.970703125, 'score': 0.970703125, 'examples_seen': 499850, 'step': 8850, 'algorithm': 'dijkstra'}
+I0716 08:12:31.469081 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.971, val scores are: dijkstra: 0.971
+I0716 08:12:33.280871 140312253715968 run.py:687] Algo dijkstra step 8900 current loss 2.262860, current_train_items 502637.
+I0716 08:12:33.335513 140312253715968 run.py:722] (val) algo dijkstra step 8900: {'pi': 0.9921875, 'score': 0.9921875, 'examples_seen': 502637, 'step': 8900, 'algorithm': 'dijkstra'}
+I0716 08:12:33.335677 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.992, val scores are: dijkstra: 0.992
+I0716 08:12:35.118788 140312253715968 run.py:687] Algo dijkstra step 8950 current loss 2.217044, current_train_items 505392.
+I0716 08:12:35.178618 140312253715968 run.py:722] (val) algo dijkstra step 8950: {'pi': 0.9765625, 'score': 0.9765625, 'examples_seen': 505392, 'step': 8950, 'algorithm': 'dijkstra'}
+I0716 08:12:35.178757 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.977, val scores are: dijkstra: 0.977
+I0716 08:12:37.025069 140312253715968 run.py:687] Algo dijkstra step 9000 current loss 2.608510, current_train_items 508139.
+I0716 08:12:37.098241 140312253715968 run.py:722] (val) algo dijkstra step 9000: {'pi': 0.9921875, 'score': 0.9921875, 'examples_seen': 508139, 'step': 9000, 'algorithm': 'dijkstra'}
+I0716 08:12:37.098407 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.992, val scores are: dijkstra: 0.992
+I0716 08:12:39.015723 140312253715968 run.py:687] Algo dijkstra step 9050 current loss 0.215934, current_train_items 511068.
+I0716 08:12:39.056811 140312253715968 run.py:722] (val) algo dijkstra step 9050: {'pi': 0.990234375, 'score': 0.990234375, 'examples_seen': 511068, 'step': 9050, 'algorithm': 'dijkstra'}
+I0716 08:12:39.056957 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.990, val scores are: dijkstra: 0.990
+I0716 08:12:40.937150 140312253715968 run.py:687] Algo dijkstra step 9100 current loss 0.503562, current_train_items 513951.
+I0716 08:12:40.980032 140312253715968 run.py:722] (val) algo dijkstra step 9100: {'pi': 0.984375, 'score': 0.984375, 'examples_seen': 513951, 'step': 9100, 'algorithm': 'dijkstra'}
+I0716 08:12:40.980176 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.984, val scores are: dijkstra: 0.984
+I0716 08:12:42.817197 140312253715968 run.py:687] Algo dijkstra step 9150 current loss 0.695409, current_train_items 516763.
+I0716 08:12:42.861027 140312253715968 run.py:722] (val) algo dijkstra step 9150: {'pi': 0.9892578125, 'score': 0.9892578125, 'examples_seen': 516763, 'step': 9150, 'algorithm': 'dijkstra'}
+I0716 08:12:42.861171 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.989, val scores are: dijkstra: 0.989
+I0716 08:12:44.720893 140312253715968 run.py:687] Algo dijkstra step 9200 current loss 0.964749, current_train_items 519585.
+I0716 08:12:44.767651 140312253715968 run.py:722] (val) algo dijkstra step 9200: {'pi': 0.982421875, 'score': 0.982421875, 'examples_seen': 519585, 'step': 9200, 'algorithm': 'dijkstra'}
+I0716 08:12:44.767794 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.982, val scores are: dijkstra: 0.982
+I0716 08:12:46.600728 140312253715968 run.py:687] Algo dijkstra step 9250 current loss 1.816782, current_train_items 522382.
+I0716 08:12:46.655290 140312253715968 run.py:722] (val) algo dijkstra step 9250: {'pi': 0.9892578125, 'score': 0.9892578125, 'examples_seen': 522382, 'step': 9250, 'algorithm': 'dijkstra'}
+I0716 08:12:46.655428 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.989, val scores are: dijkstra: 0.989
+I0716 08:12:48.451186 140312253715968 run.py:687] Algo dijkstra step 9300 current loss 2.161919, current_train_items 525200.
+I0716 08:12:48.513236 140312253715968 run.py:722] (val) algo dijkstra step 9300: {'pi': 0.984375, 'score': 0.984375, 'examples_seen': 525200, 'step': 9300, 'algorithm': 'dijkstra'}
+I0716 08:12:48.513375 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.984, val scores are: dijkstra: 0.984
+I0716 08:12:50.366042 140312253715968 run.py:687] Algo dijkstra step 9350 current loss 2.491756, current_train_items 527972.
+I0716 08:12:50.440850 140312253715968 run.py:722] (val) algo dijkstra step 9350: {'pi': 0.9755859375, 'score': 0.9755859375, 'examples_seen': 527972, 'step': 9350, 'algorithm': 'dijkstra'}
+I0716 08:12:50.441018 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.976, val scores are: dijkstra: 0.976
+I0716 08:12:52.339355 140312253715968 run.py:687] Algo dijkstra step 9400 current loss 0.214541, current_train_items 530840.
+I0716 08:12:52.378438 140312253715968 run.py:722] (val) algo dijkstra step 9400: {'pi': 0.9912109375, 'score': 0.9912109375, 'examples_seen': 530840, 'step': 9400, 'algorithm': 'dijkstra'}
+I0716 08:12:52.378585 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.991, val scores are: dijkstra: 0.991
+I0716 08:12:54.226692 140312253715968 run.py:687] Algo dijkstra step 9450 current loss 0.504200, current_train_items 533704.
+I0716 08:12:54.267902 140312253715968 run.py:722] (val) algo dijkstra step 9450: {'pi': 0.9814453125, 'score': 0.9814453125, 'examples_seen': 533704, 'step': 9450, 'algorithm': 'dijkstra'}
+I0716 08:12:54.268042 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.993, current avg val score is 0.981, val scores are: dijkstra: 0.981
+I0716 08:12:56.119611 140312253715968 run.py:687] Algo dijkstra step 9500 current loss 0.678920, current_train_items 536567.
+I0716 08:12:56.163201 140312253715968 run.py:722] (val) algo dijkstra step 9500: {'pi': 0.994140625, 'score': 0.994140625, 'examples_seen': 536567, 'step': 9500, 'algorithm': 'dijkstra'}
+I0716 08:12:56.163342 140312253715968 run.py:743] Checkpointing best model, best avg val score was 0.993, current avg val score is 0.994, val scores are: dijkstra: 0.994
+I0716 08:12:57.996601 140312253715968 run.py:687] Algo dijkstra step 9550 current loss 1.105259, current_train_items 539410.
+I0716 08:12:58.042949 140312253715968 run.py:722] (val) algo dijkstra step 9550: {'pi': 0.986328125, 'score': 0.986328125, 'examples_seen': 539410, 'step': 9550, 'algorithm': 'dijkstra'}
+I0716 08:12:58.043087 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.994, current avg val score is 0.986, val scores are: dijkstra: 0.986
+I0716 08:12:59.910005 140312253715968 run.py:687] Algo dijkstra step 9600 current loss 1.757954, current_train_items 542217.
+I0716 08:12:59.965153 140312253715968 run.py:722] (val) algo dijkstra step 9600: {'pi': 0.9892578125, 'score': 0.9892578125, 'examples_seen': 542217, 'step': 9600, 'algorithm': 'dijkstra'}
+I0716 08:12:59.965294 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.994, current avg val score is 0.989, val scores are: dijkstra: 0.989
+I0716 08:13:01.779090 140312253715968 run.py:687] Algo dijkstra step 9650 current loss 2.584186, current_train_items 545004.
+I0716 08:13:01.840774 140312253715968 run.py:722] (val) algo dijkstra step 9650: {'pi': 0.9697265625, 'score': 0.9697265625, 'examples_seen': 545004, 'step': 9650, 'algorithm': 'dijkstra'}
+I0716 08:13:01.840919 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.994, current avg val score is 0.970, val scores are: dijkstra: 0.970
+I0716 08:13:03.696212 140312253715968 run.py:687] Algo dijkstra step 9700 current loss 2.501610, current_train_items 547822.
+I0716 08:13:03.762232 140312253715968 run.py:722] (val) algo dijkstra step 9700: {'pi': 0.9912109375, 'score': 0.9912109375, 'examples_seen': 547822, 'step': 9700, 'algorithm': 'dijkstra'}
+I0716 08:13:03.762375 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.994, current avg val score is 0.991, val scores are: dijkstra: 0.991
+I0716 08:13:05.561236 140312253715968 run.py:687] Algo dijkstra step 9750 current loss 0.136044, current_train_items 550670.
+I0716 08:13:05.601119 140312253715968 run.py:722] (val) algo dijkstra step 9750: {'pi': 0.9931640625, 'score': 0.9931640625, 'examples_seen': 550670, 'step': 9750, 'algorithm': 'dijkstra'}
+I0716 08:13:05.601278 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.994, current avg val score is 0.993, val scores are: dijkstra: 0.993
+I0716 08:13:07.414963 140312253715968 run.py:687] Algo dijkstra step 9800 current loss 0.463878, current_train_items 553548.
+I0716 08:13:07.455972 140312253715968 run.py:722] (val) algo dijkstra step 9800: {'pi': 0.986328125, 'score': 0.986328125, 'examples_seen': 553548, 'step': 9800, 'algorithm': 'dijkstra'}
+I0716 08:13:07.456116 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.994, current avg val score is 0.986, val scores are: dijkstra: 0.986
+I0716 08:13:09.319656 140312253715968 run.py:687] Algo dijkstra step 9850 current loss 0.816211, current_train_items 556410.
+I0716 08:13:09.363449 140312253715968 run.py:722] (val) algo dijkstra step 9850: {'pi': 0.9892578125, 'score': 0.9892578125, 'examples_seen': 556410, 'step': 9850, 'algorithm': 'dijkstra'}
+I0716 08:13:09.363597 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.994, current avg val score is 0.989, val scores are: dijkstra: 0.989
+I0716 08:13:11.185675 140312253715968 run.py:687] Algo dijkstra step 9900 current loss 1.168897, current_train_items 559220.
+I0716 08:13:11.231988 140312253715968 run.py:722] (val) algo dijkstra step 9900: {'pi': 0.9853515625, 'score': 0.9853515625, 'examples_seen': 559220, 'step': 9900, 'algorithm': 'dijkstra'}
+I0716 08:13:11.232129 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.994, current avg val score is 0.985, val scores are: dijkstra: 0.985
+I0716 08:13:13.021433 140312253715968 run.py:687] Algo dijkstra step 9950 current loss 1.961618, current_train_items 561977.
+I0716 08:13:13.076822 140312253715968 run.py:722] (val) algo dijkstra step 9950: {'pi': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 561977, 'step': 9950, 'algorithm': 'dijkstra'}
+I0716 08:13:13.076964 140312253715968 run.py:746] Not saving new best model, best avg val score was 0.994, current avg val score is 0.983, val scores are: dijkstra: 0.983
+I0716 08:13:14.865875 140312253715968 run.py:752] Restoring best model from checkpoint...
+I0716 08:13:21.785874 140312253715968 run.py:767] (test) algo dijkstra : {'pi': 0.95849609375, 'score': 0.95849609375, 'examples_seen': 564760, 'step': 10000, 'algorithm': 'dijkstra'}
+I0716 08:13:21.786040 140312253715968 run.py:769] Done!

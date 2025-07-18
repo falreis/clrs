@@ -1,0 +1,648 @@
+I0715 08:49:15.265037 137093019534848 xla_bridge.py:889] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0715 08:49:15.265738 137093019534848 xla_bridge.py:889] Unable to initialize backend 'tpu': INTERNAL: Failed to open libtpu.so: libtpu.so: cannot open shared object file: No such file or directory
+I0715 08:49:15.492186 137093019534848 run.py:416] Model: falreis ['dfs']
+I0715 08:49:15.492282 137093019534848 run.py:418] algorithms ['dfs']
+I0715 08:49:15.492454 137093019534848 run.py:419] train_lengths ['2', '3', '5', '7', '11', '13', '16']
+I0715 08:49:15.492497 137093019534848 run.py:420] train_batch_size 16
+I0715 08:49:15.492588 137093019534848 run.py:421] val_batch_size 8
+I0715 08:49:15.492620 137093019534848 run.py:422] test_batch_size 8
+I0715 08:49:15.492649 137093019534848 run.py:423] chunked_training True
+I0715 08:49:15.492768 137093019534848 run.py:424] chunk_length 16
+I0715 08:49:15.492797 137093019534848 run.py:425] train_steps 10000
+I0715 08:49:15.492827 137093019534848 run.py:426] eval_every 50
+I0715 08:49:15.492855 137093019534848 run.py:427] test_every 500
+I0715 08:49:15.492883 137093019534848 run.py:428] learning_rate 0.001
+I0715 08:49:15.492969 137093019534848 run.py:429] grad_clip_max_norm 1.0
+I0715 08:49:15.492997 137093019534848 run.py:430] dropout_prob 0.1
+I0715 08:49:15.493026 137093019534848 run.py:431] hint_teacher_forcing 0.0
+I0715 08:49:15.493055 137093019534848 run.py:432] hint_mode encoded_decoded
+I0715 08:49:15.493155 137093019534848 run.py:433] hint_repred_mode hard_on_eval
+I0715 08:49:15.493184 137093019534848 run.py:434] use_ln False
+I0715 08:49:15.493211 137093019534848 run.py:435] use_lstm True
+I0715 08:49:15.493241 137093019534848 run.py:436] nb_triplet_fts 8
+I0715 08:49:15.493269 137093019534848 run.py:437] encoder_init xavier_on_scalars
+I0715 08:49:15.493301 137093019534848 run.py:438] processor_type falreis
+I0715 08:49:15.493328 137093019534848 run.py:439] checkpoint_path CLRS30
+I0715 08:49:15.493355 137093019534848 run.py:440] dataset_path CLRS30
+I0715 08:49:15.493382 137093019534848 run.py:441] freeze_processor False
+I0715 08:49:15.493410 137093019534848 run.py:442] reduction min
+I0715 08:49:15.493438 137093019534848 run.py:443] activation elu
+I0715 08:49:15.493466 137093019534848 run.py:444] algorithm_models ['F1', 'F2']
+I0715 08:49:15.493505 137093019534848 run.py:445] restore_model 
+I0715 08:49:15.493534 137093019534848 run.py:446] gated True
+I0715 08:49:15.493562 137093019534848 run.py:447] gated_activation sigmoid
+I0715 08:49:15.496116 137093019534848 run.py:473] Creating samplers for algo dfs
+W0715 08:49:15.496498 137093019534848 samplers.py:109] Sampling dataset on-the-fly, unlimited samples.
+I0715 08:49:21.083526 137093019534848 samplers.py:124] Creating a dataset with 64 samples.
+I0715 08:49:21.178359 137093019534848 run.py:260] Dataset found at CLRS30/CLRS30_v1.0.0. Skipping download.
+I0715 08:49:21.179122 137093019534848 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/dfs_test/1.0.0
+I0715 08:49:21.183255 137093019534848 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/dfs_test/1.0.0
+I0715 08:49:21.186853 137093019534848 reader.py:262] Creating a tf.data.Dataset reading 1 files located in folders: CLRS30/CLRS30_v1.0.0/clrs_dataset/dfs_test/1.0.0.
+I0715 08:49:21.244294 137093019534848 logging_logger.py:49] Constructing tf.data.Dataset clrs_dataset for split test, from CLRS30/CLRS30_v1.0.0/clrs_dataset/dfs_test/1.0.0
+W0715 08:49:21.266112 137093019534848 ag_logging.py:142] AutoGraph could not transform <function _preprocess at 0x7caeefa8aca0> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: `haiku.experimental.flax` features require `flax` to be installed.
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+I0715 08:50:03.786698 137093019534848 run.py:688] Algo dfs step 0 current loss 9.630206, current_train_items 16.
+I0715 08:50:09.325497 137093019534848 run.py:723] (val) algo dfs step 0: {'pi': 0.05859375, 'score': 0.05859375, 'examples_seen': 16, 'step': 0, 'algorithm': 'dfs'}
+I0715 08:50:09.325650 137093019534848 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.059, val scores are: dfs: 0.059
+I0715 08:51:53.940581 137093019534848 run.py:688] Algo dfs step 50 current loss 8.263376, current_train_items 880.
+I0715 08:51:54.063765 137093019534848 run.py:723] (val) algo dfs step 50: {'pi': 0.3798828125, 'score': 0.3798828125, 'examples_seen': 880, 'step': 50, 'algorithm': 'dfs'}
+I0715 08:51:54.063991 137093019534848 run.py:744] Checkpointing best model, best avg val score was 0.059, current avg val score is 0.380, val scores are: dfs: 0.380
+I0715 08:51:55.326143 137093019534848 run.py:688] Algo dfs step 100 current loss 9.450199, current_train_items 1744.
+I0715 08:51:55.440553 137093019534848 run.py:723] (val) algo dfs step 100: {'pi': 0.4111328125, 'score': 0.4111328125, 'examples_seen': 1744, 'step': 100, 'algorithm': 'dfs'}
+I0715 08:51:55.440782 137093019534848 run.py:744] Checkpointing best model, best avg val score was 0.380, current avg val score is 0.411, val scores are: dfs: 0.411
+I0715 08:51:56.671370 137093019534848 run.py:688] Algo dfs step 150 current loss 11.153375, current_train_items 2576.
+I0715 08:51:56.791547 137093019534848 run.py:723] (val) algo dfs step 150: {'pi': 0.39453125, 'score': 0.39453125, 'examples_seen': 2576, 'step': 150, 'algorithm': 'dfs'}
+I0715 08:51:56.791769 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.411, current avg val score is 0.395, val scores are: dfs: 0.395
+I0715 08:51:57.980166 137093019534848 run.py:688] Algo dfs step 200 current loss 12.766956, current_train_items 3424.
+I0715 08:51:58.140656 137093019534848 run.py:723] (val) algo dfs step 200: {'pi': 0.4501953125, 'score': 0.4501953125, 'examples_seen': 3424, 'step': 200, 'algorithm': 'dfs'}
+I0715 08:51:58.140883 137093019534848 run.py:744] Checkpointing best model, best avg val score was 0.411, current avg val score is 0.450, val scores are: dfs: 0.450
+I0715 08:51:59.364578 137093019534848 run.py:688] Algo dfs step 250 current loss 11.586480, current_train_items 4256.
+I0715 08:51:59.503624 137093019534848 run.py:723] (val) algo dfs step 250: {'pi': 0.4111328125, 'score': 0.4111328125, 'examples_seen': 4256, 'step': 250, 'algorithm': 'dfs'}
+I0715 08:51:59.503872 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.450, current avg val score is 0.411, val scores are: dfs: 0.411
+I0715 08:52:00.737320 137093019534848 run.py:688] Algo dfs step 300 current loss 1.706620, current_train_items 5152.
+I0715 08:52:00.878020 137093019534848 run.py:723] (val) algo dfs step 300: {'pi': 0.375, 'score': 0.375, 'examples_seen': 5152, 'step': 300, 'algorithm': 'dfs'}
+I0715 08:52:00.878236 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.450, current avg val score is 0.375, val scores are: dfs: 0.375
+I0715 08:52:02.043267 137093019534848 run.py:688] Algo dfs step 350 current loss 3.849765, current_train_items 6000.
+I0715 08:52:02.198805 137093019534848 run.py:723] (val) algo dfs step 350: {'pi': 0.458984375, 'score': 0.458984375, 'examples_seen': 6000, 'step': 350, 'algorithm': 'dfs'}
+I0715 08:52:02.199021 137093019534848 run.py:744] Checkpointing best model, best avg val score was 0.450, current avg val score is 0.459, val scores are: dfs: 0.459
+I0715 08:52:03.471754 137093019534848 run.py:688] Algo dfs step 400 current loss 5.629316, current_train_items 6864.
+I0715 08:52:03.584183 137093019534848 run.py:723] (val) algo dfs step 400: {'pi': 0.4287109375, 'score': 0.4287109375, 'examples_seen': 6864, 'step': 400, 'algorithm': 'dfs'}
+I0715 08:52:03.584325 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.459, current avg val score is 0.429, val scores are: dfs: 0.429
+I0715 08:52:04.814403 137093019534848 run.py:688] Algo dfs step 450 current loss 8.346023, current_train_items 7728.
+I0715 08:52:04.942651 137093019534848 run.py:723] (val) algo dfs step 450: {'pi': 0.4677734375, 'score': 0.4677734375, 'examples_seen': 7728, 'step': 450, 'algorithm': 'dfs'}
+I0715 08:52:04.942794 137093019534848 run.py:744] Checkpointing best model, best avg val score was 0.459, current avg val score is 0.468, val scores are: dfs: 0.468
+I0715 08:52:06.167145 137093019534848 run.py:688] Algo dfs step 500 current loss 9.452032, current_train_items 8560.
+I0715 08:52:06.288147 137093019534848 run.py:723] (val) algo dfs step 500: {'pi': 0.453125, 'score': 0.453125, 'examples_seen': 8560, 'step': 500, 'algorithm': 'dfs'}
+I0715 08:52:06.288286 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.468, current avg val score is 0.453, val scores are: dfs: 0.453
+I0715 08:52:07.490777 137093019534848 run.py:688] Algo dfs step 550 current loss 10.369559, current_train_items 9408.
+I0715 08:52:07.653300 137093019534848 run.py:723] (val) algo dfs step 550: {'pi': 0.435546875, 'score': 0.435546875, 'examples_seen': 9408, 'step': 550, 'algorithm': 'dfs'}
+I0715 08:52:07.653442 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.468, current avg val score is 0.436, val scores are: dfs: 0.436
+I0715 08:52:08.820140 137093019534848 run.py:688] Algo dfs step 600 current loss 12.534511, current_train_items 10272.
+I0715 08:52:08.990948 137093019534848 run.py:723] (val) algo dfs step 600: {'pi': 0.458984375, 'score': 0.458984375, 'examples_seen': 10272, 'step': 600, 'algorithm': 'dfs'}
+I0715 08:52:08.991092 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.468, current avg val score is 0.459, val scores are: dfs: 0.459
+I0715 08:52:10.242017 137093019534848 run.py:688] Algo dfs step 650 current loss 0.852910, current_train_items 11152.
+I0715 08:52:10.372939 137093019534848 run.py:723] (val) algo dfs step 650: {'pi': 0.4501953125, 'score': 0.4501953125, 'examples_seen': 11152, 'step': 650, 'algorithm': 'dfs'}
+I0715 08:52:10.373154 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.468, current avg val score is 0.450, val scores are: dfs: 0.450
+I0715 08:52:11.540876 137093019534848 run.py:688] Algo dfs step 700 current loss 3.484870, current_train_items 12000.
+I0715 08:52:11.696530 137093019534848 run.py:723] (val) algo dfs step 700: {'pi': 0.46484375, 'score': 0.46484375, 'examples_seen': 12000, 'step': 700, 'algorithm': 'dfs'}
+I0715 08:52:11.696741 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.468, current avg val score is 0.465, val scores are: dfs: 0.465
+I0715 08:52:12.917009 137093019534848 run.py:688] Algo dfs step 750 current loss 4.968156, current_train_items 12880.
+I0715 08:52:13.033079 137093019534848 run.py:723] (val) algo dfs step 750: {'pi': 0.4921875, 'score': 0.4921875, 'examples_seen': 12880, 'step': 750, 'algorithm': 'dfs'}
+I0715 08:52:13.033271 137093019534848 run.py:744] Checkpointing best model, best avg val score was 0.468, current avg val score is 0.492, val scores are: dfs: 0.492
+I0715 08:52:14.265106 137093019534848 run.py:688] Algo dfs step 800 current loss 7.427947, current_train_items 13728.
+I0715 08:52:14.374912 137093019534848 run.py:723] (val) algo dfs step 800: {'pi': 0.4580078125, 'score': 0.4580078125, 'examples_seen': 13728, 'step': 800, 'algorithm': 'dfs'}
+I0715 08:52:14.375121 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.492, current avg val score is 0.458, val scores are: dfs: 0.458
+I0715 08:52:15.586500 137093019534848 run.py:688] Algo dfs step 850 current loss 9.670397, current_train_items 14576.
+I0715 08:52:15.716724 137093019534848 run.py:723] (val) algo dfs step 850: {'pi': 0.4892578125, 'score': 0.4892578125, 'examples_seen': 14576, 'step': 850, 'algorithm': 'dfs'}
+I0715 08:52:15.716941 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.492, current avg val score is 0.489, val scores are: dfs: 0.489
+I0715 08:52:16.938720 137093019534848 run.py:688] Algo dfs step 900 current loss 10.682590, current_train_items 15440.
+I0715 08:52:17.067013 137093019534848 run.py:723] (val) algo dfs step 900: {'pi': 0.419921875, 'score': 0.419921875, 'examples_seen': 15440, 'step': 900, 'algorithm': 'dfs'}
+I0715 08:52:17.067228 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.492, current avg val score is 0.420, val scores are: dfs: 0.420
+I0715 08:52:18.287680 137093019534848 run.py:688] Algo dfs step 950 current loss 11.455770, current_train_items 16272.
+I0715 08:52:18.448790 137093019534848 run.py:723] (val) algo dfs step 950: {'pi': 0.44140625, 'score': 0.44140625, 'examples_seen': 16272, 'step': 950, 'algorithm': 'dfs'}
+I0715 08:52:18.449003 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.492, current avg val score is 0.441, val scores are: dfs: 0.441
+I0715 08:52:19.641547 137093019534848 run.py:688] Algo dfs step 1000 current loss 0.319429, current_train_items 17152.
+I0715 08:52:19.792688 137093019534848 run.py:723] (val) algo dfs step 1000: {'pi': 0.49609375, 'score': 0.49609375, 'examples_seen': 17152, 'step': 1000, 'algorithm': 'dfs'}
+I0715 08:52:19.792830 137093019534848 run.py:744] Checkpointing best model, best avg val score was 0.492, current avg val score is 0.496, val scores are: dfs: 0.496
+I0715 08:52:21.052247 137093019534848 run.py:688] Algo dfs step 1050 current loss 3.431061, current_train_items 18032.
+I0715 08:52:21.161281 137093019534848 run.py:723] (val) algo dfs step 1050: {'pi': 0.4580078125, 'score': 0.4580078125, 'examples_seen': 18032, 'step': 1050, 'algorithm': 'dfs'}
+I0715 08:52:21.161420 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.496, current avg val score is 0.458, val scores are: dfs: 0.458
+I0715 08:52:22.333555 137093019534848 run.py:688] Algo dfs step 1100 current loss 5.218274, current_train_items 18864.
+I0715 08:52:22.467425 137093019534848 run.py:723] (val) algo dfs step 1100: {'pi': 0.509765625, 'score': 0.509765625, 'examples_seen': 18864, 'step': 1100, 'algorithm': 'dfs'}
+I0715 08:52:22.467575 137093019534848 run.py:744] Checkpointing best model, best avg val score was 0.496, current avg val score is 0.510, val scores are: dfs: 0.510
+I0715 08:52:23.677274 137093019534848 run.py:688] Algo dfs step 1150 current loss 6.058240, current_train_items 19744.
+I0715 08:52:23.788993 137093019534848 run.py:723] (val) algo dfs step 1150: {'pi': 0.4755859375, 'score': 0.4755859375, 'examples_seen': 19744, 'step': 1150, 'algorithm': 'dfs'}
+I0715 08:52:23.789136 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.510, current avg val score is 0.476, val scores are: dfs: 0.476
+I0715 08:52:24.994066 137093019534848 run.py:688] Algo dfs step 1200 current loss 9.172750, current_train_items 20560.
+I0715 08:52:25.126873 137093019534848 run.py:723] (val) algo dfs step 1200: {'pi': 0.4658203125, 'score': 0.4658203125, 'examples_seen': 20560, 'step': 1200, 'algorithm': 'dfs'}
+I0715 08:52:25.127089 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.510, current avg val score is 0.466, val scores are: dfs: 0.466
+I0715 08:52:26.342509 137093019534848 run.py:688] Algo dfs step 1250 current loss 9.877354, current_train_items 21440.
+I0715 08:52:26.496332 137093019534848 run.py:723] (val) algo dfs step 1250: {'pi': 0.4599609375, 'score': 0.4599609375, 'examples_seen': 21440, 'step': 1250, 'algorithm': 'dfs'}
+I0715 08:52:26.496530 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.510, current avg val score is 0.460, val scores are: dfs: 0.460
+I0715 08:52:27.702209 137093019534848 run.py:688] Algo dfs step 1300 current loss 7.772207, current_train_items 22256.
+I0715 08:52:27.861353 137093019534848 run.py:723] (val) algo dfs step 1300: {'pi': 0.4326171875, 'score': 0.4326171875, 'examples_seen': 22256, 'step': 1300, 'algorithm': 'dfs'}
+I0715 08:52:27.861593 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.510, current avg val score is 0.433, val scores are: dfs: 0.433
+I0715 08:52:29.071640 137093019534848 run.py:688] Algo dfs step 1350 current loss 0.711679, current_train_items 23136.
+I0715 08:52:29.231320 137093019534848 run.py:723] (val) algo dfs step 1350: {'pi': 0.4677734375, 'score': 0.4677734375, 'examples_seen': 23136, 'step': 1350, 'algorithm': 'dfs'}
+I0715 08:52:29.231556 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.510, current avg val score is 0.468, val scores are: dfs: 0.468
+I0715 08:52:30.456661 137093019534848 run.py:688] Algo dfs step 1400 current loss 3.533144, current_train_items 24032.
+I0715 08:52:30.593860 137093019534848 run.py:723] (val) algo dfs step 1400: {'pi': 0.4619140625, 'score': 0.4619140625, 'examples_seen': 24032, 'step': 1400, 'algorithm': 'dfs'}
+I0715 08:52:30.594031 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.510, current avg val score is 0.462, val scores are: dfs: 0.462
+I0715 08:52:31.814896 137093019534848 run.py:688] Algo dfs step 1450 current loss 3.219625, current_train_items 24864.
+I0715 08:52:31.919730 137093019534848 run.py:723] (val) algo dfs step 1450: {'pi': 0.474609375, 'score': 0.474609375, 'examples_seen': 24864, 'step': 1450, 'algorithm': 'dfs'}
+I0715 08:52:31.919900 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.510, current avg val score is 0.475, val scores are: dfs: 0.475
+I0715 08:52:33.101386 137093019534848 run.py:688] Algo dfs step 1500 current loss 4.681168, current_train_items 25744.
+I0715 08:52:33.222048 137093019534848 run.py:723] (val) algo dfs step 1500: {'pi': 0.5107421875, 'score': 0.5107421875, 'examples_seen': 25744, 'step': 1500, 'algorithm': 'dfs'}
+I0715 08:52:33.222214 137093019534848 run.py:744] Checkpointing best model, best avg val score was 0.510, current avg val score is 0.511, val scores are: dfs: 0.511
+I0715 08:52:34.440383 137093019534848 run.py:688] Algo dfs step 1550 current loss 8.634608, current_train_items 26576.
+I0715 08:52:34.570622 137093019534848 run.py:723] (val) algo dfs step 1550: {'pi': 0.4658203125, 'score': 0.4658203125, 'examples_seen': 26576, 'step': 1550, 'algorithm': 'dfs'}
+I0715 08:52:34.570845 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.511, current avg val score is 0.466, val scores are: dfs: 0.466
+I0715 08:52:35.796360 137093019534848 run.py:688] Algo dfs step 1600 current loss 8.405843, current_train_items 27424.
+I0715 08:52:35.922788 137093019534848 run.py:723] (val) algo dfs step 1600: {'pi': 0.501953125, 'score': 0.501953125, 'examples_seen': 27424, 'step': 1600, 'algorithm': 'dfs'}
+I0715 08:52:35.923012 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.511, current avg val score is 0.502, val scores are: dfs: 0.502
+I0715 08:52:37.096631 137093019534848 run.py:688] Algo dfs step 1650 current loss 10.816493, current_train_items 28272.
+I0715 08:52:37.270380 137093019534848 run.py:723] (val) algo dfs step 1650: {'pi': 0.48046875, 'score': 0.48046875, 'examples_seen': 28272, 'step': 1650, 'algorithm': 'dfs'}
+I0715 08:52:37.270615 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.511, current avg val score is 0.480, val scores are: dfs: 0.480
+I0715 08:52:38.516905 137093019534848 run.py:688] Algo dfs step 1700 current loss 0.655790, current_train_items 29152.
+I0715 08:52:38.627513 137093019534848 run.py:723] (val) algo dfs step 1700: {'pi': 0.4345703125, 'score': 0.4345703125, 'examples_seen': 29152, 'step': 1700, 'algorithm': 'dfs'}
+I0715 08:52:38.627728 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.511, current avg val score is 0.435, val scores are: dfs: 0.435
+I0715 08:52:39.797259 137093019534848 run.py:688] Algo dfs step 1750 current loss 2.407138, current_train_items 30016.
+I0715 08:52:39.959112 137093019534848 run.py:723] (val) algo dfs step 1750: {'pi': 0.5234375, 'score': 0.5234375, 'examples_seen': 30016, 'step': 1750, 'algorithm': 'dfs'}
+I0715 08:52:39.959327 137093019534848 run.py:744] Checkpointing best model, best avg val score was 0.511, current avg val score is 0.523, val scores are: dfs: 0.523
+I0715 08:52:41.188603 137093019534848 run.py:688] Algo dfs step 1800 current loss 5.272152, current_train_items 30880.
+I0715 08:52:41.318214 137093019534848 run.py:723] (val) algo dfs step 1800: {'pi': 0.5498046875, 'score': 0.5498046875, 'examples_seen': 30880, 'step': 1800, 'algorithm': 'dfs'}
+I0715 08:52:41.318434 137093019534848 run.py:744] Checkpointing best model, best avg val score was 0.523, current avg val score is 0.550, val scores are: dfs: 0.550
+I0715 08:52:42.550525 137093019534848 run.py:688] Algo dfs step 1850 current loss 4.105469, current_train_items 31712.
+I0715 08:52:42.660583 137093019534848 run.py:723] (val) algo dfs step 1850: {'pi': 0.513671875, 'score': 0.513671875, 'examples_seen': 31712, 'step': 1850, 'algorithm': 'dfs'}
+I0715 08:52:42.660805 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.550, current avg val score is 0.514, val scores are: dfs: 0.514
+I0715 08:52:43.847714 137093019534848 run.py:688] Algo dfs step 1900 current loss 6.640951, current_train_items 32592.
+I0715 08:52:43.989673 137093019534848 run.py:723] (val) algo dfs step 1900: {'pi': 0.4990234375, 'score': 0.4990234375, 'examples_seen': 32592, 'step': 1900, 'algorithm': 'dfs'}
+I0715 08:52:43.989888 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.550, current avg val score is 0.499, val scores are: dfs: 0.499
+I0715 08:52:45.136574 137093019534848 run.py:688] Algo dfs step 1950 current loss 9.641550, current_train_items 33408.
+I0715 08:52:45.294887 137093019534848 run.py:723] (val) algo dfs step 1950: {'pi': 0.5068359375, 'score': 0.5068359375, 'examples_seen': 33408, 'step': 1950, 'algorithm': 'dfs'}
+I0715 08:52:45.295101 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.550, current avg val score is 0.507, val scores are: dfs: 0.507
+I0715 08:52:46.534344 137093019534848 run.py:688] Algo dfs step 2000 current loss 10.479612, current_train_items 34272.
+I0715 08:52:46.715934 137093019534848 run.py:723] (val) algo dfs step 2000: {'pi': 0.521484375, 'score': 0.521484375, 'examples_seen': 34272, 'step': 2000, 'algorithm': 'dfs'}
+I0715 08:52:46.716151 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.550, current avg val score is 0.521, val scores are: dfs: 0.521
+I0715 08:52:47.900139 137093019534848 run.py:688] Algo dfs step 2050 current loss 0.140465, current_train_items 35152.
+I0715 08:52:48.073523 137093019534848 run.py:723] (val) algo dfs step 2050: {'pi': 0.5244140625, 'score': 0.5244140625, 'examples_seen': 35152, 'step': 2050, 'algorithm': 'dfs'}
+I0715 08:52:48.073742 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.550, current avg val score is 0.524, val scores are: dfs: 0.524
+I0715 08:52:49.342813 137093019534848 run.py:688] Algo dfs step 2100 current loss 1.563475, current_train_items 36016.
+I0715 08:52:49.469709 137093019534848 run.py:723] (val) algo dfs step 2100: {'pi': 0.533203125, 'score': 0.533203125, 'examples_seen': 36016, 'step': 2100, 'algorithm': 'dfs'}
+I0715 08:52:49.469924 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.550, current avg val score is 0.533, val scores are: dfs: 0.533
+I0715 08:52:50.672952 137093019534848 run.py:688] Algo dfs step 2150 current loss 4.418653, current_train_items 36880.
+I0715 08:52:50.781151 137093019534848 run.py:723] (val) algo dfs step 2150: {'pi': 0.5078125, 'score': 0.5078125, 'examples_seen': 36880, 'step': 2150, 'algorithm': 'dfs'}
+I0715 08:52:50.781317 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.550, current avg val score is 0.508, val scores are: dfs: 0.508
+I0715 08:52:51.970847 137093019534848 run.py:688] Algo dfs step 2200 current loss 1.451803, current_train_items 37728.
+I0715 08:52:52.093299 137093019534848 run.py:723] (val) algo dfs step 2200: {'pi': 0.470703125, 'score': 0.470703125, 'examples_seen': 37728, 'step': 2200, 'algorithm': 'dfs'}
+I0715 08:52:52.093530 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.550, current avg val score is 0.471, val scores are: dfs: 0.471
+I0715 08:52:53.315749 137093019534848 run.py:688] Algo dfs step 2250 current loss 9.982093, current_train_items 38592.
+I0715 08:52:53.447385 137093019534848 run.py:723] (val) algo dfs step 2250: {'pi': 0.509765625, 'score': 0.509765625, 'examples_seen': 38592, 'step': 2250, 'algorithm': 'dfs'}
+I0715 08:52:53.447567 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.550, current avg val score is 0.510, val scores are: dfs: 0.510
+I0715 08:52:54.593477 137093019534848 run.py:688] Algo dfs step 2300 current loss 6.343226, current_train_items 39440.
+I0715 08:52:54.731265 137093019534848 run.py:723] (val) algo dfs step 2300: {'pi': 0.48828125, 'score': 0.48828125, 'examples_seen': 39440, 'step': 2300, 'algorithm': 'dfs'}
+I0715 08:52:54.731496 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.550, current avg val score is 0.488, val scores are: dfs: 0.488
+I0715 08:52:55.964181 137093019534848 run.py:688] Algo dfs step 2350 current loss 8.255430, current_train_items 40272.
+I0715 08:52:56.096006 137093019534848 run.py:723] (val) algo dfs step 2350: {'pi': 0.4765625, 'score': 0.4765625, 'examples_seen': 40272, 'step': 2350, 'algorithm': 'dfs'}
+I0715 08:52:56.096221 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.550, current avg val score is 0.477, val scores are: dfs: 0.477
+I0715 08:52:57.295041 137093019534848 run.py:688] Algo dfs step 2400 current loss 0.570195, current_train_items 41152.
+I0715 08:52:57.437994 137093019534848 run.py:723] (val) algo dfs step 2400: {'pi': 0.4921875, 'score': 0.4921875, 'examples_seen': 41152, 'step': 2400, 'algorithm': 'dfs'}
+I0715 08:52:57.438212 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.550, current avg val score is 0.492, val scores are: dfs: 0.492
+I0715 08:52:58.627789 137093019534848 run.py:688] Algo dfs step 2450 current loss 0.733281, current_train_items 42032.
+I0715 08:52:58.787827 137093019534848 run.py:723] (val) algo dfs step 2450: {'pi': 0.5341796875, 'score': 0.5341796875, 'examples_seen': 42032, 'step': 2450, 'algorithm': 'dfs'}
+I0715 08:52:58.788047 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.550, current avg val score is 0.534, val scores are: dfs: 0.534
+I0715 08:52:59.982456 137093019534848 run.py:688] Algo dfs step 2500 current loss 2.411264, current_train_items 42864.
+I0715 08:53:00.092653 137093019534848 run.py:723] (val) algo dfs step 2500: {'pi': 0.5517578125, 'score': 0.5517578125, 'examples_seen': 42864, 'step': 2500, 'algorithm': 'dfs'}
+I0715 08:53:00.092825 137093019534848 run.py:744] Checkpointing best model, best avg val score was 0.550, current avg val score is 0.552, val scores are: dfs: 0.552
+I0715 08:53:01.319297 137093019534848 run.py:688] Algo dfs step 2550 current loss 7.130233, current_train_items 43712.
+I0715 08:53:01.460454 137093019534848 run.py:723] (val) algo dfs step 2550: {'pi': 0.478515625, 'score': 0.478515625, 'examples_seen': 43712, 'step': 2550, 'algorithm': 'dfs'}
+I0715 08:53:01.460686 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.479, val scores are: dfs: 0.479
+I0715 08:53:02.670323 137093019534848 run.py:688] Algo dfs step 2600 current loss 8.852843, current_train_items 44576.
+I0715 08:53:02.817190 137093019534848 run.py:723] (val) algo dfs step 2600: {'pi': 0.5419921875, 'score': 0.5419921875, 'examples_seen': 44576, 'step': 2600, 'algorithm': 'dfs'}
+I0715 08:53:02.817402 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.542, val scores are: dfs: 0.542
+I0715 08:53:04.041574 137093019534848 run.py:688] Algo dfs step 2650 current loss 8.973930, current_train_items 45424.
+I0715 08:53:04.185660 137093019534848 run.py:723] (val) algo dfs step 2650: {'pi': 0.5029296875, 'score': 0.5029296875, 'examples_seen': 45424, 'step': 2650, 'algorithm': 'dfs'}
+I0715 08:53:04.185879 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.503, val scores are: dfs: 0.503
+I0715 08:53:05.324050 137093019534848 run.py:688] Algo dfs step 2700 current loss 10.212902, current_train_items 46272.
+I0715 08:53:05.524041 137093019534848 run.py:723] (val) algo dfs step 2700: {'pi': 0.470703125, 'score': 0.470703125, 'examples_seen': 46272, 'step': 2700, 'algorithm': 'dfs'}
+I0715 08:53:05.524258 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.471, val scores are: dfs: 0.471
+I0715 08:53:06.796225 137093019534848 run.py:688] Algo dfs step 2750 current loss 0.529752, current_train_items 47168.
+I0715 08:53:06.923008 137093019534848 run.py:723] (val) algo dfs step 2750: {'pi': 0.4921875, 'score': 0.4921875, 'examples_seen': 47168, 'step': 2750, 'algorithm': 'dfs'}
+I0715 08:53:06.923225 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.492, val scores are: dfs: 0.492
+I0715 08:53:08.109069 137093019534848 run.py:688] Algo dfs step 2800 current loss 1.521909, current_train_items 48016.
+I0715 08:53:08.246013 137093019534848 run.py:723] (val) algo dfs step 2800: {'pi': 0.4931640625, 'score': 0.4931640625, 'examples_seen': 48016, 'step': 2800, 'algorithm': 'dfs'}
+I0715 08:53:08.246227 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.493, val scores are: dfs: 0.493
+I0715 08:53:09.467876 137093019534848 run.py:688] Algo dfs step 2850 current loss 4.720625, current_train_items 48880.
+I0715 08:53:09.603002 137093019534848 run.py:723] (val) algo dfs step 2850: {'pi': 0.5234375, 'score': 0.5234375, 'examples_seen': 48880, 'step': 2850, 'algorithm': 'dfs'}
+I0715 08:53:09.603219 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.523, val scores are: dfs: 0.523
+I0715 08:53:10.832597 137093019534848 run.py:688] Algo dfs step 2900 current loss 9.064187, current_train_items 49728.
+I0715 08:53:10.950971 137093019534848 run.py:723] (val) algo dfs step 2900: {'pi': 0.44921875, 'score': 0.44921875, 'examples_seen': 49728, 'step': 2900, 'algorithm': 'dfs'}
+I0715 08:53:10.951148 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.449, val scores are: dfs: 0.449
+I0715 08:53:12.150103 137093019534848 run.py:688] Algo dfs step 2950 current loss 8.839247, current_train_items 50608.
+I0715 08:53:12.274868 137093019534848 run.py:723] (val) algo dfs step 2950: {'pi': 0.4912109375, 'score': 0.4912109375, 'examples_seen': 50608, 'step': 2950, 'algorithm': 'dfs'}
+I0715 08:53:12.275085 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.491, val scores are: dfs: 0.491
+I0715 08:53:13.473715 137093019534848 run.py:688] Algo dfs step 3000 current loss 1.867981, current_train_items 51424.
+I0715 08:53:13.600937 137093019534848 run.py:723] (val) algo dfs step 3000: {'pi': 0.51171875, 'score': 0.51171875, 'examples_seen': 51424, 'step': 3000, 'algorithm': 'dfs'}
+I0715 08:53:13.601152 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.512, val scores are: dfs: 0.512
+I0715 08:53:14.812512 137093019534848 run.py:688] Algo dfs step 3050 current loss 11.024666, current_train_items 52256.
+I0715 08:53:14.978210 137093019534848 run.py:723] (val) algo dfs step 3050: {'pi': 0.4716796875, 'score': 0.4716796875, 'examples_seen': 52256, 'step': 3050, 'algorithm': 'dfs'}
+I0715 08:53:14.978438 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.472, val scores are: dfs: 0.472
+I0715 08:53:16.247860 137093019534848 run.py:688] Algo dfs step 3100 current loss 0.096146, current_train_items 53168.
+I0715 08:53:16.385611 137093019534848 run.py:723] (val) algo dfs step 3100: {'pi': 0.462890625, 'score': 0.462890625, 'examples_seen': 53168, 'step': 3100, 'algorithm': 'dfs'}
+I0715 08:53:16.385842 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.463, val scores are: dfs: 0.463
+I0715 08:53:17.597959 137093019534848 run.py:688] Algo dfs step 3150 current loss 1.743390, current_train_items 54032.
+I0715 08:53:17.703626 137093019534848 run.py:723] (val) algo dfs step 3150: {'pi': 0.52734375, 'score': 0.52734375, 'examples_seen': 54032, 'step': 3150, 'algorithm': 'dfs'}
+I0715 08:53:17.703803 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.527, val scores are: dfs: 0.527
+I0715 08:53:18.890151 137093019534848 run.py:688] Algo dfs step 3200 current loss 3.795281, current_train_items 54880.
+I0715 08:53:19.024405 137093019534848 run.py:723] (val) algo dfs step 3200: {'pi': 0.501953125, 'score': 0.501953125, 'examples_seen': 54880, 'step': 3200, 'algorithm': 'dfs'}
+I0715 08:53:19.024646 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.502, val scores are: dfs: 0.502
+I0715 08:53:20.237785 137093019534848 run.py:688] Algo dfs step 3250 current loss 8.298961, current_train_items 55744.
+I0715 08:53:20.352204 137093019534848 run.py:723] (val) algo dfs step 3250: {'pi': 0.4755859375, 'score': 0.4755859375, 'examples_seen': 55744, 'step': 3250, 'algorithm': 'dfs'}
+I0715 08:53:20.352376 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.476, val scores are: dfs: 0.476
+I0715 08:53:21.587080 137093019534848 run.py:688] Algo dfs step 3300 current loss 5.291245, current_train_items 56576.
+I0715 08:53:21.705094 137093019534848 run.py:723] (val) algo dfs step 3300: {'pi': 0.486328125, 'score': 0.486328125, 'examples_seen': 56576, 'step': 3300, 'algorithm': 'dfs'}
+I0715 08:53:21.705313 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.486, val scores are: dfs: 0.486
+I0715 08:53:22.873522 137093019534848 run.py:688] Algo dfs step 3350 current loss 9.775881, current_train_items 57424.
+I0715 08:53:23.040013 137093019534848 run.py:723] (val) algo dfs step 3350: {'pi': 0.4921875, 'score': 0.4921875, 'examples_seen': 57424, 'step': 3350, 'algorithm': 'dfs'}
+I0715 08:53:23.040234 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.492, val scores are: dfs: 0.492
+I0715 08:53:24.281799 137093019534848 run.py:688] Algo dfs step 3400 current loss 2.516822, current_train_items 58272.
+I0715 08:53:24.428701 137093019534848 run.py:723] (val) algo dfs step 3400: {'pi': 0.51171875, 'score': 0.51171875, 'examples_seen': 58272, 'step': 3400, 'algorithm': 'dfs'}
+I0715 08:53:24.428933 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.512, val scores are: dfs: 0.512
+I0715 08:53:25.648668 137093019534848 run.py:688] Algo dfs step 3450 current loss 0.481313, current_train_items 59152.
+I0715 08:53:25.817949 137093019534848 run.py:723] (val) algo dfs step 3450: {'pi': 0.4931640625, 'score': 0.4931640625, 'examples_seen': 59152, 'step': 3450, 'algorithm': 'dfs'}
+I0715 08:53:25.818171 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.493, val scores are: dfs: 0.493
+I0715 08:53:27.005954 137093019534848 run.py:688] Algo dfs step 3500 current loss 2.249443, current_train_items 60016.
+I0715 08:53:27.149660 137093019534848 run.py:723] (val) algo dfs step 3500: {'pi': 0.513671875, 'score': 0.513671875, 'examples_seen': 60016, 'step': 3500, 'algorithm': 'dfs'}
+I0715 08:53:27.149874 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.514, val scores are: dfs: 0.514
+I0715 08:53:28.396764 137093019534848 run.py:688] Algo dfs step 3550 current loss 2.581152, current_train_items 60880.
+I0715 08:53:28.507075 137093019534848 run.py:723] (val) algo dfs step 3550: {'pi': 0.4736328125, 'score': 0.4736328125, 'examples_seen': 60880, 'step': 3550, 'algorithm': 'dfs'}
+I0715 08:53:28.507267 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.474, val scores are: dfs: 0.474
+I0715 08:53:29.711618 137093019534848 run.py:688] Algo dfs step 3600 current loss 6.744220, current_train_items 61744.
+I0715 08:53:29.826749 137093019534848 run.py:723] (val) algo dfs step 3600: {'pi': 0.509765625, 'score': 0.509765625, 'examples_seen': 61744, 'step': 3600, 'algorithm': 'dfs'}
+I0715 08:53:29.826966 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.510, val scores are: dfs: 0.510
+I0715 08:53:31.038130 137093019534848 run.py:688] Algo dfs step 3650 current loss 10.818172, current_train_items 62576.
+I0715 08:53:31.171020 137093019534848 run.py:723] (val) algo dfs step 3650: {'pi': 0.5458984375, 'score': 0.5458984375, 'examples_seen': 62576, 'step': 3650, 'algorithm': 'dfs'}
+I0715 08:53:31.171246 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.546, val scores are: dfs: 0.546
+I0715 08:53:32.378439 137093019534848 run.py:688] Algo dfs step 3700 current loss 12.217633, current_train_items 63424.
+I0715 08:53:32.547602 137093019534848 run.py:723] (val) algo dfs step 3700: {'pi': 0.509765625, 'score': 0.509765625, 'examples_seen': 63424, 'step': 3700, 'algorithm': 'dfs'}
+I0715 08:53:32.547818 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.510, val scores are: dfs: 0.510
+I0715 08:53:33.746788 137093019534848 run.py:688] Algo dfs step 3750 current loss 10.024442, current_train_items 64288.
+I0715 08:53:33.902399 137093019534848 run.py:723] (val) algo dfs step 3750: {'pi': 0.5009765625, 'score': 0.5009765625, 'examples_seen': 64288, 'step': 3750, 'algorithm': 'dfs'}
+I0715 08:53:33.902631 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.501, val scores are: dfs: 0.501
+I0715 08:53:35.138818 137093019534848 run.py:688] Algo dfs step 3800 current loss 0.499294, current_train_items 65168.
+I0715 08:53:35.251000 137093019534848 run.py:723] (val) algo dfs step 3800: {'pi': 0.5078125, 'score': 0.5078125, 'examples_seen': 65168, 'step': 3800, 'algorithm': 'dfs'}
+I0715 08:53:35.251171 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.508, val scores are: dfs: 0.508
+I0715 08:53:36.476942 137093019534848 run.py:688] Algo dfs step 3850 current loss 2.667745, current_train_items 66032.
+I0715 08:53:36.599749 137093019534848 run.py:723] (val) algo dfs step 3850: {'pi': 0.490234375, 'score': 0.490234375, 'examples_seen': 66032, 'step': 3850, 'algorithm': 'dfs'}
+I0715 08:53:36.599895 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.490, val scores are: dfs: 0.490
+I0715 08:53:37.774571 137093019534848 run.py:688] Algo dfs step 3900 current loss 5.164532, current_train_items 66880.
+I0715 08:53:37.905776 137093019534848 run.py:723] (val) algo dfs step 3900: {'pi': 0.5048828125, 'score': 0.5048828125, 'examples_seen': 66880, 'step': 3900, 'algorithm': 'dfs'}
+I0715 08:53:37.906001 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.505, val scores are: dfs: 0.505
+I0715 08:53:39.134505 137093019534848 run.py:688] Algo dfs step 3950 current loss 5.470869, current_train_items 67728.
+I0715 08:53:39.250650 137093019534848 run.py:723] (val) algo dfs step 3950: {'pi': 0.4765625, 'score': 0.4765625, 'examples_seen': 67728, 'step': 3950, 'algorithm': 'dfs'}
+I0715 08:53:39.250860 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.477, val scores are: dfs: 0.477
+I0715 08:53:40.455662 137093019534848 run.py:688] Algo dfs step 4000 current loss 8.204442, current_train_items 68576.
+I0715 08:53:40.603833 137093019534848 run.py:723] (val) algo dfs step 4000: {'pi': 0.4970703125, 'score': 0.4970703125, 'examples_seen': 68576, 'step': 4000, 'algorithm': 'dfs'}
+I0715 08:53:40.604065 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.497, val scores are: dfs: 0.497
+I0715 08:53:41.820152 137093019534848 run.py:688] Algo dfs step 4050 current loss 8.821312, current_train_items 69424.
+I0715 08:53:41.983911 137093019534848 run.py:723] (val) algo dfs step 4050: {'pi': 0.4794921875, 'score': 0.4794921875, 'examples_seen': 69424, 'step': 4050, 'algorithm': 'dfs'}
+I0715 08:53:41.984127 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.479, val scores are: dfs: 0.479
+I0715 08:53:43.212304 137093019534848 run.py:688] Algo dfs step 4100 current loss 10.305425, current_train_items 70272.
+I0715 08:53:43.399538 137093019534848 run.py:723] (val) algo dfs step 4100: {'pi': 0.4775390625, 'score': 0.4775390625, 'examples_seen': 70272, 'step': 4100, 'algorithm': 'dfs'}
+I0715 08:53:43.399749 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.478, val scores are: dfs: 0.478
+I0715 08:53:44.575982 137093019534848 run.py:688] Algo dfs step 4150 current loss 0.073523, current_train_items 71168.
+I0715 08:53:44.741159 137093019534848 run.py:723] (val) algo dfs step 4150: {'pi': 0.486328125, 'score': 0.486328125, 'examples_seen': 71168, 'step': 4150, 'algorithm': 'dfs'}
+I0715 08:53:44.741373 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.486, val scores are: dfs: 0.486
+I0715 08:53:46.001326 137093019534848 run.py:688] Algo dfs step 4200 current loss 2.099013, current_train_items 72032.
+I0715 08:53:46.109443 137093019534848 run.py:723] (val) algo dfs step 4200: {'pi': 0.4384765625, 'score': 0.4384765625, 'examples_seen': 72032, 'step': 4200, 'algorithm': 'dfs'}
+I0715 08:53:46.109623 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.438, val scores are: dfs: 0.438
+I0715 08:53:47.311740 137093019534848 run.py:688] Algo dfs step 4250 current loss 3.705175, current_train_items 72880.
+I0715 08:53:47.445596 137093019534848 run.py:723] (val) algo dfs step 4250: {'pi': 0.4677734375, 'score': 0.4677734375, 'examples_seen': 72880, 'step': 4250, 'algorithm': 'dfs'}
+I0715 08:53:47.445820 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.468, val scores are: dfs: 0.468
+I0715 08:53:48.677575 137093019534848 run.py:688] Algo dfs step 4300 current loss 5.543427, current_train_items 73760.
+I0715 08:53:48.796231 137093019534848 run.py:723] (val) algo dfs step 4300: {'pi': 0.533203125, 'score': 0.533203125, 'examples_seen': 73760, 'step': 4300, 'algorithm': 'dfs'}
+I0715 08:53:48.796408 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.533, val scores are: dfs: 0.533
+I0715 08:53:50.007854 137093019534848 run.py:688] Algo dfs step 4350 current loss 8.467300, current_train_items 74592.
+I0715 08:53:50.129999 137093019534848 run.py:723] (val) algo dfs step 4350: {'pi': 0.509765625, 'score': 0.509765625, 'examples_seen': 74592, 'step': 4350, 'algorithm': 'dfs'}
+I0715 08:53:50.130214 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.510, val scores are: dfs: 0.510
+I0715 08:53:51.280142 137093019534848 run.py:688] Algo dfs step 4400 current loss 12.557233, current_train_items 75456.
+I0715 08:53:51.443945 137093019534848 run.py:723] (val) algo dfs step 4400: {'pi': 0.4638671875, 'score': 0.4638671875, 'examples_seen': 75456, 'step': 4400, 'algorithm': 'dfs'}
+I0715 08:53:51.444164 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.464, val scores are: dfs: 0.464
+I0715 08:53:52.667022 137093019534848 run.py:688] Algo dfs step 4450 current loss 1.636221, current_train_items 76272.
+I0715 08:53:52.804980 137093019534848 run.py:723] (val) algo dfs step 4450: {'pi': 0.4931640625, 'score': 0.4931640625, 'examples_seen': 76272, 'step': 4450, 'algorithm': 'dfs'}
+I0715 08:53:52.805233 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.493, val scores are: dfs: 0.493
+I0715 08:53:54.027245 137093019534848 run.py:688] Algo dfs step 4500 current loss 0.425470, current_train_items 77152.
+I0715 08:53:54.164226 137093019534848 run.py:723] (val) algo dfs step 4500: {'pi': 0.49609375, 'score': 0.49609375, 'examples_seen': 77152, 'step': 4500, 'algorithm': 'dfs'}
+I0715 08:53:54.164441 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.496, val scores are: dfs: 0.496
+I0715 08:53:55.389652 137093019534848 run.py:688] Algo dfs step 4550 current loss 2.699447, current_train_items 78048.
+I0715 08:53:55.537715 137093019534848 run.py:723] (val) algo dfs step 4550: {'pi': 0.5078125, 'score': 0.5078125, 'examples_seen': 78048, 'step': 4550, 'algorithm': 'dfs'}
+I0715 08:53:55.537955 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.508, val scores are: dfs: 0.508
+I0715 08:53:56.759301 137093019534848 run.py:688] Algo dfs step 4600 current loss 2.317053, current_train_items 78880.
+I0715 08:53:56.869246 137093019534848 run.py:723] (val) algo dfs step 4600: {'pi': 0.5126953125, 'score': 0.5126953125, 'examples_seen': 78880, 'step': 4600, 'algorithm': 'dfs'}
+I0715 08:53:56.869441 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.513, val scores are: dfs: 0.513
+I0715 08:53:58.056354 137093019534848 run.py:688] Algo dfs step 4650 current loss 4.668181, current_train_items 79744.
+I0715 08:53:58.188972 137093019534848 run.py:723] (val) algo dfs step 4650: {'pi': 0.466796875, 'score': 0.466796875, 'examples_seen': 79744, 'step': 4650, 'algorithm': 'dfs'}
+I0715 08:53:58.189215 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.467, val scores are: dfs: 0.467
+I0715 08:53:59.383928 137093019534848 run.py:688] Algo dfs step 4700 current loss 5.185977, current_train_items 80576.
+I0715 08:53:59.506621 137093019534848 run.py:723] (val) algo dfs step 4700: {'pi': 0.5302734375, 'score': 0.5302734375, 'examples_seen': 80576, 'step': 4700, 'algorithm': 'dfs'}
+I0715 08:53:59.506865 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.530, val scores are: dfs: 0.530
+I0715 08:54:00.730932 137093019534848 run.py:688] Algo dfs step 4750 current loss 9.235600, current_train_items 81424.
+I0715 08:54:00.891534 137093019534848 run.py:723] (val) algo dfs step 4750: {'pi': 0.5068359375, 'score': 0.5068359375, 'examples_seen': 81424, 'step': 4750, 'algorithm': 'dfs'}
+I0715 08:54:00.891773 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.507, val scores are: dfs: 0.507
+I0715 08:54:02.096239 137093019534848 run.py:688] Algo dfs step 4800 current loss 9.742429, current_train_items 82288.
+I0715 08:54:02.272707 137093019534848 run.py:723] (val) algo dfs step 4800: {'pi': 0.4912109375, 'score': 0.4912109375, 'examples_seen': 82288, 'step': 4800, 'algorithm': 'dfs'}
+I0715 08:54:02.272925 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.552, current avg val score is 0.491, val scores are: dfs: 0.491
+I0715 08:54:03.511477 137093019534848 run.py:688] Algo dfs step 4850 current loss 0.536275, current_train_items 83152.
+I0715 08:54:03.635175 137093019534848 run.py:723] (val) algo dfs step 4850: {'pi': 0.56640625, 'score': 0.56640625, 'examples_seen': 83152, 'step': 4850, 'algorithm': 'dfs'}
+I0715 08:54:03.635394 137093019534848 run.py:744] Checkpointing best model, best avg val score was 0.552, current avg val score is 0.566, val scores are: dfs: 0.566
+I0715 08:54:04.847347 137093019534848 run.py:688] Algo dfs step 4900 current loss 2.258952, current_train_items 84032.
+I0715 08:54:05.007797 137093019534848 run.py:723] (val) algo dfs step 4900: {'pi': 0.494140625, 'score': 0.494140625, 'examples_seen': 84032, 'step': 4900, 'algorithm': 'dfs'}
+I0715 08:54:05.008012 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.566, current avg val score is 0.494, val scores are: dfs: 0.494
+I0715 08:54:06.202615 137093019534848 run.py:688] Algo dfs step 4950 current loss 5.017642, current_train_items 84896.
+I0715 08:54:06.331119 137093019534848 run.py:723] (val) algo dfs step 4950: {'pi': 0.494140625, 'score': 0.494140625, 'examples_seen': 84896, 'step': 4950, 'algorithm': 'dfs'}
+I0715 08:54:06.331336 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.566, current avg val score is 0.494, val scores are: dfs: 0.494
+I0715 08:54:07.555733 137093019534848 run.py:688] Algo dfs step 5000 current loss 3.722608, current_train_items 85728.
+I0715 08:54:07.665187 137093019534848 run.py:723] (val) algo dfs step 5000: {'pi': 0.509765625, 'score': 0.509765625, 'examples_seen': 85728, 'step': 5000, 'algorithm': 'dfs'}
+I0715 08:54:07.665365 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.566, current avg val score is 0.510, val scores are: dfs: 0.510
+I0715 08:54:08.870884 137093019534848 run.py:688] Algo dfs step 5050 current loss 10.159070, current_train_items 86592.
+I0715 08:54:09.018981 137093019534848 run.py:723] (val) algo dfs step 5050: {'pi': 0.568359375, 'score': 0.568359375, 'examples_seen': 86592, 'step': 5050, 'algorithm': 'dfs'}
+I0715 08:54:09.019196 137093019534848 run.py:744] Checkpointing best model, best avg val score was 0.566, current avg val score is 0.568, val scores are: dfs: 0.568
+I0715 08:54:10.252777 137093019534848 run.py:688] Algo dfs step 5100 current loss 13.590337, current_train_items 87424.
+I0715 08:54:10.409430 137093019534848 run.py:723] (val) algo dfs step 5100: {'pi': 0.4892578125, 'score': 0.4892578125, 'examples_seen': 87424, 'step': 5100, 'algorithm': 'dfs'}
+I0715 08:54:10.409659 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.568, current avg val score is 0.489, val scores are: dfs: 0.489
+I0715 08:54:11.632593 137093019534848 run.py:688] Algo dfs step 5150 current loss 10.270143, current_train_items 88288.
+I0715 08:54:11.792224 137093019534848 run.py:723] (val) algo dfs step 5150: {'pi': 0.5, 'score': 0.5, 'examples_seen': 88288, 'step': 5150, 'algorithm': 'dfs'}
+I0715 08:54:11.792436 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.568, current avg val score is 0.500, val scores are: dfs: 0.500
+I0715 08:54:12.975970 137093019534848 run.py:688] Algo dfs step 5200 current loss 0.046691, current_train_items 89152.
+I0715 08:54:13.141229 137093019534848 run.py:723] (val) algo dfs step 5200: {'pi': 0.4873046875, 'score': 0.4873046875, 'examples_seen': 89152, 'step': 5200, 'algorithm': 'dfs'}
+I0715 08:54:13.141444 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.568, current avg val score is 0.487, val scores are: dfs: 0.487
+I0715 08:54:14.391677 137093019534848 run.py:688] Algo dfs step 5250 current loss 1.913388, current_train_items 90048.
+I0715 08:54:14.500756 137093019534848 run.py:723] (val) algo dfs step 5250: {'pi': 0.4990234375, 'score': 0.4990234375, 'examples_seen': 90048, 'step': 5250, 'algorithm': 'dfs'}
+I0715 08:54:14.500948 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.568, current avg val score is 0.499, val scores are: dfs: 0.499
+I0715 08:54:15.683339 137093019534848 run.py:688] Algo dfs step 5300 current loss 3.666670, current_train_items 90880.
+I0715 08:54:15.817169 137093019534848 run.py:723] (val) algo dfs step 5300: {'pi': 0.4716796875, 'score': 0.4716796875, 'examples_seen': 90880, 'step': 5300, 'algorithm': 'dfs'}
+I0715 08:54:15.817388 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.568, current avg val score is 0.472, val scores are: dfs: 0.472
+I0715 08:54:17.029707 137093019534848 run.py:688] Algo dfs step 5350 current loss 3.274159, current_train_items 91728.
+I0715 08:54:17.160785 137093019534848 run.py:723] (val) algo dfs step 5350: {'pi': 0.5068359375, 'score': 0.5068359375, 'examples_seen': 91728, 'step': 5350, 'algorithm': 'dfs'}
+I0715 08:54:17.160998 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.568, current avg val score is 0.507, val scores are: dfs: 0.507
+I0715 08:54:18.386374 137093019534848 run.py:688] Algo dfs step 5400 current loss 9.217600, current_train_items 92576.
+I0715 08:54:18.522806 137093019534848 run.py:723] (val) algo dfs step 5400: {'pi': 0.5009765625, 'score': 0.5009765625, 'examples_seen': 92576, 'step': 5400, 'algorithm': 'dfs'}
+I0715 08:54:18.523020 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.568, current avg val score is 0.501, val scores are: dfs: 0.501
+I0715 08:54:19.727123 137093019534848 run.py:688] Algo dfs step 5450 current loss 9.364448, current_train_items 93456.
+I0715 08:54:19.880686 137093019534848 run.py:723] (val) algo dfs step 5450: {'pi': 0.5048828125, 'score': 0.5048828125, 'examples_seen': 93456, 'step': 5450, 'algorithm': 'dfs'}
+I0715 08:54:19.880904 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.568, current avg val score is 0.505, val scores are: dfs: 0.505
+I0715 08:54:21.076645 137093019534848 run.py:688] Algo dfs step 5500 current loss 1.643250, current_train_items 94272.
+I0715 08:54:21.248268 137093019534848 run.py:723] (val) algo dfs step 5500: {'pi': 0.4951171875, 'score': 0.4951171875, 'examples_seen': 94272, 'step': 5500, 'algorithm': 'dfs'}
+I0715 08:54:21.248410 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.568, current avg val score is 0.495, val scores are: dfs: 0.495
+I0715 08:54:22.465332 137093019534848 run.py:688] Algo dfs step 5550 current loss 0.412459, current_train_items 95136.
+I0715 08:54:22.637426 137093019534848 run.py:723] (val) algo dfs step 5550: {'pi': 0.462890625, 'score': 0.462890625, 'examples_seen': 95136, 'step': 5550, 'algorithm': 'dfs'}
+I0715 08:54:22.637692 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.568, current avg val score is 0.463, val scores are: dfs: 0.463
+I0715 08:54:23.867933 137093019534848 run.py:688] Algo dfs step 5600 current loss 0.534413, current_train_items 96032.
+I0715 08:54:24.007558 137093019534848 run.py:723] (val) algo dfs step 5600: {'pi': 0.46484375, 'score': 0.46484375, 'examples_seen': 96032, 'step': 5600, 'algorithm': 'dfs'}
+I0715 08:54:24.007773 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.568, current avg val score is 0.465, val scores are: dfs: 0.465
+I0715 08:54:25.235603 137093019534848 run.py:688] Algo dfs step 5650 current loss 2.104826, current_train_items 96880.
+I0715 08:54:25.345563 137093019534848 run.py:723] (val) algo dfs step 5650: {'pi': 0.572265625, 'score': 0.572265625, 'examples_seen': 96880, 'step': 5650, 'algorithm': 'dfs'}
+I0715 08:54:25.345705 137093019534848 run.py:744] Checkpointing best model, best avg val score was 0.568, current avg val score is 0.572, val scores are: dfs: 0.572
+I0715 08:54:26.558854 137093019534848 run.py:688] Algo dfs step 5700 current loss 3.215700, current_train_items 97744.
+I0715 08:54:26.668590 137093019534848 run.py:723] (val) algo dfs step 5700: {'pi': 0.5458984375, 'score': 0.5458984375, 'examples_seen': 97744, 'step': 5700, 'algorithm': 'dfs'}
+I0715 08:54:26.668732 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.572, current avg val score is 0.546, val scores are: dfs: 0.546
+I0715 08:54:27.886224 137093019534848 run.py:688] Algo dfs step 5750 current loss 7.988543, current_train_items 98608.
+I0715 08:54:28.011005 137093019534848 run.py:723] (val) algo dfs step 5750: {'pi': 0.51953125, 'score': 0.51953125, 'examples_seen': 98608, 'step': 5750, 'algorithm': 'dfs'}
+I0715 08:54:28.011224 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.572, current avg val score is 0.520, val scores are: dfs: 0.520
+I0715 08:54:29.198935 137093019534848 run.py:688] Algo dfs step 5800 current loss 10.977861, current_train_items 99440.
+I0715 08:54:29.342544 137093019534848 run.py:723] (val) algo dfs step 5800: {'pi': 0.513671875, 'score': 0.513671875, 'examples_seen': 99440, 'step': 5800, 'algorithm': 'dfs'}
+I0715 08:54:29.342764 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.572, current avg val score is 0.514, val scores are: dfs: 0.514
+I0715 08:54:30.505223 137093019534848 run.py:688] Algo dfs step 5850 current loss 9.349742, current_train_items 100288.
+I0715 08:54:30.685359 137093019534848 run.py:723] (val) algo dfs step 5850: {'pi': 0.4853515625, 'score': 0.4853515625, 'examples_seen': 100288, 'step': 5850, 'algorithm': 'dfs'}
+I0715 08:54:30.685595 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.572, current avg val score is 0.485, val scores are: dfs: 0.485
+I0715 08:54:31.941575 137093019534848 run.py:688] Algo dfs step 5900 current loss 0.460530, current_train_items 101184.
+I0715 08:54:32.047428 137093019534848 run.py:723] (val) algo dfs step 5900: {'pi': 0.515625, 'score': 0.515625, 'examples_seen': 101184, 'step': 5900, 'algorithm': 'dfs'}
+I0715 08:54:32.047660 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.572, current avg val score is 0.516, val scores are: dfs: 0.516
+I0715 08:54:33.243740 137093019534848 run.py:688] Algo dfs step 5950 current loss 1.460479, current_train_items 102032.
+I0715 08:54:33.365752 137093019534848 run.py:723] (val) algo dfs step 5950: {'pi': 0.498046875, 'score': 0.498046875, 'examples_seen': 102032, 'step': 5950, 'algorithm': 'dfs'}
+I0715 08:54:33.365969 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.572, current avg val score is 0.498, val scores are: dfs: 0.498
+I0715 08:54:34.556225 137093019534848 run.py:688] Algo dfs step 6000 current loss 4.530023, current_train_items 102912.
+I0715 08:54:34.687000 137093019534848 run.py:723] (val) algo dfs step 6000: {'pi': 0.46875, 'score': 0.46875, 'examples_seen': 102912, 'step': 6000, 'algorithm': 'dfs'}
+I0715 08:54:34.687212 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.572, current avg val score is 0.469, val scores are: dfs: 0.469
+I0715 08:54:35.910624 137093019534848 run.py:688] Algo dfs step 6050 current loss 11.026782, current_train_items 103728.
+I0715 08:54:36.028563 137093019534848 run.py:723] (val) algo dfs step 6050: {'pi': 0.4765625, 'score': 0.4765625, 'examples_seen': 103728, 'step': 6050, 'algorithm': 'dfs'}
+I0715 08:54:36.028732 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.572, current avg val score is 0.477, val scores are: dfs: 0.477
+I0715 08:54:37.262797 137093019534848 run.py:688] Algo dfs step 6100 current loss 6.211378, current_train_items 104608.
+I0715 08:54:37.388970 137093019534848 run.py:723] (val) algo dfs step 6100: {'pi': 0.5166015625, 'score': 0.5166015625, 'examples_seen': 104608, 'step': 6100, 'algorithm': 'dfs'}
+I0715 08:54:37.389184 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.572, current avg val score is 0.517, val scores are: dfs: 0.517
+I0715 08:54:38.578546 137093019534848 run.py:688] Algo dfs step 6150 current loss 9.096634, current_train_items 105440.
+I0715 08:54:38.710006 137093019534848 run.py:723] (val) algo dfs step 6150: {'pi': 0.5087890625, 'score': 0.5087890625, 'examples_seen': 105440, 'step': 6150, 'algorithm': 'dfs'}
+I0715 08:54:38.710226 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.572, current avg val score is 0.509, val scores are: dfs: 0.509
+I0715 08:54:39.935712 137093019534848 run.py:688] Algo dfs step 6200 current loss 10.525333, current_train_items 106272.
+I0715 08:54:40.119978 137093019534848 run.py:723] (val) algo dfs step 6200: {'pi': 0.5009765625, 'score': 0.5009765625, 'examples_seen': 106272, 'step': 6200, 'algorithm': 'dfs'}
+I0715 08:54:40.120203 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.572, current avg val score is 0.501, val scores are: dfs: 0.501
+I0715 08:54:41.336874 137093019534848 run.py:688] Algo dfs step 6250 current loss 0.034588, current_train_items 107168.
+I0715 08:54:41.497125 137093019534848 run.py:723] (val) algo dfs step 6250: {'pi': 0.486328125, 'score': 0.486328125, 'examples_seen': 107168, 'step': 6250, 'algorithm': 'dfs'}
+I0715 08:54:41.497344 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.572, current avg val score is 0.486, val scores are: dfs: 0.486
+I0715 08:54:42.737303 137093019534848 run.py:688] Algo dfs step 6300 current loss 1.579430, current_train_items 108032.
+I0715 08:54:42.853235 137093019534848 run.py:723] (val) algo dfs step 6300: {'pi': 0.5087890625, 'score': 0.5087890625, 'examples_seen': 108032, 'step': 6300, 'algorithm': 'dfs'}
+I0715 08:54:42.853406 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.572, current avg val score is 0.509, val scores are: dfs: 0.509
+I0715 08:54:44.057743 137093019534848 run.py:688] Algo dfs step 6350 current loss 3.284148, current_train_items 108896.
+I0715 08:54:44.193088 137093019534848 run.py:723] (val) algo dfs step 6350: {'pi': 0.4833984375, 'score': 0.4833984375, 'examples_seen': 108896, 'step': 6350, 'algorithm': 'dfs'}
+I0715 08:54:44.193305 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.572, current avg val score is 0.483, val scores are: dfs: 0.483
+I0715 08:54:45.393143 137093019534848 run.py:688] Algo dfs step 6400 current loss 7.414645, current_train_items 109744.
+I0715 08:54:45.508963 137093019534848 run.py:723] (val) algo dfs step 6400: {'pi': 0.556640625, 'score': 0.556640625, 'examples_seen': 109744, 'step': 6400, 'algorithm': 'dfs'}
+I0715 08:54:45.509188 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.572, current avg val score is 0.557, val scores are: dfs: 0.557
+I0715 08:54:46.727322 137093019534848 run.py:688] Algo dfs step 6450 current loss 10.663925, current_train_items 110592.
+I0715 08:54:46.861185 137093019534848 run.py:723] (val) algo dfs step 6450: {'pi': 0.5078125, 'score': 0.5078125, 'examples_seen': 110592, 'step': 6450, 'algorithm': 'dfs'}
+I0715 08:54:46.861406 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.572, current avg val score is 0.508, val scores are: dfs: 0.508
+I0715 08:54:48.014136 137093019534848 run.py:688] Algo dfs step 6500 current loss 10.702068, current_train_items 111440.
+I0715 08:54:48.172231 137093019534848 run.py:723] (val) algo dfs step 6500: {'pi': 0.580078125, 'score': 0.580078125, 'examples_seen': 111440, 'step': 6500, 'algorithm': 'dfs'}
+I0715 08:54:48.172447 137093019534848 run.py:744] Checkpointing best model, best avg val score was 0.572, current avg val score is 0.580, val scores are: dfs: 0.580
+I0715 08:54:49.419739 137093019534848 run.py:688] Algo dfs step 6550 current loss 1.073690, current_train_items 112272.
+I0715 08:54:49.565101 137093019534848 run.py:723] (val) algo dfs step 6550: {'pi': 0.5, 'score': 0.5, 'examples_seen': 112272, 'step': 6550, 'algorithm': 'dfs'}
+I0715 08:54:49.565317 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.500, val scores are: dfs: 0.500
+I0715 08:54:50.756039 137093019534848 run.py:688] Algo dfs step 6600 current loss 0.410554, current_train_items 113168.
+I0715 08:54:50.902710 137093019534848 run.py:723] (val) algo dfs step 6600: {'pi': 0.5751953125, 'score': 0.5751953125, 'examples_seen': 113168, 'step': 6600, 'algorithm': 'dfs'}
+I0715 08:54:50.902933 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.575, val scores are: dfs: 0.575
+I0715 08:54:52.122241 137093019534848 run.py:688] Algo dfs step 6650 current loss 1.981671, current_train_items 114048.
+I0715 08:54:52.236898 137093019534848 run.py:723] (val) algo dfs step 6650: {'pi': 0.5556640625, 'score': 0.5556640625, 'examples_seen': 114048, 'step': 6650, 'algorithm': 'dfs'}
+I0715 08:54:52.237088 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.556, val scores are: dfs: 0.556
+I0715 08:54:53.441436 137093019534848 run.py:688] Algo dfs step 6700 current loss 1.891209, current_train_items 114880.
+I0715 08:54:53.551896 137093019534848 run.py:723] (val) algo dfs step 6700: {'pi': 0.5302734375, 'score': 0.5302734375, 'examples_seen': 114880, 'step': 6700, 'algorithm': 'dfs'}
+I0715 08:54:53.552060 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.530, val scores are: dfs: 0.530
+I0715 08:54:54.731774 137093019534848 run.py:688] Algo dfs step 6750 current loss 6.307402, current_train_items 115744.
+I0715 08:54:54.874583 137093019534848 run.py:723] (val) algo dfs step 6750: {'pi': 0.552734375, 'score': 0.552734375, 'examples_seen': 115744, 'step': 6750, 'algorithm': 'dfs'}
+I0715 08:54:54.874800 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.553, val scores are: dfs: 0.553
+I0715 08:54:56.051966 137093019534848 run.py:688] Algo dfs step 6800 current loss 8.286522, current_train_items 116576.
+I0715 08:54:56.184039 137093019534848 run.py:723] (val) algo dfs step 6800: {'pi': 0.47265625, 'score': 0.47265625, 'examples_seen': 116576, 'step': 6800, 'algorithm': 'dfs'}
+I0715 08:54:56.184206 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.473, val scores are: dfs: 0.473
+I0715 08:54:57.454394 137093019534848 run.py:688] Algo dfs step 6850 current loss 9.160802, current_train_items 117456.
+I0715 08:54:57.584129 137093019534848 run.py:723] (val) algo dfs step 6850: {'pi': 0.5224609375, 'score': 0.5224609375, 'examples_seen': 117456, 'step': 6850, 'algorithm': 'dfs'}
+I0715 08:54:57.584345 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.522, val scores are: dfs: 0.522
+I0715 08:54:58.712415 137093019534848 run.py:688] Algo dfs step 6900 current loss 9.360981, current_train_items 118288.
+I0715 08:54:58.912668 137093019534848 run.py:723] (val) algo dfs step 6900: {'pi': 0.501953125, 'score': 0.501953125, 'examples_seen': 118288, 'step': 6900, 'algorithm': 'dfs'}
+I0715 08:54:58.912882 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.502, val scores are: dfs: 0.502
+I0715 08:55:00.194401 137093019534848 run.py:688] Algo dfs step 6950 current loss 0.460477, current_train_items 119168.
+I0715 08:55:00.330410 137093019534848 run.py:723] (val) algo dfs step 6950: {'pi': 0.5478515625, 'score': 0.5478515625, 'examples_seen': 119168, 'step': 6950, 'algorithm': 'dfs'}
+I0715 08:55:00.330643 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.548, val scores are: dfs: 0.548
+I0715 08:55:01.550617 137093019534848 run.py:688] Algo dfs step 7000 current loss 1.905788, current_train_items 120032.
+I0715 08:55:01.694929 137093019534848 run.py:723] (val) algo dfs step 7000: {'pi': 0.5205078125, 'score': 0.5205078125, 'examples_seen': 120032, 'step': 7000, 'algorithm': 'dfs'}
+I0715 08:55:01.695153 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.521, val scores are: dfs: 0.521
+I0715 08:55:02.904328 137093019534848 run.py:688] Algo dfs step 7050 current loss 4.427444, current_train_items 120896.
+I0715 08:55:03.034543 137093019534848 run.py:723] (val) algo dfs step 7050: {'pi': 0.5498046875, 'score': 0.5498046875, 'examples_seen': 120896, 'step': 7050, 'algorithm': 'dfs'}
+I0715 08:55:03.034776 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.550, val scores are: dfs: 0.550
+I0715 08:55:04.264185 137093019534848 run.py:688] Algo dfs step 7100 current loss 6.204446, current_train_items 121760.
+I0715 08:55:04.378342 137093019534848 run.py:723] (val) algo dfs step 7100: {'pi': 0.5107421875, 'score': 0.5107421875, 'examples_seen': 121760, 'step': 7100, 'algorithm': 'dfs'}
+I0715 08:55:04.378535 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.511, val scores are: dfs: 0.511
+I0715 08:55:05.515438 137093019534848 run.py:688] Algo dfs step 7150 current loss 8.834797, current_train_items 122608.
+I0715 08:55:05.642619 137093019534848 run.py:723] (val) algo dfs step 7150: {'pi': 0.55859375, 'score': 0.55859375, 'examples_seen': 122608, 'step': 7150, 'algorithm': 'dfs'}
+I0715 08:55:05.642837 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.559, val scores are: dfs: 0.559
+I0715 08:55:06.846540 137093019534848 run.py:688] Algo dfs step 7200 current loss 11.386206, current_train_items 123440.
+I0715 08:55:06.996657 137093019534848 run.py:723] (val) algo dfs step 7200: {'pi': 0.4228515625, 'score': 0.4228515625, 'examples_seen': 123440, 'step': 7200, 'algorithm': 'dfs'}
+I0715 08:55:06.996872 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.423, val scores are: dfs: 0.423
+I0715 08:55:08.201844 137093019534848 run.py:688] Algo dfs step 7250 current loss 9.597825, current_train_items 124288.
+I0715 08:55:08.386657 137093019534848 run.py:723] (val) algo dfs step 7250: {'pi': 0.52734375, 'score': 0.52734375, 'examples_seen': 124288, 'step': 7250, 'algorithm': 'dfs'}
+I0715 08:55:08.386875 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.527, val scores are: dfs: 0.527
+I0715 08:55:09.583754 137093019534848 run.py:688] Algo dfs step 7300 current loss 0.029282, current_train_items 125184.
+I0715 08:55:09.716851 137093019534848 run.py:723] (val) algo dfs step 7300: {'pi': 0.47265625, 'score': 0.47265625, 'examples_seen': 125184, 'step': 7300, 'algorithm': 'dfs'}
+I0715 08:55:09.717067 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.473, val scores are: dfs: 0.473
+I0715 08:55:10.929282 137093019534848 run.py:688] Algo dfs step 7350 current loss 2.491983, current_train_items 126048.
+I0715 08:55:11.032784 137093019534848 run.py:723] (val) algo dfs step 7350: {'pi': 0.505859375, 'score': 0.505859375, 'examples_seen': 126048, 'step': 7350, 'algorithm': 'dfs'}
+I0715 08:55:11.032952 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.506, val scores are: dfs: 0.506
+I0715 08:55:12.221009 137093019534848 run.py:688] Algo dfs step 7400 current loss 2.892960, current_train_items 126896.
+I0715 08:55:12.338210 137093019534848 run.py:723] (val) algo dfs step 7400: {'pi': 0.5166015625, 'score': 0.5166015625, 'examples_seen': 126896, 'step': 7400, 'algorithm': 'dfs'}
+I0715 08:55:12.338430 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.517, val scores are: dfs: 0.517
+I0715 08:55:13.540413 137093019534848 run.py:688] Algo dfs step 7450 current loss 5.538615, current_train_items 127760.
+I0715 08:55:13.652244 137093019534848 run.py:723] (val) algo dfs step 7450: {'pi': 0.5263671875, 'score': 0.5263671875, 'examples_seen': 127760, 'step': 7450, 'algorithm': 'dfs'}
+I0715 08:55:13.652412 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.526, val scores are: dfs: 0.526
+I0715 08:55:14.867855 137093019534848 run.py:688] Algo dfs step 7500 current loss 6.127492, current_train_items 128592.
+I0715 08:55:14.991143 137093019534848 run.py:723] (val) algo dfs step 7500: {'pi': 0.5439453125, 'score': 0.5439453125, 'examples_seen': 128592, 'step': 7500, 'algorithm': 'dfs'}
+I0715 08:55:14.991364 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.544, val scores are: dfs: 0.544
+I0715 08:55:16.189080 137093019534848 run.py:688] Algo dfs step 7550 current loss 8.681364, current_train_items 129456.
+I0715 08:55:16.358462 137093019534848 run.py:723] (val) algo dfs step 7550: {'pi': 0.4892578125, 'score': 0.4892578125, 'examples_seen': 129456, 'step': 7550, 'algorithm': 'dfs'}
+I0715 08:55:16.358706 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.489, val scores are: dfs: 0.489
+I0715 08:55:17.576262 137093019534848 run.py:688] Algo dfs step 7600 current loss 0.768812, current_train_items 130288.
+I0715 08:55:17.730605 137093019534848 run.py:723] (val) algo dfs step 7600: {'pi': 0.486328125, 'score': 0.486328125, 'examples_seen': 130288, 'step': 7600, 'algorithm': 'dfs'}
+I0715 08:55:17.730824 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.486, val scores are: dfs: 0.486
+I0715 08:55:18.929600 137093019534848 run.py:688] Algo dfs step 7650 current loss 0.374863, current_train_items 131152.
+I0715 08:55:19.091814 137093019534848 run.py:723] (val) algo dfs step 7650: {'pi': 0.5390625, 'score': 0.5390625, 'examples_seen': 131152, 'step': 7650, 'algorithm': 'dfs'}
+I0715 08:55:19.092037 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.539, val scores are: dfs: 0.539
+I0715 08:55:20.288883 137093019534848 run.py:688] Algo dfs step 7700 current loss 2.388595, current_train_items 132032.
+I0715 08:55:20.439919 137093019534848 run.py:723] (val) algo dfs step 7700: {'pi': 0.556640625, 'score': 0.556640625, 'examples_seen': 132032, 'step': 7700, 'algorithm': 'dfs'}
+I0715 08:55:20.440136 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.557, val scores are: dfs: 0.557
+I0715 08:55:21.682091 137093019534848 run.py:688] Algo dfs step 7750 current loss 2.484338, current_train_items 132896.
+I0715 08:55:21.792810 137093019534848 run.py:723] (val) algo dfs step 7750: {'pi': 0.5439453125, 'score': 0.5439453125, 'examples_seen': 132896, 'step': 7750, 'algorithm': 'dfs'}
+I0715 08:55:21.793029 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.544, val scores are: dfs: 0.544
+I0715 08:55:22.982319 137093019534848 run.py:688] Algo dfs step 7800 current loss 5.284865, current_train_items 133760.
+I0715 08:55:23.112892 137093019534848 run.py:723] (val) algo dfs step 7800: {'pi': 0.5322265625, 'score': 0.5322265625, 'examples_seen': 133760, 'step': 7800, 'algorithm': 'dfs'}
+I0715 08:55:23.113112 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.532, val scores are: dfs: 0.532
+I0715 08:55:24.305740 137093019534848 run.py:688] Algo dfs step 7850 current loss 1.782131, current_train_items 134592.
+I0715 08:55:24.427993 137093019534848 run.py:723] (val) algo dfs step 7850: {'pi': 0.537109375, 'score': 0.537109375, 'examples_seen': 134592, 'step': 7850, 'algorithm': 'dfs'}
+I0715 08:55:24.428206 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.537, val scores are: dfs: 0.537
+I0715 08:55:25.611826 137093019534848 run.py:688] Algo dfs step 7900 current loss 10.670904, current_train_items 135424.
+I0715 08:55:25.776256 137093019534848 run.py:723] (val) algo dfs step 7900: {'pi': 0.5537109375, 'score': 0.5537109375, 'examples_seen': 135424, 'step': 7900, 'algorithm': 'dfs'}
+I0715 08:55:25.776476 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.554, val scores are: dfs: 0.554
+I0715 08:55:26.975976 137093019534848 run.py:688] Algo dfs step 7950 current loss 9.430769, current_train_items 136304.
+I0715 08:55:27.157704 137093019534848 run.py:723] (val) algo dfs step 7950: {'pi': 0.5048828125, 'score': 0.5048828125, 'examples_seen': 136304, 'step': 7950, 'algorithm': 'dfs'}
+I0715 08:55:27.157922 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.505, val scores are: dfs: 0.505
+I0715 08:55:28.406170 137093019534848 run.py:688] Algo dfs step 8000 current loss 0.437403, current_train_items 137168.
+I0715 08:55:28.522242 137093019534848 run.py:723] (val) algo dfs step 8000: {'pi': 0.509765625, 'score': 0.509765625, 'examples_seen': 137168, 'step': 8000, 'algorithm': 'dfs'}
+I0715 08:55:28.522414 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.510, val scores are: dfs: 0.510
+I0715 08:55:29.717799 137093019534848 run.py:688] Algo dfs step 8050 current loss 2.097348, current_train_items 138048.
+I0715 08:55:29.853047 137093019534848 run.py:723] (val) algo dfs step 8050: {'pi': 0.4765625, 'score': 0.4765625, 'examples_seen': 138048, 'step': 8050, 'algorithm': 'dfs'}
+I0715 08:55:29.853270 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.477, val scores are: dfs: 0.477
+I0715 08:55:31.084728 137093019534848 run.py:688] Algo dfs step 8100 current loss 4.814597, current_train_items 138912.
+I0715 08:55:31.194282 137093019534848 run.py:723] (val) algo dfs step 8100: {'pi': 0.505859375, 'score': 0.505859375, 'examples_seen': 138912, 'step': 8100, 'algorithm': 'dfs'}
+I0715 08:55:31.194448 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.506, val scores are: dfs: 0.506
+I0715 08:55:32.375575 137093019534848 run.py:688] Algo dfs step 8150 current loss 4.290575, current_train_items 139728.
+I0715 08:55:32.494323 137093019534848 run.py:723] (val) algo dfs step 8150: {'pi': 0.5400390625, 'score': 0.5400390625, 'examples_seen': 139728, 'step': 8150, 'algorithm': 'dfs'}
+I0715 08:55:32.494560 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.540, val scores are: dfs: 0.540
+I0715 08:55:33.704924 137093019534848 run.py:688] Algo dfs step 8200 current loss 7.937754, current_train_items 140592.
+I0715 08:55:33.847675 137093019534848 run.py:723] (val) algo dfs step 8200: {'pi': 0.568359375, 'score': 0.568359375, 'examples_seen': 140592, 'step': 8200, 'algorithm': 'dfs'}
+I0715 08:55:33.847896 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.568, val scores are: dfs: 0.568
+I0715 08:55:35.056760 137093019534848 run.py:688] Algo dfs step 8250 current loss 7.925110, current_train_items 141456.
+I0715 08:55:35.186493 137093019534848 run.py:723] (val) algo dfs step 8250: {'pi': 0.53125, 'score': 0.53125, 'examples_seen': 141456, 'step': 8250, 'algorithm': 'dfs'}
+I0715 08:55:35.186712 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.531, val scores are: dfs: 0.531
+I0715 08:55:36.375558 137093019534848 run.py:688] Algo dfs step 8300 current loss 9.923166, current_train_items 142288.
+I0715 08:55:36.559539 137093019534848 run.py:723] (val) algo dfs step 8300: {'pi': 0.546875, 'score': 0.546875, 'examples_seen': 142288, 'step': 8300, 'algorithm': 'dfs'}
+I0715 08:55:36.559755 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.547, val scores are: dfs: 0.547
+I0715 08:55:37.719820 137093019534848 run.py:688] Algo dfs step 8350 current loss 0.032483, current_train_items 143152.
+I0715 08:55:37.888311 137093019534848 run.py:723] (val) algo dfs step 8350: {'pi': 0.5703125, 'score': 0.5703125, 'examples_seen': 143152, 'step': 8350, 'algorithm': 'dfs'}
+I0715 08:55:37.888547 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.570, val scores are: dfs: 0.570
+I0715 08:55:39.154618 137093019534848 run.py:688] Algo dfs step 8400 current loss 2.259271, current_train_items 144048.
+I0715 08:55:39.273074 137093019534848 run.py:723] (val) algo dfs step 8400: {'pi': 0.556640625, 'score': 0.556640625, 'examples_seen': 144048, 'step': 8400, 'algorithm': 'dfs'}
+I0715 08:55:39.273246 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.557, val scores are: dfs: 0.557
+I0715 08:55:40.451871 137093019534848 run.py:688] Algo dfs step 8450 current loss 3.379889, current_train_items 144896.
+I0715 08:55:40.591322 137093019534848 run.py:723] (val) algo dfs step 8450: {'pi': 0.462890625, 'score': 0.462890625, 'examples_seen': 144896, 'step': 8450, 'algorithm': 'dfs'}
+I0715 08:55:40.591563 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.463, val scores are: dfs: 0.463
+I0715 08:55:41.786708 137093019534848 run.py:688] Algo dfs step 8500 current loss 3.897884, current_train_items 145760.
+I0715 08:55:41.897429 137093019534848 run.py:723] (val) algo dfs step 8500: {'pi': 0.544921875, 'score': 0.544921875, 'examples_seen': 145760, 'step': 8500, 'algorithm': 'dfs'}
+I0715 08:55:41.897609 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.545, val scores are: dfs: 0.545
+I0715 08:55:43.118990 137093019534848 run.py:688] Algo dfs step 8550 current loss 7.744800, current_train_items 146592.
+I0715 08:55:43.260114 137093019534848 run.py:723] (val) algo dfs step 8550: {'pi': 0.548828125, 'score': 0.548828125, 'examples_seen': 146592, 'step': 8550, 'algorithm': 'dfs'}
+I0715 08:55:43.260332 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.549, val scores are: dfs: 0.549
+I0715 08:55:44.451369 137093019534848 run.py:688] Algo dfs step 8600 current loss 10.077926, current_train_items 147456.
+I0715 08:55:44.605391 137093019534848 run.py:723] (val) algo dfs step 8600: {'pi': 0.533203125, 'score': 0.533203125, 'examples_seen': 147456, 'step': 8600, 'algorithm': 'dfs'}
+I0715 08:55:44.605623 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.533, val scores are: dfs: 0.533
+I0715 08:55:45.831068 137093019534848 run.py:688] Algo dfs step 8650 current loss 1.357310, current_train_items 148288.
+I0715 08:55:45.992427 137093019534848 run.py:723] (val) algo dfs step 8650: {'pi': 0.5654296875, 'score': 0.5654296875, 'examples_seen': 148288, 'step': 8650, 'algorithm': 'dfs'}
+I0715 08:55:45.992659 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.565, val scores are: dfs: 0.565
+I0715 08:55:47.191195 137093019534848 run.py:688] Algo dfs step 8700 current loss 0.403644, current_train_items 149168.
+I0715 08:55:47.328715 137093019534848 run.py:723] (val) algo dfs step 8700: {'pi': 0.5556640625, 'score': 0.5556640625, 'examples_seen': 149168, 'step': 8700, 'algorithm': 'dfs'}
+I0715 08:55:47.328931 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.556, val scores are: dfs: 0.556
+I0715 08:55:48.556571 137093019534848 run.py:688] Algo dfs step 8750 current loss 0.631094, current_train_items 150048.
+I0715 08:55:48.696978 137093019534848 run.py:723] (val) algo dfs step 8750: {'pi': 0.4638671875, 'score': 0.4638671875, 'examples_seen': 150048, 'step': 8750, 'algorithm': 'dfs'}
+I0715 08:55:48.697192 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.464, val scores are: dfs: 0.464
+I0715 08:55:49.908795 137093019534848 run.py:688] Algo dfs step 8800 current loss 1.882403, current_train_items 150896.
+I0715 08:55:50.018979 137093019534848 run.py:723] (val) algo dfs step 8800: {'pi': 0.5625, 'score': 0.5625, 'examples_seen': 150896, 'step': 8800, 'algorithm': 'dfs'}
+I0715 08:55:50.019157 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.562, val scores are: dfs: 0.562
+I0715 08:55:51.231349 137093019534848 run.py:688] Algo dfs step 8850 current loss 3.531325, current_train_items 151744.
+I0715 08:55:51.361394 137093019534848 run.py:723] (val) algo dfs step 8850: {'pi': 0.552734375, 'score': 0.552734375, 'examples_seen': 151744, 'step': 8850, 'algorithm': 'dfs'}
+I0715 08:55:51.361634 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.553, val scores are: dfs: 0.553
+I0715 08:55:52.579447 137093019534848 run.py:688] Algo dfs step 8900 current loss 6.481775, current_train_items 152592.
+I0715 08:55:52.718659 137093019534848 run.py:723] (val) algo dfs step 8900: {'pi': 0.55859375, 'score': 0.55859375, 'examples_seen': 152592, 'step': 8900, 'algorithm': 'dfs'}
+I0715 08:55:52.718879 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.559, val scores are: dfs: 0.559
+I0715 08:55:53.974197 137093019534848 run.py:688] Algo dfs step 8950 current loss 7.581874, current_train_items 153456.
+I0715 08:55:54.102688 137093019534848 run.py:723] (val) algo dfs step 8950: {'pi': 0.5615234375, 'score': 0.5615234375, 'examples_seen': 153456, 'step': 8950, 'algorithm': 'dfs'}
+I0715 08:55:54.102904 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.562, val scores are: dfs: 0.562
+I0715 08:55:55.255721 137093019534848 run.py:688] Algo dfs step 9000 current loss 9.329036, current_train_items 154320.
+I0715 08:55:55.452872 137093019534848 run.py:723] (val) algo dfs step 9000: {'pi': 0.5009765625, 'score': 0.5009765625, 'examples_seen': 154320, 'step': 9000, 'algorithm': 'dfs'}
+I0715 08:55:55.453093 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.501, val scores are: dfs: 0.501
+I0715 08:55:56.707243 137093019534848 run.py:688] Algo dfs step 9050 current loss 0.488471, current_train_items 155168.
+I0715 08:55:56.844258 137093019534848 run.py:723] (val) algo dfs step 9050: {'pi': 0.55078125, 'score': 0.55078125, 'examples_seen': 155168, 'step': 9050, 'algorithm': 'dfs'}
+I0715 08:55:56.844493 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.551, val scores are: dfs: 0.551
+I0715 08:55:58.041773 137093019534848 run.py:688] Algo dfs step 9100 current loss 1.123924, current_train_items 156032.
+I0715 08:55:58.188305 137093019534848 run.py:723] (val) algo dfs step 9100: {'pi': 0.5263671875, 'score': 0.5263671875, 'examples_seen': 156032, 'step': 9100, 'algorithm': 'dfs'}
+I0715 08:55:58.188540 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.526, val scores are: dfs: 0.526
+I0715 08:55:59.399317 137093019534848 run.py:688] Algo dfs step 9150 current loss 4.434990, current_train_items 156912.
+I0715 08:55:59.529503 137093019534848 run.py:723] (val) algo dfs step 9150: {'pi': 0.5556640625, 'score': 0.5556640625, 'examples_seen': 156912, 'step': 9150, 'algorithm': 'dfs'}
+I0715 08:55:59.529722 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.556, val scores are: dfs: 0.556
+I0715 08:56:00.776895 137093019534848 run.py:688] Algo dfs step 9200 current loss 3.267145, current_train_items 157744.
+I0715 08:56:00.889144 137093019534848 run.py:723] (val) algo dfs step 9200: {'pi': 0.5126953125, 'score': 0.5126953125, 'examples_seen': 157744, 'step': 9200, 'algorithm': 'dfs'}
+I0715 08:56:00.889314 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.513, val scores are: dfs: 0.513
+I0715 08:56:02.069318 137093019534848 run.py:688] Algo dfs step 9250 current loss 3.446530, current_train_items 158624.
+I0715 08:56:02.212056 137093019534848 run.py:723] (val) algo dfs step 9250: {'pi': 0.5693359375, 'score': 0.5693359375, 'examples_seen': 158624, 'step': 9250, 'algorithm': 'dfs'}
+I0715 08:56:02.212273 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.569, val scores are: dfs: 0.569
+I0715 08:56:03.414274 137093019534848 run.py:688] Algo dfs step 9300 current loss 9.649802, current_train_items 159440.
+I0715 08:56:03.572432 137093019534848 run.py:723] (val) algo dfs step 9300: {'pi': 0.5146484375, 'score': 0.5146484375, 'examples_seen': 159440, 'step': 9300, 'algorithm': 'dfs'}
+I0715 08:56:03.572587 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.515, val scores are: dfs: 0.515
+I0715 08:56:04.788634 137093019534848 run.py:688] Algo dfs step 9350 current loss 9.819226, current_train_items 160288.
+I0715 08:56:04.965720 137093019534848 run.py:723] (val) algo dfs step 9350: {'pi': 0.556640625, 'score': 0.556640625, 'examples_seen': 160288, 'step': 9350, 'algorithm': 'dfs'}
+I0715 08:56:04.965863 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.557, val scores are: dfs: 0.557
+I0715 08:56:06.162971 137093019534848 run.py:688] Algo dfs step 9400 current loss 0.034138, current_train_items 161184.
+I0715 08:56:06.327521 137093019534848 run.py:723] (val) algo dfs step 9400: {'pi': 0.505859375, 'score': 0.505859375, 'examples_seen': 161184, 'step': 9400, 'algorithm': 'dfs'}
+I0715 08:56:06.327737 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.506, val scores are: dfs: 0.506
+I0715 08:56:07.597776 137093019534848 run.py:688] Algo dfs step 9450 current loss 1.261486, current_train_items 162064.
+I0715 08:56:07.704020 137093019534848 run.py:723] (val) algo dfs step 9450: {'pi': 0.4970703125, 'score': 0.4970703125, 'examples_seen': 162064, 'step': 9450, 'algorithm': 'dfs'}
+I0715 08:56:07.704203 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.497, val scores are: dfs: 0.497
+I0715 08:56:08.860350 137093019534848 run.py:688] Algo dfs step 9500 current loss 2.997955, current_train_items 162912.
+I0715 08:56:08.985416 137093019534848 run.py:723] (val) algo dfs step 9500: {'pi': 0.4794921875, 'score': 0.4794921875, 'examples_seen': 162912, 'step': 9500, 'algorithm': 'dfs'}
+I0715 08:56:08.985571 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.479, val scores are: dfs: 0.479
+I0715 08:56:10.153596 137093019534848 run.py:688] Algo dfs step 9550 current loss 0.469135, current_train_items 163760.
+I0715 08:56:10.280839 137093019534848 run.py:723] (val) algo dfs step 9550: {'pi': 0.5126953125, 'score': 0.5126953125, 'examples_seen': 163760, 'step': 9550, 'algorithm': 'dfs'}
+I0715 08:56:10.281058 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.513, val scores are: dfs: 0.513
+I0715 08:56:11.514406 137093019534848 run.py:688] Algo dfs step 9600 current loss 8.511600, current_train_items 164592.
+I0715 08:56:11.641528 137093019534848 run.py:723] (val) algo dfs step 9600: {'pi': 0.4853515625, 'score': 0.4853515625, 'examples_seen': 164592, 'step': 9600, 'algorithm': 'dfs'}
+I0715 08:56:11.641702 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.485, val scores are: dfs: 0.485
+I0715 08:56:12.850610 137093019534848 run.py:688] Algo dfs step 9650 current loss 6.996248, current_train_items 165472.
+I0715 08:56:12.984566 137093019534848 run.py:723] (val) algo dfs step 9650: {'pi': 0.5615234375, 'score': 0.5615234375, 'examples_seen': 165472, 'step': 9650, 'algorithm': 'dfs'}
+I0715 08:56:12.984712 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.562, val scores are: dfs: 0.562
+I0715 08:56:14.192838 137093019534848 run.py:688] Algo dfs step 9700 current loss 0.776532, current_train_items 166288.
+I0715 08:56:14.324899 137093019534848 run.py:723] (val) algo dfs step 9700: {'pi': 0.529296875, 'score': 0.529296875, 'examples_seen': 166288, 'step': 9700, 'algorithm': 'dfs'}
+I0715 08:56:14.325133 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.529, val scores are: dfs: 0.529
+I0715 08:56:15.509097 137093019534848 run.py:688] Algo dfs step 9750 current loss 0.382358, current_train_items 167168.
+I0715 08:56:15.679937 137093019534848 run.py:723] (val) algo dfs step 9750: {'pi': 0.50390625, 'score': 0.50390625, 'examples_seen': 167168, 'step': 9750, 'algorithm': 'dfs'}
+I0715 08:56:15.680169 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.504, val scores are: dfs: 0.504
+I0715 08:56:16.886488 137093019534848 run.py:688] Algo dfs step 9800 current loss 1.641805, current_train_items 168048.
+I0715 08:56:17.017104 137093019534848 run.py:723] (val) algo dfs step 9800: {'pi': 0.51953125, 'score': 0.51953125, 'examples_seen': 168048, 'step': 9800, 'algorithm': 'dfs'}
+I0715 08:56:17.017323 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.520, val scores are: dfs: 0.520
+I0715 08:56:18.237219 137093019534848 run.py:688] Algo dfs step 9850 current loss 1.798916, current_train_items 168880.
+I0715 08:56:18.353449 137093019534848 run.py:723] (val) algo dfs step 9850: {'pi': 0.5126953125, 'score': 0.5126953125, 'examples_seen': 168880, 'step': 9850, 'algorithm': 'dfs'}
+I0715 08:56:18.353630 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.513, val scores are: dfs: 0.513
+I0715 08:56:19.549138 137093019534848 run.py:688] Algo dfs step 9900 current loss 6.772820, current_train_items 169760.
+I0715 08:56:19.691300 137093019534848 run.py:723] (val) algo dfs step 9900: {'pi': 0.5625, 'score': 0.5625, 'examples_seen': 169760, 'step': 9900, 'algorithm': 'dfs'}
+I0715 08:56:19.691536 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.562, val scores are: dfs: 0.562
+I0715 08:56:20.874700 137093019534848 run.py:688] Algo dfs step 9950 current loss 7.995481, current_train_items 170592.
+I0715 08:56:21.009806 137093019534848 run.py:723] (val) algo dfs step 9950: {'pi': 0.55859375, 'score': 0.55859375, 'examples_seen': 170592, 'step': 9950, 'algorithm': 'dfs'}
+I0715 08:56:21.010025 137093019534848 run.py:747] Not saving new best model, best avg val score was 0.580, current avg val score is 0.559, val scores are: dfs: 0.559
+I0715 08:56:22.239332 137093019534848 run.py:753] Restoring best model from checkpoint...
+I0715 08:56:29.694275 137093019534848 run.py:768] (test) algo dfs : {'pi': 0.1796875, 'score': 0.1796875, 'examples_seen': 171456, 'step': 10000, 'algorithm': 'dfs'}
+I0715 08:56:29.694436 137093019534848 run.py:770] Done!

@@ -1,0 +1,653 @@
+I0715 07:39:57.809512 130963043796480 xla_bridge.py:889] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0715 07:39:57.810151 130963043796480 xla_bridge.py:889] Unable to initialize backend 'tpu': INTERNAL: Failed to open libtpu.so: libtpu.so: cannot open shared object file: No such file or directory
+I0715 07:39:58.033873 130963043796480 run.py:416] Model: falreis ['bellman_ford']
+I0715 07:39:58.033975 130963043796480 run.py:418] algorithms ['bellman_ford']
+I0715 07:39:58.034150 130963043796480 run.py:419] train_lengths ['2', '3', '5', '7', '11', '13', '16']
+I0715 07:39:58.034187 130963043796480 run.py:420] train_batch_size 16
+I0715 07:39:58.034277 130963043796480 run.py:421] val_batch_size 8
+I0715 07:39:58.034308 130963043796480 run.py:422] test_batch_size 8
+I0715 07:39:58.034337 130963043796480 run.py:423] chunked_training True
+I0715 07:39:58.034457 130963043796480 run.py:424] chunk_length 16
+I0715 07:39:58.034495 130963043796480 run.py:425] train_steps 10000
+I0715 07:39:58.034529 130963043796480 run.py:426] eval_every 50
+I0715 07:39:58.034559 130963043796480 run.py:427] test_every 500
+I0715 07:39:58.034588 130963043796480 run.py:428] learning_rate 0.001
+I0715 07:39:58.034678 130963043796480 run.py:429] grad_clip_max_norm 1.0
+I0715 07:39:58.034708 130963043796480 run.py:430] dropout_prob 0.1
+I0715 07:39:58.034736 130963043796480 run.py:431] hint_teacher_forcing 0.0
+I0715 07:39:58.034765 130963043796480 run.py:432] hint_mode encoded_decoded
+I0715 07:39:58.034870 130963043796480 run.py:433] hint_repred_mode hard_on_eval
+I0715 07:39:58.034899 130963043796480 run.py:434] use_ln False
+I0715 07:39:58.034927 130963043796480 run.py:435] use_lstm True
+I0715 07:39:58.034955 130963043796480 run.py:436] nb_triplet_fts 8
+I0715 07:39:58.034982 130963043796480 run.py:437] encoder_init xavier_on_scalars
+I0715 07:39:58.035009 130963043796480 run.py:438] processor_type falreis
+I0715 07:39:58.035037 130963043796480 run.py:439] checkpoint_path CLRS30
+I0715 07:39:58.035064 130963043796480 run.py:440] dataset_path CLRS30
+I0715 07:39:58.035093 130963043796480 run.py:441] freeze_processor False
+I0715 07:39:58.035121 130963043796480 run.py:442] reduction min
+I0715 07:39:58.035149 130963043796480 run.py:443] activation elu
+I0715 07:39:58.035177 130963043796480 run.py:444] algorithm_models ['F1', 'F2']
+I0715 07:39:58.035206 130963043796480 run.py:445] restore_model 
+I0715 07:39:58.035234 130963043796480 run.py:446] gated True
+I0715 07:39:58.035262 130963043796480 run.py:447] gated_activation sigmoid
+I0715 07:39:58.037875 130963043796480 run.py:473] Creating samplers for algo bellman_ford
+W0715 07:39:58.038255 130963043796480 samplers.py:109] Sampling dataset on-the-fly, unlimited samples.
+I0715 07:40:00.425863 130963043796480 samplers.py:124] Creating a dataset with 64 samples.
+I0715 07:40:00.467449 130963043796480 run.py:260] Dataset found at CLRS30/CLRS30_v1.0.0. Skipping download.
+I0715 07:40:00.468145 130963043796480 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/bellman_ford_test/1.0.0
+I0715 07:40:00.471613 130963043796480 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/bellman_ford_test/1.0.0
+I0715 07:40:00.474657 130963043796480 reader.py:262] Creating a tf.data.Dataset reading 1 files located in folders: CLRS30/CLRS30_v1.0.0/clrs_dataset/bellman_ford_test/1.0.0.
+I0715 07:40:00.525925 130963043796480 logging_logger.py:49] Constructing tf.data.Dataset clrs_dataset for split test, from CLRS30/CLRS30_v1.0.0/clrs_dataset/bellman_ford_test/1.0.0
+W0715 07:40:00.546353 130963043796480 ag_logging.py:142] AutoGraph could not transform <function _preprocess at 0x771bb09bab60> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: `haiku.experimental.flax` features require `flax` to be installed.
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+I0715 07:40:39.915671 130963043796480 run.py:688] Algo bellman_ford step 0 current loss 3.333920, current_train_items 159.
+I0715 07:40:45.679643 130963043796480 run.py:723] (val) algo bellman_ford step 0: {'pi': 0.3876953125, 'score': 0.3876953125, 'examples_seen': 159, 'step': 0, 'algorithm': 'bellman_ford'}
+I0715 07:40:45.679798 130963043796480 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.388, val scores are: bellman_ford: 0.388
+W0715 07:42:17.134281 130963043796480 samplers.py:175] Increasing hint lengh from 10 to 12
+I0715 07:42:17.791699 130963043796480 run.py:688] Algo bellman_ford step 50 current loss 1.427822, current_train_items 5709.
+I0715 07:42:17.820700 130963043796480 run.py:723] (val) algo bellman_ford step 50: {'pi': 0.7431640625, 'score': 0.7431640625, 'examples_seen': 5709, 'step': 50, 'algorithm': 'bellman_ford'}
+I0715 07:42:17.820848 130963043796480 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.743, val scores are: bellman_ford: 0.743
+I0715 07:42:20.749605 130963043796480 run.py:688] Algo bellman_ford step 100 current loss 1.340676, current_train_items 11237.
+I0715 07:42:20.780009 130963043796480 run.py:723] (val) algo bellman_ford step 100: {'pi': 0.7685546875, 'score': 0.7685546875, 'examples_seen': 11237, 'step': 100, 'algorithm': 'bellman_ford'}
+I0715 07:42:20.780148 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.743, current avg val score is 0.769, val scores are: bellman_ford: 0.769
+I0715 07:42:23.754384 130963043796480 run.py:688] Algo bellman_ford step 150 current loss 1.559165, current_train_items 16757.
+I0715 07:42:23.792150 130963043796480 run.py:723] (val) algo bellman_ford step 150: {'pi': 0.859375, 'score': 0.859375, 'examples_seen': 16757, 'step': 150, 'algorithm': 'bellman_ford'}
+I0715 07:42:23.792297 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.769, current avg val score is 0.859, val scores are: bellman_ford: 0.859
+I0715 07:42:26.671706 130963043796480 run.py:688] Algo bellman_ford step 200 current loss 1.252546, current_train_items 22307.
+I0715 07:42:26.714979 130963043796480 run.py:723] (val) algo bellman_ford step 200: {'pi': 0.90625, 'score': 0.90625, 'examples_seen': 22307, 'step': 200, 'algorithm': 'bellman_ford'}
+I0715 07:42:26.715122 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.859, current avg val score is 0.906, val scores are: bellman_ford: 0.906
+I0715 07:42:29.595661 130963043796480 run.py:688] Algo bellman_ford step 250 current loss 1.607560, current_train_items 27783.
+I0715 07:42:29.644694 130963043796480 run.py:723] (val) algo bellman_ford step 250: {'pi': 0.8740234375, 'score': 0.8740234375, 'examples_seen': 27783, 'step': 250, 'algorithm': 'bellman_ford'}
+I0715 07:42:29.644841 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.906, current avg val score is 0.874, val scores are: bellman_ford: 0.874
+I0715 07:42:32.467410 130963043796480 run.py:688] Algo bellman_ford step 300 current loss 0.429216, current_train_items 33428.
+I0715 07:42:32.492907 130963043796480 run.py:723] (val) algo bellman_ford step 300: {'pi': 0.9130859375, 'score': 0.9130859375, 'examples_seen': 33428, 'step': 300, 'algorithm': 'bellman_ford'}
+I0715 07:42:32.493048 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.906, current avg val score is 0.913, val scores are: bellman_ford: 0.913
+W0715 07:42:33.469332 130963043796480 samplers.py:175] Increasing hint lengh from 6 to 7
+I0715 07:42:35.452491 130963043796480 run.py:688] Algo bellman_ford step 350 current loss 0.628800, current_train_items 39018.
+I0715 07:42:35.478267 130963043796480 run.py:723] (val) algo bellman_ford step 350: {'pi': 0.873046875, 'score': 0.873046875, 'examples_seen': 39018, 'step': 350, 'algorithm': 'bellman_ford'}
+I0715 07:42:35.478407 130963043796480 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.873, val scores are: bellman_ford: 0.873
+I0715 07:42:38.372759 130963043796480 run.py:688] Algo bellman_ford step 400 current loss 0.874354, current_train_items 44533.
+I0715 07:42:38.400872 130963043796480 run.py:723] (val) algo bellman_ford step 400: {'pi': 0.9140625, 'score': 0.9140625, 'examples_seen': 44533, 'step': 400, 'algorithm': 'bellman_ford'}
+I0715 07:42:38.401015 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.873, current avg val score is 0.914, val scores are: bellman_ford: 0.914
+I0715 07:42:41.251542 130963043796480 run.py:688] Algo bellman_ford step 450 current loss 1.032828, current_train_items 49952.
+I0715 07:42:41.282526 130963043796480 run.py:723] (val) algo bellman_ford step 450: {'pi': 0.861328125, 'score': 0.861328125, 'examples_seen': 49952, 'step': 450, 'algorithm': 'bellman_ford'}
+I0715 07:42:41.282668 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.914, current avg val score is 0.861, val scores are: bellman_ford: 0.861
+I0715 07:42:44.038373 130963043796480 run.py:688] Algo bellman_ford step 500 current loss 1.176254, current_train_items 55377.
+I0715 07:42:44.077014 130963043796480 run.py:723] (val) algo bellman_ford step 500: {'pi': 0.923828125, 'score': 0.923828125, 'examples_seen': 55377, 'step': 500, 'algorithm': 'bellman_ford'}
+I0715 07:42:44.077154 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.914, current avg val score is 0.924, val scores are: bellman_ford: 0.924
+I0715 07:42:46.888932 130963043796480 run.py:688] Algo bellman_ford step 550 current loss 1.451478, current_train_items 60807.
+I0715 07:42:46.932878 130963043796480 run.py:723] (val) algo bellman_ford step 550: {'pi': 0.865234375, 'score': 0.865234375, 'examples_seen': 60807, 'step': 550, 'algorithm': 'bellman_ford'}
+I0715 07:42:46.933034 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.924, current avg val score is 0.865, val scores are: bellman_ford: 0.865
+I0715 07:42:49.848416 130963043796480 run.py:688] Algo bellman_ford step 600 current loss 1.513611, current_train_items 66310.
+I0715 07:42:49.897221 130963043796480 run.py:723] (val) algo bellman_ford step 600: {'pi': 0.9150390625, 'score': 0.9150390625, 'examples_seen': 66310, 'step': 600, 'algorithm': 'bellman_ford'}
+I0715 07:42:49.897374 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.924, current avg val score is 0.915, val scores are: bellman_ford: 0.915
+I0715 07:42:52.728089 130963043796480 run.py:688] Algo bellman_ford step 650 current loss 0.080668, current_train_items 71917.
+I0715 07:42:52.753016 130963043796480 run.py:723] (val) algo bellman_ford step 650: {'pi': 0.8837890625, 'score': 0.8837890625, 'examples_seen': 71917, 'step': 650, 'algorithm': 'bellman_ford'}
+I0715 07:42:52.753175 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.924, current avg val score is 0.884, val scores are: bellman_ford: 0.884
+I0715 07:42:55.604341 130963043796480 run.py:688] Algo bellman_ford step 700 current loss 0.383934, current_train_items 77495.
+I0715 07:42:55.630570 130963043796480 run.py:723] (val) algo bellman_ford step 700: {'pi': 0.9365234375, 'score': 0.9365234375, 'examples_seen': 77495, 'step': 700, 'algorithm': 'bellman_ford'}
+I0715 07:42:55.630722 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.924, current avg val score is 0.937, val scores are: bellman_ford: 0.937
+I0715 07:42:58.461770 130963043796480 run.py:688] Algo bellman_ford step 750 current loss 0.731396, current_train_items 83095.
+I0715 07:42:58.490099 130963043796480 run.py:723] (val) algo bellman_ford step 750: {'pi': 0.84765625, 'score': 0.84765625, 'examples_seen': 83095, 'step': 750, 'algorithm': 'bellman_ford'}
+I0715 07:42:58.490244 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.937, current avg val score is 0.848, val scores are: bellman_ford: 0.848
+I0715 07:43:01.221978 130963043796480 run.py:688] Algo bellman_ford step 800 current loss 0.774222, current_train_items 88565.
+I0715 07:43:01.253490 130963043796480 run.py:723] (val) algo bellman_ford step 800: {'pi': 0.91796875, 'score': 0.91796875, 'examples_seen': 88565, 'step': 800, 'algorithm': 'bellman_ford'}
+I0715 07:43:01.253644 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.937, current avg val score is 0.918, val scores are: bellman_ford: 0.918
+W0715 07:43:01.699848 130963043796480 samplers.py:175] Increasing hint lengh from 9 to 11
+I0715 07:43:04.014355 130963043796480 run.py:688] Algo bellman_ford step 850 current loss 1.315969, current_train_items 94046.
+I0715 07:43:04.052024 130963043796480 run.py:723] (val) algo bellman_ford step 850: {'pi': 0.806640625, 'score': 0.806640625, 'examples_seen': 94046, 'step': 850, 'algorithm': 'bellman_ford'}
+I0715 07:43:04.052160 130963043796480 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.807, val scores are: bellman_ford: 0.807
+I0715 07:43:06.848317 130963043796480 run.py:688] Algo bellman_ford step 900 current loss 1.160616, current_train_items 99550.
+I0715 07:43:06.891835 130963043796480 run.py:723] (val) algo bellman_ford step 900: {'pi': 0.9072265625, 'score': 0.9072265625, 'examples_seen': 99550, 'step': 900, 'algorithm': 'bellman_ford'}
+I0715 07:43:06.891973 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.807, current avg val score is 0.907, val scores are: bellman_ford: 0.907
+W0715 07:43:09.269159 130963043796480 samplers.py:175] Increasing hint lengh from 12 to 13
+I0715 07:43:09.774338 130963043796480 run.py:688] Algo bellman_ford step 950 current loss 1.371564, current_train_items 105079.
+I0715 07:43:09.822732 130963043796480 run.py:723] (val) algo bellman_ford step 950: {'pi': 0.880859375, 'score': 0.880859375, 'examples_seen': 105079, 'step': 950, 'algorithm': 'bellman_ford'}
+I0715 07:43:09.822873 130963043796480 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.881, val scores are: bellman_ford: 0.881
+I0715 07:43:12.630787 130963043796480 run.py:688] Algo bellman_ford step 1000 current loss 0.224122, current_train_items 110658.
+I0715 07:43:12.655784 130963043796480 run.py:723] (val) algo bellman_ford step 1000: {'pi': 0.861328125, 'score': 0.861328125, 'examples_seen': 110658, 'step': 1000, 'algorithm': 'bellman_ford'}
+I0715 07:43:12.655922 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.881, current avg val score is 0.861, val scores are: bellman_ford: 0.861
+I0715 07:43:15.491623 130963043796480 run.py:688] Algo bellman_ford step 1050 current loss 0.308645, current_train_items 116243.
+I0715 07:43:15.517947 130963043796480 run.py:723] (val) algo bellman_ford step 1050: {'pi': 0.93359375, 'score': 0.93359375, 'examples_seen': 116243, 'step': 1050, 'algorithm': 'bellman_ford'}
+I0715 07:43:15.518089 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.881, current avg val score is 0.934, val scores are: bellman_ford: 0.934
+I0715 07:43:18.335900 130963043796480 run.py:688] Algo bellman_ford step 1100 current loss 0.659564, current_train_items 121826.
+I0715 07:43:18.364856 130963043796480 run.py:723] (val) algo bellman_ford step 1100: {'pi': 0.951171875, 'score': 0.951171875, 'examples_seen': 121826, 'step': 1100, 'algorithm': 'bellman_ford'}
+I0715 07:43:18.364993 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.934, current avg val score is 0.951, val scores are: bellman_ford: 0.951
+I0715 07:43:21.240811 130963043796480 run.py:688] Algo bellman_ford step 1150 current loss 0.847855, current_train_items 127423.
+I0715 07:43:21.271931 130963043796480 run.py:723] (val) algo bellman_ford step 1150: {'pi': 0.921875, 'score': 0.921875, 'examples_seen': 127423, 'step': 1150, 'algorithm': 'bellman_ford'}
+I0715 07:43:21.272070 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.951, current avg val score is 0.922, val scores are: bellman_ford: 0.922
+I0715 07:43:24.105985 130963043796480 run.py:688] Algo bellman_ford step 1200 current loss 1.175201, current_train_items 132913.
+I0715 07:43:24.144514 130963043796480 run.py:723] (val) algo bellman_ford step 1200: {'pi': 0.921875, 'score': 0.921875, 'examples_seen': 132913, 'step': 1200, 'algorithm': 'bellman_ford'}
+I0715 07:43:24.144652 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.951, current avg val score is 0.922, val scores are: bellman_ford: 0.922
+I0715 07:43:26.940997 130963043796480 run.py:688] Algo bellman_ford step 1250 current loss 0.982548, current_train_items 138408.
+I0715 07:43:26.984725 130963043796480 run.py:723] (val) algo bellman_ford step 1250: {'pi': 0.9326171875, 'score': 0.9326171875, 'examples_seen': 138408, 'step': 1250, 'algorithm': 'bellman_ford'}
+I0715 07:43:26.984863 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.951, current avg val score is 0.933, val scores are: bellman_ford: 0.933
+I0715 07:43:29.816340 130963043796480 run.py:688] Algo bellman_ford step 1300 current loss 1.172495, current_train_items 143905.
+I0715 07:43:29.864803 130963043796480 run.py:723] (val) algo bellman_ford step 1300: {'pi': 0.9375, 'score': 0.9375, 'examples_seen': 143905, 'step': 1300, 'algorithm': 'bellman_ford'}
+I0715 07:43:29.864941 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.951, current avg val score is 0.938, val scores are: bellman_ford: 0.938
+I0715 07:43:32.684762 130963043796480 run.py:688] Algo bellman_ford step 1350 current loss 0.215974, current_train_items 149507.
+I0715 07:43:32.710078 130963043796480 run.py:723] (val) algo bellman_ford step 1350: {'pi': 0.8916015625, 'score': 0.8916015625, 'examples_seen': 149507, 'step': 1350, 'algorithm': 'bellman_ford'}
+I0715 07:43:32.710221 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.951, current avg val score is 0.892, val scores are: bellman_ford: 0.892
+I0715 07:43:35.567328 130963043796480 run.py:688] Algo bellman_ford step 1400 current loss 0.303989, current_train_items 155075.
+I0715 07:43:35.593309 130963043796480 run.py:723] (val) algo bellman_ford step 1400: {'pi': 0.923828125, 'score': 0.923828125, 'examples_seen': 155075, 'step': 1400, 'algorithm': 'bellman_ford'}
+I0715 07:43:35.593450 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.951, current avg val score is 0.924, val scores are: bellman_ford: 0.924
+I0715 07:43:38.372985 130963043796480 run.py:688] Algo bellman_ford step 1450 current loss 0.578758, current_train_items 160654.
+I0715 07:43:38.402157 130963043796480 run.py:723] (val) algo bellman_ford step 1450: {'pi': 0.947265625, 'score': 0.947265625, 'examples_seen': 160654, 'step': 1450, 'algorithm': 'bellman_ford'}
+I0715 07:43:38.402307 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.951, current avg val score is 0.947, val scores are: bellman_ford: 0.947
+I0715 07:43:41.254209 130963043796480 run.py:688] Algo bellman_ford step 1500 current loss 0.676629, current_train_items 166176.
+I0715 07:43:41.285659 130963043796480 run.py:723] (val) algo bellman_ford step 1500: {'pi': 0.931640625, 'score': 0.931640625, 'examples_seen': 166176, 'step': 1500, 'algorithm': 'bellman_ford'}
+I0715 07:43:41.285800 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.951, current avg val score is 0.932, val scores are: bellman_ford: 0.932
+I0715 07:43:44.015620 130963043796480 run.py:688] Algo bellman_ford step 1550 current loss 0.827004, current_train_items 171700.
+I0715 07:43:44.054249 130963043796480 run.py:723] (val) algo bellman_ford step 1550: {'pi': 0.9384765625, 'score': 0.9384765625, 'examples_seen': 171700, 'step': 1550, 'algorithm': 'bellman_ford'}
+I0715 07:43:44.054391 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.951, current avg val score is 0.938, val scores are: bellman_ford: 0.938
+W0715 07:43:44.410000 130963043796480 samplers.py:175] Increasing hint lengh from 9 to 10
+I0715 07:43:46.897175 130963043796480 run.py:688] Algo bellman_ford step 1600 current loss 1.190277, current_train_items 177167.
+I0715 07:43:46.941197 130963043796480 run.py:723] (val) algo bellman_ford step 1600: {'pi': 0.9521484375, 'score': 0.9521484375, 'examples_seen': 177167, 'step': 1600, 'algorithm': 'bellman_ford'}
+I0715 07:43:46.941335 130963043796480 run.py:744] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.952, val scores are: bellman_ford: 0.952
+I0715 07:43:49.839984 130963043796480 run.py:688] Algo bellman_ford step 1650 current loss 1.293145, current_train_items 182675.
+I0715 07:43:49.889832 130963043796480 run.py:723] (val) algo bellman_ford step 1650: {'pi': 0.9501953125, 'score': 0.9501953125, 'examples_seen': 182675, 'step': 1650, 'algorithm': 'bellman_ford'}
+I0715 07:43:49.889971 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.952, current avg val score is 0.950, val scores are: bellman_ford: 0.950
+I0715 07:43:52.663095 130963043796480 run.py:688] Algo bellman_ford step 1700 current loss 0.163359, current_train_items 188316.
+I0715 07:43:52.688603 130963043796480 run.py:723] (val) algo bellman_ford step 1700: {'pi': 0.888671875, 'score': 0.888671875, 'examples_seen': 188316, 'step': 1700, 'algorithm': 'bellman_ford'}
+I0715 07:43:52.688745 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.952, current avg val score is 0.889, val scores are: bellman_ford: 0.889
+I0715 07:43:55.566744 130963043796480 run.py:688] Algo bellman_ford step 1750 current loss 0.428004, current_train_items 193924.
+I0715 07:43:55.593557 130963043796480 run.py:723] (val) algo bellman_ford step 1750: {'pi': 0.9599609375, 'score': 0.9599609375, 'examples_seen': 193924, 'step': 1750, 'algorithm': 'bellman_ford'}
+I0715 07:43:55.593702 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.952, current avg val score is 0.960, val scores are: bellman_ford: 0.960
+I0715 07:43:58.475560 130963043796480 run.py:688] Algo bellman_ford step 1800 current loss 0.630252, current_train_items 199489.
+I0715 07:43:58.504526 130963043796480 run.py:723] (val) algo bellman_ford step 1800: {'pi': 0.8544921875, 'score': 0.8544921875, 'examples_seen': 199489, 'step': 1800, 'algorithm': 'bellman_ford'}
+I0715 07:43:58.504676 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.960, current avg val score is 0.854, val scores are: bellman_ford: 0.854
+I0715 07:44:01.298432 130963043796480 run.py:688] Algo bellman_ford step 1850 current loss 0.922687, current_train_items 205007.
+I0715 07:44:01.330334 130963043796480 run.py:723] (val) algo bellman_ford step 1850: {'pi': 0.94921875, 'score': 0.94921875, 'examples_seen': 205007, 'step': 1850, 'algorithm': 'bellman_ford'}
+I0715 07:44:01.330472 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.960, current avg val score is 0.949, val scores are: bellman_ford: 0.949
+I0715 07:44:04.092410 130963043796480 run.py:688] Algo bellman_ford step 1900 current loss 0.939653, current_train_items 210510.
+I0715 07:44:04.383655 130963043796480 run.py:723] (val) algo bellman_ford step 1900: {'pi': 0.9521484375, 'score': 0.9521484375, 'examples_seen': 210510, 'step': 1900, 'algorithm': 'bellman_ford'}
+I0715 07:44:04.383797 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.960, current avg val score is 0.952, val scores are: bellman_ford: 0.952
+I0715 07:44:07.233493 130963043796480 run.py:688] Algo bellman_ford step 1950 current loss 1.244330, current_train_items 216076.
+I0715 07:44:07.278170 130963043796480 run.py:723] (val) algo bellman_ford step 1950: {'pi': 0.890625, 'score': 0.890625, 'examples_seen': 216076, 'step': 1950, 'algorithm': 'bellman_ford'}
+I0715 07:44:07.278309 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.960, current avg val score is 0.891, val scores are: bellman_ford: 0.891
+I0715 07:44:10.093042 130963043796480 run.py:688] Algo bellman_ford step 2000 current loss 1.262366, current_train_items 221590.
+I0715 07:44:10.141740 130963043796480 run.py:723] (val) algo bellman_ford step 2000: {'pi': 0.9267578125, 'score': 0.9267578125, 'examples_seen': 221590, 'step': 2000, 'algorithm': 'bellman_ford'}
+I0715 07:44:10.141896 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.960, current avg val score is 0.927, val scores are: bellman_ford: 0.927
+I0715 07:44:13.016191 130963043796480 run.py:688] Algo bellman_ford step 2050 current loss 0.137017, current_train_items 227223.
+I0715 07:44:13.041335 130963043796480 run.py:723] (val) algo bellman_ford step 2050: {'pi': 0.939453125, 'score': 0.939453125, 'examples_seen': 227223, 'step': 2050, 'algorithm': 'bellman_ford'}
+I0715 07:44:13.041477 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.960, current avg val score is 0.939, val scores are: bellman_ford: 0.939
+I0715 07:44:15.943084 130963043796480 run.py:688] Algo bellman_ford step 2100 current loss 0.337122, current_train_items 232750.
+I0715 07:44:15.969732 130963043796480 run.py:723] (val) algo bellman_ford step 2100: {'pi': 0.962890625, 'score': 0.962890625, 'examples_seen': 232750, 'step': 2100, 'algorithm': 'bellman_ford'}
+I0715 07:44:15.969869 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.960, current avg val score is 0.963, val scores are: bellman_ford: 0.963
+I0715 07:44:18.816280 130963043796480 run.py:688] Algo bellman_ford step 2150 current loss 0.537452, current_train_items 238309.
+I0715 07:44:18.845987 130963043796480 run.py:723] (val) algo bellman_ford step 2150: {'pi': 0.80078125, 'score': 0.80078125, 'examples_seen': 238309, 'step': 2150, 'algorithm': 'bellman_ford'}
+I0715 07:44:18.846129 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.963, current avg val score is 0.801, val scores are: bellman_ford: 0.801
+I0715 07:44:21.666918 130963043796480 run.py:688] Algo bellman_ford step 2200 current loss 0.794937, current_train_items 243852.
+I0715 07:44:21.698022 130963043796480 run.py:723] (val) algo bellman_ford step 2200: {'pi': 0.8359375, 'score': 0.8359375, 'examples_seen': 243852, 'step': 2200, 'algorithm': 'bellman_ford'}
+I0715 07:44:21.698163 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.963, current avg val score is 0.836, val scores are: bellman_ford: 0.836
+I0715 07:44:24.537292 130963043796480 run.py:688] Algo bellman_ford step 2250 current loss 1.069135, current_train_items 249333.
+I0715 07:44:24.576433 130963043796480 run.py:723] (val) algo bellman_ford step 2250: {'pi': 0.916015625, 'score': 0.916015625, 'examples_seen': 249333, 'step': 2250, 'algorithm': 'bellman_ford'}
+I0715 07:44:24.576584 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.963, current avg val score is 0.916, val scores are: bellman_ford: 0.916
+I0715 07:44:27.314952 130963043796480 run.py:688] Algo bellman_ford step 2300 current loss 1.047420, current_train_items 254851.
+I0715 07:44:27.358027 130963043796480 run.py:723] (val) algo bellman_ford step 2300: {'pi': 0.9111328125, 'score': 0.9111328125, 'examples_seen': 254851, 'step': 2300, 'algorithm': 'bellman_ford'}
+I0715 07:44:27.358170 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.963, current avg val score is 0.911, val scores are: bellman_ford: 0.911
+I0715 07:44:30.187955 130963043796480 run.py:688] Algo bellman_ford step 2350 current loss 1.187761, current_train_items 260383.
+I0715 07:44:30.237021 130963043796480 run.py:723] (val) algo bellman_ford step 2350: {'pi': 0.9150390625, 'score': 0.9150390625, 'examples_seen': 260383, 'step': 2350, 'algorithm': 'bellman_ford'}
+I0715 07:44:30.237160 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.963, current avg val score is 0.915, val scores are: bellman_ford: 0.915
+I0715 07:44:33.095502 130963043796480 run.py:688] Algo bellman_ford step 2400 current loss 0.149057, current_train_items 266005.
+I0715 07:44:33.121716 130963043796480 run.py:723] (val) algo bellman_ford step 2400: {'pi': 0.9697265625, 'score': 0.9697265625, 'examples_seen': 266005, 'step': 2400, 'algorithm': 'bellman_ford'}
+I0715 07:44:33.121854 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.963, current avg val score is 0.970, val scores are: bellman_ford: 0.970
+I0715 07:44:35.883243 130963043796480 run.py:688] Algo bellman_ford step 2450 current loss 0.381899, current_train_items 271583.
+I0715 07:44:35.909873 130963043796480 run.py:723] (val) algo bellman_ford step 2450: {'pi': 0.9560546875, 'score': 0.9560546875, 'examples_seen': 271583, 'step': 2450, 'algorithm': 'bellman_ford'}
+I0715 07:44:35.910016 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.956, val scores are: bellman_ford: 0.956
+I0715 07:44:38.728158 130963043796480 run.py:688] Algo bellman_ford step 2500 current loss 0.590518, current_train_items 277131.
+I0715 07:44:38.756829 130963043796480 run.py:723] (val) algo bellman_ford step 2500: {'pi': 0.9658203125, 'score': 0.9658203125, 'examples_seen': 277131, 'step': 2500, 'algorithm': 'bellman_ford'}
+I0715 07:44:38.756969 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.966, val scores are: bellman_ford: 0.966
+I0715 07:44:41.561596 130963043796480 run.py:688] Algo bellman_ford step 2550 current loss 0.717298, current_train_items 282651.
+I0715 07:44:41.592841 130963043796480 run.py:723] (val) algo bellman_ford step 2550: {'pi': 0.8662109375, 'score': 0.8662109375, 'examples_seen': 282651, 'step': 2550, 'algorithm': 'bellman_ford'}
+I0715 07:44:41.592982 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.866, val scores are: bellman_ford: 0.866
+I0715 07:44:44.415429 130963043796480 run.py:688] Algo bellman_ford step 2600 current loss 0.873089, current_train_items 288177.
+I0715 07:44:44.453774 130963043796480 run.py:723] (val) algo bellman_ford step 2600: {'pi': 0.931640625, 'score': 0.931640625, 'examples_seen': 288177, 'step': 2600, 'algorithm': 'bellman_ford'}
+I0715 07:44:44.453912 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.932, val scores are: bellman_ford: 0.932
+I0715 07:44:47.253713 130963043796480 run.py:688] Algo bellman_ford step 2650 current loss 1.159375, current_train_items 293701.
+I0715 07:44:47.297683 130963043796480 run.py:723] (val) algo bellman_ford step 2650: {'pi': 0.9443359375, 'score': 0.9443359375, 'examples_seen': 293701, 'step': 2650, 'algorithm': 'bellman_ford'}
+I0715 07:44:47.297830 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.944, val scores are: bellman_ford: 0.944
+I0715 07:44:50.146346 130963043796480 run.py:688] Algo bellman_ford step 2700 current loss 0.918840, current_train_items 299203.
+I0715 07:44:50.195047 130963043796480 run.py:723] (val) algo bellman_ford step 2700: {'pi': 0.939453125, 'score': 0.939453125, 'examples_seen': 299203, 'step': 2700, 'algorithm': 'bellman_ford'}
+I0715 07:44:50.195189 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.939, val scores are: bellman_ford: 0.939
+I0715 07:44:52.977640 130963043796480 run.py:688] Algo bellman_ford step 2750 current loss 0.168505, current_train_items 304830.
+I0715 07:44:53.002345 130963043796480 run.py:723] (val) algo bellman_ford step 2750: {'pi': 0.953125, 'score': 0.953125, 'examples_seen': 304830, 'step': 2750, 'algorithm': 'bellman_ford'}
+I0715 07:44:53.002496 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.953, val scores are: bellman_ford: 0.953
+I0715 07:44:55.762492 130963043796480 run.py:688] Algo bellman_ford step 2800 current loss 0.258197, current_train_items 310344.
+I0715 07:44:55.788767 130963043796480 run.py:723] (val) algo bellman_ford step 2800: {'pi': 0.94921875, 'score': 0.94921875, 'examples_seen': 310344, 'step': 2800, 'algorithm': 'bellman_ford'}
+I0715 07:44:55.788908 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.949, val scores are: bellman_ford: 0.949
+I0715 07:44:58.590359 130963043796480 run.py:688] Algo bellman_ford step 2850 current loss 0.641965, current_train_items 315834.
+I0715 07:44:58.619900 130963043796480 run.py:723] (val) algo bellman_ford step 2850: {'pi': 0.962890625, 'score': 0.962890625, 'examples_seen': 315834, 'step': 2850, 'algorithm': 'bellman_ford'}
+I0715 07:44:58.620043 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.963, val scores are: bellman_ford: 0.963
+I0715 07:45:01.367816 130963043796480 run.py:688] Algo bellman_ford step 2900 current loss 0.842970, current_train_items 321402.
+I0715 07:45:01.399221 130963043796480 run.py:723] (val) algo bellman_ford step 2900: {'pi': 0.7958984375, 'score': 0.7958984375, 'examples_seen': 321402, 'step': 2900, 'algorithm': 'bellman_ford'}
+I0715 07:45:01.399359 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.796, val scores are: bellman_ford: 0.796
+I0715 07:45:04.243560 130963043796480 run.py:688] Algo bellman_ford step 2950 current loss 1.222309, current_train_items 326918.
+I0715 07:45:04.282463 130963043796480 run.py:723] (val) algo bellman_ford step 2950: {'pi': 0.951171875, 'score': 0.951171875, 'examples_seen': 326918, 'step': 2950, 'algorithm': 'bellman_ford'}
+I0715 07:45:04.282616 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.951, val scores are: bellman_ford: 0.951
+I0715 07:45:07.076503 130963043796480 run.py:688] Algo bellman_ford step 3000 current loss 1.241685, current_train_items 332466.
+I0715 07:45:07.119977 130963043796480 run.py:723] (val) algo bellman_ford step 3000: {'pi': 0.8994140625, 'score': 0.8994140625, 'examples_seen': 332466, 'step': 3000, 'algorithm': 'bellman_ford'}
+I0715 07:45:07.120119 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.899, val scores are: bellman_ford: 0.899
+I0715 07:45:10.025674 130963043796480 run.py:688] Algo bellman_ford step 3050 current loss 0.987001, current_train_items 338063.
+I0715 07:45:10.074281 130963043796480 run.py:723] (val) algo bellman_ford step 3050: {'pi': 0.96875, 'score': 0.96875, 'examples_seen': 338063, 'step': 3050, 'algorithm': 'bellman_ford'}
+I0715 07:45:10.074422 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.969, val scores are: bellman_ford: 0.969
+I0715 07:45:13.023826 130963043796480 run.py:688] Algo bellman_ford step 3100 current loss 0.141751, current_train_items 343709.
+I0715 07:45:13.049189 130963043796480 run.py:723] (val) algo bellman_ford step 3100: {'pi': 0.93359375, 'score': 0.93359375, 'examples_seen': 343709, 'step': 3100, 'algorithm': 'bellman_ford'}
+I0715 07:45:13.049331 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.934, val scores are: bellman_ford: 0.934
+I0715 07:45:15.837166 130963043796480 run.py:688] Algo bellman_ford step 3150 current loss 0.254802, current_train_items 349282.
+I0715 07:45:15.864309 130963043796480 run.py:723] (val) algo bellman_ford step 3150: {'pi': 0.96484375, 'score': 0.96484375, 'examples_seen': 349282, 'step': 3150, 'algorithm': 'bellman_ford'}
+I0715 07:45:15.864602 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.965, val scores are: bellman_ford: 0.965
+I0715 07:45:18.700575 130963043796480 run.py:688] Algo bellman_ford step 3200 current loss 0.576130, current_train_items 354813.
+I0715 07:45:18.729906 130963043796480 run.py:723] (val) algo bellman_ford step 3200: {'pi': 0.9697265625, 'score': 0.9697265625, 'examples_seen': 354813, 'step': 3200, 'algorithm': 'bellman_ford'}
+I0715 07:45:18.730046 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.970, val scores are: bellman_ford: 0.970
+I0715 07:45:21.536314 130963043796480 run.py:688] Algo bellman_ford step 3250 current loss 0.695073, current_train_items 360359.
+I0715 07:45:21.568390 130963043796480 run.py:723] (val) algo bellman_ford step 3250: {'pi': 0.919921875, 'score': 0.919921875, 'examples_seen': 360359, 'step': 3250, 'algorithm': 'bellman_ford'}
+I0715 07:45:21.568539 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.920, val scores are: bellman_ford: 0.920
+I0715 07:45:24.427712 130963043796480 run.py:688] Algo bellman_ford step 3300 current loss 1.091900, current_train_items 365832.
+I0715 07:45:24.466392 130963043796480 run.py:723] (val) algo bellman_ford step 3300: {'pi': 0.96484375, 'score': 0.96484375, 'examples_seen': 365832, 'step': 3300, 'algorithm': 'bellman_ford'}
+I0715 07:45:24.466541 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.965, val scores are: bellman_ford: 0.965
+I0715 07:45:27.309422 130963043796480 run.py:688] Algo bellman_ford step 3350 current loss 1.017688, current_train_items 371362.
+I0715 07:45:27.352750 130963043796480 run.py:723] (val) algo bellman_ford step 3350: {'pi': 0.9404296875, 'score': 0.9404296875, 'examples_seen': 371362, 'step': 3350, 'algorithm': 'bellman_ford'}
+I0715 07:45:27.352891 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.940, val scores are: bellman_ford: 0.940
+I0715 07:45:30.118230 130963043796480 run.py:688] Algo bellman_ford step 3400 current loss 1.027360, current_train_items 376863.
+I0715 07:45:30.169166 130963043796480 run.py:723] (val) algo bellman_ford step 3400: {'pi': 0.9638671875, 'score': 0.9638671875, 'examples_seen': 376863, 'step': 3400, 'algorithm': 'bellman_ford'}
+I0715 07:45:30.169307 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.964, val scores are: bellman_ford: 0.964
+I0715 07:45:32.896053 130963043796480 run.py:688] Algo bellman_ford step 3450 current loss 0.094101, current_train_items 382492.
+I0715 07:45:32.922251 130963043796480 run.py:723] (val) algo bellman_ford step 3450: {'pi': 0.951171875, 'score': 0.951171875, 'examples_seen': 382492, 'step': 3450, 'algorithm': 'bellman_ford'}
+I0715 07:45:32.922399 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.951, val scores are: bellman_ford: 0.951
+I0715 07:45:35.797076 130963043796480 run.py:688] Algo bellman_ford step 3500 current loss 0.267915, current_train_items 388134.
+I0715 07:45:35.823634 130963043796480 run.py:723] (val) algo bellman_ford step 3500: {'pi': 0.939453125, 'score': 0.939453125, 'examples_seen': 388134, 'step': 3500, 'algorithm': 'bellman_ford'}
+I0715 07:45:35.823777 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.970, current avg val score is 0.939, val scores are: bellman_ford: 0.939
+I0715 07:45:38.700059 130963043796480 run.py:688] Algo bellman_ford step 3550 current loss 0.483614, current_train_items 393696.
+I0715 07:45:38.728904 130963043796480 run.py:723] (val) algo bellman_ford step 3550: {'pi': 0.978515625, 'score': 0.978515625, 'examples_seen': 393696, 'step': 3550, 'algorithm': 'bellman_ford'}
+I0715 07:45:38.729048 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.970, current avg val score is 0.979, val scores are: bellman_ford: 0.979
+I0715 07:45:41.585342 130963043796480 run.py:688] Algo bellman_ford step 3600 current loss 0.637499, current_train_items 399225.
+I0715 07:45:41.616434 130963043796480 run.py:723] (val) algo bellman_ford step 3600: {'pi': 0.79296875, 'score': 0.79296875, 'examples_seen': 399225, 'step': 3600, 'algorithm': 'bellman_ford'}
+I0715 07:45:41.616581 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.979, current avg val score is 0.793, val scores are: bellman_ford: 0.793
+I0715 07:45:44.362655 130963043796480 run.py:688] Algo bellman_ford step 3650 current loss 0.828323, current_train_items 404771.
+I0715 07:45:44.401883 130963043796480 run.py:723] (val) algo bellman_ford step 3650: {'pi': 0.953125, 'score': 0.953125, 'examples_seen': 404771, 'step': 3650, 'algorithm': 'bellman_ford'}
+I0715 07:45:44.402038 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.979, current avg val score is 0.953, val scores are: bellman_ford: 0.953
+I0715 07:45:47.283808 130963043796480 run.py:688] Algo bellman_ford step 3700 current loss 0.987165, current_train_items 410258.
+I0715 07:45:47.327290 130963043796480 run.py:723] (val) algo bellman_ford step 3700: {'pi': 0.951171875, 'score': 0.951171875, 'examples_seen': 410258, 'step': 3700, 'algorithm': 'bellman_ford'}
+I0715 07:45:47.327430 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.979, current avg val score is 0.951, val scores are: bellman_ford: 0.951
+I0715 07:45:50.202989 130963043796480 run.py:688] Algo bellman_ford step 3750 current loss 0.795425, current_train_items 415744.
+I0715 07:45:50.252257 130963043796480 run.py:723] (val) algo bellman_ford step 3750: {'pi': 0.9638671875, 'score': 0.9638671875, 'examples_seen': 415744, 'step': 3750, 'algorithm': 'bellman_ford'}
+I0715 07:45:50.252396 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.979, current avg val score is 0.964, val scores are: bellman_ford: 0.964
+I0715 07:45:53.188570 130963043796480 run.py:688] Algo bellman_ford step 3800 current loss 0.164269, current_train_items 421408.
+I0715 07:45:53.214222 130963043796480 run.py:723] (val) algo bellman_ford step 3800: {'pi': 0.962890625, 'score': 0.962890625, 'examples_seen': 421408, 'step': 3800, 'algorithm': 'bellman_ford'}
+I0715 07:45:53.214361 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.979, current avg val score is 0.963, val scores are: bellman_ford: 0.963
+I0715 07:45:56.102071 130963043796480 run.py:688] Algo bellman_ford step 3850 current loss 0.230288, current_train_items 426972.
+I0715 07:45:56.128588 130963043796480 run.py:723] (val) algo bellman_ford step 3850: {'pi': 0.98046875, 'score': 0.98046875, 'examples_seen': 426972, 'step': 3850, 'algorithm': 'bellman_ford'}
+I0715 07:45:56.128727 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.979, current avg val score is 0.980, val scores are: bellman_ford: 0.980
+I0715 07:45:58.965092 130963043796480 run.py:688] Algo bellman_ford step 3900 current loss 0.463655, current_train_items 432519.
+I0715 07:45:58.994701 130963043796480 run.py:723] (val) algo bellman_ford step 3900: {'pi': 0.974609375, 'score': 0.974609375, 'examples_seen': 432519, 'step': 3900, 'algorithm': 'bellman_ford'}
+I0715 07:45:58.994844 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.975, val scores are: bellman_ford: 0.975
+I0715 07:46:01.862060 130963043796480 run.py:688] Algo bellman_ford step 3950 current loss 0.584634, current_train_items 438056.
+I0715 07:46:01.893407 130963043796480 run.py:723] (val) algo bellman_ford step 3950: {'pi': 0.94921875, 'score': 0.94921875, 'examples_seen': 438056, 'step': 3950, 'algorithm': 'bellman_ford'}
+I0715 07:46:01.893560 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.949, val scores are: bellman_ford: 0.949
+I0715 07:46:04.680855 130963043796480 run.py:688] Algo bellman_ford step 4000 current loss 0.839523, current_train_items 443551.
+I0715 07:46:04.719387 130963043796480 run.py:723] (val) algo bellman_ford step 4000: {'pi': 0.9482421875, 'score': 0.9482421875, 'examples_seen': 443551, 'step': 4000, 'algorithm': 'bellman_ford'}
+I0715 07:46:04.719535 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.948, val scores are: bellman_ford: 0.948
+I0715 07:46:07.568177 130963043796480 run.py:688] Algo bellman_ford step 4050 current loss 0.953387, current_train_items 449039.
+I0715 07:46:07.612220 130963043796480 run.py:723] (val) algo bellman_ford step 4050: {'pi': 0.91015625, 'score': 0.91015625, 'examples_seen': 449039, 'step': 4050, 'algorithm': 'bellman_ford'}
+I0715 07:46:07.612386 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.910, val scores are: bellman_ford: 0.910
+I0715 07:46:10.501084 130963043796480 run.py:688] Algo bellman_ford step 4100 current loss 1.200462, current_train_items 454526.
+I0715 07:46:10.549331 130963043796480 run.py:723] (val) algo bellman_ford step 4100: {'pi': 0.9052734375, 'score': 0.9052734375, 'examples_seen': 454526, 'step': 4100, 'algorithm': 'bellman_ford'}
+I0715 07:46:10.549474 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.905, val scores are: bellman_ford: 0.905
+I0715 07:46:13.452852 130963043796480 run.py:688] Algo bellman_ford step 4150 current loss 0.159139, current_train_items 460199.
+I0715 07:46:13.478932 130963043796480 run.py:723] (val) algo bellman_ford step 4150: {'pi': 0.9443359375, 'score': 0.9443359375, 'examples_seen': 460199, 'step': 4150, 'algorithm': 'bellman_ford'}
+I0715 07:46:13.479076 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.944, val scores are: bellman_ford: 0.944
+I0715 07:46:16.370520 130963043796480 run.py:688] Algo bellman_ford step 4200 current loss 0.136515, current_train_items 465775.
+I0715 07:46:16.396650 130963043796480 run.py:723] (val) algo bellman_ford step 4200: {'pi': 0.927734375, 'score': 0.927734375, 'examples_seen': 465775, 'step': 4200, 'algorithm': 'bellman_ford'}
+I0715 07:46:16.396795 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.928, val scores are: bellman_ford: 0.928
+I0715 07:46:19.292724 130963043796480 run.py:688] Algo bellman_ford step 4250 current loss 0.552220, current_train_items 471273.
+I0715 07:46:19.322272 130963043796480 run.py:723] (val) algo bellman_ford step 4250: {'pi': 0.904296875, 'score': 0.904296875, 'examples_seen': 471273, 'step': 4250, 'algorithm': 'bellman_ford'}
+I0715 07:46:19.322412 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.904, val scores are: bellman_ford: 0.904
+I0715 07:46:22.212287 130963043796480 run.py:688] Algo bellman_ford step 4300 current loss 0.641810, current_train_items 476803.
+I0715 07:46:22.244461 130963043796480 run.py:723] (val) algo bellman_ford step 4300: {'pi': 0.9365234375, 'score': 0.9365234375, 'examples_seen': 476803, 'step': 4300, 'algorithm': 'bellman_ford'}
+I0715 07:46:22.244610 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.937, val scores are: bellman_ford: 0.937
+I0715 07:46:25.027844 130963043796480 run.py:688] Algo bellman_ford step 4350 current loss 0.826362, current_train_items 482276.
+I0715 07:46:25.066567 130963043796480 run.py:723] (val) algo bellman_ford step 4350: {'pi': 0.8935546875, 'score': 0.8935546875, 'examples_seen': 482276, 'step': 4350, 'algorithm': 'bellman_ford'}
+I0715 07:46:25.066715 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.894, val scores are: bellman_ford: 0.894
+I0715 07:46:27.935789 130963043796480 run.py:688] Algo bellman_ford step 4400 current loss 1.027460, current_train_items 487796.
+I0715 07:46:27.979790 130963043796480 run.py:723] (val) algo bellman_ford step 4400: {'pi': 0.9716796875, 'score': 0.9716796875, 'examples_seen': 487796, 'step': 4400, 'algorithm': 'bellman_ford'}
+I0715 07:46:27.979932 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.972, val scores are: bellman_ford: 0.972
+I0715 07:46:30.713924 130963043796480 run.py:688] Algo bellman_ford step 4450 current loss 1.254091, current_train_items 493235.
+I0715 07:46:30.762840 130963043796480 run.py:723] (val) algo bellman_ford step 4450: {'pi': 0.9423828125, 'score': 0.9423828125, 'examples_seen': 493235, 'step': 4450, 'algorithm': 'bellman_ford'}
+I0715 07:46:30.762985 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.942, val scores are: bellman_ford: 0.942
+I0715 07:46:33.607168 130963043796480 run.py:688] Algo bellman_ford step 4500 current loss 0.158973, current_train_items 498891.
+I0715 07:46:33.633060 130963043796480 run.py:723] (val) algo bellman_ford step 4500: {'pi': 0.923828125, 'score': 0.923828125, 'examples_seen': 498891, 'step': 4500, 'algorithm': 'bellman_ford'}
+I0715 07:46:33.633200 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.924, val scores are: bellman_ford: 0.924
+I0715 07:46:36.487374 130963043796480 run.py:688] Algo bellman_ford step 4550 current loss 0.206366, current_train_items 504461.
+I0715 07:46:36.514499 130963043796480 run.py:723] (val) algo bellman_ford step 4550: {'pi': 0.9560546875, 'score': 0.9560546875, 'examples_seen': 504461, 'step': 4550, 'algorithm': 'bellman_ford'}
+I0715 07:46:36.514647 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.956, val scores are: bellman_ford: 0.956
+I0715 07:46:39.310833 130963043796480 run.py:688] Algo bellman_ford step 4600 current loss 0.531208, current_train_items 510047.
+I0715 07:46:39.340076 130963043796480 run.py:723] (val) algo bellman_ford step 4600: {'pi': 0.9609375, 'score': 0.9609375, 'examples_seen': 510047, 'step': 4600, 'algorithm': 'bellman_ford'}
+I0715 07:46:39.340218 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.961, val scores are: bellman_ford: 0.961
+I0715 07:46:42.078277 130963043796480 run.py:688] Algo bellman_ford step 4650 current loss 0.789519, current_train_items 515528.
+I0715 07:46:42.110553 130963043796480 run.py:723] (val) algo bellman_ford step 4650: {'pi': 0.9716796875, 'score': 0.9716796875, 'examples_seen': 515528, 'step': 4650, 'algorithm': 'bellman_ford'}
+I0715 07:46:42.110692 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.972, val scores are: bellman_ford: 0.972
+I0715 07:46:44.897929 130963043796480 run.py:688] Algo bellman_ford step 4700 current loss 0.770768, current_train_items 521055.
+I0715 07:46:44.936527 130963043796480 run.py:723] (val) algo bellman_ford step 4700: {'pi': 0.9326171875, 'score': 0.9326171875, 'examples_seen': 521055, 'step': 4700, 'algorithm': 'bellman_ford'}
+I0715 07:46:44.936670 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.933, val scores are: bellman_ford: 0.933
+I0715 07:46:47.726810 130963043796480 run.py:688] Algo bellman_ford step 4750 current loss 0.830897, current_train_items 526537.
+I0715 07:46:47.770661 130963043796480 run.py:723] (val) algo bellman_ford step 4750: {'pi': 0.9716796875, 'score': 0.9716796875, 'examples_seen': 526537, 'step': 4750, 'algorithm': 'bellman_ford'}
+I0715 07:46:47.770803 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.972, val scores are: bellman_ford: 0.972
+I0715 07:46:50.657847 130963043796480 run.py:688] Algo bellman_ford step 4800 current loss 1.060721, current_train_items 532074.
+I0715 07:46:50.707472 130963043796480 run.py:723] (val) algo bellman_ford step 4800: {'pi': 0.9609375, 'score': 0.9609375, 'examples_seen': 532074, 'step': 4800, 'algorithm': 'bellman_ford'}
+I0715 07:46:50.707620 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.961, val scores are: bellman_ford: 0.961
+I0715 07:46:53.525610 130963043796480 run.py:688] Algo bellman_ford step 4850 current loss 0.167315, current_train_items 537684.
+I0715 07:46:53.551291 130963043796480 run.py:723] (val) algo bellman_ford step 4850: {'pi': 0.8837890625, 'score': 0.8837890625, 'examples_seen': 537684, 'step': 4850, 'algorithm': 'bellman_ford'}
+I0715 07:46:53.551433 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.980, current avg val score is 0.884, val scores are: bellman_ford: 0.884
+I0715 07:46:56.451266 130963043796480 run.py:688] Algo bellman_ford step 4900 current loss 0.295516, current_train_items 543323.
+I0715 07:46:56.478195 130963043796480 run.py:723] (val) algo bellman_ford step 4900: {'pi': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 543323, 'step': 4900, 'algorithm': 'bellman_ford'}
+I0715 07:46:56.478336 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.980, current avg val score is 0.983, val scores are: bellman_ford: 0.983
+I0715 07:46:59.345981 130963043796480 run.py:688] Algo bellman_ford step 4950 current loss 0.370512, current_train_items 548827.
+I0715 07:46:59.375140 130963043796480 run.py:723] (val) algo bellman_ford step 4950: {'pi': 0.927734375, 'score': 0.927734375, 'examples_seen': 548827, 'step': 4950, 'algorithm': 'bellman_ford'}
+I0715 07:46:59.375281 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.928, val scores are: bellman_ford: 0.928
+I0715 07:47:02.192831 130963043796480 run.py:688] Algo bellman_ford step 5000 current loss 0.516579, current_train_items 554310.
+I0715 07:47:02.225028 130963043796480 run.py:723] (val) algo bellman_ford step 5000: {'pi': 0.966796875, 'score': 0.966796875, 'examples_seen': 554310, 'step': 5000, 'algorithm': 'bellman_ford'}
+I0715 07:47:02.225168 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.967, val scores are: bellman_ford: 0.967
+I0715 07:47:05.047549 130963043796480 run.py:688] Algo bellman_ford step 5050 current loss 0.967745, current_train_items 559822.
+I0715 07:47:05.087872 130963043796480 run.py:723] (val) algo bellman_ford step 5050: {'pi': 0.876953125, 'score': 0.876953125, 'examples_seen': 559822, 'step': 5050, 'algorithm': 'bellman_ford'}
+I0715 07:47:05.088016 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.877, val scores are: bellman_ford: 0.877
+I0715 07:47:07.908552 130963043796480 run.py:688] Algo bellman_ford step 5100 current loss 0.917711, current_train_items 565306.
+I0715 07:47:07.951745 130963043796480 run.py:723] (val) algo bellman_ford step 5100: {'pi': 0.9716796875, 'score': 0.9716796875, 'examples_seen': 565306, 'step': 5100, 'algorithm': 'bellman_ford'}
+I0715 07:47:07.951883 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.972, val scores are: bellman_ford: 0.972
+I0715 07:47:10.789673 130963043796480 run.py:688] Algo bellman_ford step 5150 current loss 0.920866, current_train_items 570802.
+I0715 07:47:10.839524 130963043796480 run.py:723] (val) algo bellman_ford step 5150: {'pi': 0.96875, 'score': 0.96875, 'examples_seen': 570802, 'step': 5150, 'algorithm': 'bellman_ford'}
+I0715 07:47:10.839676 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.969, val scores are: bellman_ford: 0.969
+I0715 07:47:13.694160 130963043796480 run.py:688] Algo bellman_ford step 5200 current loss 0.120473, current_train_items 576481.
+I0715 07:47:13.719575 130963043796480 run.py:723] (val) algo bellman_ford step 5200: {'pi': 0.9794921875, 'score': 0.9794921875, 'examples_seen': 576481, 'step': 5200, 'algorithm': 'bellman_ford'}
+I0715 07:47:13.719717 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.979, val scores are: bellman_ford: 0.979
+I0715 07:47:16.521013 130963043796480 run.py:688] Algo bellman_ford step 5250 current loss 0.225559, current_train_items 582016.
+I0715 07:47:16.548457 130963043796480 run.py:723] (val) algo bellman_ford step 5250: {'pi': 0.92578125, 'score': 0.92578125, 'examples_seen': 582016, 'step': 5250, 'algorithm': 'bellman_ford'}
+I0715 07:47:16.548609 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.926, val scores are: bellman_ford: 0.926
+I0715 07:47:19.333712 130963043796480 run.py:688] Algo bellman_ford step 5300 current loss 0.448581, current_train_items 587542.
+I0715 07:47:19.364097 130963043796480 run.py:723] (val) algo bellman_ford step 5300: {'pi': 0.974609375, 'score': 0.974609375, 'examples_seen': 587542, 'step': 5300, 'algorithm': 'bellman_ford'}
+I0715 07:47:19.364235 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.975, val scores are: bellman_ford: 0.975
+I0715 07:47:22.162652 130963043796480 run.py:688] Algo bellman_ford step 5350 current loss 0.598250, current_train_items 593046.
+I0715 07:47:22.194052 130963043796480 run.py:723] (val) algo bellman_ford step 5350: {'pi': 0.966796875, 'score': 0.966796875, 'examples_seen': 593046, 'step': 5350, 'algorithm': 'bellman_ford'}
+I0715 07:47:22.194196 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.967, val scores are: bellman_ford: 0.967
+I0715 07:47:25.032352 130963043796480 run.py:688] Algo bellman_ford step 5400 current loss 0.984272, current_train_items 598638.
+I0715 07:47:25.072743 130963043796480 run.py:723] (val) algo bellman_ford step 5400: {'pi': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 598638, 'step': 5400, 'algorithm': 'bellman_ford'}
+I0715 07:47:25.072881 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.983, val scores are: bellman_ford: 0.983
+I0715 07:47:27.922031 130963043796480 run.py:688] Algo bellman_ford step 5450 current loss 0.772726, current_train_items 604182.
+I0715 07:47:27.965762 130963043796480 run.py:723] (val) algo bellman_ford step 5450: {'pi': 0.9140625, 'score': 0.9140625, 'examples_seen': 604182, 'step': 5450, 'algorithm': 'bellman_ford'}
+I0715 07:47:27.965905 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.914, val scores are: bellman_ford: 0.914
+I0715 07:47:30.841450 130963043796480 run.py:688] Algo bellman_ford step 5500 current loss 0.991318, current_train_items 609662.
+I0715 07:47:30.891039 130963043796480 run.py:723] (val) algo bellman_ford step 5500: {'pi': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 609662, 'step': 5500, 'algorithm': 'bellman_ford'}
+I0715 07:47:30.891180 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.983, val scores are: bellman_ford: 0.983
+I0715 07:47:33.737282 130963043796480 run.py:688] Algo bellman_ford step 5550 current loss 0.150734, current_train_items 615297.
+I0715 07:47:33.762732 130963043796480 run.py:723] (val) algo bellman_ford step 5550: {'pi': 0.951171875, 'score': 0.951171875, 'examples_seen': 615297, 'step': 5550, 'algorithm': 'bellman_ford'}
+I0715 07:47:33.762880 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.951, val scores are: bellman_ford: 0.951
+I0715 07:47:36.695789 130963043796480 run.py:688] Algo bellman_ford step 5600 current loss 0.308451, current_train_items 620946.
+I0715 07:47:36.722577 130963043796480 run.py:723] (val) algo bellman_ford step 5600: {'pi': 0.96875, 'score': 0.96875, 'examples_seen': 620946, 'step': 5600, 'algorithm': 'bellman_ford'}
+I0715 07:47:36.722725 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.969, val scores are: bellman_ford: 0.969
+I0715 07:47:39.547391 130963043796480 run.py:688] Algo bellman_ford step 5650 current loss 0.453425, current_train_items 626443.
+I0715 07:47:39.576108 130963043796480 run.py:723] (val) algo bellman_ford step 5650: {'pi': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 626443, 'step': 5650, 'algorithm': 'bellman_ford'}
+I0715 07:47:39.576250 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.983, val scores are: bellman_ford: 0.983
+I0715 07:47:42.467305 130963043796480 run.py:688] Algo bellman_ford step 5700 current loss 0.661802, current_train_items 632007.
+I0715 07:47:42.499038 130963043796480 run.py:723] (val) algo bellman_ford step 5700: {'pi': 0.8994140625, 'score': 0.8994140625, 'examples_seen': 632007, 'step': 5700, 'algorithm': 'bellman_ford'}
+I0715 07:47:42.499191 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.899, val scores are: bellman_ford: 0.899
+I0715 07:47:45.267019 130963043796480 run.py:688] Algo bellman_ford step 5750 current loss 0.915564, current_train_items 637523.
+I0715 07:47:45.306125 130963043796480 run.py:723] (val) algo bellman_ford step 5750: {'pi': 0.916015625, 'score': 0.916015625, 'examples_seen': 637523, 'step': 5750, 'algorithm': 'bellman_ford'}
+I0715 07:47:45.306264 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.916, val scores are: bellman_ford: 0.916
+I0715 07:47:48.116344 130963043796480 run.py:688] Algo bellman_ford step 5800 current loss 0.781029, current_train_items 642958.
+I0715 07:47:48.160158 130963043796480 run.py:723] (val) algo bellman_ford step 5800: {'pi': 0.9677734375, 'score': 0.9677734375, 'examples_seen': 642958, 'step': 5800, 'algorithm': 'bellman_ford'}
+I0715 07:47:48.160299 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.983, current avg val score is 0.968, val scores are: bellman_ford: 0.968
+I0715 07:47:51.034087 130963043796480 run.py:688] Algo bellman_ford step 5850 current loss 0.997128, current_train_items 648439.
+I0715 07:47:51.083952 130963043796480 run.py:723] (val) algo bellman_ford step 5850: {'pi': 0.984375, 'score': 0.984375, 'examples_seen': 648439, 'step': 5850, 'algorithm': 'bellman_ford'}
+I0715 07:47:51.084095 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.983, current avg val score is 0.984, val scores are: bellman_ford: 0.984
+I0715 07:47:53.969612 130963043796480 run.py:688] Algo bellman_ford step 5900 current loss 0.115167, current_train_items 654090.
+I0715 07:47:53.997597 130963043796480 run.py:723] (val) algo bellman_ford step 5900: {'pi': 0.9560546875, 'score': 0.9560546875, 'examples_seen': 654090, 'step': 5900, 'algorithm': 'bellman_ford'}
+I0715 07:47:53.997739 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.984, current avg val score is 0.956, val scores are: bellman_ford: 0.956
+I0715 07:47:56.836217 130963043796480 run.py:688] Algo bellman_ford step 5950 current loss 0.179179, current_train_items 659651.
+I0715 07:47:56.862255 130963043796480 run.py:723] (val) algo bellman_ford step 5950: {'pi': 0.953125, 'score': 0.953125, 'examples_seen': 659651, 'step': 5950, 'algorithm': 'bellman_ford'}
+I0715 07:47:56.862395 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.984, current avg val score is 0.953, val scores are: bellman_ford: 0.953
+I0715 07:47:59.726289 130963043796480 run.py:688] Algo bellman_ford step 6000 current loss 0.412777, current_train_items 665285.
+I0715 07:47:59.755021 130963043796480 run.py:723] (val) algo bellman_ford step 6000: {'pi': 0.96875, 'score': 0.96875, 'examples_seen': 665285, 'step': 6000, 'algorithm': 'bellman_ford'}
+I0715 07:47:59.755158 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.984, current avg val score is 0.969, val scores are: bellman_ford: 0.969
+I0715 07:48:02.551800 130963043796480 run.py:688] Algo bellman_ford step 6050 current loss 0.598870, current_train_items 670848.
+I0715 07:48:02.586147 130963043796480 run.py:723] (val) algo bellman_ford step 6050: {'pi': 0.982421875, 'score': 0.982421875, 'examples_seen': 670848, 'step': 6050, 'algorithm': 'bellman_ford'}
+I0715 07:48:02.586294 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.984, current avg val score is 0.982, val scores are: bellman_ford: 0.982
+I0715 07:48:05.413215 130963043796480 run.py:688] Algo bellman_ford step 6100 current loss 0.778431, current_train_items 676349.
+I0715 07:48:05.452084 130963043796480 run.py:723] (val) algo bellman_ford step 6100: {'pi': 0.9736328125, 'score': 0.9736328125, 'examples_seen': 676349, 'step': 6100, 'algorithm': 'bellman_ford'}
+I0715 07:48:05.452238 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.984, current avg val score is 0.974, val scores are: bellman_ford: 0.974
+I0715 07:48:08.337261 130963043796480 run.py:688] Algo bellman_ford step 6150 current loss 0.615562, current_train_items 681805.
+I0715 07:48:08.381135 130963043796480 run.py:723] (val) algo bellman_ford step 6150: {'pi': 0.9306640625, 'score': 0.9306640625, 'examples_seen': 681805, 'step': 6150, 'algorithm': 'bellman_ford'}
+I0715 07:48:08.381273 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.984, current avg val score is 0.931, val scores are: bellman_ford: 0.931
+I0715 07:48:11.204507 130963043796480 run.py:688] Algo bellman_ford step 6200 current loss 1.031909, current_train_items 687312.
+I0715 07:48:11.252714 130963043796480 run.py:723] (val) algo bellman_ford step 6200: {'pi': 0.96875, 'score': 0.96875, 'examples_seen': 687312, 'step': 6200, 'algorithm': 'bellman_ford'}
+I0715 07:48:11.252850 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.984, current avg val score is 0.969, val scores are: bellman_ford: 0.969
+I0715 07:48:14.030901 130963043796480 run.py:688] Algo bellman_ford step 6250 current loss 0.051799, current_train_items 692910.
+I0715 07:48:14.056171 130963043796480 run.py:723] (val) algo bellman_ford step 6250: {'pi': 0.98046875, 'score': 0.98046875, 'examples_seen': 692910, 'step': 6250, 'algorithm': 'bellman_ford'}
+I0715 07:48:14.056314 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.984, current avg val score is 0.980, val scores are: bellman_ford: 0.980
+I0715 07:48:16.908623 130963043796480 run.py:688] Algo bellman_ford step 6300 current loss 0.212301, current_train_items 698517.
+I0715 07:48:16.935445 130963043796480 run.py:723] (val) algo bellman_ford step 6300: {'pi': 0.91796875, 'score': 0.91796875, 'examples_seen': 698517, 'step': 6300, 'algorithm': 'bellman_ford'}
+I0715 07:48:16.935594 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.984, current avg val score is 0.918, val scores are: bellman_ford: 0.918
+I0715 07:48:19.837663 130963043796480 run.py:688] Algo bellman_ford step 6350 current loss 0.349439, current_train_items 704138.
+I0715 07:48:19.866776 130963043796480 run.py:723] (val) algo bellman_ford step 6350: {'pi': 0.9755859375, 'score': 0.9755859375, 'examples_seen': 704138, 'step': 6350, 'algorithm': 'bellman_ford'}
+I0715 07:48:19.866914 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.984, current avg val score is 0.976, val scores are: bellman_ford: 0.976
+I0715 07:48:22.770285 130963043796480 run.py:688] Algo bellman_ford step 6400 current loss 0.613405, current_train_items 709693.
+I0715 07:48:22.802527 130963043796480 run.py:723] (val) algo bellman_ford step 6400: {'pi': 0.9326171875, 'score': 0.9326171875, 'examples_seen': 709693, 'step': 6400, 'algorithm': 'bellman_ford'}
+I0715 07:48:22.802673 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.984, current avg val score is 0.933, val scores are: bellman_ford: 0.933
+I0715 07:48:25.708848 130963043796480 run.py:688] Algo bellman_ford step 6450 current loss 0.663344, current_train_items 715239.
+I0715 07:48:25.749362 130963043796480 run.py:723] (val) algo bellman_ford step 6450: {'pi': 0.9677734375, 'score': 0.9677734375, 'examples_seen': 715239, 'step': 6450, 'algorithm': 'bellman_ford'}
+I0715 07:48:25.749515 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.984, current avg val score is 0.968, val scores are: bellman_ford: 0.968
+I0715 07:48:28.502979 130963043796480 run.py:688] Algo bellman_ford step 6500 current loss 0.884709, current_train_items 720770.
+I0715 07:48:28.546618 130963043796480 run.py:723] (val) algo bellman_ford step 6500: {'pi': 0.943359375, 'score': 0.943359375, 'examples_seen': 720770, 'step': 6500, 'algorithm': 'bellman_ford'}
+I0715 07:48:28.546756 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.984, current avg val score is 0.943, val scores are: bellman_ford: 0.943
+I0715 07:48:31.425125 130963043796480 run.py:688] Algo bellman_ford step 6550 current loss 0.645379, current_train_items 726304.
+I0715 07:48:31.474398 130963043796480 run.py:723] (val) algo bellman_ford step 6550: {'pi': 0.982421875, 'score': 0.982421875, 'examples_seen': 726304, 'step': 6550, 'algorithm': 'bellman_ford'}
+I0715 07:48:31.474548 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.984, current avg val score is 0.982, val scores are: bellman_ford: 0.982
+I0715 07:48:34.374722 130963043796480 run.py:688] Algo bellman_ford step 6600 current loss 0.082838, current_train_items 731920.
+I0715 07:48:34.400506 130963043796480 run.py:723] (val) algo bellman_ford step 6600: {'pi': 0.984375, 'score': 0.984375, 'examples_seen': 731920, 'step': 6600, 'algorithm': 'bellman_ford'}
+I0715 07:48:34.400646 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.984, current avg val score is 0.984, val scores are: bellman_ford: 0.984
+I0715 07:48:37.281455 130963043796480 run.py:688] Algo bellman_ford step 6650 current loss 0.158787, current_train_items 737510.
+I0715 07:48:37.307919 130963043796480 run.py:723] (val) algo bellman_ford step 6650: {'pi': 0.9892578125, 'score': 0.9892578125, 'examples_seen': 737510, 'step': 6650, 'algorithm': 'bellman_ford'}
+I0715 07:48:37.308058 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.984, current avg val score is 0.989, val scores are: bellman_ford: 0.989
+I0715 07:48:40.166393 130963043796480 run.py:688] Algo bellman_ford step 6700 current loss 0.291815, current_train_items 743042.
+I0715 07:48:40.195588 130963043796480 run.py:723] (val) algo bellman_ford step 6700: {'pi': 0.9248046875, 'score': 0.9248046875, 'examples_seen': 743042, 'step': 6700, 'algorithm': 'bellman_ford'}
+I0715 07:48:40.195732 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.925, val scores are: bellman_ford: 0.925
+I0715 07:48:43.132339 130963043796480 run.py:688] Algo bellman_ford step 6750 current loss 0.521838, current_train_items 748591.
+I0715 07:48:43.164155 130963043796480 run.py:723] (val) algo bellman_ford step 6750: {'pi': 0.96875, 'score': 0.96875, 'examples_seen': 748591, 'step': 6750, 'algorithm': 'bellman_ford'}
+I0715 07:48:43.164296 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.969, val scores are: bellman_ford: 0.969
+I0715 07:48:46.038633 130963043796480 run.py:688] Algo bellman_ford step 6800 current loss 0.627689, current_train_items 754161.
+I0715 07:48:46.077815 130963043796480 run.py:723] (val) algo bellman_ford step 6800: {'pi': 0.9697265625, 'score': 0.9697265625, 'examples_seen': 754161, 'step': 6800, 'algorithm': 'bellman_ford'}
+I0715 07:48:46.077955 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.970, val scores are: bellman_ford: 0.970
+I0715 07:48:48.918911 130963043796480 run.py:688] Algo bellman_ford step 6850 current loss 0.871722, current_train_items 759700.
+I0715 07:48:48.962917 130963043796480 run.py:723] (val) algo bellman_ford step 6850: {'pi': 0.9755859375, 'score': 0.9755859375, 'examples_seen': 759700, 'step': 6850, 'algorithm': 'bellman_ford'}
+I0715 07:48:48.963060 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.976, val scores are: bellman_ford: 0.976
+I0715 07:48:51.744289 130963043796480 run.py:688] Algo bellman_ford step 6900 current loss 0.891196, current_train_items 765245.
+I0715 07:48:51.793212 130963043796480 run.py:723] (val) algo bellman_ford step 6900: {'pi': 0.984375, 'score': 0.984375, 'examples_seen': 765245, 'step': 6900, 'algorithm': 'bellman_ford'}
+I0715 07:48:51.793353 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.984, val scores are: bellman_ford: 0.984
+I0715 07:48:54.661398 130963043796480 run.py:688] Algo bellman_ford step 6950 current loss 0.036621, current_train_items 770874.
+I0715 07:48:54.689269 130963043796480 run.py:723] (val) algo bellman_ford step 6950: {'pi': 0.93359375, 'score': 0.93359375, 'examples_seen': 770874, 'step': 6950, 'algorithm': 'bellman_ford'}
+I0715 07:48:54.689410 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.934, val scores are: bellman_ford: 0.934
+I0715 07:48:57.464220 130963043796480 run.py:688] Algo bellman_ford step 7000 current loss 0.131500, current_train_items 776494.
+I0715 07:48:57.490909 130963043796480 run.py:723] (val) algo bellman_ford step 7000: {'pi': 0.9638671875, 'score': 0.9638671875, 'examples_seen': 776494, 'step': 7000, 'algorithm': 'bellman_ford'}
+I0715 07:48:57.491050 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.964, val scores are: bellman_ford: 0.964
+I0715 07:49:00.209803 130963043796480 run.py:688] Algo bellman_ford step 7050 current loss 0.431329, current_train_items 781995.
+I0715 07:49:00.239956 130963043796480 run.py:723] (val) algo bellman_ford step 7050: {'pi': 0.98828125, 'score': 0.98828125, 'examples_seen': 781995, 'step': 7050, 'algorithm': 'bellman_ford'}
+I0715 07:49:00.240096 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.988, val scores are: bellman_ford: 0.988
+I0715 07:49:03.077875 130963043796480 run.py:688] Algo bellman_ford step 7100 current loss 0.523326, current_train_items 787530.
+I0715 07:49:03.108927 130963043796480 run.py:723] (val) algo bellman_ford step 7100: {'pi': 0.9541015625, 'score': 0.9541015625, 'examples_seen': 787530, 'step': 7100, 'algorithm': 'bellman_ford'}
+I0715 07:49:03.109070 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.954, val scores are: bellman_ford: 0.954
+I0715 07:49:05.962992 130963043796480 run.py:688] Algo bellman_ford step 7150 current loss 0.606333, current_train_items 793035.
+I0715 07:49:06.001548 130963043796480 run.py:723] (val) algo bellman_ford step 7150: {'pi': 0.984375, 'score': 0.984375, 'examples_seen': 793035, 'step': 7150, 'algorithm': 'bellman_ford'}
+I0715 07:49:06.001687 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.984, val scores are: bellman_ford: 0.984
+I0715 07:49:08.849329 130963043796480 run.py:688] Algo bellman_ford step 7200 current loss 0.807069, current_train_items 798444.
+I0715 07:49:08.892984 130963043796480 run.py:723] (val) algo bellman_ford step 7200: {'pi': 0.9697265625, 'score': 0.9697265625, 'examples_seen': 798444, 'step': 7200, 'algorithm': 'bellman_ford'}
+I0715 07:49:08.893123 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.970, val scores are: bellman_ford: 0.970
+I0715 07:49:11.764343 130963043796480 run.py:688] Algo bellman_ford step 7250 current loss 1.053861, current_train_items 803897.
+I0715 07:49:11.815641 130963043796480 run.py:723] (val) algo bellman_ford step 7250: {'pi': 0.896484375, 'score': 0.896484375, 'examples_seen': 803897, 'step': 7250, 'algorithm': 'bellman_ford'}
+I0715 07:49:11.815783 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.896, val scores are: bellman_ford: 0.896
+I0715 07:49:14.667372 130963043796480 run.py:688] Algo bellman_ford step 7300 current loss 0.087477, current_train_items 809451.
+I0715 07:49:14.692395 130963043796480 run.py:723] (val) algo bellman_ford step 7300: {'pi': 0.955078125, 'score': 0.955078125, 'examples_seen': 809451, 'step': 7300, 'algorithm': 'bellman_ford'}
+I0715 07:49:14.692540 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.955, val scores are: bellman_ford: 0.955
+I0715 07:49:17.617161 130963043796480 run.py:688] Algo bellman_ford step 7350 current loss 0.333682, current_train_items 815091.
+I0715 07:49:17.644460 130963043796480 run.py:723] (val) algo bellman_ford step 7350: {'pi': 0.9677734375, 'score': 0.9677734375, 'examples_seen': 815091, 'step': 7350, 'algorithm': 'bellman_ford'}
+I0715 07:49:17.644609 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.968, val scores are: bellman_ford: 0.968
+I0715 07:49:20.450253 130963043796480 run.py:688] Algo bellman_ford step 7400 current loss 0.404866, current_train_items 820552.
+I0715 07:49:20.480535 130963043796480 run.py:723] (val) algo bellman_ford step 7400: {'pi': 0.9384765625, 'score': 0.9384765625, 'examples_seen': 820552, 'step': 7400, 'algorithm': 'bellman_ford'}
+I0715 07:49:20.480678 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.938, val scores are: bellman_ford: 0.938
+I0715 07:49:23.318654 130963043796480 run.py:688] Algo bellman_ford step 7450 current loss 0.443501, current_train_items 826094.
+I0715 07:49:23.350649 130963043796480 run.py:723] (val) algo bellman_ford step 7450: {'pi': 0.970703125, 'score': 0.970703125, 'examples_seen': 826094, 'step': 7450, 'algorithm': 'bellman_ford'}
+I0715 07:49:23.350789 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.971, val scores are: bellman_ford: 0.971
+I0715 07:49:26.245121 130963043796480 run.py:688] Algo bellman_ford step 7500 current loss 0.789832, current_train_items 831601.
+I0715 07:49:26.284122 130963043796480 run.py:723] (val) algo bellman_ford step 7500: {'pi': 0.9638671875, 'score': 0.9638671875, 'examples_seen': 831601, 'step': 7500, 'algorithm': 'bellman_ford'}
+I0715 07:49:26.284272 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.989, current avg val score is 0.964, val scores are: bellman_ford: 0.964
+I0715 07:49:29.089003 130963043796480 run.py:688] Algo bellman_ford step 7550 current loss 0.771102, current_train_items 837062.
+I0715 07:49:29.132282 130963043796480 run.py:723] (val) algo bellman_ford step 7550: {'pi': 0.990234375, 'score': 0.990234375, 'examples_seen': 837062, 'step': 7550, 'algorithm': 'bellman_ford'}
+I0715 07:49:29.132421 130963043796480 run.py:744] Checkpointing best model, best avg val score was 0.989, current avg val score is 0.990, val scores are: bellman_ford: 0.990
+I0715 07:49:31.931310 130963043796480 run.py:688] Algo bellman_ford step 7600 current loss 0.924221, current_train_items 842436.
+I0715 07:49:31.984494 130963043796480 run.py:723] (val) algo bellman_ford step 7600: {'pi': 0.9853515625, 'score': 0.9853515625, 'examples_seen': 842436, 'step': 7600, 'algorithm': 'bellman_ford'}
+I0715 07:49:31.984637 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.985, val scores are: bellman_ford: 0.985
+I0715 07:49:34.847152 130963043796480 run.py:688] Algo bellman_ford step 7650 current loss 0.089451, current_train_items 848046.
+I0715 07:49:34.873931 130963043796480 run.py:723] (val) algo bellman_ford step 7650: {'pi': 0.974609375, 'score': 0.974609375, 'examples_seen': 848046, 'step': 7650, 'algorithm': 'bellman_ford'}
+I0715 07:49:34.874083 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.975, val scores are: bellman_ford: 0.975
+I0715 07:49:37.790121 130963043796480 run.py:688] Algo bellman_ford step 7700 current loss 0.139930, current_train_items 853681.
+I0715 07:49:37.817136 130963043796480 run.py:723] (val) algo bellman_ford step 7700: {'pi': 0.96875, 'score': 0.96875, 'examples_seen': 853681, 'step': 7700, 'algorithm': 'bellman_ford'}
+I0715 07:49:37.817281 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.969, val scores are: bellman_ford: 0.969
+I0715 07:49:40.621869 130963043796480 run.py:688] Algo bellman_ford step 7750 current loss 0.321939, current_train_items 859215.
+I0715 07:49:40.650734 130963043796480 run.py:723] (val) algo bellman_ford step 7750: {'pi': 0.9501953125, 'score': 0.9501953125, 'examples_seen': 859215, 'step': 7750, 'algorithm': 'bellman_ford'}
+I0715 07:49:40.650884 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.950, val scores are: bellman_ford: 0.950
+I0715 07:49:43.457798 130963043796480 run.py:688] Algo bellman_ford step 7800 current loss 0.501998, current_train_items 864750.
+I0715 07:49:43.489343 130963043796480 run.py:723] (val) algo bellman_ford step 7800: {'pi': 0.9697265625, 'score': 0.9697265625, 'examples_seen': 864750, 'step': 7800, 'algorithm': 'bellman_ford'}
+I0715 07:49:43.489490 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.970, val scores are: bellman_ford: 0.970
+I0715 07:49:46.415940 130963043796480 run.py:688] Algo bellman_ford step 7850 current loss 0.840750, current_train_items 870296.
+I0715 07:49:46.454492 130963043796480 run.py:723] (val) algo bellman_ford step 7850: {'pi': 0.919921875, 'score': 0.919921875, 'examples_seen': 870296, 'step': 7850, 'algorithm': 'bellman_ford'}
+I0715 07:49:46.454633 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.920, val scores are: bellman_ford: 0.920
+I0715 07:49:49.230820 130963043796480 run.py:688] Algo bellman_ford step 7900 current loss 0.699433, current_train_items 875822.
+I0715 07:49:49.274328 130963043796480 run.py:723] (val) algo bellman_ford step 7900: {'pi': 0.9794921875, 'score': 0.9794921875, 'examples_seen': 875822, 'step': 7900, 'algorithm': 'bellman_ford'}
+I0715 07:49:49.274468 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.979, val scores are: bellman_ford: 0.979
+I0715 07:49:52.173345 130963043796480 run.py:688] Algo bellman_ford step 7950 current loss 0.854568, current_train_items 881345.
+I0715 07:49:52.223093 130963043796480 run.py:723] (val) algo bellman_ford step 7950: {'pi': 0.947265625, 'score': 0.947265625, 'examples_seen': 881345, 'step': 7950, 'algorithm': 'bellman_ford'}
+I0715 07:49:52.223235 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.947, val scores are: bellman_ford: 0.947
+I0715 07:49:55.087320 130963043796480 run.py:688] Algo bellman_ford step 8000 current loss 0.153748, current_train_items 886969.
+I0715 07:49:55.112179 130963043796480 run.py:723] (val) algo bellman_ford step 8000: {'pi': 0.9296875, 'score': 0.9296875, 'examples_seen': 886969, 'step': 8000, 'algorithm': 'bellman_ford'}
+I0715 07:49:55.112319 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.930, val scores are: bellman_ford: 0.930
+I0715 07:49:58.016372 130963043796480 run.py:688] Algo bellman_ford step 8050 current loss 0.335871, current_train_items 892571.
+I0715 07:49:58.043979 130963043796480 run.py:723] (val) algo bellman_ford step 8050: {'pi': 0.966796875, 'score': 0.966796875, 'examples_seen': 892571, 'step': 8050, 'algorithm': 'bellman_ford'}
+I0715 07:49:58.044123 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.967, val scores are: bellman_ford: 0.967
+I0715 07:50:00.900971 130963043796480 run.py:688] Algo bellman_ford step 8100 current loss 0.388527, current_train_items 898132.
+I0715 07:50:00.929668 130963043796480 run.py:723] (val) algo bellman_ford step 8100: {'pi': 0.9541015625, 'score': 0.9541015625, 'examples_seen': 898132, 'step': 8100, 'algorithm': 'bellman_ford'}
+I0715 07:50:00.929808 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.954, val scores are: bellman_ford: 0.954
+I0715 07:50:03.739853 130963043796480 run.py:688] Algo bellman_ford step 8150 current loss 0.526756, current_train_items 903662.
+I0715 07:50:03.771748 130963043796480 run.py:723] (val) algo bellman_ford step 8150: {'pi': 0.9765625, 'score': 0.9765625, 'examples_seen': 903662, 'step': 8150, 'algorithm': 'bellman_ford'}
+I0715 07:50:03.771893 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.977, val scores are: bellman_ford: 0.977
+I0715 07:50:06.649851 130963043796480 run.py:688] Algo bellman_ford step 8200 current loss 0.771027, current_train_items 909219.
+I0715 07:50:06.688932 130963043796480 run.py:723] (val) algo bellman_ford step 8200: {'pi': 0.962890625, 'score': 0.962890625, 'examples_seen': 909219, 'step': 8200, 'algorithm': 'bellman_ford'}
+I0715 07:50:06.689075 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.963, val scores are: bellman_ford: 0.963
+I0715 07:50:09.601228 130963043796480 run.py:688] Algo bellman_ford step 8250 current loss 0.704745, current_train_items 914752.
+I0715 07:50:09.646031 130963043796480 run.py:723] (val) algo bellman_ford step 8250: {'pi': 0.951171875, 'score': 0.951171875, 'examples_seen': 914752, 'step': 8250, 'algorithm': 'bellman_ford'}
+I0715 07:50:09.646174 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.951, val scores are: bellman_ford: 0.951
+I0715 07:50:12.573955 130963043796480 run.py:688] Algo bellman_ford step 8300 current loss 0.874247, current_train_items 920284.
+I0715 07:50:12.622653 130963043796480 run.py:723] (val) algo bellman_ford step 8300: {'pi': 0.974609375, 'score': 0.974609375, 'examples_seen': 920284, 'step': 8300, 'algorithm': 'bellman_ford'}
+I0715 07:50:12.622797 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.975, val scores are: bellman_ford: 0.975
+I0715 07:50:15.551288 130963043796480 run.py:688] Algo bellman_ford step 8350 current loss 0.174981, current_train_items 925882.
+I0715 07:50:15.576771 130963043796480 run.py:723] (val) algo bellman_ford step 8350: {'pi': 0.953125, 'score': 0.953125, 'examples_seen': 925882, 'step': 8350, 'algorithm': 'bellman_ford'}
+I0715 07:50:15.576912 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.953, val scores are: bellman_ford: 0.953
+I0715 07:50:18.584268 130963043796480 run.py:688] Algo bellman_ford step 8400 current loss 0.323269, current_train_items 931492.
+I0715 07:50:18.609997 130963043796480 run.py:723] (val) algo bellman_ford step 8400: {'pi': 0.9677734375, 'score': 0.9677734375, 'examples_seen': 931492, 'step': 8400, 'algorithm': 'bellman_ford'}
+I0715 07:50:18.610137 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.968, val scores are: bellman_ford: 0.968
+I0715 07:50:21.314530 130963043796480 run.py:688] Algo bellman_ford step 8450 current loss 0.293484, current_train_items 937050.
+I0715 07:50:21.343488 130963043796480 run.py:723] (val) algo bellman_ford step 8450: {'pi': 0.95703125, 'score': 0.95703125, 'examples_seen': 937050, 'step': 8450, 'algorithm': 'bellman_ford'}
+I0715 07:50:21.343631 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.957, val scores are: bellman_ford: 0.957
+I0715 07:50:24.137331 130963043796480 run.py:688] Algo bellman_ford step 8500 current loss 0.448831, current_train_items 942593.
+I0715 07:50:24.169297 130963043796480 run.py:723] (val) algo bellman_ford step 8500: {'pi': 0.962890625, 'score': 0.962890625, 'examples_seen': 942593, 'step': 8500, 'algorithm': 'bellman_ford'}
+I0715 07:50:24.169437 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.963, val scores are: bellman_ford: 0.963
+I0715 07:50:27.006059 130963043796480 run.py:688] Algo bellman_ford step 8550 current loss 0.779233, current_train_items 948088.
+I0715 07:50:27.045042 130963043796480 run.py:723] (val) algo bellman_ford step 8550: {'pi': 0.9619140625, 'score': 0.9619140625, 'examples_seen': 948088, 'step': 8550, 'algorithm': 'bellman_ford'}
+I0715 07:50:27.045182 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.962, val scores are: bellman_ford: 0.962
+I0715 07:50:29.896160 130963043796480 run.py:688] Algo bellman_ford step 8600 current loss 0.814341, current_train_items 953583.
+I0715 07:50:29.940083 130963043796480 run.py:723] (val) algo bellman_ford step 8600: {'pi': 0.908203125, 'score': 0.908203125, 'examples_seen': 953583, 'step': 8600, 'algorithm': 'bellman_ford'}
+I0715 07:50:29.940226 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.908, val scores are: bellman_ford: 0.908
+I0715 07:50:32.757430 130963043796480 run.py:688] Algo bellman_ford step 8650 current loss 0.697757, current_train_items 959058.
+I0715 07:50:32.806067 130963043796480 run.py:723] (val) algo bellman_ford step 8650: {'pi': 0.9462890625, 'score': 0.9462890625, 'examples_seen': 959058, 'step': 8650, 'algorithm': 'bellman_ford'}
+I0715 07:50:32.806209 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.946, val scores are: bellman_ford: 0.946
+I0715 07:50:35.641795 130963043796480 run.py:688] Algo bellman_ford step 8700 current loss 0.114566, current_train_items 964626.
+I0715 07:50:35.670345 130963043796480 run.py:723] (val) algo bellman_ford step 8700: {'pi': 0.98046875, 'score': 0.98046875, 'examples_seen': 964626, 'step': 8700, 'algorithm': 'bellman_ford'}
+I0715 07:50:35.670493 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.980, val scores are: bellman_ford: 0.980
+I0715 07:50:38.497511 130963043796480 run.py:688] Algo bellman_ford step 8750 current loss 0.198012, current_train_items 970298.
+I0715 07:50:38.524631 130963043796480 run.py:723] (val) algo bellman_ford step 8750: {'pi': 0.9638671875, 'score': 0.9638671875, 'examples_seen': 970298, 'step': 8750, 'algorithm': 'bellman_ford'}
+I0715 07:50:38.524772 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.964, val scores are: bellman_ford: 0.964
+I0715 07:50:41.317643 130963043796480 run.py:688] Algo bellman_ford step 8800 current loss 0.273493, current_train_items 975825.
+I0715 07:50:41.347545 130963043796480 run.py:723] (val) algo bellman_ford step 8800: {'pi': 0.98046875, 'score': 0.98046875, 'examples_seen': 975825, 'step': 8800, 'algorithm': 'bellman_ford'}
+I0715 07:50:41.347684 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.980, val scores are: bellman_ford: 0.980
+I0715 07:50:44.286164 130963043796480 run.py:688] Algo bellman_ford step 8850 current loss 0.517999, current_train_items 981377.
+I0715 07:50:44.317508 130963043796480 run.py:723] (val) algo bellman_ford step 8850: {'pi': 0.962890625, 'score': 0.962890625, 'examples_seen': 981377, 'step': 8850, 'algorithm': 'bellman_ford'}
+I0715 07:50:44.317647 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.963, val scores are: bellman_ford: 0.963
+I0715 07:50:47.109565 130963043796480 run.py:688] Algo bellman_ford step 8900 current loss 0.646985, current_train_items 986846.
+I0715 07:50:47.148375 130963043796480 run.py:723] (val) algo bellman_ford step 8900: {'pi': 0.95703125, 'score': 0.95703125, 'examples_seen': 986846, 'step': 8900, 'algorithm': 'bellman_ford'}
+I0715 07:50:47.148522 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.957, val scores are: bellman_ford: 0.957
+I0715 07:50:50.012542 130963043796480 run.py:688] Algo bellman_ford step 8950 current loss 0.922210, current_train_items 992419.
+I0715 07:50:50.056179 130963043796480 run.py:723] (val) algo bellman_ford step 8950: {'pi': 0.9794921875, 'score': 0.9794921875, 'examples_seen': 992419, 'step': 8950, 'algorithm': 'bellman_ford'}
+I0715 07:50:50.056320 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.979, val scores are: bellman_ford: 0.979
+I0715 07:50:52.929142 130963043796480 run.py:688] Algo bellman_ford step 9000 current loss 0.920652, current_train_items 997892.
+I0715 07:50:52.977428 130963043796480 run.py:723] (val) algo bellman_ford step 9000: {'pi': 0.94921875, 'score': 0.94921875, 'examples_seen': 997892, 'step': 9000, 'algorithm': 'bellman_ford'}
+I0715 07:50:52.977576 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.949, val scores are: bellman_ford: 0.949
+I0715 07:50:55.883399 130963043796480 run.py:688] Algo bellman_ford step 9050 current loss 0.111050, current_train_items 1003572.
+I0715 07:50:55.908126 130963043796480 run.py:723] (val) algo bellman_ford step 9050: {'pi': 0.9697265625, 'score': 0.9697265625, 'examples_seen': 1003572, 'step': 9050, 'algorithm': 'bellman_ford'}
+I0715 07:50:55.908270 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.970, val scores are: bellman_ford: 0.970
+I0715 07:50:58.747106 130963043796480 run.py:688] Algo bellman_ford step 9100 current loss 0.112511, current_train_items 1009140.
+I0715 07:50:58.773484 130963043796480 run.py:723] (val) algo bellman_ford step 9100: {'pi': 0.9794921875, 'score': 0.9794921875, 'examples_seen': 1009140, 'step': 9100, 'algorithm': 'bellman_ford'}
+I0715 07:50:58.773625 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.979, val scores are: bellman_ford: 0.979
+I0715 07:51:01.579323 130963043796480 run.py:688] Algo bellman_ford step 9150 current loss 0.360914, current_train_items 1014681.
+I0715 07:51:01.608379 130963043796480 run.py:723] (val) algo bellman_ford step 9150: {'pi': 0.96875, 'score': 0.96875, 'examples_seen': 1014681, 'step': 9150, 'algorithm': 'bellman_ford'}
+I0715 07:51:01.608528 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.969, val scores are: bellman_ford: 0.969
+I0715 07:51:04.472428 130963043796480 run.py:688] Algo bellman_ford step 9200 current loss 0.531917, current_train_items 1020218.
+I0715 07:51:04.503280 130963043796480 run.py:723] (val) algo bellman_ford step 9200: {'pi': 0.966796875, 'score': 0.966796875, 'examples_seen': 1020218, 'step': 9200, 'algorithm': 'bellman_ford'}
+I0715 07:51:04.503418 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.967, val scores are: bellman_ford: 0.967
+I0715 07:51:07.343631 130963043796480 run.py:688] Algo bellman_ford step 9250 current loss 0.868633, current_train_items 1025713.
+I0715 07:51:07.383977 130963043796480 run.py:723] (val) algo bellman_ford step 9250: {'pi': 0.982421875, 'score': 0.982421875, 'examples_seen': 1025713, 'step': 9250, 'algorithm': 'bellman_ford'}
+I0715 07:51:07.384117 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.982, val scores are: bellman_ford: 0.982
+I0715 07:51:10.165625 130963043796480 run.py:688] Algo bellman_ford step 9300 current loss 0.851406, current_train_items 1031163.
+I0715 07:51:10.209547 130963043796480 run.py:723] (val) algo bellman_ford step 9300: {'pi': 0.9560546875, 'score': 0.9560546875, 'examples_seen': 1031163, 'step': 9300, 'algorithm': 'bellman_ford'}
+I0715 07:51:10.209686 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.956, val scores are: bellman_ford: 0.956
+I0715 07:51:13.009358 130963043796480 run.py:688] Algo bellman_ford step 9350 current loss 0.794690, current_train_items 1036661.
+I0715 07:51:13.058718 130963043796480 run.py:723] (val) algo bellman_ford step 9350: {'pi': 0.9580078125, 'score': 0.9580078125, 'examples_seen': 1036661, 'step': 9350, 'algorithm': 'bellman_ford'}
+I0715 07:51:13.058859 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.958, val scores are: bellman_ford: 0.958
+I0715 07:51:16.017073 130963043796480 run.py:688] Algo bellman_ford step 9400 current loss 0.111996, current_train_items 1042311.
+I0715 07:51:16.043764 130963043796480 run.py:723] (val) algo bellman_ford step 9400: {'pi': 0.974609375, 'score': 0.974609375, 'examples_seen': 1042311, 'step': 9400, 'algorithm': 'bellman_ford'}
+I0715 07:51:16.043920 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.975, val scores are: bellman_ford: 0.975
+I0715 07:51:18.933127 130963043796480 run.py:688] Algo bellman_ford step 9450 current loss 0.269231, current_train_items 1047901.
+I0715 07:51:18.960535 130963043796480 run.py:723] (val) algo bellman_ford step 9450: {'pi': 0.974609375, 'score': 0.974609375, 'examples_seen': 1047901, 'step': 9450, 'algorithm': 'bellman_ford'}
+I0715 07:51:18.960683 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.975, val scores are: bellman_ford: 0.975
+I0715 07:51:21.794203 130963043796480 run.py:688] Algo bellman_ford step 9500 current loss 0.382851, current_train_items 1053434.
+I0715 07:51:21.823869 130963043796480 run.py:723] (val) algo bellman_ford step 9500: {'pi': 0.94140625, 'score': 0.94140625, 'examples_seen': 1053434, 'step': 9500, 'algorithm': 'bellman_ford'}
+I0715 07:51:21.824016 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.941, val scores are: bellman_ford: 0.941
+I0715 07:51:24.699314 130963043796480 run.py:688] Algo bellman_ford step 9550 current loss 0.396399, current_train_items 1059006.
+I0715 07:51:24.730749 130963043796480 run.py:723] (val) algo bellman_ford step 9550: {'pi': 0.9755859375, 'score': 0.9755859375, 'examples_seen': 1059006, 'step': 9550, 'algorithm': 'bellman_ford'}
+I0715 07:51:24.730891 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.976, val scores are: bellman_ford: 0.976
+I0715 07:51:27.565433 130963043796480 run.py:688] Algo bellman_ford step 9600 current loss 0.662789, current_train_items 1064509.
+I0715 07:51:27.604567 130963043796480 run.py:723] (val) algo bellman_ford step 9600: {'pi': 0.9638671875, 'score': 0.9638671875, 'examples_seen': 1064509, 'step': 9600, 'algorithm': 'bellman_ford'}
+I0715 07:51:27.604709 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.964, val scores are: bellman_ford: 0.964
+I0715 07:51:30.486808 130963043796480 run.py:688] Algo bellman_ford step 9650 current loss 0.651630, current_train_items 1070042.
+I0715 07:51:30.530462 130963043796480 run.py:723] (val) algo bellman_ford step 9650: {'pi': 0.9775390625, 'score': 0.9775390625, 'examples_seen': 1070042, 'step': 9650, 'algorithm': 'bellman_ford'}
+I0715 07:51:30.530609 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.978, val scores are: bellman_ford: 0.978
+I0715 07:51:33.336210 130963043796480 run.py:688] Algo bellman_ford step 9700 current loss 0.972943, current_train_items 1075528.
+I0715 07:51:33.385245 130963043796480 run.py:723] (val) algo bellman_ford step 9700: {'pi': 0.9853515625, 'score': 0.9853515625, 'examples_seen': 1075528, 'step': 9700, 'algorithm': 'bellman_ford'}
+I0715 07:51:33.385387 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.985, val scores are: bellman_ford: 0.985
+I0715 07:51:36.191234 130963043796480 run.py:688] Algo bellman_ford step 9750 current loss 0.121528, current_train_items 1081174.
+I0715 07:51:36.216210 130963043796480 run.py:723] (val) algo bellman_ford step 9750: {'pi': 0.978515625, 'score': 0.978515625, 'examples_seen': 1081174, 'step': 9750, 'algorithm': 'bellman_ford'}
+I0715 07:51:36.216345 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.979, val scores are: bellman_ford: 0.979
+I0715 07:51:39.019311 130963043796480 run.py:688] Algo bellman_ford step 9800 current loss 0.175102, current_train_items 1086803.
+I0715 07:51:39.045984 130963043796480 run.py:723] (val) algo bellman_ford step 9800: {'pi': 0.9853515625, 'score': 0.9853515625, 'examples_seen': 1086803, 'step': 9800, 'algorithm': 'bellman_ford'}
+I0715 07:51:39.046138 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.985, val scores are: bellman_ford: 0.985
+I0715 07:51:41.885641 130963043796480 run.py:688] Algo bellman_ford step 9850 current loss 0.395146, current_train_items 1092342.
+I0715 07:51:41.914231 130963043796480 run.py:723] (val) algo bellman_ford step 9850: {'pi': 0.9599609375, 'score': 0.9599609375, 'examples_seen': 1092342, 'step': 9850, 'algorithm': 'bellman_ford'}
+I0715 07:51:41.914374 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.960, val scores are: bellman_ford: 0.960
+I0715 07:51:44.741732 130963043796480 run.py:688] Algo bellman_ford step 9900 current loss 0.435744, current_train_items 1097900.
+I0715 07:51:44.773714 130963043796480 run.py:723] (val) algo bellman_ford step 9900: {'pi': 0.95703125, 'score': 0.95703125, 'examples_seen': 1097900, 'step': 9900, 'algorithm': 'bellman_ford'}
+I0715 07:51:44.773854 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.957, val scores are: bellman_ford: 0.957
+I0715 07:51:47.605317 130963043796480 run.py:688] Algo bellman_ford step 9950 current loss 0.588454, current_train_items 1103445.
+I0715 07:51:47.644008 130963043796480 run.py:723] (val) algo bellman_ford step 9950: {'pi': 0.943359375, 'score': 0.943359375, 'examples_seen': 1103445, 'step': 9950, 'algorithm': 'bellman_ford'}
+I0715 07:51:47.644155 130963043796480 run.py:747] Not saving new best model, best avg val score was 0.990, current avg val score is 0.943, val scores are: bellman_ford: 0.943
+I0715 07:51:50.345293 130963043796480 run.py:753] Restoring best model from checkpoint...
+I0715 07:51:55.971950 130963043796480 run.py:768] (test) algo bellman_ford : {'pi': 0.873046875, 'score': 0.873046875, 'examples_seen': 1108784, 'step': 10000, 'algorithm': 'bellman_ford'}
+I0715 07:51:55.972073 130963043796480 run.py:770] Done!

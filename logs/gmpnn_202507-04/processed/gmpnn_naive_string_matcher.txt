@@ -1,0 +1,51 @@
+I0716 22:21:57.298558 127684082460160 xla_bridge.py:889] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0716 22:21:57.299210 127684082460160 xla_bridge.py:889] Unable to initialize backend 'tpu': INTERNAL: Failed to open libtpu.so: libtpu.so: cannot open shared object file: No such file or directory
+I0716 22:21:57.543648 127684082460160 run.py:415] Model: triplet_gmpnn ['naive_string_matcher']
+I0716 22:21:57.543751 127684082460160 run.py:417] algorithms ['naive_string_matcher']
+I0716 22:21:57.543925 127684082460160 run.py:418] train_lengths ['2', '3', '5', '7', '11', '13', '16']
+I0716 22:21:57.543962 127684082460160 run.py:419] train_batch_size 16
+I0716 22:21:57.544051 127684082460160 run.py:420] val_batch_size 8
+I0716 22:21:57.544083 127684082460160 run.py:421] test_batch_size 8
+I0716 22:21:57.544112 127684082460160 run.py:422] chunked_training True
+I0716 22:21:57.544231 127684082460160 run.py:423] chunk_length 16
+I0716 22:21:57.544261 127684082460160 run.py:424] train_steps 10000
+I0716 22:21:57.544291 127684082460160 run.py:425] eval_every 50
+I0716 22:21:57.544320 127684082460160 run.py:426] test_every 500
+I0716 22:21:57.544349 127684082460160 run.py:427] learning_rate 0.001
+I0716 22:21:57.544438 127684082460160 run.py:428] grad_clip_max_norm 1.0
+I0716 22:21:57.544467 127684082460160 run.py:429] dropout_prob 0.1
+I0716 22:21:57.544496 127684082460160 run.py:430] hint_teacher_forcing 0.0
+I0716 22:21:57.544536 127684082460160 run.py:431] hint_mode encoded_decoded
+I0716 22:21:57.544644 127684082460160 run.py:432] hint_repred_mode hard_on_eval
+I0716 22:21:57.544674 127684082460160 run.py:433] use_ln False
+I0716 22:21:57.544702 127684082460160 run.py:434] use_lstm True
+I0716 22:21:57.544730 127684082460160 run.py:435] nb_triplet_fts 8
+I0716 22:21:57.544758 127684082460160 run.py:436] encoder_init xavier_on_scalars
+I0716 22:21:57.544785 127684082460160 run.py:437] processor_type triplet_gmpnn
+I0716 22:21:57.544812 127684082460160 run.py:438] checkpoint_path CLRS30
+I0716 22:21:57.544839 127684082460160 run.py:439] dataset_path CLRS30
+I0716 22:21:57.544867 127684082460160 run.py:440] freeze_processor False
+I0716 22:21:57.544896 127684082460160 run.py:441] reduction min
+I0716 22:21:57.544925 127684082460160 run.py:442] activation elu
+I0716 22:21:57.544953 127684082460160 run.py:443] algorithm_models ['F1', 'F2']
+I0716 22:21:57.544981 127684082460160 run.py:444] restore_model 
+I0716 22:21:57.545009 127684082460160 run.py:445] gated True
+I0716 22:21:57.545037 127684082460160 run.py:446] gated_activation sigmoid
+I0716 22:21:57.547634 127684082460160 run.py:472] Creating samplers for algo naive_string_matcher
+W0716 22:21:57.547826 127684082460160 samplers.py:299] Ignoring kwargs {'p'} when building sampler class <class 'clrs._src.samplers.MatcherSampler'>
+W0716 22:21:57.548100 127684082460160 samplers.py:109] Sampling dataset on-the-fly, unlimited samples.
+W0716 22:21:57.947030 127684082460160 samplers.py:299] Ignoring kwargs {'p'} when building sampler class <class 'clrs._src.samplers.MatcherSampler'>
+I0716 22:21:57.947318 127684082460160 samplers.py:124] Creating a dataset with 4096 samples.
+I0716 22:21:58.304513 127684082460160 samplers.py:144] 1000 samples created
+I0716 22:21:58.665312 127684082460160 samplers.py:144] 2000 samples created
+I0716 22:21:59.024240 127684082460160 samplers.py:144] 3000 samples created
+I0716 22:21:59.385555 127684082460160 samplers.py:144] 4000 samples created
+I0716 22:21:59.621968 127684082460160 run.py:259] Dataset found at CLRS30/CLRS30_v1.0.0. Skipping download.
+I0716 22:21:59.622739 127684082460160 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/naive_string_matcher_test/1.0.0
+I0716 22:21:59.625569 127684082460160 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/naive_string_matcher_test/1.0.0
+I0716 22:21:59.628662 127684082460160 reader.py:262] Creating a tf.data.Dataset reading 2 files located in folders: CLRS30/CLRS30_v1.0.0/clrs_dataset/naive_string_matcher_test/1.0.0.
+I0716 22:21:59.677194 127684082460160 logging_logger.py:49] Constructing tf.data.Dataset clrs_dataset for split test, from CLRS30/CLRS30_v1.0.0/clrs_dataset/naive_string_matcher_test/1.0.0
+W0716 22:21:59.698173 127684082460160 ag_logging.py:142] AutoGraph could not transform <function _preprocess at 0x74203fd9ab60> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: `haiku.experimental.flax` features require `flax` to be installed.
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert

@@ -452,8 +452,8 @@ class GATv2Full(GATv2):
     adj_mat = jnp.ones_like(adj_mat)
     return super().__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
 
-def get_falr_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
-  """Only get node information. Ignore edges (falreis)"""
+def get_falr1_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
+  """Only get node information. Ignore edges (f1)"""
   t_1 = hk.Linear(nb_triplet_fts)
   t_2 = hk.Linear(nb_triplet_fts)
   t_3 = hk.Linear(nb_triplet_fts)
@@ -484,8 +484,8 @@ def get_falr_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
 ##############################################################
 ##############################################################
 
-class FALR(Processor):
-  """FALREIS code"""
+class FALR1(Processor):
+  """f1 code"""
 
   def __init__(
       self,
@@ -500,7 +500,7 @@ class FALR(Processor):
       nb_triplet_fts: int = 8,
       gated: bool = False,
       gated_activation: Optional[_Fn] = jax.nn.sigmoid,
-      name: str = 'falreis',
+      name: str = 'f1',
   ):
     super().__init__(name=name)
     if mid_size is None:
@@ -551,7 +551,7 @@ class FALR(Processor):
     tri_msgs = None
 
     if self.use_triplets:
-      triplets = get_falr_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
+      triplets = get_falr1_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
       #tri_msgs = jnp.max(triplets, axis=1) + jnp.max(triplets, axis=2) + jnp.max(triplets, axis=3)  # (B, N, N, H)
       tri_msgs = jnp.average(triplets, axis=1)  # (B, N, N, H)
 
@@ -605,7 +605,7 @@ class FALR(Processor):
 
     return ret, tri_msgs  # pytype: disable=bad-return-type  # numpy-scalars
 
-class F1(FALR):
+class F1(FALR1):
   """Message-Passing Neural Network (Gilmer et al., ICML 2017)."""
 
   def __call__(self, node_fts: _Array, edge_fts: _Array, graph_fts: _Array,
@@ -613,7 +613,7 @@ class F1(FALR):
     adj_mat = jnp.ones_like(adj_mat)
     return super().__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
 
-class F2(FALR):
+class F2(FALR1):
   """Message-Passing Neural Network (Gilmer et al., ICML 2017)."""
 
   def __call__(self, node_fts: _Array, edge_fts: _Array, graph_fts: _Array,
@@ -1300,7 +1300,7 @@ def get_processor_factory(kind: str,
           disable_edge_updates=kwargs['disable_edge_updates'],
           name=kind
       )
-    elif kind == 'falreis':
+    elif kind == 'f1':
       processor = F1(
           out_size=out_size,
           msgs_mlp_sizes=[out_size, out_size],

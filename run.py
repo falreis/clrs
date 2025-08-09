@@ -58,7 +58,7 @@ os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".85"
 
 #define algorithms to run
 if len(sys.argv) < 2:
-    flags.DEFINE_list('algorithms', ['activity_selector'], 'Which algorithms to run.')
+    flags.DEFINE_list('algorithms', ['task_scheduling', 'topological_sort', 'binary_search', 'floyd_warshall'], 'Which algorithms to run.')
 else:
     flags.DEFINE_list('algorithms', [sys.argv[1]], 'Which algorithms to run.')
 
@@ -78,12 +78,10 @@ flags.DEFINE_list('algorithms',
                  'Which algorithms to run.')
 '''
                  
-#flags.DEFINE_list('train_lengths', [-1], '')
-#flags.DEFINE_list('train_lengths', ['2', '3', '5', '7', '11', '13', '17', '19', '23', '29', '31', '37', '39', '41'], '')
-flags.DEFINE_list('train_lengths', ['2', '3', '5', '7', '11', '13', '16'], '')
+flags.DEFINE_list('train_lengths', [-1], '')
+#flags.DEFINE_list('train_lengths', ['2', '3', '5', '7', '11', '13', '16'], '')
 
 '''
-#flags.DEFINE_list('train_lengths', ['2', '3', '5', '7', '11', '13'], '')
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
                   'Which training sizes to use. A size of -1 means '
                   'use the benchmark dataset.')
@@ -169,14 +167,14 @@ flags.DEFINE_enum('encoder_init', 'xavier_on_scalars',
                   ['default', 'xavier_on_scalars'],
                   'Initialiser to use for the encoders.')
 
-flags.DEFINE_enum('processor_type', 'f1',
+flags.DEFINE_enum('processor_type', 'f2',
                   ['deepsets', 'mpnn', 'pgn', 'pgn_mask',
                    'triplet_mpnn', 'triplet_pgn', 'triplet_pgn_mask',
                    'gat', 'gatv2', 'gat_full', 'gatv2_full',
                    'gpgn', 'gpgn_mask', 'gmpnn',
                    'triplet_gpgn', 'triplet_gpgn_mask', 'triplet_gmpnn',
                    'memnet_full', 'memnet_masked',
-                   'rt', 'f1', 'f_mpnn'],
+                   'rt', 'f1', 'f2'],
                   'Processor type to use as the network P.')
 
 flags.DEFINE_string('checkpoint_path', 'CLRS30',
@@ -198,9 +196,6 @@ flags.DEFINE_enum('activation', 'elu',
                      'hard_sigmoid', 'log_sigmoid', 'sparse_sigmoid', 
                      'hard_tanh'],
                     'Activation function.') 
-
-flags.DEFINE_list('algorithm_models', ['F1', 'F2'], 
-                  'List of models for f_mpnn')
 
 flags.DEFINE_string('restore_model', '',
                     'Path in which dataset is stored.')
@@ -440,7 +435,6 @@ def create_samplers(
   logging.info('freeze_processor %s', FLAGS.freeze_processor)
   logging.info('reduction %s', FLAGS.reduction)
   logging.info('activation %s', FLAGS.activation)
-  logging.info('algorithm_models %s', FLAGS.algorithm_models)
   logging.info('restore_model %s', FLAGS.restore_model)
   logging.info('gated %s', FLAGS.gated)
   logging.info('gated_activation %s', FLAGS.gated_activation)
@@ -636,6 +630,8 @@ def main(unused_argv):
   length_idx = 0
   restored = False
 
+  train_reset_score = FLAGS.train_steps * 0.8
+
   while step < FLAGS.train_steps:
     feedback_list = [next(t) for t in train_samplers]
 
@@ -663,6 +659,12 @@ def main(unused_argv):
           print('------------------------------')
           print('Hint increase!! Restarting best_score. Epoch {}'.format(step))
           print('------------------------------')
+          best_score = -1.0
+        elif train_reset_score < step:
+          print('------------------------------')
+          print('Resetting best_score. Epoch {}'.format(step))
+          print('------------------------------')
+          train_reset_score = FLAGS.train_steps + 100 #not reset again
           best_score = -1.0
 
       rng_key, new_rng_key = jax.random.split(rng_key)

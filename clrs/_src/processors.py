@@ -480,6 +480,55 @@ def get_falr1_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
       jnp.expand_dims(tri_g, axis=(1, 2, 3))    # + (B, 1, 1, 1, H)
   )
 
+# Small MLP with nonlinearity for memory effect
+def non_linear_memory_block(triplets, nb_triplet_fts):
+    mem_layer1 = hk.Linear(nb_triplet_fts)
+    mem_layer2 = hk.Linear(nb_triplet_fts)
+    t1 = mem_layer1(triplets)
+    t1 = jax.nn.relu(t1)
+    t1 = mem_layer2(t1)
+    return t1
+
+# Simplified LSTM memory block
+def lstm_memory_block(triplets, nb_triplet_fts):
+  orig_shape = triplets.shape
+  flat_triplets = jnp.reshape(triplets, (-1, orig_shape[-1]))
+  lstm = hk.LSTM(nb_triplet_fts)
+  # Use zeros as initial state
+  state = lstm.initial_state(flat_triplets.shape[0])
+  # Single LSTM step (treat input as one timestep)
+  output, _ = lstm(flat_triplets, state)
+  output = jnp.reshape(output, orig_shape[:-1] + (nb_triplet_fts,))
+  return output
+
+
+def get_falr2_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
+  """Only get node information. Ignore edges (f1)"""
+
+  tri_1 = non_linear_memory_block(z, nb_triplet_fts)
+  tri_2 = non_linear_memory_block(z, nb_triplet_fts)
+  tri_e_1 = non_linear_memory_block(edge_fts, nb_triplet_fts)
+  tri_g = non_linear_memory_block(graph_fts, nb_triplet_fts)
+
+  '''
+  t_1 = hk.Linear(nb_triplet_fts)
+  t_2 = hk.Linear(nb_triplet_fts)
+  t_e_1 = hk.Linear(nb_triplet_fts)
+  t_g = hk.Linear(nb_triplet_fts)
+
+  tri_1 = t_1(z)
+  tri_2 = t_2(z)
+  tri_e_1 = t_e_1(edge_fts)
+  tri_g = t_g(graph_fts)
+  '''
+
+  return (
+      jnp.expand_dims(tri_1, axis=(1))    +  #   (B, 1, N, H)
+      jnp.expand_dims(tri_2, axis=(2))    +  #   (B, N, 1, H)
+      tri_e_1                             +  # + (B, N, N, H)
+      jnp.expand_dims(tri_g, axis=(1, 2))    # + (B, 1, 1, H)
+  )
+
 
 ##############################################################
 ##############################################################
@@ -613,22 +662,9 @@ class F1(FALR1):
     adj_mat = jnp.ones_like(adj_mat)
     return super().__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
 
-class F2(FALR1):
-  """Message-Passing Neural Network (Gilmer et al., ICML 2017)."""
 
-  def __call__(self, node_fts: _Array, edge_fts: _Array, graph_fts: _Array,
-               adj_mat: _Array, hidden: _Array, **unused_kwargs) -> _Array:
-    adj_mat = jnp.ones_like(adj_mat)
-    return super().__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
-  
-class fMPNN():
-  @property
-  def inf_bias(self):
-    return True
-
-  @property
-  def inf_bias_edge(self):
-    return True
+class FALR2(Processor):
+  """f2 code"""
 
   def __init__(
       self,
@@ -643,55 +679,134 @@ class fMPNN():
       nb_triplet_fts: int = 8,
       gated: bool = False,
       gated_activation: Optional[_Fn] = jax.nn.sigmoid,
-      name: str = 'f_mpnn',
+      name: str = 'f2',
   ):
-    self.state = 1
+    super().__init__(name=name)
+    if mid_size is None:
+      self.mid_size = out_size
+    else:
+      self.mid_size = mid_size
+    self.out_size = out_size
+    self.mid_act = mid_act
+    self.activation = activation
+    self.reduction = reduction
+    self._msgs_mlp_sizes = msgs_mlp_sizes
+    self.use_ln = use_ln
+    self.use_triplets = use_triplets
+    self.nb_triplet_fts = nb_triplet_fts
+    self.gated = gated
     self.gated_activation = gated_activation
 
-    self._f1 = F1(
-      out_size,
-      mid_size,
-      mid_act,
-      activation,
-      jnp.max,
-      msgs_mlp_sizes,
-      use_ln,
-      use_triplets,
-      nb_triplet_fts,
-      gated,
-      gated_activation,
-      'F1'
-    )
-
-    self._f2 = F1(
-      out_size,
-      mid_size,
-      mid_act,
-      activation,
-      jnp.min,
-      msgs_mlp_sizes,
-      use_ln,
-      use_triplets,
-      nb_triplet_fts,
-      gated,
-      gated_activation,
-      'F2'
-    )
-
-  def __call__(self, 
-               node_fts: _Array, 
-               edge_fts: _Array, 
-               graph_fts: _Array,
-               adj_mat: _Array, 
-               hidden: _Array, **unused_kwargs
+  def __call__(  # pytype: disable=signature-mismatch  # numpy-scalars
+      self,
+      node_fts: _Array,
+      edge_fts: _Array,
+      graph_fts: _Array,
+      adj_mat: _Array,
+      hidden: _Array,
+      **unused_kwargs,
   ) -> _Array:
+    """MPNN inference step."""
+
+    b, n, _ = node_fts.shape
+    assert edge_fts.shape[:-1] == (b, n, n)
+    assert graph_fts.shape[:-1] == (b,)
+    assert adj_mat.shape == (b, n, n) #hints
+
+    z = jnp.concatenate([node_fts, hidden], axis=-1)
+    m_1 = hk.Linear(self.mid_size)
+    m_2 = hk.Linear(self.mid_size)
+    m_e = hk.Linear(self.mid_size)
+    m_g = hk.Linear(self.mid_size)
+
+    o1 = hk.Linear(self.out_size)
+    o2 = hk.Linear(self.out_size)
+
+    msg_1 = m_1(z)
+    msg_2 = m_2(z)
+    msg_e = m_e(edge_fts)
+    msg_g = m_g(graph_fts)
+
+    tri_msgs = None
+
+    if self.use_triplets:
+      triplets = get_falr2_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
+      
+      #simple memory block
+      mem_layer = hk.Linear(self.nb_triplet_fts)
+      tri_msgs = mem_layer(triplets)
+
+      '''
+      # Improved memory block: use a small MLP with nonlinearity for memory effect
+      mem_layer1 = hk.Linear(self.nb_triplet_fts)
+      mem_layer2 = hk.Linear(self.nb_triplet_fts)
+      triplets = mem_layer1(triplets)
+      triplets = jax.nn.relu(triplets)
+      triplets = mem_layer2(triplets)
+      '''
+
+      #calculate the average of triplet messages
+      #tri_msgs = jnp.average(triplets, axis=1)  # (B, N, N, H)
+
+      if self.activation is not None:
+        tri_msgs = self.activation(tri_msgs)
+
+    msgs = (
+        jnp.expand_dims(msg_1, axis=1) + jnp.expand_dims(msg_2, axis=2) +
+        msg_e + jnp.expand_dims(msg_g, axis=(1, 2)))
+
+    if self._msgs_mlp_sizes is not None:
+      msgs = hk.nets.MLP(self._msgs_mlp_sizes)(self.activation(msgs))
+
+    if self.mid_act is not None:
+      msgs = self.mid_act(msgs)
+
+    if self.reduction == jnp.mean:
+      msgs = jnp.sum(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
+      msgs = msgs / jnp.sum(adj_mat, axis=-1, keepdims=True)
+
+    elif self.reduction == jnp.max:
+      maxarg = jnp.where(jnp.expand_dims(adj_mat, -1),
+                         msgs,
+                         -BIG_NUMBER)
+      msgs = jnp.max(maxarg, axis=1)
+
+    else:
+      msgs = self.reduction(msgs * jnp.expand_dims(adj_mat, -1), axis=1)      
+
+    h_1 = o1(z)
+    h_2 = o2(msgs)
+
+    ret = h_1 + h_2
+
+    if self.activation is not None:
+      ret = self.activation(ret)
+
+    if self.use_ln:
+      ln = hk.LayerNorm(axis=-1, create_scale=True, create_offset=True)
+      ret = ln(ret)
+
+    if self.gated:
+      gate1 = hk.Linear(self.out_size)
+      gate2 = hk.Linear(self.out_size)
+      gate3 = hk.Linear(self.out_size, b_init=hk.initializers.Constant(-3))
+
+      gate = self.gated_activation(gate3(jax.nn.relu(gate1(z) + gate2(msgs))))
+      #gate = self.gated_activation(gate3(jax.nn.relu(gate1(z) + gate2(msgs))))
+
+      ret = ret * gate + hidden * (1-gate)
+
+    return ret, tri_msgs  # pytype: disable=bad-return-type  # numpy-scalars
+
+
+class F2(FALR2):
+  """Message-Passing Neural Network (Gilmer et al., ICML 2017)."""
+
+  def __call__(self, node_fts: _Array, edge_fts: _Array, graph_fts: _Array,
+               adj_mat: _Array, hidden: _Array, **unused_kwargs) -> _Array:
     adj_mat = jnp.ones_like(adj_mat)
-
-    f1_ret, f1_tri_msgs = self._f1.__call__(node_fts, edge_fts, graph_fts, jnp.ones_like(adj_mat), hidden)
-    f2_ret, f2_tri_msgs = self._f2.__call__(node_fts, edge_fts, graph_fts, jnp.ones_like(adj_mat), hidden)
-
-    return (f1_ret + f2_ret), (f1_tri_msgs + f2_tri_msgs)
-
+    return super().__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
+  
 
 def get_triplet_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
   """Triplet messages, as done by Dudzik and Velickovic (2022)."""
@@ -1312,8 +1427,8 @@ def get_processor_factory(kind: str,
           gated = gated,
           gated_activation = gated_activation
       )
-    elif kind == 'f_mpnn':
-      processor = fMPNN(
+    elif kind == 'f2':
+      processor = F2(
           out_size=out_size,
           msgs_mlp_sizes=[out_size, out_size],
           use_ln=use_ln,

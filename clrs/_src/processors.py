@@ -714,18 +714,27 @@ class FALR2(Processor):
     assert adj_mat.shape == (b, n, n) #hints
 
     z = jnp.concatenate([node_fts, hidden], axis=-1)
+
+    
+    o1 = hk.Linear(self.out_size)
+    o2 = hk.Linear(self.out_size)
+
     m_1 = hk.Linear(self.mid_size)
     m_2 = hk.Linear(self.mid_size)
     m_e = hk.Linear(self.mid_size)
     m_g = hk.Linear(self.mid_size)
 
-    o1 = hk.Linear(self.out_size)
-    o2 = hk.Linear(self.out_size)
-
     msg_1 = m_1(z)
     msg_2 = m_2(z)
     msg_e = m_e(edge_fts)
     msg_g = m_g(graph_fts)
+    
+    '''
+    msg_1 = non_linear_memory_block(z, self.mid_size)
+    msg_2 = non_linear_memory_block(z, self.mid_size)
+    msg_e = non_linear_memory_block(edge_fts, self.mid_size)
+    msg_g = non_linear_memory_block(graph_fts, self.mid_size)
+    '''
 
     tri_msgs = None
 
@@ -736,24 +745,13 @@ class FALR2(Processor):
       mem_layer = hk.Linear(self.nb_triplet_fts)
       tri_msgs = mem_layer(triplets)
 
-      '''
-      # Improved memory block: use a small MLP with nonlinearity for memory effect
-      mem_layer1 = hk.Linear(self.nb_triplet_fts)
-      mem_layer2 = hk.Linear(self.nb_triplet_fts)
-      triplets = mem_layer1(triplets)
-      triplets = jax.nn.relu(triplets)
-      triplets = mem_layer2(triplets)
-      '''
-
-      #calculate the average of triplet messages
-      #tri_msgs = jnp.average(triplets, axis=1)  # (B, N, N, H)
-
       if self.activation is not None:
         tri_msgs = self.activation(tri_msgs)
 
     msgs = (
         jnp.expand_dims(msg_1, axis=1) + jnp.expand_dims(msg_2, axis=2) +
-        msg_e + jnp.expand_dims(msg_g, axis=(1, 2)))
+        msg_e + jnp.expand_dims(msg_g, axis=(1, 2))
+    )
 
     if self._msgs_mlp_sizes is not None:
       msgs = hk.nets.MLP(self._msgs_mlp_sizes)(self.activation(msgs))
@@ -761,6 +759,7 @@ class FALR2(Processor):
     if self.mid_act is not None:
       msgs = self.mid_act(msgs)
 
+    '''
     if self.reduction == jnp.mean:
       msgs = jnp.sum(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
       msgs = msgs / jnp.sum(adj_mat, axis=-1, keepdims=True)
@@ -773,6 +772,8 @@ class FALR2(Processor):
 
     else:
       msgs = self.reduction(msgs * jnp.expand_dims(adj_mat, -1), axis=1)      
+    '''
+    msgs = self.reduction(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
 
     h_1 = o1(z)
     h_2 = o2(msgs)
@@ -792,8 +793,6 @@ class FALR2(Processor):
       gate3 = hk.Linear(self.out_size, b_init=hk.initializers.Constant(-3))
 
       gate = self.gated_activation(gate3(jax.nn.relu(gate1(z) + gate2(msgs))))
-      #gate = self.gated_activation(gate3(jax.nn.relu(gate1(z) + gate2(msgs))))
-
       ret = ret * gate + hidden * (1-gate)
 
     return ret, tri_msgs  # pytype: disable=bad-return-type  # numpy-scalars
@@ -806,7 +805,10 @@ class F2(FALR2):
                adj_mat: _Array, hidden: _Array, **unused_kwargs) -> _Array:
     adj_mat = jnp.ones_like(adj_mat)
     return super().__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
-  
+
+
+##############################################################
+##############################################################
 
 def get_triplet_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
   """Triplet messages, as done by Dudzik and Velickovic (2022)."""
@@ -835,9 +837,6 @@ def get_triplet_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
       jnp.expand_dims(tri_e_3, axis=1)       +  # + (B, 1, N, N, H)
       jnp.expand_dims(tri_g, axis=(1, 2, 3))    # + (B, 1, 1, 1, H)
   )  
-
-##############################################################
-##############################################################
 
 
 class PGN(Processor):

@@ -57,8 +57,9 @@ assert tf.test.is_built_with_cuda()
 os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".85"
 
 #define algorithms to run
+
 if len(sys.argv) < 2:
-    flags.DEFINE_list('algorithms', ['task_scheduling', 'topological_sort', 'binary_search', 'floyd_warshall'], 'Which algorithms to run.')
+    flags.DEFINE_list('algorithms', ['bfs', 'activity_selector', 'naive_string_matcher'], 'Which algorithms to run.')
 else:
     flags.DEFINE_list('algorithms', [sys.argv[1]], 'Which algorithms to run.')
 
@@ -78,8 +79,8 @@ flags.DEFINE_list('algorithms',
                  'Which algorithms to run.')
 '''
                  
-flags.DEFINE_list('train_lengths', [-1], '')
-#flags.DEFINE_list('train_lengths', ['2', '3', '5', '7', '11', '13', '16'], '')
+#flags.DEFINE_list('train_lengths', [-1], '')
+flags.DEFINE_list('train_lengths', ['2', '3', '5', '7', '11', '13', '16'], '')
 
 '''
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
@@ -120,13 +121,13 @@ flags.DEFINE_integer('train_steps', 10000, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 
-flags.DEFINE_integer('hidden_size', 128,
+flags.DEFINE_integer('hidden_size', 256,
                      'Number of hidden units of the model.')
 flags.DEFINE_integer('nb_heads', 16, 'Number of heads for GAT processors') #including RT model
 
 flags.DEFINE_integer('nb_msg_passing_steps', 1,
                      'Number of message passing steps to run per hint.')
-flags.DEFINE_float('learning_rate', 0.001, 'Learning rate to use.')
+flags.DEFINE_float('learning_rate', 0.0005, 'Learning rate to use.')
 flags.DEFINE_float('grad_clip_max_norm', 1.0,
                    'Gradient clipping by norm. 0.0 disables grad clipping')
 flags.DEFINE_float('dropout_prob', 0.1, 'Dropout rate to use.')
@@ -148,7 +149,7 @@ flags.DEFINE_enum('hint_mode', 'encoded_decoded',
                   'counterbalance the various hint losses. Hence, for certain '
                   'tasks, the best performance will now be achievable with no '
                   'hint usage at all (`none`).')
-flags.DEFINE_enum('hint_repred_mode', 'hard_on_eval', ['soft', 'hard', 'hard_on_eval'],
+flags.DEFINE_enum('hint_repred_mode', 'soft', ['soft', 'hard', 'hard_on_eval'],
                   'How to process predicted hints when fed back as inputs.'
                   'In soft mode, we use softmaxes for categoricals, pointers '
                   'and mask_one, and sigmoids for masks. '
@@ -197,7 +198,7 @@ flags.DEFINE_enum('activation', 'elu',
                      'hard_tanh'],
                     'Activation function.') 
 
-flags.DEFINE_string('restore_model', '',
+flags.DEFINE_string('restore_model', 'best_2025-08-12 20:17:22.030807.pkl',
                     'Path in which dataset is stored.')
 
 flags.DEFINE_boolean('gated', True, 
@@ -419,6 +420,8 @@ def create_samplers(
   logging.info('train_steps %s', FLAGS.train_steps)
   logging.info('eval_every %s', FLAGS.eval_every)
   logging.info('test_every %s', FLAGS.test_every)
+  logging.info('hidden_size %s', FLAGS.hidden_size)
+  logging.info('nb_msg_passing_steps %s', FLAGS.nb_msg_passing_steps)
   logging.info('learning_rate %s', FLAGS.learning_rate)
   logging.info('grad_clip_max_norm %s', FLAGS.grad_clip_max_norm) 
   logging.info('dropout_prob %s', FLAGS.dropout_prob)

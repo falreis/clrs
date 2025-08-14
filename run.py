@@ -59,7 +59,7 @@ os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".85"
 #define algorithms to run
 
 if len(sys.argv) < 2:
-    flags.DEFINE_list('algorithms', ['bfs', 'activity_selector', 'naive_string_matcher'], 'Which algorithms to run.')
+    flags.DEFINE_list('algorithms', ['naive_string_matcher'], 'Which algorithms to run.')
 else:
     flags.DEFINE_list('algorithms', [sys.argv[1]], 'Which algorithms to run.')
 
@@ -80,7 +80,7 @@ flags.DEFINE_list('algorithms',
 '''
                  
 #flags.DEFINE_list('train_lengths', [-1], '')
-flags.DEFINE_list('train_lengths', ['2', '3', '5', '7', '11', '13', '16'], '')
+flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'], '')
 
 '''
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
@@ -90,7 +90,7 @@ flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
 
 # ----------------------------------------------------
 # Não mudar length_needle para negativo!!!
-flags.DEFINE_integer('length_needle', 0,
+flags.DEFINE_integer('length_needle', -4,
                      'Length of needle for training and validation '
                      '(not testing) in string matching algorithms. '
                      'A negative value randomizes the length for each sample '
@@ -108,13 +108,13 @@ flags.DEFINE_boolean('enforce_permutations', True,
 flags.DEFINE_boolean('enforce_pred_as_input', True,
                      'Whether to change pred_h hints into pred inputs.')
 
-flags.DEFINE_integer('batch_size', 16, 'Batch size used for training.')
-flags.DEFINE_integer('val_batch_size', 8, 'Batch size used for training.')
-flags.DEFINE_integer('test_batch_size', 8, 'Batch size used for training.')
+flags.DEFINE_integer('batch_size', 32, 'Batch size used for training.')
+flags.DEFINE_integer('val_batch_size', 16, 'Batch size used for training.')
+flags.DEFINE_integer('test_batch_size', 16, 'Batch size used for training.')
 
 flags.DEFINE_boolean('chunked_training', True,
                      'Whether to use chunking for training.')
-flags.DEFINE_integer('chunk_length', 16,
+flags.DEFINE_integer('chunk_length', 8,
                      'Time chunk length used for training (if '
                      '`chunked_training` is True.')
 flags.DEFINE_integer('train_steps', 10000, 'Number of training iterations.')
@@ -123,11 +123,11 @@ flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 
 flags.DEFINE_integer('hidden_size', 256,
                      'Number of hidden units of the model.')
-flags.DEFINE_integer('nb_heads', 16, 'Number of heads for GAT processors') #including RT model
+flags.DEFINE_integer('nb_heads', 1, 'Number of heads for GAT processors') #including RT model
 
 flags.DEFINE_integer('nb_msg_passing_steps', 1,
                      'Number of message passing steps to run per hint.')
-flags.DEFINE_float('learning_rate', 0.0005, 'Learning rate to use.')
+flags.DEFINE_float('learning_rate', 0.001, 'Learning rate to use.')
 flags.DEFINE_float('grad_clip_max_norm', 1.0,
                    'Gradient clipping by norm. 0.0 disables grad clipping')
 flags.DEFINE_float('dropout_prob', 0.1, 'Dropout rate to use.')
@@ -198,7 +198,7 @@ flags.DEFINE_enum('activation', 'elu',
                      'hard_tanh'],
                     'Activation function.') 
 
-flags.DEFINE_string('restore_model', 'best_2025-08-12 20:17:22.030807.pkl',
+flags.DEFINE_string('restore_model', '',
                     'Path in which dataset is stored.')
 
 flags.DEFINE_boolean('gated', True, 

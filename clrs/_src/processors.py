@@ -505,10 +505,10 @@ def lstm_memory_block(triplets, nb_triplet_fts):
 def get_falr2_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
   """Only get node information. Ignore edges (f1)"""
 
-  tri_1 = non_linear_memory_block(z, nb_triplet_fts)
-  tri_2 = non_linear_memory_block(z, nb_triplet_fts)
-  tri_e_1 = non_linear_memory_block(edge_fts, nb_triplet_fts)
-  tri_g = non_linear_memory_block(graph_fts, nb_triplet_fts)
+  tri_1 = lstm_memory_block(z, nb_triplet_fts)
+  tri_2 = lstm_memory_block(z, nb_triplet_fts)
+  tri_e_1 = lstm_memory_block(edge_fts, nb_triplet_fts)
+  tri_g = lstm_memory_block(graph_fts, nb_triplet_fts)
 
   '''
   t_1 = hk.Linear(nb_triplet_fts)
@@ -753,8 +753,10 @@ class FALR2(Processor):
         msg_e + jnp.expand_dims(msg_g, axis=(1, 2))
     )
 
+    '''
     if self._msgs_mlp_sizes is not None:
       msgs = hk.nets.MLP(self._msgs_mlp_sizes)(self.activation(msgs))
+    '''
 
     if self.mid_act is not None:
       msgs = self.mid_act(msgs)

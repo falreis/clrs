@@ -206,7 +206,7 @@ flags.DEFINE_boolean('gated', True,
 
 flags.DEFINE_enum('gated_activation', 'sigmoid', 
                     ['sigmoid', 'hard_sigmoid', 'log_sigmoid', 'sparse_sigmoid', 
-                     'hard_tanh', 'relu', 'elu'],
+                     'hard_tanh', 'tanh', 'relu', 'elu'],
                     'Gated activation function.') 
 
 #for RT model (Diao et al. (2023))

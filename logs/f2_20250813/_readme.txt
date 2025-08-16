@@ -1,0 +1,1 @@
+usage of lstm_memory_block

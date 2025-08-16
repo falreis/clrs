@@ -494,12 +494,29 @@ def lstm_memory_block(triplets, nb_triplet_fts):
   orig_shape = triplets.shape
   flat_triplets = jnp.reshape(triplets, (-1, orig_shape[-1]))
   lstm = hk.LSTM(nb_triplet_fts)
+
   # Use zeros as initial state
   state = lstm.initial_state(flat_triplets.shape[0])
+
   # Single LSTM step (treat input as one timestep)
   output, _ = lstm(flat_triplets, state)
   output = jnp.reshape(output, orig_shape[:-1] + (nb_triplet_fts,))
   return output
+
+# Simplified GRU memory block
+def gru_memory_block(triplets, nb_triplet_fts):
+  orig_shape = triplets.shape
+  flat_triplets = jnp.reshape(triplets, (-1, orig_shape[-1]))
+  gru = hk.GRU(nb_triplet_fts)
+
+  # Use zeros as initial state
+  state = gru.initial_state(flat_triplets.shape[0])
+
+  # Single GRU step (treat input as one timestep)
+  output, _ = gru(flat_triplets, state)
+  output = jnp.reshape(output, orig_shape[:-1] + (nb_triplet_fts,))
+  return output
+
 
 
 def get_falr2_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
@@ -528,7 +545,6 @@ def get_falr2_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
       tri_e_1                             +  # + (B, N, N, H)
       jnp.expand_dims(tri_g, axis=(1, 2))    # + (B, 1, 1, H)
   )
-
 
 ##############################################################
 ##############################################################
@@ -729,21 +745,13 @@ class FALR2(Processor):
     msg_e = m_e(edge_fts)
     msg_g = m_g(graph_fts)
     
-    '''
-    msg_1 = non_linear_memory_block(z, self.mid_size)
-    msg_2 = non_linear_memory_block(z, self.mid_size)
-    msg_e = non_linear_memory_block(edge_fts, self.mid_size)
-    msg_g = non_linear_memory_block(graph_fts, self.mid_size)
-    '''
-
     tri_msgs = None
 
     if self.use_triplets:
       triplets = get_falr2_msgs(z, edge_fts, graph_fts, self.nb_triplet_fts)
       
       #simple memory block
-      mem_layer = hk.Linear(self.nb_triplet_fts)
-      tri_msgs = mem_layer(triplets)
+      tri_msgs = lstm_memory_block(triplets, self.nb_triplet_fts)
 
       if self.activation is not None:
         tri_msgs = self.activation(tri_msgs)
@@ -1251,6 +1259,8 @@ def get_processor_factory(kind: str,
     gated_activation = jax.nn.sparse_sigmoid
   elif(kwargs['gated_activation'] == 'hard_tanh'):  
     gated_activation = jax.nn.hard_tanh
+  elif(kwargs['gated_activation'] == 'tanh'):  
+    gated_activation = jax.nn.tanh
   elif(kwargs['gated_activation'] == 'relu'):
     gated_activation = jax.nn.relu
   elif(kwargs['gated_activation'] == 'elu'):

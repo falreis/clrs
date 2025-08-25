@@ -59,13 +59,14 @@ os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".85"
 #define algorithms to run
 
 if len(sys.argv) < 2:
-    flags.DEFINE_list('algorithms', ['naive_string_matcher'], 'Which algorithms to run.')
+    flags.DEFINE_list('algorithms', ['bubble_sort'], 'Which algorithms to run.')
 else:
     flags.DEFINE_list('algorithms', [sys.argv[1]], 'Which algorithms to run.')
 
 
 #flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
-#flags.DEFINE_list('algorithms', ['dfs', 'heapsort', 'kmp_matcher', 'quickselect', 'strongly_connected_components'], 'Hard algorithms.')
+#flags.DEFINE_list('algorithms', ['dfs', 'heapsort', 'kmp_matcher', 
+#                                 'strongly_connected_components', 'naive_string_matcher'], 'Hard algorithms.')
 # flags.DEFINE_list('algorithms', ['dfs', 'heapsort'], '')
 
 '''
@@ -108,9 +109,9 @@ flags.DEFINE_boolean('enforce_permutations', True,
 flags.DEFINE_boolean('enforce_pred_as_input', True,
                      'Whether to change pred_h hints into pred inputs.')
 
-flags.DEFINE_integer('batch_size', 32, 'Batch size used for training.')
-flags.DEFINE_integer('val_batch_size', 32, 'Batch size used for training.')
-flags.DEFINE_integer('test_batch_size', 32, 'Batch size used for training.')
+flags.DEFINE_integer('batch_size', 16, 'Batch size used for training.')
+flags.DEFINE_integer('val_batch_size', 16, 'Batch size used for training.')
+flags.DEFINE_integer('test_batch_size', 16, 'Batch size used for training.')
 
 flags.DEFINE_boolean('chunked_training', True,
                      'Whether to use chunking for training.')
@@ -121,7 +122,7 @@ flags.DEFINE_integer('train_steps', 10000, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 
-flags.DEFINE_integer('hidden_size', 64,
+flags.DEFINE_integer('hidden_size', 128,
                      'Number of hidden units of the model.')
 flags.DEFINE_integer('nb_heads', 1, 'Number of heads for GAT processors') #including RT model
 
@@ -130,7 +131,7 @@ flags.DEFINE_integer('nb_msg_passing_steps', 1,
 flags.DEFINE_float('learning_rate', 0.001, 'Learning rate to use.')
 flags.DEFINE_float('grad_clip_max_norm', 1.0,
                    'Gradient clipping by norm. 0.0 disables grad clipping')
-flags.DEFINE_float('dropout_prob', 0.1, 'Dropout rate to use.')
+flags.DEFINE_float('dropout_prob', 0.0, 'Dropout rate to use.')
 flags.DEFINE_float('hint_teacher_forcing', 0.0,
                    'Probability that ground-truth teacher hints are encoded '
                    'during training instead of predicted hints. Only '
@@ -168,14 +169,14 @@ flags.DEFINE_enum('encoder_init', 'xavier_on_scalars',
                   ['default', 'xavier_on_scalars'],
                   'Initialiser to use for the encoders.')
 
-flags.DEFINE_enum('processor_type', 'f3',
+flags.DEFINE_enum('processor_type', 'f4',
                   ['deepsets', 'mpnn', 'pgn', 'pgn_mask',
                    'triplet_mpnn', 'triplet_pgn', 'triplet_pgn_mask',
                    'gat', 'gatv2', 'gat_full', 'gatv2_full',
                    'gpgn', 'gpgn_mask', 'gmpnn',
                    'triplet_gpgn', 'triplet_gpgn_mask', 'triplet_gmpnn',
                    'memnet_full', 'memnet_masked',
-                   'rt', 'f1', 'f2', 'f3'],
+                   'rt', 'f1', 'f2', 'f3', 'f4'],
                   'Processor type to use as the network P.')
 
 flags.DEFINE_string('checkpoint_path', 'CLRS30',
@@ -201,7 +202,7 @@ flags.DEFINE_enum('activation', 'elu',
 flags.DEFINE_string('restore_model', '',
                     'Path in which dataset is stored.')
 
-flags.DEFINE_boolean('gated', True, 
+flags.DEFINE_boolean('gated', False, 
                     'Use gated activation.') 
 
 flags.DEFINE_enum('gated_activation', 'sigmoid', 

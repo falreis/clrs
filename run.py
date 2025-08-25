@@ -59,7 +59,7 @@ os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".85"
 #define algorithms to run
 
 if len(sys.argv) < 2:
-    flags.DEFINE_list('algorithms', ['bubble_sort'], 'Which algorithms to run.')
+    flags.DEFINE_list('algorithms', ['naive_string_matcher'], 'Which algorithms to run.')
 else:
     flags.DEFINE_list('algorithms', [sys.argv[1]], 'Which algorithms to run.')
 
@@ -91,7 +91,7 @@ flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
 
 # ----------------------------------------------------
 # Não mudar length_needle para negativo!!!
-flags.DEFINE_integer('length_needle', -4,
+flags.DEFINE_integer('length_needle', -7,
                      'Length of needle for training and validation '
                      '(not testing) in string matching algorithms. '
                      'A negative value randomizes the length for each sample '

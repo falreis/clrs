@@ -136,7 +136,7 @@ flags.DEFINE_float('hint_teacher_forcing', 0.0,
                    'Probability that ground-truth teacher hints are encoded '
                    'during training instead of predicted hints. Only '
                    'pertinent in encoded_decoded modes.')
-flags.DEFINE_enum('hint_mode', 'encoded_decoded',
+flags.DEFINE_enum('hint_mode', 'none',
                   ['encoded_decoded', 'decoded_only', 'none'],
                   'How should hints be used? Note, each mode defines a '
                   'separate task, with various difficulties. `encoded_decoded` '

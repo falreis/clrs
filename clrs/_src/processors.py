@@ -1039,8 +1039,8 @@ class FALR4(Processor):
         msg_1_exp + msg_2_exp + msg_e + msg_g_exp
     )
 
-    #msgs = self.reduction(msgs, axis=1)
-    msgs = self.reduction(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
+    msgs = self.reduction(msgs, axis=1)
+    #msgs = self.reduction(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
 
     h_1 = hk.Linear(self.out_size, with_bias=True)(z)
     h_2 = hk.Linear(self.out_size, with_bias=True)(msgs)

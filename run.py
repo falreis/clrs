@@ -59,7 +59,7 @@ os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".85"
 #define algorithms to run
 
 if len(sys.argv) < 2:
-    flags.DEFINE_list('algorithms', ['naive_string_matcher'], 'Which algorithms to run.')
+    flags.DEFINE_list('algorithms', ['articulation_points'], 'Which algorithms to run.')
 else:
     flags.DEFINE_list('algorithms', [sys.argv[1]], 'Which algorithms to run.')
 
@@ -91,7 +91,7 @@ flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'],
 
 # ----------------------------------------------------
 # Não mudar length_needle para negativo!!!
-flags.DEFINE_integer('length_needle', -7,
+flags.DEFINE_integer('length_needle', -4,
                      'Length of needle for training and validation '
                      '(not testing) in string matching algorithms. '
                      'A negative value randomizes the length for each sample '
@@ -136,7 +136,7 @@ flags.DEFINE_float('hint_teacher_forcing', 0.0,
                    'Probability that ground-truth teacher hints are encoded '
                    'during training instead of predicted hints. Only '
                    'pertinent in encoded_decoded modes.')
-flags.DEFINE_enum('hint_mode', 'none',
+flags.DEFINE_enum('hint_mode', 'encoded_decoded',
                   ['encoded_decoded', 'decoded_only', 'none'],
                   'How should hints be used? Note, each mode defines a '
                   'separate task, with various difficulties. `encoded_decoded` '

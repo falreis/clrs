@@ -100,7 +100,7 @@ flags.DEFINE_integer('length_needle', -7,
                      'the haystack (the default sampler behavior).') 
 # ----------------------------------------------------
 
-flags.DEFINE_integer('seed', 43, 'Random seed to set')
+flags.DEFINE_integer('seed', 42, 'Random seed to set')
 
 flags.DEFINE_boolean('random_pos', True,
                      'Randomize the pos input common to all algos.')

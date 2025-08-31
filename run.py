@@ -63,11 +63,22 @@ if len(sys.argv) < 2:
 else:
     flags.DEFINE_list('algorithms', [sys.argv[1]], 'Which algorithms to run.')
 
-
 #flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
 #flags.DEFINE_list('algorithms', ['dfs', 'heapsort', 'kmp_matcher', 
 #                                 'strongly_connected_components', 'naive_string_matcher'], 'Hard algorithms.')
 # flags.DEFINE_list('algorithms', ['dfs', 'heapsort'], '')
+
+#flags.DEFINE_list('algorithms', ['find_maximum_subarray_kadane'], 'Divide and conquer algorithms.')
+#flags.DEFINE_list('algorithms', ['lcs_length', 'matrix_chain_order', 'optimal_bst'], 'Dynamic Prog. algorithms.')
+#flags.DEFINE_list('algorithms', ['graham_scan', 'jarvis_march', 'segments_intersect'], 'Geometry algorithms.')
+# flags.DEFINE_list('algorithms', ['articulation_points', 'bellman_ford', 'bfs', 'bridges', 'dfs', 
+#                                  'dag_shortest_paths', 'dijkstra', 'floyd_warshall', 'mst_kruskal', 
+#                                  'mst_prim', 'strongly_connected_components', 'topological_sort'], 'Graph algorithms.')
+#flags.DEFINE_list('algorithms', ['activity_selector', 'task_scheduling'], 'Greedy algorithms.')
+#flags.DEFINE_list('algorithms', ['binary_search', 'minimum', 'quickselect'], 'Searching algorithms.')
+#flags.DEFINE_list('algorithms', ['bubble_sort', 'heapsort', 'insertion_sort', 'quicksort'], 'Sorting algorithms.')
+#flags.DEFINE_list('algorithms', ['kmp_matcher', 'naive_string_matcher'], 'Strings algorithms.')
+
 
 '''
 flags.DEFINE_list('algorithms', 
@@ -79,6 +90,7 @@ flags.DEFINE_list('algorithms',
                  'quicksort', 'segments_intersect', 'strongly_connected_components', 'task_scheduling', 'topological_sort'], 
                  'Which algorithms to run.')
 '''
+
                  
 #flags.DEFINE_list('train_lengths', [-1], '')
 flags.DEFINE_list('train_lengths', ['4', '7', '11', '13', '16'], '')

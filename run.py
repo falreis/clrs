@@ -57,13 +57,30 @@ assert tf.test.is_built_with_cuda()
 os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".85"
 
 #define algorithms to run
-
-'''
 if len(sys.argv) < 2:
     flags.DEFINE_list('algorithms', ['naive_string_matcher'], 'Which algorithms to run.')
 else:
-    flags.DEFINE_list('algorithms', [sys.argv[1]], 'Which algorithms to run.')
-'''
+    if sys.argv[1] != 'multitask':
+      flags.DEFINE_list('algorithms', [sys.argv[1]], 'Which algorithms to run.')
+    else:
+      if sys.argv[2] == 'dc':
+        flags.DEFINE_list('algorithms', ['find_maximum_subarray_kadane'], 'Divide and conquer algorithms.')
+      elif sys.argv[2] == 'dp':
+        flags.DEFINE_list('algorithms', ['lcs_length', 'matrix_chain_order', 'optimal_bst'], 'Dynamic Prog. algorithms.')
+      elif sys.argv[2] == 'geo':
+        flags.DEFINE_list('algorithms', ['graham_scan', 'jarvis_march', 'segments_intersect'], 'Geometry algorithms.')
+      elif sys.argv[2] == 'graph':
+        flags.DEFINE_list('algorithms', ['articulation_points', 'bellman_ford', 'bfs', 'bridges', 'dfs', 
+                                  'dag_shortest_paths', 'dijkstra', 'floyd_warshall', 'mst_kruskal', 
+                                  'mst_prim', 'strongly_connected_components', 'topological_sort'], 'Graph algorithms.')
+      elif sys.argv[2] == 'greedy':
+        flags.DEFINE_list('algorithms', ['activity_selector', 'task_scheduling'], 'Greedy algorithms.')
+      elif sys.argv[2] == 'search':
+        flags.DEFINE_list('algorithms', ['binary_search', 'minimum', 'quickselect'], 'Searching algorithms.')
+      elif sys.argv[2] == 'sorting':
+        flags.DEFINE_list('algorithms', ['bubble_sort', 'heapsort', 'insertion_sort', 'quicksort'], 'Sorting algorithms.')  
+      elif sys.argv[2] == 'string':
+        flags.DEFINE_list('algorithms', ['kmp_matcher', 'naive_string_matcher'], 'Strings algorithms.')
 
 #flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
 #flags.DEFINE_list('algorithms', ['dfs', 'heapsort', 'kmp_matcher', 
@@ -73,9 +90,9 @@ else:
 #flags.DEFINE_list('algorithms', ['find_maximum_subarray_kadane'], 'Divide and conquer algorithms.')
 #flags.DEFINE_list('algorithms', ['lcs_length', 'matrix_chain_order', 'optimal_bst'], 'Dynamic Prog. algorithms.')
 #flags.DEFINE_list('algorithms', ['graham_scan', 'jarvis_march', 'segments_intersect'], 'Geometry algorithms.')
-flags.DEFINE_list('algorithms', ['articulation_points', 'bellman_ford', 'bfs', 'bridges', 'dfs', 
-                                  'dag_shortest_paths', 'dijkstra', 'floyd_warshall', 'mst_kruskal', 
-                                  'mst_prim', 'strongly_connected_components', 'topological_sort'], 'Graph algorithms.')
+#flags.DEFINE_list('algorithms', ['articulation_points', 'bellman_ford', 'bfs', 'bridges', 'dfs', 
+#                                  'dag_shortest_paths', 'dijkstra', 'floyd_warshall', 'mst_kruskal', 
+#                                  'mst_prim', 'strongly_connected_components', 'topological_sort'], 'Graph algorithms.')
 #flags.DEFINE_list('algorithms', ['activity_selector', 'task_scheduling'], 'Greedy algorithms.')
 #flags.DEFINE_list('algorithms', ['binary_search', 'minimum', 'quickselect'], 'Searching algorithms.')
 #flags.DEFINE_list('algorithms', ['bubble_sort', 'heapsort', 'insertion_sort', 'quicksort'], 'Sorting algorithms.')

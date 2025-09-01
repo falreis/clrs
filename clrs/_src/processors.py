@@ -586,23 +586,19 @@ def get_falr4_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
   tri_g_exp4 = jnp.expand_dims(tri_g4, axis=(1, 2)) # (B, 1, 1, H)
 
   # Combine triplet and graph features using weighted sum and nonlinearities for more expressiveness
-  weights = [
-      hk.get_parameter(f'comb_weight_{i}', shape=(), init=hk.initializers.Constant(1.0))
-      for i in range(9)
-  ]
   msg = (
-      weights[0] * tri_1_exp +
-      weights[1] * tri_2_exp +
-      weights[2] * tri_3_exp +
-      weights[3] * tri_4_exp +
-      weights[4] * tri_e_1 +
-      weights[5] * tri_g_exp1 +
-      weights[6] * tri_g_exp2 +
-      weights[7] * tri_g_exp3 +
-      weights[8] * tri_g_exp4
+      tri_1_exp +
+      tri_2_exp +
+      tri_3_exp +
+      tri_4_exp +
+      tri_e_1 +
+      tri_g_exp1 +
+      tri_g_exp2 +
+      tri_g_exp3 +
+      tri_g_exp4
   )
   # Add a nonlinearity and optional normalization for richer representations
-  msg = jax.nn.relu(msg)
+  #msg = jax.nn.relu(msg)
   #msg = hk.LayerNorm(axis=-1, create_scale=True, create_offset=True)(msg)
 
   '''

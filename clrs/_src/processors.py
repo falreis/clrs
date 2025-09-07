@@ -597,10 +597,44 @@ def get_falr4_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
       tri_g_exp3 +
       tri_g_exp4
   )
-  # Add a nonlinearity and optional normalization for richer representations
-  #msg = jax.nn.relu(msg)
-  #msg = hk.LayerNorm(axis=-1, create_scale=True, create_offset=True)(msg)
 
+  return msg
+
+def get_falr5_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
+  tri_1 = hk.Linear(nb_triplet_fts, with_bias=True, w_init=hk.initializers.VarianceScaling(2.0, 'fan_in', 'truncated_normal'))(node_fts)
+  tri_2 = hk.Linear(nb_triplet_fts, with_bias=True, w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'))(hidden)
+  tri_3 = hk.Linear(nb_triplet_fts, with_bias=True, w_init=hk.initializers.RandomNormal(stddev=0.05))(node_fts)
+  tri_4 = hk.Linear(nb_triplet_fts, with_bias=True, w_init=hk.initializers.Orthogonal())(hidden)
+
+  tri_e_1 = hk.Linear(nb_triplet_fts, with_bias=True)(edge_fts)
+
+  tri_g1 = hk.Linear(nb_triplet_fts, with_bias=True, w_init=hk.initializers.VarianceScaling(2.0, 'fan_in', 'truncated_normal'))(graph_fts)
+  tri_g2 = hk.Linear(nb_triplet_fts, with_bias=True, w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'))(graph_fts)
+  tri_g3 = hk.Linear(nb_triplet_fts, with_bias=True, w_init=hk.initializers.RandomNormal(stddev=0.05))(graph_fts)
+  tri_g4 = hk.Linear(nb_triplet_fts, with_bias=True, w_init=hk.initializers.Orthogonal())(graph_fts)
+
+  tri_1_exp = jnp.expand_dims(tri_1, axis=(1))    # (B, 1, N, H)
+  tri_2_exp = jnp.expand_dims(tri_2, axis=(2))    # (B, N, 1, H)
+  tri_3_exp = jnp.expand_dims(tri_3, axis=(1))    # (B, 1, N, H)
+  tri_4_exp = jnp.expand_dims(tri_4, axis=(2))    # (B, N, 1, H)
+  
+  tri_g_exp1 = jnp.expand_dims(tri_g1, axis=(1, 2)) # (B, 1, 1, H)
+  tri_g_exp2 = jnp.expand_dims(tri_g2, axis=(1, 2)) # (B, 1, 1, H)
+  tri_g_exp3 = jnp.expand_dims(tri_g3, axis=(1, 2)) # (B, 1, 1, H)
+  tri_g_exp4 = jnp.expand_dims(tri_g4, axis=(1, 2)) # (B, 1, 1, H)
+
+  # Combine triplet and graph features using weighted sum and nonlinearities for more expressiveness
+  msg = (
+      tri_1_exp +
+      tri_2_exp +
+      tri_3_exp +
+      tri_4_exp +
+      tri_e_1 +
+      tri_g_exp1 +
+      tri_g_exp2 +
+      tri_g_exp3 +
+      tri_g_exp4
+  )
   '''
   att_linear = hk.Linear(1, with_bias=True)
   att_input = tri_1_exp + tri_2_exp + tri_e_1 + tri_g_exp  # (B, N, N, H)
@@ -1062,6 +1096,99 @@ class FALR4(Processor):
 
 
 class F4(FALR4):
+  """Message-Passing Neural Network (Gilmer et al., ICML 2017)."""
+
+  def __call__(self, node_fts: _Array, edge_fts: _Array, graph_fts: _Array,
+               adj_mat: _Array, hidden: _Array, **unused_kwargs) -> _Array:
+    adj_mat = jnp.ones_like(adj_mat)
+    return super().__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
+  
+
+class FALR5(Processor):
+  """f5 code"""
+
+  def __init__(
+      self,
+      out_size: int,
+      mid_size: Optional[int] = None,
+      activation: Optional[_Fn] = jax.nn.relu,
+      reduction: _Fn = jnp.max,
+      use_ln: bool = False,
+      use_triplets: bool = False,
+      nb_triplet_fts: int = 8,
+      gated: bool = False,
+      gated_activation: Optional[_Fn] = jax.nn.sigmoid,
+      name: str = 'f5',
+  ):
+    super().__init__(name=name)
+    if mid_size is None:
+      self.mid_size = out_size
+    else:
+      self.mid_size = mid_size
+    self.out_size = out_size
+    self.activation = activation
+    self.reduction = reduction
+    self.use_ln = use_ln
+    self.use_triplets = use_triplets
+    self.nb_triplet_fts = nb_triplet_fts
+    self.gated = gated
+    self.gated_activation = gated_activation
+
+  def __call__(  # pytype: disable=signature-mismatch  # numpy-scalars
+      self,
+      node_fts: _Array,
+      edge_fts: _Array,
+      graph_fts: _Array,
+      adj_mat: _Array,
+      hidden: _Array,
+      **unused_kwargs,
+  ) -> _Array:
+    """MPNN inference step."""
+
+    b, n, _ = node_fts.shape
+    assert edge_fts.shape[:-1] == (b, n, n)
+    assert graph_fts.shape[:-1] == (b,)
+    assert adj_mat.shape == (b, n, n) #hints
+
+    #z = jnp.concatenate([node_fts, hidden], axis=-1)
+    msg_11 = hk.Linear(self.mid_size, with_bias=True)(node_fts)
+    msg_12 = hk.Linear(self.mid_size, with_bias=True)(node_fts)
+    msg_21 = hk.Linear(self.mid_size, with_bias=True)(hidden)
+    msg_22 = hk.Linear(self.mid_size, with_bias=True)(hidden)
+    msg_e = hk.Linear(self.mid_size, with_bias=True)(edge_fts)
+    msg_g = hk.Linear(self.mid_size, with_bias=True)(graph_fts)
+
+    tri_msgs = None
+
+    if self.use_triplets:
+      tri_msgs = get_falr5_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts) 
+
+      if self.activation is not None:
+        tri_msgs = self.activation(tri_msgs)
+
+    msg_11_exp = jnp.expand_dims(msg_11, axis=(1))    # (B, 1, N, H)
+    msg_12_exp = jnp.expand_dims(msg_12, axis=(2))    # (B, 1, N, H)
+    msg_21_exp = jnp.expand_dims(msg_21, axis=(1))    # (B, N, 1, H)
+    msg_22_exp = jnp.expand_dims(msg_22, axis=(2))    # (B, N, 1, H)
+    msg_g_exp = jnp.expand_dims(msg_g, axis=(1, 2)) # (B, 1, 1, H)
+
+    msgs = (
+        msg_11_exp + msg_12_exp + msg_21_exp + msg_22_exp + msg_e + msg_g_exp
+    )
+
+    msgs = self.reduction(msgs, axis=1)
+
+    #h_1 = hk.Linear(self.out_size, with_bias=True)(node_fts)
+    #h_2 = hk.Linear(self.out_size, with_bias=True)(hidden)
+    #h_3 = hk.Linear(self.out_size, with_bias=True)(msgs)
+    #ret = h_1 + h_2 + h_3
+
+    ret = hk.Linear(self.out_size, with_bias=True)(msgs)
+
+    return ret, tri_msgs  # pytype: disable=bad-return-type  # numpy-scalars
+
+
+class F5(FALR5):
   """Message-Passing Neural Network (Gilmer et al., ICML 2017)."""
 
   def __call__(self, node_fts: _Array, edge_fts: _Array, graph_fts: _Array,
@@ -1715,6 +1842,17 @@ def get_processor_factory(kind: str,
       )
     elif kind == 'f4':
       processor = F4(
+          out_size=out_size,
+          use_ln=use_ln,
+          use_triplets=True,
+          nb_triplet_fts=nb_triplet_fts,
+          activation = activation,
+          reduction = reduction,
+          gated = gated,
+          gated_activation = gated_activation
+      )
+    elif kind == 'f5':
+      processor = F5(
           out_size=out_size,
           use_ln=use_ln,
           use_triplets=True,

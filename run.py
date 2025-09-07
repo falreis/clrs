@@ -58,7 +58,7 @@ os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".85"
 
 #define algorithms to run
 if len(sys.argv) < 2:
-    flags.DEFINE_list('algorithms', ['naive_string_matcher'], 'Which algorithms to run.')
+    flags.DEFINE_list('algorithms', ['floyd_warshall'], 'Which algorithms to run.')
 else:
     if sys.argv[1] != 'multitask':
       flags.DEFINE_list('algorithms', [sys.argv[1]], 'Which algorithms to run.')
@@ -210,14 +210,14 @@ flags.DEFINE_enum('encoder_init', 'xavier_on_scalars',
                   ['default', 'xavier_on_scalars'],
                   'Initialiser to use for the encoders.')
 
-flags.DEFINE_enum('processor_type', 'f4',
+flags.DEFINE_enum('processor_type', 'f5',
                   ['deepsets', 'mpnn', 'pgn', 'pgn_mask',
                    'triplet_mpnn', 'triplet_pgn', 'triplet_pgn_mask',
                    'gat', 'gatv2', 'gat_full', 'gatv2_full',
                    'gpgn', 'gpgn_mask', 'gmpnn',
                    'triplet_gpgn', 'triplet_gpgn_mask', 'triplet_gmpnn',
                    'memnet_full', 'memnet_masked',
-                   'rt', 'f1', 'f2', 'f3', 'f4'],
+                   'rt', 'f1', 'f2', 'f3', 'f4', 'f5'],
                   'Processor type to use as the network P.')
 
 flags.DEFINE_string('checkpoint_path', 'CLRS30',
@@ -234,7 +234,7 @@ flags.DEFINE_enum('reduction', 'min',
                     ['max', 'mean', 'average', 'sum', 'min'],
                     'Reduction operation.') 
 
-flags.DEFINE_enum('activation', 'elu', 
+flags.DEFINE_enum('activation', 'relu', 
                     ['relu', 'elu', 'leaky_relu', 'glu', 'sigmoid',
                      'hard_sigmoid', 'log_sigmoid', 'sparse_sigmoid', 
                      'hard_tanh'],

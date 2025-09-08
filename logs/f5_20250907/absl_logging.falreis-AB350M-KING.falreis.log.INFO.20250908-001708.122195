@@ -1,0 +1,656 @@
+I0908 00:17:11.056870 127617279804928 xla_bridge.py:889] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I0908 00:17:11.057512 127617279804928 xla_bridge.py:889] Unable to initialize backend 'tpu': INTERNAL: Failed to open libtpu.so: libtpu.so: cannot open shared object file: No such file or directory
+I0908 00:17:11.289873 127617279804928 run.py:453] Model: f5 ['naive_string_matcher']
+I0908 00:17:11.289977 127617279804928 run.py:455] algorithms ['naive_string_matcher']
+I0908 00:17:11.290157 127617279804928 run.py:456] train_lengths ['4', '7', '11', '13', '16']
+I0908 00:17:11.290194 127617279804928 run.py:457] train_batch_size 16
+I0908 00:17:11.290286 127617279804928 run.py:458] val_batch_size 16
+I0908 00:17:11.290318 127617279804928 run.py:459] test_batch_size 16
+I0908 00:17:11.290348 127617279804928 run.py:460] chunked_training True
+I0908 00:17:11.290480 127617279804928 run.py:461] chunk_length 8
+I0908 00:17:11.290513 127617279804928 run.py:462] train_steps 10000
+I0908 00:17:11.290544 127617279804928 run.py:463] eval_every 50
+I0908 00:17:11.290573 127617279804928 run.py:464] test_every 500
+I0908 00:17:11.290602 127617279804928 run.py:465] hidden_size 128
+I0908 00:17:11.290630 127617279804928 run.py:466] nb_msg_passing_steps 1
+I0908 00:17:11.290658 127617279804928 run.py:467] learning_rate 0.001
+I0908 00:17:11.290751 127617279804928 run.py:468] grad_clip_max_norm 1.0
+I0908 00:17:11.290781 127617279804928 run.py:469] dropout_prob 0.0
+I0908 00:17:11.290809 127617279804928 run.py:470] hint_teacher_forcing 0.0
+I0908 00:17:11.290838 127617279804928 run.py:471] hint_mode encoded_decoded
+I0908 00:17:11.290941 127617279804928 run.py:472] hint_repred_mode soft
+I0908 00:17:11.290971 127617279804928 run.py:473] use_ln False
+I0908 00:17:11.290999 127617279804928 run.py:474] use_lstm True
+I0908 00:17:11.291027 127617279804928 run.py:475] nb_triplet_fts 8
+I0908 00:17:11.291055 127617279804928 run.py:476] encoder_init xavier_on_scalars
+I0908 00:17:11.291082 127617279804928 run.py:477] processor_type f5
+I0908 00:17:11.291110 127617279804928 run.py:478] checkpoint_path CLRS30
+I0908 00:17:11.291141 127617279804928 run.py:479] dataset_path CLRS30
+I0908 00:17:11.291170 127617279804928 run.py:480] freeze_processor False
+I0908 00:17:11.291198 127617279804928 run.py:481] reduction min
+I0908 00:17:11.291225 127617279804928 run.py:482] activation relu
+I0908 00:17:11.291253 127617279804928 run.py:483] restore_model 
+I0908 00:17:11.291281 127617279804928 run.py:484] gated False
+I0908 00:17:11.291309 127617279804928 run.py:485] gated_activation sigmoid
+I0908 00:17:11.294047 127617279804928 run.py:511] Creating samplers for algo naive_string_matcher
+W0908 00:17:11.294239 127617279804928 samplers.py:299] Ignoring kwargs {'p'} when building sampler class <class 'clrs._src.samplers.MatcherSampler'>
+W0908 00:17:11.294503 127617279804928 samplers.py:109] Sampling dataset on-the-fly, unlimited samples.
+W0908 00:17:11.678804 127617279804928 samplers.py:299] Ignoring kwargs {'p'} when building sampler class <class 'clrs._src.samplers.MatcherSampler'>
+I0908 00:17:11.679074 127617279804928 samplers.py:124] Creating a dataset with 4096 samples.
+I0908 00:17:12.031177 127617279804928 samplers.py:144] 1000 samples created
+I0908 00:17:12.383409 127617279804928 samplers.py:144] 2000 samples created
+I0908 00:17:12.735618 127617279804928 samplers.py:144] 3000 samples created
+I0908 00:17:13.091182 127617279804928 samplers.py:144] 4000 samples created
+I0908 00:17:13.324053 127617279804928 run.py:297] Dataset found at CLRS30/CLRS30_v1.0.0. Skipping download.
+I0908 00:17:13.324827 127617279804928 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/naive_string_matcher_test/1.0.0
+I0908 00:17:13.328899 127617279804928 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/naive_string_matcher_test/1.0.0
+I0908 00:17:13.331995 127617279804928 reader.py:262] Creating a tf.data.Dataset reading 2 files located in folders: CLRS30/CLRS30_v1.0.0/clrs_dataset/naive_string_matcher_test/1.0.0.
+I0908 00:17:13.380677 127617279804928 logging_logger.py:49] Constructing tf.data.Dataset clrs_dataset for split test, from CLRS30/CLRS30_v1.0.0/clrs_dataset/naive_string_matcher_test/1.0.0
+W0908 00:17:13.401305 127617279804928 ag_logging.py:142] AutoGraph could not transform <function _preprocess at 0x7410b21c7e20> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: `haiku.experimental.flax` features require `flax` to be installed.
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+I0908 00:17:28.756953 127617279804928 run.py:736] Algo naive_string_matcher step 0 current loss 12.639822, current_train_items 17.
+I0908 00:17:32.781418 127617279804928 run.py:771] (val) algo naive_string_matcher step 0: {'match': 0.150146484375, 'score': 0.150146484375, 'examples_seen': 17, 'step': 0, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:32.781593 127617279804928 run.py:792] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.150, val scores are: naive_string_matcher: 0.150
+I0908 00:17:33.463396 127617279804928 run.py:736] Algo naive_string_matcher step 50 current loss 8.887316, current_train_items 700.
+I0908 00:17:33.959853 127617279804928 run.py:771] (val) algo naive_string_matcher step 50: {'match': 0.2333984375, 'score': 0.2333984375, 'examples_seen': 700, 'step': 50, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:33.960041 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.150, current avg val score is 0.233, val scores are: naive_string_matcher: 0.233
+I0908 00:17:34.623032 127617279804928 run.py:736] Algo naive_string_matcher step 100 current loss 9.063517, current_train_items 1346.
+I0908 00:17:35.117980 127617279804928 run.py:771] (val) algo naive_string_matcher step 100: {'match': 0.1650390625, 'score': 0.1650390625, 'examples_seen': 1346, 'step': 100, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:35.118139 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.233, current avg val score is 0.165, val scores are: naive_string_matcher: 0.165
+I0908 00:17:35.763050 127617279804928 run.py:736] Algo naive_string_matcher step 150 current loss 8.202215, current_train_items 2026.
+I0908 00:17:36.253009 127617279804928 run.py:771] (val) algo naive_string_matcher step 150: {'match': 0.219482421875, 'score': 0.219482421875, 'examples_seen': 2026, 'step': 150, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:36.253170 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.233, current avg val score is 0.219, val scores are: naive_string_matcher: 0.219
+I0908 00:17:36.889751 127617279804928 run.py:736] Algo naive_string_matcher step 200 current loss 8.615282, current_train_items 2704.
+I0908 00:17:37.383409 127617279804928 run.py:771] (val) algo naive_string_matcher step 200: {'match': 0.232177734375, 'score': 0.232177734375, 'examples_seen': 2704, 'step': 200, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:37.383578 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.233, current avg val score is 0.232, val scores are: naive_string_matcher: 0.232
+I0908 00:17:38.043190 127617279804928 run.py:736] Algo naive_string_matcher step 250 current loss 7.587554, current_train_items 3399.
+I0908 00:17:38.535610 127617279804928 run.py:771] (val) algo naive_string_matcher step 250: {'match': 0.275390625, 'score': 0.275390625, 'examples_seen': 3399, 'step': 250, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:38.535797 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.233, current avg val score is 0.275, val scores are: naive_string_matcher: 0.275
+I0908 00:17:39.190252 127617279804928 run.py:736] Algo naive_string_matcher step 300 current loss 7.771507, current_train_items 4082.
+I0908 00:17:39.686468 127617279804928 run.py:771] (val) algo naive_string_matcher step 300: {'match': 0.385986328125, 'score': 0.385986328125, 'examples_seen': 4082, 'step': 300, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:39.686663 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.275, current avg val score is 0.386, val scores are: naive_string_matcher: 0.386
+I0908 00:17:40.300150 127617279804928 run.py:736] Algo naive_string_matcher step 350 current loss 7.260169, current_train_items 4764.
+I0908 00:17:40.795103 127617279804928 run.py:771] (val) algo naive_string_matcher step 350: {'match': 0.498779296875, 'score': 0.498779296875, 'examples_seen': 4764, 'step': 350, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:40.795262 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.386, current avg val score is 0.499, val scores are: naive_string_matcher: 0.499
+I0908 00:17:41.446722 127617279804928 run.py:736] Algo naive_string_matcher step 400 current loss 8.212234, current_train_items 5448.
+I0908 00:17:41.936274 127617279804928 run.py:771] (val) algo naive_string_matcher step 400: {'match': 0.645751953125, 'score': 0.645751953125, 'examples_seen': 5448, 'step': 400, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:41.936527 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.499, current avg val score is 0.646, val scores are: naive_string_matcher: 0.646
+I0908 00:17:42.614444 127617279804928 run.py:736] Algo naive_string_matcher step 450 current loss 7.812247, current_train_items 6140.
+I0908 00:17:43.102587 127617279804928 run.py:771] (val) algo naive_string_matcher step 450: {'match': 0.678955078125, 'score': 0.678955078125, 'examples_seen': 6140, 'step': 450, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:43.102746 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.646, current avg val score is 0.679, val scores are: naive_string_matcher: 0.679
+I0908 00:17:43.766196 127617279804928 run.py:736] Algo naive_string_matcher step 500 current loss 7.053654, current_train_items 6835.
+I0908 00:17:44.261017 127617279804928 run.py:771] (val) algo naive_string_matcher step 500: {'match': 0.533447265625, 'score': 0.533447265625, 'examples_seen': 6835, 'step': 500, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:44.261202 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.679, current avg val score is 0.533, val scores are: naive_string_matcher: 0.533
+I0908 00:17:44.880182 127617279804928 run.py:736] Algo naive_string_matcher step 550 current loss 5.991256, current_train_items 7523.
+I0908 00:17:45.369510 127617279804928 run.py:771] (val) algo naive_string_matcher step 550: {'match': 0.67041015625, 'score': 0.67041015625, 'examples_seen': 7523, 'step': 550, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:45.369671 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.679, current avg val score is 0.670, val scores are: naive_string_matcher: 0.670
+I0908 00:17:46.038535 127617279804928 run.py:736] Algo naive_string_matcher step 600 current loss 6.678943, current_train_items 8211.
+I0908 00:17:46.532770 127617279804928 run.py:771] (val) algo naive_string_matcher step 600: {'match': 0.68994140625, 'score': 0.68994140625, 'examples_seen': 8211, 'step': 600, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:46.532953 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.679, current avg val score is 0.690, val scores are: naive_string_matcher: 0.690
+I0908 00:17:47.188915 127617279804928 run.py:736] Algo naive_string_matcher step 650 current loss 6.008424, current_train_items 8895.
+I0908 00:17:47.674564 127617279804928 run.py:771] (val) algo naive_string_matcher step 650: {'match': 0.713134765625, 'score': 0.713134765625, 'examples_seen': 8895, 'step': 650, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:47.674728 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.690, current avg val score is 0.713, val scores are: naive_string_matcher: 0.713
+I0908 00:17:48.293938 127617279804928 run.py:736] Algo naive_string_matcher step 700 current loss 6.753668, current_train_items 9584.
+I0908 00:17:48.778846 127617279804928 run.py:771] (val) algo naive_string_matcher step 700: {'match': 0.7470703125, 'score': 0.7470703125, 'examples_seen': 9584, 'step': 700, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:48.779009 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.713, current avg val score is 0.747, val scores are: naive_string_matcher: 0.747
+I0908 00:17:49.429832 127617279804928 run.py:736] Algo naive_string_matcher step 750 current loss 6.488518, current_train_items 10264.
+I0908 00:17:50.038081 127617279804928 run.py:771] (val) algo naive_string_matcher step 750: {'match': 0.732177734375, 'score': 0.732177734375, 'examples_seen': 10264, 'step': 750, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:50.038239 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.747, current avg val score is 0.732, val scores are: naive_string_matcher: 0.732
+I0908 00:17:50.678271 127617279804928 run.py:736] Algo naive_string_matcher step 800 current loss 6.791817, current_train_items 10941.
+I0908 00:17:51.168745 127617279804928 run.py:771] (val) algo naive_string_matcher step 800: {'match': 0.77685546875, 'score': 0.77685546875, 'examples_seen': 10941, 'step': 800, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:51.168924 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.747, current avg val score is 0.777, val scores are: naive_string_matcher: 0.777
+I0908 00:17:51.822942 127617279804928 run.py:736] Algo naive_string_matcher step 850 current loss 7.301322, current_train_items 11617.
+I0908 00:17:52.314017 127617279804928 run.py:771] (val) algo naive_string_matcher step 850: {'match': 0.652587890625, 'score': 0.652587890625, 'examples_seen': 11617, 'step': 850, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:52.314203 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.777, current avg val score is 0.653, val scores are: naive_string_matcher: 0.653
+I0908 00:17:52.972887 127617279804928 run.py:736] Algo naive_string_matcher step 900 current loss 6.624090, current_train_items 12296.
+I0908 00:17:53.461318 127617279804928 run.py:771] (val) algo naive_string_matcher step 900: {'match': 0.75341796875, 'score': 0.75341796875, 'examples_seen': 12296, 'step': 900, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:53.461535 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.777, current avg val score is 0.753, val scores are: naive_string_matcher: 0.753
+I0908 00:17:54.109212 127617279804928 run.py:736] Algo naive_string_matcher step 950 current loss 7.805126, current_train_items 12987.
+I0908 00:17:54.599592 127617279804928 run.py:771] (val) algo naive_string_matcher step 950: {'match': 0.688232421875, 'score': 0.688232421875, 'examples_seen': 12987, 'step': 950, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:54.599769 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.777, current avg val score is 0.688, val scores are: naive_string_matcher: 0.688
+W0908 00:17:54.642847 127617279804928 samplers.py:175] Increasing hint lengh from 28 to 30
+I0908 00:17:55.256980 127617279804928 run.py:736] Algo naive_string_matcher step 1000 current loss 6.297744, current_train_items 13675.
+I0908 00:17:55.757971 127617279804928 run.py:771] (val) algo naive_string_matcher step 1000: {'match': 0.712646484375, 'score': 0.712646484375, 'examples_seen': 13675, 'step': 1000, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:55.758131 127617279804928 run.py:792] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.713, val scores are: naive_string_matcher: 0.713
+I0908 00:17:56.451078 127617279804928 run.py:736] Algo naive_string_matcher step 1050 current loss 6.443829, current_train_items 14369.
+I0908 00:17:56.939451 127617279804928 run.py:771] (val) algo naive_string_matcher step 1050: {'match': 0.822265625, 'score': 0.822265625, 'examples_seen': 14369, 'step': 1050, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:56.939610 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.713, current avg val score is 0.822, val scores are: naive_string_matcher: 0.822
+I0908 00:17:57.597686 127617279804928 run.py:736] Algo naive_string_matcher step 1100 current loss 6.143422, current_train_items 15058.
+I0908 00:17:58.087146 127617279804928 run.py:771] (val) algo naive_string_matcher step 1100: {'match': 0.750732421875, 'score': 0.750732421875, 'examples_seen': 15058, 'step': 1100, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:58.087300 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.822, current avg val score is 0.751, val scores are: naive_string_matcher: 0.751
+I0908 00:17:58.736742 127617279804928 run.py:736] Algo naive_string_matcher step 1150 current loss 5.664106, current_train_items 15737.
+I0908 00:17:59.233442 127617279804928 run.py:771] (val) algo naive_string_matcher step 1150: {'match': 0.677001953125, 'score': 0.677001953125, 'examples_seen': 15737, 'step': 1150, 'algorithm': 'naive_string_matcher'}
+I0908 00:17:59.233687 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.822, current avg val score is 0.677, val scores are: naive_string_matcher: 0.677
+I0908 00:17:59.947290 127617279804928 run.py:736] Algo naive_string_matcher step 1200 current loss 5.917917, current_train_items 16422.
+I0908 00:18:00.439334 127617279804928 run.py:771] (val) algo naive_string_matcher step 1200: {'match': 0.8203125, 'score': 0.8203125, 'examples_seen': 16422, 'step': 1200, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:00.439507 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.822, current avg val score is 0.820, val scores are: naive_string_matcher: 0.820
+I0908 00:18:01.081349 127617279804928 run.py:736] Algo naive_string_matcher step 1250 current loss 5.948758, current_train_items 17121.
+I0908 00:18:01.576884 127617279804928 run.py:771] (val) algo naive_string_matcher step 1250: {'match': 0.77001953125, 'score': 0.77001953125, 'examples_seen': 17121, 'step': 1250, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:01.577115 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.822, current avg val score is 0.770, val scores are: naive_string_matcher: 0.770
+I0908 00:18:02.211282 127617279804928 run.py:736] Algo naive_string_matcher step 1300 current loss 6.411964, current_train_items 17802.
+I0908 00:18:02.694924 127617279804928 run.py:771] (val) algo naive_string_matcher step 1300: {'match': 0.82666015625, 'score': 0.82666015625, 'examples_seen': 17802, 'step': 1300, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:02.695084 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.822, current avg val score is 0.827, val scores are: naive_string_matcher: 0.827
+I0908 00:18:03.363599 127617279804928 run.py:736] Algo naive_string_matcher step 1350 current loss 5.619965, current_train_items 18497.
+I0908 00:18:03.848425 127617279804928 run.py:771] (val) algo naive_string_matcher step 1350: {'match': 0.822021484375, 'score': 0.822021484375, 'examples_seen': 18497, 'step': 1350, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:03.848589 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.827, current avg val score is 0.822, val scores are: naive_string_matcher: 0.822
+I0908 00:18:04.496792 127617279804928 run.py:736] Algo naive_string_matcher step 1400 current loss 5.952229, current_train_items 19181.
+I0908 00:18:04.991563 127617279804928 run.py:771] (val) algo naive_string_matcher step 1400: {'match': 0.80615234375, 'score': 0.80615234375, 'examples_seen': 19181, 'step': 1400, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:04.991794 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.827, current avg val score is 0.806, val scores are: naive_string_matcher: 0.806
+I0908 00:18:05.630279 127617279804928 run.py:736] Algo naive_string_matcher step 1450 current loss 6.175655, current_train_items 19861.
+I0908 00:18:06.121336 127617279804928 run.py:771] (val) algo naive_string_matcher step 1450: {'match': 0.708251953125, 'score': 0.708251953125, 'examples_seen': 19861, 'step': 1450, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:06.121519 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.827, current avg val score is 0.708, val scores are: naive_string_matcher: 0.708
+I0908 00:18:06.806072 127617279804928 run.py:736] Algo naive_string_matcher step 1500 current loss 5.697093, current_train_items 20552.
+I0908 00:18:07.300572 127617279804928 run.py:771] (val) algo naive_string_matcher step 1500: {'match': 0.85400390625, 'score': 0.85400390625, 'examples_seen': 20552, 'step': 1500, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:07.300773 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.827, current avg val score is 0.854, val scores are: naive_string_matcher: 0.854
+I0908 00:18:07.940579 127617279804928 run.py:736] Algo naive_string_matcher step 1550 current loss 7.020497, current_train_items 21224.
+I0908 00:18:08.435639 127617279804928 run.py:771] (val) algo naive_string_matcher step 1550: {'match': 0.802978515625, 'score': 0.802978515625, 'examples_seen': 21224, 'step': 1550, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:08.435838 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.854, current avg val score is 0.803, val scores are: naive_string_matcher: 0.803
+I0908 00:18:09.148313 127617279804928 run.py:736] Algo naive_string_matcher step 1600 current loss 5.986537, current_train_items 21899.
+I0908 00:18:09.636318 127617279804928 run.py:771] (val) algo naive_string_matcher step 1600: {'match': 0.847900390625, 'score': 0.847900390625, 'examples_seen': 21899, 'step': 1600, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:09.636488 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.854, current avg val score is 0.848, val scores are: naive_string_matcher: 0.848
+I0908 00:18:10.289425 127617279804928 run.py:736] Algo naive_string_matcher step 1650 current loss 5.621197, current_train_items 22575.
+I0908 00:18:10.782105 127617279804928 run.py:771] (val) algo naive_string_matcher step 1650: {'match': 0.8515625, 'score': 0.8515625, 'examples_seen': 22575, 'step': 1650, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:10.782298 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.854, current avg val score is 0.852, val scores are: naive_string_matcher: 0.852
+I0908 00:18:11.426025 127617279804928 run.py:736] Algo naive_string_matcher step 1700 current loss 5.917055, current_train_items 23234.
+I0908 00:18:11.918871 127617279804928 run.py:771] (val) algo naive_string_matcher step 1700: {'match': 0.840576171875, 'score': 0.840576171875, 'examples_seen': 23234, 'step': 1700, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:11.919039 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.854, current avg val score is 0.841, val scores are: naive_string_matcher: 0.841
+I0908 00:18:12.580168 127617279804928 run.py:736] Algo naive_string_matcher step 1750 current loss 6.129465, current_train_items 23928.
+I0908 00:18:13.067872 127617279804928 run.py:771] (val) algo naive_string_matcher step 1750: {'match': 0.90625, 'score': 0.90625, 'examples_seen': 23928, 'step': 1750, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:13.068039 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.854, current avg val score is 0.906, val scores are: naive_string_matcher: 0.906
+I0908 00:18:13.704438 127617279804928 run.py:736] Algo naive_string_matcher step 1800 current loss 6.714618, current_train_items 24611.
+I0908 00:18:14.202237 127617279804928 run.py:771] (val) algo naive_string_matcher step 1800: {'match': 0.86865234375, 'score': 0.86865234375, 'examples_seen': 24611, 'step': 1800, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:14.202417 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.906, current avg val score is 0.869, val scores are: naive_string_matcher: 0.869
+I0908 00:18:14.894878 127617279804928 run.py:736] Algo naive_string_matcher step 1850 current loss 5.392940, current_train_items 25305.
+I0908 00:18:15.383770 127617279804928 run.py:771] (val) algo naive_string_matcher step 1850: {'match': 0.880859375, 'score': 0.880859375, 'examples_seen': 25305, 'step': 1850, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:15.383934 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.906, current avg val score is 0.881, val scores are: naive_string_matcher: 0.881
+I0908 00:18:16.068626 127617279804928 run.py:736] Algo naive_string_matcher step 1900 current loss 7.086929, current_train_items 25971.
+I0908 00:18:16.550684 127617279804928 run.py:771] (val) algo naive_string_matcher step 1900: {'match': 0.8857421875, 'score': 0.8857421875, 'examples_seen': 25971, 'step': 1900, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:16.550842 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.906, current avg val score is 0.886, val scores are: naive_string_matcher: 0.886
+I0908 00:18:17.175603 127617279804928 run.py:736] Algo naive_string_matcher step 1950 current loss 6.741680, current_train_items 26657.
+I0908 00:18:17.660596 127617279804928 run.py:771] (val) algo naive_string_matcher step 1950: {'match': 0.90234375, 'score': 0.90234375, 'examples_seen': 26657, 'step': 1950, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:17.660757 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.906, current avg val score is 0.902, val scores are: naive_string_matcher: 0.902
+I0908 00:18:18.278873 127617279804928 run.py:736] Algo naive_string_matcher step 2000 current loss 5.978889, current_train_items 27324.
+I0908 00:18:18.770752 127617279804928 run.py:771] (val) algo naive_string_matcher step 2000: {'match': 0.91357421875, 'score': 0.91357421875, 'examples_seen': 27324, 'step': 2000, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:18.770917 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.906, current avg val score is 0.914, val scores are: naive_string_matcher: 0.914
+I0908 00:18:19.397183 127617279804928 run.py:736] Algo naive_string_matcher step 2050 current loss 6.649159, current_train_items 27990.
+I0908 00:18:19.889047 127617279804928 run.py:771] (val) algo naive_string_matcher step 2050: {'match': 0.841796875, 'score': 0.841796875, 'examples_seen': 27990, 'step': 2050, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:19.889226 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.914, current avg val score is 0.842, val scores are: naive_string_matcher: 0.842
+I0908 00:18:20.535077 127617279804928 run.py:736] Algo naive_string_matcher step 2100 current loss 5.707361, current_train_items 28667.
+I0908 00:18:21.021995 127617279804928 run.py:771] (val) algo naive_string_matcher step 2100: {'match': 0.85595703125, 'score': 0.85595703125, 'examples_seen': 28667, 'step': 2100, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:21.022154 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.914, current avg val score is 0.856, val scores are: naive_string_matcher: 0.856
+I0908 00:18:21.646969 127617279804928 run.py:736] Algo naive_string_matcher step 2150 current loss 6.070364, current_train_items 29364.
+I0908 00:18:22.135609 127617279804928 run.py:771] (val) algo naive_string_matcher step 2150: {'match': 0.880859375, 'score': 0.880859375, 'examples_seen': 29364, 'step': 2150, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:22.135767 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.914, current avg val score is 0.881, val scores are: naive_string_matcher: 0.881
+I0908 00:18:22.767836 127617279804928 run.py:736] Algo naive_string_matcher step 2200 current loss 6.228439, current_train_items 30062.
+I0908 00:18:23.258385 127617279804928 run.py:771] (val) algo naive_string_matcher step 2200: {'match': 0.885986328125, 'score': 0.885986328125, 'examples_seen': 30062, 'step': 2200, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:23.258554 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.914, current avg val score is 0.886, val scores are: naive_string_matcher: 0.886
+I0908 00:18:23.878525 127617279804928 run.py:736] Algo naive_string_matcher step 2250 current loss 5.518679, current_train_items 30725.
+I0908 00:18:24.371578 127617279804928 run.py:771] (val) algo naive_string_matcher step 2250: {'match': 0.900146484375, 'score': 0.900146484375, 'examples_seen': 30725, 'step': 2250, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:24.371740 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.914, current avg val score is 0.900, val scores are: naive_string_matcher: 0.900
+I0908 00:18:24.989474 127617279804928 run.py:736] Algo naive_string_matcher step 2300 current loss 5.686764, current_train_items 31409.
+I0908 00:18:25.479134 127617279804928 run.py:771] (val) algo naive_string_matcher step 2300: {'match': 0.875, 'score': 0.875, 'examples_seen': 31409, 'step': 2300, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:25.479294 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.914, current avg val score is 0.875, val scores are: naive_string_matcher: 0.875
+I0908 00:18:26.221167 127617279804928 run.py:736] Algo naive_string_matcher step 2350 current loss 5.969303, current_train_items 32104.
+I0908 00:18:26.708342 127617279804928 run.py:771] (val) algo naive_string_matcher step 2350: {'match': 0.884521484375, 'score': 0.884521484375, 'examples_seen': 32104, 'step': 2350, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:26.708513 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.914, current avg val score is 0.885, val scores are: naive_string_matcher: 0.885
+I0908 00:18:27.325379 127617279804928 run.py:736] Algo naive_string_matcher step 2400 current loss 5.423750, current_train_items 32779.
+I0908 00:18:27.822772 127617279804928 run.py:771] (val) algo naive_string_matcher step 2400: {'match': 0.904052734375, 'score': 0.904052734375, 'examples_seen': 32779, 'step': 2400, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:27.822959 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.914, current avg val score is 0.904, val scores are: naive_string_matcher: 0.904
+I0908 00:18:28.486657 127617279804928 run.py:736] Algo naive_string_matcher step 2450 current loss 6.648042, current_train_items 33461.
+I0908 00:18:28.976134 127617279804928 run.py:771] (val) algo naive_string_matcher step 2450: {'match': 0.82275390625, 'score': 0.82275390625, 'examples_seen': 33461, 'step': 2450, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:28.976294 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.914, current avg val score is 0.823, val scores are: naive_string_matcher: 0.823
+I0908 00:18:29.629670 127617279804928 run.py:736] Algo naive_string_matcher step 2500 current loss 5.317361, current_train_items 34130.
+I0908 00:18:30.122548 127617279804928 run.py:771] (val) algo naive_string_matcher step 2500: {'match': 0.908203125, 'score': 0.908203125, 'examples_seen': 34130, 'step': 2500, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:30.122714 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.914, current avg val score is 0.908, val scores are: naive_string_matcher: 0.908
+I0908 00:18:30.720560 127617279804928 run.py:736] Algo naive_string_matcher step 2550 current loss 5.341919, current_train_items 34798.
+I0908 00:18:31.212792 127617279804928 run.py:771] (val) algo naive_string_matcher step 2550: {'match': 0.8623046875, 'score': 0.8623046875, 'examples_seen': 34798, 'step': 2550, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:31.212951 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.914, current avg val score is 0.862, val scores are: naive_string_matcher: 0.862
+I0908 00:18:31.888444 127617279804928 run.py:736] Algo naive_string_matcher step 2600 current loss 4.945626, current_train_items 35484.
+I0908 00:18:32.375212 127617279804928 run.py:771] (val) algo naive_string_matcher step 2600: {'match': 0.906005859375, 'score': 0.906005859375, 'examples_seen': 35484, 'step': 2600, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:32.375383 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.914, current avg val score is 0.906, val scores are: naive_string_matcher: 0.906
+I0908 00:18:33.020323 127617279804928 run.py:736] Algo naive_string_matcher step 2650 current loss 5.293431, current_train_items 36169.
+I0908 00:18:33.509529 127617279804928 run.py:771] (val) algo naive_string_matcher step 2650: {'match': 0.89306640625, 'score': 0.89306640625, 'examples_seen': 36169, 'step': 2650, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:33.509687 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.914, current avg val score is 0.893, val scores are: naive_string_matcher: 0.893
+I0908 00:18:34.171569 127617279804928 run.py:736] Algo naive_string_matcher step 2700 current loss 5.895707, current_train_items 36870.
+I0908 00:18:34.658984 127617279804928 run.py:771] (val) algo naive_string_matcher step 2700: {'match': 0.886962890625, 'score': 0.886962890625, 'examples_seen': 36870, 'step': 2700, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:34.659161 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.914, current avg val score is 0.887, val scores are: naive_string_matcher: 0.887
+I0908 00:18:35.292952 127617279804928 run.py:736] Algo naive_string_matcher step 2750 current loss 5.853540, current_train_items 37556.
+I0908 00:18:35.784367 127617279804928 run.py:771] (val) algo naive_string_matcher step 2750: {'match': 0.868896484375, 'score': 0.868896484375, 'examples_seen': 37556, 'step': 2750, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:35.784578 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.914, current avg val score is 0.869, val scores are: naive_string_matcher: 0.869
+I0908 00:18:36.420024 127617279804928 run.py:736] Algo naive_string_matcher step 2800 current loss 5.325002, current_train_items 38231.
+I0908 00:18:36.907630 127617279804928 run.py:771] (val) algo naive_string_matcher step 2800: {'match': 0.877197265625, 'score': 0.877197265625, 'examples_seen': 38231, 'step': 2800, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:36.907788 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.914, current avg val score is 0.877, val scores are: naive_string_matcher: 0.877
+I0908 00:18:37.573108 127617279804928 run.py:736] Algo naive_string_matcher step 2850 current loss 6.629558, current_train_items 38932.
+I0908 00:18:38.059133 127617279804928 run.py:771] (val) algo naive_string_matcher step 2850: {'match': 0.921630859375, 'score': 0.921630859375, 'examples_seen': 38932, 'step': 2850, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:38.059293 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.914, current avg val score is 0.922, val scores are: naive_string_matcher: 0.922
+I0908 00:18:38.733286 127617279804928 run.py:736] Algo naive_string_matcher step 2900 current loss 4.951459, current_train_items 39605.
+I0908 00:18:39.222707 127617279804928 run.py:771] (val) algo naive_string_matcher step 2900: {'match': 0.820556640625, 'score': 0.820556640625, 'examples_seen': 39605, 'step': 2900, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:39.222865 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.922, current avg val score is 0.821, val scores are: naive_string_matcher: 0.821
+I0908 00:18:39.875030 127617279804928 run.py:736] Algo naive_string_matcher step 2950 current loss 5.613323, current_train_items 40279.
+I0908 00:18:40.364569 127617279804928 run.py:771] (val) algo naive_string_matcher step 2950: {'match': 0.808837890625, 'score': 0.808837890625, 'examples_seen': 40279, 'step': 2950, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:40.364727 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.922, current avg val score is 0.809, val scores are: naive_string_matcher: 0.809
+I0908 00:18:41.026433 127617279804928 run.py:736] Algo naive_string_matcher step 3000 current loss 6.214419, current_train_items 40962.
+I0908 00:18:41.517324 127617279804928 run.py:771] (val) algo naive_string_matcher step 3000: {'match': 0.90576171875, 'score': 0.90576171875, 'examples_seen': 40962, 'step': 3000, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:41.517506 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.922, current avg val score is 0.906, val scores are: naive_string_matcher: 0.906
+I0908 00:18:42.152281 127617279804928 run.py:736] Algo naive_string_matcher step 3050 current loss 4.915013, current_train_items 41640.
+I0908 00:18:42.639721 127617279804928 run.py:771] (val) algo naive_string_matcher step 3050: {'match': 0.91796875, 'score': 0.91796875, 'examples_seen': 41640, 'step': 3050, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:42.639909 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.922, current avg val score is 0.918, val scores are: naive_string_matcher: 0.918
+I0908 00:18:43.297188 127617279804928 run.py:736] Algo naive_string_matcher step 3100 current loss 5.673692, current_train_items 42330.
+I0908 00:18:43.784739 127617279804928 run.py:771] (val) algo naive_string_matcher step 3100: {'match': 0.889892578125, 'score': 0.889892578125, 'examples_seen': 42330, 'step': 3100, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:43.784900 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.922, current avg val score is 0.890, val scores are: naive_string_matcher: 0.890
+I0908 00:18:44.427650 127617279804928 run.py:736] Algo naive_string_matcher step 3150 current loss 5.339854, current_train_items 43007.
+I0908 00:18:44.916943 127617279804928 run.py:771] (val) algo naive_string_matcher step 3150: {'match': 0.896240234375, 'score': 0.896240234375, 'examples_seen': 43007, 'step': 3150, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:44.917101 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.922, current avg val score is 0.896, val scores are: naive_string_matcher: 0.896
+I0908 00:18:45.613224 127617279804928 run.py:736] Algo naive_string_matcher step 3200 current loss 5.099922, current_train_items 43683.
+I0908 00:18:46.102630 127617279804928 run.py:771] (val) algo naive_string_matcher step 3200: {'match': 0.91357421875, 'score': 0.91357421875, 'examples_seen': 43683, 'step': 3200, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:46.102793 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.922, current avg val score is 0.914, val scores are: naive_string_matcher: 0.914
+I0908 00:18:46.739404 127617279804928 run.py:736] Algo naive_string_matcher step 3250 current loss 5.811389, current_train_items 44344.
+I0908 00:18:47.224510 127617279804928 run.py:771] (val) algo naive_string_matcher step 3250: {'match': 0.887451171875, 'score': 0.887451171875, 'examples_seen': 44344, 'step': 3250, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:47.224669 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.922, current avg val score is 0.887, val scores are: naive_string_matcher: 0.887
+I0908 00:18:47.841021 127617279804928 run.py:736] Algo naive_string_matcher step 3300 current loss 6.267406, current_train_items 45014.
+I0908 00:18:48.331072 127617279804928 run.py:771] (val) algo naive_string_matcher step 3300: {'match': 0.88525390625, 'score': 0.88525390625, 'examples_seen': 45014, 'step': 3300, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:48.331238 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.922, current avg val score is 0.885, val scores are: naive_string_matcher: 0.885
+I0908 00:18:49.002516 127617279804928 run.py:736] Algo naive_string_matcher step 3350 current loss 5.540207, current_train_items 45723.
+I0908 00:18:49.490870 127617279804928 run.py:771] (val) algo naive_string_matcher step 3350: {'match': 0.943115234375, 'score': 0.943115234375, 'examples_seen': 45723, 'step': 3350, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:49.491042 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.922, current avg val score is 0.943, val scores are: naive_string_matcher: 0.943
+I0908 00:18:50.159751 127617279804928 run.py:736] Algo naive_string_matcher step 3400 current loss 5.502867, current_train_items 46403.
+I0908 00:18:50.652055 127617279804928 run.py:771] (val) algo naive_string_matcher step 3400: {'match': 0.92919921875, 'score': 0.92919921875, 'examples_seen': 46403, 'step': 3400, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:50.652214 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.929, val scores are: naive_string_matcher: 0.929
+I0908 00:18:51.325479 127617279804928 run.py:736] Algo naive_string_matcher step 3450 current loss 6.465935, current_train_items 47071.
+I0908 00:18:51.811758 127617279804928 run.py:771] (val) algo naive_string_matcher step 3450: {'match': 0.935302734375, 'score': 0.935302734375, 'examples_seen': 47071, 'step': 3450, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:51.811919 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.935, val scores are: naive_string_matcher: 0.935
+I0908 00:18:52.452821 127617279804928 run.py:736] Algo naive_string_matcher step 3500 current loss 5.584471, current_train_items 47736.
+I0908 00:18:52.942550 127617279804928 run.py:771] (val) algo naive_string_matcher step 3500: {'match': 0.9140625, 'score': 0.9140625, 'examples_seen': 47736, 'step': 3500, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:52.942735 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.914, val scores are: naive_string_matcher: 0.914
+I0908 00:18:53.608476 127617279804928 run.py:736] Algo naive_string_matcher step 3550 current loss 5.723054, current_train_items 48413.
+I0908 00:18:54.106091 127617279804928 run.py:771] (val) algo naive_string_matcher step 3550: {'match': 0.917724609375, 'score': 0.917724609375, 'examples_seen': 48413, 'step': 3550, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:54.106278 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.918, val scores are: naive_string_matcher: 0.918
+I0908 00:18:54.767283 127617279804928 run.py:736] Algo naive_string_matcher step 3600 current loss 5.805816, current_train_items 49105.
+I0908 00:18:55.254962 127617279804928 run.py:771] (val) algo naive_string_matcher step 3600: {'match': 0.94287109375, 'score': 0.94287109375, 'examples_seen': 49105, 'step': 3600, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:55.255123 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.943, val scores are: naive_string_matcher: 0.943
+I0908 00:18:55.891717 127617279804928 run.py:736] Algo naive_string_matcher step 3650 current loss 4.833776, current_train_items 49777.
+I0908 00:18:56.382611 127617279804928 run.py:771] (val) algo naive_string_matcher step 3650: {'match': 0.886962890625, 'score': 0.886962890625, 'examples_seen': 49777, 'step': 3650, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:56.382770 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.887, val scores are: naive_string_matcher: 0.887
+I0908 00:18:56.990546 127617279804928 run.py:736] Algo naive_string_matcher step 3700 current loss 5.321486, current_train_items 50457.
+I0908 00:18:57.479173 127617279804928 run.py:771] (val) algo naive_string_matcher step 3700: {'match': 0.889892578125, 'score': 0.889892578125, 'examples_seen': 50457, 'step': 3700, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:57.479333 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.890, val scores are: naive_string_matcher: 0.890
+I0908 00:18:58.145825 127617279804928 run.py:736] Algo naive_string_matcher step 3750 current loss 5.245327, current_train_items 51123.
+I0908 00:18:58.633153 127617279804928 run.py:771] (val) algo naive_string_matcher step 3750: {'match': 0.9091796875, 'score': 0.9091796875, 'examples_seen': 51123, 'step': 3750, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:58.633311 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.909, val scores are: naive_string_matcher: 0.909
+I0908 00:18:59.275839 127617279804928 run.py:736] Algo naive_string_matcher step 3800 current loss 5.344404, current_train_items 51807.
+I0908 00:18:59.764103 127617279804928 run.py:771] (val) algo naive_string_matcher step 3800: {'match': 0.900390625, 'score': 0.900390625, 'examples_seen': 51807, 'step': 3800, 'algorithm': 'naive_string_matcher'}
+I0908 00:18:59.764260 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.900, val scores are: naive_string_matcher: 0.900
+I0908 00:19:00.407149 127617279804928 run.py:736] Algo naive_string_matcher step 3850 current loss 5.898317, current_train_items 52494.
+I0908 00:19:00.896543 127617279804928 run.py:771] (val) algo naive_string_matcher step 3850: {'match': 0.9287109375, 'score': 0.9287109375, 'examples_seen': 52494, 'step': 3850, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:00.896703 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.929, val scores are: naive_string_matcher: 0.929
+I0908 00:19:01.539980 127617279804928 run.py:736] Algo naive_string_matcher step 3900 current loss 5.875130, current_train_items 53154.
+I0908 00:19:02.030571 127617279804928 run.py:771] (val) algo naive_string_matcher step 3900: {'match': 0.942626953125, 'score': 0.942626953125, 'examples_seen': 53154, 'step': 3900, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:02.030731 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.943, val scores are: naive_string_matcher: 0.943
+I0908 00:19:02.678784 127617279804928 run.py:736] Algo naive_string_matcher step 3950 current loss 4.771072, current_train_items 53823.
+I0908 00:19:03.164194 127617279804928 run.py:771] (val) algo naive_string_matcher step 3950: {'match': 0.932373046875, 'score': 0.932373046875, 'examples_seen': 53823, 'step': 3950, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:03.164354 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.932, val scores are: naive_string_matcher: 0.932
+I0908 00:19:03.820825 127617279804928 run.py:736] Algo naive_string_matcher step 4000 current loss 5.324307, current_train_items 54499.
+I0908 00:19:04.311161 127617279804928 run.py:771] (val) algo naive_string_matcher step 4000: {'match': 0.935302734375, 'score': 0.935302734375, 'examples_seen': 54499, 'step': 4000, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:04.311329 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.935, val scores are: naive_string_matcher: 0.935
+I0908 00:19:04.924207 127617279804928 run.py:736] Algo naive_string_matcher step 4050 current loss 5.258104, current_train_items 55164.
+I0908 00:19:05.417574 127617279804928 run.py:771] (val) algo naive_string_matcher step 4050: {'match': 0.924072265625, 'score': 0.924072265625, 'examples_seen': 55164, 'step': 4050, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:05.417737 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.924, val scores are: naive_string_matcher: 0.924
+I0908 00:19:06.093267 127617279804928 run.py:736] Algo naive_string_matcher step 4100 current loss 5.251559, current_train_items 55832.
+I0908 00:19:06.583006 127617279804928 run.py:771] (val) algo naive_string_matcher step 4100: {'match': 0.85888671875, 'score': 0.85888671875, 'examples_seen': 55832, 'step': 4100, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:06.583165 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.859, val scores are: naive_string_matcher: 0.859
+I0908 00:19:07.250327 127617279804928 run.py:736] Algo naive_string_matcher step 4150 current loss 5.600318, current_train_items 56526.
+I0908 00:19:07.742060 127617279804928 run.py:771] (val) algo naive_string_matcher step 4150: {'match': 0.926025390625, 'score': 0.926025390625, 'examples_seen': 56526, 'step': 4150, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:07.742218 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.926, val scores are: naive_string_matcher: 0.926
+I0908 00:19:08.391726 127617279804928 run.py:736] Algo naive_string_matcher step 4200 current loss 5.495716, current_train_items 57215.
+I0908 00:19:08.883336 127617279804928 run.py:771] (val) algo naive_string_matcher step 4200: {'match': 0.88232421875, 'score': 0.88232421875, 'examples_seen': 57215, 'step': 4200, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:08.883506 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.882, val scores are: naive_string_matcher: 0.882
+I0908 00:19:09.529899 127617279804928 run.py:736] Algo naive_string_matcher step 4250 current loss 5.314754, current_train_items 57906.
+I0908 00:19:10.034195 127617279804928 run.py:771] (val) algo naive_string_matcher step 4250: {'match': 0.916015625, 'score': 0.916015625, 'examples_seen': 57906, 'step': 4250, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:10.034356 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.916, val scores are: naive_string_matcher: 0.916
+I0908 00:19:10.709116 127617279804928 run.py:736] Algo naive_string_matcher step 4300 current loss 5.445659, current_train_items 58592.
+I0908 00:19:11.202941 127617279804928 run.py:771] (val) algo naive_string_matcher step 4300: {'match': 0.8828125, 'score': 0.8828125, 'examples_seen': 58592, 'step': 4300, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:11.203134 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.883, val scores are: naive_string_matcher: 0.883
+I0908 00:19:11.847660 127617279804928 run.py:736] Algo naive_string_matcher step 4350 current loss 4.784645, current_train_items 59280.
+I0908 00:19:12.335065 127617279804928 run.py:771] (val) algo naive_string_matcher step 4350: {'match': 0.873779296875, 'score': 0.873779296875, 'examples_seen': 59280, 'step': 4350, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:12.335227 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.874, val scores are: naive_string_matcher: 0.874
+I0908 00:19:13.020497 127617279804928 run.py:736] Algo naive_string_matcher step 4400 current loss 5.364044, current_train_items 59948.
+I0908 00:19:13.508335 127617279804928 run.py:771] (val) algo naive_string_matcher step 4400: {'match': 0.908447265625, 'score': 0.908447265625, 'examples_seen': 59948, 'step': 4400, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:13.508505 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.908, val scores are: naive_string_matcher: 0.908
+I0908 00:19:14.182964 127617279804928 run.py:736] Algo naive_string_matcher step 4450 current loss 6.585315, current_train_items 60616.
+I0908 00:19:14.676439 127617279804928 run.py:771] (val) algo naive_string_matcher step 4450: {'match': 0.887939453125, 'score': 0.887939453125, 'examples_seen': 60616, 'step': 4450, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:14.676639 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.888, val scores are: naive_string_matcher: 0.888
+I0908 00:19:15.339526 127617279804928 run.py:736] Algo naive_string_matcher step 4500 current loss 4.342536, current_train_items 61299.
+I0908 00:19:15.834449 127617279804928 run.py:771] (val) algo naive_string_matcher step 4500: {'match': 0.920166015625, 'score': 0.920166015625, 'examples_seen': 61299, 'step': 4500, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:15.834627 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.920, val scores are: naive_string_matcher: 0.920
+I0908 00:19:16.485165 127617279804928 run.py:736] Algo naive_string_matcher step 4550 current loss 5.361115, current_train_items 61982.
+I0908 00:19:16.981072 127617279804928 run.py:771] (val) algo naive_string_matcher step 4550: {'match': 0.927978515625, 'score': 0.927978515625, 'examples_seen': 61982, 'step': 4550, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:16.981233 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.928, val scores are: naive_string_matcher: 0.928
+I0908 00:19:17.663819 127617279804928 run.py:736] Algo naive_string_matcher step 4600 current loss 5.292488, current_train_items 62672.
+I0908 00:19:18.153365 127617279804928 run.py:771] (val) algo naive_string_matcher step 4600: {'match': 0.927001953125, 'score': 0.927001953125, 'examples_seen': 62672, 'step': 4600, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:18.153538 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.943, current avg val score is 0.927, val scores are: naive_string_matcher: 0.927
+I0908 00:19:18.818318 127617279804928 run.py:736] Algo naive_string_matcher step 4650 current loss 4.488235, current_train_items 63362.
+I0908 00:19:19.310992 127617279804928 run.py:771] (val) algo naive_string_matcher step 4650: {'match': 0.944091796875, 'score': 0.944091796875, 'examples_seen': 63362, 'step': 4650, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:19.311188 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.943, current avg val score is 0.944, val scores are: naive_string_matcher: 0.944
+I0908 00:19:19.961807 127617279804928 run.py:736] Algo naive_string_matcher step 4700 current loss 4.516722, current_train_items 64043.
+I0908 00:19:20.452904 127617279804928 run.py:771] (val) algo naive_string_matcher step 4700: {'match': 0.890625, 'score': 0.890625, 'examples_seen': 64043, 'step': 4700, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:20.453071 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.944, current avg val score is 0.891, val scores are: naive_string_matcher: 0.891
+I0908 00:19:21.108813 127617279804928 run.py:736] Algo naive_string_matcher step 4750 current loss 5.810523, current_train_items 64731.
+I0908 00:19:21.599734 127617279804928 run.py:771] (val) algo naive_string_matcher step 4750: {'match': 0.92578125, 'score': 0.92578125, 'examples_seen': 64731, 'step': 4750, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:21.599896 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.944, current avg val score is 0.926, val scores are: naive_string_matcher: 0.926
+I0908 00:19:22.268957 127617279804928 run.py:736] Algo naive_string_matcher step 4800 current loss 5.274182, current_train_items 65425.
+I0908 00:19:22.758937 127617279804928 run.py:771] (val) algo naive_string_matcher step 4800: {'match': 0.91650390625, 'score': 0.91650390625, 'examples_seen': 65425, 'step': 4800, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:22.759096 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.944, current avg val score is 0.917, val scores are: naive_string_matcher: 0.917
+I0908 00:19:23.407044 127617279804928 run.py:736] Algo naive_string_matcher step 4850 current loss 5.423538, current_train_items 66090.
+I0908 00:19:23.897064 127617279804928 run.py:771] (val) algo naive_string_matcher step 4850: {'match': 0.92529296875, 'score': 0.92529296875, 'examples_seen': 66090, 'step': 4850, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:23.897245 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.944, current avg val score is 0.925, val scores are: naive_string_matcher: 0.925
+I0908 00:19:24.551667 127617279804928 run.py:736] Algo naive_string_matcher step 4900 current loss 5.856429, current_train_items 66789.
+I0908 00:19:25.044004 127617279804928 run.py:771] (val) algo naive_string_matcher step 4900: {'match': 0.9453125, 'score': 0.9453125, 'examples_seen': 66789, 'step': 4900, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:25.044184 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.944, current avg val score is 0.945, val scores are: naive_string_matcher: 0.945
+I0908 00:19:25.697670 127617279804928 run.py:736] Algo naive_string_matcher step 4950 current loss 5.366136, current_train_items 67484.
+I0908 00:19:26.182648 127617279804928 run.py:771] (val) algo naive_string_matcher step 4950: {'match': 0.924072265625, 'score': 0.924072265625, 'examples_seen': 67484, 'step': 4950, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:26.182828 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.945, current avg val score is 0.924, val scores are: naive_string_matcher: 0.924
+I0908 00:19:26.789455 127617279804928 run.py:736] Algo naive_string_matcher step 5000 current loss 5.971767, current_train_items 68143.
+I0908 00:19:27.276362 127617279804928 run.py:771] (val) algo naive_string_matcher step 5000: {'match': 0.921630859375, 'score': 0.921630859375, 'examples_seen': 68143, 'step': 5000, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:27.276531 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.945, current avg val score is 0.922, val scores are: naive_string_matcher: 0.922
+I0908 00:19:27.939572 127617279804928 run.py:736] Algo naive_string_matcher step 5050 current loss 5.793311, current_train_items 68844.
+I0908 00:19:28.432627 127617279804928 run.py:771] (val) algo naive_string_matcher step 5050: {'match': 0.864501953125, 'score': 0.864501953125, 'examples_seen': 68844, 'step': 5050, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:28.432789 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.945, current avg val score is 0.865, val scores are: naive_string_matcher: 0.865
+I0908 00:19:29.050778 127617279804928 run.py:736] Algo naive_string_matcher step 5100 current loss 5.069135, current_train_items 69522.
+I0908 00:19:29.543052 127617279804928 run.py:771] (val) algo naive_string_matcher step 5100: {'match': 0.869873046875, 'score': 0.869873046875, 'examples_seen': 69522, 'step': 5100, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:29.543217 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.945, current avg val score is 0.870, val scores are: naive_string_matcher: 0.870
+I0908 00:19:30.231085 127617279804928 run.py:736] Algo naive_string_matcher step 5150 current loss 5.015569, current_train_items 70230.
+I0908 00:19:30.718941 127617279804928 run.py:771] (val) algo naive_string_matcher step 5150: {'match': 0.94482421875, 'score': 0.94482421875, 'examples_seen': 70230, 'step': 5150, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:30.719100 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.945, current avg val score is 0.945, val scores are: naive_string_matcher: 0.945
+I0908 00:19:31.396401 127617279804928 run.py:736] Algo naive_string_matcher step 5200 current loss 5.221162, current_train_items 70912.
+I0908 00:19:31.883820 127617279804928 run.py:771] (val) algo naive_string_matcher step 5200: {'match': 0.947265625, 'score': 0.947265625, 'examples_seen': 70912, 'step': 5200, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:31.883985 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.945, current avg val score is 0.947, val scores are: naive_string_matcher: 0.947
+I0908 00:19:32.600440 127617279804928 run.py:736] Algo naive_string_matcher step 5250 current loss 5.341979, current_train_items 71602.
+I0908 00:19:33.091210 127617279804928 run.py:771] (val) algo naive_string_matcher step 5250: {'match': 0.923828125, 'score': 0.923828125, 'examples_seen': 71602, 'step': 5250, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:33.091369 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.947, current avg val score is 0.924, val scores are: naive_string_matcher: 0.924
+I0908 00:19:33.741405 127617279804928 run.py:736] Algo naive_string_matcher step 5300 current loss 5.160765, current_train_items 72280.
+I0908 00:19:34.226499 127617279804928 run.py:771] (val) algo naive_string_matcher step 5300: {'match': 0.958740234375, 'score': 0.958740234375, 'examples_seen': 72280, 'step': 5300, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:34.226659 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.947, current avg val score is 0.959, val scores are: naive_string_matcher: 0.959
+I0908 00:19:34.871979 127617279804928 run.py:736] Algo naive_string_matcher step 5350 current loss 6.634473, current_train_items 72973.
+I0908 00:19:35.368762 127617279804928 run.py:771] (val) algo naive_string_matcher step 5350: {'match': 0.940673828125, 'score': 0.940673828125, 'examples_seen': 72973, 'step': 5350, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:35.368927 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.959, current avg val score is 0.941, val scores are: naive_string_matcher: 0.941
+I0908 00:19:36.013838 127617279804928 run.py:736] Algo naive_string_matcher step 5400 current loss 4.791659, current_train_items 73663.
+I0908 00:19:36.503762 127617279804928 run.py:771] (val) algo naive_string_matcher step 5400: {'match': 0.946044921875, 'score': 0.946044921875, 'examples_seen': 73663, 'step': 5400, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:36.503921 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.959, current avg val score is 0.946, val scores are: naive_string_matcher: 0.946
+I0908 00:19:37.184486 127617279804928 run.py:736] Algo naive_string_matcher step 5450 current loss 4.733672, current_train_items 74365.
+I0908 00:19:37.676689 127617279804928 run.py:771] (val) algo naive_string_matcher step 5450: {'match': 0.9482421875, 'score': 0.9482421875, 'examples_seen': 74365, 'step': 5450, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:37.676924 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.959, current avg val score is 0.948, val scores are: naive_string_matcher: 0.948
+I0908 00:19:38.329843 127617279804928 run.py:736] Algo naive_string_matcher step 5500 current loss 4.932522, current_train_items 75060.
+I0908 00:19:38.825926 127617279804928 run.py:771] (val) algo naive_string_matcher step 5500: {'match': 0.95849609375, 'score': 0.95849609375, 'examples_seen': 75060, 'step': 5500, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:38.826156 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.959, current avg val score is 0.958, val scores are: naive_string_matcher: 0.958
+I0908 00:19:39.494820 127617279804928 run.py:736] Algo naive_string_matcher step 5550 current loss 4.639076, current_train_items 75752.
+I0908 00:19:39.985644 127617279804928 run.py:771] (val) algo naive_string_matcher step 5550: {'match': 0.945556640625, 'score': 0.945556640625, 'examples_seen': 75752, 'step': 5550, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:39.985805 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.959, current avg val score is 0.946, val scores are: naive_string_matcher: 0.946
+I0908 00:19:40.656803 127617279804928 run.py:736] Algo naive_string_matcher step 5600 current loss 4.604329, current_train_items 76437.
+I0908 00:19:41.145704 127617279804928 run.py:771] (val) algo naive_string_matcher step 5600: {'match': 0.94384765625, 'score': 0.94384765625, 'examples_seen': 76437, 'step': 5600, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:41.145866 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.959, current avg val score is 0.944, val scores are: naive_string_matcher: 0.944
+I0908 00:19:41.784183 127617279804928 run.py:736] Algo naive_string_matcher step 5650 current loss 5.148662, current_train_items 77136.
+I0908 00:19:42.277538 127617279804928 run.py:771] (val) algo naive_string_matcher step 5650: {'match': 0.952880859375, 'score': 0.952880859375, 'examples_seen': 77136, 'step': 5650, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:42.277790 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.959, current avg val score is 0.953, val scores are: naive_string_matcher: 0.953
+I0908 00:19:42.919183 127617279804928 run.py:736] Algo naive_string_matcher step 5700 current loss 5.128585, current_train_items 77830.
+I0908 00:19:43.407303 127617279804928 run.py:771] (val) algo naive_string_matcher step 5700: {'match': 0.9306640625, 'score': 0.9306640625, 'examples_seen': 77830, 'step': 5700, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:43.407470 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.959, current avg val score is 0.931, val scores are: naive_string_matcher: 0.931
+I0908 00:19:44.022574 127617279804928 run.py:736] Algo naive_string_matcher step 5750 current loss 4.920014, current_train_items 78507.
+I0908 00:19:44.514479 127617279804928 run.py:771] (val) algo naive_string_matcher step 5750: {'match': 0.9423828125, 'score': 0.9423828125, 'examples_seen': 78507, 'step': 5750, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:44.514638 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.959, current avg val score is 0.942, val scores are: naive_string_matcher: 0.942
+I0908 00:19:45.181952 127617279804928 run.py:736] Algo naive_string_matcher step 5800 current loss 5.758576, current_train_items 79174.
+I0908 00:19:45.668510 127617279804928 run.py:771] (val) algo naive_string_matcher step 5800: {'match': 0.952392578125, 'score': 0.952392578125, 'examples_seen': 79174, 'step': 5800, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:45.668670 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.959, current avg val score is 0.952, val scores are: naive_string_matcher: 0.952
+I0908 00:19:46.324518 127617279804928 run.py:736] Algo naive_string_matcher step 5850 current loss 5.052730, current_train_items 79864.
+I0908 00:19:46.815353 127617279804928 run.py:771] (val) algo naive_string_matcher step 5850: {'match': 0.870849609375, 'score': 0.870849609375, 'examples_seen': 79864, 'step': 5850, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:46.815560 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.959, current avg val score is 0.871, val scores are: naive_string_matcher: 0.871
+I0908 00:19:47.454371 127617279804928 run.py:736] Algo naive_string_matcher step 5900 current loss 5.055317, current_train_items 80558.
+I0908 00:19:47.946129 127617279804928 run.py:771] (val) algo naive_string_matcher step 5900: {'match': 0.929931640625, 'score': 0.929931640625, 'examples_seen': 80558, 'step': 5900, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:47.946292 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.959, current avg val score is 0.930, val scores are: naive_string_matcher: 0.930
+I0908 00:19:48.573831 127617279804928 run.py:736] Algo naive_string_matcher step 5950 current loss 5.516250, current_train_items 81225.
+I0908 00:19:49.062684 127617279804928 run.py:771] (val) algo naive_string_matcher step 5950: {'match': 0.931640625, 'score': 0.931640625, 'examples_seen': 81225, 'step': 5950, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:49.062846 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.959, current avg val score is 0.932, val scores are: naive_string_matcher: 0.932
+I0908 00:19:49.729218 127617279804928 run.py:736] Algo naive_string_matcher step 6000 current loss 4.822010, current_train_items 81916.
+I0908 00:19:50.223064 127617279804928 run.py:771] (val) algo naive_string_matcher step 6000: {'match': 0.961669921875, 'score': 0.961669921875, 'examples_seen': 81916, 'step': 6000, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:50.223227 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.959, current avg val score is 0.962, val scores are: naive_string_matcher: 0.962
+I0908 00:19:50.893940 127617279804928 run.py:736] Algo naive_string_matcher step 6050 current loss 4.785100, current_train_items 82618.
+I0908 00:19:51.378342 127617279804928 run.py:771] (val) algo naive_string_matcher step 6050: {'match': 0.892333984375, 'score': 0.892333984375, 'examples_seen': 82618, 'step': 6050, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:51.378506 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.962, current avg val score is 0.892, val scores are: naive_string_matcher: 0.892
+I0908 00:19:52.042509 127617279804928 run.py:736] Algo naive_string_matcher step 6100 current loss 5.134872, current_train_items 83287.
+I0908 00:19:52.532572 127617279804928 run.py:771] (val) algo naive_string_matcher step 6100: {'match': 0.96044921875, 'score': 0.96044921875, 'examples_seen': 83287, 'step': 6100, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:52.532731 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.962, current avg val score is 0.960, val scores are: naive_string_matcher: 0.960
+I0908 00:19:53.198227 127617279804928 run.py:736] Algo naive_string_matcher step 6150 current loss 5.482214, current_train_items 83959.
+I0908 00:19:53.684402 127617279804928 run.py:771] (val) algo naive_string_matcher step 6150: {'match': 0.9609375, 'score': 0.9609375, 'examples_seen': 83959, 'step': 6150, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:53.684573 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.962, current avg val score is 0.961, val scores are: naive_string_matcher: 0.961
+I0908 00:19:54.346215 127617279804928 run.py:736] Algo naive_string_matcher step 6200 current loss 4.371260, current_train_items 84613.
+I0908 00:19:54.833920 127617279804928 run.py:771] (val) algo naive_string_matcher step 6200: {'match': 0.957763671875, 'score': 0.957763671875, 'examples_seen': 84613, 'step': 6200, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:54.834081 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.962, current avg val score is 0.958, val scores are: naive_string_matcher: 0.958
+I0908 00:19:55.544723 127617279804928 run.py:736] Algo naive_string_matcher step 6250 current loss 4.973577, current_train_items 85291.
+I0908 00:19:56.032493 127617279804928 run.py:771] (val) algo naive_string_matcher step 6250: {'match': 0.931640625, 'score': 0.931640625, 'examples_seen': 85291, 'step': 6250, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:56.032654 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.962, current avg val score is 0.932, val scores are: naive_string_matcher: 0.932
+I0908 00:19:56.666244 127617279804928 run.py:736] Algo naive_string_matcher step 6300 current loss 3.975959, current_train_items 85989.
+I0908 00:19:57.155275 127617279804928 run.py:771] (val) algo naive_string_matcher step 6300: {'match': 0.95263671875, 'score': 0.95263671875, 'examples_seen': 85989, 'step': 6300, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:57.155441 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.962, current avg val score is 0.953, val scores are: naive_string_matcher: 0.953
+I0908 00:19:57.826441 127617279804928 run.py:736] Algo naive_string_matcher step 6350 current loss 5.571257, current_train_items 86673.
+I0908 00:19:58.312918 127617279804928 run.py:771] (val) algo naive_string_matcher step 6350: {'match': 0.9580078125, 'score': 0.9580078125, 'examples_seen': 86673, 'step': 6350, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:58.313076 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.962, current avg val score is 0.958, val scores are: naive_string_matcher: 0.958
+I0908 00:19:59.010376 127617279804928 run.py:736] Algo naive_string_matcher step 6400 current loss 4.677094, current_train_items 87352.
+I0908 00:19:59.505689 127617279804928 run.py:771] (val) algo naive_string_matcher step 6400: {'match': 0.917236328125, 'score': 0.917236328125, 'examples_seen': 87352, 'step': 6400, 'algorithm': 'naive_string_matcher'}
+I0908 00:19:59.505928 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.962, current avg val score is 0.917, val scores are: naive_string_matcher: 0.917
+I0908 00:20:00.148249 127617279804928 run.py:736] Algo naive_string_matcher step 6450 current loss 5.387781, current_train_items 88032.
+I0908 00:20:00.639231 127617279804928 run.py:771] (val) algo naive_string_matcher step 6450: {'match': 0.96044921875, 'score': 0.96044921875, 'examples_seen': 88032, 'step': 6450, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:00.639392 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.962, current avg val score is 0.960, val scores are: naive_string_matcher: 0.960
+I0908 00:20:01.297178 127617279804928 run.py:736] Algo naive_string_matcher step 6500 current loss 5.196573, current_train_items 88715.
+I0908 00:20:01.787541 127617279804928 run.py:771] (val) algo naive_string_matcher step 6500: {'match': 0.9609375, 'score': 0.9609375, 'examples_seen': 88715, 'step': 6500, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:01.787727 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.962, current avg val score is 0.961, val scores are: naive_string_matcher: 0.961
+I0908 00:20:02.393091 127617279804928 run.py:736] Algo naive_string_matcher step 6550 current loss 5.769320, current_train_items 89366.
+I0908 00:20:02.881215 127617279804928 run.py:771] (val) algo naive_string_matcher step 6550: {'match': 0.9619140625, 'score': 0.9619140625, 'examples_seen': 89366, 'step': 6550, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:02.881371 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.962, current avg val score is 0.962, val scores are: naive_string_matcher: 0.962
+I0908 00:20:03.552917 127617279804928 run.py:736] Algo naive_string_matcher step 6600 current loss 4.730319, current_train_items 90036.
+I0908 00:20:04.044216 127617279804928 run.py:771] (val) algo naive_string_matcher step 6600: {'match': 0.959228515625, 'score': 0.959228515625, 'examples_seen': 90036, 'step': 6600, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:04.044401 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.962, current avg val score is 0.959, val scores are: naive_string_matcher: 0.959
+I0908 00:20:04.685316 127617279804928 run.py:736] Algo naive_string_matcher step 6650 current loss 4.280526, current_train_items 90741.
+I0908 00:20:05.174350 127617279804928 run.py:771] (val) algo naive_string_matcher step 6650: {'match': 0.95068359375, 'score': 0.95068359375, 'examples_seen': 90741, 'step': 6650, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:05.174516 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.962, current avg val score is 0.951, val scores are: naive_string_matcher: 0.951
+I0908 00:20:05.800773 127617279804928 run.py:736] Algo naive_string_matcher step 6700 current loss 4.076888, current_train_items 91423.
+I0908 00:20:06.290875 127617279804928 run.py:771] (val) algo naive_string_matcher step 6700: {'match': 0.941162109375, 'score': 0.941162109375, 'examples_seen': 91423, 'step': 6700, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:06.291035 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.962, current avg val score is 0.941, val scores are: naive_string_matcher: 0.941
+I0908 00:20:06.987550 127617279804928 run.py:736] Algo naive_string_matcher step 6750 current loss 5.116306, current_train_items 92120.
+I0908 00:20:07.477890 127617279804928 run.py:771] (val) algo naive_string_matcher step 6750: {'match': 0.967041015625, 'score': 0.967041015625, 'examples_seen': 92120, 'step': 6750, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:07.478076 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.962, current avg val score is 0.967, val scores are: naive_string_matcher: 0.967
+I0908 00:20:08.137637 127617279804928 run.py:736] Algo naive_string_matcher step 6800 current loss 4.723656, current_train_items 92823.
+I0908 00:20:08.630436 127617279804928 run.py:771] (val) algo naive_string_matcher step 6800: {'match': 0.9716796875, 'score': 0.9716796875, 'examples_seen': 92823, 'step': 6800, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:08.630624 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.967, current avg val score is 0.972, val scores are: naive_string_matcher: 0.972
+I0908 00:20:09.275010 127617279804928 run.py:736] Algo naive_string_matcher step 6850 current loss 4.747206, current_train_items 93502.
+I0908 00:20:09.760199 127617279804928 run.py:771] (val) algo naive_string_matcher step 6850: {'match': 0.972412109375, 'score': 0.972412109375, 'examples_seen': 93502, 'step': 6850, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:09.760356 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.972, current avg val score is 0.972, val scores are: naive_string_matcher: 0.972
+I0908 00:20:10.382666 127617279804928 run.py:736] Algo naive_string_matcher step 6900 current loss 5.107848, current_train_items 94197.
+I0908 00:20:10.873706 127617279804928 run.py:771] (val) algo naive_string_matcher step 6900: {'match': 0.8974609375, 'score': 0.8974609375, 'examples_seen': 94197, 'step': 6900, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:10.873880 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.897, val scores are: naive_string_matcher: 0.897
+I0908 00:20:11.548665 127617279804928 run.py:736] Algo naive_string_matcher step 6950 current loss 5.492391, current_train_items 94895.
+I0908 00:20:12.040158 127617279804928 run.py:771] (val) algo naive_string_matcher step 6950: {'match': 0.889404296875, 'score': 0.889404296875, 'examples_seen': 94895, 'step': 6950, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:12.040392 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.889, val scores are: naive_string_matcher: 0.889
+I0908 00:20:12.737722 127617279804928 run.py:736] Algo naive_string_matcher step 7000 current loss 5.959000, current_train_items 95580.
+I0908 00:20:13.225140 127617279804928 run.py:771] (val) algo naive_string_matcher step 7000: {'match': 0.906494140625, 'score': 0.906494140625, 'examples_seen': 95580, 'step': 7000, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:13.225298 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.906, val scores are: naive_string_matcher: 0.906
+I0908 00:20:13.889920 127617279804928 run.py:736] Algo naive_string_matcher step 7050 current loss 4.858998, current_train_items 96259.
+I0908 00:20:14.382192 127617279804928 run.py:771] (val) algo naive_string_matcher step 7050: {'match': 0.90234375, 'score': 0.90234375, 'examples_seen': 96259, 'step': 7050, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:14.382348 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.902, val scores are: naive_string_matcher: 0.902
+I0908 00:20:15.009481 127617279804928 run.py:736] Algo naive_string_matcher step 7100 current loss 4.470641, current_train_items 96951.
+I0908 00:20:15.500753 127617279804928 run.py:771] (val) algo naive_string_matcher step 7100: {'match': 0.96142578125, 'score': 0.96142578125, 'examples_seen': 96951, 'step': 7100, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:15.500944 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.961, val scores are: naive_string_matcher: 0.961
+I0908 00:20:16.242439 127617279804928 run.py:736] Algo naive_string_matcher step 7150 current loss 5.027563, current_train_items 97645.
+I0908 00:20:16.740833 127617279804928 run.py:771] (val) algo naive_string_matcher step 7150: {'match': 0.95263671875, 'score': 0.95263671875, 'examples_seen': 97645, 'step': 7150, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:16.741018 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.953, val scores are: naive_string_matcher: 0.953
+I0908 00:20:17.403189 127617279804928 run.py:736] Algo naive_string_matcher step 7200 current loss 5.010469, current_train_items 98331.
+I0908 00:20:17.890064 127617279804928 run.py:771] (val) algo naive_string_matcher step 7200: {'match': 0.915283203125, 'score': 0.915283203125, 'examples_seen': 98331, 'step': 7200, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:17.890274 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.915, val scores are: naive_string_matcher: 0.915
+I0908 00:20:18.551020 127617279804928 run.py:736] Algo naive_string_matcher step 7250 current loss 5.184743, current_train_items 99012.
+I0908 00:20:19.044208 127617279804928 run.py:771] (val) algo naive_string_matcher step 7250: {'match': 0.940185546875, 'score': 0.940185546875, 'examples_seen': 99012, 'step': 7250, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:19.044369 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.940, val scores are: naive_string_matcher: 0.940
+I0908 00:20:19.696942 127617279804928 run.py:736] Algo naive_string_matcher step 7300 current loss 4.583111, current_train_items 99680.
+I0908 00:20:20.190251 127617279804928 run.py:771] (val) algo naive_string_matcher step 7300: {'match': 0.954345703125, 'score': 0.954345703125, 'examples_seen': 99680, 'step': 7300, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:20.190417 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.954, val scores are: naive_string_matcher: 0.954
+I0908 00:20:20.847423 127617279804928 run.py:736] Algo naive_string_matcher step 7350 current loss 4.379857, current_train_items 100366.
+I0908 00:20:21.334408 127617279804928 run.py:771] (val) algo naive_string_matcher step 7350: {'match': 0.95947265625, 'score': 0.95947265625, 'examples_seen': 100366, 'step': 7350, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:21.334576 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.959, val scores are: naive_string_matcher: 0.959
+I0908 00:20:21.973541 127617279804928 run.py:736] Algo naive_string_matcher step 7400 current loss 5.170547, current_train_items 101025.
+I0908 00:20:22.467960 127617279804928 run.py:771] (val) algo naive_string_matcher step 7400: {'match': 0.95458984375, 'score': 0.95458984375, 'examples_seen': 101025, 'step': 7400, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:22.468142 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.955, val scores are: naive_string_matcher: 0.955
+I0908 00:20:23.166561 127617279804928 run.py:736] Algo naive_string_matcher step 7450 current loss 4.826260, current_train_items 101704.
+I0908 00:20:23.660591 127617279804928 run.py:771] (val) algo naive_string_matcher step 7450: {'match': 0.96337890625, 'score': 0.96337890625, 'examples_seen': 101704, 'step': 7450, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:23.660772 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.963, val scores are: naive_string_matcher: 0.963
+I0908 00:20:24.331643 127617279804928 run.py:736] Algo naive_string_matcher step 7500 current loss 4.562775, current_train_items 102395.
+I0908 00:20:24.822178 127617279804928 run.py:771] (val) algo naive_string_matcher step 7500: {'match': 0.956787109375, 'score': 0.956787109375, 'examples_seen': 102395, 'step': 7500, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:24.822337 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.957, val scores are: naive_string_matcher: 0.957
+I0908 00:20:25.482779 127617279804928 run.py:736] Algo naive_string_matcher step 7550 current loss 5.821503, current_train_items 103075.
+I0908 00:20:25.976604 127617279804928 run.py:771] (val) algo naive_string_matcher step 7550: {'match': 0.932373046875, 'score': 0.932373046875, 'examples_seen': 103075, 'step': 7550, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:25.976763 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.932, val scores are: naive_string_matcher: 0.932
+I0908 00:20:26.607990 127617279804928 run.py:736] Algo naive_string_matcher step 7600 current loss 5.399065, current_train_items 103735.
+I0908 00:20:27.098355 127617279804928 run.py:771] (val) algo naive_string_matcher step 7600: {'match': 0.958740234375, 'score': 0.958740234375, 'examples_seen': 103735, 'step': 7600, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:27.098540 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.959, val scores are: naive_string_matcher: 0.959
+I0908 00:20:27.762086 127617279804928 run.py:736] Algo naive_string_matcher step 7650 current loss 5.028802, current_train_items 104421.
+I0908 00:20:28.253317 127617279804928 run.py:771] (val) algo naive_string_matcher step 7650: {'match': 0.947265625, 'score': 0.947265625, 'examples_seen': 104421, 'step': 7650, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:28.253489 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.947, val scores are: naive_string_matcher: 0.947
+I0908 00:20:28.890156 127617279804928 run.py:736] Algo naive_string_matcher step 7700 current loss 5.183680, current_train_items 105094.
+I0908 00:20:29.385341 127617279804928 run.py:771] (val) algo naive_string_matcher step 7700: {'match': 0.958984375, 'score': 0.958984375, 'examples_seen': 105094, 'step': 7700, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:29.385514 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.972, current avg val score is 0.959, val scores are: naive_string_matcher: 0.959
+I0908 00:20:30.022295 127617279804928 run.py:736] Algo naive_string_matcher step 7750 current loss 5.251508, current_train_items 105792.
+I0908 00:20:30.519019 127617279804928 run.py:771] (val) algo naive_string_matcher step 7750: {'match': 0.9814453125, 'score': 0.9814453125, 'examples_seen': 105792, 'step': 7750, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:30.519216 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.972, current avg val score is 0.981, val scores are: naive_string_matcher: 0.981
+I0908 00:20:31.196788 127617279804928 run.py:736] Algo naive_string_matcher step 7800 current loss 5.648189, current_train_items 106478.
+I0908 00:20:31.688058 127617279804928 run.py:771] (val) algo naive_string_matcher step 7800: {'match': 0.96435546875, 'score': 0.96435546875, 'examples_seen': 106478, 'step': 7800, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:31.688221 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.964, val scores are: naive_string_matcher: 0.964
+I0908 00:20:32.320966 127617279804928 run.py:736] Algo naive_string_matcher step 7850 current loss 5.174891, current_train_items 107196.
+I0908 00:20:32.815352 127617279804928 run.py:771] (val) algo naive_string_matcher step 7850: {'match': 0.96533203125, 'score': 0.96533203125, 'examples_seen': 107196, 'step': 7850, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:32.815531 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.965, val scores are: naive_string_matcher: 0.965
+I0908 00:20:33.480535 127617279804928 run.py:736] Algo naive_string_matcher step 7900 current loss 5.183236, current_train_items 107876.
+I0908 00:20:33.972995 127617279804928 run.py:771] (val) algo naive_string_matcher step 7900: {'match': 0.899658203125, 'score': 0.899658203125, 'examples_seen': 107876, 'step': 7900, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:33.973160 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.900, val scores are: naive_string_matcher: 0.900
+I0908 00:20:34.624873 127617279804928 run.py:736] Algo naive_string_matcher step 7950 current loss 3.579318, current_train_items 108565.
+I0908 00:20:35.119527 127617279804928 run.py:771] (val) algo naive_string_matcher step 7950: {'match': 0.96826171875, 'score': 0.96826171875, 'examples_seen': 108565, 'step': 7950, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:35.119704 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.968, val scores are: naive_string_matcher: 0.968
+I0908 00:20:35.767096 127617279804928 run.py:736] Algo naive_string_matcher step 8000 current loss 4.766053, current_train_items 109237.
+I0908 00:20:36.254745 127617279804928 run.py:771] (val) algo naive_string_matcher step 8000: {'match': 0.972900390625, 'score': 0.972900390625, 'examples_seen': 109237, 'step': 8000, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:36.254911 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.973, val scores are: naive_string_matcher: 0.973
+I0908 00:20:36.938594 127617279804928 run.py:736] Algo naive_string_matcher step 8050 current loss 5.662954, current_train_items 109943.
+I0908 00:20:37.550254 127617279804928 run.py:771] (val) algo naive_string_matcher step 8050: {'match': 0.939697265625, 'score': 0.939697265625, 'examples_seen': 109943, 'step': 8050, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:37.550425 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.940, val scores are: naive_string_matcher: 0.940
+I0908 00:20:38.222290 127617279804928 run.py:736] Algo naive_string_matcher step 8100 current loss 4.839100, current_train_items 110649.
+I0908 00:20:38.719399 127617279804928 run.py:771] (val) algo naive_string_matcher step 8100: {'match': 0.950927734375, 'score': 0.950927734375, 'examples_seen': 110649, 'step': 8100, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:38.719610 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.951, val scores are: naive_string_matcher: 0.951
+I0908 00:20:39.384093 127617279804928 run.py:736] Algo naive_string_matcher step 8150 current loss 4.764315, current_train_items 111337.
+I0908 00:20:39.882831 127617279804928 run.py:771] (val) algo naive_string_matcher step 8150: {'match': 0.951904296875, 'score': 0.951904296875, 'examples_seen': 111337, 'step': 8150, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:39.882988 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.952, val scores are: naive_string_matcher: 0.952
+I0908 00:20:40.560441 127617279804928 run.py:736] Algo naive_string_matcher step 8200 current loss 4.949159, current_train_items 112038.
+I0908 00:20:41.057595 127617279804928 run.py:771] (val) algo naive_string_matcher step 8200: {'match': 0.95166015625, 'score': 0.95166015625, 'examples_seen': 112038, 'step': 8200, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:41.057750 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.952, val scores are: naive_string_matcher: 0.952
+I0908 00:20:41.664248 127617279804928 run.py:736] Algo naive_string_matcher step 8250 current loss 4.789529, current_train_items 112718.
+I0908 00:20:42.159338 127617279804928 run.py:771] (val) algo naive_string_matcher step 8250: {'match': 0.929443359375, 'score': 0.929443359375, 'examples_seen': 112718, 'step': 8250, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:42.159505 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.929, val scores are: naive_string_matcher: 0.929
+I0908 00:20:42.809992 127617279804928 run.py:736] Algo naive_string_matcher step 8300 current loss 4.364823, current_train_items 113407.
+I0908 00:20:43.301068 127617279804928 run.py:771] (val) algo naive_string_matcher step 8300: {'match': 0.97412109375, 'score': 0.97412109375, 'examples_seen': 113407, 'step': 8300, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:43.301232 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.974, val scores are: naive_string_matcher: 0.974
+I0908 00:20:43.982321 127617279804928 run.py:736] Algo naive_string_matcher step 8350 current loss 4.055387, current_train_items 114095.
+I0908 00:20:44.477568 127617279804928 run.py:771] (val) algo naive_string_matcher step 8350: {'match': 0.962646484375, 'score': 0.962646484375, 'examples_seen': 114095, 'step': 8350, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:44.477729 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.963, val scores are: naive_string_matcher: 0.963
+I0908 00:20:45.103184 127617279804928 run.py:736] Algo naive_string_matcher step 8400 current loss 5.177720, current_train_items 114755.
+I0908 00:20:45.601976 127617279804928 run.py:771] (val) algo naive_string_matcher step 8400: {'match': 0.955322265625, 'score': 0.955322265625, 'examples_seen': 114755, 'step': 8400, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:45.602175 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.955, val scores are: naive_string_matcher: 0.955
+I0908 00:20:46.252536 127617279804928 run.py:736] Algo naive_string_matcher step 8450 current loss 4.613486, current_train_items 115444.
+I0908 00:20:46.745172 127617279804928 run.py:771] (val) algo naive_string_matcher step 8450: {'match': 0.97412109375, 'score': 0.97412109375, 'examples_seen': 115444, 'step': 8450, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:46.745335 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.974, val scores are: naive_string_matcher: 0.974
+I0908 00:20:47.405817 127617279804928 run.py:736] Algo naive_string_matcher step 8500 current loss 4.627230, current_train_items 116134.
+I0908 00:20:47.898062 127617279804928 run.py:771] (val) algo naive_string_matcher step 8500: {'match': 0.958740234375, 'score': 0.958740234375, 'examples_seen': 116134, 'step': 8500, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:47.898236 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.959, val scores are: naive_string_matcher: 0.959
+I0908 00:20:48.556909 127617279804928 run.py:736] Algo naive_string_matcher step 8550 current loss 4.323659, current_train_items 116824.
+I0908 00:20:49.048473 127617279804928 run.py:771] (val) algo naive_string_matcher step 8550: {'match': 0.955322265625, 'score': 0.955322265625, 'examples_seen': 116824, 'step': 8550, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:49.048640 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.955, val scores are: naive_string_matcher: 0.955
+I0908 00:20:49.695409 127617279804928 run.py:736] Algo naive_string_matcher step 8600 current loss 4.402426, current_train_items 117508.
+I0908 00:20:50.192424 127617279804928 run.py:771] (val) algo naive_string_matcher step 8600: {'match': 0.95458984375, 'score': 0.95458984375, 'examples_seen': 117508, 'step': 8600, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:50.192665 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.955, val scores are: naive_string_matcher: 0.955
+I0908 00:20:50.834310 127617279804928 run.py:736] Algo naive_string_matcher step 8650 current loss 4.288283, current_train_items 118195.
+I0908 00:20:51.328753 127617279804928 run.py:771] (val) algo naive_string_matcher step 8650: {'match': 0.962890625, 'score': 0.962890625, 'examples_seen': 118195, 'step': 8650, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:51.328963 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.963, val scores are: naive_string_matcher: 0.963
+I0908 00:20:51.986064 127617279804928 run.py:736] Algo naive_string_matcher step 8700 current loss 4.901847, current_train_items 118858.
+I0908 00:20:52.483299 127617279804928 run.py:771] (val) algo naive_string_matcher step 8700: {'match': 0.9638671875, 'score': 0.9638671875, 'examples_seen': 118858, 'step': 8700, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:52.483521 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.964, val scores are: naive_string_matcher: 0.964
+I0908 00:20:53.138034 127617279804928 run.py:736] Algo naive_string_matcher step 8750 current loss 4.837251, current_train_items 119530.
+I0908 00:20:53.631971 127617279804928 run.py:771] (val) algo naive_string_matcher step 8750: {'match': 0.934814453125, 'score': 0.934814453125, 'examples_seen': 119530, 'step': 8750, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:53.632137 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.935, val scores are: naive_string_matcher: 0.935
+I0908 00:20:54.332436 127617279804928 run.py:736] Algo naive_string_matcher step 8800 current loss 5.234842, current_train_items 120219.
+I0908 00:20:54.823810 127617279804928 run.py:771] (val) algo naive_string_matcher step 8800: {'match': 0.925537109375, 'score': 0.925537109375, 'examples_seen': 120219, 'step': 8800, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:54.823977 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.926, val scores are: naive_string_matcher: 0.926
+I0908 00:20:55.474574 127617279804928 run.py:736] Algo naive_string_matcher step 8850 current loss 5.091085, current_train_items 120909.
+I0908 00:20:55.969908 127617279804928 run.py:771] (val) algo naive_string_matcher step 8850: {'match': 0.95654296875, 'score': 0.95654296875, 'examples_seen': 120909, 'step': 8850, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:55.970107 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.957, val scores are: naive_string_matcher: 0.957
+I0908 00:20:56.603802 127617279804928 run.py:736] Algo naive_string_matcher step 8900 current loss 4.757182, current_train_items 121597.
+I0908 00:20:57.096890 127617279804928 run.py:771] (val) algo naive_string_matcher step 8900: {'match': 0.966064453125, 'score': 0.966064453125, 'examples_seen': 121597, 'step': 8900, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:57.097051 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.966, val scores are: naive_string_matcher: 0.966
+I0908 00:20:57.749372 127617279804928 run.py:736] Algo naive_string_matcher step 8950 current loss 3.940284, current_train_items 122310.
+I0908 00:20:58.248952 127617279804928 run.py:771] (val) algo naive_string_matcher step 8950: {'match': 0.95361328125, 'score': 0.95361328125, 'examples_seen': 122310, 'step': 8950, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:58.249191 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.954, val scores are: naive_string_matcher: 0.954
+I0908 00:20:58.900983 127617279804928 run.py:736] Algo naive_string_matcher step 9000 current loss 4.312443, current_train_items 123003.
+I0908 00:20:59.396712 127617279804928 run.py:771] (val) algo naive_string_matcher step 9000: {'match': 0.951416015625, 'score': 0.951416015625, 'examples_seen': 123003, 'step': 9000, 'algorithm': 'naive_string_matcher'}
+I0908 00:20:59.396876 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.951, val scores are: naive_string_matcher: 0.951
+I0908 00:21:00.028867 127617279804928 run.py:736] Algo naive_string_matcher step 9050 current loss 5.042617, current_train_items 123676.
+I0908 00:21:00.519751 127617279804928 run.py:771] (val) algo naive_string_matcher step 9050: {'match': 0.96240234375, 'score': 0.96240234375, 'examples_seen': 123676, 'step': 9050, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:00.519917 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.962, val scores are: naive_string_matcher: 0.962
+I0908 00:21:01.149795 127617279804928 run.py:736] Algo naive_string_matcher step 9100 current loss 4.205692, current_train_items 124328.
+I0908 00:21:01.643579 127617279804928 run.py:771] (val) algo naive_string_matcher step 9100: {'match': 0.939697265625, 'score': 0.939697265625, 'examples_seen': 124328, 'step': 9100, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:01.643742 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.940, val scores are: naive_string_matcher: 0.940
+I0908 00:21:02.270133 127617279804928 run.py:736] Algo naive_string_matcher step 9150 current loss 4.364133, current_train_items 125006.
+I0908 00:21:02.762576 127617279804928 run.py:771] (val) algo naive_string_matcher step 9150: {'match': 0.970458984375, 'score': 0.970458984375, 'examples_seen': 125006, 'step': 9150, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:02.762738 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.970, val scores are: naive_string_matcher: 0.970
+I0908 00:21:03.424856 127617279804928 run.py:736] Algo naive_string_matcher step 9200 current loss 4.679928, current_train_items 125695.
+I0908 00:21:03.913711 127617279804928 run.py:771] (val) algo naive_string_matcher step 9200: {'match': 0.89697265625, 'score': 0.89697265625, 'examples_seen': 125695, 'step': 9200, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:03.913870 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.897, val scores are: naive_string_matcher: 0.897
+I0908 00:21:04.537313 127617279804928 run.py:736] Algo naive_string_matcher step 9250 current loss 5.213161, current_train_items 126361.
+I0908 00:21:05.032741 127617279804928 run.py:771] (val) algo naive_string_matcher step 9250: {'match': 0.93994140625, 'score': 0.93994140625, 'examples_seen': 126361, 'step': 9250, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:05.032903 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.981, current avg val score is 0.940, val scores are: naive_string_matcher: 0.940
+I0908 00:21:05.683704 127617279804928 run.py:736] Algo naive_string_matcher step 9300 current loss 4.808230, current_train_items 127053.
+I0908 00:21:06.179706 127617279804928 run.py:771] (val) algo naive_string_matcher step 9300: {'match': 0.98486328125, 'score': 0.98486328125, 'examples_seen': 127053, 'step': 9300, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:06.179901 127617279804928 run.py:792] Checkpointing best model, best avg val score was 0.981, current avg val score is 0.985, val scores are: naive_string_matcher: 0.985
+I0908 00:21:06.836712 127617279804928 run.py:736] Algo naive_string_matcher step 9350 current loss 4.361107, current_train_items 127751.
+I0908 00:21:07.327264 127617279804928 run.py:771] (val) algo naive_string_matcher step 9350: {'match': 0.966796875, 'score': 0.966796875, 'examples_seen': 127751, 'step': 9350, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:07.327431 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.985, current avg val score is 0.967, val scores are: naive_string_matcher: 0.967
+I0908 00:21:07.975715 127617279804928 run.py:736] Algo naive_string_matcher step 9400 current loss 5.610185, current_train_items 128427.
+I0908 00:21:08.465497 127617279804928 run.py:771] (val) algo naive_string_matcher step 9400: {'match': 0.923095703125, 'score': 0.923095703125, 'examples_seen': 128427, 'step': 9400, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:08.465658 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.985, current avg val score is 0.923, val scores are: naive_string_matcher: 0.923
+I0908 00:21:09.141719 127617279804928 run.py:736] Algo naive_string_matcher step 9450 current loss 4.848784, current_train_items 129090.
+I0908 00:21:09.630642 127617279804928 run.py:771] (val) algo naive_string_matcher step 9450: {'match': 0.9248046875, 'score': 0.9248046875, 'examples_seen': 129090, 'step': 9450, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:09.630804 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.985, current avg val score is 0.925, val scores are: naive_string_matcher: 0.925
+I0908 00:21:10.239709 127617279804928 run.py:736] Algo naive_string_matcher step 9500 current loss 5.559045, current_train_items 129775.
+I0908 00:21:10.730167 127617279804928 run.py:771] (val) algo naive_string_matcher step 9500: {'match': 0.914306640625, 'score': 0.914306640625, 'examples_seen': 129775, 'step': 9500, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:10.730327 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.985, current avg val score is 0.914, val scores are: naive_string_matcher: 0.914
+I0908 00:21:11.363854 127617279804928 run.py:736] Algo naive_string_matcher step 9550 current loss 3.731959, current_train_items 130425.
+I0908 00:21:11.856824 127617279804928 run.py:771] (val) algo naive_string_matcher step 9550: {'match': 0.926513671875, 'score': 0.926513671875, 'examples_seen': 130425, 'step': 9550, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:11.856983 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.985, current avg val score is 0.927, val scores are: naive_string_matcher: 0.927
+I0908 00:21:12.494818 127617279804928 run.py:736] Algo naive_string_matcher step 9600 current loss 5.667109, current_train_items 131133.
+I0908 00:21:12.985261 127617279804928 run.py:771] (val) algo naive_string_matcher step 9600: {'match': 0.9462890625, 'score': 0.9462890625, 'examples_seen': 131133, 'step': 9600, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:12.985429 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.985, current avg val score is 0.946, val scores are: naive_string_matcher: 0.946
+I0908 00:21:13.644235 127617279804928 run.py:736] Algo naive_string_matcher step 9650 current loss 5.220304, current_train_items 131815.
+I0908 00:21:14.139236 127617279804928 run.py:771] (val) algo naive_string_matcher step 9650: {'match': 0.962646484375, 'score': 0.962646484375, 'examples_seen': 131815, 'step': 9650, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:14.139399 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.985, current avg val score is 0.963, val scores are: naive_string_matcher: 0.963
+I0908 00:21:14.768270 127617279804928 run.py:736] Algo naive_string_matcher step 9700 current loss 5.552105, current_train_items 132476.
+I0908 00:21:15.262180 127617279804928 run.py:771] (val) algo naive_string_matcher step 9700: {'match': 0.9677734375, 'score': 0.9677734375, 'examples_seen': 132476, 'step': 9700, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:15.262345 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.985, current avg val score is 0.968, val scores are: naive_string_matcher: 0.968
+I0908 00:21:15.922133 127617279804928 run.py:736] Algo naive_string_matcher step 9750 current loss 4.068249, current_train_items 133174.
+I0908 00:21:16.418994 127617279804928 run.py:771] (val) algo naive_string_matcher step 9750: {'match': 0.957275390625, 'score': 0.957275390625, 'examples_seen': 133174, 'step': 9750, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:16.419190 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.985, current avg val score is 0.957, val scores are: naive_string_matcher: 0.957
+I0908 00:21:17.065464 127617279804928 run.py:736] Algo naive_string_matcher step 9800 current loss 5.009477, current_train_items 133865.
+I0908 00:21:17.557673 127617279804928 run.py:771] (val) algo naive_string_matcher step 9800: {'match': 0.974609375, 'score': 0.974609375, 'examples_seen': 133865, 'step': 9800, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:17.557832 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.985, current avg val score is 0.975, val scores are: naive_string_matcher: 0.975
+I0908 00:21:18.260980 127617279804928 run.py:736] Algo naive_string_matcher step 9850 current loss 4.326390, current_train_items 134538.
+I0908 00:21:18.755143 127617279804928 run.py:771] (val) algo naive_string_matcher step 9850: {'match': 0.95068359375, 'score': 0.95068359375, 'examples_seen': 134538, 'step': 9850, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:18.755317 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.985, current avg val score is 0.951, val scores are: naive_string_matcher: 0.951
+I0908 00:21:19.419571 127617279804928 run.py:736] Algo naive_string_matcher step 9900 current loss 4.462044, current_train_items 135239.
+I0908 00:21:19.911733 127617279804928 run.py:771] (val) algo naive_string_matcher step 9900: {'match': 0.940185546875, 'score': 0.940185546875, 'examples_seen': 135239, 'step': 9900, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:19.911890 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.985, current avg val score is 0.940, val scores are: naive_string_matcher: 0.940
+I0908 00:21:20.507946 127617279804928 run.py:736] Algo naive_string_matcher step 9950 current loss 4.265913, current_train_items 135927.
+I0908 00:21:21.004976 127617279804928 run.py:771] (val) algo naive_string_matcher step 9950: {'match': 0.95556640625, 'score': 0.95556640625, 'examples_seen': 135927, 'step': 9950, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:21.005132 127617279804928 run.py:795] Not saving new best model, best avg val score was 0.985, current avg val score is 0.956, val scores are: naive_string_matcher: 0.956
+I0908 00:21:21.691713 127617279804928 run.py:801] Restoring best model from checkpoint...
+I0908 00:21:37.108536 127617279804928 run.py:816] (test) algo naive_string_matcher : {'match': 0.4873046875, 'score': 0.4873046875, 'examples_seen': 136583, 'step': 10000, 'algorithm': 'naive_string_matcher'}
+I0908 00:21:37.108713 127617279804928 run.py:818] Done!

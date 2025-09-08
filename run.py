@@ -141,7 +141,7 @@ flags.DEFINE_integer('length_needle', -7,
                      'the haystack (the default sampler behavior).') 
 # ----------------------------------------------------
 
-flags.DEFINE_integer('seed', 42, 'Random seed to set')
+flags.DEFINE_integer('seed', 51, 'Random seed to set')
 
 flags.DEFINE_boolean('random_pos', True,
                      'Randomize the pos input common to all algos.')
@@ -705,12 +705,14 @@ def main(unused_argv):
           print('Hint increase!! Restarting best_score. Epoch {}'.format(step))
           print('------------------------------')
           best_score = -1.0
+        '''
         elif train_reset_score < step:
           print('------------------------------')
           print('Resetting best_score. Epoch {}'.format(step))
           print('------------------------------')
           train_reset_score = FLAGS.train_steps + 100 #not reset again
           best_score = -1.0
+        '''
 
       rng_key, new_rng_key = jax.random.split(rng_key)
       if FLAGS.chunked_training:

@@ -156,7 +156,7 @@ flags.DEFINE_integer('test_batch_size', 16, 'Batch size used for training.')
 
 flags.DEFINE_boolean('chunked_training', True,
                      'Whether to use chunking for training.')
-flags.DEFINE_integer('chunk_length', 8,
+flags.DEFINE_integer('chunk_length', 16,
                      'Time chunk length used for training (if '
                      '`chunked_training` is True.')
 flags.DEFINE_integer('train_steps', 10000, 'Number of training iterations.')
@@ -172,7 +172,7 @@ flags.DEFINE_integer('nb_msg_passing_steps', 1,
 flags.DEFINE_float('learning_rate', 0.001, 'Learning rate to use.')
 flags.DEFINE_float('grad_clip_max_norm', 1.0,
                    'Gradient clipping by norm. 0.0 disables grad clipping')
-flags.DEFINE_float('dropout_prob', 0.0, 'Dropout rate to use.')
+flags.DEFINE_float('dropout_prob', 0.1, 'Dropout rate to use.')
 flags.DEFINE_float('hint_teacher_forcing', 0.0,
                    'Probability that ground-truth teacher hints are encoded '
                    'during training instead of predicted hints. Only '
@@ -210,7 +210,7 @@ flags.DEFINE_enum('encoder_init', 'xavier_on_scalars',
                   ['default', 'xavier_on_scalars'],
                   'Initialiser to use for the encoders.')
 
-flags.DEFINE_enum('processor_type', 'f5',
+flags.DEFINE_enum('processor_type', 'f1',
                   ['deepsets', 'mpnn', 'pgn', 'pgn_mask',
                    'triplet_mpnn', 'triplet_pgn', 'triplet_pgn_mask',
                    'gat', 'gatv2', 'gat_full', 'gatv2_full',
@@ -234,7 +234,7 @@ flags.DEFINE_enum('reduction', 'min',
                     ['max', 'mean', 'average', 'sum', 'min'],
                     'Reduction operation.') 
 
-flags.DEFINE_enum('activation', 'relu', 
+flags.DEFINE_enum('activation', 'elu', 
                     ['relu', 'elu', 'leaky_relu', 'glu', 'sigmoid',
                      'hard_sigmoid', 'log_sigmoid', 'sparse_sigmoid', 
                      'hard_tanh'],
@@ -243,7 +243,7 @@ flags.DEFINE_enum('activation', 'relu',
 flags.DEFINE_string('restore_model', '',
                     'Path in which dataset is stored.')
 
-flags.DEFINE_boolean('gated', False, 
+flags.DEFINE_boolean('gated', True, 
                     'Use gated activation.') 
 
 flags.DEFINE_enum('gated_activation', 'sigmoid', 

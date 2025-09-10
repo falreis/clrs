@@ -141,7 +141,7 @@ flags.DEFINE_integer('length_needle', -7,
                      'the haystack (the default sampler behavior).') 
 # ----------------------------------------------------
 
-flags.DEFINE_integer('seed', 51, 'Random seed to set')
+flags.DEFINE_integer('seed', 42, 'Random seed to set')
 
 flags.DEFINE_boolean('random_pos', True,
                      'Randomize the pos input common to all algos.')
@@ -150,7 +150,7 @@ flags.DEFINE_boolean('enforce_permutations', True,
 flags.DEFINE_boolean('enforce_pred_as_input', True,
                      'Whether to change pred_h hints into pred inputs.')
 
-flags.DEFINE_integer('batch_size', 16, 'Batch size used for training.')
+flags.DEFINE_integer('batch_size', 32, 'Batch size used for training.')
 flags.DEFINE_integer('val_batch_size', 16, 'Batch size used for training.')
 flags.DEFINE_integer('test_batch_size', 16, 'Batch size used for training.')
 
@@ -210,7 +210,7 @@ flags.DEFINE_enum('encoder_init', 'xavier_on_scalars',
                   ['default', 'xavier_on_scalars'],
                   'Initialiser to use for the encoders.')
 
-flags.DEFINE_enum('processor_type', 'f6',
+flags.DEFINE_enum('processor_type', 'f1',
                   ['deepsets', 'mpnn', 'pgn', 'pgn_mask',
                    'triplet_mpnn', 'triplet_pgn', 'triplet_pgn_mask',
                    'gat', 'gatv2', 'gat_full', 'gatv2_full',
@@ -243,7 +243,7 @@ flags.DEFINE_enum('activation', 'elu',
 flags.DEFINE_string('restore_model', '',
                     'Path in which dataset is stored.')
 
-flags.DEFINE_boolean('gated', False, 
+flags.DEFINE_boolean('gated', True, 
                     'Use gated activation.') 
 
 flags.DEFINE_enum('gated_activation', 'sigmoid', 

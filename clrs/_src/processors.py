@@ -632,17 +632,17 @@ def get_falr5_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
   return msg
 
 def get_falr6_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
-  tri_n_1 = hk.Linear(nb_triplet_fts, with_bias=True, w_init=hk.initializers.VarianceScaling(2.0, 'fan_in', 'truncated_normal'))(node_fts)
-  tri_n_2 = hk.Linear(nb_triplet_fts, with_bias=True, w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'))(node_fts)
+  tri_n_1 = hk.Linear(nb_triplet_fts, with_bias=True)(node_fts)
+  tri_n_2 = hk.Linear(nb_triplet_fts, with_bias=True)(node_fts)
   
-  tri_h_1 = hk.Linear(nb_triplet_fts, with_bias=True, w_init=hk.initializers.RandomNormal(stddev=0.05))(hidden)
-  tri_h_2 = hk.Linear(nb_triplet_fts, with_bias=True, w_init=hk.initializers.Orthogonal())(hidden)
+  tri_h_1 = hk.Linear(nb_triplet_fts, with_bias=True)(hidden)
+  tri_h_2 = hk.Linear(nb_triplet_fts, with_bias=True)(hidden)
 
-  tri_e_1 = hk.Linear(nb_triplet_fts, with_bias=True, w_init=hk.initializers.VarianceScaling(2.0, 'fan_in', 'truncated_normal'))(edge_fts)
-  tri_e_2 = hk.Linear(nb_triplet_fts, with_bias=True, w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'))(edge_fts)
+  tri_e_1 = hk.Linear(nb_triplet_fts, with_bias=True)(edge_fts)
+  tri_e_2 = hk.Linear(nb_triplet_fts, with_bias=True)(edge_fts)
 
-  tri_g1 = hk.Linear(nb_triplet_fts, with_bias=True, w_init=hk.initializers.VarianceScaling(2.0, 'fan_in', 'truncated_normal'))(graph_fts)
-  tri_g2 = hk.Linear(nb_triplet_fts, with_bias=True, w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'))(graph_fts)
+  tri_g1 = hk.Linear(nb_triplet_fts, with_bias=True)(graph_fts)
+  tri_g2 = hk.Linear(nb_triplet_fts, with_bias=True)(graph_fts)
 
   tri_n1_exp = jnp.expand_dims(tri_n_1, axis=(1))    # (B, 1, N, H)
   tri_n2_exp = jnp.expand_dims(tri_n_2, axis=(2))    # (B, N, 1, H)
@@ -1265,17 +1265,17 @@ class FALR6(Processor):
     assert graph_fts.shape[:-1] == (b,)
     assert adj_mat.shape == (b, n, n) #hints
 
-    msg_n_1 = hk.Linear(self.mid_size, with_bias=True, w_init=hk.initializers.VarianceScaling(2.0, 'fan_in', 'truncated_normal'))(node_fts)
-    msg_n_2 = hk.Linear(self.mid_size, with_bias=True, w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'))(node_fts)
+    msg_n_1 = hk.Linear(self.mid_size, with_bias=True)(node_fts)
+    msg_n_2 = hk.Linear(self.mid_size, with_bias=True)(node_fts)
 
-    msg_h_1 = hk.Linear(self.mid_size, with_bias=True, w_init=hk.initializers.VarianceScaling(2.0, 'fan_in', 'truncated_normal'))(hidden)
-    msg_h_2 = hk.Linear(self.mid_size, with_bias=True, w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'))(hidden)
+    msg_h_1 = hk.Linear(self.mid_size, with_bias=True)(hidden)
+    msg_h_2 = hk.Linear(self.mid_size, with_bias=True)(hidden)
 
-    msg_e_1 = hk.Linear(self.mid_size, with_bias=True, w_init=hk.initializers.VarianceScaling(2.0, 'fan_in', 'truncated_normal'))(edge_fts)
-    msg_e_2 = hk.Linear(self.mid_size, with_bias=True, w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'))(edge_fts)
+    msg_e_1 = hk.Linear(self.mid_size, with_bias=True)(edge_fts)
+    msg_e_2 = hk.Linear(self.mid_size, with_bias=True)(edge_fts)
 
-    msg_g_1 = hk.Linear(self.mid_size, with_bias=True, w_init=hk.initializers.VarianceScaling(2.0, 'fan_in', 'truncated_normal'))(graph_fts)
-    msg_g_2 = hk.Linear(self.mid_size, with_bias=True, w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'))(graph_fts)
+    msg_g_1 = hk.Linear(self.mid_size, with_bias=True)(graph_fts)
+    msg_g_2 = hk.Linear(self.mid_size, with_bias=True)(graph_fts)
 
     tri_msgs = get_falr6_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts) 
 
@@ -1303,8 +1303,6 @@ class FALR6(Processor):
     h_3 = hk.Linear(self.out_size, with_bias=True)(msgs)
     ret = h_1 + h_2 + h_3
 
-    # if self.activation is not None:
-    #   ret = jax.nn.relu(ret)
 
     #ret = hk.Linear(self.out_size, with_bias=True)(msgs)
 

@@ -210,14 +210,14 @@ flags.DEFINE_enum('encoder_init', 'xavier_on_scalars',
                   ['default', 'xavier_on_scalars'],
                   'Initialiser to use for the encoders.')
 
-flags.DEFINE_enum('processor_type', 'f1',
+flags.DEFINE_enum('processor_type', 'f6',
                   ['deepsets', 'mpnn', 'pgn', 'pgn_mask',
                    'triplet_mpnn', 'triplet_pgn', 'triplet_pgn_mask',
                    'gat', 'gatv2', 'gat_full', 'gatv2_full',
                    'gpgn', 'gpgn_mask', 'gmpnn',
                    'triplet_gpgn', 'triplet_gpgn_mask', 'triplet_gmpnn',
                    'memnet_full', 'memnet_masked',
-                   'rt', 'f1', 'f2', 'f3', 'f4', 'f5'],
+                   'rt', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6'],
                   'Processor type to use as the network P.')
 
 flags.DEFINE_string('checkpoint_path', 'CLRS30',
@@ -243,7 +243,7 @@ flags.DEFINE_enum('activation', 'elu',
 flags.DEFINE_string('restore_model', '',
                     'Path in which dataset is stored.')
 
-flags.DEFINE_boolean('gated', True, 
+flags.DEFINE_boolean('gated', False, 
                     'Use gated activation.') 
 
 flags.DEFINE_enum('gated_activation', 'sigmoid', 

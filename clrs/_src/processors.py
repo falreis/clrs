@@ -1228,6 +1228,7 @@ class FALR6(Processor):
       mid_size: Optional[int] = None,
       activation: Optional[_Fn] = jax.nn.relu,
       reduction: _Fn = jnp.max,
+      msgs_mlp_sizes: Optional[List[int]] = None,
       use_ln: bool = False,
       use_triplets: bool = False,
       nb_triplet_fts: int = 8,
@@ -1243,6 +1244,7 @@ class FALR6(Processor):
     self.out_size = out_size
     self.activation = activation
     self.reduction = reduction
+    self._msgs_mlp_sizes = msgs_mlp_sizes
     self.use_ln = use_ln
     self.use_triplets = use_triplets
     self.nb_triplet_fts = nb_triplet_fts
@@ -1265,46 +1267,67 @@ class FALR6(Processor):
     assert graph_fts.shape[:-1] == (b,)
     assert adj_mat.shape == (b, n, n) #hints
 
-    msg_n_1 = hk.Linear(self.mid_size, with_bias=True)(node_fts)
-    msg_n_2 = hk.Linear(self.mid_size, with_bias=True)(node_fts)
+    #z = jnp.concatenate([node_fts, hidden], axis=-1)
+    m_1 = hk.Linear(self.mid_size)
+    m_2 = hk.Linear(self.mid_size)
+    m_e = hk.Linear(self.mid_size)
+    m_g = hk.Linear(self.mid_size)
 
-    msg_h_1 = hk.Linear(self.mid_size, with_bias=True)(hidden)
-    msg_h_2 = hk.Linear(self.mid_size, with_bias=True)(hidden)
+    o1 = hk.Linear(self.out_size)
+    o2 = hk.Linear(self.out_size)
+    o3 = hk.Linear(self.out_size)
 
-    msg_e_1 = hk.Linear(self.mid_size, with_bias=True)(edge_fts)
-    msg_e_2 = hk.Linear(self.mid_size, with_bias=True)(edge_fts)
+    msg_n_1 = m_1(node_fts)
+    msg_h_1 = m_2(hidden)
+    msg_e = m_e(edge_fts)
+    msg_g = m_g(graph_fts)
 
-    msg_g_1 = hk.Linear(self.mid_size, with_bias=True)(graph_fts)
-    msg_g_2 = hk.Linear(self.mid_size, with_bias=True)(graph_fts)
+    tri_msgs = None
 
-    tri_msgs = get_falr6_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts) 
+    if self.use_triplets:
+      tri_msgs = get_falr6_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
+      #tri_msgs = jnp.average(triplets, axis=1)  # (B, N, N, H)
 
-    if self.activation is not None:
-      tri_msgs = self.activation(tri_msgs)
-
-    msg_n1_exp = jnp.expand_dims(msg_n_1, axis=(1))    # (B, 1, N, H)
-    msg_n2_exp = jnp.expand_dims(msg_n_2, axis=(2))    # (B, 1, N, H)
-    msg_h1_exp = jnp.expand_dims(msg_h_1, axis=(1))    # (B, N, 1, H)
-    msg_h2_exp = jnp.expand_dims(msg_h_2, axis=(2))    # (B, N, 1, H)
-    msg_g1_exp = jnp.expand_dims(msg_g_1, axis=(1, 2)) # (B, 1, 1, H)
-    msg_g2_exp = jnp.expand_dims(msg_g_2, axis=(1, 2)) # (B, 1, 1, H)
+      if self.activation is not None:
+        tri_msgs = self.activation(tri_msgs)
 
     msgs = (
-        msg_n1_exp + msg_n2_exp + 
-        msg_h1_exp + msg_h2_exp + 
-        msg_e_1 + msg_e_2 + 
-        msg_g1_exp + msg_g2_exp
-    )
+        jnp.expand_dims(msg_n_1, axis=1) + jnp.expand_dims(msg_h_1, axis=2) +
+        msg_e + jnp.expand_dims(msg_g, axis=(1, 2))
+  )
 
-    msgs = self.reduction(msgs, axis=1)
+    if self._msgs_mlp_sizes is not None:
+      msgs = hk.nets.MLP(self._msgs_mlp_sizes)(self.activation(msgs))
 
-    h_1 = hk.Linear(self.out_size, with_bias=True)(node_fts)
-    h_2 = hk.Linear(self.out_size, with_bias=True)(hidden)
-    h_3 = hk.Linear(self.out_size, with_bias=True)(msgs)
+
+    msgs = self.reduction(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
+    #msgs = self.reduction(msgs, axis=1)
+
+    h_1 = o1(node_fts)
+    h_2 = o2(hidden)
+    h_3 = o3(msgs)
+
     ret = h_1 + h_2 + h_3
 
+    #if self.activation is not None:
+    #  ret = self.activation(ret)
 
-    #ret = hk.Linear(self.out_size, with_bias=True)(msgs)
+    '''
+    if self.use_ln:
+      ln = hk.LayerNorm(axis=-1, create_scale=True, create_offset=True)
+      ret = ln(ret)
+    '''
+
+    if self.gated:
+      gate_n = hk.Linear(self.out_size)
+      gate_h = hk.Linear(self.out_size)
+      gate_m = hk.Linear(self.out_size)
+      gate_o = hk.Linear(self.out_size, b_init=hk.initializers.Constant(-3))
+
+      gate = self.gated_activation(gate_o(jax.nn.relu(gate_n(node_fts) + gate_h(hidden) + gate_m(msgs))))
+      #gate = self.gated_activation(gate3(jax.nn.relu(gate1(z) + gate2(msgs))))
+
+      ret = ret * gate + hidden * (1-gate)
 
     return ret, tri_msgs  # pytype: disable=bad-return-type  # numpy-scalars
 
@@ -1985,6 +2008,7 @@ def get_processor_factory(kind: str,
     elif kind == 'f6':
       processor = F6(
           out_size=out_size,
+          msgs_mlp_sizes=[out_size, out_size],
           use_ln=use_ln,
           use_triplets=True,
           nb_triplet_fts=nb_triplet_fts,

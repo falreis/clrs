@@ -163,7 +163,7 @@ flags.DEFINE_integer('train_steps', 10000, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 
-flags.DEFINE_integer('hidden_size', 128,
+flags.DEFINE_integer('hidden_size', 256,
                      'Number of hidden units of the model.')
 flags.DEFINE_integer('nb_heads', 1, 'Number of heads for GAT processors') #including RT model
 
@@ -199,7 +199,7 @@ flags.DEFINE_enum('hint_repred_mode', 'soft', ['soft', 'hard', 'hard_on_eval'],
                   'thresholding of masks. '
                   'In hard_on_eval mode, soft mode is '
                   'used for training and hard mode is used for evaluation.')
-flags.DEFINE_boolean('use_ln', False,
+flags.DEFINE_boolean('use_ln', True,
                      'Whether to use layer normalisation in the processor.')
 flags.DEFINE_boolean('use_lstm', True,
                      'Whether to insert an LSTM after message passing.')
@@ -705,14 +705,12 @@ def main(unused_argv):
           print('Hint increase!! Restarting best_score. Epoch {}'.format(step))
           print('------------------------------')
           best_score = -1.0
-        '''
         elif train_reset_score < step:
           print('------------------------------')
           print('Resetting best_score. Epoch {}'.format(step))
           print('------------------------------')
           train_reset_score = FLAGS.train_steps + 100 #not reset again
           best_score = -1.0
-        '''
 
       rng_key, new_rng_key = jax.random.split(rng_key)
       if FLAGS.chunked_training:

@@ -640,6 +640,7 @@ def get_falr6_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
 
   tri_e_1 = hk.Linear(nb_triplet_fts, with_bias=True)(edge_fts)
   tri_e_2 = hk.Linear(nb_triplet_fts, with_bias=True)(edge_fts)
+  # tri_e_3 = hk.Linear(nb_triplet_fts, with_bias=True)(edge_fts)
 
   tri_g1 = hk.Linear(nb_triplet_fts, with_bias=True)(graph_fts)
   tri_g2 = hk.Linear(nb_triplet_fts, with_bias=True)(graph_fts)
@@ -657,16 +658,9 @@ def get_falr6_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
   msg = (
       tri_n1_exp + tri_n2_exp +
       tri_h1_exp + tri_h2_exp +
-      tri_e_1 + tri_e_2 +
+      tri_e_1 + tri_e_2 + #tri_e_3 +
       tri_g_exp1 + tri_g_exp2
   )
-  '''
-  att_linear = hk.Linear(1, with_bias=True)
-  att_input = tri_1_exp + tri_2_exp + tri_e_1 + tri_g_exp  # (B, N, N, H)
-  att_logits = att_linear(jax.nn.tanh(att_input))  # (B, N, N, 1)
-  att_weights = jax.nn.softmax(att_logits, axis=2)  # (B, N, N, 1)
-  msg = att_weights * msg  # (B, N, N, H)
-  '''
 
   return msg
 
@@ -1318,16 +1312,39 @@ class FALR6(Processor):
       ret = ln(ret)
     '''
 
+    '''
+    att_linear = hk.Linear(1, with_bias=True)
+    att_input = msg_n_1  # (B, N, N, H)
+    att_logits = att_linear(jax.nn.tanh(att_input))  # (B, N, N, 1)
+    att_weights = jax.nn.softmax(att_logits, axis=2)  # (B, N, N, 1)
+    att_weights = jnp.squeeze(att_weights, axis=-1)  # (B, N, N)
+    msgs = att_weights[..., None] * msgs  # (B, N, N, H)
+    '''
+    
+
     if self.gated:
+      # Improved gating: use LayerNorm, richer interaction, and optional residual
       gate_n = hk.Linear(self.out_size)
       gate_h = hk.Linear(self.out_size)
       gate_m = hk.Linear(self.out_size)
       gate_o = hk.Linear(self.out_size, b_init=hk.initializers.Constant(-3))
 
-      gate = self.gated_activation(gate_o(jax.nn.relu(gate_n(node_fts) + gate_h(hidden) + gate_m(msgs))))
-      #gate = self.gated_activation(gate3(jax.nn.relu(gate1(z) + gate2(msgs))))
+      # Concatenate all sources for gating
+      gate_input = jnp.concatenate([
+          gate_n(node_fts),
+          gate_h(hidden),
+          gate_m(msgs)
+      ], axis=-1)
 
-      ret = ret * gate + hidden * (1-gate)
+      # Normalization for stability
+      if self.use_ln:
+        ln_gate = hk.LayerNorm(axis=-1, create_scale=True, create_offset=True)
+        gate_input = ln_gate(gate_input)
+
+      gate = self.gated_activation(gate_o(jax.nn.relu(gate_input)))
+
+      # Residual connection for better gradient flow
+      ret = ret * gate + hidden * (1 - gate) + ret * (1 - gate)
 
     return ret, tri_msgs  # pytype: disable=bad-return-type  # numpy-scalars
 

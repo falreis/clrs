@@ -1306,22 +1306,6 @@ class FALR6(Processor):
     #if self.activation is not None:
     #  ret = self.activation(ret)
 
-    '''
-    if self.use_ln:
-      ln = hk.LayerNorm(axis=-1, create_scale=True, create_offset=True)
-      ret = ln(ret)
-    '''
-
-    '''
-    att_linear = hk.Linear(1, with_bias=True)
-    att_input = msg_n_1  # (B, N, N, H)
-    att_logits = att_linear(jax.nn.tanh(att_input))  # (B, N, N, 1)
-    att_weights = jax.nn.softmax(att_logits, axis=2)  # (B, N, N, 1)
-    att_weights = jnp.squeeze(att_weights, axis=-1)  # (B, N, N)
-    msgs = att_weights[..., None] * msgs  # (B, N, N, H)
-    '''
-    
-
     if self.gated:
       # Improved gating: use LayerNorm, richer interaction, and optional residual
       gate_n = hk.Linear(self.out_size)

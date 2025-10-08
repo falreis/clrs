@@ -665,22 +665,22 @@ def get_falr6_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
   return msg
 
 def get_falr7_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
-  #tri_n_1 = hk.Linear(nb_triplet_fts, with_bias=True)(node_fts)  # (B, N, H)
-  #tri_h_1 = hk.Linear(nb_triplet_fts, with_bias=True)(hidden)    # (B, N, H)
-  #tri_e_1 = hk.Linear(nb_triplet_fts, with_bias=True)(edge_fts)  # (B, N, N, H)
-  #tri_g_1 = hk.Linear(nb_triplet_fts, with_bias=True)(graph_fts) # (B, H)
+  tri_n_1 = hk.Linear(nb_triplet_fts, with_bias=True)(node_fts)  # (B, N, H)
+  tri_h_1 = hk.Linear(nb_triplet_fts, with_bias=True)(hidden)    # (B, N, H)
+  tri_e_1 = hk.Linear(nb_triplet_fts, with_bias=True)(edge_fts)  # (B, N, N, H)
+  tri_g_1 = hk.Linear(nb_triplet_fts, with_bias=True)(graph_fts) # (B, H)
 
-  tri_n_1 = non_linear_memory_block(node_fts, nb_triplet_fts)
-  tri_n_2 = lstm_memory_block(node_fts, nb_triplet_fts)
+  #tri_n_1 = non_linear_memory_block(node_fts, nb_triplet_fts)
+  tri_n_2 = non_linear_memory_block(node_fts, nb_triplet_fts)
 
-  tri_h_1 = non_linear_memory_block(hidden, nb_triplet_fts)
-  tri_h_2 = lstm_memory_block(node_fts, nb_triplet_fts)
+  #tri_h_1 = non_linear_memory_block(hidden, nb_triplet_fts)
+  tri_h_2 = non_linear_memory_block(node_fts, nb_triplet_fts)
 
-  tri_e_1 = non_linear_memory_block(edge_fts, nb_triplet_fts)
-  tri_e_2 = lstm_memory_block(edge_fts, nb_triplet_fts)
+  #tri_e_1 = non_linear_memory_block(edge_fts, nb_triplet_fts)
+  tri_e_2 = non_linear_memory_block(edge_fts, nb_triplet_fts)
 
-  tri_g_1 = non_linear_memory_block(graph_fts, nb_triplet_fts)
-  tri_g_2 = lstm_memory_block(graph_fts, nb_triplet_fts)
+  #tri_g_1 = non_linear_memory_block(graph_fts, nb_triplet_fts)
+  tri_g_2 = non_linear_memory_block(graph_fts, nb_triplet_fts)
 
   B, N, H = tri_n_1.shape
 

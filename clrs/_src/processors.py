@@ -1515,8 +1515,8 @@ class FALR7(Processor):
       msgs = hk.nets.MLP(self._msgs_mlp_sizes)(self.activation(msgs))
 
 
-    #msgs = self.reduction(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
-    msgs = self.reduction(msgs, axis=(1))
+    msgs = self.reduction(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
+    #msgs = self.reduction(msgs, axis=(1))
 
     h_1 = o1(node_fts)
     h_2 = o2(hidden)

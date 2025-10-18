@@ -172,7 +172,7 @@ flags.DEFINE_integer('nb_msg_passing_steps', 1,
 flags.DEFINE_float('learning_rate', 0.001, 'Learning rate to use.')
 flags.DEFINE_float('grad_clip_max_norm', 1.0,
                    'Gradient clipping by norm. 0.0 disables grad clipping')
-flags.DEFINE_float('dropout_prob', 0.1, 'Dropout rate to use.')
+flags.DEFINE_float('dropout_prob', 0.0, 'Dropout rate to use.')
 flags.DEFINE_float('hint_teacher_forcing', 0.0,
                    'Probability that ground-truth teacher hints are encoded '
                    'during training instead of predicted hints. Only '
@@ -203,7 +203,7 @@ flags.DEFINE_boolean('use_ln', True,
                      'Whether to use layer normalisation in the processor.')
 flags.DEFINE_boolean('use_lstm', True,
                      'Whether to insert an LSTM after message passing.')
-flags.DEFINE_integer('nb_triplet_fts', 8,
+flags.DEFINE_integer('nb_triplet_fts', 16,
                      'How many triplet features to compute?')
 
 flags.DEFINE_enum('encoder_init', 'xavier_on_scalars',

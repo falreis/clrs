@@ -1,0 +1,658 @@
+I1126 02:40:58.011911 136016717403648 xla_bridge.py:889] Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+I1126 02:40:58.012606 136016717403648 xla_bridge.py:889] Unable to initialize backend 'tpu': INTERNAL: Failed to open libtpu.so: libtpu.so: cannot open shared object file: No such file or directory
+I1126 02:40:58.249689 136016717403648 run.py:453] Model: f7 ['kmp_matcher']
+I1126 02:40:58.249790 136016717403648 run.py:455] algorithms ['kmp_matcher']
+I1126 02:40:58.249969 136016717403648 run.py:456] train_lengths ['4', '7', '11', '13', '16']
+I1126 02:40:58.250006 136016717403648 run.py:457] train_batch_size 32
+I1126 02:40:58.250099 136016717403648 run.py:458] val_batch_size 16
+I1126 02:40:58.250131 136016717403648 run.py:459] test_batch_size 16
+I1126 02:40:58.250160 136016717403648 run.py:460] chunked_training True
+I1126 02:40:58.250277 136016717403648 run.py:461] chunk_length 16
+I1126 02:40:58.250310 136016717403648 run.py:462] train_steps 10000
+I1126 02:40:58.250340 136016717403648 run.py:463] eval_every 50
+I1126 02:40:58.250369 136016717403648 run.py:464] test_every 500
+I1126 02:40:58.250398 136016717403648 run.py:465] hidden_size 256
+I1126 02:40:58.250426 136016717403648 run.py:466] nb_msg_passing_steps 1
+I1126 02:40:58.250454 136016717403648 run.py:467] learning_rate 0.001
+I1126 02:40:58.250557 136016717403648 run.py:468] grad_clip_max_norm 1.0
+I1126 02:40:58.250588 136016717403648 run.py:469] dropout_prob 0.0
+I1126 02:40:58.250617 136016717403648 run.py:470] hint_teacher_forcing 0.0
+I1126 02:40:58.250646 136016717403648 run.py:471] hint_mode encoded_decoded
+I1126 02:40:58.250747 136016717403648 run.py:472] hint_repred_mode soft
+I1126 02:40:58.250779 136016717403648 run.py:473] use_ln True
+I1126 02:40:58.250808 136016717403648 run.py:474] use_lstm True
+I1126 02:40:58.250836 136016717403648 run.py:475] nb_triplet_fts 16
+I1126 02:40:58.250864 136016717403648 run.py:476] encoder_init xavier_on_scalars
+I1126 02:40:58.250891 136016717403648 run.py:477] processor_type f7
+I1126 02:40:58.250921 136016717403648 run.py:478] checkpoint_path CLRS30
+I1126 02:40:58.250949 136016717403648 run.py:479] dataset_path CLRS30
+I1126 02:40:58.250977 136016717403648 run.py:480] freeze_processor False
+I1126 02:40:58.251008 136016717403648 run.py:481] reduction min
+I1126 02:40:58.251036 136016717403648 run.py:482] activation elu
+I1126 02:40:58.251064 136016717403648 run.py:483] restore_model 
+I1126 02:40:58.251092 136016717403648 run.py:484] gated True
+I1126 02:40:58.251120 136016717403648 run.py:485] gated_activation tanh
+I1126 02:40:58.253755 136016717403648 run.py:511] Creating samplers for algo kmp_matcher
+W1126 02:40:58.253932 136016717403648 samplers.py:299] Ignoring kwargs {'p'} when building sampler class <class 'clrs._src.samplers.MatcherSampler'>
+W1126 02:40:58.254187 136016717403648 samplers.py:109] Sampling dataset on-the-fly, unlimited samples.
+W1126 02:40:58.985259 136016717403648 samplers.py:299] Ignoring kwargs {'p'} when building sampler class <class 'clrs._src.samplers.MatcherSampler'>
+I1126 02:40:58.985563 136016717403648 samplers.py:124] Creating a dataset with 4096 samples.
+I1126 02:40:59.666969 136016717403648 samplers.py:144] 1000 samples created
+I1126 02:41:00.341660 136016717403648 samplers.py:144] 2000 samples created
+I1126 02:41:01.123058 136016717403648 samplers.py:144] 3000 samples created
+I1126 02:41:01.805763 136016717403648 samplers.py:144] 4000 samples created
+I1126 02:41:02.054280 136016717403648 run.py:297] Dataset found at CLRS30/CLRS30_v1.0.0. Skipping download.
+I1126 02:41:02.055083 136016717403648 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/kmp_matcher_test/1.0.0
+I1126 02:41:02.059672 136016717403648 dataset_info.py:708] Load dataset info from CLRS30/CLRS30_v1.0.0/clrs_dataset/kmp_matcher_test/1.0.0
+I1126 02:41:02.063456 136016717403648 reader.py:262] Creating a tf.data.Dataset reading 4 files located in folders: CLRS30/CLRS30_v1.0.0/clrs_dataset/kmp_matcher_test/1.0.0.
+I1126 02:41:02.119968 136016717403648 logging_logger.py:49] Constructing tf.data.Dataset clrs_dataset for split test, from CLRS30/CLRS30_v1.0.0/clrs_dataset/kmp_matcher_test/1.0.0
+W1126 02:41:02.142163 136016717403648 ag_logging.py:142] AutoGraph could not transform <function _preprocess at 0x7bb45798ca40> and will run it as-is.
+Please report this to the TensorFlow team. When filing the bug, set the verbosity to 10 (on Linux, `export AUTOGRAPH_VERBOSITY=10`) and attach the full output.
+Cause: `haiku.experimental.flax` features require `flax` to be installed.
+To silence this warning, decorate the function with @tf.autograph.experimental.do_not_convert
+I1126 02:41:38.078051 136016717403648 run.py:734] Algo kmp_matcher step 0 current loss 21.275253, current_train_items 40.
+I1126 02:41:51.187874 136016717403648 run.py:769] (val) algo kmp_matcher step 0: {'match': 0.205322265625, 'score': 0.205322265625, 'examples_seen': 40, 'step': 0, 'algorithm': 'kmp_matcher'}
+I1126 02:41:51.188135 136016717403648 run.py:790] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.205, val scores are: kmp_matcher: 0.205
+W1126 02:41:54.092301 136016717403648 samplers.py:175] Increasing hint lengh from 25 to 26
+W1126 02:41:56.158100 136016717403648 samplers.py:175] Increasing hint lengh from 26 to 27
+I1126 02:41:58.120256 136016717403648 run.py:734] Algo kmp_matcher step 50 current loss 8.861067, current_train_items 1908.
+I1126 02:42:02.315523 136016717403648 run.py:769] (val) algo kmp_matcher step 50: {'match': 0.23193359375, 'score': 0.23193359375, 'examples_seen': 1908, 'step': 50, 'algorithm': 'kmp_matcher'}
+I1126 02:42:02.315773 136016717403648 run.py:790] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.232, val scores are: kmp_matcher: 0.232
+I1126 02:42:09.206708 136016717403648 run.py:734] Algo kmp_matcher step 100 current loss 8.999131, current_train_items 3794.
+I1126 02:42:13.418809 136016717403648 run.py:769] (val) algo kmp_matcher step 100: {'match': 0.266845703125, 'score': 0.266845703125, 'examples_seen': 3794, 'step': 100, 'algorithm': 'kmp_matcher'}
+I1126 02:42:13.419060 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.232, current avg val score is 0.267, val scores are: kmp_matcher: 0.267
+I1126 02:42:20.301210 136016717403648 run.py:734] Algo kmp_matcher step 150 current loss 7.908856, current_train_items 5660.
+I1126 02:42:24.514468 136016717403648 run.py:769] (val) algo kmp_matcher step 150: {'match': 0.353759765625, 'score': 0.353759765625, 'examples_seen': 5660, 'step': 150, 'algorithm': 'kmp_matcher'}
+I1126 02:42:24.514717 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.267, current avg val score is 0.354, val scores are: kmp_matcher: 0.354
+I1126 02:42:31.403471 136016717403648 run.py:734] Algo kmp_matcher step 200 current loss 8.201616, current_train_items 7541.
+I1126 02:42:35.635627 136016717403648 run.py:769] (val) algo kmp_matcher step 200: {'match': 0.3251953125, 'score': 0.3251953125, 'examples_seen': 7541, 'step': 200, 'algorithm': 'kmp_matcher'}
+I1126 02:42:35.635869 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.354, current avg val score is 0.325, val scores are: kmp_matcher: 0.325
+I1126 02:42:42.481981 136016717403648 run.py:734] Algo kmp_matcher step 250 current loss 8.373026, current_train_items 9443.
+I1126 02:42:46.707397 136016717403648 run.py:769] (val) algo kmp_matcher step 250: {'match': 0.389404296875, 'score': 0.389404296875, 'examples_seen': 9443, 'step': 250, 'algorithm': 'kmp_matcher'}
+I1126 02:42:46.707658 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.354, current avg val score is 0.389, val scores are: kmp_matcher: 0.389
+I1126 02:42:53.638360 136016717403648 run.py:734] Algo kmp_matcher step 300 current loss 8.127722, current_train_items 11308.
+I1126 02:42:57.866313 136016717403648 run.py:769] (val) algo kmp_matcher step 300: {'match': 0.408447265625, 'score': 0.408447265625, 'examples_seen': 11308, 'step': 300, 'algorithm': 'kmp_matcher'}
+I1126 02:42:57.866566 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.389, current avg val score is 0.408, val scores are: kmp_matcher: 0.408
+I1126 02:43:04.784965 136016717403648 run.py:734] Algo kmp_matcher step 350 current loss 7.985392, current_train_items 13188.
+I1126 02:43:09.011922 136016717403648 run.py:769] (val) algo kmp_matcher step 350: {'match': 0.381591796875, 'score': 0.381591796875, 'examples_seen': 13188, 'step': 350, 'algorithm': 'kmp_matcher'}
+I1126 02:43:09.012187 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.408, current avg val score is 0.382, val scores are: kmp_matcher: 0.382
+I1126 02:43:15.825867 136016717403648 run.py:734] Algo kmp_matcher step 400 current loss 7.185327, current_train_items 15085.
+I1126 02:43:20.058075 136016717403648 run.py:769] (val) algo kmp_matcher step 400: {'match': 0.369140625, 'score': 0.369140625, 'examples_seen': 15085, 'step': 400, 'algorithm': 'kmp_matcher'}
+I1126 02:43:20.058317 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.408, current avg val score is 0.369, val scores are: kmp_matcher: 0.369
+I1126 02:43:26.902791 136016717403648 run.py:734] Algo kmp_matcher step 450 current loss 7.726657, current_train_items 16983.
+I1126 02:43:31.131680 136016717403648 run.py:769] (val) algo kmp_matcher step 450: {'match': 0.301513671875, 'score': 0.301513671875, 'examples_seen': 16983, 'step': 450, 'algorithm': 'kmp_matcher'}
+I1126 02:43:31.131925 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.408, current avg val score is 0.302, val scores are: kmp_matcher: 0.302
+I1126 02:43:37.978442 136016717403648 run.py:734] Algo kmp_matcher step 500 current loss 7.543375, current_train_items 18862.
+I1126 02:43:42.205603 136016717403648 run.py:769] (val) algo kmp_matcher step 500: {'match': 0.450439453125, 'score': 0.450439453125, 'examples_seen': 18862, 'step': 500, 'algorithm': 'kmp_matcher'}
+I1126 02:43:42.205800 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.408, current avg val score is 0.450, val scores are: kmp_matcher: 0.450
+I1126 02:43:49.082202 136016717403648 run.py:734] Algo kmp_matcher step 550 current loss 7.591823, current_train_items 20756.
+I1126 02:43:53.317358 136016717403648 run.py:769] (val) algo kmp_matcher step 550: {'match': 0.3759765625, 'score': 0.3759765625, 'examples_seen': 20756, 'step': 550, 'algorithm': 'kmp_matcher'}
+I1126 02:43:53.317613 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.450, current avg val score is 0.376, val scores are: kmp_matcher: 0.376
+I1126 02:44:00.159299 136016717403648 run.py:734] Algo kmp_matcher step 600 current loss 8.167543, current_train_items 22668.
+I1126 02:44:04.391334 136016717403648 run.py:769] (val) algo kmp_matcher step 600: {'match': 0.388916015625, 'score': 0.388916015625, 'examples_seen': 22668, 'step': 600, 'algorithm': 'kmp_matcher'}
+I1126 02:44:04.391589 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.450, current avg val score is 0.389, val scores are: kmp_matcher: 0.389
+I1126 02:44:11.090749 136016717403648 run.py:734] Algo kmp_matcher step 650 current loss 7.312695, current_train_items 24539.
+I1126 02:44:15.480684 136016717403648 run.py:769] (val) algo kmp_matcher step 650: {'match': 0.511474609375, 'score': 0.511474609375, 'examples_seen': 24539, 'step': 650, 'algorithm': 'kmp_matcher'}
+I1126 02:44:15.480923 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.450, current avg val score is 0.511, val scores are: kmp_matcher: 0.511
+I1126 02:44:22.424207 136016717403648 run.py:734] Algo kmp_matcher step 700 current loss 7.382992, current_train_items 26419.
+I1126 02:44:26.670420 136016717403648 run.py:769] (val) algo kmp_matcher step 700: {'match': 0.471435546875, 'score': 0.471435546875, 'examples_seen': 26419, 'step': 700, 'algorithm': 'kmp_matcher'}
+I1126 02:44:26.670682 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.511, current avg val score is 0.471, val scores are: kmp_matcher: 0.471
+I1126 02:44:33.579508 136016717403648 run.py:734] Algo kmp_matcher step 750 current loss 7.606806, current_train_items 28284.
+I1126 02:44:37.823107 136016717403648 run.py:769] (val) algo kmp_matcher step 750: {'match': 0.467529296875, 'score': 0.467529296875, 'examples_seen': 28284, 'step': 750, 'algorithm': 'kmp_matcher'}
+I1126 02:44:37.823352 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.511, current avg val score is 0.468, val scores are: kmp_matcher: 0.468
+I1126 02:44:44.775041 136016717403648 run.py:734] Algo kmp_matcher step 800 current loss 7.881889, current_train_items 30175.
+I1126 02:44:48.921782 136016717403648 run.py:769] (val) algo kmp_matcher step 800: {'match': 0.54541015625, 'score': 0.54541015625, 'examples_seen': 30175, 'step': 800, 'algorithm': 'kmp_matcher'}
+I1126 02:44:48.922020 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.511, current avg val score is 0.545, val scores are: kmp_matcher: 0.545
+I1126 02:44:55.860399 136016717403648 run.py:734] Algo kmp_matcher step 850 current loss 7.768192, current_train_items 32026.
+I1126 02:45:00.101185 136016717403648 run.py:769] (val) algo kmp_matcher step 850: {'match': 0.458251953125, 'score': 0.458251953125, 'examples_seen': 32026, 'step': 850, 'algorithm': 'kmp_matcher'}
+I1126 02:45:00.101430 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.545, current avg val score is 0.458, val scores are: kmp_matcher: 0.458
+I1126 02:45:06.961331 136016717403648 run.py:734] Algo kmp_matcher step 900 current loss 8.029448, current_train_items 33920.
+I1126 02:45:11.203547 136016717403648 run.py:769] (val) algo kmp_matcher step 900: {'match': 0.457763671875, 'score': 0.457763671875, 'examples_seen': 33920, 'step': 900, 'algorithm': 'kmp_matcher'}
+I1126 02:45:11.203793 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.545, current avg val score is 0.458, val scores are: kmp_matcher: 0.458
+I1126 02:45:18.061198 136016717403648 run.py:734] Algo kmp_matcher step 950 current loss 7.242217, current_train_items 35785.
+I1126 02:45:22.306983 136016717403648 run.py:769] (val) algo kmp_matcher step 950: {'match': 0.40478515625, 'score': 0.40478515625, 'examples_seen': 35785, 'step': 950, 'algorithm': 'kmp_matcher'}
+I1126 02:45:22.307225 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.545, current avg val score is 0.405, val scores are: kmp_matcher: 0.405
+I1126 02:45:29.164557 136016717403648 run.py:734] Algo kmp_matcher step 1000 current loss 7.284944, current_train_items 37670.
+I1126 02:45:33.411216 136016717403648 run.py:769] (val) algo kmp_matcher step 1000: {'match': 0.493408203125, 'score': 0.493408203125, 'examples_seen': 37670, 'step': 1000, 'algorithm': 'kmp_matcher'}
+I1126 02:45:33.411455 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.545, current avg val score is 0.493, val scores are: kmp_matcher: 0.493
+I1126 02:45:40.268905 136016717403648 run.py:734] Algo kmp_matcher step 1050 current loss 7.636578, current_train_items 39572.
+I1126 02:45:44.514456 136016717403648 run.py:769] (val) algo kmp_matcher step 1050: {'match': 0.526611328125, 'score': 0.526611328125, 'examples_seen': 39572, 'step': 1050, 'algorithm': 'kmp_matcher'}
+I1126 02:45:44.514719 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.545, current avg val score is 0.527, val scores are: kmp_matcher: 0.527
+I1126 02:45:51.376607 136016717403648 run.py:734] Algo kmp_matcher step 1100 current loss 7.684207, current_train_items 41416.
+I1126 02:45:55.620134 136016717403648 run.py:769] (val) algo kmp_matcher step 1100: {'match': 0.469970703125, 'score': 0.469970703125, 'examples_seen': 41416, 'step': 1100, 'algorithm': 'kmp_matcher'}
+I1126 02:45:55.620376 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.545, current avg val score is 0.470, val scores are: kmp_matcher: 0.470
+I1126 02:46:02.478220 136016717403648 run.py:734] Algo kmp_matcher step 1150 current loss 7.134165, current_train_items 43334.
+I1126 02:46:06.720761 136016717403648 run.py:769] (val) algo kmp_matcher step 1150: {'match': 0.460205078125, 'score': 0.460205078125, 'examples_seen': 43334, 'step': 1150, 'algorithm': 'kmp_matcher'}
+I1126 02:46:06.721013 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.545, current avg val score is 0.460, val scores are: kmp_matcher: 0.460
+W1126 02:46:07.248307 136016717403648 samplers.py:175] Increasing hint lengh from 27 to 30
+I1126 02:46:13.614266 136016717403648 run.py:734] Algo kmp_matcher step 1200 current loss 7.363594, current_train_items 45219.
+I1126 02:46:17.864701 136016717403648 run.py:769] (val) algo kmp_matcher step 1200: {'match': 0.559326171875, 'score': 0.559326171875, 'examples_seen': 45219, 'step': 1200, 'algorithm': 'kmp_matcher'}
+I1126 02:46:17.864938 136016717403648 run.py:790] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.559, val scores are: kmp_matcher: 0.559
+I1126 02:46:24.803587 136016717403648 run.py:734] Algo kmp_matcher step 1250 current loss 7.393354, current_train_items 47106.
+I1126 02:46:29.052595 136016717403648 run.py:769] (val) algo kmp_matcher step 1250: {'match': 0.579345703125, 'score': 0.579345703125, 'examples_seen': 47106, 'step': 1250, 'algorithm': 'kmp_matcher'}
+I1126 02:46:29.052834 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.559, current avg val score is 0.579, val scores are: kmp_matcher: 0.579
+I1126 02:46:35.980336 136016717403648 run.py:734] Algo kmp_matcher step 1300 current loss 7.701733, current_train_items 48972.
+I1126 02:46:40.226686 136016717403648 run.py:769] (val) algo kmp_matcher step 1300: {'match': 0.530517578125, 'score': 0.530517578125, 'examples_seen': 48972, 'step': 1300, 'algorithm': 'kmp_matcher'}
+I1126 02:46:40.226991 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.579, current avg val score is 0.531, val scores are: kmp_matcher: 0.531
+I1126 02:46:47.089467 136016717403648 run.py:734] Algo kmp_matcher step 1350 current loss 7.198950, current_train_items 50850.
+I1126 02:46:51.332531 136016717403648 run.py:769] (val) algo kmp_matcher step 1350: {'match': 0.5546875, 'score': 0.5546875, 'examples_seen': 50850, 'step': 1350, 'algorithm': 'kmp_matcher'}
+I1126 02:46:51.332773 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.579, current avg val score is 0.555, val scores are: kmp_matcher: 0.555
+I1126 02:46:58.191931 136016717403648 run.py:734] Algo kmp_matcher step 1400 current loss 7.322214, current_train_items 52744.
+I1126 02:47:02.431751 136016717403648 run.py:769] (val) algo kmp_matcher step 1400: {'match': 0.534912109375, 'score': 0.534912109375, 'examples_seen': 52744, 'step': 1400, 'algorithm': 'kmp_matcher'}
+I1126 02:47:02.431995 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.579, current avg val score is 0.535, val scores are: kmp_matcher: 0.535
+I1126 02:47:09.288022 136016717403648 run.py:734] Algo kmp_matcher step 1450 current loss 7.296525, current_train_items 54589.
+I1126 02:47:13.533838 136016717403648 run.py:769] (val) algo kmp_matcher step 1450: {'match': 0.543212890625, 'score': 0.543212890625, 'examples_seen': 54589, 'step': 1450, 'algorithm': 'kmp_matcher'}
+I1126 02:47:13.534076 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.579, current avg val score is 0.543, val scores are: kmp_matcher: 0.543
+I1126 02:47:20.391346 136016717403648 run.py:734] Algo kmp_matcher step 1500 current loss 6.707871, current_train_items 56475.
+I1126 02:47:24.633153 136016717403648 run.py:769] (val) algo kmp_matcher step 1500: {'match': 0.513427734375, 'score': 0.513427734375, 'examples_seen': 56475, 'step': 1500, 'algorithm': 'kmp_matcher'}
+I1126 02:47:24.633393 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.579, current avg val score is 0.513, val scores are: kmp_matcher: 0.513
+I1126 02:47:31.492576 136016717403648 run.py:734] Algo kmp_matcher step 1550 current loss 6.932345, current_train_items 58383.
+I1126 02:47:35.732016 136016717403648 run.py:769] (val) algo kmp_matcher step 1550: {'match': 0.52880859375, 'score': 0.52880859375, 'examples_seen': 58383, 'step': 1550, 'algorithm': 'kmp_matcher'}
+I1126 02:47:35.732257 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.579, current avg val score is 0.529, val scores are: kmp_matcher: 0.529
+I1126 02:47:42.589218 136016717403648 run.py:734] Algo kmp_matcher step 1600 current loss 7.542098, current_train_items 60249.
+I1126 02:47:46.835587 136016717403648 run.py:769] (val) algo kmp_matcher step 1600: {'match': 0.5732421875, 'score': 0.5732421875, 'examples_seen': 60249, 'step': 1600, 'algorithm': 'kmp_matcher'}
+I1126 02:47:46.835821 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.579, current avg val score is 0.573, val scores are: kmp_matcher: 0.573
+I1126 02:47:53.695519 136016717403648 run.py:734] Algo kmp_matcher step 1650 current loss 7.586573, current_train_items 62150.
+I1126 02:47:57.934424 136016717403648 run.py:769] (val) algo kmp_matcher step 1650: {'match': 0.57275390625, 'score': 0.57275390625, 'examples_seen': 62150, 'step': 1650, 'algorithm': 'kmp_matcher'}
+I1126 02:47:57.934676 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.579, current avg val score is 0.573, val scores are: kmp_matcher: 0.573
+I1126 02:48:04.792186 136016717403648 run.py:734] Algo kmp_matcher step 1700 current loss 7.435274, current_train_items 63995.
+I1126 02:48:09.037652 136016717403648 run.py:769] (val) algo kmp_matcher step 1700: {'match': 0.53271484375, 'score': 0.53271484375, 'examples_seen': 63995, 'step': 1700, 'algorithm': 'kmp_matcher'}
+I1126 02:48:09.037893 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.579, current avg val score is 0.533, val scores are: kmp_matcher: 0.533
+I1126 02:48:15.865769 136016717403648 run.py:734] Algo kmp_matcher step 1750 current loss 7.076081, current_train_items 65893.
+I1126 02:48:20.112817 136016717403648 run.py:769] (val) algo kmp_matcher step 1750: {'match': 0.52392578125, 'score': 0.52392578125, 'examples_seen': 65893, 'step': 1750, 'algorithm': 'kmp_matcher'}
+I1126 02:48:20.113072 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.579, current avg val score is 0.524, val scores are: kmp_matcher: 0.524
+I1126 02:48:27.086614 136016717403648 run.py:734] Algo kmp_matcher step 1800 current loss 7.198043, current_train_items 67784.
+I1126 02:48:31.192480 136016717403648 run.py:769] (val) algo kmp_matcher step 1800: {'match': 0.448486328125, 'score': 0.448486328125, 'examples_seen': 67784, 'step': 1800, 'algorithm': 'kmp_matcher'}
+I1126 02:48:31.192732 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.579, current avg val score is 0.448, val scores are: kmp_matcher: 0.448
+I1126 02:48:38.023621 136016717403648 run.py:734] Algo kmp_matcher step 1850 current loss 7.018942, current_train_items 69684.
+I1126 02:48:42.269964 136016717403648 run.py:769] (val) algo kmp_matcher step 1850: {'match': 0.497802734375, 'score': 0.497802734375, 'examples_seen': 69684, 'step': 1850, 'algorithm': 'kmp_matcher'}
+I1126 02:48:42.270207 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.579, current avg val score is 0.498, val scores are: kmp_matcher: 0.498
+I1126 02:48:49.128270 136016717403648 run.py:734] Algo kmp_matcher step 1900 current loss 8.012856, current_train_items 71599.
+I1126 02:48:53.369628 136016717403648 run.py:769] (val) algo kmp_matcher step 1900: {'match': 0.580810546875, 'score': 0.580810546875, 'examples_seen': 71599, 'step': 1900, 'algorithm': 'kmp_matcher'}
+I1126 02:48:53.369866 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.579, current avg val score is 0.581, val scores are: kmp_matcher: 0.581
+I1126 02:49:00.305217 136016717403648 run.py:734] Algo kmp_matcher step 1950 current loss 7.353246, current_train_items 73489.
+I1126 02:49:04.556221 136016717403648 run.py:769] (val) algo kmp_matcher step 1950: {'match': 0.553955078125, 'score': 0.553955078125, 'examples_seen': 73489, 'step': 1950, 'algorithm': 'kmp_matcher'}
+I1126 02:49:04.556475 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.581, current avg val score is 0.554, val scores are: kmp_matcher: 0.554
+I1126 02:49:11.415394 136016717403648 run.py:734] Algo kmp_matcher step 2000 current loss 7.136721, current_train_items 75355.
+I1126 02:49:15.653879 136016717403648 run.py:769] (val) algo kmp_matcher step 2000: {'match': 0.5556640625, 'score': 0.5556640625, 'examples_seen': 75355, 'step': 2000, 'algorithm': 'kmp_matcher'}
+I1126 02:49:15.654123 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.581, current avg val score is 0.556, val scores are: kmp_matcher: 0.556
+I1126 02:49:22.512161 136016717403648 run.py:734] Algo kmp_matcher step 2050 current loss 7.957167, current_train_items 77214.
+I1126 02:49:26.757038 136016717403648 run.py:769] (val) algo kmp_matcher step 2050: {'match': 0.52783203125, 'score': 0.52783203125, 'examples_seen': 77214, 'step': 2050, 'algorithm': 'kmp_matcher'}
+I1126 02:49:26.757275 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.581, current avg val score is 0.528, val scores are: kmp_matcher: 0.528
+I1126 02:49:33.636256 136016717403648 run.py:734] Algo kmp_matcher step 2100 current loss 7.181172, current_train_items 79094.
+I1126 02:49:37.886102 136016717403648 run.py:769] (val) algo kmp_matcher step 2100: {'match': 0.5634765625, 'score': 0.5634765625, 'examples_seen': 79094, 'step': 2100, 'algorithm': 'kmp_matcher'}
+I1126 02:49:37.886353 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.581, current avg val score is 0.563, val scores are: kmp_matcher: 0.563
+I1126 02:49:44.741285 136016717403648 run.py:734] Algo kmp_matcher step 2150 current loss 7.109100, current_train_items 80965.
+I1126 02:49:48.983274 136016717403648 run.py:769] (val) algo kmp_matcher step 2150: {'match': 0.5361328125, 'score': 0.5361328125, 'examples_seen': 80965, 'step': 2150, 'algorithm': 'kmp_matcher'}
+I1126 02:49:48.983524 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.581, current avg val score is 0.536, val scores are: kmp_matcher: 0.536
+I1126 02:49:56.008532 136016717403648 run.py:734] Algo kmp_matcher step 2200 current loss 7.446812, current_train_items 82864.
+I1126 02:50:00.107789 136016717403648 run.py:769] (val) algo kmp_matcher step 2200: {'match': 0.565673828125, 'score': 0.565673828125, 'examples_seen': 82864, 'step': 2200, 'algorithm': 'kmp_matcher'}
+I1126 02:50:00.108026 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.581, current avg val score is 0.566, val scores are: kmp_matcher: 0.566
+I1126 02:50:06.892714 136016717403648 run.py:734] Algo kmp_matcher step 2250 current loss 7.245224, current_train_items 84738.
+I1126 02:50:11.208817 136016717403648 run.py:769] (val) algo kmp_matcher step 2250: {'match': 0.57275390625, 'score': 0.57275390625, 'examples_seen': 84738, 'step': 2250, 'algorithm': 'kmp_matcher'}
+I1126 02:50:11.209062 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.581, current avg val score is 0.573, val scores are: kmp_matcher: 0.573
+I1126 02:50:18.067703 136016717403648 run.py:734] Algo kmp_matcher step 2300 current loss 7.265553, current_train_items 86597.
+I1126 02:50:22.310332 136016717403648 run.py:769] (val) algo kmp_matcher step 2300: {'match': 0.525146484375, 'score': 0.525146484375, 'examples_seen': 86597, 'step': 2300, 'algorithm': 'kmp_matcher'}
+I1126 02:50:22.310582 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.581, current avg val score is 0.525, val scores are: kmp_matcher: 0.525
+I1126 02:50:29.169272 136016717403648 run.py:734] Algo kmp_matcher step 2350 current loss 6.706071, current_train_items 88474.
+I1126 02:50:33.416069 136016717403648 run.py:769] (val) algo kmp_matcher step 2350: {'match': 0.5537109375, 'score': 0.5537109375, 'examples_seen': 88474, 'step': 2350, 'algorithm': 'kmp_matcher'}
+I1126 02:50:33.416322 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.581, current avg val score is 0.554, val scores are: kmp_matcher: 0.554
+I1126 02:50:40.245206 136016717403648 run.py:734] Algo kmp_matcher step 2400 current loss 6.137790, current_train_items 90326.
+I1126 02:50:44.487519 136016717403648 run.py:769] (val) algo kmp_matcher step 2400: {'match': 0.785400390625, 'score': 0.785400390625, 'examples_seen': 90326, 'step': 2400, 'algorithm': 'kmp_matcher'}
+I1126 02:50:44.487761 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.581, current avg val score is 0.785, val scores are: kmp_matcher: 0.785
+I1126 02:50:51.421463 136016717403648 run.py:734] Algo kmp_matcher step 2450 current loss 6.332340, current_train_items 92223.
+I1126 02:50:55.664766 136016717403648 run.py:769] (val) algo kmp_matcher step 2450: {'match': 0.752685546875, 'score': 0.752685546875, 'examples_seen': 92223, 'step': 2450, 'algorithm': 'kmp_matcher'}
+I1126 02:50:55.665002 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.785, current avg val score is 0.753, val scores are: kmp_matcher: 0.753
+I1126 02:51:02.525611 136016717403648 run.py:734] Algo kmp_matcher step 2500 current loss 6.319770, current_train_items 94092.
+I1126 02:51:06.769730 136016717403648 run.py:769] (val) algo kmp_matcher step 2500: {'match': 0.784423828125, 'score': 0.784423828125, 'examples_seen': 94092, 'step': 2500, 'algorithm': 'kmp_matcher'}
+I1126 02:51:06.769972 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.785, current avg val score is 0.784, val scores are: kmp_matcher: 0.784
+I1126 02:51:13.625767 136016717403648 run.py:734] Algo kmp_matcher step 2550 current loss 6.308071, current_train_items 95929.
+I1126 02:51:17.871002 136016717403648 run.py:769] (val) algo kmp_matcher step 2550: {'match': 0.856201171875, 'score': 0.856201171875, 'examples_seen': 95929, 'step': 2550, 'algorithm': 'kmp_matcher'}
+I1126 02:51:17.871236 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.785, current avg val score is 0.856, val scores are: kmp_matcher: 0.856
+I1126 02:51:24.791484 136016717403648 run.py:734] Algo kmp_matcher step 2600 current loss 6.037640, current_train_items 97795.
+I1126 02:51:29.035584 136016717403648 run.py:769] (val) algo kmp_matcher step 2600: {'match': 0.82958984375, 'score': 0.82958984375, 'examples_seen': 97795, 'step': 2600, 'algorithm': 'kmp_matcher'}
+I1126 02:51:29.035827 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.856, current avg val score is 0.830, val scores are: kmp_matcher: 0.830
+I1126 02:51:35.865130 136016717403648 run.py:734] Algo kmp_matcher step 2650 current loss 5.954906, current_train_items 99689.
+I1126 02:51:40.108323 136016717403648 run.py:769] (val) algo kmp_matcher step 2650: {'match': 0.894287109375, 'score': 0.894287109375, 'examples_seen': 99689, 'step': 2650, 'algorithm': 'kmp_matcher'}
+I1126 02:51:40.108580 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.856, current avg val score is 0.894, val scores are: kmp_matcher: 0.894
+I1126 02:51:47.047456 136016717403648 run.py:734] Algo kmp_matcher step 2700 current loss 5.880297, current_train_items 101550.
+I1126 02:51:51.288058 136016717403648 run.py:769] (val) algo kmp_matcher step 2700: {'match': 0.87451171875, 'score': 0.87451171875, 'examples_seen': 101550, 'step': 2700, 'algorithm': 'kmp_matcher'}
+I1126 02:51:51.288295 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.894, current avg val score is 0.875, val scores are: kmp_matcher: 0.875
+I1126 02:51:58.169307 136016717403648 run.py:734] Algo kmp_matcher step 2750 current loss 6.179289, current_train_items 103448.
+I1126 02:52:02.412952 136016717403648 run.py:769] (val) algo kmp_matcher step 2750: {'match': 0.888427734375, 'score': 0.888427734375, 'examples_seen': 103448, 'step': 2750, 'algorithm': 'kmp_matcher'}
+I1126 02:52:02.413193 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.894, current avg val score is 0.888, val scores are: kmp_matcher: 0.888
+I1126 02:52:09.271556 136016717403648 run.py:734] Algo kmp_matcher step 2800 current loss 6.059744, current_train_items 105332.
+I1126 02:52:13.508669 136016717403648 run.py:769] (val) algo kmp_matcher step 2800: {'match': 0.82421875, 'score': 0.82421875, 'examples_seen': 105332, 'step': 2800, 'algorithm': 'kmp_matcher'}
+I1126 02:52:13.508917 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.894, current avg val score is 0.824, val scores are: kmp_matcher: 0.824
+I1126 02:52:20.363396 136016717403648 run.py:734] Algo kmp_matcher step 2850 current loss 5.741300, current_train_items 107210.
+I1126 02:52:24.606969 136016717403648 run.py:769] (val) algo kmp_matcher step 2850: {'match': 0.89794921875, 'score': 0.89794921875, 'examples_seen': 107210, 'step': 2850, 'algorithm': 'kmp_matcher'}
+I1126 02:52:24.607208 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.894, current avg val score is 0.898, val scores are: kmp_matcher: 0.898
+I1126 02:52:31.536740 136016717403648 run.py:734] Algo kmp_matcher step 2900 current loss 6.257367, current_train_items 109081.
+I1126 02:52:35.775259 136016717403648 run.py:769] (val) algo kmp_matcher step 2900: {'match': 0.963623046875, 'score': 0.963623046875, 'examples_seen': 109081, 'step': 2900, 'algorithm': 'kmp_matcher'}
+I1126 02:52:35.775528 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.898, current avg val score is 0.964, val scores are: kmp_matcher: 0.964
+I1126 02:52:42.685096 136016717403648 run.py:734] Algo kmp_matcher step 2950 current loss 5.803117, current_train_items 110985.
+I1126 02:52:46.928518 136016717403648 run.py:769] (val) algo kmp_matcher step 2950: {'match': 0.917236328125, 'score': 0.917236328125, 'examples_seen': 110985, 'step': 2950, 'algorithm': 'kmp_matcher'}
+I1126 02:52:46.928764 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.964, current avg val score is 0.917, val scores are: kmp_matcher: 0.917
+I1126 02:52:53.785407 136016717403648 run.py:734] Algo kmp_matcher step 3000 current loss 5.813737, current_train_items 112867.
+I1126 02:52:58.026309 136016717403648 run.py:769] (val) algo kmp_matcher step 3000: {'match': 0.9140625, 'score': 0.9140625, 'examples_seen': 112867, 'step': 3000, 'algorithm': 'kmp_matcher'}
+I1126 02:52:58.026578 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.964, current avg val score is 0.914, val scores are: kmp_matcher: 0.914
+I1126 02:53:04.885309 136016717403648 run.py:734] Algo kmp_matcher step 3050 current loss 5.949575, current_train_items 114757.
+I1126 02:53:09.127981 136016717403648 run.py:769] (val) algo kmp_matcher step 3050: {'match': 0.96435546875, 'score': 0.96435546875, 'examples_seen': 114757, 'step': 3050, 'algorithm': 'kmp_matcher'}
+I1126 02:53:09.128217 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.964, current avg val score is 0.964, val scores are: kmp_matcher: 0.964
+I1126 02:53:16.052712 136016717403648 run.py:734] Algo kmp_matcher step 3100 current loss 5.824938, current_train_items 116621.
+I1126 02:53:20.295374 136016717403648 run.py:769] (val) algo kmp_matcher step 3100: {'match': 0.857421875, 'score': 0.857421875, 'examples_seen': 116621, 'step': 3100, 'algorithm': 'kmp_matcher'}
+I1126 02:53:20.295626 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.964, current avg val score is 0.857, val scores are: kmp_matcher: 0.857
+I1126 02:53:27.180583 136016717403648 run.py:734] Algo kmp_matcher step 3150 current loss 5.947131, current_train_items 118474.
+I1126 02:53:31.420989 136016717403648 run.py:769] (val) algo kmp_matcher step 3150: {'match': 0.894775390625, 'score': 0.894775390625, 'examples_seen': 118474, 'step': 3150, 'algorithm': 'kmp_matcher'}
+I1126 02:53:31.421233 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.964, current avg val score is 0.895, val scores are: kmp_matcher: 0.895
+I1126 02:53:38.302958 136016717403648 run.py:734] Algo kmp_matcher step 3200 current loss 5.904431, current_train_items 120304.
+I1126 02:53:42.544878 136016717403648 run.py:769] (val) algo kmp_matcher step 3200: {'match': 0.923828125, 'score': 0.923828125, 'examples_seen': 120304, 'step': 3200, 'algorithm': 'kmp_matcher'}
+I1126 02:53:42.545122 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.964, current avg val score is 0.924, val scores are: kmp_matcher: 0.924
+I1126 02:53:49.404286 136016717403648 run.py:734] Algo kmp_matcher step 3250 current loss 5.768689, current_train_items 122205.
+I1126 02:53:53.648756 136016717403648 run.py:769] (val) algo kmp_matcher step 3250: {'match': 0.966552734375, 'score': 0.966552734375, 'examples_seen': 122205, 'step': 3250, 'algorithm': 'kmp_matcher'}
+I1126 02:53:53.648995 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.964, current avg val score is 0.967, val scores are: kmp_matcher: 0.967
+I1126 02:54:00.581633 136016717403648 run.py:734] Algo kmp_matcher step 3300 current loss 4.996374, current_train_items 124074.
+I1126 02:54:04.829277 136016717403648 run.py:769] (val) algo kmp_matcher step 3300: {'match': 0.97412109375, 'score': 0.97412109375, 'examples_seen': 124074, 'step': 3300, 'algorithm': 'kmp_matcher'}
+I1126 02:54:04.829532 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.967, current avg val score is 0.974, val scores are: kmp_matcher: 0.974
+I1126 02:54:11.768066 136016717403648 run.py:734] Algo kmp_matcher step 3350 current loss 5.539160, current_train_items 125992.
+I1126 02:54:16.013946 136016717403648 run.py:769] (val) algo kmp_matcher step 3350: {'match': 0.972412109375, 'score': 0.972412109375, 'examples_seen': 125992, 'step': 3350, 'algorithm': 'kmp_matcher'}
+I1126 02:54:16.014189 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.974, current avg val score is 0.972, val scores are: kmp_matcher: 0.972
+I1126 02:54:22.869371 136016717403648 run.py:734] Algo kmp_matcher step 3400 current loss 5.197182, current_train_items 127872.
+I1126 02:54:27.111686 136016717403648 run.py:769] (val) algo kmp_matcher step 3400: {'match': 0.8955078125, 'score': 0.8955078125, 'examples_seen': 127872, 'step': 3400, 'algorithm': 'kmp_matcher'}
+I1126 02:54:27.111926 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.974, current avg val score is 0.896, val scores are: kmp_matcher: 0.896
+I1126 02:54:33.969010 136016717403648 run.py:734] Algo kmp_matcher step 3450 current loss 5.598473, current_train_items 129775.
+I1126 02:54:38.210490 136016717403648 run.py:769] (val) algo kmp_matcher step 3450: {'match': 0.9482421875, 'score': 0.9482421875, 'examples_seen': 129775, 'step': 3450, 'algorithm': 'kmp_matcher'}
+I1126 02:54:38.210738 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.974, current avg val score is 0.948, val scores are: kmp_matcher: 0.948
+I1126 02:54:45.070767 136016717403648 run.py:734] Algo kmp_matcher step 3500 current loss 5.021032, current_train_items 131638.
+I1126 02:54:49.312335 136016717403648 run.py:769] (val) algo kmp_matcher step 3500: {'match': 0.93408203125, 'score': 0.93408203125, 'examples_seen': 131638, 'step': 3500, 'algorithm': 'kmp_matcher'}
+I1126 02:54:49.312594 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.974, current avg val score is 0.934, val scores are: kmp_matcher: 0.934
+I1126 02:54:56.171452 136016717403648 run.py:734] Algo kmp_matcher step 3550 current loss 5.268149, current_train_items 133527.
+I1126 02:55:00.407370 136016717403648 run.py:769] (val) algo kmp_matcher step 3550: {'match': 0.96435546875, 'score': 0.96435546875, 'examples_seen': 133527, 'step': 3550, 'algorithm': 'kmp_matcher'}
+I1126 02:55:00.407617 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.974, current avg val score is 0.964, val scores are: kmp_matcher: 0.964
+I1126 02:55:07.318031 136016717403648 run.py:734] Algo kmp_matcher step 3600 current loss 4.939304, current_train_items 135414.
+I1126 02:55:11.565755 136016717403648 run.py:769] (val) algo kmp_matcher step 3600: {'match': 0.955078125, 'score': 0.955078125, 'examples_seen': 135414, 'step': 3600, 'algorithm': 'kmp_matcher'}
+I1126 02:55:11.565991 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.974, current avg val score is 0.955, val scores are: kmp_matcher: 0.955
+I1126 02:55:18.393144 136016717403648 run.py:734] Algo kmp_matcher step 3650 current loss 5.511997, current_train_items 137282.
+I1126 02:55:22.637301 136016717403648 run.py:769] (val) algo kmp_matcher step 3650: {'match': 0.925537109375, 'score': 0.925537109375, 'examples_seen': 137282, 'step': 3650, 'algorithm': 'kmp_matcher'}
+I1126 02:55:22.637582 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.974, current avg val score is 0.926, val scores are: kmp_matcher: 0.926
+I1126 02:55:29.496646 136016717403648 run.py:734] Algo kmp_matcher step 3700 current loss 5.735525, current_train_items 139155.
+I1126 02:55:33.743819 136016717403648 run.py:769] (val) algo kmp_matcher step 3700: {'match': 0.9658203125, 'score': 0.9658203125, 'examples_seen': 139155, 'step': 3700, 'algorithm': 'kmp_matcher'}
+I1126 02:55:33.744051 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.974, current avg val score is 0.966, val scores are: kmp_matcher: 0.966
+I1126 02:55:40.603812 136016717403648 run.py:734] Algo kmp_matcher step 3750 current loss 5.595904, current_train_items 141011.
+I1126 02:55:44.846867 136016717403648 run.py:769] (val) algo kmp_matcher step 3750: {'match': 0.978271484375, 'score': 0.978271484375, 'examples_seen': 141011, 'step': 3750, 'algorithm': 'kmp_matcher'}
+I1126 02:55:44.847104 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.974, current avg val score is 0.978, val scores are: kmp_matcher: 0.978
+I1126 02:55:51.780319 136016717403648 run.py:734] Algo kmp_matcher step 3800 current loss 4.579893, current_train_items 142876.
+I1126 02:55:56.025790 136016717403648 run.py:769] (val) algo kmp_matcher step 3800: {'match': 0.91064453125, 'score': 0.91064453125, 'examples_seen': 142876, 'step': 3800, 'algorithm': 'kmp_matcher'}
+I1126 02:55:56.026036 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.978, current avg val score is 0.911, val scores are: kmp_matcher: 0.911
+I1126 02:56:02.886641 136016717403648 run.py:734] Algo kmp_matcher step 3850 current loss 5.264758, current_train_items 144738.
+I1126 02:56:07.131816 136016717403648 run.py:769] (val) algo kmp_matcher step 3850: {'match': 0.96484375, 'score': 0.96484375, 'examples_seen': 144738, 'step': 3850, 'algorithm': 'kmp_matcher'}
+I1126 02:56:07.132054 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.978, current avg val score is 0.965, val scores are: kmp_matcher: 0.965
+I1126 02:56:13.989249 136016717403648 run.py:734] Algo kmp_matcher step 3900 current loss 5.328094, current_train_items 146580.
+I1126 02:56:18.231342 136016717403648 run.py:769] (val) algo kmp_matcher step 3900: {'match': 0.944580078125, 'score': 0.944580078125, 'examples_seen': 146580, 'step': 3900, 'algorithm': 'kmp_matcher'}
+I1126 02:56:18.231604 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.978, current avg val score is 0.945, val scores are: kmp_matcher: 0.945
+I1126 02:56:25.112854 136016717403648 run.py:734] Algo kmp_matcher step 3950 current loss 5.191287, current_train_items 148466.
+I1126 02:56:29.352827 136016717403648 run.py:769] (val) algo kmp_matcher step 3950: {'match': 0.945068359375, 'score': 0.945068359375, 'examples_seen': 148466, 'step': 3950, 'algorithm': 'kmp_matcher'}
+I1126 02:56:29.352995 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.978, current avg val score is 0.945, val scores are: kmp_matcher: 0.945
+I1126 02:56:36.230358 136016717403648 run.py:734] Algo kmp_matcher step 4000 current loss 4.710108, current_train_items 150370.
+I1126 02:56:40.470322 136016717403648 run.py:769] (val) algo kmp_matcher step 4000: {'match': 0.963134765625, 'score': 0.963134765625, 'examples_seen': 150370, 'step': 4000, 'algorithm': 'kmp_matcher'}
+I1126 02:56:40.470580 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.978, current avg val score is 0.963, val scores are: kmp_matcher: 0.963
+I1126 02:56:47.326527 136016717403648 run.py:734] Algo kmp_matcher step 4050 current loss 4.645783, current_train_items 152232.
+I1126 02:56:51.567140 136016717403648 run.py:769] (val) algo kmp_matcher step 4050: {'match': 0.955810546875, 'score': 0.955810546875, 'examples_seen': 152232, 'step': 4050, 'algorithm': 'kmp_matcher'}
+I1126 02:56:51.567376 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.978, current avg val score is 0.956, val scores are: kmp_matcher: 0.956
+I1126 02:56:58.425085 136016717403648 run.py:734] Algo kmp_matcher step 4100 current loss 5.856361, current_train_items 154096.
+I1126 02:57:02.670989 136016717403648 run.py:769] (val) algo kmp_matcher step 4100: {'match': 0.9775390625, 'score': 0.9775390625, 'examples_seen': 154096, 'step': 4100, 'algorithm': 'kmp_matcher'}
+I1126 02:57:02.671231 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.978, current avg val score is 0.978, val scores are: kmp_matcher: 0.978
+I1126 02:57:09.532366 136016717403648 run.py:734] Algo kmp_matcher step 4150 current loss 5.302518, current_train_items 155969.
+I1126 02:57:13.775320 136016717403648 run.py:769] (val) algo kmp_matcher step 4150: {'match': 0.943603515625, 'score': 0.943603515625, 'examples_seen': 155969, 'step': 4150, 'algorithm': 'kmp_matcher'}
+I1126 02:57:13.775584 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.978, current avg val score is 0.944, val scores are: kmp_matcher: 0.944
+I1126 02:57:20.657602 136016717403648 run.py:734] Algo kmp_matcher step 4200 current loss 5.130942, current_train_items 157836.
+I1126 02:57:24.897812 136016717403648 run.py:769] (val) algo kmp_matcher step 4200: {'match': 0.953857421875, 'score': 0.953857421875, 'examples_seen': 157836, 'step': 4200, 'algorithm': 'kmp_matcher'}
+I1126 02:57:24.898056 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.978, current avg val score is 0.954, val scores are: kmp_matcher: 0.954
+I1126 02:57:31.758094 136016717403648 run.py:734] Algo kmp_matcher step 4250 current loss 4.802896, current_train_items 159692.
+I1126 02:57:36.002628 136016717403648 run.py:769] (val) algo kmp_matcher step 4250: {'match': 0.91748046875, 'score': 0.91748046875, 'examples_seen': 159692, 'step': 4250, 'algorithm': 'kmp_matcher'}
+I1126 02:57:36.002874 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.978, current avg val score is 0.917, val scores are: kmp_matcher: 0.917
+I1126 02:57:42.858756 136016717403648 run.py:734] Algo kmp_matcher step 4300 current loss 5.041679, current_train_items 161532.
+I1126 02:57:47.102574 136016717403648 run.py:769] (val) algo kmp_matcher step 4300: {'match': 0.967529296875, 'score': 0.967529296875, 'examples_seen': 161532, 'step': 4300, 'algorithm': 'kmp_matcher'}
+I1126 02:57:47.102825 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.978, current avg val score is 0.968, val scores are: kmp_matcher: 0.968
+I1126 02:57:53.987517 136016717403648 run.py:734] Algo kmp_matcher step 4350 current loss 4.943782, current_train_items 163465.
+I1126 02:57:58.232357 136016717403648 run.py:769] (val) algo kmp_matcher step 4350: {'match': 0.980224609375, 'score': 0.980224609375, 'examples_seen': 163465, 'step': 4350, 'algorithm': 'kmp_matcher'}
+I1126 02:57:58.232629 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.978, current avg val score is 0.980, val scores are: kmp_matcher: 0.980
+I1126 02:58:05.170706 136016717403648 run.py:734] Algo kmp_matcher step 4400 current loss 5.162806, current_train_items 165350.
+I1126 02:58:09.413152 136016717403648 run.py:769] (val) algo kmp_matcher step 4400: {'match': 0.976806640625, 'score': 0.976806640625, 'examples_seen': 165350, 'step': 4400, 'algorithm': 'kmp_matcher'}
+I1126 02:58:09.413408 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.977, val scores are: kmp_matcher: 0.977
+I1126 02:58:16.384540 136016717403648 run.py:734] Algo kmp_matcher step 4450 current loss 5.151389, current_train_items 167228.
+I1126 02:58:20.580673 136016717403648 run.py:769] (val) algo kmp_matcher step 4450: {'match': 0.9755859375, 'score': 0.9755859375, 'examples_seen': 167228, 'step': 4450, 'algorithm': 'kmp_matcher'}
+I1126 02:58:20.580841 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.976, val scores are: kmp_matcher: 0.976
+I1126 02:58:27.416863 136016717403648 run.py:734] Algo kmp_matcher step 4500 current loss 4.900236, current_train_items 169094.
+I1126 02:58:31.655360 136016717403648 run.py:769] (val) algo kmp_matcher step 4500: {'match': 0.950927734375, 'score': 0.950927734375, 'examples_seen': 169094, 'step': 4500, 'algorithm': 'kmp_matcher'}
+I1126 02:58:31.655622 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.951, val scores are: kmp_matcher: 0.951
+I1126 02:58:38.516681 136016717403648 run.py:734] Algo kmp_matcher step 4550 current loss 5.276340, current_train_items 171013.
+I1126 02:58:42.754561 136016717403648 run.py:769] (val) algo kmp_matcher step 4550: {'match': 0.961181640625, 'score': 0.961181640625, 'examples_seen': 171013, 'step': 4550, 'algorithm': 'kmp_matcher'}
+I1126 02:58:42.754726 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.961, val scores are: kmp_matcher: 0.961
+I1126 02:58:49.630511 136016717403648 run.py:734] Algo kmp_matcher step 4600 current loss 5.584911, current_train_items 172893.
+I1126 02:58:53.871337 136016717403648 run.py:769] (val) algo kmp_matcher step 4600: {'match': 0.95263671875, 'score': 0.95263671875, 'examples_seen': 172893, 'step': 4600, 'algorithm': 'kmp_matcher'}
+I1126 02:58:53.871598 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.953, val scores are: kmp_matcher: 0.953
+I1126 02:59:00.752784 136016717403648 run.py:734] Algo kmp_matcher step 4650 current loss 5.277521, current_train_items 174768.
+I1126 02:59:04.991054 136016717403648 run.py:769] (val) algo kmp_matcher step 4650: {'match': 0.969970703125, 'score': 0.969970703125, 'examples_seen': 174768, 'step': 4650, 'algorithm': 'kmp_matcher'}
+I1126 02:59:04.991293 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.970, val scores are: kmp_matcher: 0.970
+I1126 02:59:11.848885 136016717403648 run.py:734] Algo kmp_matcher step 4700 current loss 5.306060, current_train_items 176656.
+I1126 02:59:16.088576 136016717403648 run.py:769] (val) algo kmp_matcher step 4700: {'match': 0.971435546875, 'score': 0.971435546875, 'examples_seen': 176656, 'step': 4700, 'algorithm': 'kmp_matcher'}
+I1126 02:59:16.088817 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.971, val scores are: kmp_matcher: 0.971
+I1126 02:59:22.995097 136016717403648 run.py:734] Algo kmp_matcher step 4750 current loss 5.444765, current_train_items 178572.
+I1126 02:59:27.233116 136016717403648 run.py:769] (val) algo kmp_matcher step 4750: {'match': 0.956787109375, 'score': 0.956787109375, 'examples_seen': 178572, 'step': 4750, 'algorithm': 'kmp_matcher'}
+I1126 02:59:27.233366 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.957, val scores are: kmp_matcher: 0.957
+I1126 02:59:34.092252 136016717403648 run.py:734] Algo kmp_matcher step 4800 current loss 5.083657, current_train_items 180467.
+I1126 02:59:38.340152 136016717403648 run.py:769] (val) algo kmp_matcher step 4800: {'match': 0.96630859375, 'score': 0.96630859375, 'examples_seen': 180467, 'step': 4800, 'algorithm': 'kmp_matcher'}
+I1126 02:59:38.340409 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.966, val scores are: kmp_matcher: 0.966
+I1126 02:59:45.222455 136016717403648 run.py:734] Algo kmp_matcher step 4850 current loss 4.813682, current_train_items 182363.
+I1126 02:59:49.461010 136016717403648 run.py:769] (val) algo kmp_matcher step 4850: {'match': 0.97021484375, 'score': 0.97021484375, 'examples_seen': 182363, 'step': 4850, 'algorithm': 'kmp_matcher'}
+I1126 02:59:49.461248 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.970, val scores are: kmp_matcher: 0.970
+I1126 02:59:56.344324 136016717403648 run.py:734] Algo kmp_matcher step 4900 current loss 4.680754, current_train_items 184255.
+I1126 03:00:00.588653 136016717403648 run.py:769] (val) algo kmp_matcher step 4900: {'match': 0.977783203125, 'score': 0.977783203125, 'examples_seen': 184255, 'step': 4900, 'algorithm': 'kmp_matcher'}
+I1126 03:00:00.588821 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.978, val scores are: kmp_matcher: 0.978
+I1126 03:00:07.448799 136016717403648 run.py:734] Algo kmp_matcher step 4950 current loss 4.950251, current_train_items 186106.
+I1126 03:00:11.694039 136016717403648 run.py:769] (val) algo kmp_matcher step 4950: {'match': 0.96240234375, 'score': 0.96240234375, 'examples_seen': 186106, 'step': 4950, 'algorithm': 'kmp_matcher'}
+I1126 03:00:11.694276 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.962, val scores are: kmp_matcher: 0.962
+I1126 03:00:18.549561 136016717403648 run.py:734] Algo kmp_matcher step 5000 current loss 4.504003, current_train_items 187991.
+I1126 03:00:22.794510 136016717403648 run.py:769] (val) algo kmp_matcher step 5000: {'match': 0.9697265625, 'score': 0.9697265625, 'examples_seen': 187991, 'step': 5000, 'algorithm': 'kmp_matcher'}
+I1126 03:00:22.794752 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.970, val scores are: kmp_matcher: 0.970
+I1126 03:00:29.653474 136016717403648 run.py:734] Algo kmp_matcher step 5050 current loss 4.992681, current_train_items 189876.
+I1126 03:00:33.899751 136016717403648 run.py:769] (val) algo kmp_matcher step 5050: {'match': 0.96240234375, 'score': 0.96240234375, 'examples_seen': 189876, 'step': 5050, 'algorithm': 'kmp_matcher'}
+I1126 03:00:33.899996 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.962, val scores are: kmp_matcher: 0.962
+I1126 03:00:40.759118 136016717403648 run.py:734] Algo kmp_matcher step 5100 current loss 5.355074, current_train_items 191777.
+I1126 03:00:44.999761 136016717403648 run.py:769] (val) algo kmp_matcher step 5100: {'match': 0.952880859375, 'score': 0.952880859375, 'examples_seen': 191777, 'step': 5100, 'algorithm': 'kmp_matcher'}
+I1126 03:00:45.000002 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.953, val scores are: kmp_matcher: 0.953
+I1126 03:00:51.879470 136016717403648 run.py:734] Algo kmp_matcher step 5150 current loss 4.933895, current_train_items 193636.
+I1126 03:00:56.124553 136016717403648 run.py:769] (val) algo kmp_matcher step 5150: {'match': 0.979736328125, 'score': 0.979736328125, 'examples_seen': 193636, 'step': 5150, 'algorithm': 'kmp_matcher'}
+I1126 03:00:56.124794 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.980, val scores are: kmp_matcher: 0.980
+I1126 03:01:02.952245 136016717403648 run.py:734] Algo kmp_matcher step 5200 current loss 4.877841, current_train_items 195520.
+I1126 03:01:07.192306 136016717403648 run.py:769] (val) algo kmp_matcher step 5200: {'match': 0.975830078125, 'score': 0.975830078125, 'examples_seen': 195520, 'step': 5200, 'algorithm': 'kmp_matcher'}
+I1126 03:01:07.192577 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.976, val scores are: kmp_matcher: 0.976
+I1126 03:01:14.075476 136016717403648 run.py:734] Algo kmp_matcher step 5250 current loss 4.865726, current_train_items 197412.
+I1126 03:01:18.321849 136016717403648 run.py:769] (val) algo kmp_matcher step 5250: {'match': 0.971435546875, 'score': 0.971435546875, 'examples_seen': 197412, 'step': 5250, 'algorithm': 'kmp_matcher'}
+I1126 03:01:18.322089 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.971, val scores are: kmp_matcher: 0.971
+I1126 03:01:25.180471 136016717403648 run.py:734] Algo kmp_matcher step 5300 current loss 5.307889, current_train_items 199292.
+I1126 03:01:29.426532 136016717403648 run.py:769] (val) algo kmp_matcher step 5300: {'match': 0.97705078125, 'score': 0.97705078125, 'examples_seen': 199292, 'step': 5300, 'algorithm': 'kmp_matcher'}
+I1126 03:01:29.426775 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.977, val scores are: kmp_matcher: 0.977
+I1126 03:01:36.285025 136016717403648 run.py:734] Algo kmp_matcher step 5350 current loss 4.988639, current_train_items 201139.
+I1126 03:01:40.529821 136016717403648 run.py:769] (val) algo kmp_matcher step 5350: {'match': 0.9560546875, 'score': 0.9560546875, 'examples_seen': 201139, 'step': 5350, 'algorithm': 'kmp_matcher'}
+I1126 03:01:40.530075 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.956, val scores are: kmp_matcher: 0.956
+I1126 03:01:47.389523 136016717403648 run.py:734] Algo kmp_matcher step 5400 current loss 4.781949, current_train_items 203035.
+I1126 03:01:51.631656 136016717403648 run.py:769] (val) algo kmp_matcher step 5400: {'match': 0.966552734375, 'score': 0.966552734375, 'examples_seen': 203035, 'step': 5400, 'algorithm': 'kmp_matcher'}
+I1126 03:01:51.631895 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.967, val scores are: kmp_matcher: 0.967
+I1126 03:01:58.490452 136016717403648 run.py:734] Algo kmp_matcher step 5450 current loss 4.830448, current_train_items 204940.
+I1126 03:02:02.734553 136016717403648 run.py:769] (val) algo kmp_matcher step 5450: {'match': 0.966064453125, 'score': 0.966064453125, 'examples_seen': 204940, 'step': 5450, 'algorithm': 'kmp_matcher'}
+I1126 03:02:02.734791 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.980, current avg val score is 0.966, val scores are: kmp_matcher: 0.966
+I1126 03:02:09.592816 136016717403648 run.py:734] Algo kmp_matcher step 5500 current loss 4.515330, current_train_items 206821.
+I1126 03:02:13.832745 136016717403648 run.py:769] (val) algo kmp_matcher step 5500: {'match': 0.98291015625, 'score': 0.98291015625, 'examples_seen': 206821, 'step': 5500, 'algorithm': 'kmp_matcher'}
+I1126 03:02:13.832994 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.980, current avg val score is 0.983, val scores are: kmp_matcher: 0.983
+I1126 03:02:20.750229 136016717403648 run.py:734] Algo kmp_matcher step 5550 current loss 5.249647, current_train_items 208680.
+I1126 03:02:24.988290 136016717403648 run.py:769] (val) algo kmp_matcher step 5550: {'match': 0.987060546875, 'score': 0.987060546875, 'examples_seen': 208680, 'step': 5550, 'algorithm': 'kmp_matcher'}
+I1126 03:02:24.988545 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.983, current avg val score is 0.987, val scores are: kmp_matcher: 0.987
+I1126 03:02:31.898341 136016717403648 run.py:734] Algo kmp_matcher step 5600 current loss 5.099299, current_train_items 210556.
+I1126 03:02:36.144017 136016717403648 run.py:769] (val) algo kmp_matcher step 5600: {'match': 0.962646484375, 'score': 0.962646484375, 'examples_seen': 210556, 'step': 5600, 'algorithm': 'kmp_matcher'}
+I1126 03:02:36.144262 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.987, current avg val score is 0.963, val scores are: kmp_matcher: 0.963
+I1126 03:02:43.026211 136016717403648 run.py:734] Algo kmp_matcher step 5650 current loss 4.276212, current_train_items 212430.
+I1126 03:02:47.270015 136016717403648 run.py:769] (val) algo kmp_matcher step 5650: {'match': 0.982177734375, 'score': 0.982177734375, 'examples_seen': 212430, 'step': 5650, 'algorithm': 'kmp_matcher'}
+I1126 03:02:47.270262 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.987, current avg val score is 0.982, val scores are: kmp_matcher: 0.982
+I1126 03:02:54.102454 136016717403648 run.py:734] Algo kmp_matcher step 5700 current loss 5.236345, current_train_items 214318.
+I1126 03:02:58.342838 136016717403648 run.py:769] (val) algo kmp_matcher step 5700: {'match': 0.984619140625, 'score': 0.984619140625, 'examples_seen': 214318, 'step': 5700, 'algorithm': 'kmp_matcher'}
+I1126 03:02:58.343082 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.987, current avg val score is 0.985, val scores are: kmp_matcher: 0.985
+I1126 03:03:05.201698 136016717403648 run.py:734] Algo kmp_matcher step 5750 current loss 4.413722, current_train_items 216198.
+I1126 03:03:09.441035 136016717403648 run.py:769] (val) algo kmp_matcher step 5750: {'match': 0.956298828125, 'score': 0.956298828125, 'examples_seen': 216198, 'step': 5750, 'algorithm': 'kmp_matcher'}
+I1126 03:03:09.441279 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.987, current avg val score is 0.956, val scores are: kmp_matcher: 0.956
+I1126 03:03:16.298670 136016717403648 run.py:734] Algo kmp_matcher step 5800 current loss 5.409582, current_train_items 218064.
+I1126 03:03:20.541778 136016717403648 run.py:769] (val) algo kmp_matcher step 5800: {'match': 0.9677734375, 'score': 0.9677734375, 'examples_seen': 218064, 'step': 5800, 'algorithm': 'kmp_matcher'}
+I1126 03:03:20.542026 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.987, current avg val score is 0.968, val scores are: kmp_matcher: 0.968
+I1126 03:03:27.420861 136016717403648 run.py:734] Algo kmp_matcher step 5850 current loss 4.799598, current_train_items 219957.
+I1126 03:03:31.668275 136016717403648 run.py:769] (val) algo kmp_matcher step 5850: {'match': 0.976318359375, 'score': 0.976318359375, 'examples_seen': 219957, 'step': 5850, 'algorithm': 'kmp_matcher'}
+I1126 03:03:31.668531 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.987, current avg val score is 0.976, val scores are: kmp_matcher: 0.976
+I1126 03:03:38.525186 136016717403648 run.py:734] Algo kmp_matcher step 5900 current loss 4.582583, current_train_items 221860.
+I1126 03:03:42.768300 136016717403648 run.py:769] (val) algo kmp_matcher step 5900: {'match': 0.9755859375, 'score': 0.9755859375, 'examples_seen': 221860, 'step': 5900, 'algorithm': 'kmp_matcher'}
+I1126 03:03:42.768562 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.987, current avg val score is 0.976, val scores are: kmp_matcher: 0.976
+I1126 03:03:49.626535 136016717403648 run.py:734] Algo kmp_matcher step 5950 current loss 4.778372, current_train_items 223702.
+I1126 03:03:53.868309 136016717403648 run.py:769] (val) algo kmp_matcher step 5950: {'match': 0.974853515625, 'score': 0.974853515625, 'examples_seen': 223702, 'step': 5950, 'algorithm': 'kmp_matcher'}
+I1126 03:03:53.868564 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.987, current avg val score is 0.975, val scores are: kmp_matcher: 0.975
+I1126 03:04:00.750957 136016717403648 run.py:734] Algo kmp_matcher step 6000 current loss 4.964863, current_train_items 225575.
+I1126 03:04:04.992411 136016717403648 run.py:769] (val) algo kmp_matcher step 6000: {'match': 0.9873046875, 'score': 0.9873046875, 'examples_seen': 225575, 'step': 6000, 'algorithm': 'kmp_matcher'}
+I1126 03:04:04.992667 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.987, current avg val score is 0.987, val scores are: kmp_matcher: 0.987
+I1126 03:04:11.958227 136016717403648 run.py:734] Algo kmp_matcher step 6050 current loss 4.668672, current_train_items 227426.
+I1126 03:04:16.201654 136016717403648 run.py:769] (val) algo kmp_matcher step 6050: {'match': 0.98974609375, 'score': 0.98974609375, 'examples_seen': 227426, 'step': 6050, 'algorithm': 'kmp_matcher'}
+I1126 03:04:16.201893 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.987, current avg val score is 0.990, val scores are: kmp_matcher: 0.990
+I1126 03:04:23.113447 136016717403648 run.py:734] Algo kmp_matcher step 6100 current loss 4.949986, current_train_items 229308.
+I1126 03:04:27.353712 136016717403648 run.py:769] (val) algo kmp_matcher step 6100: {'match': 0.979736328125, 'score': 0.979736328125, 'examples_seen': 229308, 'step': 6100, 'algorithm': 'kmp_matcher'}
+I1126 03:04:27.353962 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.980, val scores are: kmp_matcher: 0.980
+I1126 03:04:34.212604 136016717403648 run.py:734] Algo kmp_matcher step 6150 current loss 4.802323, current_train_items 231190.
+I1126 03:04:38.452085 136016717403648 run.py:769] (val) algo kmp_matcher step 6150: {'match': 0.975830078125, 'score': 0.975830078125, 'examples_seen': 231190, 'step': 6150, 'algorithm': 'kmp_matcher'}
+I1126 03:04:38.452339 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.976, val scores are: kmp_matcher: 0.976
+I1126 03:04:45.306459 136016717403648 run.py:734] Algo kmp_matcher step 6200 current loss 4.660366, current_train_items 233076.
+I1126 03:04:49.554726 136016717403648 run.py:769] (val) algo kmp_matcher step 6200: {'match': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 233076, 'step': 6200, 'algorithm': 'kmp_matcher'}
+I1126 03:04:49.554966 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.983, val scores are: kmp_matcher: 0.983
+I1126 03:04:56.339508 136016717403648 run.py:734] Algo kmp_matcher step 6250 current loss 4.703321, current_train_items 234970.
+I1126 03:05:00.654428 136016717403648 run.py:769] (val) algo kmp_matcher step 6250: {'match': 0.977294921875, 'score': 0.977294921875, 'examples_seen': 234970, 'step': 6250, 'algorithm': 'kmp_matcher'}
+I1126 03:05:00.654684 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.977, val scores are: kmp_matcher: 0.977
+I1126 03:05:07.509405 136016717403648 run.py:734] Algo kmp_matcher step 6300 current loss 4.605703, current_train_items 236843.
+I1126 03:05:11.747454 136016717403648 run.py:769] (val) algo kmp_matcher step 6300: {'match': 0.983154296875, 'score': 0.983154296875, 'examples_seen': 236843, 'step': 6300, 'algorithm': 'kmp_matcher'}
+I1126 03:05:11.747718 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.983, val scores are: kmp_matcher: 0.983
+I1126 03:05:18.604643 136016717403648 run.py:734] Algo kmp_matcher step 6350 current loss 4.245665, current_train_items 238739.
+I1126 03:05:22.850406 136016717403648 run.py:769] (val) algo kmp_matcher step 6350: {'match': 0.969482421875, 'score': 0.969482421875, 'examples_seen': 238739, 'step': 6350, 'algorithm': 'kmp_matcher'}
+I1126 03:05:22.850657 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.969, val scores are: kmp_matcher: 0.969
+I1126 03:05:29.708759 136016717403648 run.py:734] Algo kmp_matcher step 6400 current loss 4.898648, current_train_items 240623.
+I1126 03:05:33.957182 136016717403648 run.py:769] (val) algo kmp_matcher step 6400: {'match': 0.98095703125, 'score': 0.98095703125, 'examples_seen': 240623, 'step': 6400, 'algorithm': 'kmp_matcher'}
+I1126 03:05:33.957430 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.981, val scores are: kmp_matcher: 0.981
+I1126 03:05:40.816098 136016717403648 run.py:734] Algo kmp_matcher step 6450 current loss 4.843738, current_train_items 242535.
+I1126 03:05:45.057662 136016717403648 run.py:769] (val) algo kmp_matcher step 6450: {'match': 0.986083984375, 'score': 0.986083984375, 'examples_seen': 242535, 'step': 6450, 'algorithm': 'kmp_matcher'}
+I1126 03:05:45.057903 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.986, val scores are: kmp_matcher: 0.986
+I1126 03:05:51.916381 136016717403648 run.py:734] Algo kmp_matcher step 6500 current loss 4.260561, current_train_items 244422.
+I1126 03:05:56.165615 136016717403648 run.py:769] (val) algo kmp_matcher step 6500: {'match': 0.974365234375, 'score': 0.974365234375, 'examples_seen': 244422, 'step': 6500, 'algorithm': 'kmp_matcher'}
+I1126 03:05:56.165858 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.974, val scores are: kmp_matcher: 0.974
+I1126 03:06:02.994404 136016717403648 run.py:734] Algo kmp_matcher step 6550 current loss 5.222301, current_train_items 246309.
+I1126 03:06:07.239306 136016717403648 run.py:769] (val) algo kmp_matcher step 6550: {'match': 0.9775390625, 'score': 0.9775390625, 'examples_seen': 246309, 'step': 6550, 'algorithm': 'kmp_matcher'}
+I1126 03:06:07.239569 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.978, val scores are: kmp_matcher: 0.978
+I1126 03:06:14.070898 136016717403648 run.py:734] Algo kmp_matcher step 6600 current loss 4.675587, current_train_items 248175.
+I1126 03:06:18.317516 136016717403648 run.py:769] (val) algo kmp_matcher step 6600: {'match': 0.989990234375, 'score': 0.989990234375, 'examples_seen': 248175, 'step': 6600, 'algorithm': 'kmp_matcher'}
+I1126 03:06:18.317760 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.990, current avg val score is 0.990, val scores are: kmp_matcher: 0.990
+I1126 03:06:25.221958 136016717403648 run.py:734] Algo kmp_matcher step 6650 current loss 4.811249, current_train_items 250027.
+I1126 03:06:29.465872 136016717403648 run.py:769] (val) algo kmp_matcher step 6650: {'match': 0.96728515625, 'score': 0.96728515625, 'examples_seen': 250027, 'step': 6650, 'algorithm': 'kmp_matcher'}
+I1126 03:06:29.466107 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.967, val scores are: kmp_matcher: 0.967
+I1126 03:06:36.322631 136016717403648 run.py:734] Algo kmp_matcher step 6700 current loss 4.297301, current_train_items 251949.
+I1126 03:06:40.566938 136016717403648 run.py:769] (val) algo kmp_matcher step 6700: {'match': 0.986572265625, 'score': 0.986572265625, 'examples_seen': 251949, 'step': 6700, 'algorithm': 'kmp_matcher'}
+I1126 03:06:40.567181 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.987, val scores are: kmp_matcher: 0.987
+I1126 03:06:47.425654 136016717403648 run.py:734] Algo kmp_matcher step 6750 current loss 4.903645, current_train_items 253833.
+I1126 03:06:51.672939 136016717403648 run.py:769] (val) algo kmp_matcher step 6750: {'match': 0.9833984375, 'score': 0.9833984375, 'examples_seen': 253833, 'step': 6750, 'algorithm': 'kmp_matcher'}
+I1126 03:06:51.673177 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.983, val scores are: kmp_matcher: 0.983
+I1126 03:06:58.600945 136016717403648 run.py:734] Algo kmp_matcher step 6800 current loss 4.201386, current_train_items 255716.
+I1126 03:07:02.745259 136016717403648 run.py:769] (val) algo kmp_matcher step 6800: {'match': 0.979736328125, 'score': 0.979736328125, 'examples_seen': 255716, 'step': 6800, 'algorithm': 'kmp_matcher'}
+I1126 03:07:02.745512 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.980, val scores are: kmp_matcher: 0.980
+I1126 03:07:09.677747 136016717403648 run.py:734] Algo kmp_matcher step 6850 current loss 4.181564, current_train_items 257584.
+I1126 03:07:13.868915 136016717403648 run.py:769] (val) algo kmp_matcher step 6850: {'match': 0.989501953125, 'score': 0.989501953125, 'examples_seen': 257584, 'step': 6850, 'algorithm': 'kmp_matcher'}
+I1126 03:07:13.869153 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.990, val scores are: kmp_matcher: 0.990
+I1126 03:07:20.724439 136016717403648 run.py:734] Algo kmp_matcher step 6900 current loss 5.053350, current_train_items 259475.
+I1126 03:07:24.968031 136016717403648 run.py:769] (val) algo kmp_matcher step 6900: {'match': 0.987548828125, 'score': 0.987548828125, 'examples_seen': 259475, 'step': 6900, 'algorithm': 'kmp_matcher'}
+I1126 03:07:24.968277 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.988, val scores are: kmp_matcher: 0.988
+I1126 03:07:31.852089 136016717403648 run.py:734] Algo kmp_matcher step 6950 current loss 4.565125, current_train_items 261352.
+I1126 03:07:36.099735 136016717403648 run.py:769] (val) algo kmp_matcher step 6950: {'match': 0.984375, 'score': 0.984375, 'examples_seen': 261352, 'step': 6950, 'algorithm': 'kmp_matcher'}
+I1126 03:07:36.099975 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.984, val scores are: kmp_matcher: 0.984
+I1126 03:07:42.987562 136016717403648 run.py:734] Algo kmp_matcher step 7000 current loss 4.644364, current_train_items 263238.
+I1126 03:07:47.223789 136016717403648 run.py:769] (val) algo kmp_matcher step 7000: {'match': 0.985107421875, 'score': 0.985107421875, 'examples_seen': 263238, 'step': 7000, 'algorithm': 'kmp_matcher'}
+I1126 03:07:47.224031 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.985, val scores are: kmp_matcher: 0.985
+I1126 03:07:54.108007 136016717403648 run.py:734] Algo kmp_matcher step 7050 current loss 4.159598, current_train_items 265114.
+I1126 03:07:58.351197 136016717403648 run.py:769] (val) algo kmp_matcher step 7050: {'match': 0.984375, 'score': 0.984375, 'examples_seen': 265114, 'step': 7050, 'algorithm': 'kmp_matcher'}
+I1126 03:07:58.351477 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.984, val scores are: kmp_matcher: 0.984
+I1126 03:08:05.211851 136016717403648 run.py:734] Algo kmp_matcher step 7100 current loss 4.984528, current_train_items 266944.
+I1126 03:08:09.457713 136016717403648 run.py:769] (val) algo kmp_matcher step 7100: {'match': 0.974365234375, 'score': 0.974365234375, 'examples_seen': 266944, 'step': 7100, 'algorithm': 'kmp_matcher'}
+I1126 03:08:09.457951 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.974, val scores are: kmp_matcher: 0.974
+I1126 03:08:16.316895 136016717403648 run.py:734] Algo kmp_matcher step 7150 current loss 5.013803, current_train_items 268811.
+I1126 03:08:20.567730 136016717403648 run.py:769] (val) algo kmp_matcher step 7150: {'match': 0.988037109375, 'score': 0.988037109375, 'examples_seen': 268811, 'step': 7150, 'algorithm': 'kmp_matcher'}
+I1126 03:08:20.567977 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.990, current avg val score is 0.988, val scores are: kmp_matcher: 0.988
+I1126 03:08:27.597999 136016717403648 run.py:734] Algo kmp_matcher step 7200 current loss 4.973139, current_train_items 270688.
+I1126 03:08:31.694139 136016717403648 run.py:769] (val) algo kmp_matcher step 7200: {'match': 0.993408203125, 'score': 0.993408203125, 'examples_seen': 270688, 'step': 7200, 'algorithm': 'kmp_matcher'}
+I1126 03:08:31.694338 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.990, current avg val score is 0.993, val scores are: kmp_matcher: 0.993
+I1126 03:08:38.611841 136016717403648 run.py:734] Algo kmp_matcher step 7250 current loss 4.457025, current_train_items 272559.
+I1126 03:08:42.860311 136016717403648 run.py:769] (val) algo kmp_matcher step 7250: {'match': 0.966552734375, 'score': 0.966552734375, 'examples_seen': 272559, 'step': 7250, 'algorithm': 'kmp_matcher'}
+I1126 03:08:42.860585 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.993, current avg val score is 0.967, val scores are: kmp_matcher: 0.967
+I1126 03:08:49.688241 136016717403648 run.py:734] Algo kmp_matcher step 7300 current loss 4.600969, current_train_items 274458.
+I1126 03:08:53.933930 136016717403648 run.py:769] (val) algo kmp_matcher step 7300: {'match': 0.98046875, 'score': 0.98046875, 'examples_seen': 274458, 'step': 7300, 'algorithm': 'kmp_matcher'}
+I1126 03:08:53.934172 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.993, current avg val score is 0.980, val scores are: kmp_matcher: 0.980
+I1126 03:09:00.762339 136016717403648 run.py:734] Algo kmp_matcher step 7350 current loss 4.930856, current_train_items 276378.
+I1126 03:09:05.003868 136016717403648 run.py:769] (val) algo kmp_matcher step 7350: {'match': 0.9697265625, 'score': 0.9697265625, 'examples_seen': 276378, 'step': 7350, 'algorithm': 'kmp_matcher'}
+I1126 03:09:05.004564 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.993, current avg val score is 0.970, val scores are: kmp_matcher: 0.970
+I1126 03:09:11.888762 136016717403648 run.py:734] Algo kmp_matcher step 7400 current loss 4.629161, current_train_items 278243.
+I1126 03:09:16.129008 136016717403648 run.py:769] (val) algo kmp_matcher step 7400: {'match': 0.97705078125, 'score': 0.97705078125, 'examples_seen': 278243, 'step': 7400, 'algorithm': 'kmp_matcher'}
+I1126 03:09:16.129260 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.993, current avg val score is 0.977, val scores are: kmp_matcher: 0.977
+I1126 03:09:22.927526 136016717403648 run.py:734] Algo kmp_matcher step 7450 current loss 4.785196, current_train_items 280130.
+I1126 03:09:27.225057 136016717403648 run.py:769] (val) algo kmp_matcher step 7450: {'match': 0.947021484375, 'score': 0.947021484375, 'examples_seen': 280130, 'step': 7450, 'algorithm': 'kmp_matcher'}
+I1126 03:09:27.225300 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.993, current avg val score is 0.947, val scores are: kmp_matcher: 0.947
+I1126 03:09:34.084179 136016717403648 run.py:734] Algo kmp_matcher step 7500 current loss 4.161918, current_train_items 281992.
+I1126 03:09:38.329188 136016717403648 run.py:769] (val) algo kmp_matcher step 7500: {'match': 0.97216796875, 'score': 0.97216796875, 'examples_seen': 281992, 'step': 7500, 'algorithm': 'kmp_matcher'}
+I1126 03:09:38.329355 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.993, current avg val score is 0.972, val scores are: kmp_matcher: 0.972
+I1126 03:09:45.048609 136016717403648 run.py:734] Algo kmp_matcher step 7550 current loss 4.863521, current_train_items 283893.
+I1126 03:09:49.396911 136016717403648 run.py:769] (val) algo kmp_matcher step 7550: {'match': 0.983642578125, 'score': 0.983642578125, 'examples_seen': 283893, 'step': 7550, 'algorithm': 'kmp_matcher'}
+I1126 03:09:49.397156 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.993, current avg val score is 0.984, val scores are: kmp_matcher: 0.984
+I1126 03:09:56.256597 136016717403648 run.py:734] Algo kmp_matcher step 7600 current loss 4.284330, current_train_items 285768.
+I1126 03:10:00.497385 136016717403648 run.py:769] (val) algo kmp_matcher step 7600: {'match': 0.976806640625, 'score': 0.976806640625, 'examples_seen': 285768, 'step': 7600, 'algorithm': 'kmp_matcher'}
+I1126 03:10:00.497633 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.993, current avg val score is 0.977, val scores are: kmp_matcher: 0.977
+I1126 03:10:07.356222 136016717403648 run.py:734] Algo kmp_matcher step 7650 current loss 4.678326, current_train_items 287638.
+I1126 03:10:11.593503 136016717403648 run.py:769] (val) algo kmp_matcher step 7650: {'match': 0.98388671875, 'score': 0.98388671875, 'examples_seen': 287638, 'step': 7650, 'algorithm': 'kmp_matcher'}
+I1126 03:10:11.593710 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.993, current avg val score is 0.984, val scores are: kmp_matcher: 0.984
+I1126 03:10:18.450978 136016717403648 run.py:734] Algo kmp_matcher step 7700 current loss 4.578880, current_train_items 289514.
+I1126 03:10:22.691237 136016717403648 run.py:769] (val) algo kmp_matcher step 7700: {'match': 0.984130859375, 'score': 0.984130859375, 'examples_seen': 289514, 'step': 7700, 'algorithm': 'kmp_matcher'}
+I1126 03:10:22.691484 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.993, current avg val score is 0.984, val scores are: kmp_matcher: 0.984
+I1126 03:10:29.549348 136016717403648 run.py:734] Algo kmp_matcher step 7750 current loss 4.381569, current_train_items 291403.
+I1126 03:10:33.941680 136016717403648 run.py:769] (val) algo kmp_matcher step 7750: {'match': 0.987060546875, 'score': 0.987060546875, 'examples_seen': 291403, 'step': 7750, 'algorithm': 'kmp_matcher'}
+I1126 03:10:33.941912 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.993, current avg val score is 0.987, val scores are: kmp_matcher: 0.987
+I1126 03:10:40.827417 136016717403648 run.py:734] Algo kmp_matcher step 7800 current loss 4.318675, current_train_items 293272.
+I1126 03:10:45.071927 136016717403648 run.py:769] (val) algo kmp_matcher step 7800: {'match': 0.985595703125, 'score': 0.985595703125, 'examples_seen': 293272, 'step': 7800, 'algorithm': 'kmp_matcher'}
+I1126 03:10:45.072173 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.993, current avg val score is 0.986, val scores are: kmp_matcher: 0.986
+I1126 03:10:51.899707 136016717403648 run.py:734] Algo kmp_matcher step 7850 current loss 4.328926, current_train_items 295173.
+I1126 03:10:56.140354 136016717403648 run.py:769] (val) algo kmp_matcher step 7850: {'match': 0.98876953125, 'score': 0.98876953125, 'examples_seen': 295173, 'step': 7850, 'algorithm': 'kmp_matcher'}
+I1126 03:10:56.140554 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.993, current avg val score is 0.989, val scores are: kmp_matcher: 0.989
+I1126 03:11:02.990415 136016717403648 run.py:734] Algo kmp_matcher step 7900 current loss 4.583179, current_train_items 297067.
+I1126 03:11:07.227176 136016717403648 run.py:769] (val) algo kmp_matcher step 7900: {'match': 0.9736328125, 'score': 0.9736328125, 'examples_seen': 297067, 'step': 7900, 'algorithm': 'kmp_matcher'}
+I1126 03:11:07.227412 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.993, current avg val score is 0.974, val scores are: kmp_matcher: 0.974
+I1126 03:11:14.083405 136016717403648 run.py:734] Algo kmp_matcher step 7950 current loss 4.321751, current_train_items 298968.
+I1126 03:11:18.325824 136016717403648 run.py:769] (val) algo kmp_matcher step 7950: {'match': 0.982177734375, 'score': 0.982177734375, 'examples_seen': 298968, 'step': 7950, 'algorithm': 'kmp_matcher'}
+I1126 03:11:18.326113 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.993, current avg val score is 0.982, val scores are: kmp_matcher: 0.982
+I1126 03:11:25.182179 136016717403648 run.py:734] Algo kmp_matcher step 8000 current loss 4.850449, current_train_items 300818.
+I1126 03:11:29.422842 136016717403648 run.py:769] (val) algo kmp_matcher step 8000: {'match': 0.986572265625, 'score': 0.986572265625, 'examples_seen': 300818, 'step': 8000, 'algorithm': 'kmp_matcher'}
+I1126 03:11:29.423087 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.993, current avg val score is 0.987, val scores are: kmp_matcher: 0.987
+I1126 03:11:36.317331 136016717403648 run.py:734] Algo kmp_matcher step 8050 current loss 4.807598, current_train_items 302684.
+I1126 03:11:40.559704 136016717403648 run.py:769] (val) algo kmp_matcher step 8050: {'match': 0.97705078125, 'score': 0.97705078125, 'examples_seen': 302684, 'step': 8050, 'algorithm': 'kmp_matcher'}
+I1126 03:11:40.559941 136016717403648 run.py:790] Checkpointing best model, best avg val score was -1.000, current avg val score is 0.977, val scores are: kmp_matcher: 0.977
+I1126 03:11:47.470347 136016717403648 run.py:734] Algo kmp_matcher step 8100 current loss 4.449744, current_train_items 304567.
+I1126 03:11:51.709199 136016717403648 run.py:769] (val) algo kmp_matcher step 8100: {'match': 0.972412109375, 'score': 0.972412109375, 'examples_seen': 304567, 'step': 8100, 'algorithm': 'kmp_matcher'}
+I1126 03:11:51.709443 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.977, current avg val score is 0.972, val scores are: kmp_matcher: 0.972
+I1126 03:11:58.565356 136016717403648 run.py:734] Algo kmp_matcher step 8150 current loss 4.893312, current_train_items 306474.
+I1126 03:12:02.804986 136016717403648 run.py:769] (val) algo kmp_matcher step 8150: {'match': 0.987548828125, 'score': 0.987548828125, 'examples_seen': 306474, 'step': 8150, 'algorithm': 'kmp_matcher'}
+I1126 03:12:02.805230 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.977, current avg val score is 0.988, val scores are: kmp_matcher: 0.988
+I1126 03:12:09.714208 136016717403648 run.py:734] Algo kmp_matcher step 8200 current loss 4.783112, current_train_items 308372.
+I1126 03:12:13.958145 136016717403648 run.py:769] (val) algo kmp_matcher step 8200: {'match': 0.97705078125, 'score': 0.97705078125, 'examples_seen': 308372, 'step': 8200, 'algorithm': 'kmp_matcher'}
+I1126 03:12:13.958380 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.988, current avg val score is 0.977, val scores are: kmp_matcher: 0.977
+I1126 03:12:20.786056 136016717403648 run.py:734] Algo kmp_matcher step 8250 current loss 4.600717, current_train_items 310274.
+I1126 03:12:25.023811 136016717403648 run.py:769] (val) algo kmp_matcher step 8250: {'match': 0.9853515625, 'score': 0.9853515625, 'examples_seen': 310274, 'step': 8250, 'algorithm': 'kmp_matcher'}
+I1126 03:12:25.023973 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.988, current avg val score is 0.985, val scores are: kmp_matcher: 0.985
+I1126 03:12:31.871375 136016717403648 run.py:734] Algo kmp_matcher step 8300 current loss 4.473976, current_train_items 312182.
+I1126 03:12:36.107213 136016717403648 run.py:769] (val) algo kmp_matcher step 8300: {'match': 0.981689453125, 'score': 0.981689453125, 'examples_seen': 312182, 'step': 8300, 'algorithm': 'kmp_matcher'}
+I1126 03:12:36.107461 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.988, current avg val score is 0.982, val scores are: kmp_matcher: 0.982
+I1126 03:12:42.992461 136016717403648 run.py:734] Algo kmp_matcher step 8350 current loss 4.683690, current_train_items 314078.
+I1126 03:12:47.231094 136016717403648 run.py:769] (val) algo kmp_matcher step 8350: {'match': 0.991455078125, 'score': 0.991455078125, 'examples_seen': 314078, 'step': 8350, 'algorithm': 'kmp_matcher'}
+I1126 03:12:47.231335 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.988, current avg val score is 0.991, val scores are: kmp_matcher: 0.991
+I1126 03:12:54.151693 136016717403648 run.py:734] Algo kmp_matcher step 8400 current loss 5.105151, current_train_items 315960.
+I1126 03:12:58.393578 136016717403648 run.py:769] (val) algo kmp_matcher step 8400: {'match': 0.9873046875, 'score': 0.9873046875, 'examples_seen': 315960, 'step': 8400, 'algorithm': 'kmp_matcher'}
+I1126 03:12:58.393832 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.991, current avg val score is 0.987, val scores are: kmp_matcher: 0.987
+I1126 03:13:05.251218 136016717403648 run.py:734] Algo kmp_matcher step 8450 current loss 4.629296, current_train_items 317890.
+I1126 03:13:09.490958 136016717403648 run.py:769] (val) algo kmp_matcher step 8450: {'match': 0.983642578125, 'score': 0.983642578125, 'examples_seen': 317890, 'step': 8450, 'algorithm': 'kmp_matcher'}
+I1126 03:13:09.491206 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.991, current avg val score is 0.984, val scores are: kmp_matcher: 0.984
+I1126 03:13:16.352007 136016717403648 run.py:734] Algo kmp_matcher step 8500 current loss 4.294670, current_train_items 319777.
+I1126 03:13:20.593513 136016717403648 run.py:769] (val) algo kmp_matcher step 8500: {'match': 0.99462890625, 'score': 0.99462890625, 'examples_seen': 319777, 'step': 8500, 'algorithm': 'kmp_matcher'}
+I1126 03:13:20.593750 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.991, current avg val score is 0.995, val scores are: kmp_matcher: 0.995
+I1126 03:13:27.508019 136016717403648 run.py:734] Algo kmp_matcher step 8550 current loss 4.328768, current_train_items 321655.
+I1126 03:13:31.756954 136016717403648 run.py:769] (val) algo kmp_matcher step 8550: {'match': 0.970458984375, 'score': 0.970458984375, 'examples_seen': 321655, 'step': 8550, 'algorithm': 'kmp_matcher'}
+I1126 03:13:31.757191 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.970, val scores are: kmp_matcher: 0.970
+I1126 03:13:38.617048 136016717403648 run.py:734] Algo kmp_matcher step 8600 current loss 4.698658, current_train_items 323522.
+I1126 03:13:42.857122 136016717403648 run.py:769] (val) algo kmp_matcher step 8600: {'match': 0.972900390625, 'score': 0.972900390625, 'examples_seen': 323522, 'step': 8600, 'algorithm': 'kmp_matcher'}
+I1126 03:13:42.857370 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.973, val scores are: kmp_matcher: 0.973
+I1126 03:13:49.715102 136016717403648 run.py:734] Algo kmp_matcher step 8650 current loss 3.993437, current_train_items 325399.
+I1126 03:13:53.952320 136016717403648 run.py:769] (val) algo kmp_matcher step 8650: {'match': 0.955078125, 'score': 0.955078125, 'examples_seen': 325399, 'step': 8650, 'algorithm': 'kmp_matcher'}
+I1126 03:13:53.952576 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.955, val scores are: kmp_matcher: 0.955
+I1126 03:14:00.882405 136016717403648 run.py:734] Algo kmp_matcher step 8700 current loss 4.781446, current_train_items 327281.
+I1126 03:14:05.123175 136016717403648 run.py:769] (val) algo kmp_matcher step 8700: {'match': 0.96630859375, 'score': 0.96630859375, 'examples_seen': 327281, 'step': 8700, 'algorithm': 'kmp_matcher'}
+I1126 03:14:05.123424 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.966, val scores are: kmp_matcher: 0.966
+I1126 03:14:11.979941 136016717403648 run.py:734] Algo kmp_matcher step 8750 current loss 4.565148, current_train_items 329193.
+I1126 03:14:16.222191 136016717403648 run.py:769] (val) algo kmp_matcher step 8750: {'match': 0.963134765625, 'score': 0.963134765625, 'examples_seen': 329193, 'step': 8750, 'algorithm': 'kmp_matcher'}
+I1126 03:14:16.222437 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.963, val scores are: kmp_matcher: 0.963
+I1126 03:14:23.077743 136016717403648 run.py:734] Algo kmp_matcher step 8800 current loss 4.547126, current_train_items 331040.
+I1126 03:14:27.315042 136016717403648 run.py:769] (val) algo kmp_matcher step 8800: {'match': 0.987548828125, 'score': 0.987548828125, 'examples_seen': 331040, 'step': 8800, 'algorithm': 'kmp_matcher'}
+I1126 03:14:27.315286 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.988, val scores are: kmp_matcher: 0.988
+I1126 03:14:34.172314 136016717403648 run.py:734] Algo kmp_matcher step 8850 current loss 3.992042, current_train_items 332955.
+I1126 03:14:38.414319 136016717403648 run.py:769] (val) algo kmp_matcher step 8850: {'match': 0.988037109375, 'score': 0.988037109375, 'examples_seen': 332955, 'step': 8850, 'algorithm': 'kmp_matcher'}
+I1126 03:14:38.414568 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.988, val scores are: kmp_matcher: 0.988
+I1126 03:14:45.271651 136016717403648 run.py:734] Algo kmp_matcher step 8900 current loss 4.394919, current_train_items 334849.
+I1126 03:14:49.512141 136016717403648 run.py:769] (val) algo kmp_matcher step 8900: {'match': 0.98291015625, 'score': 0.98291015625, 'examples_seen': 334849, 'step': 8900, 'algorithm': 'kmp_matcher'}
+I1126 03:14:49.512383 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.983, val scores are: kmp_matcher: 0.983
+I1126 03:14:56.367707 136016717403648 run.py:734] Algo kmp_matcher step 8950 current loss 4.643571, current_train_items 336726.
+I1126 03:15:00.609456 136016717403648 run.py:769] (val) algo kmp_matcher step 8950: {'match': 0.977783203125, 'score': 0.977783203125, 'examples_seen': 336726, 'step': 8950, 'algorithm': 'kmp_matcher'}
+I1126 03:15:00.609701 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.978, val scores are: kmp_matcher: 0.978
+I1126 03:15:07.470174 136016717403648 run.py:734] Algo kmp_matcher step 9000 current loss 4.944986, current_train_items 338565.
+I1126 03:15:11.709364 136016717403648 run.py:769] (val) algo kmp_matcher step 9000: {'match': 0.96240234375, 'score': 0.96240234375, 'examples_seen': 338565, 'step': 9000, 'algorithm': 'kmp_matcher'}
+I1126 03:15:11.709615 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.962, val scores are: kmp_matcher: 0.962
+I1126 03:15:18.589880 136016717403648 run.py:734] Algo kmp_matcher step 9050 current loss 4.228645, current_train_items 340465.
+I1126 03:15:22.831413 136016717403648 run.py:769] (val) algo kmp_matcher step 9050: {'match': 0.99462890625, 'score': 0.99462890625, 'examples_seen': 340465, 'step': 9050, 'algorithm': 'kmp_matcher'}
+I1126 03:15:22.831584 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.995, val scores are: kmp_matcher: 0.995
+I1126 03:15:29.681164 136016717403648 run.py:734] Algo kmp_matcher step 9100 current loss 4.271163, current_train_items 342355.
+I1126 03:15:33.919760 136016717403648 run.py:769] (val) algo kmp_matcher step 9100: {'match': 0.9853515625, 'score': 0.9853515625, 'examples_seen': 342355, 'step': 9100, 'algorithm': 'kmp_matcher'}
+I1126 03:15:33.920008 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.985, val scores are: kmp_matcher: 0.985
+I1126 03:15:40.776307 136016717403648 run.py:734] Algo kmp_matcher step 9150 current loss 4.466324, current_train_items 344243.
+I1126 03:15:45.016431 136016717403648 run.py:769] (val) algo kmp_matcher step 9150: {'match': 0.990966796875, 'score': 0.990966796875, 'examples_seen': 344243, 'step': 9150, 'algorithm': 'kmp_matcher'}
+I1126 03:15:45.016703 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.991, val scores are: kmp_matcher: 0.991
+I1126 03:15:51.875404 136016717403648 run.py:734] Algo kmp_matcher step 9200 current loss 4.784752, current_train_items 346120.
+I1126 03:15:56.118467 136016717403648 run.py:769] (val) algo kmp_matcher step 9200: {'match': 0.98974609375, 'score': 0.98974609375, 'examples_seen': 346120, 'step': 9200, 'algorithm': 'kmp_matcher'}
+I1126 03:15:56.118753 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.990, val scores are: kmp_matcher: 0.990
+I1126 03:16:02.976549 136016717403648 run.py:734] Algo kmp_matcher step 9250 current loss 4.639194, current_train_items 348026.
+I1126 03:16:07.217571 136016717403648 run.py:769] (val) algo kmp_matcher step 9250: {'match': 0.98193359375, 'score': 0.98193359375, 'examples_seen': 348026, 'step': 9250, 'algorithm': 'kmp_matcher'}
+I1126 03:16:07.217824 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.982, val scores are: kmp_matcher: 0.982
+I1126 03:16:14.075191 136016717403648 run.py:734] Algo kmp_matcher step 9300 current loss 4.504627, current_train_items 349889.
+I1126 03:16:18.322544 136016717403648 run.py:769] (val) algo kmp_matcher step 9300: {'match': 0.96044921875, 'score': 0.96044921875, 'examples_seen': 349889, 'step': 9300, 'algorithm': 'kmp_matcher'}
+I1126 03:16:18.322782 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.960, val scores are: kmp_matcher: 0.960
+I1126 03:16:25.180828 136016717403648 run.py:734] Algo kmp_matcher step 9350 current loss 5.090946, current_train_items 351758.
+I1126 03:16:29.421455 136016717403648 run.py:769] (val) algo kmp_matcher step 9350: {'match': 0.97021484375, 'score': 0.97021484375, 'examples_seen': 351758, 'step': 9350, 'algorithm': 'kmp_matcher'}
+I1126 03:16:29.421714 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.970, val scores are: kmp_matcher: 0.970
+I1126 03:16:36.306724 136016717403648 run.py:734] Algo kmp_matcher step 9400 current loss 4.631330, current_train_items 353640.
+I1126 03:16:40.547781 136016717403648 run.py:769] (val) algo kmp_matcher step 9400: {'match': 0.977783203125, 'score': 0.977783203125, 'examples_seen': 353640, 'step': 9400, 'algorithm': 'kmp_matcher'}
+I1126 03:16:40.547947 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.978, val scores are: kmp_matcher: 0.978
+I1126 03:16:47.386440 136016717403648 run.py:734] Algo kmp_matcher step 9450 current loss 4.111345, current_train_items 355542.
+I1126 03:16:51.625764 136016717403648 run.py:769] (val) algo kmp_matcher step 9450: {'match': 0.984619140625, 'score': 0.984619140625, 'examples_seen': 355542, 'step': 9450, 'algorithm': 'kmp_matcher'}
+I1126 03:16:51.626013 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.985, val scores are: kmp_matcher: 0.985
+I1126 03:16:58.385876 136016717403648 run.py:734] Algo kmp_matcher step 9500 current loss 4.307618, current_train_items 357417.
+I1126 03:17:02.725866 136016717403648 run.py:769] (val) algo kmp_matcher step 9500: {'match': 0.985595703125, 'score': 0.985595703125, 'examples_seen': 357417, 'step': 9500, 'algorithm': 'kmp_matcher'}
+I1126 03:17:02.726107 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.986, val scores are: kmp_matcher: 0.986
+I1126 03:17:09.584236 136016717403648 run.py:734] Algo kmp_matcher step 9550 current loss 4.570797, current_train_items 359288.
+I1126 03:17:13.822938 136016717403648 run.py:769] (val) algo kmp_matcher step 9550: {'match': 0.968017578125, 'score': 0.968017578125, 'examples_seen': 359288, 'step': 9550, 'algorithm': 'kmp_matcher'}
+I1126 03:17:13.823174 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.968, val scores are: kmp_matcher: 0.968
+I1126 03:17:20.680745 136016717403648 run.py:734] Algo kmp_matcher step 9600 current loss 4.011744, current_train_items 361196.
+I1126 03:17:24.923727 136016717403648 run.py:769] (val) algo kmp_matcher step 9600: {'match': 0.976806640625, 'score': 0.976806640625, 'examples_seen': 361196, 'step': 9600, 'algorithm': 'kmp_matcher'}
+I1126 03:17:24.923979 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.977, val scores are: kmp_matcher: 0.977
+I1126 03:17:31.779016 136016717403648 run.py:734] Algo kmp_matcher step 9650 current loss 4.505258, current_train_items 363041.
+I1126 03:17:36.018386 136016717403648 run.py:769] (val) algo kmp_matcher step 9650: {'match': 0.986572265625, 'score': 0.986572265625, 'examples_seen': 363041, 'step': 9650, 'algorithm': 'kmp_matcher'}
+I1126 03:17:36.018638 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.987, val scores are: kmp_matcher: 0.987
+I1126 03:17:42.949461 136016717403648 run.py:734] Algo kmp_matcher step 9700 current loss 4.232235, current_train_items 364913.
+I1126 03:17:47.116259 136016717403648 run.py:769] (val) algo kmp_matcher step 9700: {'match': 0.98779296875, 'score': 0.98779296875, 'examples_seen': 364913, 'step': 9700, 'algorithm': 'kmp_matcher'}
+I1126 03:17:47.116528 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.988, val scores are: kmp_matcher: 0.988
+I1126 03:17:54.000457 136016717403648 run.py:734] Algo kmp_matcher step 9750 current loss 4.012770, current_train_items 366814.
+I1126 03:17:58.243171 136016717403648 run.py:769] (val) algo kmp_matcher step 9750: {'match': 0.961181640625, 'score': 0.961181640625, 'examples_seen': 366814, 'step': 9750, 'algorithm': 'kmp_matcher'}
+I1126 03:17:58.243415 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.961, val scores are: kmp_matcher: 0.961
+I1126 03:18:05.102533 136016717403648 run.py:734] Algo kmp_matcher step 9800 current loss 4.620593, current_train_items 368693.
+I1126 03:18:09.343937 136016717403648 run.py:769] (val) algo kmp_matcher step 9800: {'match': 0.98046875, 'score': 0.98046875, 'examples_seen': 368693, 'step': 9800, 'algorithm': 'kmp_matcher'}
+I1126 03:18:09.344175 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.980, val scores are: kmp_matcher: 0.980
+I1126 03:18:16.203445 136016717403648 run.py:734] Algo kmp_matcher step 9850 current loss 4.444031, current_train_items 370569.
+I1126 03:18:20.445608 136016717403648 run.py:769] (val) algo kmp_matcher step 9850: {'match': 0.995361328125, 'score': 0.995361328125, 'examples_seen': 370569, 'step': 9850, 'algorithm': 'kmp_matcher'}
+I1126 03:18:20.445850 136016717403648 run.py:790] Checkpointing best model, best avg val score was 0.995, current avg val score is 0.995, val scores are: kmp_matcher: 0.995
+I1126 03:18:27.370703 136016717403648 run.py:734] Algo kmp_matcher step 9900 current loss 4.892686, current_train_items 372469.
+I1126 03:18:31.608824 136016717403648 run.py:769] (val) algo kmp_matcher step 9900: {'match': 0.98876953125, 'score': 0.98876953125, 'examples_seen': 372469, 'step': 9900, 'algorithm': 'kmp_matcher'}
+I1126 03:18:31.608983 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.989, val scores are: kmp_matcher: 0.989
+I1126 03:18:38.591346 136016717403648 run.py:734] Algo kmp_matcher step 9950 current loss 4.433564, current_train_items 374330.
+I1126 03:18:42.691807 136016717403648 run.py:769] (val) algo kmp_matcher step 9950: {'match': 0.95263671875, 'score': 0.95263671875, 'examples_seen': 374330, 'step': 9950, 'algorithm': 'kmp_matcher'}
+I1126 03:18:42.692058 136016717403648 run.py:793] Not saving new best model, best avg val score was 0.995, current avg val score is 0.953, val scores are: kmp_matcher: 0.953
+I1126 03:18:49.431289 136016717403648 run.py:799] Restoring best model from checkpoint...
+I1126 03:21:12.912763 136016717403648 run.py:814] (test) algo kmp_matcher : {'match': 0.2333984375, 'score': 0.2333984375, 'examples_seen': 376155, 'step': 10000, 'algorithm': 'kmp_matcher'}
+I1126 03:21:12.912895 136016717403648 run.py:816] Done!

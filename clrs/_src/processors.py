@@ -689,26 +689,11 @@ def get_falr7_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
 
   tri_h_1_exp = jnp.expand_dims(tri_h_1, axis=(2))
   tri_h_2_exp = jnp.expand_dims(tri_h_2, axis=(2))
-  #tri_h_1_exp = jnp.tile(tri_h_1_exp, (1, N, 1, 1))
 
   tri_g_1_exp = jnp.expand_dims(tri_g_1, axis=(1, 2))
   tri_g_2_exp = jnp.expand_dims(tri_g_2, axis=(1, 2))
-  #tri_g_1_exp = jnp.tile(tri_g_1_exp, (1, N, N, 1))
-
-  # Combine triplet and graph features using weighted sum and nonlinearities for more expressiveness
-  # Compute attention weights over node and hidden features
-  '''
-  att_n = hk.Linear(1)(tri_n_1)  # (B, N, 1)
-  att_h = hk.Linear(1)(tri_h_1)  # (B, N, 1)
-  att_weights = jax.nn.softmax(jnp.concatenate([att_n, att_h], axis=-1), axis=-1)  # (B, N, 2)
-
-  # Weighted sum for node and hidden features
-  tri_n_att = att_weights[..., 0:1] * tri_n_1 + att_weights[..., 1:2] * tri_h_1  # (B, N, H)
-  tri_n_att_exp = jnp.expand_dims(tri_n_att, axis=1)  # (B, 1, N, H)
-  '''
 
   msg = (
-      #tri_n_att_exp +
       tri_n_1_exp +
       tri_n_2_exp +
       tri_h_1_exp +
@@ -718,19 +703,6 @@ def get_falr7_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
       tri_g_1_exp +
       tri_g_2_exp
   )
-
-  #print('msg:', msg.shape)
-
-  '''
-  msg = jnp.concatenate(
-      [tri_n_1_exp, 
-       tri_h_1_exp, 
-       tri_e_1, 
-       tri_g_1_exp],
-      axis=-1
-  )
-  #print('m2:', msg.shape)
-  '''
 
   return msg
 
@@ -1486,7 +1458,6 @@ class FALR7(Processor):
 
     if self.use_triplets:
       triplets = get_falr7_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
-      #tri_msgs = self.reduction(triplets, axis=(1))  # (B, N, N, H)
 
       if self.activation is not None:
         tri_msgs = self.activation(triplets)
@@ -1494,16 +1465,6 @@ class FALR7(Processor):
 
     B, N, H = msg_n_1.shape
 
-    '''
-    msgs = jnp.concatenate(
-      [
-        jnp.tile(jnp.expand_dims(msg_n_1, axis=(2)), (1, 1, N, 1)),
-        jnp.tile(jnp.expand_dims(msg_h_1, axis=(2)), (1, 1, N, 1)),
-        msg_e,
-        jnp.tile(jnp.expand_dims(msg_g, axis=(1, 2)), (1, N, N, 1))
-      ], axis=-1
-    )
-    '''
     msgs = (
         jnp.expand_dims(msg_n_1, axis=1) + 
         jnp.expand_dims(msg_h_1, axis=2) +

@@ -54,7 +54,7 @@ assert tf.test.is_built_with_cuda()
 
 #source env/bin/activate env
 #os.environ["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"
-os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".85"
+os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".9"
 
 #define algorithms to run
 if len(sys.argv) < 2:
@@ -150,7 +150,7 @@ flags.DEFINE_boolean('enforce_permutations', True,
 flags.DEFINE_boolean('enforce_pred_as_input', True,
                      'Whether to change pred_h hints into pred inputs.')
 
-flags.DEFINE_integer('batch_size', 32, 'Batch size used for training.')
+flags.DEFINE_integer('batch_size', 16, 'Batch size used for training.')
 flags.DEFINE_integer('val_batch_size', 16, 'Batch size used for training.')
 flags.DEFINE_integer('test_batch_size', 16, 'Batch size used for training.')
 

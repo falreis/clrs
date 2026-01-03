@@ -156,6 +156,7 @@ class BaselineModel(model.Model):
       name: str = 'base_model',
       nb_msg_passing_steps: int = 1,
       debug: bool = False,
+      memory_size = None
   ):
     """Constructor for BaselineModel.
 
@@ -212,6 +213,7 @@ class BaselineModel(model.Model):
 
     assert hint_repred_mode in ['soft', 'hard', 'hard_on_eval']
 
+    self.memory_size = memory_size
     self.decode_hints = decode_hints
     self.checkpoint_path = checkpoint_path
     self.name = name
@@ -257,7 +259,7 @@ class BaselineModel(model.Model):
                       dropout_prob, hint_teacher_forcing,
                       hint_repred_mode,
                       self.nb_dims, self.nb_msg_passing_steps,
-                      self.debug)(*args, **kwargs)
+                      self.debug, self.memory_size)(*args, **kwargs)
 
     self.net_fn = hk.transform(_use_net)
     pmap_args = dict(axis_name='batch', devices=jax.local_devices())
@@ -531,7 +533,7 @@ class BaselineModelChunked(BaselineModel):
           self._spec, hidden_dim, encode_hints, self.decode_hints,
           processor_factory, use_lstm, encoder_init, dropout_prob,
           hint_teacher_forcing, hint_repred_mode,
-          self.nb_dims, self.nb_msg_passing_steps)(*args, **kwargs)
+          self.nb_dims, self.nb_msg_passing_steps, False, self.memory_size)(*args, **kwargs)
 
     self.net_fn = hk.transform(_use_net)
     pmap_args = dict(axis_name='batch', devices=jax.local_devices())

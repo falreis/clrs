@@ -1384,7 +1384,7 @@ class F6(FALR6):
     return super().__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
   
 class FALR7(Processor):
-  """f6 code"""
+  """f7 code"""
 
   def __init__(
       self,
@@ -1534,6 +1534,171 @@ class FALR7(Processor):
 
 
 class F7(FALR7):
+  """Message-Passing Neural Network (Gilmer et al., ICML 2017)."""
+
+  def __call__(self, node_fts: _Array, edge_fts: _Array, graph_fts: _Array,
+               adj_mat: _Array, hidden: _Array, **unused_kwargs) -> _Array:
+    adj_mat = jnp.ones_like(adj_mat)
+    return super().__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
+  
+
+class FALR8(Processor):
+  """f7 code with memory block (f8)"""
+
+  def __init__(
+      self,
+      out_size: int,
+      mid_size: Optional[int] = None,
+      activation: Optional[_Fn] = jax.nn.relu,
+      reduction: _Fn = jnp.max,
+      msgs_mlp_sizes: Optional[List[int]] = None,
+      use_ln: bool = False,
+      use_triplets: bool = False,
+      nb_triplet_fts: int = 8,
+      gated: bool = False,
+      gated_activation: Optional[_Fn] = jax.nn.sigmoid,
+      memory_size: Optional[int] = None,
+      name: str = 'f8',
+  ):
+    super().__init__(name=name)
+    if mid_size is None:
+      self.mid_size = out_size
+    else:
+      self.mid_size = mid_size
+    self.out_size = out_size
+    self.activation = activation
+    self.reduction = reduction
+    self._msgs_mlp_sizes = msgs_mlp_sizes
+    self.use_ln = use_ln
+    self.use_triplets = use_triplets
+    self.nb_triplet_fts = nb_triplet_fts
+    self.gated = gated
+    self.gated_activation = gated_activation
+    self.memory_size = memory_size
+
+  def __call__(  # pytype: disable=signature-mismatch  # numpy-scalars
+      self,
+      node_fts: _Array,
+      edge_fts: _Array,
+      graph_fts: _Array,
+      adj_mat: _Array,
+      hidden: _Array,
+      memory: Optional[_Array] = None,
+      **unused_kwargs,
+  ) -> _Array:
+    """MPNN inference step with memory."""
+
+    b, n, _ = node_fts.shape
+    assert edge_fts.shape[:-1] == (b, n, n)
+    assert graph_fts.shape[:-1] == (b,)
+    assert adj_mat.shape == (b, n, n) #hints
+
+    print('falreis memory size:', self.memory_size)
+
+    # Memory block: initialize or update memory
+    if self.memory_size is not None:
+      # Initialize memory if not provided
+      if memory is None:
+        memory = jnp.zeros((b, self.memory_size, self.out_size))
+      
+      # Use a GRU cell to update memory sequentially for each batch
+      gru = hk.GRU(self.out_size)
+      mem_input = jnp.mean(node_fts, axis=1)  # (B, H)
+      mem_state = gru.initial_state(b)
+
+      # Update memory for each slot
+      new_memory = []
+      for i in range(self.memory_size):
+        mem_out, mem_state = gru(mem_input, mem_state)
+        new_memory.append(mem_out)
+        memory = jnp.stack(new_memory, axis=1)  # (B, memory_size, H)
+
+      # Optionally, use memory in node features
+      mem_context = jnp.mean(memory, axis=1, keepdims=True)  # (B, 1, H)
+      node_fts = node_fts + mem_context
+
+    m_n_1 = hk.Linear(self.mid_size)
+    m_n_2 = hk.Linear(self.mid_size)
+    m_h_1 = hk.Linear(self.mid_size)
+    m_h_2 = hk.Linear(self.mid_size)
+    m_e_1 = hk.Linear(self.mid_size)
+    m_e_2 = hk.Linear(self.mid_size)
+    m_g_1 = hk.Linear(self.mid_size)
+    m_g_2 = hk.Linear(self.mid_size)
+
+    o1 = hk.Linear(self.out_size)
+    o2 = hk.Linear(self.out_size)
+    o3 = hk.Linear(self.out_size)
+
+    msg_n_1 = m_n_1(node_fts)
+    msg_n_2 = m_n_2(node_fts)
+    msg_h_1 = m_h_1(hidden)
+    msg_h_2 = m_h_2(hidden)
+    msg_e_1 = m_e_1(edge_fts)
+    msg_e_2 = m_e_2(edge_fts)
+    msg_g_1 = m_g_1(graph_fts)
+    msg_g_2 = m_g_2(graph_fts)
+
+    tri_msgs = None
+
+    if self.use_triplets:
+      triplets = get_falr6_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
+      if self.activation is not None:
+        tri_msgs = self.activation(triplets)
+
+    B, N, H = msg_n_1.shape
+
+    msgs = (
+        jnp.expand_dims(msg_n_1, axis=1) + 
+        jnp.expand_dims(msg_h_1, axis=2) +
+        msg_e_1 + 
+        jnp.expand_dims(msg_g_1, axis=(1, 2))
+    )
+
+    if self._msgs_mlp_sizes is not None:
+      msgs = hk.nets.MLP(self._msgs_mlp_sizes)(self.activation(msgs))
+
+    msgs = self.reduction(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
+
+    h_1 = o1(node_fts)
+    h_2 = o2(hidden)
+    h_3 = o3(msgs)
+
+    ret = h_1 + h_2 + h_3
+
+    if self.gated:
+      # Improved gating: use LayerNorm, richer interaction, and optional residual
+      gate_n = hk.Linear(self.out_size)
+      gate_h = hk.Linear(self.out_size)
+      gate_m = hk.Linear(self.out_size)
+      gate_g = hk.Linear(self.out_size)
+      gate_o = hk.Linear(self.out_size, b_init=hk.initializers.Constant(-3))
+
+      # Concatenate all sources for gating
+      gate_input = jnp.concatenate([
+          gate_n(node_fts),
+          gate_h(hidden),
+          gate_m(msgs)
+      ], axis=-1)
+
+      # Normalization for stability
+      if self.use_ln:
+        ln_gate = hk.LayerNorm(axis=-1, create_scale=True, create_offset=True)
+        gate_input = ln_gate(gate_input)
+
+      gate = self.gated_activation(gate_o(jax.nn.relu(gate_input)))
+
+      # Residual connection for better gradient flow
+      ret = (ret * gate) + (hidden * gate) + (hidden * (1 - gate)) + (ret * (1 - gate))
+
+    # Return memory as additional output if used
+    if self.memory_size is not None:
+      return ret, tri_msgs, memory  # tri_msgs and memory
+    else:
+      return ret, tri_msgs  # pytype: disable=bad-return-type  # numpy-scalars
+
+
+class F8(FALR8):
   """Message-Passing Neural Network (Gilmer et al., ICML 2017)."""
 
   def __call__(self, node_fts: _Array, edge_fts: _Array, graph_fts: _Array,
@@ -1990,6 +2155,8 @@ def get_processor_factory(kind: str,
   elif(kwargs['gated_activation'] == 'elu'):
     gated_activation = jax.nn.elu
 
+  memory_size = kwargs.get('memory_size', None)
+
   #factory with methods
   def _factory(out_size: int):
     if kind == 'deepsets':
@@ -2229,6 +2396,19 @@ def get_processor_factory(kind: str,
           reduction = reduction,
           gated = gated,
           gated_activation = gated_activation
+      )
+    elif kind == 'f8':
+      processor = F8(
+          out_size=out_size,
+          msgs_mlp_sizes=[out_size, out_size],
+          use_ln=use_ln,
+          use_triplets=True,
+          nb_triplet_fts=nb_triplet_fts,
+          activation = activation,
+          reduction = reduction,
+          gated = gated,
+          gated_activation = gated_activation,
+          memory_size = memory_size
       )
     else:
       raise ValueError('Unexpected processor kind ' + kind)

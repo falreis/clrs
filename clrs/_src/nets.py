@@ -86,6 +86,7 @@ class Net(hk.Module):
       nb_dims=None,
       nb_msg_passing_steps=1,
       debug=False,
+      memory_size: int = None,
       name: str = 'net',
   ):
     """Constructs a `Net`."""
@@ -104,6 +105,7 @@ class Net(hk.Module):
     self.encoder_init = encoder_init
     self.nb_msg_passing_steps = nb_msg_passing_steps
     self.debug = debug
+    self.memory_size = memory_size
 
   def _msg_passing_step(self,
                         mp_state: _MessagePassingScanState,
@@ -405,15 +407,26 @@ class Net(hk.Module):
     # PROCESS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     nxt_hidden = hidden
     for _ in range(self.nb_msg_passing_steps):
-      nxt_hidden, nxt_edge = self.processor(
-          node_fts,
-          edge_fts,
-          graph_fts,
-          adj_mat,
-          nxt_hidden,
-          batch_size=batch_size,
-          nb_nodes=nb_nodes,
-      )
+      if self.memory_size is not None:
+        nxt_hidden, nxt_edge, mem = self.processor(
+            node_fts,
+            edge_fts,
+            graph_fts,
+            adj_mat,
+            nxt_hidden,
+            batch_size=batch_size,
+            nb_nodes=nb_nodes,
+        )
+      else:
+        nxt_hidden, nxt_edge = self.processor(
+            node_fts,
+            edge_fts,
+            graph_fts,
+            adj_mat,
+            nxt_hidden,
+            batch_size=batch_size,
+            nb_nodes=nb_nodes,
+        )
 
     if not repred:      # dropout only on training
       nxt_hidden = hk.dropout(hk.next_rng_key(), self._dropout_prob, nxt_hidden)

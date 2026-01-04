@@ -254,7 +254,7 @@ flags.DEFINE_enum('gated_activation', 'tanh',
 flags.DEFINE_enum('memory_type', 'mha',
                   ['gru', 'lstm', 'mha'],
                   'Memory type for F-series processors (available starting with F8).' \
-                  'Use None for no memory. MHA = Mult-head attention')
+                  'Use None for no memory. MHA = Mult-head')
 
 flags.DEFINE_integer('memory_size', 8,
                      'Memory size for F-series processors (available starting with F8). ' \

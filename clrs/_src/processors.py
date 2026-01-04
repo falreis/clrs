@@ -1602,51 +1602,53 @@ class FALR8(Processor):
         memory = jnp.zeros((b, self.memory_size, self.out_size))
 
       if self.memory_type == 'gru':
-        print('memory_type: gru')
-
         # Use a GRU cell to update memory sequentially for each batch
         gru = hk.GRU(self.out_size)
         mem_input = jnp.mean(node_fts, axis=1)  # (B, H)
+        # Incorporate edge_fts: mean over (1,2) dims to get (B, H)
+        edge_context = jnp.mean(edge_fts, axis=(1,2))
+        mem_input = mem_input + edge_context
         mem_state = gru.initial_state(b)
 
-        # Update memory for each slot
         new_memory = []
         for i in range(self.memory_size):
           mem_out, mem_state = gru(mem_input, mem_state)
           new_memory.append(mem_out)
-          memory = jnp.stack(new_memory, axis=1)  # (B, memory_size, H)
+        memory = jnp.stack(new_memory, axis=1)  # (B, memory_size, H)
 
       elif self.memory_type == 'lstm':
-        print('memory_type: lstm')
-
         # Use an LSTM cell to update memory
         lstm = hk.LSTM(self.out_size)
         mem_input = jnp.mean(node_fts, axis=1)  # (B, H)
+        # Incorporate edge_fts: mean over (1,2) dims to get (B, H)
+        edge_context = jnp.mean(edge_fts, axis=(1,2))
+        mem_input = mem_input + edge_context
         mem_state = lstm.initial_state(b)
 
         new_memory = []
         for i in range(self.memory_size):
           mem_out, mem_state = lstm(mem_input, mem_state)
           new_memory.append(mem_out)
-          memory = jnp.stack(new_memory, axis=1)  # (B, memory_size, H)
+        memory = jnp.stack(new_memory, axis=1)  # (B, memory_size, H)
 
       elif self.memory_type == 'mha': #multi-head attention
-        print('memory_type: mha')
-
         # Use a simple MultiHeadAttention block to update memory
         mha = hk.MultiHeadAttention(
-            num_heads= self.memory_size,
-            key_size=self.out_size // self.memory_size,
-            w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'),
+          num_heads=self.memory_size,
+          key_size=self.out_size // self.memory_size,
+          w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'),
         )
         mem_input = jnp.mean(node_fts, axis=1, keepdims=True)  # (B, 1, H)
+        # Incorporate edge_fts: mean over (1,2) dims to get (B, H), expand to (B, 1, H)
+        edge_context = jnp.mean(edge_fts, axis=(1,2), keepdims=True)
+        mem_input = mem_input + edge_context
         # memory: (B, memory_size, H), mem_input: (B, 1, H)
         # Attend mem_input (query) to memory (key, value)
         memory = mha(query=mem_input, key=memory, value=memory)
 
       # Optionally, use memory in node features
       mem_context = jnp.mean(memory, axis=1, keepdims=True)  # (B, 1, H)
-      node_fts = node_fts + mem_context
+      edge_fts = edge_fts + mem_context
 
     m_n_1 = hk.Linear(self.mid_size)
     m_n_2 = hk.Linear(self.mid_size)

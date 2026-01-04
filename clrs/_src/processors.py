@@ -1604,10 +1604,12 @@ class FALR8(Processor):
       if self.memory_type == 'gru':
         # Use a GRU cell to update memory sequentially for each batch
         gru = hk.GRU(self.out_size)
-        mem_input = jnp.mean(node_fts, axis=1)  # (B, H)
-        # Incorporate edge_fts: mean over (1,2) dims to get (B, H)
-        edge_context = jnp.mean(edge_fts, axis=(1,2))
-        mem_input = mem_input + edge_context
+
+        #graph_context = jnp.mean(graph_fts, keepdims=True)  # (B, 1, H)
+        node_context = jnp.mean(node_fts, axis=1)  # (B, H)
+        #edge_context = jnp.mean(edge_fts, axis=(1,2)) #mean over (1,2) dims to get (B, H)
+        mem_input = node_context #+ edge_context + graph_context  # (B, H)
+
         mem_state = gru.initial_state(b)
 
         new_memory = []
@@ -1616,13 +1618,18 @@ class FALR8(Processor):
           new_memory.append(mem_out)
         memory = jnp.stack(new_memory, axis=1)  # (B, memory_size, H)
 
+         # Generate mem_context to edge features
+        mem_context = jnp.mean(memory, axis=1, keepdims=True)  # (B, 1, H)
+        node_fts = node_fts + mem_context
+
       elif self.memory_type == 'lstm':
         # Use an LSTM cell to update memory
         lstm = hk.LSTM(self.out_size)
-        mem_input = jnp.mean(node_fts, axis=1)  # (B, H)
-        # Incorporate edge_fts: mean over (1,2) dims to get (B, H)
-        edge_context = jnp.mean(edge_fts, axis=(1,2))
-        mem_input = mem_input + edge_context
+        graph_context = jnp.mean(graph_fts, keepdims=True)  # (B, 1, H)
+        node_context = jnp.mean(node_fts, axis=1)  # (B, H)
+        edge_context = jnp.mean(edge_fts, axis=(1,2)) #mean over (1,2) dims to get (B, H)
+
+        mem_input = node_context + edge_context + graph_context  # (B, H)
         mem_state = lstm.initial_state(b)
 
         new_memory = []
@@ -1631,6 +1638,10 @@ class FALR8(Processor):
           new_memory.append(mem_out)
         memory = jnp.stack(new_memory, axis=1)  # (B, memory_size, H)
 
+        # Generate mem_context to edge features
+        mem_context = jnp.mean(memory, axis=1, keepdims=True)  # (B, 1, H)
+        node_fts = node_fts + mem_context
+
       elif self.memory_type == 'mha': #multi-head attention
         # Use a simple MultiHeadAttention block to update memory
         mha = hk.MultiHeadAttention(
@@ -1638,17 +1649,17 @@ class FALR8(Processor):
           key_size=self.out_size // self.memory_size,
           w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'),
         )
-        mem_input = jnp.mean(node_fts, axis=1, keepdims=True)  # (B, 1, H)
-        # Incorporate edge_fts: mean over (1,2) dims to get (B, H), expand to (B, 1, H)
-        edge_context = jnp.mean(edge_fts, axis=(1,2), keepdims=True)
-        mem_input = mem_input + edge_context
-        # memory: (B, memory_size, H), mem_input: (B, 1, H)
-        # Attend mem_input (query) to memory (key, value)
-        memory = mha(query=mem_input, key=memory, value=memory)
+        graph_context = jnp.mean(graph_fts, keepdims=True)  # (B, 1, H)
+        node_context = jnp.mean(node_fts, axis=1, keepdims=True)  # (B, 1, H)
+        edge_context = jnp.mean(edge_fts, axis=(1,2), keepdims=True) #mean over (1,2) dims to get (B, H), expand to (B, 1, H)
+        mem_input = node_context + edge_context + graph_context  # (B, 1, H)
 
-      # Optionally, use memory in node features
-      mem_context = jnp.mean(memory, axis=1, keepdims=True)  # (B, 1, H)
-      edge_fts = edge_fts + mem_context
+        # Attend mem_input (query) to memory (key, value)
+        memory = mha(query=mem_input, key=memory, value=memory) #(B, memory_size, H), mem_input: (B, 1, H)
+
+        # Generate mem_context to edge features
+        mem_context = jnp.mean(memory, axis=1, keepdims=True)  # (B, 1, H)
+        edge_fts = edge_fts + mem_context
 
     m_n_1 = hk.Linear(self.mid_size)
     m_n_2 = hk.Linear(self.mid_size)

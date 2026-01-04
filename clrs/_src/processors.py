@@ -1557,6 +1557,7 @@ class FALR8(Processor):
       nb_triplet_fts: int = 8,
       gated: bool = False,
       gated_activation: Optional[_Fn] = jax.nn.sigmoid,
+      memory_type: Optional[str] = None,
       memory_size: Optional[int] = None,
       name: str = 'f8',
   ):
@@ -1574,6 +1575,7 @@ class FALR8(Processor):
     self.nb_triplet_fts = nb_triplet_fts
     self.gated = gated
     self.gated_activation = gated_activation
+    self.memory_type = memory_type
     self.memory_size = memory_size
 
   def __call__(  # pytype: disable=signature-mismatch  # numpy-scalars
@@ -1593,25 +1595,54 @@ class FALR8(Processor):
     assert graph_fts.shape[:-1] == (b,)
     assert adj_mat.shape == (b, n, n) #hints
 
-    print('falreis memory size:', self.memory_size)
-
     # Memory block: initialize or update memory
-    if self.memory_size is not None:
+    if self.memory_size is not None and self.memory_type is not None:
       # Initialize memory if not provided
       if memory is None:
         memory = jnp.zeros((b, self.memory_size, self.out_size))
-      
-      # Use a GRU cell to update memory sequentially for each batch
-      gru = hk.GRU(self.out_size)
-      mem_input = jnp.mean(node_fts, axis=1)  # (B, H)
-      mem_state = gru.initial_state(b)
 
-      # Update memory for each slot
-      new_memory = []
-      for i in range(self.memory_size):
-        mem_out, mem_state = gru(mem_input, mem_state)
-        new_memory.append(mem_out)
-        memory = jnp.stack(new_memory, axis=1)  # (B, memory_size, H)
+      if self.memory_type == 'gru':
+        print('memory_type: gru')
+
+        # Use a GRU cell to update memory sequentially for each batch
+        gru = hk.GRU(self.out_size)
+        mem_input = jnp.mean(node_fts, axis=1)  # (B, H)
+        mem_state = gru.initial_state(b)
+
+        # Update memory for each slot
+        new_memory = []
+        for i in range(self.memory_size):
+          mem_out, mem_state = gru(mem_input, mem_state)
+          new_memory.append(mem_out)
+          memory = jnp.stack(new_memory, axis=1)  # (B, memory_size, H)
+
+      elif self.memory_type == 'lstm':
+        print('memory_type: lstm')
+
+        # Use an LSTM cell to update memory
+        lstm = hk.LSTM(self.out_size)
+        mem_input = jnp.mean(node_fts, axis=1)  # (B, H)
+        mem_state = lstm.initial_state(b)
+
+        new_memory = []
+        for i in range(self.memory_size):
+          mem_out, mem_state = lstm(mem_input, mem_state)
+          new_memory.append(mem_out)
+          memory = jnp.stack(new_memory, axis=1)  # (B, memory_size, H)
+
+      elif self.memory_type == 'mha': #multi-head attention
+        print('memory_type: mha')
+
+        # Use a simple MultiHeadAttention block to update memory
+        mha = hk.MultiHeadAttention(
+            num_heads= self.memory_size,
+            key_size=self.out_size // self.memory_size,
+            w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'),
+        )
+        mem_input = jnp.mean(node_fts, axis=1, keepdims=True)  # (B, 1, H)
+        # memory: (B, memory_size, H), mem_input: (B, 1, H)
+        # Attend mem_input (query) to memory (key, value)
+        memory = mha(query=mem_input, key=memory, value=memory)
 
       # Optionally, use memory in node features
       mem_context = jnp.mean(memory, axis=1, keepdims=True)  # (B, 1, H)
@@ -2156,6 +2187,7 @@ def get_processor_factory(kind: str,
     gated_activation = jax.nn.elu
 
   memory_size = kwargs.get('memory_size', None)
+  memory_type = kwargs.get('memory_type', None)
 
   #factory with methods
   def _factory(out_size: int):
@@ -2408,6 +2440,7 @@ def get_processor_factory(kind: str,
           reduction = reduction,
           gated = gated,
           gated_activation = gated_activation,
+          memory_type = memory_type,
           memory_size = memory_size
       )
     else:

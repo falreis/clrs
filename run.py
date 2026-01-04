@@ -163,7 +163,7 @@ flags.DEFINE_integer('train_steps', 10000, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 
-flags.DEFINE_integer('hidden_size', 128,
+flags.DEFINE_integer('hidden_size', 256,
                      'Number of hidden units of the model.')
 flags.DEFINE_integer('nb_heads', 1, 'Number of heads for GAT processors') #including RT model
 
@@ -251,8 +251,14 @@ flags.DEFINE_enum('gated_activation', 'tanh',
                      'hard_tanh', 'tanh', 'relu', 'elu'],
                     'Gated activation function.') 
 
-flags.DEFINE_integer('memory_size', 32,
-                     'Memory size for F-series processors (available starting with F8).')
+flags.DEFINE_enum('memory_type', 'mha',
+                  ['gru', 'lstm', 'mha'],
+                  'Memory type for F-series processors (available starting with F8).' \
+                  'Use None for no memory. MHA = Mult-head attention')
+
+flags.DEFINE_integer('memory_size', 8,
+                     'Memory size for F-series processors (available starting with F8). ' \
+                     'Use None for no memory.')
 
 #for RT model (Diao et al. (2023))
 flags.DEFINE_integer('nb_layers', 3, 'Number of processor layers.') 
@@ -486,6 +492,7 @@ def create_samplers(
   logging.info('restore_model %s', FLAGS.restore_model)
   logging.info('gated %s', FLAGS.gated)
   logging.info('gated_activation %s', FLAGS.gated_activation)
+  logging.info('memory_type %s', FLAGS.memory_type)
   logging.info('memory_size %s', FLAGS.memory_size)
 
   train_samplers = []
@@ -627,6 +634,7 @@ def main(unused_argv):
       activation = FLAGS.activation,
       gated = FLAGS.gated,
       gated_activation = FLAGS.gated_activation,
+      memory_type = FLAGS.memory_type,
       memory_size = FLAGS.memory_size,
       
       #RT model

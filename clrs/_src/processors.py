@@ -707,6 +707,25 @@ def get_falr7_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
   return msg
 
 
+def get_falr8_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
+  t_1 = hk.Linear(nb_triplet_fts)
+  t_2 = hk.Linear(nb_triplet_fts)
+  t_e_1 = hk.Linear(nb_triplet_fts)
+  t_g = hk.Linear(nb_triplet_fts)
+
+  tri_1 = t_1(node_fts)
+  tri_2 = t_2(hidden)
+  tri_e_1 = t_e_1(edge_fts)
+  tri_g = t_g(graph_fts)
+
+  return (
+      jnp.expand_dims(tri_1, axis=(1))    +  # (B, 1, N, H)
+      jnp.expand_dims(tri_2, axis=(2))    +  # (B, N, 1, H)
+      tri_e_1                             +  # (B, N, N, H)
+      jnp.expand_dims(tri_g, axis=(1, 2))    # (B, 1, 1, H)
+  ) 
+
+
 ##############################################################
 ##############################################################
 
@@ -1599,7 +1618,7 @@ class FALR8(Processor):
     if self.memory_size is not None and self.memory_type is not None:
       # Initialize memory if not provided
       if memory is None:
-        memory = jnp.zeros((b, self.memory_size, self.out_size))
+        memory = jnp.ones((b, self.memory_size, self.out_size))
 
       if self.memory_type == 'gru':
         # Use a GRU cell to update memory sequentially for each batch

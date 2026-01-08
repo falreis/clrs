@@ -408,7 +408,7 @@ class Net(hk.Module):
     nxt_hidden = hidden
     for _ in range(self.nb_msg_passing_steps):
       if self.memory_size is not None:
-        nxt_hidden, nxt_edge, mem = self.processor(
+        nxt_hidden, nxt_edge, mem_n, men_e  = self.processor(
             node_fts,
             edge_fts,
             graph_fts,

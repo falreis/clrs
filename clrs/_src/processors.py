@@ -708,22 +708,42 @@ def get_falr7_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
 
 
 def get_falr8_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
-  t_1 = hk.Linear(nb_triplet_fts)
-  t_2 = hk.Linear(nb_triplet_fts)
+  """Only get node information. Ignore edges (f1)"""
+
+  t_n_1 = hk.Linear(nb_triplet_fts)
+  t_n_2 = hk.Linear(nb_triplet_fts)
+  t_n_3 = hk.Linear(nb_triplet_fts)
+  t_h_1 = hk.Linear(nb_triplet_fts)
+  t_h_2 = hk.Linear(nb_triplet_fts)
+  t_h_3 = hk.Linear(nb_triplet_fts)
   t_e_1 = hk.Linear(nb_triplet_fts)
+  t_e_2 = hk.Linear(nb_triplet_fts)
+  t_e_3 = hk.Linear(nb_triplet_fts)
   t_g = hk.Linear(nb_triplet_fts)
 
-  tri_1 = t_1(node_fts)
-  tri_2 = t_2(hidden)
+  tri_n_1 = t_n_1(node_fts)
+  tri_n_2 = t_n_2(node_fts)
+  tri_n_3 = t_n_3(node_fts)
+  tri_h_1 = t_h_1(hidden)
+  tri_h_2 = t_h_2(hidden)
+  tri_h_3 = t_h_3(hidden)
   tri_e_1 = t_e_1(edge_fts)
+  tri_e_2 = t_e_2(edge_fts)
+  tri_e_3 = t_e_3(edge_fts)
   tri_g = t_g(graph_fts)
 
   return (
-      jnp.expand_dims(tri_1, axis=(1))    +  # (B, 1, N, H)
-      jnp.expand_dims(tri_2, axis=(2))    +  # (B, N, 1, H)
-      tri_e_1                             +  # (B, N, N, H)
-      jnp.expand_dims(tri_g, axis=(1, 2))    # (B, 1, 1, H)
-  ) 
+      jnp.expand_dims(tri_n_1, axis=(2, 3))    +  #   (B, N, 1, 1, H)
+      jnp.expand_dims(tri_n_2, axis=(1, 3))    +  # + (B, 1, N, 1, H)
+      jnp.expand_dims(tri_n_3, axis=(1, 2))    +  # + (B, 1, 1, N, H)
+      jnp.expand_dims(tri_h_1, axis=(2, 3))    +  #   (B, N, 1, 1, H)
+      jnp.expand_dims(tri_h_2, axis=(1, 3))    +  # + (B, 1, N, 1, H)
+      jnp.expand_dims(tri_h_3, axis=(1, 2))    +  # + (B, 1, 1, N, H)
+      jnp.expand_dims(tri_e_1, axis=3)       +  # + (B, N, N, 1, H)
+      jnp.expand_dims(tri_e_2, axis=2)       +  # + (B, N, 1, N, H)
+      jnp.expand_dims(tri_e_3, axis=1)       +  # + (B, 1, N, N, H)
+      jnp.expand_dims(tri_g, axis=(1, 2, 3))    # + (B, 1, 1, 1, H)
+  )
 
 
 ##############################################################
@@ -1618,7 +1638,7 @@ class FALR8(Processor):
     if self.memory_size is not None and self.memory_type is not None:
       # Initialize memory if not provided
       if memory is None:
-        memory = jnp.ones((b, self.memory_size, self.out_size))
+        memory = jnp.zeros((b, self.memory_size, self.out_size))
 
       if self.memory_type == 'gru':
         # Use a GRU cell to update memory sequentially for each batch
@@ -1668,10 +1688,12 @@ class FALR8(Processor):
           key_size=self.out_size // self.memory_size,
           w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'),
         )
+
         graph_context = jnp.mean(graph_fts, keepdims=True)  # (B, 1, H)
         node_context = jnp.mean(node_fts, axis=1, keepdims=True)  # (B, 1, H)
+        hidden_context = jnp.mean(hidden, axis=1, keepdims=True)  # (B, 1, H)
         edge_context = jnp.mean(edge_fts, axis=(1,2), keepdims=True) #mean over (1,2) dims to get (B, H), expand to (B, 1, H)
-        mem_input = node_context + edge_context + graph_context  # (B, 1, H)
+        mem_input = edge_context #node_context + hidden_context + edge_context + graph_context  # (B, 1, H)
 
         # Attend mem_input (query) to memory (key, value)
         memory = mha(query=mem_input, key=memory, value=memory) #(B, memory_size, H), mem_input: (B, 1, H)
@@ -1679,6 +1701,10 @@ class FALR8(Processor):
         # Generate mem_context to edge features
         mem_context = jnp.mean(memory, axis=1, keepdims=True)  # (B, 1, H)
         edge_fts = edge_fts + mem_context
+
+        ######################
+        #se usar node_fts, lembrar de atualizar a passagem de parâmetros (return da função)
+        ######################
 
     m_n_1 = hk.Linear(self.mid_size)
     m_n_2 = hk.Linear(self.mid_size)
@@ -1705,9 +1731,13 @@ class FALR8(Processor):
     tri_msgs = None
 
     if self.use_triplets:
-      triplets = get_falr6_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
+      triplets = get_falr8_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
+      
+      ot = hk.Linear(self.out_size)
+      tri_msgs = ot(jnp.max(triplets, axis=1))  # (B, N, N, H)   
+
       if self.activation is not None:
-        tri_msgs = self.activation(triplets)
+        tri_msgs = self.activation(tri_msgs)
 
     B, N, H = msg_n_1.shape
 

@@ -1579,7 +1579,62 @@ class F7(FALR7):
                adj_mat: _Array, hidden: _Array, **unused_kwargs) -> _Array:
     adj_mat = jnp.ones_like(adj_mat)
     return super().__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
+
+
+def multihead_attention_block(memory_size, out_size, fts, axis, memory):
+  mha = hk.MultiHeadAttention(
+    num_heads=memory_size,
+    key_size=out_size // memory_size,
+    w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'),
+  )
+
+  mem_input = jnp.mean(fts, axis=axis, keepdims=True)  # (B, 1, H)
+
+  # Attend mem_input (query) to memory (key, value)
+  memory = mha(query=mem_input, key=memory, value=memory) #(B, memory_size, H), mem_input: (B, 1, H)
   
+  # Generate mem_context to edge features
+  mem_context = jnp.mean(memory, axis=1, keepdims=True)  # (B, 1, H)
+
+  return memory, mem_context
+
+
+def lstm_block(ini_state, memory_size, out_size, fts, axis, memory):
+  # Use an LSTM cell to update memory
+  lstm = hk.LSTM(out_size)
+  mem_input = jnp.mean(fts, axis=axis, keepdims=True)  # (B, 1, H)
+
+  mem_state = lstm.initial_state(ini_state)
+
+  new_memory = []
+  for i in range(memory_size):
+    mem_out, mem_state = lstm(mem_input, mem_state)
+    new_memory.append(mem_out)
+
+  memory = jnp.stack(new_memory, axis=axis)  # (B, memory_size, H)
+
+  # Generate mem_context to edge features
+  mem_context = jnp.mean(memory, axis=axis, keepdims=True)  # (B, 1, H)
+  
+  return memory, mem_context
+
+def gru_block(ini_state, memory_size, out_size, fts, axis, memory):
+  # Use a GRU cell to update memory sequentially for each batch
+  gru = hk.GRU(out_size)
+
+  mem_input = jnp.mean(fts, axis=1)  # (B, H)
+  mem_state = gru.initial_state(ini_state)
+
+  new_memory = []
+  for i in range(memory_size):
+    mem_out, mem_state = gru(mem_input, mem_state)
+    new_memory.append(mem_out)
+  memory = jnp.stack(new_memory, axis=axis)  # (B, memory_size, H)
+
+    # Generate mem_context to edge features
+  mem_context = jnp.mean(memory, axis=axis, keepdims=True)  # (B, 1, H)
+  
+  return memory, mem_context
 
 class FALR8(Processor):
   """f7 code with memory block (f8)"""
@@ -1625,6 +1680,7 @@ class FALR8(Processor):
       adj_mat: _Array,
       hidden: _Array,
       memory_n: Optional[_Array] = None,
+      memory_h: Optional[_Array] = None,
       memory_e: Optional[_Array] = None,
       **unused_kwargs,
   ) -> _Array:
@@ -1636,86 +1692,34 @@ class FALR8(Processor):
     assert adj_mat.shape == (b, n, n) #hints
 
     # Memory block: initialize or update memory
-
-    if self.memory_size is not None and self.memory_type is not None:
+    if self.memory_size is None or self.memory_type is None:
+      memory_n = None
+      memory_e = None
+    else:
       # Initialize memory if not provided
-      if memory_e is None or memory_n is None:
+      if memory_e is None or memory_n is None or memory_h is None:
         memory_n = jnp.zeros((b, self.memory_size, self.out_size))
+        memory_h = jnp.zeros((b, self.memory_size, self.out_size))
         memory_e = jnp.zeros((b, self.memory_size, self.out_size))
 
       if self.memory_type == 'gru':
         # Use a GRU cell to update memory sequentially for each batch
-        gru = hk.GRU(self.out_size)
-
-        #graph_context = jnp.mean(graph_fts, keepdims=True)  # (B, 1, H)
-        node_context = jnp.mean(node_fts, axis=1)  # (B, H)
-        #edge_context = jnp.mean(edge_fts, axis=(1,2)) #mean over (1,2) dims to get (B, H)
-        mem_n_input = node_context #+ edge_context + graph_context  # (B, H)
-
-        mem_state = gru.initial_state(b)
-
-        new_memory = []
-        for i in range(self.memory_size):
-          mem_out, mem_state = gru(mem_n_input, mem_state)
-          new_memory.append(mem_out)
-        memory_n = jnp.stack(new_memory, axis=1)  # (B, memory_size, H)
-
-         # Generate mem_context to edge features
-        mem_context = jnp.mean(memory_n, axis=1, keepdims=True)  # (B, 1, H)
+        memory_n, mem_context = gru_block(b, self.memory_size, self.out_size, node_fts, 1, memory_n)
         node_fts = node_fts + mem_context
 
       elif self.memory_type == 'lstm':
         # Use an LSTM cell to update memory
-        lstm = hk.LSTM(self.out_size)
-        graph_context = jnp.mean(graph_fts, keepdims=True)  # (B, 1, H)
-        node_context = jnp.mean(node_fts, axis=1)  # (B, H)
-        edge_context = jnp.mean(edge_fts, axis=(1,2)) #mean over (1,2) dims to get (B, H)
-
-        mem_n_input = node_context + edge_context + graph_context  # (B, H)
-        mem_state = lstm.initial_state(b)
-
-        new_memory = []
-        for i in range(self.memory_size):
-          mem_out, mem_state = lstm(mem_n_input, mem_state)
-          new_memory.append(mem_out)
-        memory_n = jnp.stack(new_memory, axis=1)  # (B, memory_size, H)
-
-        # Generate mem_context to edge features
-        mem_context = jnp.mean(memory_n, axis=1, keepdims=True)  # (B, 1, H)
+        memory_n, mem_context = lstm_block(b, self.memory_size, self.out_size, node_fts, 1, memory_n)
         node_fts = node_fts + mem_context
 
       elif self.memory_type == 'mha': #multi-head attention
         # Use a simple MultiHeadAttention block to update memory
-        mha_e = hk.MultiHeadAttention(
-          num_heads=self.memory_size,
-          key_size=self.out_size // self.memory_size,
-          w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'),
-        )
-
-        mha_n = hk.MultiHeadAttention(
-          num_heads=self.memory_size,
-          key_size=self.out_size // self.memory_size,
-          w_init=hk.initializers.VarianceScaling(1.0, 'fan_avg', 'uniform'),
-        )
-
-
-        graph_context = jnp.mean(graph_fts, keepdims=True)  # (B, 1, H)
-        node_context = jnp.mean(node_fts, axis=1, keepdims=True)  # (B, 1, H)
-        hidden_context = jnp.mean(hidden, axis=1, keepdims=True)  # (B, 1, H)
-        edge_context = jnp.mean(edge_fts, axis=(1,2), keepdims=True) #mean over (1,2) dims to get (B, H), expand to (B, 1, H)
-        
-        mem_n_input = node_context
-        mem_e_input = edge_context #node_context + hidden_context + edge_context + graph_context  # (B, 1, H)
-
-        # Attend mem_input (query) to memory (key, value)
-        memory_n = mha_n(query=mem_n_input, key=memory_n, value=memory_n) #(B, memory_size, H), mem_input: (B, 1, H)
-        memory_e = mha_e(query=mem_e_input, key=memory_e, value=memory_e) #(B, memory_size, H), mem_input: (B, 1, H)
-        
-        # Generate mem_context to edge features
-        mem_n_context = jnp.mean(memory_n, axis=1, keepdims=True)  # (B, 1, H)
-        mem_e_context = jnp.mean(memory_e, axis=1, keepdims=True)  # (B, 1, H)
+        memory_n, mem_n_context = multihead_attention_block(self.memory_size, self.out_size, node_fts, 1, memory_n)
+        memory_h, mem_h_context = multihead_attention_block(self.memory_size, self.out_size, hidden, 1, memory_h)
+        memory_e, mem_e_context = multihead_attention_block(self.memory_size, self.out_size, edge_fts, (1,2), memory_e)
 
         node_fts = node_fts + mem_n_context
+        hidden = hidden + mem_h_context
         edge_fts = edge_fts + mem_e_context
 
         ######################
@@ -1802,7 +1806,7 @@ class FALR8(Processor):
 
     # Return memory as additional output if used
     if self.memory_size is not None:
-      return ret, tri_msgs, memory_n, memory_e  # tri_msgs and memory
+      return ret, tri_msgs, memory_n, memory_h, memory_e   # tri_msgs and memory
     else:
       return ret, tri_msgs  # pytype: disable=bad-return-type  # numpy-scalars
 

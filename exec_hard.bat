@@ -1,5 +1,7 @@
 python run.py activity_selector
 sleep 30
+python run.py bfs
+sleep 30
 python run.py bubble_sort
 sleep 30
 python run.py dfs

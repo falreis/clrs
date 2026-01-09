@@ -256,7 +256,7 @@ flags.DEFINE_enum('memory_type', 'mha',
                   'Memory type for F-series processors (available starting with F8).' \
                   'Use None for no memory. MHA = Mult-head')
 
-flags.DEFINE_integer('memory_size', 8,
+flags.DEFINE_integer('memory_size', 16,
                      'Memory size for F-series processors (available starting with F8). ' \
                      'Use None for no memory.')
 

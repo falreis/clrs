@@ -1682,6 +1682,7 @@ class FALR8(Processor):
       memory_n: Optional[_Array] = None,
       memory_h: Optional[_Array] = None,
       memory_e: Optional[_Array] = None,
+      memory_g: Optional[_Array] = None,
       **unused_kwargs,
   ) -> _Array:
     """MPNN inference step with memory."""
@@ -1693,14 +1694,18 @@ class FALR8(Processor):
 
     # Memory block: initialize or update memory
     if self.memory_size is None or self.memory_type is None:
-      memory_n = None
-      memory_e = None
+      memory = None
     else:
       # Initialize memory if not provided
       if memory_e is None or memory_n is None or memory_h is None:
         memory_n = jnp.zeros((b, self.memory_size, self.out_size))
         memory_h = jnp.zeros((b, self.memory_size, self.out_size))
         memory_e = jnp.zeros((b, self.memory_size, self.out_size))
+        memory_g = jnp.zeros((b, self.memory_size, self.out_size))
+
+        memory = (memory_n, memory_h, memory_e, memory_g)
+      else:
+        memory_n, memory_h, memory_e, memory_g = memory
 
       if self.memory_type == 'gru':
         # Use a GRU cell to update memory sequentially for each batch
@@ -1717,10 +1722,13 @@ class FALR8(Processor):
         memory_n, mem_n_context = multihead_attention_block(self.memory_size, self.out_size, node_fts, 1, memory_n)
         memory_h, mem_h_context = multihead_attention_block(self.memory_size, self.out_size, hidden, 1, memory_h)
         memory_e, mem_e_context = multihead_attention_block(self.memory_size, self.out_size, edge_fts, (1,2), memory_e)
+        memory_g, mem_g_context = multihead_attention_block(self.memory_size, self.out_size, graph_fts, None, memory_g)
+
 
         node_fts = node_fts + mem_n_context
         hidden = hidden + mem_h_context
         edge_fts = edge_fts + mem_e_context
+        graph_fts = graph_fts + mem_g_context
 
         ######################
         #se usar node_fts, lembrar de atualizar a passagem de parâmetros (return da função)
@@ -1806,7 +1814,8 @@ class FALR8(Processor):
 
     # Return memory as additional output if used
     if self.memory_size is not None:
-      return ret, tri_msgs, memory_n, memory_h, memory_e   # tri_msgs and memory
+      memory = (memory_n, memory_h, memory_e, memory_g)
+      return ret, tri_msgs, memory   # tri_msgs and memory
     else:
       return ret, tri_msgs  # pytype: disable=bad-return-type  # numpy-scalars
 

@@ -1759,13 +1759,15 @@ class FALR8(Processor):
     tri_msgs = None
 
     if self.use_triplets:
-      triplets = get_falr8_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
-      
-      ot = hk.Linear(self.out_size)
-      tri_msgs = ot(jnp.max(triplets, axis=1))  # (B, N, N, H)   
+      triplets = get_falr6_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
+      #tri_msgs = jnp.mean(triplets, axis=1)  # (B, N, N, H)
+
+      #triplets = get_falr8_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
+      #ot = hk.Linear(self.out_size)
+      #tri_msgs = ot(jnp.max(triplets, axis=1))  # (B, N, N, H)   
 
       if self.activation is not None:
-        tri_msgs = self.activation(tri_msgs)
+        tri_msgs = self.activation(triplets)
 
     B, N, H = msg_n_1.shape
 

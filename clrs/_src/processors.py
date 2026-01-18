@@ -710,6 +710,7 @@ def get_falr7_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
 def get_falr8_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
   """Only get node information. Ignore edges (f1)"""
 
+  '''
   t_n_1 = hk.Linear(nb_triplet_fts)
   t_n_2 = hk.Linear(nb_triplet_fts)
   t_n_3 = hk.Linear(nb_triplet_fts)
@@ -744,6 +745,37 @@ def get_falr8_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
       jnp.expand_dims(tri_e_3, axis=1)       +  # + (B, 1, N, N, H)
       jnp.expand_dims(tri_g, axis=(1, 2, 3))    # + (B, 1, 1, 1, H)
   )
+  '''
+
+  tri_n_1 = hk.Linear(nb_triplet_fts, with_bias=True)(node_fts)
+  tri_n_2 = hk.Linear(nb_triplet_fts, with_bias=True)(node_fts)
+  
+  tri_h_1 = hk.Linear(nb_triplet_fts, with_bias=True)(hidden)
+  tri_h_2 = hk.Linear(nb_triplet_fts, with_bias=True)(hidden)
+
+  tri_e_1 = hk.Linear(nb_triplet_fts, with_bias=True)(edge_fts)
+  tri_e_2 = hk.Linear(nb_triplet_fts, with_bias=True)(edge_fts)
+
+  tri_g1 = hk.Linear(nb_triplet_fts, with_bias=True)(graph_fts)
+  tri_g2 = hk.Linear(nb_triplet_fts, with_bias=True)(graph_fts)
+
+  tri_n1_exp = jnp.expand_dims(tri_n_1, axis=(1))    # (B, 1, N, H)
+  tri_n2_exp = jnp.expand_dims(tri_n_2, axis=(2))    # (B, N, 1, H)
+
+  tri_h1_exp = jnp.expand_dims(tri_h_1, axis=(1))    # (B, 1, N, H)
+  tri_h2_exp = jnp.expand_dims(tri_h_2, axis=(2))    # (B, N, 1, H)
+  
+  tri_g_exp1 = jnp.expand_dims(tri_g1, axis=(1, 2)) # (B, 1, 1, H)
+  tri_g_exp2 = jnp.expand_dims(tri_g2, axis=(1, 2)) # (B, 1, 1, H)
+
+  # Combine triplet and graph features using weighted sum and nonlinearities for more expressiveness
+  return (
+      tri_n1_exp + tri_n2_exp +
+      tri_h1_exp + tri_h2_exp +
+      tri_e_1 + tri_e_2 +
+      tri_g_exp1 + tri_g_exp2
+  )
+
 
 
 ##############################################################
@@ -1724,7 +1756,6 @@ class FALR8(Processor):
         memory_e, mem_e_context = multihead_attention_block(self.memory_size, self.out_size, edge_fts, (1,2), memory_e)
         memory_g, mem_g_context = multihead_attention_block(self.memory_size, self.out_size, graph_fts, None, memory_g)
 
-
         node_fts = node_fts + mem_n_context
         hidden = hidden + mem_h_context
         edge_fts = edge_fts + mem_e_context
@@ -1759,7 +1790,7 @@ class FALR8(Processor):
     tri_msgs = None
 
     if self.use_triplets:
-      triplets = get_falr6_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
+      triplets = get_falr8_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
       #tri_msgs = jnp.mean(triplets, axis=1)  # (B, N, N, H)
 
       #triplets = get_falr8_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)

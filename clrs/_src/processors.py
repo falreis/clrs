@@ -1791,7 +1791,7 @@ class FALR8(Processor):
 
     if self.use_triplets:
       triplets = get_falr8_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
-      #tri_msgs = jnp.mean(triplets, axis=1)  # (B, N, N, H)
+      tri_msgs = jnp.min(triplets) #, axis=1)  # (B, N, N, H)
 
       #triplets = get_falr8_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
       #ot = hk.Linear(self.out_size)
@@ -2267,6 +2267,7 @@ def get_processor_factory(kind: str,
   elif(kwargs['reduction'] == 'mean'):
     reduction = jnp.mean
   elif(kwargs['reduction'] == 'min'):
+    print('reduction min')
     reduction = jnp.min
   elif(kwargs['reduction'] == 'sum'):
     reduction = jnp.sum

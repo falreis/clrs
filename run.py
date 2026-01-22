@@ -150,9 +150,9 @@ flags.DEFINE_boolean('enforce_permutations', True,
 flags.DEFINE_boolean('enforce_pred_as_input', True,
                      'Whether to change pred_h hints into pred inputs.')
 
-flags.DEFINE_integer('batch_size', 16, 'Batch size used for training.')
-flags.DEFINE_integer('val_batch_size', 16, 'Batch size used for training.')
-flags.DEFINE_integer('test_batch_size', 16, 'Batch size used for training.')
+flags.DEFINE_integer('batch_size', 32, 'Batch size used for training.')
+flags.DEFINE_integer('val_batch_size', 32, 'Batch size used for training.')
+flags.DEFINE_integer('test_batch_size', 32, 'Batch size used for training.')
 
 flags.DEFINE_boolean('chunked_training', True,
                      'Whether to use chunking for training.')

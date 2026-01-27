@@ -150,9 +150,9 @@ flags.DEFINE_boolean('enforce_permutations', True,
 flags.DEFINE_boolean('enforce_pred_as_input', True,
                      'Whether to change pred_h hints into pred inputs.')
 
-flags.DEFINE_integer('batch_size', 32, 'Batch size used for training.')
-flags.DEFINE_integer('val_batch_size', 32, 'Batch size used for training.')
-flags.DEFINE_integer('test_batch_size', 32, 'Batch size used for training.')
+flags.DEFINE_integer('batch_size', 16, 'Batch size used for training.')
+flags.DEFINE_integer('val_batch_size', 16, 'Batch size used for training.')
+flags.DEFINE_integer('test_batch_size', 16, 'Batch size used for training.')
 
 flags.DEFINE_boolean('chunked_training', True,
                      'Whether to use chunking for training.')
@@ -246,7 +246,7 @@ flags.DEFINE_string('restore_model', '',
 flags.DEFINE_boolean('gated', True, 
                     'Use gated activation.') 
 
-flags.DEFINE_enum('gated_activation', 'tanh', 
+flags.DEFINE_enum('gated_activation', 'elu', 
                     ['sigmoid', 'hard_sigmoid', 'log_sigmoid', 'sparse_sigmoid', 
                      'hard_tanh', 'tanh', 'relu', 'elu'],
                     'Gated activation function.') 

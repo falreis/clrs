@@ -608,10 +608,19 @@ class MatcherSampler(Sampler):
         length_needle = length // 5
     elif length_needle < 0:  # randomize needle length
       length_needle = self._rng.randint(1, high=1 - length_needle)
+
+
+    #print('length_needle', length_needle)
+    #print('length_haystack', length - length_needle)
+
     length_haystack = length - length_needle
     needle = self._random_string(length=length_needle, chars=chars)
     haystack = self._random_string(length=length_haystack, chars=chars)
-    embed_pos = self._rng.choice(length_haystack - length_needle)
+
+    if(length_needle == length_haystack):
+      embed_pos = self._rng.choice(1)
+    else:
+      embed_pos = self._rng.choice(length_haystack - length_needle)
     haystack[embed_pos:embed_pos + length_needle] = needle
     return [haystack, needle]
 

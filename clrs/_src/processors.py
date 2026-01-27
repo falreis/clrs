@@ -1757,9 +1757,9 @@ class FALR8(Processor):
         memory_g, mem_g_context = multihead_attention_block(self.memory_size, self.out_size, graph_fts, None, memory_g)
 
         node_fts = node_fts + mem_n_context
-        hidden = hidden + mem_h_context
+        #hidden = hidden + mem_h_context
         edge_fts = edge_fts + mem_e_context
-        graph_fts = graph_fts + mem_g_context
+        #graph_fts = graph_fts + mem_g_context
 
         ######################
         #se usar node_fts, lembrar de atualizar a passagem de parâmetros (return da função)
@@ -1790,15 +1790,15 @@ class FALR8(Processor):
     tri_msgs = None
 
     if self.use_triplets:
-      triplets = get_falr8_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
-      tri_msgs = jnp.min(triplets) #, axis=1)  # (B, N, N, H)
+
+      tri_msgs = get_falr8_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
 
       #triplets = get_falr8_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
       #ot = hk.Linear(self.out_size)
       #tri_msgs = ot(jnp.max(triplets, axis=1))  # (B, N, N, H)   
 
-      if self.activation is not None:
-        tri_msgs = self.activation(triplets)
+      #if self.activation is not None:
+      #  tri_msgs = self.activation(tri_msgs)
 
     B, N, H = msg_n_1.shape
 

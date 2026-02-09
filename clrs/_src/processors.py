@@ -749,13 +749,27 @@ def get_falr9_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
   tri_h_2 = non_linear_memory_block(hidden, nb_triplet_fts)
   tri_e_2 = non_linear_memory_block(edge_fts, nb_triplet_fts)
 
+  tri_n_3 = gru_memory_block(node_fts, nb_triplet_fts)
+  tri_h_3 = gru_memory_block(hidden, nb_triplet_fts)
+  tri_e_3 = gru_memory_block(edge_fts, nb_triplet_fts)
+
+  tri_n_4 = lstm_memory_block(node_fts, nb_triplet_fts)
+  tri_h_4 = lstm_memory_block(hidden, nb_triplet_fts)
+  tri_e_4 = lstm_memory_block(edge_fts, nb_triplet_fts)
+  
   return (
       jnp.expand_dims(tri_n_1, axis=(1)) + 
       jnp.expand_dims(tri_n_2, axis=(2)) +
+      jnp.expand_dims(tri_n_3, axis=(1)) +
+      jnp.expand_dims(tri_n_4, axis=(2)) +
       jnp.expand_dims(tri_h_1, axis=(1)) +
       jnp.expand_dims(tri_h_2, axis=(2)) +
+      jnp.expand_dims(tri_h_3, axis=(1)) +
+      jnp.expand_dims(tri_h_4, axis=(2)) +
       tri_e_1 +
       tri_e_2 +
+      tri_e_3 +
+      tri_e_4 +
       jnp.expand_dims(tri_g_1, axis=(1, 2))
   )
 
@@ -1858,6 +1872,7 @@ class FALR9(Processor):
       self,
       out_size: int,
       mid_size: Optional[int] = None,
+      mid_act: Optional[_Fn] = jax.nn.relu,
       activation: Optional[_Fn] = jax.nn.relu,
       reduction: _Fn = jnp.max,
       msgs_mlp_sizes: Optional[List[int]] = None,
@@ -1875,6 +1890,7 @@ class FALR9(Processor):
       self.mid_size = out_size
     else:
       self.mid_size = mid_size
+    self.mid_act = mid_act
     self.out_size = out_size
     self.activation = activation
     self.reduction = reduction
@@ -1994,6 +2010,9 @@ class FALR9(Processor):
 
     msgs = self.reduction(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
 
+    #if self.mid_act is not None:
+    #  msgs = self.mid_act(msgs)
+
     h_1 = o1(node_fts)
     h_2 = o2(hidden)
     h_3 = o3(msgs)
@@ -2024,6 +2043,8 @@ class FALR9(Processor):
 
       # Residual connection for better gradient flow
       ret = (ret * gate) + (hidden * gate) + (hidden * (1 - gate)) + (ret * (1 - gate))
+    else:
+      ret = self.gated_activation(ret)
 
     # Return memory as additional output if used
     if self.memory_size is not None:

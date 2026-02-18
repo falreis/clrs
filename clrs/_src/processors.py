@@ -773,6 +773,27 @@ def get_falr9_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
       jnp.expand_dims(tri_g_1, axis=(1, 2))
   )
 
+def get_falr10_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
+  """Only get node information. Ignore edges (f1)"""
+  tri_n_1 = hk.Linear(nb_triplet_fts, with_bias=True)(node_fts)
+  tri_h_1 = hk.Linear(nb_triplet_fts, with_bias=True)(hidden)
+  tri_e_1 = hk.Linear(nb_triplet_fts, with_bias=True)(edge_fts)
+  tri_g_1 = hk.Linear(nb_triplet_fts, with_bias=True)(graph_fts)
+  
+  tri_n_2 = non_linear_memory_block(node_fts, nb_triplet_fts)
+  tri_h_2 = non_linear_memory_block(hidden, nb_triplet_fts)
+  tri_e_2 = non_linear_memory_block(edge_fts, nb_triplet_fts)
+  
+  return (
+      jnp.expand_dims(tri_n_1, axis=(1)) + 
+      jnp.expand_dims(tri_n_2, axis=(2)) +
+      jnp.expand_dims(tri_h_1, axis=(1)) +
+      jnp.expand_dims(tri_h_2, axis=(2)) +
+      tri_e_1 +
+      tri_e_2 +
+      jnp.expand_dims(tri_g_1, axis=(1, 2))
+  )
+
 
 
 ##############################################################
@@ -1610,23 +1631,6 @@ class FALR7(Processor):
     h_2 = o2(hidden)
     h_3 = o3(msgs)
 
-    #print("h_1", h_1.shape)
-    #print("h_2", h_2.shape)
-    #print("h_3", h_3.shape)
-
-    # Add attention mechanism over node and hidden features before combining
-    # Compute attention scores
-    '''
-    att_n = hk.Linear(1)(node_fts)  # (B, N, 1)
-    att_h = hk.Linear(1)(hidden)    # (B, N, 1)
-    att_scores = jnp.concatenate([att_n, att_h], axis=-1)  # (B, N, 2)
-    att_weights = jax.nn.softmax(att_scores, axis=-1)      # (B, N, 2)
-
-    # Weighted sum for node and hidden features
-    node_att = att_weights[..., 0:1] * h_1 + att_weights[..., 1:2] * h_2  # (B, N, H)
-
-    ret = node_att + h_3
-    '''
     ret = h_1 + h_2 + h_3
 
     #if self.activation is not None:
@@ -1956,7 +1960,7 @@ class FALR9(Processor):
         memory_g, mem_g_context = multihead_attention_block(self.memory_size, self.out_size, graph_fts, None, memory_g)
 
         node_fts = node_fts + mem_n_context
-        #hidden = hidden + mem_h_context
+        hidden = hidden + mem_h_context
         edge_fts = edge_fts + mem_e_context
         #graph_fts = graph_fts + mem_g_context
 
@@ -2055,6 +2059,197 @@ class FALR9(Processor):
 
 
 class F9(FALR9):
+  """Message-Passing Neural Network (Gilmer et al., ICML 2017)."""
+
+  def __call__(self, node_fts: _Array, edge_fts: _Array, graph_fts: _Array,
+               adj_mat: _Array, hidden: _Array, **unused_kwargs) -> _Array:
+    adj_mat = jnp.ones_like(adj_mat)
+    return super().__call__(node_fts, edge_fts, graph_fts, adj_mat, hidden)
+  
+
+class FALR10(Processor):
+  """f7 code with memory block (f8)"""
+
+  def __init__(
+      self,
+      out_size: int,
+      mid_size: Optional[int] = None,
+      mid_act: Optional[_Fn] = jax.nn.relu,
+      activation: Optional[_Fn] = jax.nn.relu,
+      reduction: _Fn = jnp.max,
+      msgs_mlp_sizes: Optional[List[int]] = None,
+      use_ln: bool = False,
+      use_triplets: bool = False,
+      nb_triplet_fts: int = 8,
+      gated: bool = False,
+      gated_activation: Optional[_Fn] = jax.nn.sigmoid,
+      memory_type: Optional[str] = None,
+      memory_size: Optional[int] = None,
+      name: str = 'f8',
+  ):
+    super().__init__(name=name)
+    if mid_size is None:
+      self.mid_size = out_size
+    else:
+      self.mid_size = mid_size
+    self.mid_act = mid_act
+    self.out_size = out_size
+    self.activation = activation
+    self.reduction = reduction
+    self._msgs_mlp_sizes = msgs_mlp_sizes
+    self.use_ln = use_ln
+    self.use_triplets = use_triplets
+    self.nb_triplet_fts = nb_triplet_fts
+    self.gated = gated
+    self.gated_activation = gated_activation
+    self.memory_type = memory_type
+    self.memory_size = memory_size
+
+  def __call__(  # pytype: disable=signature-mismatch  # numpy-scalars
+      self,
+      node_fts: _Array,
+      edge_fts: _Array,
+      graph_fts: _Array,
+      adj_mat: _Array,
+      hidden: _Array,
+      memory_n: Optional[_Array] = None,
+      memory_h: Optional[_Array] = None,
+      memory_e: Optional[_Array] = None,
+      memory_g: Optional[_Array] = None,
+      **unused_kwargs,
+  ) -> _Array:
+    """MPNN inference step with memory."""
+
+    b, n, _ = node_fts.shape
+    assert edge_fts.shape[:-1] == (b, n, n)
+    assert graph_fts.shape[:-1] == (b,)
+    assert adj_mat.shape == (b, n, n) #hints
+
+    # Memory block: initialize or update memory
+    if self.memory_size is None or self.memory_type is None:
+      memory = None
+    else:
+      # Initialize memory if not provided
+      if memory_e is None or memory_n is None or memory_h is None:
+        memory_n = jnp.zeros((b, self.memory_size, self.out_size))
+        memory_h = jnp.zeros((b, self.memory_size, self.out_size))
+        memory_e = jnp.zeros((b, self.memory_size, self.out_size))
+        memory_g = jnp.zeros((b, self.memory_size, self.out_size))
+
+        memory = (memory_n, memory_h, memory_e, memory_g)
+      else:
+        memory_n, memory_h, memory_e, memory_g = memory
+
+      if self.memory_type == 'gru':
+        # Use a GRU cell to update memory sequentially for each batch
+        memory_n, mem_context = gru_block(b, self.memory_size, self.out_size, node_fts, 1, memory_n)
+        node_fts = node_fts + mem_context
+
+      elif self.memory_type == 'lstm':
+        # Use an LSTM cell to update memory
+        memory_n, mem_context = lstm_block(b, self.memory_size, self.out_size, node_fts, 1, memory_n)
+        node_fts = node_fts + mem_context
+
+      elif self.memory_type == 'mha': #multi-head attention
+        # Use a simple MultiHeadAttention block to update memory
+        memory_n, mem_n_context = multihead_attention_block(self.memory_size, self.out_size, node_fts, 1, memory_n)
+        memory_h, mem_h_context = multihead_attention_block(self.memory_size, self.out_size, hidden, 1, memory_h)
+        memory_e, mem_e_context = multihead_attention_block(self.memory_size, self.out_size, edge_fts, (1,2), memory_e)
+        memory_g, mem_g_context = multihead_attention_block(self.memory_size, self.out_size, graph_fts, None, memory_g)
+
+        node_fts = node_fts + mem_n_context
+        hidden = hidden + mem_h_context
+        edge_fts = edge_fts + mem_e_context
+        #graph_fts = graph_fts + mem_g_context
+
+        ######################
+        #se usar node_fts, lembrar de atualizar a passagem de parâmetros (return da função)
+        ######################
+
+    m_n_1 = hk.Linear(self.mid_size)
+    m_h_1 = hk.Linear(self.mid_size)
+    m_e_1 = hk.Linear(self.mid_size)
+    m_g_1 = hk.Linear(self.mid_size)
+
+    o1 = hk.Linear(self.out_size)
+    o2 = hk.Linear(self.out_size)
+    o3 = hk.Linear(self.out_size)
+    o4 = hk.Linear(self.out_size)
+
+    msg_n_1 = m_n_1(node_fts)
+    msg_h_1 = m_h_1(hidden)
+    msg_e_1 = m_e_1(edge_fts)
+    msg_g_1 = m_g_1(graph_fts)
+
+    tri_msgs = None
+
+    if self.use_triplets:
+
+      tri_msgs = get_falr10_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
+      #tri_msgs = jnp.average(triplets, axis=1)  # (B, N, N, H)
+
+      if self.activation is not None:
+        tri_msgs = self.activation(tri_msgs)
+
+    B, N, H = msg_n_1.shape
+
+    msgs = (
+        jnp.expand_dims(msg_n_1, axis=1) + 
+        jnp.expand_dims(msg_h_1, axis=2) +
+        msg_e_1 + 
+        jnp.expand_dims(msg_g_1, axis=(1, 2))
+    )
+
+    if self._msgs_mlp_sizes is not None:
+      msgs = hk.nets.MLP(self._msgs_mlp_sizes)(self.activation(msgs))
+
+    msgs = self.reduction(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
+
+    #if self.mid_act is not None:
+    #  msgs = self.mid_act(msgs)
+
+    h_1 = o1(node_fts)
+    h_2 = o2(hidden)
+    h_3 = o3(msgs)
+
+    ret = h_1 + h_2 + h_3
+
+    if self.gated:
+      # Improved gating: use LayerNorm, richer interaction, and optional residual
+      gate_n = hk.Linear(self.out_size)
+      gate_h = hk.Linear(self.out_size)
+      gate_m = hk.Linear(self.out_size)
+      gate_g = hk.Linear(self.out_size)
+      gate_o = hk.Linear(self.out_size, b_init=hk.initializers.Constant(-3))
+
+      # Concatenate all sources for gating
+      gate_input = jnp.concatenate([
+          gate_n(node_fts),
+          gate_h(hidden),
+          gate_m(msgs)
+      ], axis=-1)
+
+      # Normalization for stability
+      if self.use_ln:
+        ln_gate = hk.LayerNorm(axis=-1, create_scale=True, create_offset=True)
+        gate_input = ln_gate(gate_input)
+
+      gate = self.gated_activation(gate_o(jax.nn.relu(gate_input)))
+
+      # Residual connection for better gradient flow
+      ret = (ret * gate) + (hidden * gate) + (hidden * (1 - gate)) + (ret * (1 - gate))
+    else:
+      ret = self.gated_activation(ret)
+
+    # Return memory as additional output if used
+    if self.memory_size is not None:
+      memory = (memory_n, memory_h, memory_e, memory_g)
+      return ret, tri_msgs, memory   # tri_msgs and memory
+    else:
+      return ret, tri_msgs  # pytype: disable=bad-return-type  # numpy-scalars
+
+
+class F10(FALR10):
   """Message-Passing Neural Network (Gilmer et al., ICML 2017)."""
 
   def __call__(self, node_fts: _Array, edge_fts: _Array, graph_fts: _Array,
@@ -2771,6 +2966,20 @@ def get_processor_factory(kind: str,
       )
     elif kind == 'f9':
       processor = F9(
+          out_size=out_size,
+          msgs_mlp_sizes=[out_size, out_size],
+          use_ln=use_ln,
+          use_triplets=True,
+          nb_triplet_fts=nb_triplet_fts,
+          activation = activation,
+          reduction = reduction,
+          gated = gated,
+          gated_activation = gated_activation,
+          memory_type = memory_type,
+          memory_size = memory_size
+      )
+    elif kind == 'f10':
+      processor = F10(
           out_size=out_size,
           msgs_mlp_sizes=[out_size, out_size],
           use_ln=use_ln,

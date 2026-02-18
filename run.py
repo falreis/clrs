@@ -58,29 +58,10 @@ os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".9"
 
 #define algorithms to run
 if len(sys.argv) < 2:
-    flags.DEFINE_list('algorithms', ['activity_selector'], 'Which algorithms to run.')
+  flags.DEFINE_list('algorithms', ['activity_selector'], 'Which algorithms to run.')
 else:
-    if sys.argv[1] != 'multitask':
-      flags.DEFINE_list('algorithms', [sys.argv[1]], 'Which algorithms to run.')
-    else:
-      if sys.argv[2] == 'dc':
-        flags.DEFINE_list('algorithms', ['find_maximum_subarray_kadane'], 'Divide and conquer algorithms.')
-      elif sys.argv[2] == 'dp':
-        flags.DEFINE_list('algorithms', ['lcs_length', 'matrix_chain_order', 'optimal_bst'], 'Dynamic Prog. algorithms.')
-      elif sys.argv[2] == 'geo':
-        flags.DEFINE_list('algorithms', ['graham_scan', 'jarvis_march', 'segments_intersect'], 'Geometry algorithms.')
-      elif sys.argv[2] == 'graph':
-        flags.DEFINE_list('algorithms', ['articulation_points', 'bellman_ford', 'bfs', 'bridges', 'dfs', 
-                                  'dag_shortest_paths', 'dijkstra', 'floyd_warshall', 'mst_kruskal', 
-                                  'mst_prim', 'strongly_connected_components', 'topological_sort'], 'Graph algorithms.')
-      elif sys.argv[2] == 'greedy':
-        flags.DEFINE_list('algorithms', ['activity_selector', 'task_scheduling'], 'Greedy algorithms.')
-      elif sys.argv[2] == 'search':
-        flags.DEFINE_list('algorithms', ['binary_search', 'minimum', 'quickselect'], 'Searching algorithms.')
-      elif sys.argv[2] == 'sorting':
-        flags.DEFINE_list('algorithms', ['bubble_sort', 'heapsort', 'insertion_sort', 'quicksort'], 'Sorting algorithms.')  
-      elif sys.argv[2] == 'string':
-        flags.DEFINE_list('algorithms', ['kmp_matcher', 'naive_string_matcher'], 'Strings algorithms.')
+  flags.DEFINE_list('algorithms', [sys.argv[1]], 'Which algorithms to run.')
+    
 
 #flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
 #flags.DEFINE_list('algorithms', ['dfs', 'heapsort', 'kmp_matcher', 
@@ -159,7 +140,7 @@ flags.DEFINE_boolean('chunked_training', True,
 flags.DEFINE_integer('chunk_length', 16,
                      'Time chunk length used for training (if '
                      '`chunked_training` is True.')
-flags.DEFINE_integer('train_steps', 10000, 'Number of training iterations.')
+flags.DEFINE_integer('train_steps', 10000 + 1, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 
@@ -210,14 +191,14 @@ flags.DEFINE_enum('encoder_init', 'xavier_on_scalars',
                   ['default', 'xavier_on_scalars'],
                   'Initialiser to use for the encoders.')
 
-flags.DEFINE_enum('processor_type', 'f9',
+flags.DEFINE_enum('processor_type', 'f7',
                   ['deepsets', 'mpnn', 'pgn', 'pgn_mask',
                    'triplet_mpnn', 'triplet_pgn', 'triplet_pgn_mask',
                    'gat', 'gatv2', 'gat_full', 'gatv2_full',
                    'gpgn', 'gpgn_mask', 'gmpnn',
                    'triplet_gpgn', 'triplet_gpgn_mask', 'triplet_gmpnn',
                    'memnet_full', 'memnet_masked', 'rt', 
-                   'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9'],
+                   'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10'],
                   'Processor type to use as the network P.')
 
 flags.DEFINE_string('checkpoint_path', 'CLRS30',
@@ -251,12 +232,12 @@ flags.DEFINE_enum('gated_activation', 'sigmoid',
                      'hard_tanh', 'tanh', 'relu', 'elu'],
                     'Gated activation function.') 
 
-flags.DEFINE_enum('memory_type', 'mha',
+flags.DEFINE_enum('memory_type', None,
                   ['gru', 'lstm', 'mha'],
                   'Memory type for F-series processors (available starting with F8).' \
                   'Use None for no memory. MHA = Mult-head')
 
-flags.DEFINE_integer('memory_size', 16,
+flags.DEFINE_integer('memory_size', None,
                      'Memory size for F-series processors (available starting with F8). ' \
                      'Use None for no memory.')
 

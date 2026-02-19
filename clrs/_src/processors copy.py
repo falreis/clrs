@@ -480,6 +480,7 @@ def get_falr1_msgs(z, edge_fts, graph_fts, nb_triplet_fts):
       jnp.expand_dims(tri_g, axis=(1, 2, 3))    # + (B, 1, 1, 1, H)
   )
 
+# Small MLP with nonlinearity for memory effect
 def linear_memory_block(triplets, nb_triplet_fts):
     return hk.Linear(nb_triplet_fts)(triplets)
 
@@ -2035,18 +2036,21 @@ class FALR9(Processor):
       gate_o = hk.Linear(self.out_size, b_init=hk.initializers.Constant(-3))
 
       # Concatenate all sources for gating
+      '''
       gate_input = jnp.concatenate([
           gate_n(node_fts),
           gate_h(hidden),
           gate_m(msgs)
       ], axis=-1)
+      '''
+      gate_input = ret
 
       # Normalization for stability
       if self.use_ln:
         ln_gate = hk.LayerNorm(axis=-1, create_scale=True, create_offset=True)
         gate_input = ln_gate(gate_input)
 
-      gate = self.gated_activation(gate_o(jax.nn.relu(gate_input)))
+      gate = self.gated_activation(gate_o(self.activation(gate_input)))
 
       # Residual connection for better gradient flow
       ret = (ret * gate) + (hidden * gate) + (hidden * (1 - gate)) + (ret * (1 - gate))
@@ -2163,32 +2167,20 @@ class FALR10(Processor):
       node_fts_mem = node_fts + mem_n_context
       hidden_mem = hidden + mem_h_context
       edge_fts_mem = edge_fts + mem_e_context
-      #graph_fts_mem = graph_fts + mem_g_context
+      graph_fts_mem = graph_fts #+ mem_g_context
 
-    m_n_1 = hk.Linear(self.mid_size)
-    m_n_2 = hk.Linear(self.mid_size)
-    m_h_1 = hk.Linear(self.mid_size)
-    m_h_2 = hk.Linear(self.mid_size)
-    m_e_1 = hk.Linear(self.mid_size)
-    m_e_2 = hk.Linear(self.mid_size)
-    m_g_1 = hk.Linear(self.mid_size)
-    m_g_2 = hk.Linear(self.mid_size)
-
-    o1 = hk.Linear(self.out_size)
-    o2 = hk.Linear(self.out_size)
-    o3 = hk.Linear(self.out_size)
-
-    msg_n_1 = m_n_1(node_fts)
-    msg_h_1 = m_h_1(hidden)
-    msg_e_1 = m_e_1(edge_fts)
-    msg_g_1 = m_g_1(graph_fts)
+    msg_n_1 = linear_memory_block(node_fts_mem, self.mid_size)
+    msg_h_1 = linear_memory_block(hidden_mem, self.mid_size)
+    msg_e_1 = linear_memory_block(edge_fts_mem, self.mid_size)
+    msg_g_1 = linear_memory_block(graph_fts_mem, self.mid_size)
 
     tri_msgs = None
 
     if self.use_triplets:
 
       tri_msgs = get_falr10_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
-      #tri_msgs = jnp.average(triplets, axis=1)  # (B, N, N, H)
+      #tri_msgs = get_falr10_msgs(node_fts_mem, hidden_mem, edge_fts_mem, graph_fts_mem, self.nb_triplet_fts)
+      #tri_msgs = jnp.average(tri_msgs, axis=1)  # (B, N, N, H)
 
       if self.activation is not None:
         tri_msgs = self.activation(tri_msgs)
@@ -2207,25 +2199,21 @@ class FALR10(Processor):
 
     msgs = self.reduction(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
 
-    h_1 = o1(node_fts)
-    h_2 = o2(hidden)
-    h_3 = o3(msgs)
+    #if self.mid_act is not None:
+    #  msgs = self.mid_act(msgs)
+
+    h_1 = linear_memory_block(node_fts, self.out_size)
+    h_2 = linear_memory_block(hidden, self.out_size)
+    h_3 = linear_memory_block(msgs, self.out_size)
 
     ret = h_1 + h_2 + h_3
 
     if self.gated:
-      # Improved gating: use LayerNorm, richer interaction, and optional residual
-      gate_n = hk.Linear(self.out_size)
-      gate_h = hk.Linear(self.out_size)
-      gate_m = hk.Linear(self.out_size)
-      gate_g = hk.Linear(self.out_size)
-      gate_o = hk.Linear(self.out_size, b_init=hk.initializers.Constant(-3))
-
       # Concatenate all sources for gating
       gate_input = jnp.concatenate([
-          gate_n(node_fts),
-          gate_h(hidden),
-          gate_m(msgs)
+          linear_memory_block(node_fts, self.out_size) + 
+          linear_memory_block(hidden, self.out_size) + 
+          linear_memory_block(msgs, self.out_size)
       ], axis=-1)
 
       # Normalization for stability
@@ -2233,10 +2221,10 @@ class FALR10(Processor):
         ln_gate = hk.LayerNorm(axis=-1, create_scale=True, create_offset=True)
         gate_input = ln_gate(gate_input)
 
-      gate = self.gated_activation(gate_o(jax.nn.relu(gate_input)))
+      gate = self.gated_activation(linear_memory_block(self.gated_activation(gate_input), self.out_size))
 
       # Residual connection for better gradient flow
-      ret = (ret * gate) + (hidden * gate) + (hidden * (1 - gate)) + (ret * (1 - gate))
+      ret = (ret * gate) + (hidden_mem * gate) + (hidden_mem * (1 - gate)) + (ret * (1 - gate))
     else:
       ret = self.gated_activation(ret)
 

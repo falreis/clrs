@@ -140,7 +140,7 @@ flags.DEFINE_boolean('chunked_training', True,
 flags.DEFINE_integer('chunk_length', 16,
                      'Time chunk length used for training (if '
                      '`chunked_training` is True.')
-flags.DEFINE_integer('train_steps', 10000 + 1, 'Number of training iterations.')
+flags.DEFINE_integer('train_steps', 12000 + 1, 'Number of training iterations.')
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 
@@ -191,7 +191,7 @@ flags.DEFINE_enum('encoder_init', 'xavier_on_scalars',
                   ['default', 'xavier_on_scalars'],
                   'Initialiser to use for the encoders.')
 
-flags.DEFINE_enum('processor_type', 'f7',
+flags.DEFINE_enum('processor_type', 'f10',
                   ['deepsets', 'mpnn', 'pgn', 'pgn_mask',
                    'triplet_mpnn', 'triplet_pgn', 'triplet_pgn_mask',
                    'gat', 'gatv2', 'gat_full', 'gatv2_full',
@@ -232,12 +232,12 @@ flags.DEFINE_enum('gated_activation', 'sigmoid',
                      'hard_tanh', 'tanh', 'relu', 'elu'],
                     'Gated activation function.') 
 
-flags.DEFINE_enum('memory_type', None,
+flags.DEFINE_enum('memory_type', 'mha',
                   ['gru', 'lstm', 'mha'],
                   'Memory type for F-series processors (available starting with F8).' \
                   'Use None for no memory. MHA = Mult-head')
 
-flags.DEFINE_integer('memory_size', None,
+flags.DEFINE_integer('memory_size', 16,
                      'Memory size for F-series processors (available starting with F8). ' \
                      'Use None for no memory.')
 

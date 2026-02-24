@@ -752,6 +752,7 @@ def get_falr9_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
   tri_h_2 = non_linear_memory_block(hidden, nb_triplet_fts)
   tri_e_2 = non_linear_memory_block(edge_fts, nb_triplet_fts)
 
+  '''
   tri_n_3 = gru_memory_block(node_fts, nb_triplet_fts)
   tri_h_3 = gru_memory_block(hidden, nb_triplet_fts)
   tri_e_3 = gru_memory_block(edge_fts, nb_triplet_fts)
@@ -759,20 +760,21 @@ def get_falr9_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
   tri_n_4 = lstm_memory_block(node_fts, nb_triplet_fts)
   tri_h_4 = lstm_memory_block(hidden, nb_triplet_fts)
   tri_e_4 = lstm_memory_block(edge_fts, nb_triplet_fts)
+  '''
   
   return (
       jnp.expand_dims(tri_n_1, axis=(1)) + 
       jnp.expand_dims(tri_n_2, axis=(2)) +
-      jnp.expand_dims(tri_n_3, axis=(1)) +
-      jnp.expand_dims(tri_n_4, axis=(2)) +
+      #jnp.expand_dims(tri_n_3, axis=(1)) +
+      #jnp.expand_dims(tri_n_4, axis=(2)) +
       jnp.expand_dims(tri_h_1, axis=(1)) +
       jnp.expand_dims(tri_h_2, axis=(2)) +
-      jnp.expand_dims(tri_h_3, axis=(1)) +
-      jnp.expand_dims(tri_h_4, axis=(2)) +
+      #jnp.expand_dims(tri_h_3, axis=(1)) +
+      #jnp.expand_dims(tri_h_4, axis=(2)) +
       tri_e_1 +
       tri_e_2 +
-      tri_e_3 +
-      tri_e_4 +
+      #tri_e_3 +
+      #tri_e_4 +
       jnp.expand_dims(tri_g_1, axis=(1, 2))
   )
 

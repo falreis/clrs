@@ -57,7 +57,10 @@ _OutputClass = specs.OutputClass
 def _maybe_pick_first_pmapped(tree):
   if jax.local_device_count() == 1:
     return tree
-  return jax.tree_util.tree_map(lambda x: x[0], tree)
+  # Avoid degraded performance under the new jax.pmap.
+  return jax.tree_util.tree_map(
+      lambda x: x.addressable_shards[0].data.squeeze(0), tree
+  )
 
 
 @jax.jit
@@ -122,15 +125,27 @@ def _maybe_put_replicated(tree):
   if jax.local_device_count() == 1:
     return jax.device_put(tree)
   else:
-    return jax.device_put_replicated(tree, jax.local_devices())
+    devices = jax.local_devices()
+    mesh = jax.sharding.Mesh(np.array(devices), ('_device_put_sharded',))
+    sharding = jax.NamedSharding(mesh, jax.P('_device_put_sharded'))
+
+    def _replicate(x):
+      if isinstance(x, jax.Array):
+        return jax.device_put(jnp.stack([x] * len(devices)), sharding)
+      return jax.device_put(np.stack([x] * len(devices)), sharding)
+
+    return jax.tree_util.tree_map(_replicate, tree)
 
 
 def _maybe_pmap_rng_key(rng_key: _Array):
   n_devices = jax.local_device_count()
   if n_devices == 1:
     return rng_key
+  devices = jax.local_devices()
   pmap_rng_keys = jax.random.split(rng_key, n_devices)
-  return jax.device_put_sharded(list(pmap_rng_keys), jax.local_devices())
+  mesh = jax.sharding.Mesh(np.array(devices), ('_device_put_sharded',))
+  sharding = jax.NamedSharding(mesh, jax.P('_device_put_sharded'))
+  return jax.device_put(jnp.stack(list(pmap_rng_keys)), sharding)
 
 
 class BaselineModel(model.Model):
@@ -786,11 +801,19 @@ def filter_null_grads(grads, opt, opt_state, opt_state_skeleton, algo_idx):
     masked_grads = grads
   else:
     masked_grads = {k: _keep_in_algo(k, v) for k, v in grads.items()}
-  flat_grads, treedef = jax.tree_util.tree_flatten(
+
+  flat_grads_with_none, treedef = jax.tree_util.tree_flatten(
       masked_grads, is_leaf=lambda x: x is None
   )
+  null_mask = [g is None for g in flat_grads_with_none]
+  flat_grads_all, _ = jax.tree_util.tree_flatten(grads)
+  flat_grads = [
+      flat_grads_all[i] if null_mask[i] else flat_grads_with_none[i]
+      for i in range(len(flat_grads_with_none))
+  ]
+
   flat_opt_state = jax.tree_util.tree_map(
-      lambda _, x: x  # pylint:disable=g-long-lambda
+      lambda _, x: x
       if isinstance(x, (np.ndarray, jax.Array))
       else treedef.flatten_up_to(x),
       opt_state_skeleton,
@@ -800,17 +823,38 @@ def filter_null_grads(grads, opt, opt_state, opt_state_skeleton, algo_idx):
   # Compute updates only for the params with gradient.
   flat_updates, flat_opt_state = opt_update(opt, flat_grads, flat_opt_state)
 
+  flat_updates = [
+      None if null_mask[i] else flat_updates[i]
+      for i in range(len(flat_updates))
+  ]
+  flat_opt_state = jax.tree_util.tree_map(
+      lambda x: x
+      if isinstance(x, (np.ndarray, jax.Array))
+      else [None if null_mask[i] else x[i] for i in range(len(x))],
+      flat_opt_state,
+      is_leaf=lambda x: isinstance(x, (np.ndarray, jax.Array)),
+  )
+
   def unflatten(flat, original):
     """Restore tree structure, filling missing (None) leaves with original."""
+
     if isinstance(flat, (np.ndarray, jax.Array)):
       return flat
-    return jax.tree_util.tree_map(lambda x, y: x if y is None else y, original,
-                                  treedef.unflatten(flat))
+    return jax.tree_util.tree_map(
+        lambda x, y: x if y is None else y,
+        original,
+        treedef.unflatten(flat),
+        is_leaf=lambda x: x is None,
+    )
 
   # Restore the state and updates tree structure.
-  new_opt_state = jax.tree_util.tree_map(lambda _, x, y: unflatten(x, y),
-                                         opt_state_skeleton, flat_opt_state,
-                                         opt_state)
-  updates = unflatten(flat_updates,
-                      jax.tree_util.tree_map(lambda x: 0., grads))
+  new_opt_state = jax.tree_util.tree_map(
+      lambda _, x, y: unflatten(x, y),
+      opt_state_skeleton,
+      flat_opt_state,
+      opt_state,
+  )
+  updates = unflatten(
+      flat_updates, jax.tree_util.tree_map(lambda x: 0.0, grads)
+  )
   return updates, new_opt_state

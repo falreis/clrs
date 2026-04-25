@@ -17,6 +17,9 @@
 
 #python -m clrs.examples.run
 
+#https://forums.developer.nvidia.com/t/how-can-i-use-my-rtx-5060ti-to-training-model-by-using-tensorflow/350054/4
+
+
 import sys
 import functools
 import os
@@ -51,6 +54,8 @@ import tensorflow as tf
 assert tf.test.is_gpu_available()
 assert tf.test.is_built_with_cuda()
 
+print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
+
 
 #source env/bin/activate env
 #os.environ["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"
@@ -59,8 +64,10 @@ os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".9"
 #define algorithms to run
 if len(sys.argv) < 2:
   flags.DEFINE_list('algorithms', ['activity_selector'], 'Which algorithms to run.')
-else:
+elif len(sys.argv) < 3:
   flags.DEFINE_list('algorithms', [sys.argv[1]], 'Which algorithms to run.')
+else:
+  flags.DEFINE_list('algorithms', [sys.argv[2]], 'Which algorithms to run.')
     
 
 #flags.DEFINE_list('algorithms', ['insertion_sort', 'activity_selector', 'bfs', 'quicksort'], 'Which algorithms to run.')
@@ -140,11 +147,17 @@ flags.DEFINE_boolean('chunked_training', True,
 flags.DEFINE_integer('chunk_length', 16,
                      'Time chunk length used for training (if '
                      '`chunked_training` is True.')
-flags.DEFINE_integer('train_steps', 16000 + 1, 'Number of training iterations.')
+
+if len(sys.argv) < 3:
+  flags.DEFINE_integer('train_steps', 6000 + 1, 'Number of training iterations.')
+else:
+  flags.DEFINE_integer('train_steps', int(sys.argv[1]) + 1, 'Number of training iterations.')
+
 flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
+flags.DEFINE_integer('save_every', 1000, 'Evaluation frequency (in steps).')
 
-flags.DEFINE_integer('hidden_size', 256,
+flags.DEFINE_integer('hidden_size', 128,
                      'Number of hidden units of the model.')
 flags.DEFINE_integer('nb_heads', 1, 'Number of heads for GAT processors') #including RT model
 
@@ -452,6 +465,7 @@ def create_samplers(
   logging.info('train_steps %s', FLAGS.train_steps)
   logging.info('eval_every %s', FLAGS.eval_every)
   logging.info('test_every %s', FLAGS.test_every)
+  logging.info('save_every %s', FLAGS.save_every)
   logging.info('hidden_size %s', FLAGS.hidden_size)
   logging.info('nb_msg_passing_steps %s', FLAGS.nb_msg_passing_steps)
   logging.info('learning_rate %s', FLAGS.learning_rate)
@@ -700,12 +714,14 @@ def main(unused_argv):
           print('Hint increase!! Restarting best_score. Epoch {}'.format(step))
           print('------------------------------')
           best_score = -1.0
+        '''
         elif train_reset_score < step:
           print('------------------------------')
           print('Resetting best_score. Epoch {}'.format(step))
           print('------------------------------')
           train_reset_score = FLAGS.train_steps + 100 #not reset again
           best_score = -1.0
+        '''
 
       rng_key, new_rng_key = jax.random.split(rng_key)
       if FLAGS.chunked_training:
@@ -787,26 +803,42 @@ def main(unused_argv):
       else:
         logging.info('Not saving new best model, %s', msg)
 
+      if step % FLAGS.save_every == 0:
+        logging.info('Checkpointing latest model at step %d', step)
+        indice = step // FLAGS.save_every
+        train_model.save_model('latest_{}_{}.pkl'.format(exec_timestamp, indice))
+
     step += 1
     length_idx = (length_idx + 1) % len(train_lengths)
 
 
-  logging.info('Restoring best model from checkpoint...')
-  eval_model.restore_model('best_{}.pkl'.format(exec_timestamp), only_load_processor=False)
+  range_end = (FLAGS.train_steps // FLAGS.save_every)
+  for indice in range(range_end + 1):
+    if indice < range_end:
+      logging.info('Restoring best model from checkpoint...')
+      eval_model.restore_model('latest_{}_{}.pkl'.format(exec_timestamp, indice), only_load_processor=False)
+    else:
+      logging.info('Restoring best model from checkpoint...')
+      eval_model.restore_model('best_{}.pkl'.format(exec_timestamp), only_load_processor=False)
 
-  for algo_idx in range(len(train_samplers)):
-    common_extras = {'examples_seen': current_train_items[algo_idx],
-                     'step': step,
-                     'algorithm': FLAGS.algorithms[algo_idx]}
+    for algo_idx in range(len(train_samplers)):
+      common_extras = {'examples_seen': current_train_items[algo_idx],
+                      'step': step,
+                      'algorithm': FLAGS.algorithms[algo_idx]}
 
-    new_rng_key, rng_key = jax.random.split(rng_key)
-    test_stats = collect_and_eval(
-        test_samplers[algo_idx],
-        functools.partial(eval_model.predict, algorithm_index=algo_idx),
-        test_sample_counts[algo_idx],
-        new_rng_key,
-        extras=common_extras)
-    logging.info('(test) algo %s : %s', FLAGS.algorithms[algo_idx], test_stats)
+      new_rng_key, rng_key = jax.random.split(rng_key)
+      test_stats = collect_and_eval(
+          test_samplers[algo_idx],
+          functools.partial(eval_model.predict, algorithm_index=algo_idx),
+          test_sample_counts[algo_idx],
+          new_rng_key,
+          extras=common_extras)
+      
+      if indice < range_end:
+        logging.info('(latest) %d algo %s : %s', indice, FLAGS.algorithms[algo_idx], test_stats)
+      else:
+        logging.info('(final) algo %s : %s', FLAGS.algorithms[algo_idx], test_stats)
+
 
   logging.info('Done!')
 

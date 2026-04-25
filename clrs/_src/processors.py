@@ -799,6 +799,40 @@ def get_falr10_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
       jnp.expand_dims(tri_g_1, axis=(1, 2))
   )
 
+def get_falr11_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts):
+  """Only get node information. Ignore edges (f1)"""
+  t_1 = hk.Linear(nb_triplet_fts)
+  t_2 = hk.Linear(nb_triplet_fts)
+  t_3 = hk.Linear(nb_triplet_fts)
+  t_e_1 = hk.Linear(nb_triplet_fts)
+  t_e_2 = hk.Linear(nb_triplet_fts)
+  t_e_3 = hk.Linear(nb_triplet_fts)
+  t_g = hk.Linear(nb_triplet_fts)
+
+  tri_1 = t_1(node_fts)
+  tri_2 = t_2(node_fts)
+  tri_3 = t_3(node_fts)
+  tri_h_1 = t_1(hidden)
+  tri_h_2 = t_2(hidden)
+  tri_h_3 = t_3(hidden)
+  tri_e_1 = t_e_1(edge_fts)
+  tri_e_2 = t_e_2(edge_fts)
+  tri_e_3 = t_e_3(edge_fts)
+  tri_g = t_g(graph_fts)
+
+  return (
+      jnp.expand_dims(tri_1, axis=(2, 3))    +  #   (B, N, 1, 1, H)
+      jnp.expand_dims(tri_2, axis=(1, 3))    +  # + (B, 1, N, 1, H)
+      jnp.expand_dims(tri_3, axis=(1, 2))    +  # + (B, 1, 1, N, H)
+      jnp.expand_dims(tri_h_1, axis=(2, 3))    +  #   (B, N, 1, 1, H)
+      jnp.expand_dims(tri_h_2, axis=(1, 3))    +  # + (B, 1, N, 1, H)
+      jnp.expand_dims(tri_h_3, axis=(1, 2))    +  # + (B, 1, 1, N, H)
+      jnp.expand_dims(tri_e_1, axis=3)       +  # + (B, N, N, 1, H)
+      jnp.expand_dims(tri_e_2, axis=2)       +  # + (B, N, 1, N, H)
+      jnp.expand_dims(tri_e_3, axis=1)       +  # + (B, 1, N, N, H)
+      jnp.expand_dims(tri_g, axis=(1, 2, 3))    # + (B, 1, 1, 1, H)
+  )
+
 
 
 ##############################################################
@@ -2239,6 +2273,7 @@ class FALR10(Processor):
 
       # Residual connection for better gradient flow
       ret = (ret * gate) + (hidden * gate) + (hidden * (1 - gate)) + (ret * (1 - gate))
+      #ret = ret * gate + hidden * (1-gate)
     else:
       ret = self.gated_activation(ret)
 

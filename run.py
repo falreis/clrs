@@ -63,7 +63,7 @@ os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".9"
 
 #define algorithms to run
 if len(sys.argv) < 2:
-  flags.DEFINE_list('algorithms', ['activity_selector'], 'Which algorithms to run.')
+  flags.DEFINE_list('algorithms', ['insertion_sort'], 'Which algorithms to run.')
 elif len(sys.argv) < 3:
   flags.DEFINE_list('algorithms', [sys.argv[1]], 'Which algorithms to run.')
 else:
@@ -370,6 +370,8 @@ def make_sampler(length: int,
   if enforce_pred_as_input and algorithm in PRED_AS_INPUT_ALGOS:
     spec, sampler = clrs.process_pred_as_input(spec, sampler)
   spec, sampler = clrs.process_permutations(spec, sampler, enforce_permutations)
+
+
   if chunked:
     sampler = clrs.chunkify(sampler, chunk_length)
   return sampler, num_samples, spec
@@ -499,6 +501,9 @@ def create_samplers(
 
   algorithms = algorithms or FLAGS.algorithms
   for algo_idx, algorithm in enumerate(algorithms):
+    # Set the training lengths for the current algorithm.
+    current_algo_train_lengths = train_lengths
+
     # Make full dataset pipeline run on CPU (including prefetching).
     with tf.device('/cpu:0'):
 
@@ -507,12 +512,18 @@ def create_samplers(
         # Still, for chunked training, we maintain as many samplers
         # as train lengths, since, for each length there is a separate state,
         # and we must keep the 1:1 relationship between states and samplers.
-        max_length = max(train_lengths)
+        max_length = max(current_algo_train_lengths)
+
         if max_length > 0:  # if < 0, we are using the benchmark data
           max_length = (max_length * 5) // 4
-        train_lengths = [max_length]
+        
+        current_algo_train_lengths = [max_length]
+
         if FLAGS.chunked_training:
           train_lengths = train_lengths * len(train_lengths)
+          current_algo_train_lengths = current_algo_train_lengths * len(
+              current_algo_train_lengths
+          )
 
       logging.info('Creating samplers for algo %s', algorithm)
 
@@ -535,26 +546,30 @@ def create_samplers(
           chunk_length=FLAGS.chunk_length,
           )
 
-      train_args = dict(sizes=train_lengths,
-                        split='train',
-                        batch_size=train_batch_size,
-                        multiplier=-1,
-                        randomize_pos=FLAGS.random_pos,
-                        chunked=FLAGS.chunked_training,
-                        sampler_kwargs=sampler_kwargs,
-                        **common_sampler_args)
-      train_sampler, _, spec = make_multi_sampler(**train_args)
+      train_args = dict(
+          sizes=current_algo_train_lengths,
+          split='train',
+          batch_size=train_batch_size,
+          multiplier=-1,
+          randomize_pos=FLAGS.random_pos,
+          chunked=FLAGS.chunked_training,
+          sampler_kwargs=sampler_kwargs,
+          **common_sampler_args,
+      )
+      train_sampler, _, _ = make_multi_sampler(**train_args)
 
       mult = clrs.CLRS_30_ALGS_SETTINGS[algorithm]['num_samples_multiplier']
-      val_args = dict(sizes=val_lengths or [np.amax(train_lengths)],
-                      split='val',
-                      batch_size=val_batch_size,
-                      multiplier=2 * mult,
-                      randomize_pos=FLAGS.random_pos,
-                      chunked=False,
-                      sampler_kwargs=sampler_kwargs,
-                      **common_sampler_args)
-      val_sampler, val_samples, spec = make_multi_sampler(**val_args)
+      val_args = dict(
+          sizes=val_lengths or [np.amax(current_algo_train_lengths)],
+          split='val',
+          batch_size=val_batch_size,
+          multiplier=2 * mult,
+          randomize_pos=FLAGS.random_pos,
+          chunked=False,
+          sampler_kwargs=sampler_kwargs,
+          **common_sampler_args,
+      )
+      val_sampler, val_samples, _ = make_multi_sampler(**val_args)
 
       test_args = dict(sizes=test_lengths or [-1],
                        split='test',
@@ -714,14 +729,12 @@ def main(unused_argv):
           print('Hint increase!! Restarting best_score. Epoch {}'.format(step))
           print('------------------------------')
           best_score = -1.0
-        '''
         elif train_reset_score < step:
           print('------------------------------')
           print('Resetting best_score. Epoch {}'.format(step))
           print('------------------------------')
           train_reset_score = FLAGS.train_steps + 100 #not reset again
           best_score = -1.0
-        '''
 
       rng_key, new_rng_key = jax.random.split(rng_key)
       if FLAGS.chunked_training:
@@ -815,7 +828,7 @@ def main(unused_argv):
   range_end = (FLAGS.train_steps // FLAGS.save_every)
   for indice in range(range_end + 1):
     if indice < range_end:
-      logging.info('Restoring best model from checkpoint...')
+      logging.info('Restoring intermediary model from checkpoint...')
       eval_model.restore_model('latest_{}_{}.pkl'.format(exec_timestamp, indice), only_load_processor=False)
     else:
       logging.info('Restoring best model from checkpoint...')

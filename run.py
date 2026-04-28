@@ -826,8 +826,8 @@ def main(unused_argv):
 
 
   range_end = (FLAGS.train_steps // FLAGS.save_every)
-  for indice in range(range_end + 1):
-    if indice < range_end:
+  for indice in range(range_end + 2):
+    if indice <= range_end:
       logging.info('Restoring intermediary model from checkpoint...')
       eval_model.restore_model('latest_{}_{}.pkl'.format(exec_timestamp, indice), only_load_processor=False)
     else:
@@ -848,7 +848,7 @@ def main(unused_argv):
           extras=common_extras)
       
       if indice < range_end:
-        logging.info('(latest) %d algo %s : %s', (indice + 1), FLAGS.algorithms[algo_idx], test_stats)
+        logging.info('(latest) %d algo %s : %s', indice, FLAGS.algorithms[algo_idx], test_stats)
       else:
         logging.info('(final) algo %s : %s', FLAGS.algorithms[algo_idx], test_stats)
 

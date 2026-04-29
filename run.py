@@ -847,7 +847,7 @@ def main(unused_argv):
           new_rng_key,
           extras=common_extras)
       
-      if indice < range_end:
+      if indice <= range_end:
         logging.info('(latest) %d algo %s : %s', indice, FLAGS.algorithms[algo_idx], test_stats)
       else:
         logging.info('(final) algo %s : %s', FLAGS.algorithms[algo_idx], test_stats)

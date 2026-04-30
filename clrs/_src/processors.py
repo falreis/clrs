@@ -2224,7 +2224,7 @@ class FALR10(Processor):
     if self.use_triplets:
 
       tri_msgs = get_falr10_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts)
-      #tri_msgs = jnp.average(triplets, axis=1)  # (B, N, N, H)
+      #tri_msgs = jnp.average(tri_msgs, axis=1)  # (B, N, N, H)
 
       if self.activation is not None:
         tri_msgs = self.activation(tri_msgs)

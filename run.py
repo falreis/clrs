@@ -18,6 +18,8 @@
 #python -m clrs.examples.run
 
 #https://forums.developer.nvidia.com/t/how-can-i-use-my-rtx-5060ti-to-training-model-by-using-tensorflow/350054/4
+#https://github.com/stellargraph/stellargraph/blob/develop/demos/time-series/gcn-lstm-time-series.ipynb
+#https://www.sciencedirect.com/science/article/pii/S0141029624002955
 
 
 import sys
@@ -157,11 +159,11 @@ flags.DEFINE_integer('eval_every', 50, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('test_every', 500, 'Evaluation frequency (in steps).')
 flags.DEFINE_integer('save_every', 1000, 'Evaluation frequency (in steps).')
 
-flags.DEFINE_integer('hidden_size', 256,
+flags.DEFINE_integer('hidden_size', 128,
                      'Number of hidden units of the model.')
 flags.DEFINE_integer('nb_heads', 1, 'Number of heads for GAT processors') #including RT model
 
-flags.DEFINE_integer('nb_msg_passing_steps', 1,
+flags.DEFINE_integer('nb_msg_passing_steps', 2,
                      'Number of message passing steps to run per hint.')
 flags.DEFINE_float('learning_rate', 0.001, 'Learning rate to use.')
 flags.DEFINE_float('grad_clip_max_norm', 1.0,

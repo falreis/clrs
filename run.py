@@ -731,12 +731,13 @@ def main(unused_argv):
           print('Hint increase!! Restarting best_score. Epoch {}'.format(step))
           print('------------------------------')
           best_score = -1.0
-        elif train_reset_score < step:
-          print('------------------------------')
-          print('Resetting best_score. Epoch {}'.format(step))
-          print('------------------------------')
-          train_reset_score = FLAGS.train_steps + 100 #not reset again
-          best_score = -1.0
+        elif FLAGS.train_steps < 8000:
+          if train_reset_score < step:
+            print('------------------------------')
+            print('Resetting best_score. Epoch {}'.format(step))
+            print('------------------------------')
+            train_reset_score = FLAGS.train_steps + 100 #not reset again
+            best_score = -1.0
 
       rng_key, new_rng_key = jax.random.split(rng_key)
       if FLAGS.chunked_training:

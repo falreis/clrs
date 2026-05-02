@@ -80,7 +80,7 @@ else:
 #flags.DEFINE_list('algorithms', ['lcs_length', 'matrix_chain_order', 'optimal_bst'], 'Dynamic Programming algorithms.')
 #flags.DEFINE_list('algorithms', ['graham_scan', 'jarvis_march', 'segments_intersect'], 'Geometry algorithms.')
 #flags.DEFINE_list('algorithms', ['articulation_points', 'bellman_ford', 'bfs', 'bridges', 
-#                                 'dag_shortest_paths', 'dijkstra', 'dfs', 'floyd_warshall', 'mst_kruskal', 
+#                                 'dag_shortest_paths', 'dfs', 'dijkstra', 'floyd_warshall', 'mst_kruskal', 
 #                                 'mst_prim', 'strongly_connected_components', 'topological_sort', ], 'Graphs algorithms.')
 #flags.DEFINE_list('algorithms', ['activity_selector', 'task_scheduling'], 'Greedy algorithms.')
 #flags.DEFINE_list('algorithms', ['binary_search', 'minimum', 'quickselect'], 'Searching algorithms.')

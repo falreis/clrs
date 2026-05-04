@@ -226,7 +226,7 @@ flags.DEFINE_boolean('freeze_processor', False,
 # ----------------------------------------------
 # for falreis model
 
-flags.DEFINE_enum('reduction', 'max', 
+flags.DEFINE_enum('reduction', 'min', 
                     ['max', 'mean', 'average', 'sum', 'min'],
                     'Reduction operation.') 
 

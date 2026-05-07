@@ -239,10 +239,10 @@ flags.DEFINE_enum('activation', 'elu',
 flags.DEFINE_string('restore_model', '',
                     'Path in which dataset is stored.')
 
-flags.DEFINE_boolean('gated', True, 
+flags.DEFINE_boolean('gated', False, 
                     'Use gated activation.') 
 
-flags.DEFINE_enum('gated_activation', 'sigmoid', 
+flags.DEFINE_enum('gated_activation', 'relu', 
                     ['sigmoid', 'hard_sigmoid', 'log_sigmoid', 'sparse_sigmoid', 
                      'hard_tanh', 'tanh', 'relu', 'elu'],
                     'Gated activation function.') 

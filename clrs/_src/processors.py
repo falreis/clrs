@@ -859,12 +859,12 @@ def multihead_attention_block(memory_size, out_size, fts, axis, memory):
 def lstm_block(ini_state, memory_size, out_size, fts, axis, memory):
   # Use an LSTM cell to update memory
   lstm = hk.LSTM(out_size)
-  mem_input = jnp.mean(fts, axis=axis, keepdims=True)  # (B, 1, H)
+  mem_input = jnp.mean(fts, axis=axis)  # (B, H)
 
   mem_state = lstm.initial_state(ini_state)
 
   new_memory = []
-  for i in range(memory_size):
+  for _ in range(memory_size):
     mem_out, mem_state = lstm(mem_input, mem_state)
     new_memory.append(mem_out)
 
@@ -2181,13 +2181,26 @@ class FALR10(Processor):
 
       if self.memory_type == 'gru':
         # Use a GRU cell to update memory sequentially for each batch
-        memory_n, mem_context = gru_block(b, self.memory_size, self.out_size, node_fts, 1, memory_n)
-        node_fts = node_fts + mem_context
+        memory_n, mem_n_context = gru_block(b, self.memory_size, self.out_size, node_fts, 1, memory_n)
+        memory_h, mem_h_context = gru_block(b, self.memory_size, self.out_size, hidden, 1, memory_h)
+        memory_e, mem_e_context = gru_block(b, self.memory_size, self.out_size, jnp.mean(edge_fts, (1)), 1, memory_e)
+        
+        node_fts_mem = node_fts + mem_n_context
+        hidden_mem = hidden + mem_h_context
+        edge_fts_mem = edge_fts + jnp.expand_dims(mem_e_context, axis=1)
+        graph_fts_mem = graph_fts #+ mem_g_context
 
       elif self.memory_type == 'lstm':
         # Use an LSTM cell to update memory
-        memory_n, mem_context = lstm_block(b, self.memory_size, self.out_size, node_fts, 1, memory_n)
-        node_fts = node_fts + mem_context
+        memory_n, mem_n_context = lstm_block(b, self.memory_size, self.out_size, node_fts, 1, memory_n)
+        memory_h, mem_h_context = lstm_block(b, self.memory_size, self.out_size, hidden, 1, memory_h)
+        memory_e, mem_e_context = lstm_block(b, self.memory_size, self.out_size, jnp.mean(edge_fts, (1)), 1, memory_e)
+        #memory_g, mem_g_context = lstm_block(b, self.memory_size, self.out_size, graph_fts, None, memory_g)
+
+        node_fts_mem = node_fts + mem_n_context
+        hidden_mem = hidden + mem_h_context
+        edge_fts_mem = edge_fts + jnp.expand_dims(mem_e_context, axis=1)
+        graph_fts_mem = graph_fts #+ mem_g_context
 
       elif self.memory_type == 'mha': #multi-head attention
         # Use a simple MultiHeadAttention block to update memory
@@ -2196,10 +2209,10 @@ class FALR10(Processor):
         memory_e, mem_e_context = multihead_attention_block(self.memory_size, self.out_size, edge_fts, (1,2), memory_e)
         memory_g, mem_g_context = multihead_attention_block(self.memory_size, self.out_size, graph_fts, None, memory_g)
 
-      node_fts_mem = node_fts + mem_n_context
-      hidden_mem = hidden + mem_h_context
-      edge_fts_mem = edge_fts + mem_e_context
-      #graph_fts_mem = graph_fts + mem_g_context
+        node_fts_mem = node_fts + mem_n_context
+        hidden_mem = hidden + mem_h_context
+        edge_fts_mem = edge_fts + mem_e_context
+        graph_fts_mem = graph_fts #+ mem_g_context
 
     m_n_1 = hk.Linear(self.mid_size)
     m_n_2 = hk.Linear(self.mid_size)
@@ -2214,10 +2227,10 @@ class FALR10(Processor):
     o2 = hk.Linear(self.out_size)
     o3 = hk.Linear(self.out_size)
 
-    msg_n_1 = m_n_1(node_fts)
-    msg_h_1 = m_h_1(hidden)
-    msg_e_1 = m_e_1(edge_fts)
-    msg_g_1 = m_g_1(graph_fts)
+    msg_n_1 = m_n_1(node_fts_mem)
+    msg_h_1 = m_h_1(hidden_mem)
+    msg_e_1 = m_e_1(edge_fts_mem)
+    msg_g_1 = m_g_1(graph_fts_mem)
 
     tri_msgs = None
 
@@ -2271,11 +2284,9 @@ class FALR10(Processor):
 
       gate = self.gated_activation(gate_o(jax.nn.relu(gate_input)))
 
-      # Residual connection for better gradient flow
-      ret = (ret * gate) + (hidden * gate) + (hidden * (1 - gate)) + (ret * (1 - gate))
-      #ret = ret * gate + hidden * (1-gate)
+      ret = ret * gate + hidden * (1-gate)
     else:
-      ret = self.gated_activation(ret)
+      ret = ret + self.gated_activation(hidden)
 
     # Return memory as additional output if used
     if self.memory_size is not None:

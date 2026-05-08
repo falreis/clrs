@@ -848,50 +848,39 @@ def multihead_attention_block(memory_size, out_size, fts, axis, memory):
   mem_input = jnp.mean(fts, axis=axis, keepdims=True)  # (B, 1, H)
 
   # Attend mem_input (query) to memory (key, value)
-  memory = mha(query=mem_input, key=memory, value=memory) #(B, memory_size, H), mem_input: (B, 1, H)
+  mem_out = mha(query=mem_input, key=memory, value=memory) #(B, memory_size, H), mem_input: (B, 1, H)
   
   # Generate mem_context to edge features
-  mem_context = jnp.mean(memory, axis=1, keepdims=True)  # (B, 1, H)
+  mem_context = jnp.mean(mem_out, axis=1, keepdims=True)  # (B, 1, H)
 
-  return memory, mem_context
+  return mem_out, mem_context
 
 
-def lstm_block(ini_state, memory_size, out_size, fts, axis, memory):
+def mem_block(mem_type, memory_size, out_size, fts, axis, memory):
   # Use an LSTM cell to update memory
-  lstm = hk.LSTM(out_size)
+  lstm = mem_type(out_size)
   mem_input = jnp.mean(fts, axis=axis)  # (B, H)
 
-  mem_state = lstm.initial_state(ini_state)
+  # Use the provided memory as the initial state for LSTM
+  mem_state = memory
 
   new_memory = []
   for _ in range(memory_size):
     mem_out, mem_state = lstm(mem_input, mem_state)
     new_memory.append(mem_out)
 
-  memory = jnp.stack(new_memory, axis=axis)  # (B, memory_size, H)
+  mem_out = jnp.stack(new_memory, axis=axis)  # (B, memory_size, H)
 
   # Generate mem_context to edge features
-  mem_context = jnp.mean(memory, axis=axis, keepdims=True)  # (B, 1, H)
+  mem_context = jnp.mean(mem_out, axis=axis, keepdims=True)  # (B, 1, H)
   
-  return memory, mem_context
+  return mem_out, mem_context
+
+def lstm_block(ini_state, memory_size, out_size, fts, axis, memory):
+  return mem_block(hk.LSTM, memory_size, out_size, fts, axis, memory)
 
 def gru_block(ini_state, memory_size, out_size, fts, axis, memory):
-  # Use a GRU cell to update memory sequentially for each batch
-  gru = hk.GRU(out_size)
-
-  mem_input = jnp.mean(fts, axis=1)  # (B, H)
-  mem_state = gru.initial_state(ini_state)
-
-  new_memory = []
-  for i in range(memory_size):
-    mem_out, mem_state = gru(mem_input, mem_state)
-    new_memory.append(mem_out)
-  memory = jnp.stack(new_memory, axis=axis)  # (B, memory_size, H)
-
-    # Generate mem_context to edge features
-  mem_context = jnp.mean(memory, axis=axis, keepdims=True)  # (B, 1, H)
-  
-  return memory, mem_context
+  return mem_block(hk.GRU, memory_size, out_size, fts, axis, memory)
 
 
 ##############################################################
@@ -2170,10 +2159,23 @@ class FALR10(Processor):
     else:
       # Initialize memory if not provided
       if memory_e is None or memory_n is None or memory_h is None:
-        memory_n = jnp.zeros((b, self.memory_size, self.out_size))
-        memory_h = jnp.zeros((b, self.memory_size, self.out_size))
-        memory_e = jnp.zeros((b, self.memory_size, self.out_size))
-        memory_g = jnp.zeros((b, self.memory_size, self.out_size))
+        if self.memory_type == 'lstm':
+          lstm = hk.LSTM(self.out_size)
+          memory_n = lstm.initial_state(b)
+          memory_h = lstm.initial_state(b)
+          memory_e = lstm.initial_state(b)
+          memory_g = lstm.initial_state(b)
+        elif self.memory_type == 'gru':
+          gru = hk.GRU(self.out_size)
+          memory_n = gru.initial_state(b)
+          memory_h = gru.initial_state(b)
+          memory_e = gru.initial_state(b)
+          memory_g = gru.initial_state(b)
+        else:
+          memory_n = jnp.zeros((b, self.memory_size, self.out_size))
+          memory_h = jnp.zeros((b, self.memory_size, self.out_size))
+          memory_e = jnp.zeros((b, self.memory_size, self.out_size))
+          memory_g = jnp.zeros((b, self.memory_size, self.out_size))
 
         memory = (memory_n, memory_h, memory_e, memory_g)
       else:
@@ -2184,11 +2186,8 @@ class FALR10(Processor):
         memory_n, mem_n_context = gru_block(b, self.memory_size, self.out_size, node_fts, 1, memory_n)
         memory_h, mem_h_context = gru_block(b, self.memory_size, self.out_size, hidden, 1, memory_h)
         memory_e, mem_e_context = gru_block(b, self.memory_size, self.out_size, jnp.mean(edge_fts, (1)), 1, memory_e)
-        
-        node_fts_mem = node_fts + mem_n_context
-        hidden_mem = hidden + mem_h_context
-        edge_fts_mem = edge_fts + jnp.expand_dims(mem_e_context, axis=1)
-        graph_fts_mem = graph_fts #+ mem_g_context
+
+        mem_e_context = jnp.expand_dims(mem_e_context, axis=1)
 
       elif self.memory_type == 'lstm':
         # Use an LSTM cell to update memory
@@ -2197,10 +2196,7 @@ class FALR10(Processor):
         memory_e, mem_e_context = lstm_block(b, self.memory_size, self.out_size, jnp.mean(edge_fts, (1)), 1, memory_e)
         #memory_g, mem_g_context = lstm_block(b, self.memory_size, self.out_size, graph_fts, None, memory_g)
 
-        node_fts_mem = node_fts + mem_n_context
-        hidden_mem = hidden + mem_h_context
-        edge_fts_mem = edge_fts + jnp.expand_dims(mem_e_context, axis=1)
-        graph_fts_mem = graph_fts #+ mem_g_context
+        mem_e_context = jnp.expand_dims(mem_e_context, axis=1)
 
       elif self.memory_type == 'mha': #multi-head attention
         # Use a simple MultiHeadAttention block to update memory
@@ -2209,10 +2205,10 @@ class FALR10(Processor):
         memory_e, mem_e_context = multihead_attention_block(self.memory_size, self.out_size, edge_fts, (1,2), memory_e)
         memory_g, mem_g_context = multihead_attention_block(self.memory_size, self.out_size, graph_fts, None, memory_g)
 
-        node_fts_mem = node_fts + mem_n_context
-        hidden_mem = hidden + mem_h_context
-        edge_fts_mem = edge_fts + mem_e_context
-        graph_fts_mem = graph_fts #+ mem_g_context
+      node_fts_mem = node_fts + mem_n_context
+      hidden_mem = hidden + mem_h_context
+      edge_fts_mem = edge_fts + mem_e_context
+      graph_fts_mem = graph_fts #+ mem_g_context
 
     m_n_1 = hk.Linear(self.mid_size)
     m_n_2 = hk.Linear(self.mid_size)

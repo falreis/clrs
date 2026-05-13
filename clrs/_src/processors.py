@@ -2282,7 +2282,11 @@ class FALR10(Processor):
 
       ret = ret * gate + hidden * (1-gate)
     else:
-      ret = ret + self.gated_activation(hidden)
+      if self.use_ln:
+        ln_gate = hk.LayerNorm(axis=-1, create_scale=True, create_offset=True)
+        ret = ln_gate(ret + hidden)
+      else:
+        ret = ret + hidden
 
     # Return memory as additional output if used
     if self.memory_size is not None:

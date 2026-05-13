@@ -195,7 +195,7 @@ flags.DEFINE_enum('hint_repred_mode', 'soft', ['soft', 'hard', 'hard_on_eval'],
                   'thresholding of masks. '
                   'In hard_on_eval mode, soft mode is '
                   'used for training and hard mode is used for evaluation.')
-flags.DEFINE_boolean('use_ln', True,
+flags.DEFINE_boolean('use_ln', False,
                      'Whether to use layer normalisation in the processor.')
 flags.DEFINE_boolean('use_lstm', True,
                      'Whether to insert an LSTM after message passing.')

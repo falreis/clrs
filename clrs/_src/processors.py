@@ -2156,6 +2156,11 @@ class FALR10(Processor):
     # Memory block: initialize or update memory
     if self.memory_size is None or self.memory_type is None:
       memory = None
+      node_fts_mem = node_fts
+      hidden_mem = hidden
+      edge_fts_mem = edge_fts
+      graph_fts_mem = graph_fts
+
     else:
       # Initialize memory if not provided
       if memory_e is None or memory_n is None or memory_h is None:

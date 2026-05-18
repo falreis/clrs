@@ -1,53 +1,53 @@
-python run.py articulation_points
+python run.py 10000 articulation_points
 sleep 30
-python run.py bellman_ford
+python run.py 10000 bellman_ford
 sleep 30
-python run.py bfs
-sleep 30
-python run.py binary_search
+python run.py 10000 binary_search
 sleep 30
 
 
-python run.py bridges
+python run.py 10000 bridges
 sleep 30
-python run.py dag_shortest_paths
+python run.py 10000 dag_shortest_paths
 sleep 30
-python run.py dijkstra
-sleep 30
-
-
-python run.py find_maximum_subarray_kadane
-sleep 30
-python run.py graham_scan
-sleep 30
-python run.py heapsort
-sleep 30
-python run.py insertion_sort
+python run.py 10000 dijkstra
 sleep 30
 
 
-python run.py jarvis_march
+python run.py 10000 find_maximum_subarray_kadane
 sleep 30
-python run.py lcs_length
+python run.py 10000 graham_scan
 sleep 30
-python run.py matrix_chain_order
+python run.py 10000 heapsort
 sleep 30
-python run.py minimum
-sleep 30
-
-
-python run.py mst_kruskal
-sleep 30
-python run.py mst_prim
-sleep 30
-python run.py optimal_bst
+python run.py 10000 insertion_sort
 sleep 30
 
 
-python run.py quicksort
+python run.py 10000 jarvis_march
 sleep 30
-python run.py segments_intersect
+python run.py 10000 lcs_length
 sleep 30
-python run.py task_scheduling
+python run.py 10000 matrix_chain_order
 sleep 30
-python run.py topological_sort
+python run.py 10000 minimum
+sleep 30
+
+
+python run.py 10000 mst_kruskal
+sleep 30
+python run.py 10000 mst_prim
+sleep 30
+python run.py 10000 optimal_bst
+sleep 30
+
+
+python run.py 10000 quicksort
+sleep 30
+python run.py 10000 segments_intersect
+sleep 30
+python run.py 10000 task_scheduling
+sleep 30
+python run.py 10000 topological_sort
+
+shutdown now 

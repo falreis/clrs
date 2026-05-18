@@ -1,17 +1,17 @@
-python run.py activity_selector
+python run.py 10000 activity_selector
 sleep 30
-python run.py bfs
+python run.py 10000 bfs
 sleep 30
-python run.py bubble_sort
+python run.py 10000 bubble_sort
 sleep 30
-python run.py dfs
+python run.py 10000 dfs
 sleep 30
-python run.py floyd_warshall
+python run.py 10000 floyd_warshall
 sleep 30
-python run.py kmp_matcher
+python run.py 10000 kmp_matcher
 sleep 30
-python run.py naive_string_matcher
+python run.py 10000 naive_string_matcher
+sleep 30
+python run.py 10000 strongly_connected_components
 sleep 30
 python run.py quickselect
-sleep 30
-python run.py strongly_connected_components

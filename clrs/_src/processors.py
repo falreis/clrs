@@ -485,12 +485,34 @@ def linear_memory_block(triplets, nb_triplet_fts):
 
 # Small MLP with nonlinearity for memory effect
 def non_linear_memory_block(triplets, nb_triplet_fts):
-    mem_layer1 = hk.Linear(nb_triplet_fts)
-    mem_layer2 = hk.Linear(nb_triplet_fts)
+    mem_layer1 = hk.Linear(nb_triplet_fts, with_bias=True)
+    mem_layer2 = hk.Linear(nb_triplet_fts, with_bias=True)
     t1 = mem_layer1(triplets)
-    t1 = jax.nn.relu(t1)
+    t1 = jax.nn.leaky_relu(t1)
     t1 = mem_layer2(t1)
     return t1
+
+def residual_memory_block(triplets, nb_triplet_fts):
+    mem_layer1 = hk.Linear(nb_triplet_fts, with_bias=True)
+    mem_layer2 = hk.Linear(nb_triplet_fts, with_bias=True)
+    
+    # First layer with activation
+    hidden = mem_layer1(triplets)
+    hidden = jax.nn.leaky_relu(hidden)
+    
+    # Layer normalization for training stability
+    ln = hk.LayerNorm(axis=-1, create_scale=True, create_offset=True)
+    hidden = ln(hidden)
+    
+    # Second layer
+    output = mem_layer2(hidden)
+    
+    # Residual connection for better gradient flow (only when dimensions match)
+    if triplets.shape[-1] == nb_triplet_fts:
+        output = output + triplets
+    
+    return output
+
 
 # Simplified LSTM memory block
 def lstm_memory_block(triplets, nb_triplet_fts):
@@ -520,15 +542,11 @@ def gru_memory_block(triplets, nb_triplet_fts):
   output = jnp.reshape(output, orig_shape[:-1] + (nb_triplet_fts,))
   return output
 
-def get_falr6_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts, adj_mat, msgs_mlp_sizes):
-  mlp_size = [nb_triplet_fts, nb_triplet_fts]
-  
-  tri_n_1 = hk.nets.MLP(mlp_size)(node_fts)
-  tri_h_1 = hk.nets.MLP(mlp_size)(hidden)
-  tri_e_1 = hk.nets.MLP(mlp_size)(edge_fts)
-  tri_g_1 = hk.nets.MLP(mlp_size)(graph_fts)
-
-  #hk.nets.MLP(self._msgs_mlp_sizes)(self.activation(msgs))
+def get_falr6_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts, adj_mat, msgs_mlp_sizes):  
+  tri_n_1 = hk.Linear(nb_triplet_fts, with_bias=True)(node_fts)
+  tri_h_1 = hk.Linear(nb_triplet_fts, with_bias=True)(hidden)
+  tri_e_1 = hk.Linear(nb_triplet_fts, with_bias=True)(edge_fts)
+  tri_g_1 = hk.Linear(nb_triplet_fts, with_bias=True)(graph_fts)
   
   tri_n_2 = non_linear_memory_block(node_fts, nb_triplet_fts)
   tri_h_2 = non_linear_memory_block(hidden, nb_triplet_fts)
@@ -545,10 +563,48 @@ def get_falr6_msgs(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts, adj_ma
       jnp.expand_dims(tri_g_1, axis=(1, 2))
   )
 
-  #return alpha
+  return alpha
 
-  t_line = jnp.transpose(adj_mat) * alpha
-  return jax.nn.leaky_relu(t_line / jnp.sum(t_line))
+  #t_line = jnp.transpose(adj_mat) * alpha
+  #return jax.nn.leaky_relu(t_line / jnp.sum(t_line))
+
+
+def get_falr6_msgs_extra(node_fts, hidden, edge_fts, graph_fts, nb_triplet_fts, adj_mat, msgs_mlp_sizes):
+  mlp_size = [nb_triplet_fts, nb_triplet_fts]
+  '''
+  tri_n_1 = hk.nets.MLP(mlp_size)(node_fts)
+  tri_h_1 = hk.nets.MLP(mlp_size)(hidden)
+  tri_e_1 = hk.nets.MLP(mlp_size)(edge_fts)
+  tri_g_1 = hk.nets.MLP(mlp_size)(graph_fts)
+  '''
+  
+  tri_n_1 = hk.Linear(nb_triplet_fts, with_bias=True)(node_fts)
+  tri_h_1 = hk.Linear(nb_triplet_fts, with_bias=True)(hidden)
+  tri_e_1 = hk.Linear(nb_triplet_fts, with_bias=True)(edge_fts)
+  tri_g_1 = hk.Linear(nb_triplet_fts, with_bias=True)(graph_fts)
+
+  tri_n_2 = residual_memory_block(node_fts, nb_triplet_fts)
+  tri_h_2 = residual_memory_block(hidden, nb_triplet_fts)
+  tri_e_2 = residual_memory_block(edge_fts, nb_triplet_fts)
+
+  tri_n_3 = non_linear_memory_block(node_fts, nb_triplet_fts)
+  tri_h_3 = non_linear_memory_block(hidden, nb_triplet_fts)
+  tri_e_3 = non_linear_memory_block(edge_fts, nb_triplet_fts)
+  
+  alpha = (
+      jnp.expand_dims(tri_n_1, axis=(1, 2)) + 
+      jnp.expand_dims(tri_n_2, axis=(2, 3)) +
+      jnp.expand_dims(tri_n_3, axis=(1, 3)) +
+      jnp.expand_dims(tri_h_1, axis=(1, 2)) +
+      jnp.expand_dims(tri_h_2, axis=(2, 3)) +
+      jnp.expand_dims(tri_h_3, axis=(1, 3)) +
+      jnp.expand_dims(tri_e_1, axis=(1)) +
+      jnp.expand_dims(tri_e_2, axis=(2)) +
+      jnp.expand_dims(tri_e_3, axis=(3)) +
+      jnp.expand_dims(tri_g_1, axis=(1, 2, 3))
+  )
+
+  return alpha
 
 
 
@@ -652,25 +708,29 @@ class FALR6(Processor):
     assert adj_mat.shape == (b, n, n) #hints
 
     #z = jnp.concatenate([node_fts, hidden], axis=-1)
-    m_1 = hk.Linear(self.mid_size)
-    m_2 = hk.Linear(self.mid_size)
-    m_e = hk.Linear(self.mid_size)
-    m_g = hk.Linear(self.mid_size)
+    m_1 = hk.Linear(self.mid_size, with_bias=True)
+    m_2 = hk.Linear(self.mid_size, with_bias=True)
+    m_e = hk.Linear(self.mid_size, with_bias=True)
+    m_g = hk.Linear(self.mid_size, with_bias=True)
 
-    o1 = hk.Linear(self.out_size)
-    o2 = hk.Linear(self.out_size)
-    o3 = hk.Linear(self.out_size)
+    o1 = hk.Linear(self.out_size, with_bias=True)
+    o2 = hk.Linear(self.out_size, with_bias=True)
+    o3 = hk.Linear(self.out_size, with_bias=True)
 
-    msg_n_1 = m_1(node_fts)
+    msg_n_1 = m_1(node_fts) 
+    #msg_n_1 = non_linear_memory_block(node_fts, self.mid_size)
     msg_h_1 = m_2(hidden)
+    #msg_h_1 = non_linear_memory_block(hidden, self.mid_size)
     msg_e = m_e(edge_fts)
+    #msg_e = non_linear_memory_block(edge_fts, self.mid_size)
     msg_g = m_g(graph_fts)
+    #msg_g = non_linear_memory_block(graph_fts, self.mid_size)
 
     tri_msgs = None
 
     if self.use_triplets:
       tri_msgs = get_falr6_msgs(node_fts, hidden, edge_fts, graph_fts, self.nb_triplet_fts, jnp.expand_dims(adj_mat, -1), self._msgs_mlp_sizes)
-      #tri_msgs = jnp.average(tri_msgs, axis=(1))  # (B, N, N, H)
+      #topk = jnp.minimum(3, tri_msgs.shape[1])  # top 3
 
       if self.activation is not None:
         tri_msgs = self.activation(tri_msgs)
@@ -685,14 +745,18 @@ class FALR6(Processor):
 
     if self._msgs_mlp_sizes is not None:
       msgs = hk.nets.MLP(self._msgs_mlp_sizes)(self.activation(msgs))
+      #msgs = residual_memory_block(msgs, self._msgs_mlp_sizes[0])
 
-
-    #msgs = self.reduction(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
-    msgs = self.reduction(msgs, axis=1)
+    msgs = self.reduction(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
+    #att_weights = hk.Linear(1)(msgs)  # (B, N, N, 1)
+    #att_weights = jax.nn.softmax(att_weights, axis=1)  # normalize over axis 1
+    #msgs = self.reduction(tri_msgs * att_weights * jnp.expand_dims(adj_mat, -1), axis=1)  # (B, N, H)
+    
 
     h_1 = o1(node_fts)
     h_2 = o2(hidden)
     h_3 = o3(msgs)
+    
 
     #print(node_fts.shape, hidden.shape, msgs.shape)
 
@@ -725,7 +789,7 @@ class FALR6(Processor):
       # Residual connection for better gradient flow
       ret = ret * gate + hidden * (1 - gate)
     else:
-      ret = ret + hidden
+      ret = ret + hidden #self.gated_activation(hidden)
 
     return ret, tri_msgs  # pytype: disable=bad-return-type  # numpy-scalars
 

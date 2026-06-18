@@ -744,8 +744,8 @@ class FALR6(Processor):
     )
 
     if self._msgs_mlp_sizes is not None:
-      msgs = hk.nets.MLP(self._msgs_mlp_sizes)(self.activation(msgs))
-      #msgs = residual_memory_block(msgs, self._msgs_mlp_sizes[0])
+      #msgs = hk.nets.MLP(self._msgs_mlp_sizes)(self.activation(msgs))
+      msgs = residual_memory_block(msgs, self._msgs_mlp_sizes[0])
 
     msgs = self.reduction(msgs * jnp.expand_dims(adj_mat, -1), axis=1)
     #att_weights = hk.Linear(1)(msgs)  # (B, N, N, 1)
@@ -789,7 +789,7 @@ class FALR6(Processor):
       # Residual connection for better gradient flow
       ret = ret * gate + hidden * (1 - gate)
     else:
-      ret = ret + hidden #self.gated_activation(hidden)
+      ret = ret + self.gated_activation(hidden)
 
     return ret, tri_msgs  # pytype: disable=bad-return-type  # numpy-scalars
 

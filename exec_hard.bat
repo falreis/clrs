@@ -10,6 +10,4 @@ python run.py 10000 kmp_matcher
 sleep 30
 python run.py 10000 naive_string_matcher
 sleep 30
-python run.py 10000 quickselect
-sleep 30
 python run.py 10000 strongly_connected_components
